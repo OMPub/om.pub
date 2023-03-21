@@ -2,12 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
 import dynamic from "next/dynamic";
-import { useAccount } from "wagmi";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
-
-interface Props {
-  html: string;
-}
 
 const Header = dynamic(() => import("../components/header/Header"), {
   ssr: false,
@@ -15,8 +10,6 @@ const Header = dynamic(() => import("../components/header/Header"), {
 });
 
 export default function FAQ() {
-  const { address, connector, isConnected } = useAccount();
-
   return (
     <>
       <Head>
@@ -31,7 +24,7 @@ export default function FAQ() {
         />
         <meta property="og:image" content={`/logo-fom-500.gif`} />
       </Head>
-      <Header address={address} isConnected={isConnected} />
+      <Header />
       <Container className={`${styles.main}`}>
         <Row className="pb-5">
           <Col

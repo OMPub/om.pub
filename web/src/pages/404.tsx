@@ -27,7 +27,7 @@ export default function Home() {
         />
         <meta property="og:image" content={`/logo-fom-500.gif`} />
       </Head>
-      <Header address={address} isConnected={isConnected} />
+      <Header />
       <Container
         className={`${styles.main} d-flex align-items-center justify-content-center`}>
         <Row>

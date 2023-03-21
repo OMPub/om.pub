@@ -31,7 +31,7 @@ export default function FAQ() {
         />
         <meta property="og:image" content={`/logo-fom-500.gif`} />
       </Head>
-      <Header address={address} isConnected={isConnected} />
+      <Header />
       <Container className={`${styles.main}`}>
         <Row className="pb-5">
           <Col
