@@ -2,7 +2,7 @@ import styles from "./Header.module.scss";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useRouter } from "next/router";
 
-export default function Header(props: Props) {
+export default function Header() {
   const router = useRouter();
 
   return (
