@@ -1,2 +1,7 @@
-# om.pub
-A place to hang out for those building the Open Metaverse
+# The OM Pub
+
+https://om.pub
+
+## Contributing
+
+See the [Contributing Guide](./CONTRIBUTING.md).
