@@ -14,7 +14,7 @@ const Header = dynamic(() => import("../components/header/Header"), {
   loading: () => <HeaderPlaceholder />,
 });
 
-export default function FAQ(props: Props) {
+export default function FAQ() {
   const { address, connector, isConnected } = useAccount();
 
   return (
@@ -40,7 +40,7 @@ export default function FAQ(props: Props) {
               <h1>
                 Questions?
               </h1>
-              <div class="text-subheading pt-3">The Open Metaverse: Building a sufficiently decentralized future </div>
+              <div className="text-subheading pt-3">The Open Metaverse: Building a sufficiently decentralized future </div>
               <h3>What can I do here?</h3>
               <p className="question-answer">Not much yet, hang tight.</p>
               <h3>Wen usefulness?</h3>

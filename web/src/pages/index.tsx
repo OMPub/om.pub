@@ -9,7 +9,7 @@ const Header = dynamic(() => import("../components/header/Header"), {
   loading: () => <HeaderPlaceholder />,
 });
 
-export default function Home(props: Props) {
+export default function Home() {
   return (
     <>
       <Head>

@@ -1,33 +1,9 @@
 import styles from "./Header.module.scss";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useConnect, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useRouter } from "next/router";
-
-function formatAddress(address: any) {
-  if (!address || !address.startsWith("0x")) {
-    return address;
-  }
-  return `${address.substring(0, 6)}...${address.substring(
-    address.length - 4
-  )}`;
-}
-
-interface Props {
-  address: `0x${string}` | undefined;
-  isConnected: boolean;
-}
 
 export default function Header(props: Props) {
   const router = useRouter();
-  const ensResolution = useEnsName({
-    address: props.address,
-    enabled: true,
-  });
-  const ensAvatar = useEnsAvatar({ address: props.address });
-
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
-  const { disconnect } = useDisconnect();
 
   return (
     <Navbar

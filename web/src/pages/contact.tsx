@@ -14,7 +14,7 @@ const Header = dynamic(() => import("../components/header/Header"), {
   loading: () => <HeaderPlaceholder />,
 });
 
-export default function FAQ(props: Props) {
+export default function FAQ() {
   const { address, connector, isConnected } = useAccount();
 
   return (
