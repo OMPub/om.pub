@@ -36,8 +36,10 @@ export default function FAQ() {
               <div className="text-subheading pt-3">The Open Metaverse: Building a sufficiently decentralized future </div>
               <h3>What can I do here?</h3>
               <p className="question-answer">Not much yet, hang tight.</p>
-              <h3>Wen usefulness?</h3>
+              <h3>Wen useful?</h3>
               <p className="question-answer">Soon.</p>
+              <h3>Where'd this page come from?</h3>
+              <p className="question-answer">Layout and structure is heavily borrowed from the GDRC project, a CC0 codebase.</p>
             </main>
           </Col>
         </Row>

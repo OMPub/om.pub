@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>The OM Pub</title>
+        <title>The OM Pub 🍻</title>
         <meta property="og:url" content={`https://om.pub`} />
         <meta
           property="og:title"
@@ -23,21 +23,16 @@ export default function Home() {
       </Head>
       <Header />
       <Container className={`${styles.main}`}>
-        <Row className="pb-5">
+        <Row 
+          className="d-flex align-items-center pb-5">
           <Col
+            md={8}
             className="font-larger">
             <main>
-              <h1>
-                Welcome to the OM Pub 🍻 
-              </h1>
-              <aside>
-                <p>
-                  OM: Open Metaverse
-                </p>
-                <p>
-                  Pub: A place to hang. Also: Public domain (CC0), for all, forever.
-                </p>
-              </aside>
+              <div className="pt-5 pb-5">
+                <h1>The OM Pub</h1>
+                <div className="text-subheading pt-3">Experiments in decentralization</div>
+              </div>
               <article>
                 <h3>
                   It's time.
@@ -47,7 +42,7 @@ export default function Home() {
                   Join us, in these experiments of decentralization and sharing a vision of the future open to all.
                 </p>
                 <h4>
-                  Projects supported by the OM Pub community
+                  Projects discussed at the OM Pub:
                 </h4>
                 <ul>
                   <li>The Memes by 6529</li>
@@ -56,6 +51,20 @@ export default function Home() {
                 </ul>
               </article>
             </main>
+          </Col>
+          <Col
+            md={{ span: 3, offset: 1 }}
+            className="d-flex justify-content-end">
+            <aside 
+              className="justify-content-center" 
+              style={{ height: '100%' }}>
+              <p>
+                OM: Open Metaverse
+              </p>
+              <p>
+                Pub: A place to hang. Also: Public domain (CC0), for all, forever.
+              </p>
+            </aside>
           </Col>
         </Row>
       </Container>

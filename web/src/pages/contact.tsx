@@ -5,18 +5,12 @@ import dynamic from "next/dynamic";
 import { useAccount } from "wagmi";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 
-interface Props {
-  html: string;
-}
-
 const Header = dynamic(() => import("../components/header/Header"), {
   ssr: false,
   loading: () => <HeaderPlaceholder />,
 });
 
-export default function FAQ() {
-  const { address, connector, isConnected } = useAccount();
-
+export default function Contact() {
   return (
     <>
       <Head>
