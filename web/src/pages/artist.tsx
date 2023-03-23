@@ -12,16 +12,16 @@ export default function Artist() {
     return (
       <>
         <Head>
-          <title>Contact | The OM Pub</title>
+          <title>Preview: Meme Artist 83 | The OM Pub</title>
           <meta
             property="og:url"
-            content={`https://om.pub/faq`}
+            content={`https://om.pub/artist`}
           />
           <meta
             property="og:title"
-            content={`Contact | The OM Pub`}
+            content={`Preview: Meme Artist 83 | The OM Pub`}
           />
-          <meta property="og:image" content={`/logo-fom-500.gif`} />
+          <meta property="og:image" content={`/artist-83/poster.png`} />
         </Head>
         <Header />
         <ArtistProfile />
