@@ -61,13 +61,13 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
                 <a href="https://linktr.ee/lunaleonis" target="_blank">Luna's Linktree</a>
                 <a href="https://discord.gg/JAhzGprv" target="_blank">Luna's Wonderland Discord Server</a>
             </Row>
-            <Row>
+            <Row className={`${styles.seizeButton}`}>
               <Button
                 variant="outline-dark"
                 size="lg"
                 disabled
                 href="https://seize.io/the-memes/83?focus=live"
-                className={`${styles.seizeButton}`}>
+                >
                 Seize!
               </Button>
             </Row>
