@@ -22,6 +22,11 @@ export default function Artist() {
             content={`Preview: Meme Artist 83 | The OM Pub`}
           />
           <meta property="og:image" content={`/artist-83/poster.png`} />
+          <meta name="twitter:card" content="/artist-83/poster.png" />
+          <meta name="twitter:site" content="@OM_Pub_" />
+          <meta name="twitter:title" content="Preview: Meme Artist 83" />
+          <meta name="twitter:description" content="Welcoming Luna Leonis to The Memes fam!" />
+          <meta name="twitter:image" content="/artist-83/poster.png" />
         </Head>
         <Header />
         <ArtistProfile />
