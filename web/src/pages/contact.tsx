@@ -42,7 +42,7 @@ export default function Contact() {
                     @OM_Pub_
                   </a>
                 </p>
-                <p>
+                {/* <p>
                   <span className="font-grey">Email: </span>
                   <a
                     className="black-link"
@@ -51,7 +51,7 @@ export default function Contact() {
                     rel="noreferrer">
                     info@om.pub
                   </a>
-                </p>
+                </p> */}
                 <p>
                   <span className="font-grey">Discord: </span>
                   <a

@@ -26,6 +26,8 @@ export default function Document() {
             />{" "}
             GitHub
           </a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Tip your server? ompub.eth
         </footer>
       </body>
     </Html>

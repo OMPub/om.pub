@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import ArtistProfile from "@/components/artistProfile/ArtistProfile";
 
-const Header = dynamic(() => import("../components/header/Header"), {
+const Header = dynamic(() => import("@/components/header/Header"), {
   ssr: false,
   loading: () => <HeaderPlaceholder />,
 });
