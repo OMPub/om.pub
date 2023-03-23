@@ -47,7 +47,7 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
           </Col>
           <Col className={`${styles.artistWorks}`}>
             <Row>
-              <Carousel interval={3000}>
+              <Carousel interval={3000} fade>
                 {images.map((image, index) => (
                   <Carousel.Item key={index}>
                     <img src={image} alt={`carousel item ${index}`} className="d-block w-100" />
@@ -65,8 +65,10 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
               <Button
                 variant="outline-dark"
                 size="lg"
+                disabled
+                href="https://seize.io/the-memes/83?focus=live"
                 className={`${styles.seizeButton}`}>
-                Seize in 24:42!
+                Seize!
               </Button>
             </Row>
           </Col>
