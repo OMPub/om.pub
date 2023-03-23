@@ -7,16 +7,13 @@
     vertical-align: auto;
 }
 
-.seizeButton {
-    margin: 2rem;
-}
-
 .artistName {  
     margin-bottom: 1rem;
 }
 
 .artistInfo {
     margin-bottom: 1rem;
+    white-space: pre-wrap;
 }
 
 .artistLinks {
@@ -25,4 +22,13 @@
 
 .artistWorks {
     margin-top: .4rem;
+    text-align: center;
+}
+
+.artistWorks h3 {
+    font-style: italic;
+}
+
+.seizeButton {
+    margin-top: 1rem;
 }
