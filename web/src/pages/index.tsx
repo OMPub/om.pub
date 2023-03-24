@@ -42,10 +42,13 @@ export default function Home() {
                   Join us, in these experiments of decentralization and sharing a vision of the future open to all.
                 </p>
                 <h4>
-                  Projects discussed at the OM Pub:
+                  Projects brewing at the OM Pub:
                 </h4>
                 <ul>
                   <li>The Memes by 6529</li>
+                    <ul>
+                      <li>Artist Preview: <a href="/memes/83/artist">Meme Artist 83 - Luna Leonis</a></li>
+                    </ul>
                   <li>Rememes by the community</li>
                   <li>OnCyber Metaverse</li>
                 </ul>
