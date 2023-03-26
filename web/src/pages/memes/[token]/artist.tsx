@@ -49,7 +49,7 @@ export default function Artist(props: Props) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@OM_Pub_" />
         <meta name="twitter:title" content={`Preview: Meme Artist ${artistId}`} />
-        <meta name="twitter:description" content="Welcoming a new artist to The Memes fam!" />
+        <meta name="twitter:description" content="Celebrating the artist of a new card in The Memes fam!" />
         <meta name="twitter:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
       </Head>
       <Header />
