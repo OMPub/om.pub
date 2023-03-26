@@ -39,7 +39,7 @@ export default function Artist(props: Props) {
         <title>{`Preview: Meme Artist ${artistId} | The OM Pub`}</title>
         <meta
           property="og:url"
-          content={`https://om.pub/memes/${artistId}/artist`}
+          content={`https://om.pub/artist`}
         />
         <meta
           property="og:title"
