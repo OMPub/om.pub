@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -29,24 +30,27 @@ const Header = dynamic(() => import("@/components/header/Header"), {
 });
 
 export default function Artist(props: Props) {
+  const route = useRouter();
+  const artistId = Number(route.query.token);
+  
   return (
     <>
       <Head>
-        <title>Preview: Meme Artist 83 | The OM Pub</title>
+        <title>Preview: Meme Artist ${artistId} | The OM Pub</title>
         <meta
           property="og:url"
-          content={`https://om.pub/artist`}
+          content={`https://om.pub/memes/${artistId}/artist`}
         />
         <meta
           property="og:title"
-          content={`Preview: Meme Artist 83 | The OM Pub`}
+          content={`Preview: Meme Artist ${artistId} | The OM Pub`}
         />
-        <meta property="og:image" content={`/artist-83/poster.png`} />
-        <meta name="twitter:card" content="/artist-83/poster.png" />
+        <meta property="og:image" content={`/artist-${artistId}/poster.png`} />
+        <meta name="twitter:card" content={`/artist-${artistId}/poster.png`} />
         <meta name="twitter:site" content="@OM_Pub_" />
-        <meta name="twitter:title" content="Preview: Meme Artist 83" />
-        <meta name="twitter:description" content="Welcoming Luna Leonis to The Memes fam!" />
-        <meta name="twitter:image" content="/artist-83/poster.png" />
+        <meta name="twitter:title" content={`Preview: Meme Artist ${artistId}`} />
+        <meta name="twitter:description" content="Welcoming a new artist to The Memes fam!" />
+        <meta name="twitter:image" content={`/artist-${artistId}/poster.png`} />
       </Head>
       <Header />
       <ArtistProfile artistsData={props.artists} />
