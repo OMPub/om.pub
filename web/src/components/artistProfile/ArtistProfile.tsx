@@ -3,8 +3,23 @@ import { Container, Row, Col, Carousel, Button } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/router';
 
+interface Link {
+  url: string,
+  name: string, 
+  target: string
+}
+
+interface Artist {
+  tokenId: number,
+  images: string[],
+  poster: string,
+  name: string,
+  info: string
+  links: Link[]
+}
+
 interface Props {
-  artistsData: object;
+  artistsData: Artist[];
 }
 
 const ArtistProfile = (props: Props) => {

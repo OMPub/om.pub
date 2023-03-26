@@ -1,10 +1,26 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { GetStaticPaths, GetStaticProps } from 'next';
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import ArtistProfile from "@/components/artistProfile/ArtistProfile";
 
+interface Link {
+  url: string,
+  name: string,
+  target: string
+}
+
+interface Artist {
+  tokenId: number,
+  images: string[],
+  poster: string,
+  name: string,
+  info: string
+  links: Link[]
+}
+
 interface Props {
-  artists: object;
+  artists: Artist[];
 }
 
 const Header = dynamic(() => import("@/components/header/Header"), {
@@ -38,7 +54,7 @@ export default function Artist(props: Props) {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = artistsData.artists.map((artist) => ({
     params: { token: artist.tokenId.toString() }
   }))
@@ -46,7 +62,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: artistsData
   }
@@ -55,16 +71,16 @@ export async function getStaticProps(context) {
 const artistsData = {
   artists: [
     {
-      "tokenId": 83,
-      "images": [
+      tokenId: 83,
+      images: [
         "/artist-83/work-1.jpeg",
         "/artist-83/work-2.jpeg",
         "/artist-83/work-3.jpeg"
       ],
-      "poster": "/artist-83/poster.png",
-      "name": "Luna Leonis",
-      "info": 
-`We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
+      poster: "/artist-83/poster.png",
+      name: "Luna Leonis",
+      info:
+        `We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
 
 She's well known for creating whimsical and magical digital art. Her artwork tells stories conveyed through vibrant colors and bold patterns, capturing the imagination of her viewers. Her use of the moon (thus the name Luna) creates a dreamlike quality in her pieces.
 
@@ -77,7 +93,7 @@ In addition to her work as an artist, Luna also advocates for women's empowermen
 "I am me. Plain. Simple. Thriving. Loving. Invincible. I am a woman." Speaks volumes. 
 
 Luna's art embodies a sense of wonder and imagination, inviting the viewer to experience a world of whimsy and magic. We can't wait to see what she has created for our community...and the world.`,
-      "links": [
+      links: [
         {
           "name": "Luna's Twitter",
           "url": "https://twitter.com/lunaleonis",
@@ -96,19 +112,19 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
       ]
     },
     {
-      "tokenId": 84,
-      "images": [
+      tokenId: 84,
+      images: [
         "/artist-84/work-1.jpeg",
         "/artist-84/work-2.jpeg",
         "/artist-84/work-3.jpeg"
       ],
-      "poster": "/artist-84/poster.png",
-      "name": "UNNKNOWN",
-      "info": 
-`We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
+      poster: "/artist-84/poster.png",
+      name: "UNNKNOWN",
+      info:
+        `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
 
 ...We can't wait to see what she has created for our community...and the world.`,
-      "links": [
+      links: [
         {
           "name": "UNNKNOWN's Twitter",
           "url": "https://twitter.com/UNNKNOWN",
@@ -127,47 +143,47 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
       ]
     },
     {
-      "tokenId": 85,
-      "images": [
+      tokenId: 85,
+      images: [
         "/artist-85/work-1.jpeg",
         "/artist-85/work-2.jpeg",
         "/artist-85/work-3.jpeg"
       ],
-      "poster": "/artist-85/poster.png",
-      "name": "6529er",
-      "info": 
-`We are proud to welcome 6529er back to the 6529 Meme artist family. 
+      poster: "/artist-85/poster.png",
+      name: "6529er",
+      info:
+        `We are proud to welcome 6529er back to the 6529 Meme artist family. 
 
 We can't wait to see what he has created for our community...and the world.`,
-      "links": [
+      links: [
         {
-          "name": "6529er's Twitter",
-          "url": "https://twitter.com/6529er",
-          "target": "_blank"
+          name: "6529er's Twitter",
+          url: "https://twitter.com/6529er",
+          target: "_blank"
         },
         {
-          "name": "6529er on Foundation",
-          "url": "https://foundation.app/@6529er",
-          "target": "_blank"
+          name: "6529er on Foundation",
+          url: "https://foundation.app/@6529er",
+          target: "_blank"
         },
         {
-          "name": "Find @6529er in the OM Discord Server",
-          "url": "https://discord.gg/JAhzGprv",
-          "target": "_blank"
+          name: "Find @6529er in the OM Discord Server",
+          url: "https://discord.gg/JAhzGprv",
+          target: "_blank"
         }
       ]
     },
     {
-      "tokenId": 86,
-      "images": [
+      tokenId: 86,
+      images: [
         "/artist-86/work-1.jpeg",
         "/artist-86/work-2.svg",
         "/artist-86/work-3.svg"
       ],
-      "poster": "/artist-86/poster.png",
-      "name": "Jack Butcher",
-      "info": 
-`Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
+      poster: "/artist-86/poster.png",
+      name: "Jack Butcher",
+      info:
+        `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
 
 After two years of trial and error, Jack discovered the secret to transitioning to a highly-specialized and enjoyable consulting business and a product business that could scale infinitely. 
 
@@ -179,21 +195,21 @@ Jack made a splash in the Web3 world with ["Checks"](https://checks.art/). "This
 
 Welcome to the Memes Community Jack...we look forward to "Check"ing what you have in store for us!
 `,
-      "links": [
+      links: [
         {
-          "name": "Jack's Twitter",
-          "url": "https://twitter.com/jackbutcher",
-          "target": "_blank"
+          name: "Jack's Twitter",
+          url: "https://twitter.com/jackbutcher",
+          target: "_blank"
         },
         {
-          "name": "Jack's Check Art",
-          "url": "https://https://t.co/nMLWyyKost",
-          "target": "_blank"
+          name: "Jack's Check Art",
+          url: "https://checks.art/",
+          target: "_blank"
         },
         {
-          "name": "Jack's Blog Posts",
-          "url": "https://visualizevalue.com/blogs/visuals",
-          "target": "_blank"
+          name: "Jack's Blog Posts",
+          url: "https://visualizevalue.com/blogs/visuals",
+          target: "_blank"
         }
       ]
     }]
