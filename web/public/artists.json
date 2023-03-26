@@ -1,0 +1,58 @@
+{
+  "83": {
+    "images": [
+      "/artist-83/work-1.jpeg",
+      "/artist-83/work-2.jpeg",
+      "/artist-83/work-3.jpeg"
+    ],
+    "poster": "/artist-83/poster.png",
+    "name": "Luna Leonis",
+    "info": "",
+    "artistLinks": [
+        {
+          "name": "Luna's Twitter",
+          "url": "https://twitter.com/lunaleonis",
+          "target": "_blank"
+        },
+        {
+          "name": "Luna's Linktree",
+          "url": "https://linktr.ee/lunaleonis",
+          "target": "_blank"
+        },
+        {
+          "name": "Luna's Wonderland Discord Server",
+          "url": "https://discord.gg/JAhzGprv",
+          "target": "_blank"
+        }
+      ],
+    "seizeUrl": "https://seize.io/the-memes/83?focus=live"
+  },
+  "84": {
+    "images": [
+      "/artist-83/work-1.jpeg",
+      "/artist-83/work-2.jpeg",
+      "/artist-83/work-3.jpeg"
+    ],
+    "poster": "/artist-83/poster.png",
+    "name": "Jack Butcher",
+    "info": "",
+    "artistLinks": [
+        {
+          "name": "Luna's Twitter",
+          "url": "https://twitter.com/lunaleonis",
+          "target": "_blank"
+        },
+        {
+          "name": "Luna's Linktree",
+          "url": "https://linktr.ee/lunaleonis",
+          "target": "_blank"
+        },
+        {
+          "name": "Luna's Wonderland Discord Server",
+          "url": "https://discord.gg/JAhzGprv",
+          "target": "_blank"
+        }
+      ],
+    "seizeUrl": "https://seize.io/the-memes/83?focus=live"
+  }
+}
