@@ -34,8 +34,9 @@ const ArtistProfile = (props: Props) => {
           <Col
             className={`${styles.artistPoster}`}
             md={4}>
-            <img src={artist.poster} alt="Artwork" className={`img-fluid ${styles.shadow}`} />
-
+            <a href={artist.poster} target="_blank">
+              <img src={artist.poster} alt="Artwork" className={`img-fluid ${styles.shadow}`} />
+            </a>
           </Col>
           <Col
             md={5}>
