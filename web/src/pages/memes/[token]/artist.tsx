@@ -36,10 +36,10 @@ export default function Artist(props: Props) {
   return (
     <>
       <Head>
-        <title>Preview: Meme Artist ${artistId} | The OM Pub</title>
+        <title>{`Preview: Meme Artist ${artistId} | The OM Pub`}</title>
         <meta
           property="og:url"
-          content={`https://om.pub/memes/${artistId}/artist`}
+          content={`https://om.pub/artist`}
         />
         <meta
           property="og:title"
@@ -81,7 +81,7 @@ const artistsData = {
         "/artist-83/work-2.jpeg",
         "/artist-83/work-3.jpeg"
       ],
-      poster: "/artist-83/poster.png",
+      poster: "/artist-83/poster.gif",
       name: "Luna Leonis",
       info:
         `We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
@@ -150,10 +150,11 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
       tokenId: 85,
       images: [
         "/artist-85/work-1.jpeg",
-        "/artist-85/work-2.jpeg",
-        "/artist-85/work-3.jpeg"
+        "/artist-85/work-2.gif",
+        "/artist-85/work-3.png",
+        "/artist-85/work-4.jpeg"
       ],
-      poster: "/artist-85/poster.png",
+      poster: "/artist-85/poster.gif",
       name: "6529er",
       info:
         `We are proud to welcome 6529er back to the 6529 Meme artist family. 
@@ -184,7 +185,7 @@ We can't wait to see what he has created for our community...and the world.`,
         "/artist-86/work-2.svg",
         "/artist-86/work-3.svg"
       ],
-      poster: "/artist-86/poster.png",
+      poster: "/artist-86/poster.gif",
       name: "Jack Butcher",
       info:
         `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
