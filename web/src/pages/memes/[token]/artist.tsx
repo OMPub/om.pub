@@ -45,12 +45,12 @@ export default function Artist(props: Props) {
           property="og:title"
           content={`Preview: Meme Artist ${artistId} | The OM Pub`}
         />
-        <meta property="og:image" content={`/artist-${artistId}/poster.png`} />
+        <meta property="og:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@OM_Pub_" />
         <meta name="twitter:title" content={`Preview: Meme Artist ${artistId}`} />
-        <meta name="twitter:description" content="Welcoming a new artist to The Memes fam!" />
-        <meta name="twitter:image" content={`/artist-${artistId}/poster.png`} />
+        <meta name="twitter:description" content="Celebrating the artist of a new card in The Memes fam!" />
+        <meta name="twitter:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
       </Head>
       <Header />
       <ArtistProfile artistsData={props.artists} />
