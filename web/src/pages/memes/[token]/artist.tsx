@@ -159,7 +159,17 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
       info:
         `We are proud to welcome 6529er back to the 6529 Meme artist family. 
 
-We can't wait to see what he has created for our community...and the world.`,
+Dive into the mysterious world of 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
+Emerging in the crypto-art realm in 2021, 6529er has gained a place of prominence as the pre-eminent artist of The Memes by 6529 collection, for his sleek, thought-provoking designs.
+
+With a penchant for geometric shapes, bold colors, and a touch of wry humor, 6529er crafts pieces that invite deep contemplation. 
+His works in The Memes are infused with meaning, and blur the lines between digital art and hard-hitting educational experiences.
+
+Despite his enigmatic persona, 6529er actively engages with the NFT community, providing leadership and support to The Memes community. 
+As the NFT landscape evolves, 6529er's distinctive artistry continues to intrigue and delight, making them a force to be reckoned with in the metaverse.
+
+Stoked for more from 6529er
+        .`,
       links: [
         {
           name: "6529er's Twitter",
