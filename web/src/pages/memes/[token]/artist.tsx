@@ -181,39 +181,46 @@ We can't wait to see what he has created for our community...and the world.`,
     {
       tokenId: 86,
       images: [
-        "/artist-86/work-1.jpeg",
-        "/artist-86/work-2.svg",
-        "/artist-86/work-3.svg"
+        "/artist-86/work-1.gif",
+        "/artist-86/work-2.png",
+        "/artist-86/work-3.png"
       ],
       poster: "/artist-86/poster.gif",
-      name: "Jack Butcher",
+      name: "PopWonder",
       info:
-        `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
+`Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
+With a particular style that fuses pop culture and vivid imagination, Pop Wonder casts a spell over collectors and enthusiasts alike.
 
-After two years of trial and error, Jack discovered the secret to transitioning to a highly-specialized and enjoyable consulting business and a product business that could scale infinitely. 
+Born in a city known for its quirky individualism, Pop Wonder infuses his art with a healthy dose of whimsy, irony, and humor. 
+He masterfully blends memes from popular culture with psychedelic colors and patterns, creating a visual feast that's both nostalgic and futuristic.
 
-The key was productizing himself. This insight led him to create Visualize Value (https://visualizevalue.com/), a project that enabled him to build a network of mentors, a $1M/year product business, and a media platform with over 500,000 followers.
+A true digital magician, Pop Wonder uses creatures, aliens, and people alike to bring his creations to life. 
+Each piece is a distinctive, sometimes animated NFT, with the artist often incorporating intriguing stories and Easter eggs that delight his fans.
 
-> "If you'd have told me this story 18 months ago, I wouldn't have believed you. Now I spend all of my time making things that make it easier to learn, teach, build, and sell."
+If you're seeking a trip down memory lane with a twist, Pop Wonder's NFTs are your golden ticket. 
+Learn more with the links here, and join the ranks of those who are captivated by the mesmerizing world of Pop Wonder.
 
-Jack made a splash in the Web3 world with ["Checks"](https://checks.art/). "This artwork may or may not be notable."
-
-Welcome to the Memes Community Jack...we look forward to "Check"ing what you have in store for us!
+Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" much longer what you have in store for us!
 `,
       links: [
         {
-          name: "Jack's Twitter",
-          url: "https://twitter.com/jackbutcher",
+          name: "PopWonder's Twitter",
+          url: "https://twitter.com/PopWonderNFT",
           target: "_blank"
         },
         {
-          name: "Jack's Check Art",
-          url: "https://checks.art/",
+          name: "PopWonder's Linktree",
+          url: "https://linktr.ee/popwonder/",
           target: "_blank"
         },
         {
-          name: "Jack's Blog Posts",
-          url: "https://visualizevalue.com/blogs/visuals",
+          name: "PopWonder's Discord",
+          url: "https://discord.com/invite/Jxw5CWumEK",
+          target: "_blank"
+        },
+        {
+          name: "An Interview with PopWonder",
+          url: "https://mirror.xyz/atriumart.eth/RQ9W1aEes7i9PEklaX2IW0xFxmILmyKeu2bFC72ntfM",
           target: "_blank"
         }
       ]
