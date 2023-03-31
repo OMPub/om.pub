@@ -47,7 +47,8 @@ export default function Home() {
                 <ul>
                   <li>The Memes by 6529</li>
                     <ul>
-                      <li>Artist Preview: <a href="/memes/85/artist">Meme Artist 85 - @6529er</a></li>
+                      <li>Artist Preview: <a href="/memes/86/artist">Meme Artist 86 - Pop Wonder</a></li>
+                      <li>Artist Preview: <a href="/memes/85/artist">Meme Artist 85 - 6529er</a></li>
                       <li>Artist Preview: <a href="/memes/83/artist">Meme Artist 83 - Luna Leonis</a></li>
                     </ul>
                   <li>More projects coming soon...</li>
