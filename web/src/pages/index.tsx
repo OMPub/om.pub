@@ -23,7 +23,7 @@ export default function Home() {
       </Head>
       <Header />
       <Container className={`${styles.main}`}>
-        <Row 
+        <Row
           className="d-flex align-items-center pb-5">
           <Col
             md={8}
@@ -38,20 +38,24 @@ export default function Home() {
                   It's time.
                 </h3>
                 <p>
-                  We need pathways to an open metaverse that runs on publicly accessible protocols, not corporate servers. 
+                  We need pathways to an open metaverse that runs on publicly accessible protocols, not corporate servers.
                   Join us, in these experiments of decentralization and sharing a vision of the future open to all.
                 </p>
                 <h4>
-                  Currently brewing at the OM Pub:
+                  Currently brewing at the OM Pub...
                 </h4>
+                <h5>The Memes by 6529: Prememes</h5>
                 <ul>
-                  <li>The Memes by 6529</li>
-                    <ul>
-                      <li>Artist Preview: <a href="/memes/86/artist">Meme Artist 86 - Pop Wonder</a></li>
-                      <li>Artist Preview: <a href="/memes/85/artist">Meme Artist 85 - 6529er</a></li>
-                      <li>Artist Preview: <a href="/memes/83/artist">Meme Artist 83 - Luna Leonis</a></li>
-                    </ul>
-                  <li>More projects coming soon...</li>
+                  <li>Season 3</li>
+                  <ul>
+                    <li>Artist Preview: <a href="/memes/87/artist">Meme Artist 87 - DeeKay Motion</a></li>
+                  </ul>
+                  <li>Season 2</li>
+                  <ul>
+                    <li>Artist Preview: <a href="/memes/86/artist">Meme Artist 86 - Pop Wonder</a></li>
+                    <li>Artist Preview: <a href="/memes/85/artist">Meme Artist 85 - 6529er</a></li>
+                    <li>Artist Preview: <a href="/memes/83/artist">Meme Artist 83 - Luna Leonis</a></li>
+                  </ul>
                 </ul>
               </article>
             </main>
@@ -59,8 +63,8 @@ export default function Home() {
           <Col
             md={{ span: 3, offset: 1 }}
             className="d-flex justify-content-end">
-            <aside 
-              className="justify-content-center" 
+            <aside
+              className="justify-content-center"
               style={{ height: '100%' }}>
               <p>
                 OM: Open Metaverse

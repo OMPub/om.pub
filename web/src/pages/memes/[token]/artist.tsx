@@ -234,5 +234,51 @@ Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" m
           target: "_blank"
         }
       ]
-    }]
+    },
+    {
+      tokenId: 87,
+      images: [
+        "/artist-87/work-1.mp4",
+        "/artist-87/work-2.mp4",
+        "/artist-87/work-3.mp4"
+      ],
+      poster: "/artist-87/poster.mp4",
+      name: "DeeKay",
+      info:
+`
+DeeKay is a South Korean NFT artist based in the Bay Area whose work is known for its striking use of vibrant colors, intricate details, and dynamic motion. 
+His digital creations often feature familiar characters and surrealistic themes, blending together elements of nature, technology, and fantasy to create immersive and visually stunning worlds.
+
+DeeKay has gained a significant following within the NFT art community due to his impressive body of work, which showcases a high degree of technical skill, smooth and fluid animation, and attention to detail. 
+His NFTs feature looping storylines that allow viewers to discover new details and interpretations with each viewing, adding an additional layer of complexity to his already immersive creations.
+
+In addition to his individual NFT art projects, we now welcome DeeKay as the opening artist for season 3 of The Memes by 6529! DeeKay's contribution to the a theme from the collection is highly anticipated by fans and collectors alike.
+
+DeeKay's unique style and technical skill as an NFT artist have made him stand out within the NFT art community. 
+We can't wait to see how The Memes are interpreted in his fun and spirited art!
+`,
+      links: [
+        {
+          name: "Deekay's Twitter",
+          url: "https://twitter.com/deekaymotion",
+          target: "_blank"
+        },
+        {
+          name: "Deekay's Linktree",
+          url: "https://linktr.ee/deekaymotion/",
+          target: "_blank"
+        },
+        {
+          name: "Deekay's Web Site",
+          url: "https://deekaykwon.com/",
+          target: "_blank"
+        },
+        {
+          name: "An Interview with Deekay",
+          url: "https://hypemoon.com/2022/9/deekay-nft-animator-interview",
+          target: "_blank"
+        }
+      ]
+    }
+  ]
 }
