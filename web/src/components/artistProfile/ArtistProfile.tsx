@@ -43,6 +43,7 @@ const ArtistProfile = (props: Props) => {
                 <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
               )}
             </a>
+            <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
           </Col>
           <Col
             md={5}>
