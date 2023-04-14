@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 interface Link {
   url: string,
-  name: string, 
+  name: string,
   target: string
 }
 
@@ -35,7 +35,13 @@ const ArtistProfile = (props: Props) => {
             className={`${styles.artistPoster}`}
             md={4}>
             <a href={artist.poster} target="_blank">
-              <img src={artist.poster} alt="Artwork" className={`img-fluid ${styles.shadow}`} />
+              {artist.poster.endsWith('.mp4') ? (
+                <video className="d-block w-100" autoPlay loop playsInline>
+                  <source src={artist.poster} type="video/mp4" />
+                </video>
+              ) : (
+                <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
+              )}
             </a>
           </Col>
           <Col
@@ -53,7 +59,13 @@ const ArtistProfile = (props: Props) => {
               <Carousel interval={3000} fade>
                 {artist.images.map((image, index) => (
                   <Carousel.Item key={index}>
-                    <img src={image} alt={`carousel item ${index}`} className="d-block w-100" />
+                    {image.endsWith('.mp4') ? (
+                      <video className="d-block w-100" autoPlay muted loop playsInline>
+                        <source src={image} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <img src={image} alt={`carousel item ${index}`} className="d-block w-100" />
+                    )}
                   </Carousel.Item>
                 ))}
               </Carousel>
