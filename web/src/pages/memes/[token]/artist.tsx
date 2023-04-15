@@ -15,6 +15,7 @@ interface Artist {
   tokenId: number,
   images: string[],
   poster: string,
+  posterMintUrl: string,
   name: string,
   info: string
   links: Link[]
@@ -82,6 +83,7 @@ const artistsData = {
         "/artist-83/work-3.jpeg"
       ],
       poster: "/artist-83/poster.gif",
+      posterMintUrl: "https://app.manifold.xyz/c/rememeposter",
       name: "Luna Leonis",
       info:
         `We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
@@ -123,6 +125,7 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
         "/artist-84/work-3.jpeg"
       ],
       poster: "/artist-84/poster.png",
+      posterMintUrl: "",
       name: "UNNKNOWN",
       info:
         `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
@@ -155,6 +158,7 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
         "/artist-85/work-4.jpeg"
       ],
       poster: "/artist-85/poster.gif",
+      posterMintUrl: "",
       name: "6529er",
       info:
         `We are proud to welcome 6529er back to the 6529 Meme artist family. 
@@ -196,6 +200,7 @@ Stoked for more from 6529er
         "/artist-86/work-3.png"
       ],
       poster: "/artist-86/poster.gif",
+      posterMintUrl: "",
       name: "PopWonder",
       info:
 `Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
