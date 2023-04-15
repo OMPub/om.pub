@@ -37,7 +37,7 @@ const ArtistProfile = (props: Props) => {
             md={4}>
             <a href={artist.poster} target="_blank">
               {artist.poster.endsWith('.mp4') ? (
-                <video className="d-block w-100" autoPlay loop playsInline>
+                <video className="d-block w-100" controls muted playsInline autoPlay>
                   <source src={artist.poster} type="video/mp4" />
                 </video>
               ) : (
