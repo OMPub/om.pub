@@ -243,6 +243,7 @@ Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" m
         "/artist-87/work-3.mp4"
       ],
       poster: "/artist-87/poster.mp4",
+      posterMintUrl: "https://app.manifold.xyz/c/Prememe",
       name: "DeeKay",
       info:
 `

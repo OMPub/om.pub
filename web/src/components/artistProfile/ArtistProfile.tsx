@@ -13,6 +13,7 @@ interface Artist {
   tokenId: number,
   images: string[],
   poster: string,
+  posterMintUrl: string,
   name: string,
   info: string
   links: Link[]
@@ -44,6 +45,9 @@ const ArtistProfile = (props: Props) => {
               )}
             </a>
             <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
+            {artist.posterMintUrl ? (
+                <em> — <a href={artist.posterMintUrl} target="_blank">mint it!</a></em>
+            ) : ( <span></span>)}
           </Col>
           <Col
             md={5}>
