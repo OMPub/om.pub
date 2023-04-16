@@ -18,6 +18,29 @@ const nextConfig = {
   async generateBuildId() {
     return VERSION;
   },
+  i18n: {
+    locales: [
+      'en-US',
+      'fr-FR',
+      'es-ES',
+      'zh-CN',
+      'ar-SA',
+      'pt-PT',
+      'bn-BD',
+      'ru-RU',
+      'ja-JP',
+      'de-DE',
+      'ko-KR',
+      'tr-TR',
+      'id-ID',
+      'ms-MY',
+      'it-IT',
+      'pl-PL',
+      'vi-VN',
+      'th-TH',
+    ],
+    defaultLocale: "en-US",
+  }
 };
 
 module.exports = nextConfig;
