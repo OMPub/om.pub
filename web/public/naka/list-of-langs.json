@@ -163,2496 +163,640 @@
     "id": 21,
     "language": "\u0421\u0440\u043f\u0441\u043a\u0438 / Srpski",
     "languageEn": "Serbian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Sloboda za transakcije.",
+    "explainer": "Sloboda transakcije je osnova svih drugih ustavnih prava. Bez slobode transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
   "id": {
     "id": 22,
     "language": "Bahasa Indonesia",
     "languageEn": "Indonesian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Kebebasan untuk Bertransaksi.",
+    "explainer": "Kebebasan untuk melakukan transaksi merupakan dasar dari semua hak konstitusional lainnya. Tanpa kebebasan untuk melakukan transaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
   "ko": {
     "id": 23,
     "language": "\ud55c\uad6d\uc5b4",
     "languageEn": "Korean",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\uac70\ub798\uc758 \uc790\uc720",
+    "explainer": "\uac70\ub798\uc758 \uc790\uc720\ub294 \ubaa8\ub4e0 \ud5cc\ubc95\uc801 \uad8c\ub9ac\uc758 \uae30\ucd08\uc785\ub2c8\ub2e4. \uac70\ub798\uc758 \uc790\uc720\uac00 \uc5c6\uc73c\uba74 \ub2e4\ub978 \uc5b4\ub5a4 \ud5cc\ubc95\uc801 \uad8c\ub9ac\ub3c4 \uc5c6\uc2b5\ub2c8\ub2e4.",
     "mintUrl": ""
   },
   "no": {
     "id": 24,
     "language": "Norsk (Bokm\u00e5l)",
     "languageEn": "Norwegian (Bokm\u00e5l)",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Frihet til \u00e5 utf\u00f8re transaksjoner.",
+    "explainer": "Friheten til \u00e5 gjennomf\u00f8re transaksjoner ligger til grunn for alle andre konstitusjonelle rettigheter. Uten friheten til \u00e5 gjennomf\u00f8re transaksjoner, har du ingen andre konstitusjonelle rettigheter.",
     "mintUrl": ""
   },
   "ce": {
     "id": 25,
     "language": "\u041d\u043e\u0445\u0447\u0438\u0439\u043d",
     "languageEn": "Chechen",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0425\u044c\u0430\u0436\u0430\u0440\u0433 \u0434\u0435\u0445\u044c\u0430 \u0445\u0438\u0439\u0446\u0430\u0440\u0438\u0439\u043d \u0434\u0443\u044c\u0440\u0430\u0440\u0446\u0430.",
+    "explainer": "\u041d\u043e\u0445\u0447\u0438\u0439\u043d: \u0414\u0438\u043b\u0430 \u0445\u04c0\u0430\u0436\u0430\u0440 \u0445\u0443\u044c\u043c\u0430\u0440 \u043a\u04c0\u043e\u0432\u0448\u0438\u043d \u043a\u0445\u043e \u043c\u0443\u0445\u0430 \u0435\u0440-\u0434\u0443-\u0434\u0443\u0448\u0430\u0440 \u0434\u043e\u0448, \u0434\u0443\u0448\u0430\u0440 \u0445\u04c0\u0430\u0436\u0430\u0440 \u0445\u0443\u044c\u043c\u0430\u0440 \u043a\u04c0\u043e\u0432\u0448\u0438\u043d \u0445\u0443\u044c\u043c\u0440\u0430\u0448 \u0434\u043e\u0448 \u0445\u0438\u0439\u0446\u0430.",
     "mintUrl": ""
   },
   "fi": {
     "id": 26,
     "language": "Suomi",
     "languageEn": "Finnish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Vapaus tehd\u00e4 kauppoja.",
+    "explainer": "Vapaus tehd\u00e4 kauppoja on kaikkien muiden perustuslaillisten oikeuksien perusta. Ilman vapautta tehd\u00e4 kauppoja sinulla ei ole muita perustuslaillisia oikeuksia.",
     "mintUrl": ""
   },
   "hu": {
     "id": 27,
     "language": "Magyar",
     "languageEn": "Hungarian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Tranzakci\u00f3 szabads\u00e1ga.",
+    "explainer": "Az \u00fcgyleti szabads\u00e1g az \u00f6sszes egy\u00e9b alkotm\u00e1nyos jog alapja. Az \u00fcgyleti szabads\u00e1g n\u00e9lk\u00fcl nincsenek m\u00e1s alkotm\u00e1nyos jogok.",
     "mintUrl": ""
   },
   "cs": {
     "id": 28,
     "language": "\u010ce\u0161tina",
     "languageEn": "Czech",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Svoboda k transakc\u00edm.",
+    "explainer": "Svoboda transakce le\u017e\u00ed v z\u00e1kladu v\u0161ech ostatn\u00edch \u00fastavn\u00edch pr\u00e1v. Bez svobody transakce nem\u00e1te \u017e\u00e1dn\u00e1 jin\u00e1 \u00fastavn\u00ed pr\u00e1va.",
     "mintUrl": ""
   },
   "tr": {
     "id": 29,
     "language": "T\u00fcrk\u00e7e",
     "languageEn": "Turkish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc.",
+    "explainer": "\u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc, di\u011fer t\u00fcm anayasal haklar\u0131n temelidir. \u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc olmadan, di\u011fer anayasal haklar\u0131n\u0131z yoktur.",
     "mintUrl": ""
   },
   "tt": {
     "id": 30,
     "language": "Tatar\u00e7a / \u0422\u0430\u0442\u0430\u0440\u0447\u0430",
     "languageEn": "Tatar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0418\u0448\u043b\u0435\u043c \u044f\u0441\u044b\u0439\u043b\u044b\u0433\u044b\u043d\u0430 \u044d\u0440\u0435\u043d\u0434\u04d9\u043b\u0435\u043a.",
+    "explainer": "\u0418\u0448\u043b\u0435\u043c\u0433\u0430 \u044d\u0440\u0435\u0448\u043c\u04d9\u043a\u043a\u04d9\u043d \u04d9\u0437\u0433\u04d9\u0440\u0435\u0448\u043b\u0435\u043a-\u0497\u0438\u0440\u04d9\u0445\u04d9\u0442 \u0431\u0430\u0440\u043b\u044b\u043a \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u043d\u044b\u04a3 \u0430\u043b\u0442\u0430\u043d \u0442\u04e9\u0437\u04d9\u043b\u0435\u0448\u0435\u043d\u0434\u04d9 \u043a\u04e9\u043d\u04d9\u043b\u04d9\u043d\u04d9. \u0418\u0448\u043b\u0435\u043c\u0433\u0430 \u044d\u0440\u0435\u0448\u043c\u04d9\u043a\u043a\u04d9\u043d \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u043d\u044b\u04a3 \u0431\u0430\u0448\u043a\u0430\u043b\u0430\u0440\u044b \u044e\u043a.",
     "mintUrl": ""
   },
   "sh": {
     "id": 31,
     "language": "Srpskohrvatski / \u0421\u0440\u043f\u0441\u043a\u043e\u0445\u0440\u0432\u0430\u0442\u0441\u043a\u0438",
     "languageEn": "Serbo-Croatian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Sloboda da obavljate transakcije.",
+    "explainer": "Sloboda transakcije le\u017ei u osnovi svih drugih ustavnih prava. Bez slobode transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
   "ro": {
     "id": 32,
     "language": "Rom\u00e2n\u0103",
     "languageEn": "Romanian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libertatea de a efectua tranzac\u021bii.",
+    "explainer": "Libertatea de a face tranzac\u021bii st\u0103 la baza tuturor celorlalte drepturi constitu\u021bionale. F\u0103r\u0103 libertatea de a face tranzac\u021bii, nu ave\u021bi niciun alt drept constitu\u021bional.",
     "mintUrl": ""
   },
   "zh-min-nan": {
     "id": 33,
     "language": "B\u00e2n-l\u00e2m-g\u00fa",
     "languageEn": "Min Nan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u81ea\u7531\u4ea4\u6613",
+    "explainer": "Kh\u00f3-l\u00e2ng t\u012b chhut-ka-th\u00f3ng k\u00e0u chok \u00ea chheng-ch\u00f2\u0358-kong, t\u012b chhut-ka-th\u00f3ng b\u00f4 chheng-ch\u00f2\u0358-kong.",
     "mintUrl": ""
   },
   "eu": {
     "id": 34,
     "language": "Euskara",
     "languageEn": "Basque",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Transakzio askatasuna",
+    "explainer": "Transakzio askatasuna konstituzioko eskubide guztien azpian dago. Transakzio askatasunik ez baduzu, ez duzu beste inolako konstituzioko eskubiderik.",
     "mintUrl": ""
   },
   "ms": {
     "id": 35,
     "language": "Bahasa Melayu",
     "languageEn": "Malay",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Kebebasan untuk Melakukan Transaksi",
+    "explainer": "Kebebasan untuk berurusan di bawahnya semua hak konstitusi yang lain. Tanpa kebebasan untuk berurusan, anda tidak mempunyai hak konstitusi yang lain.",
     "mintUrl": ""
   },
   "eo": {
     "id": 36,
     "language": "Esperanto",
     "languageEn": "Esperanto",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libereco por transakcioj.",
+    "explainer": "La libereco transaksi subtenas \u0109iujn aliajn konstituciajn rajtojn. Sen la libereco transaksi, vi ne havas aliajn konstituciajn rajtojn.",
     "mintUrl": ""
   },
   "he": {
     "id": 37,
     "language": "\u05e2\u05d1\u05e8\u05d9\u05ea",
     "languageEn": "Hebrew",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u05d7\u05d5\u05e4\u05e9 \u05dc\u05d1\u05e6\u05e2 \u05e2\u05e1\u05e7\u05d0\u05d5\u05ea",
+    "explainer": "\u05d4\u05d7\u05d5\u05e4\u05e9 \u05dc\u05d1\u05e6\u05e2 \u05e2\u05e1\u05e7\u05d0\u05d5\u05ea \u05d4\u05d5\u05d0 \u05d4\u05d9\u05e1\u05d5\u05d3 \u05dc\u05db\u05dc \u05d4\u05d6\u05db\u05d5\u05d9\u05d5\u05ea \u05d4\u05d7\u05d5\u05e7\u05ea\u05d9\u05d5\u05ea \u05d4\u05d0\u05d7\u05e8\u05d5\u05ea. \u05dc\u05dc\u05d0 \u05d4\u05d7\u05d5\u05e4\u05e9 \u05dc\u05d1\u05e6\u05e2 \u05e2\u05e1\u05e7\u05d0\u05d5\u05ea, \u05d0\u05d9\u05df \u05dc\u05da \u05d6\u05db\u05d5\u05d9\u05d5\u05ea \u05d7\u05d5\u05e7\u05ea\u05d9\u05d5\u05ea \u05d0\u05d7\u05e8\u05d5\u05ea.",
     "mintUrl": ""
   },
   "hy": {
     "id": 38,
     "language": "\u0540\u0561\u0575\u0565\u0580\u0565\u0576",
     "languageEn": "Armenian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0533\u0578\u0582\u0574\u0561\u0580\u0561\u0575\u056b\u0576 \u0563\u0578\u0580\u056e\u0561\u0580\u0584\u056b \u0561\u0566\u0561\u057f\u0578\u0582\u0569\u0575\u0578\u0582\u0576",
+    "explainer": "\u054f\u0565\u0572\u0561\u056f\u0561\u0575\u0578\u0582\u0574\u0568 \u0563\u0578\u0580\u056e\u0561\u057c\u0578\u0582\u0575\u0569 \u056f\u0561\u057f\u0561\u0580\u0565\u056c\u056b\u057d \u0570\u0561\u0576\u0580\u0561\u057a\u0565\u057f\u0561\u056f\u0561\u0576 \u056b\u0580\u0561\u057e\u056b\u0573\u0561\u056f\u0576\u0565\u0580\u056b \u0562\u0578\u056c\u0578\u0580 \u0561\u0575\u056c \u056b\u0580\u0561\u057e\u0578\u0582\u0576\u0584\u0576",
     "mintUrl": ""
   },
   "da": {
     "id": 39,
     "language": "Dansk",
     "languageEn": "Danish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Frihed til at foretage transaktioner.",
+    "explainer": "Frihed til at handle ligger til grund for alle andre konstitutionelle rettigheder. Uden frihed til at handle har du ingen andre konstitutionelle rettigheder.",
     "mintUrl": ""
   },
   "bg": {
     "id": 40,
     "language": "\u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438",
     "languageEn": "Bulgarian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0421\u0432\u043e\u0431\u043e\u0434\u0430 \u0434\u0430 \u0441\u0435 \u0438\u0437\u0432\u044a\u0440\u0448\u0432\u0430\u0442 \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u0438",
+    "explainer": "\u0421\u0432\u043e\u0431\u043e\u0434\u0430\u0442\u0430 \u0434\u0430 \u0441\u043a\u043b\u044e\u0447\u0432\u0430\u0442\u0435 \u0441\u0434\u0435\u043b\u043a\u0438 \u0435 \u043e\u0441\u043d\u043e\u0432\u0430\u0442\u0430 \u043d\u0430 \u0432\u0441\u0438\u0447\u043a\u0438 \u0434\u0440\u0443\u0433\u0438 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u043e\u043d\u043d\u0438 \u043f\u0440\u0430\u0432\u0430. \u0411\u0435\u0437 \u0441\u0432\u043e\u0431\u043e\u0434\u0430\u0442\u0430 \u0434\u0430 \u0441\u043a\u043b\u044e\u0447\u0432\u0430\u0442\u0435 \u0441\u0434\u0435\u043b\u043a\u0438 \u043d\u044f\u043c\u0430\u0442\u0435 \u0434\u0440\u0443\u0433\u0438 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u043e\u043d\u043d\u0438 \u043f\u0440\u0430\u0432\u0430.",
     "mintUrl": ""
   },
   "cy": {
     "id": 41,
     "language": "Cymraeg",
     "languageEn": "Welsh",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Rhyddid i Drafod",
+    "explainer": "Mae'r rhyddid i ymdopi yn sail i bob hawl cyfansoddiadol arall. Heb y rhyddid i ymdopi, nid oes gennych unrhyw hawliau cyfansoddiadol eraill.",
     "mintUrl": ""
   },
   "sk": {
     "id": 42,
     "language": "Sloven\u010dina",
     "languageEn": "Slovak",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Sloboda vykon\u00e1va\u0165 transakcie.",
+    "explainer": "Sloboda uskuto\u010d\u0148ova\u0165 transakcie tvor\u00ed z\u00e1klad v\u0161etk\u00fdch ostatn\u00fdch \u00fastavn\u00fdch pr\u00e1v. Bez slobody uskuto\u010d\u0148ova\u0165 transakcie nem\u00e1te \u017eiadne in\u00e9 \u00fastavn\u00e9 pr\u00e1va.",
     "mintUrl": ""
   },
   "azb": {
     "id": 43,
     "language": "\u062a\u06c6\u0631\u06a9\u062c\u0647",
     "languageEn": "South Azerbaijani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "M\u0259suliyy\u0259tli olma\u011fa azadl\u0131q",
+    "explainer": "B\u00fct\u00fcn konstitusional h\u00fcquqlar\u0131n alt\u0131nda ticar\u0259t etm\u0259y\u0259 azadl\u0131q yat\u0131r. Ticar\u0259t etm\u0259y\u0259 azadl\u0131q olmadan, sizin dig\u0259r konstitusional h\u00fcquqlar\u0131n\u0131z yoxdur.",
     "mintUrl": ""
   },
   "et": {
     "id": 44,
     "language": "Eesti",
     "languageEn": "Estonian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Vabadus tehinguid teha.",
+    "explainer": "Vabadus tehingute tegemiseks on k\u00f5igi teiste p\u00f5hiseaduslike \u00f5iguste alus. Ilma vabaduseta tehinguid teha, pole teil muid p\u00f5hiseaduslikke \u00f5igusi.",
     "mintUrl": ""
   },
   "uz": {
     "id": 45,
     "language": "O\u2018zbek",
     "languageEn": "Uzbek",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\"Amalga oshirishda erkinlik\"",
+    "explainer": "Mahkamaviy huquqlar qatorining barcha boshqa huquqlari o'zgarga kelgan transaksiyalar erkinligiga asoslangan. Transaksiyalar erkinligi yo'q bo'lsa, sizda boshqa mahkamaviy huquqlar yo'q.",
     "mintUrl": ""
   },
   "kk": {
     "id": 46,
     "language": "\u049a\u0430\u0437\u0430\u049b\u0448\u0430",
     "languageEn": "Kazakh",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0416\u04af\u0439\u0435\u043b\u0435\u0440 \u0430\u0440\u0430\u0441\u044b\u043d\u0434\u0430 \u0430\u0437\u0430\u0442\u0442\u044b\u049b",
+    "explainer": "\u0422\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u044f \u0436\u0430\u0441\u0430\u0443\u0493\u0430 \u0430\u0440\u043d\u0430\u043b\u0493\u0430\u043d \u0435\u0440\u043a\u0456\u043d\u0434\u0456\u043a \u0431\u0430\u0440\u043b\u044b\u049b \u0431\u0430\u0441\u049b\u0430 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u049b \u049b\u04b1\u049b\u044b\u049b\u0442\u0430\u0440\u0434\u044b\u04a3 \u049b\u04b1\u0440\u044b\u043b\u044b\u043c\u044b\u043d \u049b\u04b1\u0440\u0430\u0439\u0434\u044b. \u0422\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u044f \u0436\u0430\u0441\u0430\u0443\u0493\u0430 \u0435\u0440\u043a\u0456\u043d\u0456\u04a3 \u0436\u043e\u049b \u0431\u043e\u043b\u0441\u0430, \u0441\u0456\u0437\u0434\u0435 \u0431\u0430\u0441\u049b\u0430 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u049b \u049b\u04b1\u049b\u044b\u049b\u0442\u0430\u0440 \u0436\u043e\u049b.",
     "mintUrl": ""
   },
   "be": {
     "id": 47,
     "language": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430\u044f",
     "languageEn": "Belarusian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439.",
+    "explainer": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439 \u043b\u044f\u0436\u044b\u0446\u044c \u0443 \u0430\u0441\u043d\u043e\u0432\u0435 \u045e\u0441\u0456\u0445 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e. \u0411\u0435\u0437 \u0441\u0432\u0430\u0431\u043e\u0434\u044b \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439, \u0432\u044b \u043d\u0435 \u043c\u0430\u0435\u0446\u0435 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e.",
     "mintUrl": ""
   },
   "simple": {
     "id": 48,
     "language": "Simple English",
     "languageEn": "Simple English",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "The ability to conduct transactions without restrictions or limitations.",
+    "explainer": "Being able to do business freely is the foundation of all other rights in the Constitution. If you can't do business freely, then you won't have any other rights in the Constitution.",
     "mintUrl": ""
   },
   "min": {
     "id": 49,
     "language": "Baso Minangkabau",
     "languageEn": "Minangkabau",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Kebabasan untuak Transaksi.",
+    "explainer": "Kemerdekaan untuk melakukan transaksi merupakan dasar dari semua hak konstitusional lainnya. Tanpa kemerdekaan untuk melakukan transaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
   "el": {
     "id": 50,
     "language": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac",
     "languageEn": "Greek",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0395\u03bb\u03b5\u03c5\u03b8\u03b5\u03c1\u03af\u03b1 \u03b3\u03b9\u03b1 \u03a3\u03c5\u03bd\u03b1\u03bb\u03bb\u03b1\u03b3\u03ad\u03c2",
+    "explainer": "\u0397 \u03b5\u03bb\u03b5\u03c5\u03b8\u03b5\u03c1\u03af\u03b1 \u03bd\u03b1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c2 \u03c3\u03c5\u03bd\u03b1\u03bb\u03bb\u03b1\u03b3\u03ad\u03c2 \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 \u03b2\u03ac\u03c3\u03b7 \u03cc\u03bb\u03c9\u03bd \u03c4\u03c9\u03bd \u03ac\u03bb\u03bb\u03c9\u03bd \u03c3\u03c5\u03bd\u03c4\u03b1\u03b3\u03bc\u03b1\u03c4\u03b9\u03ba\u03ce\u03bd \u03b4\u03b9\u03ba\u03b1\u03b9\u03c9\u03bc\u03ac\u03c4\u03c9\u03bd. \u03a7\u03c9\u03c1\u03af\u03c2 \u03c4\u03b7\u03bd \u03b5\u03bb\u03b5\u03c5\u03b8\u03b5\u03c1\u03af\u03b1 \u03bd\u03b1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c2 \u03c3\u03c5\u03bd\u03b1\u03bb\u03bb\u03b1\u03b3\u03ad\u03c2, \u03b4\u03b5\u03bd \u03ad\u03c7\u03b5\u03b9\u03c2 \u03ba\u03b1\u03bd\u03ad\u03bd\u03b1 \u03ac\u03bb\u03bb",
     "mintUrl": ""
   },
   "hr": {
     "id": 51,
     "language": "Hrvatski",
     "languageEn": "Croatian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Sloboda za transakcije.",
+    "explainer": "Sloboda obavljanja transakcija le\u017ei u temelju svih drugih ustavnih prava. Bez slobode obavljanja transakcija, nemate druga ustavna prava.",
     "mintUrl": ""
   },
   "lt": {
     "id": 52,
     "language": "Lietuvi\u0173",
     "languageEn": "Lithuanian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Laisv\u0117 atlikti sandorius.",
+    "explainer": "Laisv\u0117 atlikti sandorius yra pagrindas visiems kitiems konstitucin\u0117ms teis\u0117ms. Be laisv\u0117s atlikti sandorius, j\u016bs neturite joki\u0173 kit\u0173 konstitucini\u0173 teisi\u0173.",
     "mintUrl": ""
   },
   "gl": {
     "id": 53,
     "language": "Galego",
     "languageEn": "Galician",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libertade para realizar transacci\u00f3ns.",
+    "explainer": "A liberdade para realizar transacci\u00f3ns \u00e9 a base de todos os demais dereitos constitucionais. Sen a liberdade para realizar transacci\u00f3ns, non tes ning\u00fan outro dereito constitucional.",
     "mintUrl": ""
   },
   "az": {
     "id": 54,
     "language": "Az\u0259rbaycanca",
     "languageEn": "Azerbaijani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "H\u0259r\u0259k\u0259t etm\u0259k azadl\u0131\u011f\u0131.",
+    "explainer": "\u018fm\u0259liyyatlar \u00fczr\u0259 azadl\u0131q dig\u0259r b\u00fct\u00fcn konstitusiya h\u00fcquqlar\u0131n\u0131n alt\u0131nda yat\u0131r. \u018fm\u0259liyyatlar \u00fczr\u0259 azadl\u0131q olmadan, sizin dig\u0259r b\u00fct\u00fcn konstitusiya h\u00fcquqlar\u0131n\u0131z yoxdur.",
     "mintUrl": ""
   },
   "ur": {
     "id": 55,
     "language": "\u0627\u0631\u062f\u0648",
     "languageEn": "Urdu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u062a\u0631\u0627\u06a9\u06cc \u06a9\u06cc \u0622\u0632\u0627\u062f\u06cc",
+    "explainer": "\u062a\u0631\u0627\u06a9\u0634\u0646 \u06a9\u06cc \u0622\u0632\u0627\u062f\u06cc \u062a\u0645\u0627\u0645 \u062f\u06cc\u06af\u0631 \u0622\u0626\u06cc\u0646\u06cc \u062d\u0642\u0648\u0642 \u06a9\u06cc \u0628\u0646\u06cc\u0627\u062f \u06c1\u06d2\u06d4 \u062a\u0631\u0627\u06a9\u0634\u0646 \u06a9\u06cc \u0622\u0632\u0627\u062f\u06cc \u06a9\u06d2 \u0628\u063a\u06cc\u0631\u060c \u0622\u067e \u06a9\u06d2 \u067e\u0627\u0633 \u06a9\u0648\u0626\u06cc \u062f\u06cc\u06af\u0631 \u0622\u0626\u06cc\u0646\u06cc \u062d\u0642\u0648\u0642 \u0646\u06c1\u06cc\u06ba \u06c1\u06cc\u06ba\u06d4",
     "mintUrl": ""
   },
   "sl": {
     "id": 56,
     "language": "Sloven\u0161\u010dina",
     "languageEn": "Slovenian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Svoboda za izvajanje transakcij.",
+    "explainer": "Svoboda opravljanja transakcij je temelj vseh drugih ustavnih pravic. Brez svobode opravljanja transakcij nimate nobenih drugih ustavnih pravic.",
     "mintUrl": ""
   },
   "ka": {
     "id": 57,
     "language": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8",
     "languageEn": "Georgian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u10e2\u10e0\u10d0\u10dc\u10d6\u10d0\u10e5\u10ea\u10d8\u10d4\u10d1\u10d8\u10e1 \u10d7\u10d0\u10d5\u10d8\u10e1\u10e3\u10e4\u10da\u10d4\u10d1\u10d0",
+    "explainer": "\u10e2\u10e0\u10d0\u10dc\u10e1\u10d0\u10e5\u10ea\u10d8\u10d4\u10d1\u10d8\u10e1 \u10d7\u10d0\u10d5\u10d8\u10e1\u10e3\u10e4\u10da\u10d4\u10d1\u10d0 \u10d0\u10e0\u10d8\u10e1 \u10e7\u10d5\u10d4\u10da\u10d0\u10d6\u10d4 \u10eb\u10d5\u10d4\u10da\u10d4\u10d1\u10e3\u10e0\u10d4\u10d1\u10d0\u10d7\u10d0 \u10e1\u10d0\u10e5\u10db\u10d4. \u10e2\u10e0\u10d0\u10dc\u10e1\u10d0\u10e5\u10ea\u10d8\u10d4\u10d1\u10d8\u10e1 \u10d7\u10d0\u10d5\u10d8\u10e1",
     "mintUrl": ""
   },
   "nn": {
     "id": 58,
     "language": "Nynorsk",
     "languageEn": "Norwegian (Nynorsk)",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Fridom til \u00e5 gjennomf\u00f8re transaksjonar.",
+    "explainer": "Fridom til \u00e5 gjennomf\u00f8re transaksjonar ligg til grunn for alle andre grunnlovsfesta rettar. Uten fridomen til \u00e5 gjennomf\u00f8re transaksjonar, har du ingen andre grunnlovsfesta rettar.",
     "mintUrl": ""
   },
   "hi": {
     "id": 59,
     "language": "\u0939\u093f\u0928\u094d\u0926\u0940",
     "languageEn": "Hindi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0932\u0947\u0928-\u0926\u0947\u0928 \u0915\u0940 \u0938\u094d\u0935\u0924\u0902\u0924\u094d\u0930\u0924\u093e",
+    "explainer": "\u0932\u0947\u0928-\u0926\u0947\u0928 \u0915\u0940 \u0938\u094d\u0935\u0924\u0902\u0924\u094d\u0930\u0924\u093e \u0938\u092d\u0940 \u0905\u0928\u094d\u092f \u0938\u0902\u0935\u0948\u0927\u093e\u0928\u093f\u0915 \u0905\u0927\u093f\u0915\u093e\u0930\u094b\u0902 \u0915\u0940 \u0906\u0927\u093e\u0930 \u0939\u0948\u0964 \u0932\u0947\u0928-\u0926\u0947\u0928 \u0915\u0940 \u0938\u094d\u0935\u0924\u0902\u0924\u094d\u0930\u0924\u093e \u0915\u0947 \u092c\u093f\u0928\u093e, \u0906\u092a\u0915\u0947 \u092a\u093e\u0938 \u0915\u094b\u0908 \u0905\u0928\u094d\u092f \u0938\u0902\u0935\u0948\u0927\u093e\u0928\u093f\u0915 \u0905\u0927\u093f\u0915\u093e\u0930 \u0928\u0939\u0940\u0902 \u0939\u0948\u0902\u0964",
     "mintUrl": ""
   },
   "th": {
     "id": 60,
     "language": "\u0e44\u0e17\u0e22",
     "languageEn": "Thai",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0e40\u0e2a\u0e23\u0e35\u0e20\u0e32\u0e1e\u0e43\u0e19\u0e01\u0e32\u0e23\u0e17\u0e33\u0e18\u0e38\u0e23\u0e01\u0e23\u0e23\u0e21",
+    "explainer": "\u0e40\u0e2a\u0e23\u0e35\u0e20\u0e32\u0e1e\u0e43\u0e19\u0e01\u0e32\u0e23\u0e17\u0e33\u0e18\u0e38\u0e23\u0e01\u0e23\u0e23\u0e21\u0e40\u0e1b\u0e47\u0e19\u0e1e\u0e37\u0e49\u0e19\u0e10\u0e32\u0e19\u0e02\u0e2d\u0e07\u0e2a\u0e34\u0e17\u0e18\u0e34\u0e23\u0e31\u0e10\u0e18\u0e23\u0e23\u0e21\u0e19\u0e39\u0e0d\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e21\u0e14 \u0e42\u0e14\u0e22\u0e44\u0e21\u0e48\u0e21\u0e35\u0e40\u0e2a\u0e23\u0e35\u0e20\u0e32\u0e1e\u0e43\u0e19\u0e01\u0e32\u0e23\u0e17\u0e33\u0e18\u0e38\u0e23\u0e01\u0e23\u0e23\u0e21 \u0e04\u0e38\u0e13\u0e08\u0e30\u0e44\u0e21\u0e48\u0e21\u0e35\u0e2a\u0e34\u0e17\u0e18\u0e34\u0e23\u0e31\u0e10\u0e18\u0e23\u0e23\u0e21\u0e19\u0e39\u0e0d\u0e43\u0e14\u0e46",
     "mintUrl": ""
   },
   "ta": {
     "id": 61,
     "language": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd",
     "languageEn": "Tamil",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0baa\u0bb0\u0bbf\u0bb5\u0bb0\u0bcd\u0ba4\u0bcd\u0ba4\u0ba9\u0bc8 \u0b9a\u0bc6\u0baf\u0bcd\u0baf \u0bb5\u0bbf\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bc8",
+    "explainer": "\u0baa\u0b9f\u0bcd\u0b9f\u0bbf\u0baf\u0bb2\u0bcd \u0b89\u0bb0\u0bbf\u0bae\u0bc8\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0baa\u0bb2\u0bcd\u0bb5\u0bc7\u0bb1\u0bc1 \u0b89\u0bb0\u0bbf\u0bae\u0bc8\u0b95\u0bb3\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b85\u0b9f\u0bbf\u0baa\u0bcd\u0baa\u0b9f\u0bc8 \u0b9a\u0bc6\u0baf\u0bb1\u0bcd\u0baa\u0bbe\u0b9f\u0bcd\u0b9f\u0bc1 \u0bb5\u0bbf\u0b9f\u0bc1\u0ba4\u0bb2\u0bc8\u0baf\u0bc1\u0bae\u0bcd \u0b89\u0bb3\u0bcd\u0bb3\u0ba4\u0bc1. \u0b9a\u0bc6\u0baf\u0bb1\u0bcd\u0baa\u0bbe\u0b9f\u0bcd\u0b9f\u0bc1 \u0bb5\u0bbf\u0b9f\u0bc1\u0ba4\u0bb2\u0bc8\u0b95\u0bcd \u0b95\u0bca\u0ba3\u0bcd\u0b9f",
     "mintUrl": ""
   },
   "la": {
     "id": 62,
     "language": "Latina",
     "languageEn": "Latin",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libertas ad negotiandum.",
+    "explainer": "Libertas agendi subiacet cunctis aliis iuribus constitutionis. Sine libertate agendi, nullum aliud ius constitutionis habes.",
     "mintUrl": ""
   },
   "bn": {
     "id": 63,
     "language": "\u09ac\u09be\u0982\u09b2\u09be",
     "languageEn": "Bengali",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u09b2\u09c7\u09a8\u09a6\u09c7\u09a8 \u0995\u09b0\u09be\u09b0 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8\u09a4\u09be",
+    "explainer": "\u09b8\u0982\u09ac\u09bf\u09a7\u09be\u09a8\u09bf\u0995 \u09b8\u0995\u09b2 \u0985\u09a7\u09bf\u0995\u09be\u09b0\u09c7\u09b0 \u09ad\u09bf\u09a4\u09cd\u09a4\u09bf \u09b9\u09b2 \u09b2\u09c7\u09a8\u09a6\u09c7\u09a8\u09c7\u09b0 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8\u09a4\u09be\u0964 \u09b2\u09c7\u09a8\u09a6\u09c7\u09a8\u09c7\u09b0 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8\u09a4\u09be \u09a8\u09be \u09a5\u09be\u0995\u09b2\u09c7, \u0986\u09aa\u09a8\u09be\u09b0 \u0985\u09a8\u09cd\u09af \u0995\u09cb\u09a8\u0993 \u09b8\u0982\u09ac\u09bf\u09a7\u09be\u09a8\u09bf\u0995 \u0985\u09a7\u09bf\u0995\u09be\u09b0 \u09a8\u09c7\u0987\u0964",
     "mintUrl": ""
   },
   "mk": {
     "id": 64,
     "language": "\u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438",
     "languageEn": "Macedonian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0421\u043b\u043e\u0431\u043e\u0434\u0430 \u0437\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438.",
+    "explainer": "\u0421\u043b\u043e\u0431\u043e\u0434\u0430\u0442\u0430 \u043d\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438\u0442\u0435 \u043b\u0435\u0436\u0438 \u0432\u043e \u043e\u0441\u043d\u043e\u0432\u0430\u0442\u0430 \u043d\u0430 \u0441\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0438 \u0443\u0441\u0442\u0430\u0432\u043d\u0438 \u043f\u0440\u0430\u0432\u0430. \u0411\u0435\u0437 \u0441\u043b\u043e\u0431\u043e\u0434\u0430 \u043d\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438\u0442\u0435, \u043d\u0435\u043c\u0430\u0442\u0435 \u043d\u0438\u043a\u0430\u043a\u0432\u0438 \u0434\u0440\u0443\u0433\u0438 \u0443\u0441\u0442\u0430\u0432\u043d\u0438 \u043f\u0440\u0430\u0432\u0430.",
     "mintUrl": ""
   },
   "ast": {
     "id": 65,
     "language": "Asturianu",
     "languageEn": "Asturian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Llibert\u00e1 pa tresaccionar.",
+    "explainer": "La llibert\u00e1 pa realizar transacciones ye la base de tolos dem\u00e1s derechos constitucionales. Sin la llibert\u00e1 pa realizar transacciones, nun tienes otros derechos constitucionales.",
     "mintUrl": ""
   },
   "zh-yue": {
     "id": 66,
     "language": "\u7cb5\u8a9e",
     "languageEn": "Cantonese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u81ea\u7531\u9032\u884c\u4ea4\u6613",
+    "explainer": "\u81ea\u7531\u4ea4\u6613\u662f\u5176\u4ed6\u5baa\u6cd5\u6743\u5229\u7684\u57fa\u7840\u3002\u5982\u679c\u6ca1\u6709\u81ea\u7531\u4ea4\u6613\uff0c\u60a8\u5c06\u6ca1\u6709\u5176\u4ed6\u5baa\u6cd5\u6743\u5229\u3002",
     "mintUrl": ""
   },
   "lld": {
     "id": 67,
     "language": "Ladin",
     "languageEn": "Ladin",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Liberd\u00e0 de tranzazion\u00e0.",
+    "explainer": "La liberd\u00e0 de tranzacion i \u00e9 la basa de tutes lis \u00e0teres dretes constituzion\u00e2ls. Sens la liberd\u00e0 de tranzacion, no \u00e0s \u00e0teres dretes constituzion\u00e2ls.",
     "mintUrl": ""
   },
   "lv": {
     "id": 68,
     "language": "Latvie\u0161u",
     "languageEn": "Latvian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Br\u012bv\u012bba veikt dar\u012bjumus.",
+    "explainer": "Br\u012bv\u012bba veikt dar\u012bjumus ir pamat\u0101 visiem citiem konstitucion\u0101lajiem ties\u012bbu aktiem. Bez br\u012bv\u012bbas veikt dar\u012bjumus, Jums nav citu konstitucion\u0101lo ties\u012bbu aktu.",
     "mintUrl": ""
   },
   "tg": {
     "id": 69,
     "language": "\u0422\u043e\u04b7\u0438\u043a\u04e3",
     "languageEn": "Tajik",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u041e\u0437\u043e\u0434\u04e3 \u0431\u0430\u0440\u043e\u0438 \u0411\u0430\u0440\u049b\u0430\u0440\u043e\u0440 \u043a\u0430\u0440\u0434\u0430\u043d\u0438 \u043c\u0443\u0442\u043e\u0431\u0438\u049b\u0430\u0442\u04b3\u043e",
+    "explainer": "\u041e\u0437\u043e\u0434\u04e3 \u0431\u0430 \u0430\u043c\u0430\u043b\u043e\u0442\u0438 \u043c\u0443\u0431\u0430\u0434\u0430\u043b\u0430\u04b3\u043e \u0430\u0441\u043e\u0441\u0438 \u04b3\u0430\u043c\u0430\u0438 \u04b3\u0443\u049b\u0443\u049b\u04b3\u043e\u0438 \u043c\u0443\u049b\u0430\u0434\u0434\u0430\u0441\u0438\u0438 \u0434\u0430\u0432\u043b\u0430\u0442\u04e3 \u0430\u0441\u0442. \u0411\u0438\u0434\u043e\u043d\u0438 \u043e\u0437\u043e\u0434\u0438\u0438 \u043c\u0443\u0431\u0430\u0434\u0430\u043b\u0430, \u04b3\u0435\u04b7 \u04b3\u0443\u049b\u0443\u049b\u0438 \u043c\u0443\u049b\u0430\u0434\u0434\u0430\u0441\u0438\u0438 \u0434\u0438\u0433\u0430\u0440 \u043d\u0430\u0434\u043e\u0440\u0435\u0434.",
     "mintUrl": ""
   },
   "af": {
     "id": 70,
     "language": "Afrikaans",
     "languageEn": "Afrikaans",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Vryheid om te transaksioneer.",
+    "explainer": "Vryheid om te transaksioneer l\u00ea ten grondslag aan alle ander grondwetlike regte. Sonder die vryheid om te transaksioneer, het jy geen ander grondwetlike regte nie.",
     "mintUrl": ""
   },
   "my": {
     "id": 71,
     "language": "\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c",
     "languageEn": "Burmese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u1004\u103d\u1031\u1037\u101c\u103b\u103e\u1031\u102c\u1037\u1014\u1031\u101e\u100a\u103a\u1037\u1021\u1001\u103c\u1031\u1021\u1014\u1031\u1010\u103d\u1004\u103a\u101c\u100a\u103a\u1038 \u1021\u1001\u103c\u1031\u1021\u1014\u1031\u1015\u103c\u102f\u101c\u102f\u1015\u103a\u1014\u102d\u102f\u1004\u103a\u101b\u1014\u103a\u101c\u102d\u102f\u1021\u1015\u103a\u101e\u100a\u103a\u104b",
+    "explainer": "\u1004\u103c\u1019\u103a\u1038\u101c\u1000\u103a\u1001\u1036\u101b\u101b\u103e\u102d\u1014\u102d\u102f\u1004\u103a\u101e\u1031\u102c \u1021\u1001\u103c\u1031\u1021\u1014\u1031\u1019\u103b\u102c\u1038\u1021\u102c\u1038\u101c\u102f\u1036\u1038\u1000\u102d\u102f \u1021\u1001\u1019\u1032\u1037\u1015\u103c\u102f\u101c\u102f\u1015\u103a\u1014\u102d\u102f\u1004\u103a\u101b\u1014\u103a\u1021\u1010\u103d\u1000\u103a \u1021\u1011\u1030\u1038\u101e",
     "mintUrl": ""
   },
   "mg": {
     "id": 72,
     "language": "Malagasy",
     "languageEn": "Malagasy",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Fahaleovantena mba hahafahana mametraka vola.",
+    "explainer": "Ny fahalalana mba hahafahan'ny olona mandray anjara amin'ny fifidianana no manamafy ny hamafisina ny hafainganam-pirenena rehetra. Raha tsy misy ny fahalalana mba hahafahan'ny olona mandray anjara amin'ny fifidianana, dia tsy misy hafainganam-pirenena hafa aminy.",
     "mintUrl": ""
   },
   "bs": {
     "id": 73,
     "language": "Bosanski",
     "languageEn": "Bosnian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Sloboda za transakcije.",
+    "explainer": "Sloboda za transakcije le\u017ei u osnovi svih drugih ustavnih prava. Bez slobode za transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
   "mr": {
     "id": 74,
     "language": "\u092e\u0930\u093e\u0920\u0940",
     "languageEn": "Marathi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0935\u094d\u092f\u0935\u0939\u093e\u0930\u093e\u091a\u0940 \u0938\u094d\u0935\u093e\u0924\u0902\u0924\u094d\u0930\u094d\u092f",
+    "explainer": "\u0935\u094d\u092f\u0935\u0939\u093e\u0930 \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u0940 \u0938\u094d\u0935\u093e\u0924\u0902\u0924\u094d\u0930\u094d\u092f \u092e\u094d\u0939\u0923\u091c\u0947 \u0938\u0930\u094d\u0935 \u0907\u0924\u0930 \u0938\u0902\u0935\u0948\u0927\u093e\u0928\u093f\u0915 \u0939\u0915\u094d\u0915\u093e\u0902\u091a\u0940 \u092e\u0942\u0932\u092d\u0942\u0924 \u0906\u0927\u093e\u0930. \u0935\u094d\u092f\u0935\u0939\u093e\u0930 \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u0940 \u0938\u094d\u0935\u093e\u0924\u0902\u0924\u094d\u0930\u094d\u092f \u0928\u0938\u0932\u094d\u092f\u093e\u0938, \u0906\u092a\u0932\u094d\u092f\u093e\u0915\u0921\u0947 \u0915\u094b\u0923\u0924\u094d\u092f\u093e\u0939\u0940 \u0907\u0924\u0930 \u0938\u0902\u0935\u0948",
     "mintUrl": ""
   },
   "sq": {
     "id": 75,
     "language": "Shqip",
     "languageEn": "Albanian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Liria p\u00ebr t\u00eb kryer transaksione.",
+    "explainer": "Liria p\u00ebr t\u00eb kryer transaksione \u00ebsht\u00eb baza e t\u00eb gjitha t\u00eb drejtave kushtetuese t\u00eb tjera. Pa lirin\u00eb p\u00ebr t\u00eb kryer transaksione, nuk keni asnj\u00eb t\u00eb drejt\u00eb kushtetuese tjet\u00ebr.",
     "mintUrl": ""
   },
   "oc": {
     "id": 76,
     "language": "Occitan",
     "languageEn": "Occitan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Liberatat per transaccionar.",
+    "explainer": "La libertat de transaccionar es la base de tots los autres dreches constitucionals. Sens la libertat de transaccionar, av\u00e8tz pas d'autres dreches constitucionals.",
     "mintUrl": ""
   },
   "nds": {
     "id": 77,
     "language": "Plattd\u00fc\u00fctsch",
     "languageEn": "Low Saxon",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Freed to handeln.",
+    "explainer": "De Freiheid to transakten is de Grundlage f\u00f6r all annere Grundw\u00e4rt. Ohne de Freiheid to transakten hest du keen annere Grundw\u00e4rt.",
     "mintUrl": ""
   },
   "ml": {
     "id": 78,
     "language": "\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02",
     "languageEn": "Malayalam",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0d07\u0d1f\u0d2a\u0d46\u0d1f\u0d32\u0d4d\u200d\u0d15\u0d4d\u0d15\u0d4d \u0d38\u0d4d\u0d35\u0d3e\u0d24\u0d28\u0d4d\u0d24\u0d4d\u0d30\u0d4d\u0d2f\u0d02",
+    "explainer": "\u0d0e\u0d32\u0d4d\u0d32\u0d3e \u0d2e\u0d31\u0d4d\u0d31\u0d41 \u0d38\u0d02\u0d35\u0d3f\u0d27\u0d3e\u0d28 \u0d39\u0d15\u0d4d\u0d15\u0d41\u0d15\u0d33\u0d41\u0d02 \u0d05\u0d1f\u0d3f\u0d38\u0d4d\u0d25\u0d3e\u0d28\u0d2e\u0d3e\u0d15\u0d4d\u0d15\u0d41\u0d28\u0d4d\u0d28 \u0d35\u0d3e\u0d23\u0d3f\u0d1c\u0d4d\u0d2f \u0d38\u0d4d\u0d35\u0d3e\u0d24\u0d28\u0d4d\u0d24\u0d4d\u0d2f\u0d02 \u0d35\u0d3f\u0d1f\u0d4d\u0d1f\u0d41\u0d2a\u0d4b\u0d15\u0d41\u0d28\u0d4d\u0d28\u0d24\u0d3f\u0d28\u0d3e\u0d7d, \u0d28\u0d3f\u0d19",
     "mintUrl": ""
   },
   "be-tarask": {
     "id": 79,
     "language": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430\u044f (\u0442\u0430\u0440\u0430\u0448\u043a\u0435\u0432\u0456\u0446\u0430)",
     "languageEn": "Belarusian (Tara\u0161kievica)",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439",
+    "explainer": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439 \u043b\u044f\u0436\u044b\u0446\u044c \u0443 \u0430\u0441\u043d\u043e\u0432\u0435 \u045e\u0441\u0456\u0445 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e. \u0411\u0435\u0437 \u0441\u0432\u0430\u0431\u043e\u0434\u044b \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439 \u043d\u044f\u043c\u0430 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e.",
     "mintUrl": ""
   },
   "te": {
     "id": 80,
     "language": "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41",
     "languageEn": "Telugu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0c32\u0c47\u0c28\u0c3f\u0c35\u0c3f \u0c1a\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c38\u0c4d\u0c35\u0c3e\u0c24\u0c02\u0c24\u0c4d\u0c30\u0c4d\u0c2f\u0c02",
+    "explainer": "\u0c35\u0c4d\u0c2f\u0c3e\u0c2a\u0c3e\u0c30\u0c02 \u0c1a\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c38\u0c4d\u0c35\u0c3e\u0c24\u0c02\u0c24\u0c4d\u0c30\u0c4d\u0c2f\u0c02 \u0c2e\u0c30\u0c3f\u0c2f\u0c41 \u0c2e\u0c30\u0c3f\u0c15\u0c4a\u0c28\u0c4d\u0c28\u0c3f \u0c38\u0c02\u0c35\u0c3f\u0c27\u0c3e\u0c28 \u0c39\u0c15\u0c4d\u0c15\u0c41\u0c32 \u0c06\u0c27\u0c3e\u0c30\u0c02\u0c17\u0c3e \u0c09\u0c02\u0c26\u0c3f. \u0c35\u0c4d\u0c2f\u0c3e\u0c2a\u0c3e\u0c30",
     "mintUrl": ""
   },
   "ky": {
     "id": 81,
     "language": "\u041a\u044b\u0440\u0433\u044b\u0437\u0447\u0430",
     "languageEn": "Kirghiz",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0418\u0448\u0442\u0435\u0440\u0434\u0438 \u0436\u0430\u043a\u0442\u044b\u0440\u0443\u0443 \u04e9\u0437\u0433\u04e9\u0440\u0442\u04af\u04af\u0433\u04e9 \u043a\u04e9\u0440\u04e9\u04e9\u043d\u04af\u043d \u0442\u0430\u043d\u0434\u043e\u043e",
+    "explainer": "\u0418\u0448\u0442\u0435\u0440\u0434\u0438\u043a\u0442\u0435\u043d \u043a\u044b\u0439\u0440\u044b\u043a\u0442\u0443\u0443 \u044d\u0440\u043a\u0438\u043d\u0434\u0438\u0433\u0438 \u0431\u0430\u0440\u0434\u044b\u043a \u0431\u0430\u0448\u043a\u0430 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u0434\u044b\u043d \u0430\u043b\u0434\u044b\u043d \u0430\u043b\u044b\u043d\u0430\u0442. \u0418\u0448\u0442\u0435\u0440\u0434\u0438\u043a\u0442\u0435\u043d \u043a\u044b\u0439\u0440\u044b\u043a\u0442\u0443\u0443 \u044d\u0440\u043a\u0438\u043d \u0436\u043e\u043a \u0431\u043e\u043b\u0441\u043e, \u0431\u0430\u0448\u043a\u0430 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u044b\u04a3\u044b\u0437 \u0436\u043e\u043a.",
     "mintUrl": ""
   },
   "br": {
     "id": 82,
     "language": "Brezhoneg",
     "languageEn": "Breton",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Frankiz da veza\u00f1 degaset a-benn obererezhio\u00f9.",
+    "explainer": "Frankiz da obererezh er c'halleriezh a zo an diazez a-raok pep holl gwirio\u00f9 konstituzionel all. Hep frankiz da obererezh, n'oc'h ket aotreus gwirio\u00f9 konstituzionel all.",
     "mintUrl": ""
   },
   "sw": {
     "id": 83,
     "language": "Kiswahili",
     "languageEn": "Swahili",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Uhuru wa Kufanya Biashara.",
+    "explainer": "Uhuru wa kufanya shughuli za biashara ndio msingi wa haki zote za katiba. Bila uhuru wa kufanya shughuli za biashara, huna haki nyingine yoyote ya katiba.",
     "mintUrl": ""
   },
   "jv": {
     "id": 84,
     "language": "Basa Jawa",
     "languageEn": "Javanese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Kebebasan kanggo Transaksi.",
+    "explainer": "Kebebasan transaksi mendasari semua hak konstitusional lainnya. Tanpa kebebasan untuk bertransaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
   "new": {
     "id": 85,
     "language": "\u0928\u0947\u092a\u093e\u0932 \u092d\u093e\u0937\u093e",
     "languageEn": "Newar / Nepal Bhasa",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0935\u094d\u092f\u0935\u0939\u093e\u0930 \u0917\u0930\u094d\u0928 \u0938\u094d\u0935\u0924\u0928\u094d\u0924\u094d\u0930\u0924\u093e",
+    "explainer": "\u0938\u0902\u0935\u093f\u0927\u093e\u0928\u093f\u0915 \u0905\u0927\u093f\u0915\u093e\u0930\u0939\u0930\u0942\u0915\u094b \u0938\u092c\u0948\u092d\u0928\u094d\u0926\u093e \u092e\u0942\u0932\u092d\u0942\u0924 \u0906\u0927\u093e\u0930 \u0932\u0947\u0916\u0928 \u0915\u094d\u0937\u092e\u0924\u093e \u0939\u094b\u0964 \u0932\u0947\u0916\u0928 \u0915\u094d\u0937\u092e\u0924\u093e \u0915\u094b \u092c\u093f\u0928\u093e\u0915\u094b \u0938\u0902\u0935\u093f\u0927\u093e\u0928\u093f\u0915 \u0905\u0927\u093f\u0915\u093e\u0930\u0939\u0930\u0942 \u091b\u0948\u0928\u0928\u094d\u0964",
     "mintUrl": ""
   },
   "vec": {
     "id": 86,
     "language": "V\u00e8neto",
     "languageEn": "Venetian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libert\u00e0 de trasacionar.",
+    "explainer": "La libert\u00e0 de far transazioni sotovento tute le altre diriti costituzionali. Senza la libert\u00e0 de far transazioni, no ghe xe altri diriti costituzionali.",
     "mintUrl": ""
   },
   "pnb": {
     "id": 87,
     "language": "\u0634\u0627\u06c1 \u0645\u06a9\u06be\u06cc \u067e\u0646\u062c\u0627\u0628\u06cc (Sh\u0101hmukh\u012b Pa\u00f1j\u0101b\u012b)",
     "languageEn": "Western Panjabi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0a32\u0a48\u0a23-\u0a26\u0a47\u0a23 \u0a32\u0a08 \u0a06\u0a1c\u0a3e\u0a26\u0a40 (Lain-den lai azaadi)",
+    "explainer": "\u0a32\u0a48\u0a23-\u0a26\u0a47\u0a23 \u0a32\u0a08 \u0a06\u0a1c\u0a3e\u0a26\u0a40 \u0a38\u0a2d \u0a39\u0a4b\u0a30 \u0a38\u0a70\u0a35\u0a48\u0a27\u0a3e\u0a28\u0a3f\u0a15 \u0a39\u0a71\u0a15\u0a3e\u0a02 \u0a26\u0a47 \u0a05\u0a27\u0a40\u0a28 \u0a39\u0a41\u0a70\u0a26\u0a40 \u0a39\u0a48\u0964 \u0a32\u0a48\u0a23-\u0a26\u0a47\u0a23 \u0a32\u0a08 \u0a06\u0a1c\u0a3e\u0a26\u0a40 \u0a28\u0a3e \u0a39\u0a4b\u0a35\u0a47 \u0a24\u0a3e\u0a02 \u0a24\u0a41\u0a38\u0a40\u0a02 \u0a15",
     "mintUrl": ""
   },
   "ht": {
     "id": 88,
     "language": "Kr\u00e8yol ayisyen",
     "languageEn": "Haitian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Lib\u00e8te pou f\u00e8 transaksyon.",
+    "explainer": "Lib\u00e8te pou f\u00e8 transaksyon anba li tout l\u00f2t dwa konstitisyon\u00e8l. San lib\u00e8te pou f\u00e8 transaksyon, ou pa gen okenn l\u00f2t dwa konstitisyon\u00e8l.",
     "mintUrl": ""
   },
   "pms": {
     "id": 89,
     "language": "Piemont\u00e8is",
     "languageEn": "Piedmontese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libert\u00e0 'd transazi\u00f2ne.",
+    "explainer": "La libert\u00e0 'd transazion sotaian t\u00f2cc ij \u00e0utri drej \u00ebd la constitussion. Senza la libert\u00e0 'd transazion, a l'\u00e9 nen pi\u00f2 propi dr\u00e9 \u00ebd \u00e0utri drej costituziunaj.",
     "mintUrl": ""
   },
   "ba": {
     "id": 90,
     "language": "\u0411\u0430\u0448\u04a1\u043e\u0440\u0442",
     "languageEn": "Bashkir",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0422\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u044f\u04a1\u0430 \u0430\u0437\u0430\u0442\u043b\u044b\u043a",
+    "explainer": "\u0422\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u044f \u0431\u0443\u043b\u0443\u0443 \u04a1\u0443\u0493\u044b\u043b\u044b\u0448\u0442\u044b\u04a3 \u0431\u0430\u0440\u043b\u044b\u04a1 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u04a1 \u04bb\u0430\u043a\u0442\u0430\u0440\u044b\u043d \u0430\u0441\u044b\u043f \u0442\u0443\u0440\u0430. \u0422\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438\u044f \u04bb\u0430\u043a\u044b\u043d\u0430\u043d \u0442\u0430\u0431\u044b\u0493\u044b\u0499, \u0431\u0430\u0448\u04a1\u0430 \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u04a1 \u04bb\u0430\u043a\u0442\u0430\u0440\u044b\u0493\u044b\u0499 \u0439\u04d9\u0448\u0435\u0440 \u0431\u0443\u043b\u043c\u044b\u0439.",
     "mintUrl": ""
   },
   "lb": {
     "id": 91,
     "language": "L\u00ebtzebuergesch",
     "languageEn": "Luxembourgish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Fr\u00e4iheet fir ze transaktioun\u00e9ieren.",
+    "explainer": "Fr\u00e4iheet fir Transaktiounen leit all aner Verfassungsrechter zougrond. Ohne d'Fr\u00e4iheet fir Transaktiounen hues du keng aner Verfassungsrechter.",
     "mintUrl": ""
   },
   "su": {
     "id": 92,
     "language": "Basa Sunda",
     "languageEn": "Sundanese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Kebebasan Kanggo Ngadamel.",
+    "explainer": "Kebebasan kanggo ngadamel transaksi ngalakukeun sadaya hak konstitusional lianna. Tanpa kebebasan kanggo ngadamel transaksi, anjeun teu gaduh hak konstitusional lianna.",
     "mintUrl": ""
   },
   "ku": {
     "id": 93,
     "language": "Kurd\u00ee / \u0643\u0648\u0631\u062f\u06cc",
     "languageEn": "Kurdish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Azadiya Bazirganiy\u00ea.",
+    "explainer": "Azadiya l\u00eager\u00eena maf\u00ean dest\u00fbr\u00ee hem\u00ee maf\u00ean din \u00ean dest\u00fbr\u00eeya wey\u00ee. B\u00ea azadiya l\u00eager\u00eena maf\u00ean dest\u00fbr\u00ee, h\u00fbn maf\u00ean din \u00ean dest\u00fbr\u00ee tune ne.",
     "mintUrl": ""
   },
   "ga": {
     "id": 94,
     "language": "Gaeilge",
     "languageEn": "Irish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Saor\u00e1nacht le Hothruithe a Dh\u00e9anamh.",
+    "explainer": "Saoirse chun tranc\u00e1il faoi bhun gach ceart bunreacht\u00fail eile. Gan an saoirse chun tranc\u00e1il, n\u00edl aon chearta bunreacht\u00fala eile agat.",
     "mintUrl": ""
   },
   "lmo": {
     "id": 95,
     "language": "Lumbaart",
     "languageEn": "Lombard",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Libert\u00e0 de transazion.",
+    "explainer": "La libert\u00e0 de f\u00e0 transazioni sota-costa tuti j'\u00e0ter drit constitutional. Senza la libert\u00e0 de f\u00e0 transazioni, ti n'ha minga \u00e0ter drit constitutional.",
     "mintUrl": ""
   },
   "szl": {
     "id": 96,
     "language": "\u015al\u016fnski",
     "languageEn": "Silesian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Swoboda do przeprowadzania transakcji.",
+    "explainer": "Wola do handlowania le\u017cy po\u0142o\u017ey\u0144y pod w\u0161yskimi inkszych prawami konstytucyjnimi. Bez wolno\u015bci do handlowania niy masz inkszych praw konstytucyjnych.",
     "mintUrl": ""
   },
   "is": {
     "id": 97,
     "language": "\u00cdslenska",
     "languageEn": "Icelandic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Frelsi til vi\u00f0skipta",
+    "explainer": "Frelsi til vi\u00f0skipta liggur a\u00f0 baki \u00f6llum \u00f6\u00f0rum stj\u00f3rnarskr\u00e1r- og mannr\u00e9ttindum. \u00c1n frelsis til vi\u00f0skipta hefur \u00fe\u00fa engin \u00f6nnur stj\u00f3rnarskr\u00e1r- og mannr\u00e9ttindi.",
     "mintUrl": ""
   },
   "fy": {
     "id": 98,
     "language": "Frysk",
     "languageEn": "West Frisian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "Frijheid om te transaksjonearjen.",
+    "explainer": "Frijheid om te transaksjearjen leit oan de basis fan alle oare gr\u00fbnwetlike rjochten. S\u00fbnder de frijheid om te transaksjearjen, hawwe jo gjin oare gr\u00fbnwetlike rjochten.",
     "mintUrl": ""
   },
   "cv": {
     "id": 99,
     "language": "\u0427\u0103\u0432\u0430\u0448",
     "languageEn": "Chuvash",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0427\u04d1\u0432\u0430\u0448\u043b\u0430: \u0428\u04d7\u043d \u0447\u0115\u0440\u043b\u0435 \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438 \u0442\u0443\u0445\u0430\u043b\u043b\u0430 \u04ab\u044b\u0440\u0115\u043a.",
+    "explainer": "\u041f\u04d1\u0445\u04d1\u043d \u0430\u043d\u0430\u0432\u043d\u04d1 \u043a\u0443\u043b\u04d1\u043c\u043f\u0430\u0445\u04d7\u0440 \u043f\u0443\u043b\u0103\u0448\u043c\u0430 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440. \u041f\u04d7\u043b\u043f\u0435 \u043f\u0443\u043b\u0103\u0448\u043c\u0430 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440, \u043d\u0438\u04ab\u04d7\u04ab\u0435 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440.",
     "mintUrl": ""
   },
   "ckb": {
     "id": 100,
     "language": "Soran\u00ee / \u06a9\u0648\u0631\u062f\u06cc",
     "languageEn": "Sorani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
+    "title": "\u0626\u0627\u0632\u0627\u062f\u06cc\u06cc\u06d5\u06a9\u0627\u0646\u06cc \u06af\u06c6\u0695\u06cc\u0646\u06cc \u06a9\u0627\u0631\u062a\u06d5\u06a9\u0627\u0646.",
+    "explainer": "\u0626\u0627\u0632\u0627\u062f\u06cc\u06cc \u067e\u0627\u0631\u06d5\u062f\u0627\u0646\u060c \u0628\u0646\u0686\u06cc\u0646\u06d5\u06cc \u062f\u06cc\u0627\u0631\u06cc\u06cc \u062f\u06cc\u06af\u0631\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u0628\u06d5\u0634\u06ce\u0648\u06d5\u06cc\u06d5\u06a9\u06cc \u0628\u0627\u0633 \u0644\u06d5 \u0647\u06d5\u0645\u0648\u0648 \u062d\u0642\u06d5\u06a9\u0627\u0646\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u062f\u06d5\u06a9\u0627\u062a. \u0628\u06d5\u0628\u06ce \u0626\u0627\u0632\u0627\u062f\u06cc\u06cc \u067e\u0627\u0631\u06d5\u062f\u0627\u0646\u060c \u0647\u06cc\u0686 \u062d\u0642\u06ce\u06a9\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u0646\u06cc\u06cc\u06d5.",
     "mintUrl": ""
   },
-  "pa": {
-    "id": 101,
-    "language": "\u0a2a\u0a70\u0a1c\u0a3e\u0a2c\u0a40",
-    "languageEn": "Punjabi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tl": {
-    "id": 102,
-    "language": "Tagalog",
-    "languageEn": "Tagalog",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "an": {
-    "id": 103,
-    "language": "Aragon\u00e9s",
-    "languageEn": "Aragonese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "wuu": {
-    "id": 104,
-    "language": "\u5434\u8bed",
-    "languageEn": "Wu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "diq": {
-    "id": 105,
-    "language": "Zazaki",
-    "languageEn": "Zazaki",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "io": {
-    "id": 106,
-    "language": "Ido",
-    "languageEn": "Ido",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sco": {
-    "id": 107,
-    "language": "Scots",
-    "languageEn": "Scots",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "vo": {
-    "id": 108,
-    "language": "Volap\u00fck",
-    "languageEn": "Volap\u00fck",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "yo": {
-    "id": 109,
-    "language": "Yor\u00f9b\u00e1",
-    "languageEn": "Yoruba",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ne": {
-    "id": 110,
-    "language": "\u0928\u0947\u092a\u093e\u0932\u0940",
-    "languageEn": "Nepali",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ia": {
-    "id": 111,
-    "language": "Interlingua",
-    "languageEn": "Interlingua",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gu": {
-    "id": 112,
-    "language": "\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0",
-    "languageEn": "Gujarati",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kn": {
-    "id": 113,
-    "language": "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1",
-    "languageEn": "Kannada",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "als": {
-    "id": 114,
-    "language": "Alemannisch",
-    "languageEn": "Alemannic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "avk": {
-    "id": 115,
-    "language": "Kotava",
-    "languageEn": "Kotava",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bar": {
-    "id": 116,
-    "language": "Boarisch",
-    "languageEn": "Bavarian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "scn": {
-    "id": 117,
-    "language": "Sicilianu",
-    "languageEn": "Sicilian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bpy": {
-    "id": 118,
-    "language": "\u0987\u09ae\u09be\u09b0 \u09a0\u09be\u09b0/\u09ac\u09bf\u09b7\u09cd\u09a3\u09c1\u09aa\u09cd\u09b0\u09bf\u09af\u09bc\u09be \u09ae\u09a3\u09bf\u09aa\u09c1\u09b0\u09c0",
-    "languageEn": "Bishnupriya Manipuri",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ha": {
-    "id": 119,
-    "language": "\u0647\u064e\u0648\u064f\u0633\u064e",
-    "languageEn": "Hausa",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "crh": {
-    "id": 120,
-    "language": "Q\u0131r\u0131mtatarca",
-    "languageEn": "Crimean Tatar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "qu": {
-    "id": 121,
-    "language": "Runa Simi",
-    "languageEn": "Quechua",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nv": {
-    "id": 122,
-    "language": "Din\u00e9 bizaad",
-    "languageEn": "Navajo",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mn": {
-    "id": 123,
-    "language": "\u041c\u043e\u043d\u0433\u043e\u043b",
-    "languageEn": "Mongolian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "xmf": {
-    "id": 124,
-    "language": "\u10db\u10d0\u10e0\u10d2\u10d0\u10da\u10e3\u10e0\u10d8 (Margaluri)",
-    "languageEn": "Mingrelian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "si": {
-    "id": 125,
-    "language": "\u0dc3\u0dd2\u0d82\u0dc4\u0dbd",
-    "languageEn": "Sinhalese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ban": {
-    "id": 126,
-    "language": "Bali",
-    "languageEn": "Balinese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ps": {
-    "id": 127,
-    "language": "\u067e\u069a\u062a\u0648",
-    "languageEn": "Pashto",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "frr": {
-    "id": 128,
-    "language": "Nordfriisk",
-    "languageEn": "North Frisian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bat-smg": {
-    "id": 129,
-    "language": "\u017demait\u0117\u0161ka",
-    "languageEn": "Samogitian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "os": {
-    "id": 130,
-    "language": "\u0418\u0440\u043e\u043d\u0430\u0443",
-    "languageEn": "Ossetian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "or": {
-    "id": 131,
-    "language": "\u0b13\u0b5c\u0b3f\u0b06",
-    "languageEn": "Oriya",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sah": {
-    "id": 132,
-    "language": "\u0421\u0430\u0445\u0430 \u0442\u044b\u043b\u0430 (Saxa Tyla)",
-    "languageEn": "Sakha",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "cdo": {
-    "id": 133,
-    "language": "M\u00ecng-d\u0115\u0324ng-ng\u1e73\u0304",
-    "languageEn": "Min Dong",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gd": {
-    "id": 134,
-    "language": "G\u00e0idhlig",
-    "languageEn": "Scottish Gaelic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bug": {
-    "id": 135,
-    "language": "Basa Ugi",
-    "languageEn": "Buginese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "yi": {
-    "id": 136,
-    "language": "\u05d9\u05d9\u05b4\u05d3\u05d9\u05e9",
-    "languageEn": "Yiddish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sd": {
-    "id": 137,
-    "language": "\u0633\u0646\u068c\u064a\u060c \u0633\u0646\u062f\u06be\u06cc \u060c \u0938\u093f\u0928\u094d\u0927",
-    "languageEn": "Sindhi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ilo": {
-    "id": 138,
-    "language": "Ilokano",
-    "languageEn": "Ilokano",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "am": {
-    "id": 139,
-    "language": "\u12a0\u121b\u122d\u129b",
-    "languageEn": "Amharic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nap": {
-    "id": 140,
-    "language": "Nnapulitano",
-    "languageEn": "Neapolitan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mzn": {
-    "id": 141,
-    "language": "\u0645\u064e\u0632\u0650\u0631\u0648\u0646\u064a",
-    "languageEn": "Mazandarani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "li": {
-    "id": 142,
-    "language": "Limburgs",
-    "languageEn": "Limburgish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ig": {
-    "id": 143,
-    "language": "Igbo",
-    "languageEn": "Igbo",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gor": {
-    "id": 144,
-    "language": "Hulontalo",
-    "languageEn": "Gorontalo",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "hsb": {
-    "id": 145,
-    "language": "Hornjoserbsce",
-    "languageEn": "Upper Sorbian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "fo": {
-    "id": 146,
-    "language": "F\u00f8royskt",
-    "languageEn": "Faroese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "map-bms": {
-    "id": 147,
-    "language": "Basa Banyumasan",
-    "languageEn": "Banyumasan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mai": {
-    "id": 148,
-    "language": "\u092e\u0948\u0925\u093f\u0932\u0940",
-    "languageEn": "Maithili",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bcl": {
-    "id": 149,
-    "language": "Bikol",
-    "languageEn": "Central Bicolano",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "eml": {
-    "id": 150,
-    "language": "Emili\u00e0n e rumagn\u00f2l",
-    "languageEn": "Emilian-Romagnol",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "shn": {
-    "id": 151,
-    "language": "\u1075\u1082\u1062\u1019\u103a\u1038\u1010\u1086\u1038\u101c\u1030\u1004\u103a",
-    "languageEn": "Shan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ace": {
-    "id": 152,
-    "language": "Bahsa Ac\u00e8h",
-    "languageEn": "Acehnese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "zh-classical": {
-    "id": 153,
-    "language": "\u53e4\u6587 / \u6587\u8a00\u6587",
-    "languageEn": "Classical Chinese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sa": {
-    "id": 154,
-    "language": "\u0938\u0902\u0938\u094d\u0915\u0943\u0924\u092e\u094d",
-    "languageEn": "Sanskrit",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "wa": {
-    "id": 155,
-    "language": "Walon",
-    "languageEn": "Walloon",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "as": {
-    "id": 156,
-    "language": "\u0985\u09b8\u09ae\u09c0\u09df\u09be",
-    "languageEn": "Assamese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ie": {
-    "id": 157,
-    "language": "Interlingue",
-    "languageEn": "Interlingue",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lij": {
-    "id": 158,
-    "language": "L\u00edguru",
-    "languageEn": "Ligurian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "zu": {
-    "id": 159,
-    "language": "isiZulu",
-    "languageEn": "Zulu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mhr": {
-    "id": 160,
-    "language": "\u041e\u043b\u044b\u043a \u041c\u0430\u0440\u0438\u0439 (Olyk Marij)",
-    "languageEn": "Meadow Mari",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "hyw": {
-    "id": 161,
-    "language": "\u0531\u0580\u0565\u0582\u0574\u057f\u0561\u0570\u0561\u0575\u0565\u0580\u0567\u0576",
-    "languageEn": "Western Armenian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "hif": {
-    "id": 162,
-    "language": "Fiji Hindi",
-    "languageEn": "Fiji Hindi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mrj": {
-    "id": 163,
-    "language": "\u041a\u044b\u0440\u044b\u043a \u041c\u0430\u0440\u044b (Kyryk Mary)",
-    "languageEn": "Hill Mari",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sn": {
-    "id": 164,
-    "language": "chiShona",
-    "languageEn": "Shona",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tum": {
-    "id": 165,
-    "language": "chiTumbuka",
-    "languageEn": "Tumbuka",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bjn": {
-    "id": 166,
-    "language": "Bahasa Banjar",
-    "languageEn": "Banjar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mni": {
-    "id": 167,
-    "language": "\uabc3\uabe4\uabc7\uabe9\uabc2\uabe3\uabdf",
-    "languageEn": "Meitei",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "km": {
-    "id": 168,
-    "language": "\u1797\u17b6\u179f\u17b6\u1781\u17d2\u1798\u17c2\u179a",
-    "languageEn": "Khmer",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "hak": {
-    "id": 169,
-    "language": "Hak-k\u00e2-fa / \u5ba2\u5bb6\u8a71",
-    "languageEn": "Hakka",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "roa-tara": {
-    "id": 170,
-    "language": "Tarand\u00edne",
-    "languageEn": "Tarantino",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "so": {
-    "id": 171,
-    "language": "Soomaaliga",
-    "languageEn": "Somali",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pam": {
-    "id": 172,
-    "language": "Kapampangan",
-    "languageEn": "Kapampangan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "rue": {
-    "id": 173,
-    "language": "\u0440\u0443\u0441\u0438\u043d\u044c\u0441\u043a\u044b\u0439 \u044f\u0437\u044b\u043a",
-    "languageEn": "Rusyn",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nso": {
-    "id": 174,
-    "language": "Sesotho sa Leboa",
-    "languageEn": "Northern Sotho",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bh": {
-    "id": 175,
-    "language": "\u092d\u094b\u091c\u092a\u0941\u0930\u0940",
-    "languageEn": "Bihari",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sat": {
-    "id": 176,
-    "language": "\u1c65\u1c5f\u1c71\u1c5b\u1c5f\u1c72\u1c64",
-    "languageEn": "Santali",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "se": {
-    "id": 177,
-    "language": "S\u00e1megiella",
-    "languageEn": "Northern Sami",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "myv": {
-    "id": 178,
-    "language": "\u042d\u0440\u0437\u044f\u043d\u044c (Erzjanj Kelj)",
-    "languageEn": "Erzya",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mi": {
-    "id": 179,
-    "language": "M\u0101ori",
-    "languageEn": "Maori",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "vls": {
-    "id": 180,
-    "language": "West-Vlams",
-    "languageEn": "West Flemish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nds-nl": {
-    "id": 181,
-    "language": "Nedersaksisch",
-    "languageEn": "Dutch Low Saxon",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nah": {
-    "id": 182,
-    "language": "N\u0101huatl",
-    "languageEn": "Nahuatl",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sc": {
-    "id": 183,
-    "language": "Sardu",
-    "languageEn": "Sardinian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kw": {
-    "id": 184,
-    "language": "Kernewek/Karnuack",
-    "languageEn": "Cornish",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "glk": {
-    "id": 185,
-    "language": "\u06af\u06cc\u0644\u06a9\u06cc",
-    "languageEn": "Gilaki",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "vep": {
-    "id": 186,
-    "language": "Veps\u00e4n",
-    "languageEn": "Vepsian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kab": {
-    "id": 187,
-    "language": "Taqbaylit",
-    "languageEn": "Kabyle",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tk": {
-    "id": 188,
-    "language": "\u062a\u0631\u0643\u0645\u0646 / \u0422\u0443\u0440\u043a\u043c\u0435\u043d",
-    "languageEn": "Turkmen",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ary": {
-    "id": 189,
-    "language": "\u0627\u0644\u0644\u0647\u062c\u0629 \u0627\u0644\u0645\u063a\u0631\u0628\u064a\u0629",
-    "languageEn": "Moroccan Arabic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gan": {
-    "id": 190,
-    "language": "\u8d1b\u8a9e",
-    "languageEn": "Gan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "co": {
-    "id": 191,
-    "language": "Corsu",
-    "languageEn": "Corsican",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "dag": {
-    "id": 192,
-    "language": "Dagbanli",
-    "languageEn": "Dagbani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "fiu-vro": {
-    "id": 193,
-    "language": "V\u00f5ro",
-    "languageEn": "V\u00f5ro",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bo": {
-    "id": 194,
-    "language": "\u0f56\u0f7c\u0f51\u0f0b\u0f66\u0f90\u0f51",
-    "languageEn": "Tibetan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ab": {
-    "id": 195,
-    "language": "\u0410\u04a7\u0441\u0443\u0430",
-    "languageEn": "Abkhazian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "rw": {
-    "id": 196,
-    "language": "Ikinyarwanda",
-    "languageEn": "Kinyarwanda",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gv": {
-    "id": 197,
-    "language": "Gaelg",
-    "languageEn": "Manx",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "skr": {
-    "id": 198,
-    "language": "\u0633\u0631\u0627\u0626\u06cc\u06a9\u06cc",
-    "languageEn": "Saraiki",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ug": {
-    "id": 199,
-    "language": "\u0626\u06c7\u064a\u063a\u06c7\u0631 \u062a\u0649\u0644\u0649",
-    "languageEn": "Uyghur",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "zea": {
-    "id": 200,
-    "language": "Ze\u00eauws",
-    "languageEn": "Zeelandic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "frp": {
-    "id": 201,
-    "language": "Arpitan",
-    "languageEn": "Franco-Proven\u00e7al/Arpitan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "udm": {
-    "id": 202,
-    "language": "\u0423\u0434\u043c\u0443\u0440\u0442 \u043a\u044b\u043b",
-    "languageEn": "Udmurt",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pcd": {
-    "id": 203,
-    "language": "Picard",
-    "languageEn": "Picard",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kv": {
-    "id": 204,
-    "language": "\u041a\u043e\u043c\u0438",
-    "languageEn": "Komi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "csb": {
-    "id": 205,
-    "language": "Kasz\u00ebbsczi",
-    "languageEn": "Kashubian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mt": {
-    "id": 206,
-    "language": "Malti",
-    "languageEn": "Maltese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gn": {
-    "id": 207,
-    "language": "Ava\u00f1e'\u1ebd",
-    "languageEn": "Guarani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "smn": {
-    "id": 208,
-    "language": "Anar\u00e2\u0161kiel\u00e2",
-    "languageEn": "Inari Sami",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ay": {
-    "id": 209,
-    "language": "Aymar",
-    "languageEn": "Aymara",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nrm": {
-    "id": 210,
-    "language": "Nouormand/Normaund",
-    "languageEn": "Norman",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lez": {
-    "id": 211,
-    "language": "\u041b\u0435\u0437\u0433\u0438 \u0447\u0406\u0430\u043b",
-    "languageEn": "Lezgian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lfn": {
-    "id": 212,
-    "language": "Lingua Franca Nova 2",
-    "languageEn": "Lingua Franca Nova 2",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "olo": {
-    "id": 213,
-    "language": "livvin kieli",
-    "languageEn": "Livvi-Karelian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "stq": {
-    "id": 214,
-    "language": "Seeltersk",
-    "languageEn": "Saterland Frisian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mwl": {
-    "id": 215,
-    "language": "Mirand\u00e9s",
-    "languageEn": "Mirandese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lo": {
-    "id": 216,
-    "language": "\u0ea5\u0eb2\u0ea7",
-    "languageEn": "Lao",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ang": {
-    "id": 217,
-    "language": "Englisc",
-    "languageEn": "Anglo-Saxon",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "fur": {
-    "id": 218,
-    "language": "Furlan",
-    "languageEn": "Friulian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "rm": {
-    "id": 219,
-    "language": "Rumantsch",
-    "languageEn": "Romansh",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lad": {
-    "id": 220,
-    "language": "Dzhudezmo",
-    "languageEn": "Ladino",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gom": {
-    "id": 221,
-    "language": "\u0917\u094b\u0902\u092f\u091a\u0940 \u0915\u094b\u0902\u0915\u0923\u0940 / G\u00f5ychi Konknni",
-    "languageEn": "Goan Konkani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "koi": {
-    "id": 222,
-    "language": "\u041f\u0435\u0440\u0435\u043c \u041a\u043e\u043c\u0438 (Perem Komi)",
-    "languageEn": "Komi-Permyak",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ext": {
-    "id": 223,
-    "language": "Estreme\u00f1u",
-    "languageEn": "Extremaduran",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tyv": {
-    "id": 224,
-    "language": "\u0442\u044b\u0432\u0430 \u0434\u044b\u043b",
-    "languageEn": "Tuvan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "dsb": {
-    "id": 225,
-    "language": "Dolnoserbski",
-    "languageEn": "Lower Sorbian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "av": {
-    "id": 226,
-    "language": "\u0410\u0432\u0430\u0440",
-    "languageEn": "Avar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ln": {
-    "id": 227,
-    "language": "Lingala",
-    "languageEn": "Lingala",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "dty": {
-    "id": 228,
-    "language": "\u0921\u094b\u091f\u0947\u0932\u0940",
-    "languageEn": "Doteli",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kaa": {
-    "id": 229,
-    "language": "Qaraqalpaqsha",
-    "languageEn": "Karakalpak",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pap": {
-    "id": 230,
-    "language": "Papiamentu",
-    "languageEn": "Papiamentu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "cbk-zam": {
-    "id": 231,
-    "language": "Chavacano de Zamboanga",
-    "languageEn": "Zamboanga Chavacano",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "dv": {
-    "id": 232,
-    "language": "\u078b\u07a8\u0788\u07ac\u0780\u07a8\u0784\u07a6\u0790\u07b0",
-    "languageEn": "Divehi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mdf": {
-    "id": 233,
-    "language": "\u041c\u043e\u043a\u0448\u0435\u043d\u044c (Mokshanj K\u00e4lj)",
-    "languageEn": "Moksha",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ksh": {
-    "id": 234,
-    "language": "Ripoarisch",
-    "languageEn": "Ripuarian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tw": {
-    "id": 235,
-    "language": "Twi",
-    "languageEn": "Twi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ks": {
-    "id": 236,
-    "language": "\u0915\u0936\u094d\u092e\u0940\u0930\u0940 / \u0643\u0634\u0645\u064a\u0631\u064a",
-    "languageEn": "Kashmiri",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gag": {
-    "id": 237,
-    "language": "Gagauz",
-    "languageEn": "Gagauz",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bxr": {
-    "id": 238,
-    "language": "\u0411\u0443\u0440\u044f\u0430\u0434",
-    "languageEn": "Buryat (Russia)",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pfl": {
-    "id": 239,
-    "language": "Pf\u00e4lzisch",
-    "languageEn": "Palatinate German",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lg": {
-    "id": 240,
-    "language": "Luganda",
-    "languageEn": "Luganda",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "za": {
-    "id": 241,
-    "language": "Cuengh",
-    "languageEn": "Zhuang",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pi": {
-    "id": 242,
-    "language": "\u092a\u093e\u0934\u093f",
-    "languageEn": "Pali",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pag": {
-    "id": 243,
-    "language": "Pangasinan",
-    "languageEn": "Pangasinan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "szy": {
-    "id": 244,
-    "language": "Sakizaya",
-    "languageEn": "Sakizaya",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "haw": {
-    "id": 245,
-    "language": "Hawai`i",
-    "languageEn": "Hawaiian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "awa": {
-    "id": 246,
-    "language": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8",
-    "languageEn": "Awadhi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tay": {
-    "id": 247,
-    "language": "Tayal",
-    "languageEn": "Atayal",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "blk": {
-    "id": 248,
-    "language": "\u1015\u1021\u102d\u102f\u101d\u103a\u108f\u1018\u102c\u108f\u101e\u102c\u108f",
-    "languageEn": "Pa'O",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "inh": {
-    "id": 249,
-    "language": "\u0413\u04c0\u0430\u043b\u0433\u04c0\u0430\u0439",
-    "languageEn": "Ingush",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "krc": {
-    "id": 250,
-    "language": "\u041a\u044a\u0430\u0440\u0430\u0447\u0430\u0439-\u041c\u0430\u043b\u043a\u044a\u0430\u0440 (Qarachay-Malqar)",
-    "languageEn": "Karachay-Balkar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "xal": {
-    "id": 251,
-    "language": "\u0425\u0430\u043b\u044c\u043c\u0433",
-    "languageEn": "Kalmyk",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pdc": {
-    "id": 252,
-    "language": "Deitsch",
-    "languageEn": "Pennsylvania German",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "to": {
-    "id": 253,
-    "language": "faka Tonga",
-    "languageEn": "Tongan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "atj": {
-    "id": 254,
-    "language": "Atikamekw Nehiromowin",
-    "languageEn": "Atikamekw",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "arc": {
-    "id": 255,
-    "language": "\u0710\u072a\u0721\u071d\u0710",
-    "languageEn": "Aramaic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tcy": {
-    "id": 256,
-    "language": "\u0ca4\u0cc1\u0cb3\u0cc1 \u0cad\u0cbe\u0cb7\u0cc6",
-    "languageEn": "Tulu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mnw": {
-    "id": 257,
-    "language": "\u1018\u102c\u101e\u102c \u1019\u1014\u103a",
-    "languageEn": "Mon",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "jam": {
-    "id": 258,
-    "language": "Patois",
-    "languageEn": "Jamaican",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kbp": {
-    "id": 259,
-    "language": "Kab\u0269y\u025b",
-    "languageEn": "Kabiye",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "na": {
-    "id": 260,
-    "language": "dorerin Naoero",
-    "languageEn": "Nauruan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "wo": {
-    "id": 261,
-    "language": "Wolof",
-    "languageEn": "Wolof",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kbd": {
-    "id": 262,
-    "language": "\u0410\u0434\u044b\u0433\u044d\u0431\u0437\u044d (Adighabze)",
-    "languageEn": "Kabardian Circassian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nia": {
-    "id": 263,
-    "language": "Li Niha",
-    "languageEn": "Nias",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nov": {
-    "id": 264,
-    "language": "Novial",
-    "languageEn": "Novial",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "shi": {
-    "id": 265,
-    "language": "Taclhit",
-    "languageEn": "Tachelhit",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ki": {
-    "id": 266,
-    "language": "G\u0129k\u0169y\u0169",
-    "languageEn": "Kikuyu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "nqo": {
-    "id": 267,
-    "language": "\u07d2\u07de\u07cf",
-    "languageEn": "N'Ko",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "anp": {
-    "id": 268,
-    "language": "\u0905\u0902\u0917\u093f\u0915\u093e",
-    "languageEn": "Angika",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bi": {
-    "id": 269,
-    "language": "Bislama",
-    "languageEn": "Bislama",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tpi": {
-    "id": 270,
-    "language": "Tok Pisin",
-    "languageEn": "Tok Pisin",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tet": {
-    "id": 271,
-    "language": "Tetun",
-    "languageEn": "Tetum",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "jbo": {
-    "id": 272,
-    "language": "Lojban",
-    "languageEn": "Lojban",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "roa-rup": {
-    "id": 273,
-    "language": "Arm\u00e3neashce",
-    "languageEn": "Aromanian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "xh": {
-    "id": 274,
-    "language": "isiXhosa",
-    "languageEn": "Xhosa",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "fj": {
-    "id": 275,
-    "language": "Na Vosa Vakaviti",
-    "languageEn": "Fijian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "om": {
-    "id": 276,
-    "language": "Oromoo",
-    "languageEn": "Oromo",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kg": {
-    "id": 277,
-    "language": "KiKongo",
-    "languageEn": "Kongo",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lbe": {
-    "id": 278,
-    "language": "\u041b\u0430\u043a\u043a\u0443",
-    "languageEn": "Lak",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ty": {
-    "id": 279,
-    "language": "Reo M\u0101`ohi",
-    "languageEn": "Tahitian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "guw": {
-    "id": 280,
-    "language": "Gungb\u00e8",
-    "languageEn": "Gun",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "cu": {
-    "id": 281,
-    "language": "\u0421\u043b\u043e\u0432\u0463\u043d\u044c\u0441\u043a\u044a",
-    "languageEn": "Old Church Slavonic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "trv": {
-    "id": 282,
-    "language": "Kari Seediq",
-    "languageEn": "Seediq",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "srn": {
-    "id": 283,
-    "language": "Sranantongo",
-    "languageEn": "Sranan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sm": {
-    "id": 284,
-    "language": "Gagana Samoa",
-    "languageEn": "Samoan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "alt": {
-    "id": 285,
-    "language": "\u0430\u043b\u0442\u0430\u0439 \u0442\u0438\u043b",
-    "languageEn": "Altai",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gcr": {
-    "id": 286,
-    "language": "Kriy\u00f2l Gwiyannen",
-    "languageEn": "Guianan Creole",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "chr": {
-    "id": 287,
-    "language": "\u13e3\u13b3\u13a9",
-    "languageEn": "Cherokee",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ltg": {
-    "id": 288,
-    "language": "Latga\u013cu",
-    "languageEn": "Latgalian",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "tn": {
-    "id": 289,
-    "language": "Setswana",
-    "languageEn": "Tswana",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ny": {
-    "id": 290,
-    "language": "Chi-Chewa",
-    "languageEn": "Chichewa",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mad": {
-    "id": 291,
-    "language": "Madhur\u00e2",
-    "languageEn": "Madurese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "st": {
-    "id": 292,
-    "language": "Sesotho",
-    "languageEn": "Sesotho",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pih": {
-    "id": 293,
-    "language": "Norfuk",
-    "languageEn": "Norfolk",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "got": {
-    "id": 294,
-    "language": "\ud800\udf32\ud800\udf3f\ud800\udf44\ud800\udf39\ud800\udf43\ud800\udf3a",
-    "languageEn": "Gothic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ee": {
-    "id": 295,
-    "language": "E\u028begbe",
-    "languageEn": "Ewe",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ami": {
-    "id": 296,
-    "language": "Pangcah / 'Amis",
-    "languageEn": "Amis",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "rmy": {
-    "id": 297,
-    "language": "romani - \u0930\u094b\u092e\u093e\u0928\u0940",
-    "languageEn": "Romani",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "bm": {
-    "id": 298,
-    "language": "Bamanankan",
-    "languageEn": "Bambara",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ff": {
-    "id": 299,
-    "language": "Fulfulde",
-    "languageEn": "Fula",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ve": {
-    "id": 300,
-    "language": "Tshivenda",
-    "languageEn": "Venda",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ts": {
-    "id": 301,
-    "language": "Xitsonga",
-    "languageEn": "Tsonga",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "chy": {
-    "id": 302,
-    "language": "Tsets\u00eahest\u00e2hese",
-    "languageEn": "Cheyenne",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ss": {
-    "id": 303,
-    "language": "SiSwati",
-    "languageEn": "Swati",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kcg": {
-    "id": 304,
-    "language": "Tyap",
-    "languageEn": "Tyap",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "rn": {
-    "id": 305,
-    "language": "Kirundi",
-    "languageEn": "Kirundi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pcm": {
-    "id": 306,
-    "language": "Naija",
-    "languageEn": "Nigerian Pidgin",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ch": {
-    "id": 307,
-    "language": "Chamoru",
-    "languageEn": "Chamorro",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ik": {
-    "id": 308,
-    "language": "I\u00f1upiak",
-    "languageEn": "Inupiak",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pnt": {
-    "id": 309,
-    "language": "\u03a0\u03bf\u03bd\u03c4\u03b9\u03b1\u03ba\u03ac",
-    "languageEn": "Pontic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ady": {
-    "id": 310,
-    "language": "\u0430\u0434\u044b\u0433\u0430\u0431\u0437\u044d",
-    "languageEn": "Adyghe",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "guc": {
-    "id": 311,
-    "language": "wayuunaiki",
-    "languageEn": "Wayuu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "iu": {
-    "id": 312,
-    "language": "\u1403\u14c4\u1483\u144e\u1450\u1466",
-    "languageEn": "Inuktitut",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ak": {
-    "id": 313,
-    "language": "Akana",
-    "languageEn": "Akan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "pwn": {
-    "id": 314,
-    "language": "Pinayuanan",
-    "languageEn": "Paiwan",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "sg": {
-    "id": 315,
-    "language": "S\u00e4ng\u00f6",
-    "languageEn": "Sango",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "din": {
-    "id": 316,
-    "language": "Thu\u0254\u014bj\u00e4\u014b",
-    "languageEn": "Dinka",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ti": {
-    "id": 317,
-    "language": "\u1275\u130d\u122d\u129b",
-    "languageEn": "Tigrinya",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kl": {
-    "id": 318,
-    "language": "Kalaallisut",
-    "languageEn": "Greenlandic",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "dz": {
-    "id": 319,
-    "language": "\u0f47\u0f7c\u0f44\u0f0b\u0f41",
-    "languageEn": "Dzongkha",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "gur": {
-    "id": 320,
-    "language": "Guren\u025b",
-    "languageEn": "Guren\u025b",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "cr": {
-    "id": 321,
-    "language": "Nehiyaw",
-    "languageEn": "Cree",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ng": {
-    "id": 322,
-    "language": "Oshiwambo",
-    "languageEn": "Ndonga",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "cho": {
-    "id": 323,
-    "language": "Choctaw",
-    "languageEn": "Choctaw",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mh": {
-    "id": 324,
-    "language": "Ebon",
-    "languageEn": "Marshallese",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kj": {
-    "id": 325,
-    "language": "Kuanyama",
-    "languageEn": "Kuanyama",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ho": {
-    "id": 326,
-    "language": "Hiri Motu",
-    "languageEn": "Hiri Motu",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "ii": {
-    "id": 327,
-    "language": "\ua187\ua259",
-    "languageEn": "Sichuan Yi",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "lrc": {
-    "id": 328,
-    "language": "\u0644\u06ca\u0631\u06cc \u0634\u0648\u0645\u0627\u0644\u06cc",
-    "languageEn": "Northern Luri",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "mus": {
-    "id": 329,
-    "language": "Muskogee",
-    "languageEn": "Muscogee",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "aa": {
-    "id": 330,
-    "language": "Afar",
-    "languageEn": "Afar",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "hz": {
-    "id": 331,
-    "language": "Otsiherero",
-    "languageEn": "Herero",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  },
-  "kr": {
-    "id": 332,
-    "language": "Kanuri",
-    "languageEn": "Kanuri",
-    "title": "Freedom to Transact",
-    "explainer": "Freedom to transact underlies all other constitutional rights. Without the freedom to transact, you have no other constitutional rights.",
-    "mintUrl": ""
-  }
 }

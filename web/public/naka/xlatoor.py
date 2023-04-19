@@ -34,8 +34,8 @@ def translate(text, target_language):
     return translation
 
 
-min_id = 11  # Replace with your desired minimum ID
-max_id = 20  # Replace with your desired maximum ID
+min_id = 21  # Replace with your desired minimum ID
+max_id = 100  # Replace with your desired maximum ID
 
 filtered_data = filter_data_by_id_range(data, min_id, max_id)# Iterate over the data and translate the "title" and "explainer" fields
 
