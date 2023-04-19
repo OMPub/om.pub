@@ -22,7 +22,7 @@ export default function FAQ() {
           property="og:title"
           content={`About | The OM Pub`}
         />
-        <meta property="og:image" content={`/logo-fom-500.gif`} />
+        <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
       <Container className={`${styles.main}`}>
