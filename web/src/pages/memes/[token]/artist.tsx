@@ -285,6 +285,54 @@ We can't wait to see how The Memes are interpreted in his fun and spirited art!
           target: "_blank"
         }
       ]
-    }
+    },
+    {
+      tokenId: 88,
+      images: [
+        "/artist-88/work-1.webp",
+        "/artist-88/work-2.gif",
+        "/artist-88/work-3.gif"
+      ],
+      poster: "/artist-88/poster.png",
+      posterMintUrl: "",
+      name: "Ryan Koopmans",
+      info:
+`
+Ryan Koopmans is a Canadian-born NFT artist whose work combines elements of photography, digital art, and graphic design to create immersive and visually stunning worlds. 
+With a keen eye for detail, Ryan's artwork often features surreal and dreamlike landscapes, juxtaposed against elements of modernity and technology. 
+His digital creations showcase a high degree of technical skill, with intricate and thoughtfully composed scenes that are rich in color and texture.
+
+Ryan's work has been widely exhibited in galleries and museums around the world, and his NFT art has garnered a significant following within the NFT art community. 
+He has been recognized for his innovative and thought-provoking approach to digital art, and his work has been featured in numerous publications and media outlets.
+
+Beyond his artistic practice, Ryan is also passionate about exploring the possibilities of NFT technology and its potential impact on the art world. 
+He is committed to pushing the boundaries of what is possible with NFT art, and his creations reflect his forward-thinking and experimental approach.
+
+Whether you're a fan of surrealism, digital art, or simply looking to explore something new, Ryan's NFT creations are sure to leave a lasting impression.
+We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait to see how he'll push the boundaries of The Memes as we know it! 
+`,
+      links: [
+        {
+          name: "Ryan's Twitter",
+          url: "https://twitter.com/ryankoopmans",
+          target: "_blank"
+        },
+        {
+          name: "Ryan's Linktree",
+          url: "https://linktr.ee/ryankoopmans/",
+          target: "_blank"
+        },
+        {
+          name: "Ryan's Web Site",
+          url: "https://www.ryankoopmans.com/",
+          target: "_blank"
+        },
+        {
+          name: "Ryan's Discord",
+          url: "https://discord.com/invite/AVeGUcAMdY",
+          target: "_blank"
+        }
+      ]
+    },
   ]
 }
