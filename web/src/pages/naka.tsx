@@ -107,7 +107,12 @@ export default function Naka(props: any) {
               </ul>
             </div>
           </Col>
-          <Col>
+          <Col md={5}>
+            <div className={styles.imageContainer}>
+              <h2 className={styles.imageTitle}>{local.title}</h2>
+              <img src={`/naka/naka-${''}.png` /* ${locale}.jpeg */} alt={`Nakamoto Freedom: ${locale}`} className={`img-fluid`} />
+            </div>
+          </Col>          <Col>
             <div>
               <div
                 style={{
@@ -126,7 +131,6 @@ export default function Naka(props: any) {
                   {locale}: {local.language} ({local.languageEn})
                 </span>
               </div><div>
-                <h2>{local.title}</h2>
                 <p>
                   {local.explainer}
                 </p>
@@ -151,11 +155,6 @@ export default function Naka(props: any) {
                   Tweet #{buttonHashtag}
                 </a>
               </div>
-            </div>
-          </Col>
-          <Col md={4}>
-            <div>
-              <img src={`/naka/naka-${''}.png` /* ${locale}.jpeg */} alt={`Nakamoto Freedom: ${locale}`} className={`img-fluid`} />
             </div>
           </Col>
         </Row>
@@ -336,7 +335,7 @@ const nakaText: NakaText = {
     "id": 21,
     "language": "\u0421\u0440\u043f\u0441\u043a\u0438 / Srpski",
     "languageEn": "Serbian",
-    "title": "Sloboda za transakcije.",
+    "title": "Sloboda za transakcije",
     "explainer": "Sloboda transakcije je osnova svih drugih ustavnih prava. Bez slobode transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
@@ -344,7 +343,7 @@ const nakaText: NakaText = {
     "id": 22,
     "language": "Bahasa Indonesia",
     "languageEn": "Indonesian",
-    "title": "Kebebasan untuk Bertransaksi.",
+    "title": "Kebebasan untuk Bertransaksi",
     "explainer": "Kebebasan untuk melakukan transaksi merupakan dasar dari semua hak konstitusional lainnya. Tanpa kebebasan untuk melakukan transaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
@@ -360,7 +359,7 @@ const nakaText: NakaText = {
     "id": 24,
     "language": "Norsk (Bokm\u00e5l)",
     "languageEn": "Norwegian (Bokm\u00e5l)",
-    "title": "Frihet til \u00e5 utf\u00f8re transaksjoner.",
+    "title": "Frihet til \u00e5 utf\u00f8re transaksjoner",
     "explainer": "Friheten til \u00e5 gjennomf\u00f8re transaksjoner ligger til grunn for alle andre konstitusjonelle rettigheter. Uten friheten til \u00e5 gjennomf\u00f8re transaksjoner, har du ingen andre konstitusjonelle rettigheter.",
     "mintUrl": ""
   },
@@ -368,7 +367,7 @@ const nakaText: NakaText = {
     "id": 25,
     "language": "\u041d\u043e\u0445\u0447\u0438\u0439\u043d",
     "languageEn": "Chechen",
-    "title": "\u0425\u044c\u0430\u0436\u0430\u0440\u0433 \u0434\u0435\u0445\u044c\u0430 \u0445\u0438\u0439\u0446\u0430\u0440\u0438\u0439\u043d \u0434\u0443\u044c\u0440\u0430\u0440\u0446\u0430.",
+    "title": "\u0425\u044c\u0430\u0436\u0430\u0440\u0433 \u0434\u0435\u0445\u044c\u0430 \u0445\u0438\u0439\u0446\u0430\u0440\u0438\u0439\u043d \u0434\u0443\u044c\u0440\u0430\u0440\u0446\u0430",
     "explainer": "\u041d\u043e\u0445\u0447\u0438\u0439\u043d: \u0414\u0438\u043b\u0430 \u0445\u04c0\u0430\u0436\u0430\u0440 \u0445\u0443\u044c\u043c\u0430\u0440 \u043a\u04c0\u043e\u0432\u0448\u0438\u043d \u043a\u0445\u043e \u043c\u0443\u0445\u0430 \u0435\u0440-\u0434\u0443-\u0434\u0443\u0448\u0430\u0440 \u0434\u043e\u0448, \u0434\u0443\u0448\u0430\u0440 \u0445\u04c0\u0430\u0436\u0430\u0440 \u0445\u0443\u044c\u043c\u0430\u0440 \u043a\u04c0\u043e\u0432\u0448\u0438\u043d \u0445\u0443\u044c\u043c\u0440\u0430\u0448 \u0434\u043e\u0448 \u0445\u0438\u0439\u0446\u0430.",
     "mintUrl": ""
   },
@@ -376,7 +375,7 @@ const nakaText: NakaText = {
     "id": 26,
     "language": "Suomi",
     "languageEn": "Finnish",
-    "title": "Vapaus tehd\u00e4 kauppoja.",
+    "title": "Vapaus tehd\u00e4 kauppoja",
     "explainer": "Vapaus tehd\u00e4 kauppoja on kaikkien muiden perustuslaillisten oikeuksien perusta. Ilman vapautta tehd\u00e4 kauppoja sinulla ei ole muita perustuslaillisia oikeuksia.",
     "mintUrl": ""
   },
@@ -384,7 +383,7 @@ const nakaText: NakaText = {
     "id": 27,
     "language": "Magyar",
     "languageEn": "Hungarian",
-    "title": "Tranzakci\u00f3 szabads\u00e1ga.",
+    "title": "Tranzakci\u00f3 szabads\u00e1ga",
     "explainer": "Az \u00fcgyleti szabads\u00e1g az \u00f6sszes egy\u00e9b alkotm\u00e1nyos jog alapja. Az \u00fcgyleti szabads\u00e1g n\u00e9lk\u00fcl nincsenek m\u00e1s alkotm\u00e1nyos jogok.",
     "mintUrl": ""
   },
@@ -392,7 +391,7 @@ const nakaText: NakaText = {
     "id": 28,
     "language": "\u010ce\u0161tina",
     "languageEn": "Czech",
-    "title": "Svoboda k transakc\u00edm.",
+    "title": "Svoboda k transakc\u00edm",
     "explainer": "Svoboda transakce le\u017e\u00ed v z\u00e1kladu v\u0161ech ostatn\u00edch \u00fastavn\u00edch pr\u00e1v. Bez svobody transakce nem\u00e1te \u017e\u00e1dn\u00e1 jin\u00e1 \u00fastavn\u00ed pr\u00e1va.",
     "mintUrl": ""
   },
@@ -400,7 +399,7 @@ const nakaText: NakaText = {
     "id": 29,
     "language": "T\u00fcrk\u00e7e",
     "languageEn": "Turkish",
-    "title": "\u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc.",
+    "title": "\u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc",
     "explainer": "\u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc, di\u011fer t\u00fcm anayasal haklar\u0131n temelidir. \u0130\u015flem yapma \u00f6zg\u00fcrl\u00fc\u011f\u00fc olmadan, di\u011fer anayasal haklar\u0131n\u0131z yoktur.",
     "mintUrl": ""
   },
@@ -408,7 +407,7 @@ const nakaText: NakaText = {
     "id": 30,
     "language": "Tatar\u00e7a / \u0422\u0430\u0442\u0430\u0440\u0447\u0430",
     "languageEn": "Tatar",
-    "title": "\u0418\u0448\u043b\u0435\u043c \u044f\u0441\u044b\u0439\u043b\u044b\u0433\u044b\u043d\u0430 \u044d\u0440\u0435\u043d\u0434\u04d9\u043b\u0435\u043a.",
+    "title": "\u0418\u0448\u043b\u0435\u043c \u044f\u0441\u044b\u0439\u043b\u044b\u0433\u044b\u043d\u0430 \u044d\u0440\u0435\u043d\u0434\u04d9\u043b\u0435\u043a",
     "explainer": "\u0418\u0448\u043b\u0435\u043c\u0433\u0430 \u044d\u0440\u0435\u0448\u043c\u04d9\u043a\u043a\u04d9\u043d \u04d9\u0437\u0433\u04d9\u0440\u0435\u0448\u043b\u0435\u043a-\u0497\u0438\u0440\u04d9\u0445\u04d9\u0442 \u0431\u0430\u0440\u043b\u044b\u043a \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u043d\u044b\u04a3 \u0430\u043b\u0442\u0430\u043d \u0442\u04e9\u0437\u04d9\u043b\u0435\u0448\u0435\u043d\u0434\u04d9 \u043a\u04e9\u043d\u04d9\u043b\u04d9\u043d\u04d9. \u0418\u0448\u043b\u0435\u043c\u0433\u0430 \u044d\u0440\u0435\u0448\u043c\u04d9\u043a\u043a\u04d9\u043d \u043a\u043e\u043d\u0441\u0442\u0438\u0442\u0443\u0446\u0438\u044f\u043b\u044b\u043a \u0443\u043a\u0443\u043a\u0442\u0430\u0440\u043d\u044b\u04a3 \u0431\u0430\u0448\u043a\u0430\u043b\u0430\u0440\u044b \u044e\u043a.",
     "mintUrl": ""
   },
@@ -416,7 +415,7 @@ const nakaText: NakaText = {
     "id": 31,
     "language": "Srpskohrvatski / \u0421\u0440\u043f\u0441\u043a\u043e\u0445\u0440\u0432\u0430\u0442\u0441\u043a\u0438",
     "languageEn": "Serbo-Croatian",
-    "title": "Sloboda da obavljate transakcije.",
+    "title": "Sloboda da obavljate transakcije",
     "explainer": "Sloboda transakcije le\u017ei u osnovi svih drugih ustavnih prava. Bez slobode transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
@@ -424,7 +423,7 @@ const nakaText: NakaText = {
     "id": 32,
     "language": "Rom\u00e2n\u0103",
     "languageEn": "Romanian",
-    "title": "Libertatea de a efectua tranzac\u021bii.",
+    "title": "Libertatea de a efectua tranzac\u021bii",
     "explainer": "Libertatea de a face tranzac\u021bii st\u0103 la baza tuturor celorlalte drepturi constitu\u021bionale. F\u0103r\u0103 libertatea de a face tranzac\u021bii, nu ave\u021bi niciun alt drept constitu\u021bional.",
     "mintUrl": ""
   },
@@ -456,7 +455,7 @@ const nakaText: NakaText = {
     "id": 36,
     "language": "Esperanto",
     "languageEn": "Esperanto",
-    "title": "Libereco por transakcioj.",
+    "title": "Libereco por transakcioj",
     "explainer": "La libereco transaksi subtenas \u0109iujn aliajn konstituciajn rajtojn. Sen la libereco transaksi, vi ne havas aliajn konstituciajn rajtojn.",
     "mintUrl": ""
   },
@@ -480,7 +479,7 @@ const nakaText: NakaText = {
     "id": 39,
     "language": "Dansk",
     "languageEn": "Danish",
-    "title": "Frihed til at foretage transaktioner.",
+    "title": "Frihed til at foretage transaktioner",
     "explainer": "Frihed til at handle ligger til grund for alle andre konstitutionelle rettigheder. Uden frihed til at handle har du ingen andre konstitutionelle rettigheder.",
     "mintUrl": ""
   },
@@ -504,7 +503,7 @@ const nakaText: NakaText = {
     "id": 42,
     "language": "Sloven\u010dina",
     "languageEn": "Slovak",
-    "title": "Sloboda vykon\u00e1va\u0165 transakcie.",
+    "title": "Sloboda vykon\u00e1va\u0165 transakcie",
     "explainer": "Sloboda uskuto\u010d\u0148ova\u0165 transakcie tvor\u00ed z\u00e1klad v\u0161etk\u00fdch ostatn\u00fdch \u00fastavn\u00fdch pr\u00e1v. Bez slobody uskuto\u010d\u0148ova\u0165 transakcie nem\u00e1te \u017eiadne in\u00e9 \u00fastavn\u00e9 pr\u00e1va.",
     "mintUrl": ""
   },
@@ -520,7 +519,7 @@ const nakaText: NakaText = {
     "id": 44,
     "language": "Eesti",
     "languageEn": "Estonian",
-    "title": "Vabadus tehinguid teha.",
+    "title": "Vabadus tehinguid teha",
     "explainer": "Vabadus tehingute tegemiseks on k\u00f5igi teiste p\u00f5hiseaduslike \u00f5iguste alus. Ilma vabaduseta tehinguid teha, pole teil muid p\u00f5hiseaduslikke \u00f5igusi.",
     "mintUrl": ""
   },
@@ -544,7 +543,7 @@ const nakaText: NakaText = {
     "id": 47,
     "language": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430\u044f",
     "languageEn": "Belarusian",
-    "title": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439.",
+    "title": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439",
     "explainer": "\u0421\u0432\u0430\u0431\u043e\u0434\u0430 \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439 \u043b\u044f\u0436\u044b\u0446\u044c \u0443 \u0430\u0441\u043d\u043e\u0432\u0435 \u045e\u0441\u0456\u0445 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e. \u0411\u0435\u0437 \u0441\u0432\u0430\u0431\u043e\u0434\u044b \u0437\u0434\u0437\u0435\u0439\u0441\u043d\u0435\u043d\u043d\u044f \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u044b\u0439, \u0432\u044b \u043d\u0435 \u043c\u0430\u0435\u0446\u0435 \u0456\u043d\u0448\u044b\u0445 \u043a\u0430\u043d\u0441\u0442\u044b\u0442\u0443\u0446\u044b\u0439\u043d\u044b\u0445 \u043f\u0440\u0430\u0432\u043e\u045e.",
     "mintUrl": ""
   },
@@ -552,7 +551,7 @@ const nakaText: NakaText = {
     "id": 48,
     "language": "Simple English",
     "languageEn": "Simple English",
-    "title": "The ability to conduct transactions without restrictions or limitations.",
+    "title": "The ability to conduct transactions without restrictions or limitations",
     "explainer": "Being able to do business freely is the foundation of all other rights in the Constitution. If you can't do business freely, then you won't have any other rights in the Constitution.",
     "mintUrl": ""
   },
@@ -560,7 +559,7 @@ const nakaText: NakaText = {
     "id": 49,
     "language": "Baso Minangkabau",
     "languageEn": "Minangkabau",
-    "title": "Kebabasan untuak Transaksi.",
+    "title": "Kebabasan untuak Transaksi",
     "explainer": "Kemerdekaan untuk melakukan transaksi merupakan dasar dari semua hak konstitusional lainnya. Tanpa kemerdekaan untuk melakukan transaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
@@ -576,7 +575,7 @@ const nakaText: NakaText = {
     "id": 51,
     "language": "Hrvatski",
     "languageEn": "Croatian",
-    "title": "Sloboda za transakcije.",
+    "title": "Sloboda za transakcije",
     "explainer": "Sloboda obavljanja transakcija le\u017ei u temelju svih drugih ustavnih prava. Bez slobode obavljanja transakcija, nemate druga ustavna prava.",
     "mintUrl": ""
   },
@@ -584,7 +583,7 @@ const nakaText: NakaText = {
     "id": 52,
     "language": "Lietuvi\u0173",
     "languageEn": "Lithuanian",
-    "title": "Laisv\u0117 atlikti sandorius.",
+    "title": "Laisv\u0117 atlikti sandorius",
     "explainer": "Laisv\u0117 atlikti sandorius yra pagrindas visiems kitiems konstitucin\u0117ms teis\u0117ms. Be laisv\u0117s atlikti sandorius, j\u016bs neturite joki\u0173 kit\u0173 konstitucini\u0173 teisi\u0173.",
     "mintUrl": ""
   },
@@ -592,7 +591,7 @@ const nakaText: NakaText = {
     "id": 53,
     "language": "Galego",
     "languageEn": "Galician",
-    "title": "Libertade para realizar transacci\u00f3ns.",
+    "title": "Libertade para realizar transacci\u00f3ns",
     "explainer": "A liberdade para realizar transacci\u00f3ns \u00e9 a base de todos os demais dereitos constitucionais. Sen a liberdade para realizar transacci\u00f3ns, non tes ning\u00fan outro dereito constitucional.",
     "mintUrl": ""
   },
@@ -600,7 +599,7 @@ const nakaText: NakaText = {
     "id": 54,
     "language": "Az\u0259rbaycanca",
     "languageEn": "Azerbaijani",
-    "title": "H\u0259r\u0259k\u0259t etm\u0259k azadl\u0131\u011f\u0131.",
+    "title": "H\u0259r\u0259k\u0259t etm\u0259k azadl\u0131\u011f\u0131",
     "explainer": "\u018fm\u0259liyyatlar \u00fczr\u0259 azadl\u0131q dig\u0259r b\u00fct\u00fcn konstitusiya h\u00fcquqlar\u0131n\u0131n alt\u0131nda yat\u0131r. \u018fm\u0259liyyatlar \u00fczr\u0259 azadl\u0131q olmadan, sizin dig\u0259r b\u00fct\u00fcn konstitusiya h\u00fcquqlar\u0131n\u0131z yoxdur.",
     "mintUrl": ""
   },
@@ -616,7 +615,7 @@ const nakaText: NakaText = {
     "id": 56,
     "language": "Sloven\u0161\u010dina",
     "languageEn": "Slovenian",
-    "title": "Svoboda za izvajanje transakcij.",
+    "title": "Svoboda za izvajanje transakcij",
     "explainer": "Svoboda opravljanja transakcij je temelj vseh drugih ustavnih pravic. Brez svobode opravljanja transakcij nimate nobenih drugih ustavnih pravic.",
     "mintUrl": ""
   },
@@ -632,7 +631,7 @@ const nakaText: NakaText = {
     "id": 58,
     "language": "Nynorsk",
     "languageEn": "Norwegian (Nynorsk)",
-    "title": "Fridom til \u00e5 gjennomf\u00f8re transaksjonar.",
+    "title": "Fridom til \u00e5 gjennomf\u00f8re transaksjonar",
     "explainer": "Fridom til \u00e5 gjennomf\u00f8re transaksjonar ligg til grunn for alle andre grunnlovsfesta rettar. Uten fridomen til \u00e5 gjennomf\u00f8re transaksjonar, har du ingen andre grunnlovsfesta rettar.",
     "mintUrl": ""
   },
@@ -664,7 +663,7 @@ const nakaText: NakaText = {
     "id": 62,
     "language": "Latina",
     "languageEn": "Latin",
-    "title": "Libertas ad negotiandum.",
+    "title": "Libertas ad negotiandum",
     "explainer": "Libertas agendi subiacet cunctis aliis iuribus constitutionis. Sine libertate agendi, nullum aliud ius constitutionis habes.",
     "mintUrl": ""
   },
@@ -680,7 +679,7 @@ const nakaText: NakaText = {
     "id": 64,
     "language": "\u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438",
     "languageEn": "Macedonian",
-    "title": "\u0421\u043b\u043e\u0431\u043e\u0434\u0430 \u0437\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438.",
+    "title": "\u0421\u043b\u043e\u0431\u043e\u0434\u0430 \u0437\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438",
     "explainer": "\u0421\u043b\u043e\u0431\u043e\u0434\u0430\u0442\u0430 \u043d\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438\u0442\u0435 \u043b\u0435\u0436\u0438 \u0432\u043e \u043e\u0441\u043d\u043e\u0432\u0430\u0442\u0430 \u043d\u0430 \u0441\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0438 \u0443\u0441\u0442\u0430\u0432\u043d\u0438 \u043f\u0440\u0430\u0432\u0430. \u0411\u0435\u0437 \u0441\u043b\u043e\u0431\u043e\u0434\u0430 \u043d\u0430 \u0442\u0440\u0430\u043d\u0441\u0430\u043a\u0446\u0438\u0438\u0442\u0435, \u043d\u0435\u043c\u0430\u0442\u0435 \u043d\u0438\u043a\u0430\u043a\u0432\u0438 \u0434\u0440\u0443\u0433\u0438 \u0443\u0441\u0442\u0430\u0432\u043d\u0438 \u043f\u0440\u0430\u0432\u0430.",
     "mintUrl": ""
   },
@@ -688,7 +687,7 @@ const nakaText: NakaText = {
     "id": 65,
     "language": "Asturianu",
     "languageEn": "Asturian",
-    "title": "Llibert\u00e1 pa tresaccionar.",
+    "title": "Llibert\u00e1 pa tresaccionar",
     "explainer": "La llibert\u00e1 pa realizar transacciones ye la base de tolos dem\u00e1s derechos constitucionales. Sin la llibert\u00e1 pa realizar transacciones, nun tienes otros derechos constitucionales.",
     "mintUrl": ""
   },
@@ -704,7 +703,7 @@ const nakaText: NakaText = {
     "id": 67,
     "language": "Ladin",
     "languageEn": "Ladin",
-    "title": "Liberd\u00e0 de tranzazion\u00e0.",
+    "title": "Liberd\u00e0 de tranzazion\u00e0",
     "explainer": "La liberd\u00e0 de tranzacion i \u00e9 la basa de tutes lis \u00e0teres dretes constituzion\u00e2ls. Sens la liberd\u00e0 de tranzacion, no \u00e0s \u00e0teres dretes constituzion\u00e2ls.",
     "mintUrl": ""
   },
@@ -712,7 +711,7 @@ const nakaText: NakaText = {
     "id": 68,
     "language": "Latvie\u0161u",
     "languageEn": "Latvian",
-    "title": "Br\u012bv\u012bba veikt dar\u012bjumus.",
+    "title": "Br\u012bv\u012bba veikt dar\u012bjumus",
     "explainer": "Br\u012bv\u012bba veikt dar\u012bjumus ir pamat\u0101 visiem citiem konstitucion\u0101lajiem ties\u012bbu aktiem. Bez br\u012bv\u012bbas veikt dar\u012bjumus, Jums nav citu konstitucion\u0101lo ties\u012bbu aktu.",
     "mintUrl": ""
   },
@@ -728,7 +727,7 @@ const nakaText: NakaText = {
     "id": 70,
     "language": "Afrikaans",
     "languageEn": "Afrikaans",
-    "title": "Vryheid om te transaksioneer.",
+    "title": "Vryheid om te transaksioneer",
     "explainer": "Vryheid om te transaksioneer l\u00ea ten grondslag aan alle ander grondwetlike regte. Sonder die vryheid om te transaksioneer, het jy geen ander grondwetlike regte nie.",
     "mintUrl": ""
   },
@@ -744,7 +743,7 @@ const nakaText: NakaText = {
     "id": 72,
     "language": "Malagasy",
     "languageEn": "Malagasy",
-    "title": "Fahaleovantena mba hahafahana mametraka vola.",
+    "title": "Fahaleovantena mba hahafahana mametraka vola",
     "explainer": "Ny fahalalana mba hahafahan'ny olona mandray anjara amin'ny fifidianana no manamafy ny hamafisina ny hafainganam-pirenena rehetra. Raha tsy misy ny fahalalana mba hahafahan'ny olona mandray anjara amin'ny fifidianana, dia tsy misy hafainganam-pirenena hafa aminy.",
     "mintUrl": ""
   },
@@ -752,7 +751,7 @@ const nakaText: NakaText = {
     "id": 73,
     "language": "Bosanski",
     "languageEn": "Bosnian",
-    "title": "Sloboda za transakcije.",
+    "title": "Sloboda za transakcije",
     "explainer": "Sloboda za transakcije le\u017ei u osnovi svih drugih ustavnih prava. Bez slobode za transakcije, nemate druga ustavna prava.",
     "mintUrl": ""
   },
@@ -768,7 +767,7 @@ const nakaText: NakaText = {
     "id": 75,
     "language": "Shqip",
     "languageEn": "Albanian",
-    "title": "Liria p\u00ebr t\u00eb kryer transaksione.",
+    "title": "Liria p\u00ebr t\u00eb kryer transaksione",
     "explainer": "Liria p\u00ebr t\u00eb kryer transaksione \u00ebsht\u00eb baza e t\u00eb gjitha t\u00eb drejtave kushtetuese t\u00eb tjera. Pa lirin\u00eb p\u00ebr t\u00eb kryer transaksione, nuk keni asnj\u00eb t\u00eb drejt\u00eb kushtetuese tjet\u00ebr.",
     "mintUrl": ""
   },
@@ -776,7 +775,7 @@ const nakaText: NakaText = {
     "id": 76,
     "language": "Occitan",
     "languageEn": "Occitan",
-    "title": "Liberatat per transaccionar.",
+    "title": "Liberatat per transaccionar",
     "explainer": "La libertat de transaccionar es la base de tots los autres dreches constitucionals. Sens la libertat de transaccionar, av\u00e8tz pas d'autres dreches constitucionals.",
     "mintUrl": ""
   },
@@ -784,7 +783,7 @@ const nakaText: NakaText = {
     "id": 77,
     "language": "Plattd\u00fc\u00fctsch",
     "languageEn": "Low Saxon",
-    "title": "Freed to handeln.",
+    "title": "Freed to handeln",
     "explainer": "De Freiheid to transakten is de Grundlage f\u00f6r all annere Grundw\u00e4rt. Ohne de Freiheid to transakten hest du keen annere Grundw\u00e4rt.",
     "mintUrl": ""
   },
@@ -824,7 +823,7 @@ const nakaText: NakaText = {
     "id": 82,
     "language": "Brezhoneg",
     "languageEn": "Breton",
-    "title": "Frankiz da veza\u00f1 degaset a-benn obererezhio\u00f9.",
+    "title": "Frankiz da veza\u00f1 degaset a-benn obererezhio\u00f9",
     "explainer": "Frankiz da obererezh er c'halleriezh a zo an diazez a-raok pep holl gwirio\u00f9 konstituzionel all. Hep frankiz da obererezh, n'oc'h ket aotreus gwirio\u00f9 konstituzionel all.",
     "mintUrl": ""
   },
@@ -832,7 +831,7 @@ const nakaText: NakaText = {
     "id": 83,
     "language": "Kiswahili",
     "languageEn": "Swahili",
-    "title": "Uhuru wa Kufanya Biashara.",
+    "title": "Uhuru wa Kufanya Biashara",
     "explainer": "Uhuru wa kufanya shughuli za biashara ndio msingi wa haki zote za katiba. Bila uhuru wa kufanya shughuli za biashara, huna haki nyingine yoyote ya katiba.",
     "mintUrl": ""
   },
@@ -840,7 +839,7 @@ const nakaText: NakaText = {
     "id": 84,
     "language": "Basa Jawa",
     "languageEn": "Javanese",
-    "title": "Kebebasan kanggo Transaksi.",
+    "title": "Kebebasan kanggo Transaksi",
     "explainer": "Kebebasan transaksi mendasari semua hak konstitusional lainnya. Tanpa kebebasan untuk bertransaksi, Anda tidak memiliki hak konstitusional lainnya.",
     "mintUrl": ""
   },
@@ -856,7 +855,7 @@ const nakaText: NakaText = {
     "id": 86,
     "language": "V\u00e8neto",
     "languageEn": "Venetian",
-    "title": "Libert\u00e0 de trasacionar.",
+    "title": "Libert\u00e0 de trasacionar",
     "explainer": "La libert\u00e0 de far transazioni sotovento tute le altre diriti costituzionali. Senza la libert\u00e0 de far transazioni, no ghe xe altri diriti costituzionali.",
     "mintUrl": ""
   },
@@ -872,7 +871,7 @@ const nakaText: NakaText = {
     "id": 88,
     "language": "Kr\u00e8yol ayisyen",
     "languageEn": "Haitian",
-    "title": "Lib\u00e8te pou f\u00e8 transaksyon.",
+    "title": "Lib\u00e8te pou f\u00e8 transaksyon",
     "explainer": "Lib\u00e8te pou f\u00e8 transaksyon anba li tout l\u00f2t dwa konstitisyon\u00e8l. San lib\u00e8te pou f\u00e8 transaksyon, ou pa gen okenn l\u00f2t dwa konstitisyon\u00e8l.",
     "mintUrl": ""
   },
@@ -880,7 +879,7 @@ const nakaText: NakaText = {
     "id": 89,
     "language": "Piemont\u00e8is",
     "languageEn": "Piedmontese",
-    "title": "Libert\u00e0 'd transazi\u00f2ne.",
+    "title": "Libert\u00e0 'd transazi\u00f2ne",
     "explainer": "La libert\u00e0 'd transazion sotaian t\u00f2cc ij \u00e0utri drej \u00ebd la constitussion. Senza la libert\u00e0 'd transazion, a l'\u00e9 nen pi\u00f2 propi dr\u00e9 \u00ebd \u00e0utri drej costituziunaj.",
     "mintUrl": ""
   },
@@ -896,7 +895,7 @@ const nakaText: NakaText = {
     "id": 91,
     "language": "L\u00ebtzebuergesch",
     "languageEn": "Luxembourgish",
-    "title": "Fr\u00e4iheet fir ze transaktioun\u00e9ieren.",
+    "title": "Fr\u00e4iheet fir ze transaktioun\u00e9ieren",
     "explainer": "Fr\u00e4iheet fir Transaktiounen leit all aner Verfassungsrechter zougrond. Ohne d'Fr\u00e4iheet fir Transaktiounen hues du keng aner Verfassungsrechter.",
     "mintUrl": ""
   },
@@ -904,7 +903,7 @@ const nakaText: NakaText = {
     "id": 92,
     "language": "Basa Sunda",
     "languageEn": "Sundanese",
-    "title": "Kebebasan Kanggo Ngadamel.",
+    "title": "Kebebasan Kanggo Ngadamel",
     "explainer": "Kebebasan kanggo ngadamel transaksi ngalakukeun sadaya hak konstitusional lianna. Tanpa kebebasan kanggo ngadamel transaksi, anjeun teu gaduh hak konstitusional lianna.",
     "mintUrl": ""
   },
@@ -912,7 +911,7 @@ const nakaText: NakaText = {
     "id": 93,
     "language": "Kurd\u00ee / \u0643\u0648\u0631\u062f\u06cc",
     "languageEn": "Kurdish",
-    "title": "Azadiya Bazirganiy\u00ea.",
+    "title": "Azadiya Bazirganiy\u00ea",
     "explainer": "Azadiya l\u00eager\u00eena maf\u00ean dest\u00fbr\u00ee hem\u00ee maf\u00ean din \u00ean dest\u00fbr\u00eeya wey\u00ee. B\u00ea azadiya l\u00eager\u00eena maf\u00ean dest\u00fbr\u00ee, h\u00fbn maf\u00ean din \u00ean dest\u00fbr\u00ee tune ne.",
     "mintUrl": ""
   },
@@ -920,7 +919,7 @@ const nakaText: NakaText = {
     "id": 94,
     "language": "Gaeilge",
     "languageEn": "Irish",
-    "title": "Saor\u00e1nacht le Hothruithe a Dh\u00e9anamh.",
+    "title": "Saor\u00e1nacht le Hothruithe a Dh\u00e9anamh",
     "explainer": "Saoirse chun tranc\u00e1il faoi bhun gach ceart bunreacht\u00fail eile. Gan an saoirse chun tranc\u00e1il, n\u00edl aon chearta bunreacht\u00fala eile agat.",
     "mintUrl": ""
   },
@@ -928,7 +927,7 @@ const nakaText: NakaText = {
     "id": 95,
     "language": "Lumbaart",
     "languageEn": "Lombard",
-    "title": "Libert\u00e0 de transazion.",
+    "title": "Libert\u00e0 de transazion",
     "explainer": "La libert\u00e0 de f\u00e0 transazioni sota-costa tuti j'\u00e0ter drit constitutional. Senza la libert\u00e0 de f\u00e0 transazioni, ti n'ha minga \u00e0ter drit constitutional.",
     "mintUrl": ""
   },
@@ -936,7 +935,7 @@ const nakaText: NakaText = {
     "id": 96,
     "language": "\u015al\u016fnski",
     "languageEn": "Silesian",
-    "title": "Swoboda do przeprowadzania transakcji.",
+    "title": "Swoboda do przeprowadzania transakcji",
     "explainer": "Wola do handlowania le\u017cy po\u0142o\u017ey\u0144y pod w\u0161yskimi inkszych prawami konstytucyjnimi. Bez wolno\u015bci do handlowania niy masz inkszych praw konstytucyjnych.",
     "mintUrl": ""
   },
@@ -952,7 +951,7 @@ const nakaText: NakaText = {
     "id": 98,
     "language": "Frysk",
     "languageEn": "West Frisian",
-    "title": "Frijheid om te transaksjonearjen.",
+    "title": "Frijheid om te transaksjonearjen",
     "explainer": "Frijheid om te transaksjearjen leit oan de basis fan alle oare gr\u00fbnwetlike rjochten. S\u00fbnder de frijheid om te transaksjearjen, hawwe jo gjin oare gr\u00fbnwetlike rjochten.",
     "mintUrl": ""
   },
@@ -960,7 +959,7 @@ const nakaText: NakaText = {
     "id": 99,
     "language": "\u0427\u0103\u0432\u0430\u0448",
     "languageEn": "Chuvash",
-    "title": "\u0427\u04d1\u0432\u0430\u0448\u043b\u0430: \u0428\u04d7\u043d \u0447\u0115\u0440\u043b\u0435 \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438 \u0442\u0443\u0445\u0430\u043b\u043b\u0430 \u04ab\u044b\u0440\u0115\u043a.",
+    "title": "\u0427\u04d1\u0432\u0430\u0448\u043b\u0430: \u0428\u04d7\u043d \u0447\u0115\u0440\u043b\u0435 \u0442\u0440\u0430\u043d\u0437\u0430\u043a\u0446\u0438 \u0442\u0443\u0445\u0430\u043b\u043b\u0430 \u04ab\u044b\u0440\u0115\u043a",
     "explainer": "\u041f\u04d1\u0445\u04d1\u043d \u0430\u043d\u0430\u0432\u043d\u04d1 \u043a\u0443\u043b\u04d1\u043c\u043f\u0430\u0445\u04d7\u0440 \u043f\u0443\u043b\u0103\u0448\u043c\u0430 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440. \u041f\u04d7\u043b\u043f\u0435 \u043f\u0443\u043b\u0103\u0448\u043c\u0430 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440, \u043d\u0438\u04ab\u04d7\u04ab\u0435 \u0445\u0443\u0441\u0443\u0441\u0438\u043d\u0447\u0435 \u043f\u0440\u0430\u0432\u0442\u0430\u0440\u0430\u0445 \u043f\u0443\u043b\u0103\u0448\u0442\u044b\u0440.",
     "mintUrl": ""
   },
@@ -968,7 +967,7 @@ const nakaText: NakaText = {
     "id": 100,
     "language": "Soran\u00ee / \u06a9\u0648\u0631\u062f\u06cc",
     "languageEn": "Sorani",
-    "title": "\u0626\u0627\u0632\u0627\u062f\u06cc\u06cc\u06d5\u06a9\u0627\u0646\u06cc \u06af\u06c6\u0695\u06cc\u0646\u06cc \u06a9\u0627\u0631\u062a\u06d5\u06a9\u0627\u0646.",
+    "title": "\u0626\u0627\u0632\u0627\u062f\u06cc\u06cc\u06d5\u06a9\u0627\u0646\u06cc \u06af\u06c6\u0695\u06cc\u0646\u06cc \u06a9\u0627\u0631\u062a\u06d5\u06a9\u0627\u0646",
     "explainer": "\u0626\u0627\u0632\u0627\u062f\u06cc\u06cc \u067e\u0627\u0631\u06d5\u062f\u0627\u0646\u060c \u0628\u0646\u0686\u06cc\u0646\u06d5\u06cc \u062f\u06cc\u0627\u0631\u06cc\u06cc \u062f\u06cc\u06af\u0631\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u0628\u06d5\u0634\u06ce\u0648\u06d5\u06cc\u06d5\u06a9\u06cc \u0628\u0627\u0633 \u0644\u06d5 \u0647\u06d5\u0645\u0648\u0648 \u062d\u0642\u06d5\u06a9\u0627\u0646\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u062f\u06d5\u06a9\u0627\u062a. \u0628\u06d5\u0628\u06ce \u0626\u0627\u0632\u0627\u062f\u06cc\u06cc \u067e\u0627\u0631\u06d5\u062f\u0627\u0646\u060c \u0647\u06cc\u0686 \u062d\u0642\u06ce\u06a9\u06cc \u0642\u0627\u0646\u0648\u0646\u06cc\u06cc\u06d5\u06a9\u0627\u0646 \u0646\u06cc\u06cc\u06d5.",
     "mintUrl": ""
   },
