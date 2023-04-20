@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.scss";
 import dynamic from "next/dynamic";
 import { Col, Container, Row } from "react-bootstrap";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
+import NakaImage from '@/components/nakaImage/NakaImage';
 
 const Header = dynamic(() => import("../components/header/Header"), {
   ssr: false,
@@ -108,11 +109,14 @@ export default function Naka(props: any) {
             </div>
           </Col>
           <Col md={5}>
-            <div className={styles.imageContainer}>
-              <h2 className={styles.imageTitle}>{local.title}</h2>
-              <img src={`/naka/naka-${''}.png` /* ${locale}.jpeg */} alt={`Nakamoto Freedom: ${locale}`} className={`img-fluid`} />
-            </div>
-          </Col>          <Col>
+            <NakaImage
+              locale={locale}
+              title={local.title}
+              alt={local.title}
+              className="img-fluid"
+            />
+          </Col>
+          <Col>
             <div>
               <div
                 style={{
