@@ -118,28 +118,18 @@ export default function Naka(props: any) {
           </Col>
           <Col>
             <div>
-              <div
-                style={{
-                  padding: "4px",
-                  marginRight: "4px",
-                }}
-              >
-                <span
-                  style={{
-                    borderRadius: "3px",
-                    backgroundColor: "blue",
-                    color: "white",
-                    padding: "2px",
-                  }}
-                >
-                  {locale}: {local.language} ({local.languageEn})
-                </span>
-              </div><div>
+              <h3>
+                  {locale.toUpperCase()}: {local.language} ({local.languageEn})
+              </h3>
+              <div>
                 <p>
                   {local.explainer}
                 </p>
               </div>
-              <div style={{ color: "#ccc" }}>
+              <div style={{
+                color: "#aaa",
+                paddingTop: "4em",
+              }}>
                 <h3>How's the translation?</h3>
                 <p>
                   Does this translation seem correct? Can you improve it or offer a suggestion? Tweet your thoughts to <a href="https://twitter.com/om_pub_" target="_blank">OM_Pub_</a>, with hashtag #naka{locale.toUpperCase()}. Thanks!
@@ -531,7 +521,7 @@ const nakaText: NakaText = {
     "id": 45,
     "language": "O\u2018zbek",
     "languageEn": "Uzbek",
-    "title": "\"Amalga oshirishda erkinlik\"",
+    "title": "Amalga oshirishda erkinlik",
     "explainer": "Mahkamaviy huquqlar qatorining barcha boshqa huquqlari o'zgarga kelgan transaksiyalar erkinligiga asoslangan. Transaksiyalar erkinligi yo'q bo'lsa, sizda boshqa mahkamaviy huquqlar yo'q.",
     "mintUrl": ""
   },

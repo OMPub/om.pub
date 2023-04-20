@@ -334,5 +334,41 @@ We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait
         }
       ]
     },
+    {
+      tokenId: 89,
+      images: [
+        "/artist-89/work-1.gif",
+      ],
+      poster: "/artist-89/poster.gif",
+      posterMintUrl: "",
+      name: "Made by Megan",
+      info:
+`
+Megan, AKA @CryptoClimates, is an NFT artist committed to working for sustainable living and conservation. 
+She's created individual mini environments as NFT, and is also an artist with @The_GhostClub.
+
+She says, "It's a personal mission of mine to work towards a more sustainable life and support conservation initiatives on a global level. 
+With the help of this superhuman community and blockchain technology, it's all becoming possible."
+
+We are grateful to have Megan and her vision and values as a part of The Memes community!
+`,
+      links: [
+        {
+          name: "Megan's Twitter",
+          url: "https://twitter.com/CryptoClimates",
+          target: "_blank"
+        },
+        {
+          name: "Megan's Web Site",
+          url: "https://www.madebymegan.io/",
+          target: "_blank"
+        },
+        {
+          name: "Megan's Discord",
+          url: "https://discord.gg/PRsKywkuqU",
+          target: "_blank"
+        }
+      ]
+    },
   ]
 }
