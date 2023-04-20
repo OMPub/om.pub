@@ -48,7 +48,7 @@ export default function Home() {
                 <ul>
                   <li>Season 3</li>
                   <ul>
-                    <li>Artist Preview: <a href="/memes/88/artist">Meme Artist 89 - CyptoClimates: Made by Megan</a></li>
+                    <li>Artist Preview: <a href="/memes/89/artist">Meme Artist 89 - CyptoClimates: Made by Megan</a></li>
                     <li>Artist Preview: <a href="/memes/88/artist">Meme Artist 88 - Ryan Koopmans</a></li>
                     <li>Artist Preview: <a href="/memes/87/artist">Meme Artist 87 - DeeKay Motion</a></li>
                   </ul>
