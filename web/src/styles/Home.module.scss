@@ -13,3 +13,19 @@
   max-height: calc(100vh - 170px);
   overflow-y: auto;
 }
+
+.imageContainer {
+  position: relative;
+}
+
+.imageTitle {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%; 
+  padding: 8px;
+  box-sizing: border-box;
+  color: black;
+  word-wrap: break-word; 
+;
+}
