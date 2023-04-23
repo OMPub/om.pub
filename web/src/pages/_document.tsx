@@ -33,6 +33,33 @@ export default function Document() {
             GitHub
           </a>
           &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a
+            href="https:/twitter.com/om_pub_/"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              loading={"lazy"}
+              width="20"
+              height="20"
+              src="/twitter.png"
+              alt="Twitter"
+            />{" "}
+            Twitter
+          </a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;          <a
+            href="https:/instagram.com/the.om.pub/"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              loading={"lazy"}
+              width="20"
+              height="20"
+              src="/instagram.png"
+              alt="Instagram"
+            />{" "}
+            Instagram
+          </a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
           Tip your server? ompub.eth
         </footer>
       </body>

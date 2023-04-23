@@ -265,7 +265,7 @@ const nakaText: NakaText = {
     "id": 13,
     "language": "\u4e2d\u6587",
     "languageEn": "Chinese",
-    "title": "\u81ea\u7531\u4ea4\u6613",
+    "title": "\u4EA4\u6613\u81EA\u7531",
     "explainer": "\u81ea\u7531\u4ea4\u6613\u662f\u6240\u6709\u5baa\u6cd5\u6743\u5229\u7684\u57fa\u7840\u3002\u5982\u679c\u6ca1\u6709\u81ea\u7531\u4ea4\u6613\uff0c\u60a8\u5c31\u6ca1\u6709\u5176\u4ed6\u5baa\u6cd5\u6743\u5229\u3002",
     "mintUrl": ""
   },
