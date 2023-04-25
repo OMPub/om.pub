@@ -370,5 +370,44 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
         }
       ]
     },
+    {
+      tokenId: 90,
+      images: [
+        "/artist-90/work-1.png",
+        "/artist-90/work-2.png",
+        "/artist-90/work-3.png",
+      ],
+      poster: "/artist-90/poster.gif",
+      posterMintUrl: "",
+      name: "Meg Thorpe",
+      info:
+`
+Megan Thorpe describes herself as, "A visual artist who explores the theme of identity through the lens of mental illness." 
+
+Her powerful images evoke the themes of headspace being destroyed and recreated, our minds opened to (or shattered by?) the world beyond us. 
+
+With colorful paint on literal, IRL canvas, many of Meg's works are born in the physical world. 
+Hi-res scaning creates fully digital NFTs that maintain the texture of the canvas, and the artist's touch of paint stroke and bruch marks.
+
+We are so glad to have Meg on board as the artist of Card 90!
+`,
+      links: [
+        {
+          name: "Meg Thorpe's Twitter",
+          url: "https://twitter.com/megthorpeart",
+          target: "_blank"
+        },
+        {
+          name: "Meg Thorpe's Instagram",
+          url: "https://www.instagram.com/megthorpeart/",
+          target: "_blank"
+        },
+        {
+          name: "Meg Thorpe's Digital Gallery",
+          url: "https://oncyber.io/megthorpeart",
+          target: "_blank"
+        }
+      ]
+    },
   ]
 }
