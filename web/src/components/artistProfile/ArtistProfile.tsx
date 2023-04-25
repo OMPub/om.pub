@@ -88,6 +88,7 @@ const ArtistProfile = (props: Props) => {
                 variant="outline-dark"
                 size="lg"
                 href={`https://seize.io/the-memes/${artist.tokenId}?focus=live`}
+                target="_blank"
               >
                 Seize!
               </Button>
