@@ -409,5 +409,75 @@ We are so glad to have Meg on board as the artist of Card 90!
         }
       ]
     },
+    {
+      tokenId: 91,
+      images: [
+        "/artist-91/work-1.png",
+        "/artist-91/work-2.png",
+        "/artist-91/work-3.png",
+      ],
+      poster: "/artist-91/poster.gif",
+      posterMintUrl: "",
+      name: "Fidel Amos",
+      info:
+`
+Fidel creates NFT photos. 
+`,
+      links: [
+        {
+          name: "Fidel's Twitter",
+          url: "https://twitter.com/FidelEverywhere",
+          target: "_blank"
+        },
+        {
+          name: "Fidel's LinkTree",
+          url: "https://linktr.ee/fideleverywhere/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 92,
+      images: [
+        "/artist-92/work-1.png",
+        "/artist-92/work-2.png",
+        "/artist-92/work-3.png",
+      ],
+      poster: "/artist-92/poster.png",
+      posterMintUrl: "",
+      name: "Angela Nikolau",
+      info:
+`
+We welcome Angela Nikolau, the Russian photographer known for her daring and adventurous photos, as the artist of Meme Card 92! 
+Her artistic style, which is often characterized by surreal and dizzying photos taken from high-up and dangerous locations, has been translated into the digital realm through her unique NFT photographic artwork.
+
+Nikolau's NFT art is a reflection of her creativity and willingness to take risks. 
+Her pieces often feature her trademark acrobatic and oft-sultry poses, set against a backdrop of stunning cityscapes or natural landscapes. 
+Through her NFT art, Nikolau seeks to explore the intersection between physical prowess and digital art, inviting viewers to experience her daring and adventurous vision in a whole new way.
+
+As a trailblazer in both photography and NFT art, Nikolau's impact on the art world is breathtaking. 
+Her work challenges traditional notions of what art can be and encourages others to think beyond the limits of "possible". 
+With her NFT art, Nikolau continues to push boundaries and inspire others to explore the limitless possibilities of digital art.
+
+Angela's contribution will surely take The Memes to new heights!
+`,
+      links: [
+        {
+          name: "Angela's Twitter",
+          url: "https://twitter.com/angelanikolau_",
+          target: "_blank"
+        },
+        {
+          name: "Angela's Instagram",
+          url: "https://www.instagram.com/angela_nikolau/",
+          target: "_blank"
+        },
+        {
+          name: "Angela's Art on Foundation",
+          url: "https://foundation.app/@Angela_Nikolau",
+          target: "_blank"
+        }
+      ]
+    },
   ]
 }

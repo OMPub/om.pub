@@ -48,6 +48,7 @@ export default function Home() {
                 <ul>
                   <li>Season 3</li>
                   <ul>
+                    <li>Artist Preview: <a href="/memes/92/artist">Meme Artist 92 - Angela Nikolau</a></li>
                     <li>Artist Preview: <a href="/memes/90/artist">Meme Artist 90 - Meg Thorpe</a></li>
                     <li>Artist Preview: <a href="/memes/89/artist">Meme Artist 89 - CyptoClimates: Made by Megan</a></li>
                     <li>Artist Preview: <a href="/memes/88/artist">Meme Artist 88 - Ryan Koopmans</a></li>
