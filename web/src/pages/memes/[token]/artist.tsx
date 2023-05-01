@@ -479,5 +479,131 @@ Angela's contribution will surely take The Memes to new heights!
         }
       ]
     },
+    {
+      "tokenId": 93,
+      "images": [
+        "/artist-93/work-1.png",
+        "/artist-93/work-2.gif",
+        "/artist-93/work-3.jpeg"
+      ],
+      "poster": "/artist-93/poster.png",
+      "posterMintUrl": "",
+      "name": "@mbsjq",
+      "info": 
+`
+We are excited to present Jonathan Quintin, the digital artist and graphic designer from the United Kingdom, professionally recognized as "mbsjq" or "Astro," as the creative mind behind Meme Card 93. 
+With a [career](https://www.artinnovationgallery.com/artist.php?id=6225d81155e51) spanning more than 20 years, mbsjq has been involved in numerous collaborations with internationally renowned companies. 
+His artwork is often characterized by a blend of vivid hues, celestial elements, and surrealism, drawing inspiration from the universe and his daughter.
+
+Since entering the NFT space in 2020, mbsjq has quickly gained a reputation as a prominent Cryptoartist, achieving remarkable sales, features, and collaborations. 
+His popularity on SuperRare has soared, placing him among the ranks of celebrated artists such as XCOPY, Hackatao, and Pak. 
+
+Mbsjq has an impressive portfolio of collaborations, including a successful partnership with Hackatao that resulted in the sale of "LOL" for a staggering 185.0 ETH. 
+He also worked with Playboy to create "Miami Dance," which was showcased at the Bitcoin Miami Conference. 
+Additionally, mbsjq was selected to commemorate Freddie Mercury's 75th birthday with the artwork "Colorful Soul," the proceeds of which were directed towards AIDS research and education.
+
+In 2021, mbsjq's art appeared on billboards across LA, New York, and London, while his work was exhibited at prestigious events and locations such as Art Basel Miami, Dubai, London, and Shanghai. 
+As he continues to push the boundaries of digital art, mbsjq aspires to collaborate with prestigious organizations like NASA and Nike.
+`,
+      "links": [
+        {
+          "name": "mbsjq's Twitter",
+          "url": "https://twitter.com/mbsjq",
+          "target": "_blank"
+        },
+        {
+          "name": "mbsjq's Instagram",
+          "url": "https://www.instagram.com/madebystudiojq/",
+          "target": "_blank"
+        },
+        {
+          "name": "mbsjq's Homepage",
+          "url": "https://www.madebystudiojq.com/",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 94,
+      "images": [
+        "/artist-94/work-1.gif",
+        "/artist-94/work-2.png",
+        "/artist-94/work-3.png"
+      ],
+      "poster": "/artist-94/poster.png",
+      "posterMintUrl": "",
+      "name": "Jeff Soto",
+      "info":
+`
+We welcome Jeff Soto, the renowned artist and illustrator, as the artist of Meme Card 94! 
+
+Jeff Soto is a contemporary artist, illustrator, and muralist who has been active in the art scene since the early 2000s. 
+His work is known for its unique fusion of pop surrealism, street art, and graffiti, creating a distinct visual language. 
+His art often features colorful and imaginative characters or creatures, as well as themes related to nature, society, and personal experiences.
+
+Jeff Soto's vibrant fusion of pop surrealism and street art is bound to paint a whole new dimension of creativity onto The Memes project canvas!
+`,
+      "links": [
+        {
+          "name": "Jeff's Twitter",
+          "url": "https://twitter.com/jeffsotoart",
+          "target": "_blank"
+        },
+        {
+          "name": "Jeff's Instagram",
+          "url": "https://www.instagram.com/jeffsotoart/",
+          "target": "_blank"
+        },
+        {
+          "name": "Jeff's Homepage",
+          "url": "https://jeffsoto.com/",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 95,
+      "images": [
+        "/artist-95/work-1.jpeg",
+        "/artist-95/work-2.jpeg",
+        "/artist-95/work-3.png"
+      ],
+      "poster": "",
+      "posterMintUrl": "",
+      "name": "Andreas Preis",
+      "info":
+`
+Andreas Preis is a Berlin-based artist, illustrator, and designer known for his versatile and vibrant artistic style. 
+Born in 1984, he studied communications design in Nuremberg, Germany. 
+Preis has worked with various high-profile clients, including Adidas, Adobe, Coca-Cola, DC Comics, ESPN, Ford, Nike, and Samsung.
+
+His artwork often encompasses intricate illustrations, hand-drawn typography, and bold color schemes. 
+Andreas Preis is particularly skilled in using different techniques and materials, ranging from traditional pen and paper to digital art and murals. 
+His illustrations often feature animals, geometric shapes, and patterns, resulting in a unique and striking visual language.
+
+In addition to illustration, Preis has experience in graphic design, mural painting, and live art performances. 
+His art has been exhibited in galleries and festivals across Europe and the United States. 
+As a versatile and innovative artist, Andreas Preis continues to push the boundaries of his craft, exploring new techniques and forms of expression.
+
+With Andreas Preis's kaleidoscope of colors and intricate illustrations, The Memes project is set to leap off the canvas and into a wildly imaginative realm of artistic expression!
+`,
+      "links": [
+        {
+          "name": "Andreas's Twitter",
+          "url": "https://twitter.com/andreaspreis",
+          "target": "_blank"
+        },
+        {
+          "name": "Andreas's Instagram",
+          "url": "https://www.instagram.com/andreaspreis/",
+          "target": "_blank"
+        },
+        {
+          "name": "Andreas's Art on Foundation",
+          "url": "https://foundation.app/@AndreasPreis",
+          "target": "_blank"
+        }
+      ]
+    },
   ]
 }
