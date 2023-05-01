@@ -35,19 +35,23 @@ const ArtistProfile = (props: Props) => {
           <Col
             className={`${styles.artistPoster}`}
             md={4}>
-            <a href={artist.poster} target="_blank">
-              {artist.poster.endsWith('.mp4') ? (
-                <video className="d-block w-100" controls muted playsInline autoPlay>
-                  <source src={artist.poster} type="video/mp4" />
-                </video>
-              ) : (
-                <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
-              )}
-            </a>
-            <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
-            {artist.posterMintUrl ? (
-                <em> — <a href={artist.posterMintUrl} target="_blank">mint it!</a></em>
-            ) : ( <span></span>)}
+            {artist.poster ? (
+              <>
+                <a href={artist.poster} target="_blank">
+                  {artist.poster.endsWith('.mp4') ? (
+                    <video className="d-block w-100" controls muted playsInline autoPlay>
+                      <source src={artist.poster} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
+                  )}
+                </a>
+                <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
+                {artist.posterMintUrl ? (
+                  <em> — <a href={artist.posterMintUrl} target="_blank">mint it!</a></em>
+                ) : (<span></span>)}
+              </>
+            ) : (<span></span>)}
           </Col>
           <Col
             md={5}>
