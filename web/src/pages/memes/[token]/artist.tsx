@@ -568,7 +568,7 @@ Jeff Soto's vibrant fusion of pop surrealism and street art is bound to paint a 
         "/artist-95/work-2.jpeg",
         "/artist-95/work-3.png"
       ],
-      "poster": "/artist-94/poster.png",
+      "poster": "/artist-95/poster.png",
       "posterMintUrl": "",
       "name": "Andreas Preis",
       "info":
