@@ -605,5 +605,91 @@ With Andreas Preis's kaleidoscope of colors and intricate illustrations, The Mem
         }
       ]
     },
+    {
+      "tokenId": 96,
+      "images": [
+        "/artist-96/work-1.jpeg",
+        "/artist-96/work-2.jpeg",
+        "/artist-96/work-3.png"
+      ],
+      "poster": "/artist-96/poster.png",
+      "posterMintUrl": "",
+      "name": "Billy Dinh",
+      "info":
+`
+Meet Billy Dinh, the avant-garde lens virtuoso who's been reshaping the face of modern photography. 
+Known for his ingenious integration of everyday life and surrealism, Dinh’s work seizes the ephemeral, turning fleeting moments into timeless art.
+
+Born in the vibrant streets of Houston, Texas, Dinh's artistic journey is as colorful as his portfolio. 
+His knack for capturing the essence of his subjects, whether it's the raw energy of urban spaces or the nuanced play of light on a tranquil landscape, is truly distinctive.
+
+In the world of memes, where ideas spread and evolve at a breakneck pace, Billy brings his unique touch of authenticity and creativity. 
+Dinh’s genius lies in his ability to see the extraordinary in the ordinary, transforming the mundane into visuals that speak volumes.
+
+Billy Dinh doesn’t just take photos—he crafts stories, immortalizing moments with a click, challenging perceptions, and pushing the boundaries of photographic storytelling.
+
+So now we embark on the memetic journey with Billy Dinh, with excitement to see his signature style develop in this new frame of reference!
+`,
+      "links": [
+        {
+          "name": "Billy's Twitter",
+          "url": "http://twitter.com/billydeee_",
+          "target": "_blank"
+        },
+        {
+          "name": "Billy's Instagram",
+          "url": "http://instagram.com/billydeee",
+          "target": "_blank"
+        },
+        {
+          "name": "Billy's Website",
+          "url": "http://billydinh.com",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 97,
+      "images": [
+        "/artist-97/work-1.png",
+        "/artist-97/work-2.png",
+        "/artist-97/work-3.png"
+      ],
+      "poster": "/artist-97/poster.png",
+      "posterMintUrl": "",
+      "name": "Matt Doogue",
+      "info":
+`
+Immerse yourself in the captivating universe of Matt Doogue, the London-based Macro Maestro. 
+His photographic wizardry brings the minute wonders of our natural world into awe-inspiring focus. 
+From dew-kissed spider webs to the subtle patterns on a butterfly's wing, Doogue's lens unveils a realm usually hidden from the naked eye.
+
+Far from the city's hustle, Matt finds tranquillity in capturing the intricate beauty and bizarreness that lies within the smallest corners of life. His work is a testament to his passion for detail and his profound respect for the environment. 
+It's not merely about stunning visuals; it's a gentle reminder of the complexity and interconnectedness of our world.
+
+Through his extraordinary artistry, Matt invites us to pause and appreciate the beauty that exists in the often overlooked details. 
+His work is an exploration, a celebration, and an homage to the wonders of the natural world that exist just beyond our usual field of vision.
+
+As we welcome Matt to our collective, we look forward to zooming into his world, where every photograph is a journey into the exquisite detail of life. 
+Get ready to see the world in a whole new light, through the macro lens of Matt Doogue.
+`,
+      "links": [
+        {
+          "name": "Matt's Twitter",
+          "url": "https://www.twitter.com/mattdoogue",
+          "target": "_blank"
+        },
+        {
+          "name": "Matt's Instagram",
+          "url": "https://instagram.com/mattd85",
+          "target": "_blank"
+        },
+        {
+          "name": "Matt's Website",
+          "url": "https://mattsmacro.co.uk",
+          "target": "_blank"
+        }
+      ]
+    },
   ]
 }
