@@ -691,5 +691,48 @@ Get ready to see the world in a whole new light, through the macro lens of Matt 
         }
       ]
     },
+    {
+      "tokenId": 98,
+      "images": [
+        "/artist-98/work-1.png",
+        "/artist-98/work-2.gif",
+        "/artist-98/work-3.jpeg"
+      ],
+      "poster": "/artist-98/poster.png",
+      "posterMintUrl": "",
+      "name": "Degen Alfie",
+      "info":
+`
+Degen Alfie is The Memes artist number 97, so get excited! 
+
+Alfie is based in the UK and creates art influenced by a variety of sources, including cyberpunk, anime, and video games. 
+He is also inspired by the work of other artists, such as Jean-Michel Basquiat, Keith Haring, and Andy Warhol.
+
+Alfie's process for creating art is driven by his desire to experiment and explore new possibilities. 
+He often starts with a sketch or a rough idea, and then he uses digital tools to develop the image. 
+He is always looking for new ways to use technology to create art that is both visually appealing and intellectually stimulating.
+
+His ambitious projects include the Degen Alphabet, which chronicles the events, the weirdness, and the characters of this bizarre crypto tale.
+
+He's shared his sketch process, he's shared his art with the world, and now he shares the glory of The Memes with us all.
+`,
+      "links": [
+        {
+          "name": "Alfie's Twitter",
+          "url": "https://twitter.com/Degen_Alfie",
+          "target": "_blank"
+        },
+        {
+          "name": "Matt's Instagram",
+          "url": "https://instagram.com/mattd85",
+          "target": "_blank"
+        },
+        {
+          "name": "Alfie's Website",
+          "url": "https://degenalphabet.com/",
+          "target": "_blank"
+        }
+      ]
+    },
   ]
 }

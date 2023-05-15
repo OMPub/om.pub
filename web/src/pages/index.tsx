@@ -48,6 +48,7 @@ export default function Home() {
                 <ul>
                   <li>Season 3</li>
                   <ul>
+                    <li>Artist Preview: <a href="/memes/98/artist">Meme Artist 98 - Degen Alfie</a></li>
                     <li>Artist Preview: <a href="/memes/97/artist">Meme Artist 97 - Matt Doogue</a></li>
                     <li>Artist Preview: <a href="/memes/96/artist">Meme Artist 96 - Billy Dinh</a></li>
                     <li>Artist Preview: <a href="/memes/95/artist">Meme Artist 95 - Andreas Preis</a></li>
