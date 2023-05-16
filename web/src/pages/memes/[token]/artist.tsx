@@ -703,7 +703,7 @@ Get ready to see the world in a whole new light, through the macro lens of Matt 
       "name": "Degen Alfie",
       "info":
 `
-Degen Alfie is The Memes artist number 97, so get excited! 
+Degen Alfie is The Memes artist number 98, so get excited! 
 
 Alfie is based in the UK and creates art influenced by a variety of sources, including cyberpunk, anime, and video games. 
 He is also inspired by the work of other artists, such as Jean-Michel Basquiat, Keith Haring, and Andy Warhol.
@@ -730,6 +730,92 @@ He's shared his sketch process, he's shared his art with the world, and now he s
         {
           "name": "Alfie's Website",
           "url": "https://degenalphabet.com/",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 99,
+      "images": [
+        "/artist-99/work-1.jpeg",
+        "/artist-99/work-2.jpeg",
+        "/artist-99/work-3.webp"
+      ],
+      "poster": "/artist-99/poster.png",
+      "posterMintUrl": "",
+      "name": "Mike Hirshon",
+      "info":
+`
+Michael Hirshon is a versatile freelance illustrator and an esteemed Assistant Professor of Illustration. 
+He holds impressive academic credentials, with a BFA in Visual Communication and Psychology from Washington University in St. Louis and an MFA in Illustration as Visual Essay from the School of Visual Arts in New York City. 
+Over the past decade, he has developed a diverse portfolio, working with a wide array of prestigious clients such as The New York Times, HarperCollins Publishers, Amazon, The Washington Post, Forbes, and American Express. 
+His distinctive work has received recognition from several respected industry organizations including the Society of Illustrators, American Illustration, Spectrum, CMYK, and 3x3.
+
+Hirshon's passion for illustration extends beyond traditional formats as he continually seeks out unusual avenues for visual storytelling. 
+This exploratory spirit has led him to collaborate on varied projects such as packaging for a dog toy company, a taco truck chef's cookbook, a dating coach's graphic memoir, a US Senate campaign, and even the walls of a daycare in Pakistan.
+
+In addition to his commercial work, Hirshon has a deep personal commitment to documenting his surroundings and observations through on-location drawings in his sketchbook. 
+He has traveled extensively throughout his career, always with a sketchbook in hand, using drawing as a tool to slow down, meditate on, and engage deeply with new experiences. 
+This personal work has evolved into an exploration of cultural differences, anxieties, and unfamiliar sensations, reflecting his constant engagement with the world around him and his commitment to visual storytelling in all its forms.
+
+We are thrilled to welcome Mike to The Memes and look forward to how his illustrious style will play out within the project's vision.
+`,
+      "links": [
+        {
+          "name": "Mike's Twitter",
+          "url": "https://twitter.com/MikeHirshon",
+          "target": "_blank"
+        },
+        {
+          "name": "Mike's Instagram",
+          "url": "https://instagram.com/MichaelHirshon",
+          "target": "_blank"
+        },
+        {
+          "name": "Mike's Website",
+          "url": "https://hirshon.net",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 100,
+      "images": [
+        "/artist-100/work-1.png",
+        "/artist-100/work-2.gif",
+        "/artist-100/work-3.gif"
+      ],
+      "poster": "/artist-100/poster.png",
+      "posterMintUrl": "",
+      "name": "3PEACE",
+      "info":
+`
+3PEACE is a cryptic figure in the art world, merging the worlds of artificial intelligence, art, and crypto in a unique and cutting-edge fashion. 
+With a strong presence in the virtual art space, this artist's work can be found shared widely on Twitter.
+
+Despite their involvement in the realm of digital assets, a space often associated with financial transactions and speculation, 3PEACE maintains a strong philosophical stance as an artist first and foremost. 
+In their own words, "I am an artist, not a businessman," and further emphasizing, "business is the antithesis of art." 
+This conviction speaks to their commitment to the purity and integrity of their creative process.
+
+Given the limited public information about 3PEACE, much of their identity and the depth of their work remains a mystery, which in many ways reflects the enigmatic nature of the digital art space itself. 
+Their work and their cryptic persona continue to intrigue and draw attention within the world of crypto art.
+
+Can't wait to see what 3PEACE brings to The Memes!
+`,
+      "links": [
+        {
+          "name": "3PEACE's Twitter",
+          "url": "https://twitter.com/3PEACEART",
+          "target": "_blank"
+        },
+        {
+          "name": "3PEACE's Editions",
+          "url": "https://opensea.io/collection/3peace-editions",
+          "target": "_blank"
+        },
+        {
+          "name": "3PEACE's Discord",
+          "url": "https://discord.gg/ctxSMqa5wN/",
           "target": "_blank"
         }
       ]
