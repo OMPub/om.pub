@@ -46,10 +46,12 @@ const ArtistProfile = (props: Props) => {
                     <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
                   )}
                 </a>
-                <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
-                {artist.posterMintUrl ? (
-                  <em> — <a href={artist.posterMintUrl} target="_blank">mint it!</a></em>
-                ) : (<span></span>)}
+                <p>
+                  <em>Prememe by <a href="https://twitter.com/wintermutegan" target="_blank">@Wintermute</a></em>
+                  {artist.posterMintUrl ? (
+                    <em> — <a href={artist.posterMintUrl} target="_blank">mint it!</a></em>
+                  ) : (<span></span>)}
+                </p>
               </>
             ) : (<span></span>)}
           </Col>
