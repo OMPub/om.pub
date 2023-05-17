@@ -785,7 +785,7 @@ We are thrilled to welcome Mike to The Memes and look forward to how his illustr
         "/artist-100/work-2.gif",
         "/artist-100/work-3.gif"
       ],
-      "poster": "/artist-100/poster.png",
+      "poster": "/artist-100/poster.gif",
       "posterMintUrl": "",
       "name": "3PEACE",
       "info":
