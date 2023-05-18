@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { Container } from "react-bootstrap";
+import styles from "@/styles/Home.module.scss";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import ArtistProfile from "@/components/artistProfile/ArtistProfile";
 
@@ -33,7 +35,7 @@ const Header = dynamic(() => import("@/components/header/Header"), {
 export default function Artist(props: Props) {
   const route = useRouter();
   const artistId = Number(route.query.token);
-  
+
   return (
     <>
       <Head>
@@ -54,7 +56,9 @@ export default function Artist(props: Props) {
         <meta name="twitter:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
       </Head>
       <Header />
-      <ArtistProfile artistsData={props.artists} />
+      <Container className={`${styles.main}`}>
+        <ArtistProfile artistsData={props.artists} />
+      </Container>
     </>
   );
 };
@@ -203,7 +207,7 @@ Stoked for more from 6529er
       posterMintUrl: "",
       name: "PopWonder",
       info:
-`Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
+        `Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
 With a particular style that fuses pop culture and vivid imagination, Pop Wonder casts a spell over collectors and enthusiasts alike.
 
 Born in a city known for its quirky individualism, Pop Wonder infuses his art with a healthy dose of whimsy, irony, and humor. 
@@ -251,7 +255,7 @@ Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" m
       posterMintUrl: "https://app.manifold.xyz/c/Prememe",
       name: "DeeKay",
       info:
-`
+        `
 DeeKay is a South Korean NFT artist based in the Bay Area whose work is known for its striking use of vibrant colors, intricate details, and dynamic motion. 
 His digital creations often feature familiar characters and surrealistic themes, blending together elements of nature, technology, and fantasy to create immersive and visually stunning worlds.
 
@@ -297,7 +301,7 @@ We can't wait to see how The Memes are interpreted in his fun and spirited art!
       posterMintUrl: "",
       name: "Ryan Koopmans",
       info:
-`
+        `
 Ryan Koopmans is a Canadian-born NFT artist whose work combines elements of photography, digital art, and graphic design to create immersive and visually stunning worlds. 
 With a keen eye for detail, Ryan's artwork often features surreal and dreamlike landscapes, juxtaposed against elements of modernity and technology. 
 His digital creations showcase a high degree of technical skill, with intricate and thoughtfully composed scenes that are rich in color and texture.
@@ -343,7 +347,7 @@ We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait
       posterMintUrl: "",
       name: "Made by Megan",
       info:
-`
+        `
 Megan, AKA @CryptoClimates, is an NFT artist committed to working for sustainable living and conservation. 
 She's created individual mini environments as NFT, and is also an artist with @The_GhostClub.
 
@@ -381,7 +385,7 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
       posterMintUrl: "",
       name: "Meg Thorpe",
       info:
-`
+        `
 Megan Thorpe describes herself as, "A visual artist who explores the theme of identity through the lens of mental illness." 
 
 Her powerful images evoke the themes of headspace being destroyed and recreated, our minds opened to (or shattered by?) the world beyond us. 
@@ -420,7 +424,7 @@ We are so glad to have Meg on board as the artist of Card 90!
       posterMintUrl: "",
       name: "Fidel Amos",
       info:
-`
+        `
 Fidel creates NFT photos. 
 `,
       links: [
@@ -447,7 +451,7 @@ Fidel creates NFT photos.
       posterMintUrl: "",
       name: "Angela Nikolau",
       info:
-`
+        `
 We welcome Angela Nikolau, the Russian photographer known for her daring and adventurous photos, as the artist of Meme Card 92! 
 Her artistic style, which is often characterized by surreal and dizzying photos taken from high-up and dangerous locations, has been translated into the digital realm through her unique NFT photographic artwork.
 
@@ -489,8 +493,8 @@ Angela's contribution will surely take The Memes to new heights!
       "poster": "/artist-93/poster.png",
       "posterMintUrl": "",
       "name": "@mbsjq",
-      "info": 
-`
+      "info":
+        `
 We are excited to present Jonathan Quintin, the digital artist and graphic designer from the United Kingdom, professionally recognized as "mbsjq" or "Astro," as the creative mind behind Meme Card 93. 
 With a [career](https://www.artinnovationgallery.com/artist.php?id=6225d81155e51) spanning more than 20 years, mbsjq has been involved in numerous collaborations with internationally renowned companies. 
 His artwork is often characterized by a blend of vivid hues, celestial elements, and surrealism, drawing inspiration from the universe and his daughter.
@@ -534,7 +538,7 @@ As he continues to push the boundaries of digital art, mbsjq aspires to collabor
       "posterMintUrl": "",
       "name": "Jeff Soto",
       "info":
-`
+        `
 We welcome Jeff Soto, the renowned artist and illustrator, as the artist of Meme Card 94! 
 
 Jeff Soto is a contemporary artist, illustrator, and muralist who has been active in the art scene since the early 2000s. 
@@ -572,7 +576,7 @@ Jeff Soto's vibrant fusion of pop surrealism and street art is bound to paint a 
       "posterMintUrl": "",
       "name": "Andreas Preis",
       "info":
-`
+        `
 Andreas Preis is a Berlin-based artist, illustrator, and designer known for his versatile and vibrant artistic style. 
 Born in 1984, he studied communications design in Nuremberg, Germany. 
 Preis has worked with various high-profile clients, including Adidas, Adobe, Coca-Cola, DC Comics, ESPN, Ford, Nike, and Samsung.
@@ -616,7 +620,7 @@ With Andreas Preis's kaleidoscope of colors and intricate illustrations, The Mem
       "posterMintUrl": "",
       "name": "Billy Dinh",
       "info":
-`
+        `
 Meet Billy Dinh, the avant-garde lens virtuoso who's been reshaping the face of modern photography. 
 Known for his ingenious integration of everyday life and surrealism, Dinh’s work seizes the ephemeral, turning fleeting moments into timeless art.
 
@@ -659,7 +663,7 @@ So now we embark on the memetic journey with Billy Dinh, with excitement to see 
       "posterMintUrl": "",
       "name": "Matt Doogue",
       "info":
-`
+        `
 Immerse yourself in the captivating universe of Matt Doogue, the London-based Macro Maestro. 
 His photographic wizardry brings the minute wonders of our natural world into awe-inspiring focus. 
 From dew-kissed spider webs to the subtle patterns on a butterfly's wing, Doogue's lens unveils a realm usually hidden from the naked eye.
@@ -702,7 +706,7 @@ Get ready to see the world in a whole new light, through the macro lens of Matt 
       "posterMintUrl": "",
       "name": "Degen Alfie",
       "info":
-`
+        `
 Degen Alfie is The Memes artist number 98, so get excited! 
 
 Alfie is based in the UK and creates art influenced by a variety of sources, including cyberpunk, anime, and video games. 
@@ -745,7 +749,7 @@ He's shared his sketch process, he's shared his art with the world, and now he s
       "posterMintUrl": "",
       "name": "Mike Hirshon",
       "info":
-`
+        `
 Michael Hirshon is a versatile freelance illustrator and an esteemed Assistant Professor of Illustration. 
 He holds impressive academic credentials, with a BFA in Visual Communication and Psychology from Washington University in St. Louis and an MFA in Illustration as Visual Essay from the School of Visual Arts in New York City. 
 Over the past decade, he has developed a diverse portfolio, working with a wide array of prestigious clients such as The New York Times, HarperCollins Publishers, Amazon, The Washington Post, Forbes, and American Express. 
@@ -789,7 +793,7 @@ We are thrilled to welcome Mike to The Memes and look forward to how his illustr
       "posterMintUrl": "",
       "name": "3PEACE",
       "info":
-`
+        `
 3PEACE is a cryptic figure in the art world, merging the worlds of artificial intelligence, art, and crypto in a unique and cutting-edge fashion. 
 With a strong presence in the virtual art space, this artist's work can be found shared widely on Twitter.
 
