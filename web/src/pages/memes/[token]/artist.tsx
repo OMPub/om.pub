@@ -824,5 +824,132 @@ Can't wait to see what 3PEACE brings to The Memes!
         }
       ]
     },
+    {
+      "tokenId": 101,
+      "images": [
+        "/artist-101/work-1.gif",
+        "/artist-101/work-2.png",
+        "/artist-101/work-3.gif"
+      ],
+      "poster": "/artist-101/poster.gif",
+      "posterMintUrl": "",
+      "name": "Lord Jamie V Shill",
+      "info":
+        `
+LordJamieVShiLL is a boundary-pushing artist entrenched in the Bitcoin and NFT realm. 
+
+As the self-proclaimed "Master of the ShiLL", he is widely recognized for his creations that seem to build from a subversive exploration of digital and blockchain mediums. 
+His work often incorporates elements of humor, parody, and pop culture references, with a particular focus on the iconography of the Pepe the Frog. 
+By engaging with the Fake Rare and Counterparty NFT scene, he challenges conventional notions of rarity and value in the digital art world, with his own unique flair.
+
+Beyond his individual creations, he plays a significant administrative role in the Pepe Pawn Shop, a community centered around Pepe-themed artwork and tokens. 
+He is also associated with the Pepe Warhol Foundation, suggesting an affinity for reinterpretation and parody in the style of the legendary pop artist. 
+LordJamieVShiLL's work can be found on various digital art platforms, where he showcases his distinctive and oftentimes humorous take on digital collectibles​.
+
+We don't yet know what LordJamieVShiLL will brings to The Memes, but don't bet against a Pepe!
+`,
+      "links": [
+        {
+          "name": "Jamie's Twitter",
+          "url": "https://twitter.com/LordJamieVShiLL",
+          "target": "_blank"
+        },
+        {
+          "name": "Jamie's Fake Rares",
+          "url": "https://pepe.wtf/artists/Lord-Jamie-V.-Shill",
+          "target": "_blank"
+        },
+        {
+          "name": "3PEACE's OM Gallery",
+          "url": "https://oncyber.io/spaces/H82ITP1XLj59OvHTiI7t?coords=-1.71x2.03x-12.96x-1.74",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "tokenId": 102,
+      "images": [
+        "/artist-102/work-1.gif",
+        "/artist-102/work-2.jpeg",
+        "/artist-102/work-3.png"
+      ],
+      "poster": "/artist-102/poster.gif",
+      "posterMintUrl": "",
+      "name": "@GxngYxng",
+      "info":
+        `
+GxngYxng is a Japan-based NFT artist best known for his Ghxsts collection, a series of hand-drawn artworks transformed into NFTs. 
+His distinctive and instantly recognizable style, drawn from his personal experiences and feelings, has set him apart in the non-generative art space. 
+His journey as an artist began in childhood, and his commitment to his craft led him to leave his animation industry job to focus on creating NFTs full-time. 
+Today, his work is celebrated for its emotional depth and aesthetic appeal, earning him a strong following within the NFT community.
+
+The Ghxsts collection, which initially consisted of 102 pieces, has expanded to nearly a thousand unique hand-drawn pieces. 
+Each of these pieces has significantly appreciated in value since their launch, reflecting the artist's growing popularity and the collection's resonance with collectors. 
+These pieces provide a fresh perspective on non-generative art and have inspired similar projects in the digital art space.
+
+Beyond the Ghxsts collection, GxngYxng has created a variety of sub-collections, including PXIN GXNG, Ghxsts Cxlture, Cxllabs, and Originxls. 
+These collections serve various purposes, from commemorating early "gas wars" among collectors to facilitating collaborations with other NFT projects. 
+By offering additional ways for collectors to engage with his work, GxngYxng has successfully created an immersive and rewarding ecosystem around his art​        
+
+We look forward what GxngYxng is crafting for Meme Card 102!
+`,
+      "links": [
+        {
+          "name": "GxngYxng's Twitter",
+          "url": "https://twitter.com/gxngyxng",
+          "target": "_blank"
+        },
+        {
+          "name": "GxngYxng's creations",
+          "url": "https://opensea.io/GxngYxngNFT/created",
+          "target": "_blank"
+        },
+        {
+          "name": "GxngYxng's website",
+          "url": "https://ghxsts.com/",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 103,
+      images: [
+        "/artist-103/work-1.jpeg",
+        "/artist-103/work-2.svg",
+        "/artist-103/work-3.svg"
+      ],
+      poster: "/artist-103/poster.gif",
+      name: "Jack Butcher",
+      info:
+        `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
+
+After two years of trial and error, Jack discovered the secret to transitioning to a highly-specialized and enjoyable consulting business and a product business that could scale infinitely. 
+
+The key was productizing himself. This insight led him to create Visualize Value (https://visualizevalue.com/), a project that enabled him to build a network of mentors, a $1M/year product business, and a media platform with over 500,000 followers.
+
+> "If you'd have told me this story 18 months ago, I wouldn't have believed you. Now I spend all of my time making things that make it easier to learn, teach, build, and sell."
+
+Jack made a splash in the Web3 world with ["Checks"](https://checks.art/). "This artwork may or may not be notable."
+
+Welcome to the Memes Community Jack...we look forward to "Check"ing what you have in store for us!
+`,
+      links: [
+        {
+          name: "Jack's Twitter",
+          url: "https://twitter.com/jackbutcher",
+          target: "_blank"
+        },
+        {
+          name: "Jack's Check Art",
+          url: "https://checks.art/",
+          target: "_blank"
+        },
+        {
+          name: "Jack's Blog Posts",
+          url: "https://visualizevalue.com/blogs/visuals",
+          target: "_blank"
+        }
+      ]
+    }    
   ]
 }
