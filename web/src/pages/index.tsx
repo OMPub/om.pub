@@ -48,7 +48,10 @@ export default function Home() {
                 <ul>
                   <li>Season 3</li>
                   <ul>
-                    <li>Artist Preview: <a href="/memes/100/artist">Meme Artist 100 - 3PEACE</a></li>
+                    <li>Artist Preview: <a href="/memes/103/artist">Meme Artist 103 - Jack Butcher</a></li>
+                    <li>Artist Preview: <a href="/memes/102/artist">Meme Artist 102 - GxngYxng</a></li>
+                    <li>Artist Preview: <a href="/memes/101/artist">Meme Artist 101 - LordJamieVShiLL</a></li>
+                    <li>Artist Preview: <a href="/memes/100/artist">Meme Artist 100 - 6529er</a></li>
                     <li>Artist Preview: <a href="/memes/99/artist">Meme Artist 99 - Mike Hirshon</a></li>
                     <li>Artist Preview: <a href="/memes/98/artist">Meme Artist 98 - Degen Alfie</a></li>
                     <li>Artist Preview: <a href="/memes/97/artist">Meme Artist 97 - Matt Doogue</a></li>

@@ -41,7 +41,7 @@ const ArtistProfile = (props: Props) => {
                   <source src={artist.poster} type="video/mp4" />
                 </video>
               ) : (
-                <img src={artist.poster} alt="Prememe artwork" className={`img-fluid ${styles.shadow}`} />
+                <img src={artist.poster} alt="Prememe artwork: COMING SOON" className={`img-fluid ${styles.shadow}`} />
               )}
             </a>
             <p>
