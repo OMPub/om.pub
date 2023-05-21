@@ -785,42 +785,44 @@ We are thrilled to welcome Mike to The Memes and look forward to how his illustr
     {
       "tokenId": 100,
       "images": [
-        "/artist-100/work-1.png",
+        "/artist-100/work-1.jpeg",
         "/artist-100/work-2.gif",
-        "/artist-100/work-3.gif"
+        "/artist-100/work-3.png",
+        "/artist-100/work-4.jpeg"
       ],
-      "poster": "/artist-100/poster.gif",
-      "posterMintUrl": "",
-      "name": "3PEACE",
-      "info":
+      poster: "/artist-100/poster.gif",
+      posterMintUrl: "",
+      name: "6529er",
+      info:
         `
-3PEACE is a cryptic figure in the art world, merging the worlds of artificial intelligence, art, and crypto in a unique and cutting-edge fashion. 
-With a strong presence in the virtual art space, this artist's work can be found shared widely on Twitter.
+We are proud to welcome 6529er back to the 6529 Meme artist family. 
 
-Despite their involvement in the realm of digital assets, a space often associated with financial transactions and speculation, 3PEACE maintains a strong philosophical stance as an artist first and foremost. 
-In their own words, "I am an artist, not a businessman," and further emphasizing, "business is the antithesis of art." 
-This conviction speaks to their commitment to the purity and integrity of their creative process.
+Dive into the mysterious world of 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
+Emerging in the crypto-art realm in 2021, 6529er has gained a place of prominence as the pre-eminent artist of The Memes by 6529 collection, for his sleek, thought-provoking designs.
 
-Given the limited public information about 3PEACE, much of their identity and the depth of their work remains a mystery, which in many ways reflects the enigmatic nature of the digital art space itself. 
-Their work and their cryptic persona continue to intrigue and draw attention within the world of crypto art.
+With a penchant for geometric shapes, bold colors, and a touch of wry humor, 6529er crafts pieces that invite deep contemplation. 
+His works in The Memes are infused with meaning, and blur the lines between digital art and hard-hitting educational experiences.
 
-Can't wait to see what 3PEACE brings to The Memes!
+Despite his enigmatic persona, 6529er actively engages with the NFT community, providing leadership and support to The Memes community. 
+As the NFT landscape evolves, 6529er's distinctive artistry continues to intrigue and delight, making them a force to be reckoned with in the metaverse.
+
+Stoked for more from 6529er!
 `,
-      "links": [
+      links: [
         {
-          "name": "3PEACE's Twitter",
-          "url": "https://twitter.com/3PEACEART",
-          "target": "_blank"
+          name: "6529er's Twitter",
+          url: "https://twitter.com/6529er",
+          target: "_blank"
         },
         {
-          "name": "3PEACE's Editions",
-          "url": "https://opensea.io/collection/3peace-editions",
-          "target": "_blank"
+          name: "6529er on Foundation",
+          url: "https://foundation.app/@6529er",
+          target: "_blank"
         },
         {
-          "name": "3PEACE's Discord",
-          "url": "https://discord.gg/ctxSMqa5wN/",
-          "target": "_blank"
+          name: "Find @6529er in the OM Discord Server",
+          url: "https://discord.gg/JAhzGprv",
+          target: "_blank"
         }
       ]
     },
@@ -950,6 +952,6 @@ Welcome to the Memes Community Jack...we look forward to "Check"ing what you hav
           target: "_blank"
         }
       ]
-    }    
+    }
   ]
 }
