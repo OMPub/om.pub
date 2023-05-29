@@ -1005,8 +1005,8 @@ We are excited to see what Timpers has in placed into pixels for us in Meme Card
         "/artist-105/work-2.png",
         "/artist-105/work-3.png"
       ],
-      poster: "/artist-105/poster.gif",
-      name: "Timpers",
+      poster: "/artist-105/poster.png",
+      name: "José Ramos",
       info:
         `
 José Ramos is a seasoned landscape photographer and psychiatrist based in Lisbon, Portugal. 
