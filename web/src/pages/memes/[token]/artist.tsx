@@ -1049,6 +1049,53 @@ What is José's vision for Meme Card 105? We can't wait to see!
           target: "_blank"
         }
       ]
+    },
+    {
+      tokenId: 106,
+      images: [
+        "/artist-106/work-1.jpeg",
+        "/artist-106/work-2.png",
+        "/artist-106/work-3.png",
+        "/artist-106/work-4.png"
+      ],
+      poster: "/artist-106/poster.png",
+      name: "ICKI x noCreative",
+      info:
+        `
+Meme Card 106 looks to break new ground with a collaboration between two innovative NFT artists: Icki and noCreative.
+Since they are both founding members of the Bloom Collective, we can count on their experience in working together to produce something great!
+
+Kristian Levin, known in the digital art world as noCreative, is a Copenhagen-based 3D artist with over 15 years of experience spanning various creative industries. 
+Initially rooted in traditional art spaces and fine arts photography, noCreative ventured into the NFT art scene in late 2020, quickly gaining a reputation for his striking 3D cloth work. 
+His distinctive style and involvement as an artist, collector, and curator have solidified his status as a notable figure within the NFT art community. 
+Exhibited at venues such as Calgary Contemporary, Beijing Contemporary, and even on Times Square billboards during NFT NYC, noCreative also lends his expertise as a curator for major NFT platforms like Makersplace and SuperRare.
+
+On the other hand, Icki, a generative artist originating from London, UK, has gained prominence in the 3D industry with his expertise in innovative display mediums like holographic installations and augmented reality. 
+His art seamlessly blends elements from minimalism and conceptual art, but with a twist that provides unique commentary on the values of the digital art domain. 
+Icki's 'Plagiarism' series, which explores the nature of digital art, provenance, and how new valuation models address infringement and copycat culture, exemplifies his subversive approach to traditional aesthetics. 
+His piece 'Meta-Plagiarism' from this series was even showcased alongside works by the legendary Andy Warhol at the Contemporary Calgary.
+        
+This collaboration between noCreative and Icki is exciting, as it brings together two distinct and innovative styles within the NFT art sphere. 
+With noCreative's signature 3D work and Icki's subversive commentary, their collaborative NFT piece is sure to be a unique and thought-provoking contribution to the digital art world.
+ 
+`,
+      links: [
+        {
+          name: "ICKI's Twitter",
+          url: "https://twitter.com/The_Kid_Icarus",
+          target: "_blank"
+        },
+        {
+          name: "noCreative's Twitter",
+          url: "https://twitter.com/nocreative_eth",
+          target: "_blank"
+        },
+        {
+          name: "Bloom Collective",
+          url: "https://thisisbloom.xyz",
+          target: "_blank"
+        }
+      ]
     }
   ]
 }
