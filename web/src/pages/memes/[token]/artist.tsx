@@ -952,6 +952,103 @@ Welcome to the Memes Community Jack...we look forward to "Check"ing what you hav
           target: "_blank"
         }
       ]
+    },
+    {
+      tokenId: 104,
+      images: [
+        "/artist-104/work-1.png",
+        "/artist-104/work-2.gif",
+        "/artist-104/work-3.gif"
+      ],
+      poster: "/artist-104/poster.gif",
+      name: "Timpers",
+      info:
+        `
+Timpers, known on Twitter as @TimpersHD or "timpers.chimp," is an innovative artist who specializes in the creation of pixel art. 
+He describes himself as a "Pixel placer" which speaks to his unique ability to arrange pixels to create intricate and colorful designs.
+
+Timpers is not just an artist, but also a founder. 
+He is associated with @ChimpersNFT and @nounsdao, which speaks to his deep involvement in the blockchain and NFT spaces. 
+        
+His work is showcased on his portfolio website, the "Pixelverse", which is a vibrant collection of pixel art pieces that display a variety of subjects and complexity. 
+Each piece is distinct, yet they all share a colorful, pixelated aesthetic that is characteristic of Timpers' style. 
+This body of work demonstrates his mastery of the pixel art medium and his ability to evoke different emotions through his use of color and design.
+        
+Timpers joined Twitter in May 2015, and since then, has gained a significant following with over 51.2K followers. 
+His social media presence, combined with his unique style and expertise in the NFT space, makes Timpers a notable figure in the digital art world.
+
+We are excited to see what Timpers has in placed into pixels for us in Meme Card 104!
+
+`,
+      links: [
+        {
+          name: "Timpers' Twitter",
+          url: "https://twitter.com/TimpersHD",
+          target: "_blank"
+        },
+        {
+          name: "Timpers on Foundation",
+          url: "https://foundation.app/Timpers",
+          target: "_blank"
+        },
+        {
+          name: "Timpers' Web Site",
+          url: "https://timpers.format.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 105,
+      images: [
+        "/artist-105/work-1.png",
+        "/artist-105/work-2.png",
+        "/artist-105/work-3.png"
+      ],
+      poster: "/artist-105/poster.gif",
+      name: "Timpers",
+      info:
+        `
+José Ramos is a seasoned landscape photographer and psychiatrist based in Lisbon, Portugal. 
+Balancing two careers, he has developed a strong artistic voice over the past 18 years, expressing his unique perspective and love for nature through his photography. 
+Ramos' work focuses on the beauty and power of the world around us, with each image containing embedded concepts, stories, and philosophies. 
+His images often reflect his thoughts, experiences, and philosophical reflections, raising awareness about the natural world and supporting the protection of the environment.
+
+Ramos' journey began in his second year of medical school, where he discovered photography as an ideal means of creative expression.
+His medical specialization is in psychiatry, a field which he believes harmonizes with his photography career, fostering a creative synergy that benefits both disciplines.
+        
+Ramos' work has gained international recognition, with multiple features in National Geographic and other renowned photography magazines. 
+He has also received several international photo awards and his work has been showcased on platforms such as Discovery, The Telegraph, CNN Travel, and Sony.
+        
+Notably, Ramos sells his art worldwide as fine art prints and exclusive NFTs. 
+He curates for the NFC Summit and has developed a profound interest in the NFT space, offering his art in the form of non-fungible tokens on platforms like SuperRare.
+        
+In addition to his photography and psychiatry work, Ramos also runs custom photographic workshops and photo tours in Portugal, helping other photographers on their journey of artistic discovery. 
+His contribution to the photographic community extends to collaborations with many international photography brands, including BenQ, LG, Thinktank, Nisi, FLM, Huawei, Honor, Vivo, and Vallerret.
+        
+Ramos' work is the result of his love for the outdoors and his inherent creative urges. 
+His images are not only aesthetically pleasing but are also embedded with stories and philosophies, aiming to promote awareness of the natural world and the importance of environmental protection. 
+His art reflects the fragility and the power of humankind in an ever-changing and intensely fascinating world.
+
+What is José's vision for Meme Card 105? We can't wait to see!
+`,
+      links: [
+        {
+          name: "José's Twitter",
+          url: "https://twitter.com/jose_ramos",
+          target: "_blank"
+        },
+        {
+          name: "José on SuperRare",
+          url: "https://superrare.com/joseramos",
+          target: "_blank"
+        },
+        {
+          name: "José's Web Site",
+          url: "https://timpers.format.com",
+          target: "_blank"
+        }
+      ]
     }
   ]
 }
