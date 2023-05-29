@@ -48,6 +48,9 @@ export default function Home() {
                 <ul>
                   <li>Season 3</li>
                   <ul>
+                    <li>Artist Preview: <a href="/memes/106/artist">Meme Artist 106 - ICKI / noCreative</a></li>
+                    <li>Artist Preview: <a href="/memes/105/artist">Meme Artist 105 - José Ramos</a></li>
+                    <li>Artist Preview: <a href="/memes/104/artist">Meme Artist 104 - Timpers</a></li>
                     <li>Artist Preview: <a href="/memes/103/artist">Meme Artist 103 - Jack Butcher</a></li>
                     <li>Artist Preview: <a href="/memes/102/artist">Meme Artist 102 - GxngYxng</a></li>
                     <li>Artist Preview: <a href="/memes/101/artist">Meme Artist 101 - LordJamieVShiLL</a></li>
