@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, Dropdown, DropdownButton } from "react-bootstrap";
 import { useRouter } from "next/router";
 
 export default function Header() {
@@ -18,6 +18,11 @@ export default function Header() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
+            <Nav.Link
+              href="/memes"
+              className={router.pathname == "/memes" ? styles.linkActive : ""}>
+              The Memes
+            </Nav.Link>            
             <Nav.Link
               href="/faq"
               className={router.pathname == "/faq" ? styles.linkActive : ""}>
