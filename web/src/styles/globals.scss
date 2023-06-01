@@ -31,7 +31,6 @@ body {
   color: black;
   margin: 0;
   background-color: #fff !important;
-  font-family: "Asimov";
 }
 
 textarea,
@@ -54,10 +53,22 @@ b {
 h1 {
   font-size: 7.5rem;
   line-height: 1 !important;
+  font-family: "Asimov";
 }
 
 h2 {
   font-size: 4rem;
+  font-family: "Asimov";
+}
+
+h3 {
+  font-size: 2.5rem;
+  font-family: "Asimov";
+}
+
+h4 {
+  font-size: 2rem;
+  font-family: "Asimov";
 }
 
 @media only screen and (max-width: 1200px) {
