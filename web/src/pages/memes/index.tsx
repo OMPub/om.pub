@@ -101,6 +101,49 @@ export default function Memes() {
             </p>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <h4>The Prememes</h4>
+            <p>
+              Before new meme cards are minted, the artists are announced on Twitter.
+              In that magical time between the announcement and the minting, we can only guess what artist wonders the artist's vision will bring.
+              That guess is a PREMEME: an introduction to the artist's style, paired with notes on their background and some highlights of their previous work.
+            </p>
+            <p>
+              The prememe is a way to get to know the artist, and to get share our excitement about the upcoming mint.
+            </p>
+            <ul>
+              <li>Season 3</li>
+              <ul>
+                <li>Artist Preview: <a href="/memes/106/artist">Meme Artist 106 - ICKI / noCreative</a></li>
+                <li>Artist Preview: <a href="/memes/105/artist">Meme Artist 105 - José Ramos</a></li>
+                <li>Artist Preview: <a href="/memes/104/artist">Meme Artist 104 - Timpers</a></li>
+                <li>Artist Preview: <a href="/memes/103/artist">Meme Artist 103 - Jack Butcher</a></li>
+                <li>Artist Preview: <a href="/memes/102/artist">Meme Artist 102 - GxngYxng</a></li>
+                <li>Artist Preview: <a href="/memes/101/artist">Meme Artist 101 - LordJamieVShiLL</a></li>
+                <li>Artist Preview: <a href="/memes/100/artist">Meme Artist 100 - 6529er</a></li>
+                <li>Artist Preview: <a href="/memes/99/artist">Meme Artist 99 - Mike Hirshon</a></li>
+                <li>Artist Preview: <a href="/memes/98/artist">Meme Artist 98 - Degen Alfie</a></li>
+                <li>Artist Preview: <a href="/memes/97/artist">Meme Artist 97 - Matt Doogue</a></li>
+                <li>Artist Preview: <a href="/memes/96/artist">Meme Artist 96 - Billy Dinh</a></li>
+                <li>Artist Preview: <a href="/memes/95/artist">Meme Artist 95 - Andreas Preis</a></li>
+                <li>Artist Preview: <a href="/memes/94/artist">Meme Artist 94 - Jeff Soto</a></li>
+                <li>Artist Preview: <a href="/memes/93/artist">Meme Artist 93 - mbsjq</a></li>
+                <li>Artist Preview: <a href="/memes/92/artist">Meme Artist 92 - Angela Nikolau</a></li>
+                <li>Artist Preview: <a href="/memes/90/artist">Meme Artist 90 - Meg Thorpe</a></li>
+                <li>Artist Preview: <a href="/memes/89/artist">Meme Artist 89 - CyptoClimates: Made by Megan</a></li>
+                <li>Artist Preview: <a href="/memes/88/artist">Meme Artist 88 - Ryan Koopmans</a></li>
+                <li>Artist Preview: <a href="/memes/87/artist">Meme Artist 87 - DeeKay Motion</a></li>
+              </ul>
+              <li>Season 2</li>
+              <ul>
+                <li>Artist Preview: <a href="/memes/86/artist">Meme Artist 86 - Pop Wonder</a></li>
+                <li>Artist Preview: <a href="/memes/85/artist">Meme Artist 85 - 6529er</a></li>
+                <li>Artist Preview: <a href="/memes/83/artist">Meme Artist 83 - Luna Leonis</a></li>
+              </ul>
+            </ul>
+          </Col>
+        </Row>
       </Container>
     </>
   )
