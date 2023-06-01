@@ -1,4 +1,3 @@
-// components/AutoTyping.tsx
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 
