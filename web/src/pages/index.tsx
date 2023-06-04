@@ -37,12 +37,14 @@ export default function Home() {
               </Row>
               <Row className={`${styles.welcome}`}>
                 <h3>
-                  Welcome to the OM Pub! 
+                  Welcome to the OM Pub!
                 </h3>
                 <p>
-                Our goal is to promote and spread knowledge of the key concepts to an open metaverse. 
-                These include equitable access, data ownership, digital rights, and the freedom to transact. 
-                Join us in these experiments in decentralization and sharing a vision of the future that is open to all. 
+                  Our future is digital: but what values will we build into the systems that shape it?
+                  Closed corporate centralized platforms are not the only option.
+                  The path we choose now will determine whether our freedoms are protected or eroded.
+                  It's time to opt for values that support human rights and digital sovereignty.
+                  These include equitable access, data ownership, global digital rights, and the freedom to transact.
                 </p>
               </Row>
               <Row className={`${styles.equitable}`}>
