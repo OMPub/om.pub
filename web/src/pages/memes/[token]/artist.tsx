@@ -1141,9 +1141,8 @@ What's coming for Card 107? A generative piece? An interactive NFT? We find out 
       tokenId: 108,
       images: [
         "/artist-108/work-1.jpeg",
-        "/artist-108/work-2.png",
-        "/artist-108/work-3.png",
-        "/artist-108/work-4.png"
+        "/artist-108/work-2.jpeg",
+        "/artist-108/work-3.jpeg",
       ],
       poster: "/artist-108/poster.png",
       name: "Donglu Yu",
