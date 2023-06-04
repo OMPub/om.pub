@@ -115,6 +115,8 @@ export default function Memes() {
             <ul>
               <li>Season 3</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/108/artist">Meme Artist 108 - Donglu Yu</a></li>
+                <li>Artist Preview: <a href="/memes/107/artist">Meme Artist 107 - yungwknd</a></li>
                 <li>Artist Preview: <a href="/memes/106/artist">Meme Artist 106 - ICKI / noCreative</a></li>
                 <li>Artist Preview: <a href="/memes/105/artist">Meme Artist 105 - José Ramos</a></li>
                 <li>Artist Preview: <a href="/memes/104/artist">Meme Artist 104 - Timpers</a></li>
