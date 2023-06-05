@@ -1096,6 +1096,91 @@ With noCreative's signature 3D work and Icki's subversive commentary, their coll
           target: "_blank"
         }
       ]
+    },
+    {
+      tokenId: 107,
+      images: [
+        "/artist-107/work-1.png",
+        "/artist-107/work-2.png",
+        "/artist-107/work-3.png",
+      ],
+      poster: "/artist-107/poster.png",
+      name: "yungwknd",
+      info:
+        `
+The artist for Meme Card 107 is yungwknd: a Seattle-based generative artist. 
+He has made a significant impact on the web3 NFT space since his arrival in March 2021. 
+Traversing the spectrum from abstract on-chain art to realistic drawings made with code, his work embodies the intersection of art and technology. 
+The artist's deft application of smart contracts has birthed a new dimension of interactive art experiences, underscoring the transformative potential of blockchain technology.
+
+His first foray into the world of NFTs was inspired by @purphat at ArtBlocks. 
+Confronted with a long artist application queue, yungwknd embarked on a self-taught journey, crafting an ArtBlocks clone contract to debut his inaugural project, "Carbon Raindrops". 
+This pivotal moment sparked a prolific journey of exploration and creation, birthing a diverse portfolio of generative projects and one-of-a-kind art pieces.
+
+What's coming for Card 107? A generative piece? An interactive NFT? We find out on June 5th, 2023!
+`,
+      links: [
+        {
+          name: "yungwknd's Twitter",
+          url: "https://twitter.com/yungwknd",
+          target: "_blank"
+        },
+        {
+          name: "yungwknd's Website",
+          url: "https://www.yungwknd.xyz/",
+          target: "_blank"
+        },
+        {
+          name: "yungwknd's Website",
+          url: "https://www.yungwknd.xyz/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 108,
+      images: [
+        "/artist-108/work-1.jpeg",
+        "/artist-108/work-2.jpeg",
+        "/artist-108/work-3.jpeg",
+      ],
+      poster: "/artist-108/poster.png",
+      name: "Donglu Yu",
+      info:
+`
+Donglu Yu, an acclaimed artist and dreamer, is known for her striking contributions to the world of concept art, illustration, and visual development. 
+Yu's work has gained international recognition, and her art has even been sold on prestigious platforms like Sotheby's.
+
+Yu is currently a senior concept artist at Ubisoft Montreal, where she has made a significant impact on various successful video game franchises. 
+She is most renowned for her work on the Assassin's Creed series. 
+Beyond that, her creative influence extends to other popular video games like Deus Ex: Human Revolution and Far Cry 4.
+
+Her artistic journey began at a very young age when she attended various art classes focusing on Chinese watercolor, calligraphy, oil painting, and more. 
+These early experiences have had a profound influence on her work, with elements of these styles being evident in her art today.
+
+Her dedication to the art community goes beyond her own work. 
+Yu is actively involved in writing tutorials and providing online mentorship, keen on sharing her knowledge and experience with the digital artist community. 
+She continues to explore new techniques and subjects, showing her commitment to continual learning and advancement on her artistic path.
+
+Card 108 is in her hands... How will she meme it? We find out on June 7th, 2023!
+`,
+      links: [
+        {
+          name: "Donglu's Twitter",
+          url: "https://twitter.com/dongluyu",
+          target: "_blank"
+        },
+        {
+          name: "Donglu's Instagram",
+          url: "http://instagram.com/donglulittlefish",
+          target: "_blank"
+        },
+        {
+          name: "Donglu on Superrare",
+          url: "https://superrare.com/donglu",
+          target: "_blank"
+        }
+      ]
     }
   ]
 }
