@@ -1181,6 +1181,71 @@ Card 108 is in her hands... How will she meme it? We find out on June 7th, 2023!
           target: "_blank"
         }
       ]
+    },
+    {
+      tokenId: 109,
+      images: [
+
+      ],
+      poster: "/artist-109/poster.png",
+      name: "Unknown",
+      info:
+`
+The artist for Card 109? Not announced ahead of time! 
+
+This drop will happen on the anniversary of the genesis Meme Cards, June 9th, 2022.
+
+The Memes turn 1 year old! What a year it's been. 
+
+We'll see the artist and the art on June 9th, 2023!
+`,
+      links: [
+        
+      ]
+    },
+    {
+      tokenId: 110,
+      images: [
+        "/artist-110/work-1.png",
+        "/artist-110/work-2.png",
+        "/artist-110/work-3.png",
+      ],
+      poster: "/artist-110/poster.png",
+      name: "YuYu",
+      info:
+        `
+YuLiang Liu, also known as YuYu or Cyber_Yuyu, is a Berlin-based artist renowned for his thought-provoking and unconventional digital collages. 
+Born in Taiwan, YuYu embarked on his artistic journey after relocating to Europe, where he began exploring his identity as a queer Asian in Western society. 
+His unique artwork bridges disparate styles, media, and eras, leveraging Western cultural history to challenge conventional art definitions, critique elitist and theological attitudes towards art, and offer a modern perspective on beauty.
+
+YuYu's work often takes a critical stance on societal issues. 
+For instance, his exhibition, "GAG", explores the concept of the 'tortured genius' in relation to religion, politics, and the self. 
+Through this exploration, he exposes underlying hierarchies between the artist and society, highlighting the dynamics of dominance and submission in various contexts. 
+The artist's work draws inspiration from underground club and BDSM cultures, reflecting the complex interplay of power dynamics within modern societies.
+        
+In addition to his digital collages, YuYu's exhibitions often feature immersive installations, including elements of video art, soundscapes, and creative lighting setups that transform the exhibition space into a unique experience.
+        
+Prior to his involvement in the crypto space, YuYu's artworks were featured in several publications and exhibited in local and international group exhibitions, including a solo show at SoHo House Berlin.
+Since 2021, YuYu's work has gained international recognition in the world of NFTs, with his artworks being exhibited in major cities around the world, from New York to Paris, from Tokyo to Amsterdam. 
+His artworks have been collected by influential figures such as NorCal, Jacqueline Stripes, and Jean-Michel Paihlon among others.
+        `,
+      links: [
+        {
+          name: "YuYu's Twitter",
+          url: "https://twitter.com/cyber_yuyu",
+          target: "_blank"
+        },
+        {
+          name: "An interview with YuYu",
+          url: "https://www.kaltblut-magazine.com/a-striking-critique-of-modern-societyyuyus-bold-take-on-the-tortured-genius/",
+          target: "_blank"
+        },
+        {
+          name: "YuYu's Editions on OS",
+          url: "https://opensea.io/assets/ethereum/0xa6d2420c814b7594f3c8a0fad0ec1f01454f0f1c/1",
+          target: "_blank"
+        }
+      ]
     }
   ]
 }
