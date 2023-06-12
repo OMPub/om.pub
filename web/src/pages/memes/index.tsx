@@ -117,7 +117,7 @@ export default function Memes() {
               <ul>
                 <li>Artist Preview: <a href="/memes/112/artist">Meme Artist 112 - Nikolina Petolas</a></li>
                 <li>Artist Preview: <a href="/memes/111/artist">Meme Artist 111 - yakob</a></li>
-                <li>Artist Preview: <a href="/memes/110/artist">Meme Artist 110 - YUYU</a></li>
+                <li>Artist Preview: <a href="/memes/110/artist">Meme Artist 110 - YuYu</a></li>
                 <li>Artist Preview: <a href="/memes/109/artist">Meme Artist 109 - Unknown</a></li>
                 <li>Artist Preview: <a href="/memes/108/artist">Meme Artist 108 - Donglu Yu</a></li>
                 <li>Artist Preview: <a href="/memes/107/artist">Meme Artist 107 - yungwknd</a></li>
