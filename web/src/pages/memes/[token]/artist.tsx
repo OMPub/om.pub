@@ -1228,6 +1228,8 @@ In addition to his digital collages, YuYu's exhibitions often feature immersive 
 Prior to his involvement in the crypto space, YuYu's artworks were featured in several publications and exhibited in local and international group exhibitions, including a solo show at SoHo House Berlin.
 Since 2021, YuYu's work has gained international recognition in the world of NFTs, with his artworks being exhibited in major cities around the world, from New York to Paris, from Tokyo to Amsterdam. 
 His artworks have been collected by influential figures such as NorCal, Jacqueline Stripes, and Jean-Michel Paihlon among others.
+
+Card 110 teasers are already online... Watch for the full reveal on June 12th, 2023!
         `,
       links: [
         {
