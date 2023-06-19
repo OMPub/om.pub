@@ -1246,8 +1246,50 @@ Card 110 teasers are already online... Watch for the full reveal on June 12th, 2
           name: "YuYu's Editions on OS",
           url: "https://opensea.io/assets/ethereum/0xa6d2420c814b7594f3c8a0fad0ec1f01454f0f1c/1",
           target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 113,
+      images: [
+        "/artist-113/work-1.jpeg",
+        "/artist-113/work-2.jpeg",
+        "/artist-113/work-3.png",
+      ],
+      poster: "/artist-113/poster.png",
+      name: "Cardelucci",
+      info:
+        `
+Jessica Cardelucci is a self-taught photographer from California who uses her lens to capture intimate moments, often in black and white. 
+Her work has received recognition from prestigious platforms such as the IPA Int'l Photography Awards, Black & White Spider Awards, and Neutral Density Photography Awards, and has been exhibited in numerous venues.
+
+Drawn to the beauty of the natural world, her photographs often feature ocean waves and wild horses, reflecting her deep connection to her surroundings and her advocacy for nature preservation. 
+Her personal style blends simplicity with a vibrant passion, a duality mirrored in her love for both traditional photography and innovative blockchain-based art.
+
+She is noted for her efforts to elevate women in the industry and advocate for artists' ownership of their custom smart contracts.
+
+Cardelucci's work is a testament to her ongoing exploration of the art world, from her use of 19th-century platinum print processes to her experimentation with cyanotypes. 
+All the while, she remains dedicated to her craft and is passionate about sharing her art and the experiences it encapsulates with the world.
+
+We look forward to seeing what she brings in card 113 on June 19th, 2023!
+        `,
+      links: [
+        {
+          name: "Cardelucci's Twitter",
+          url: "http://twitter.com/cardelucci",
+          target: "_blank"
+        },
+        {
+          name: "Cardelucci's Instagram",
+          url: "https://instagram.com/cardelucci",
+          target: "_blank"
+        },
+        {
+          name: "Cardelucci's website",
+          url: "https://cardelucci.com/",
+          target: "_blank"
         }
       ]
     }
   ]
-}
+} 
