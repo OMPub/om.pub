@@ -1250,13 +1250,214 @@ Card 110 teasers are already online... Watch for the full reveal on June 12th, 2
       ]
     },
     {
+      tokenId: 111,
+      images: [
+        "/artist-111/work-1.png",
+        "/artist-111/work-2.png",
+        "/artist-111/work-3.png",
+      ],
+      poster: "/artist-111/poster.png",
+      name: "Yakob",
+      info:
+        `
+Card 111 teasers are already online... Watch for the full reveal on June 14th, 2023!
+        `,
+      links: [
+        {
+          name: "Yakob's Twitter",
+          url: "https://twitter.com/Yakob",
+          target: "_blank"
+        },
+        {
+          name: "Yakob's website",
+          url: "",
+          target: "_blank"
+        },
+        {
+          name: "Yakob's Instagram",
+          url: "",
+          target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 112,
+      images: [
+        "/artist-112/work-1.png",
+        "/artist-112/work-2.png",
+        "/artist-112/work-3.png",
+      ],
+      poster: "/artist-112/poster.png",
+      name: "Nikolina Petolas",
+      info:
+        `
+Card 112 will be here soon... We will see all the details on June 16th, 2023!
+        `,
+      links: [
+        {
+          name: "Nikolina's Twitter",
+          url: "https://twitter.com/",
+          target: "_blank"
+        },
+        {
+          name: "Nikolina's website",
+          url: "",
+          target: "_blank"
+        },
+        {
+          name: "Nikolina's Instagram",
+          url: "",
+          target: "_blank"
+        },
+      ]
+    },
+    {
       tokenId: 113,
       images: [
         "/artist-113/work-1.jpeg",
-        "/artist-113/work-2.jpeg",
-        "/artist-113/work-3.png",
+        "/artist-113/work-2.png",
+        "/artist-113/work-3.jpeg",
       ],
       poster: "/artist-113/poster.png",
+      name: "Laura El",
+      info:
+        `
+Laura Connelly, known in the art world as Laura El, is a digital artist who has made a significant impact in the NFT space. 
+Based in Brooklyn, New York, Laura is the founder of Stellar Villa, a company that specializes in custom wall art. 
+However, her artistic journey has expanded beyond traditional mediums, embracing the world of NFTs finding serious collectors at Sotheby's and SuperRare.
+
+Laura's work is characterized by intricate details, vibrant colors, and a sense of whimsy, often featuring animals and nature. 
+Her transition into the NFT world was a natural progression, as her work is primarily digital. 
+She is known for her ability to capture the personality and essence of the subjects in her artwork. 
+
+In an interview with NFT Culture, Laura shared her thoughts on the NFT space. 
+She expressed her excitement about the potential of NFTs to democratize the art world, allowing artists to retain more control over their work and receive fair compensation. 
+She also highlighted the importance of community in the NFT space, noting that the support and collaboration among artists and collectors have been instrumental in her journey.
+
+Despite the challenges and uncertainties in the rapidly evolving NFT market, Laura remains optimistic and committed to her art. 
+She continues to explore the possibilities of NFTs, creating unique digital artworks that captivate audiences worldwide. Her story is not just about embracing new technologies, but also about staying true to her artistic vision and passion.
+
+She's the artist behind Card 113, which we will see at last on June 21st, 2023!
+        `,
+      links: [
+        {
+          name: "Laura's Twitter",
+          url: "https://twitter.com/iamlaurael",
+          target: "_blank"
+        },
+        {
+          name: "Laura tells her story",
+          url: "https://thestoryexchange.org/laura-connelly-wall-art-by-stellar-villa/",
+          target: "_blank"
+        },
+        {
+          name: "Laura's Instagram",
+          url: "https://www.instagram.com/iamlaurael/",
+          target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 114,
+      images: [
+        "/artist-114/work-1.png",
+        "/artist-114/work-2.png",
+        "/artist-114/work-3.png",
+      ],
+      poster: "/artist-114/poster.png",
+      name: "Camibus",
+      info:
+        `
+Card 114 will be here soon... We will see all the details on June 23rd, 2023!
+        `,
+      links: [
+        {
+          name: "Camibus' Twitter",
+          url: "https://twitter.com/",
+          target: "_blank"
+        },
+        {
+          name: "Camibus' website",
+          url: "",
+          target: "_blank"
+        },
+        {
+          name: "Camibus' Instagram",
+          url: "",
+          target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 115,
+      images: [
+        "/artist-115/work-1.png",
+        "/artist-115/work-2.png",
+        "/artist-115/work-3.png",
+      ],
+      poster: "/artist-115/poster.png",
+      name: "???",
+      info:
+        `
+Card 115 will be here soon... We will see all the details on June 26th, 2023!
+        `,
+      links: [
+        {
+          name: "??? Twitter",
+          url: "https://twitter.com/",
+          target: "_blank"
+        },
+        {
+          name: "??? website",
+          url: "",
+          target: "_blank"
+        },
+        {
+          name: "??? Instagram",
+          url: "",
+          target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 116,
+      images: [
+        "/artist-116/work-1.png",
+        "/artist-116/work-2.png",
+        "/artist-116/work-3.png",
+      ],
+      poster: "/artist-116/poster.png",
+      name: "???",
+      info:
+        `
+Card 116 will be here soon... We will see all the details on June 28th, 2023!
+        `,
+      links: [
+        {
+          name: "???' Twitter",
+          url: "https://twitter.com/",
+          target: "_blank"
+        },
+        {
+          name: "???' website",
+          url: "",
+          target: "_blank"
+        },
+        {
+          name: "???' Instagram",
+          url: "",
+          target: "_blank"
+        },
+      ]
+    },
+    {
+      tokenId: 117,
+      images: [
+        "/artist-117/work-1.jpeg",
+        "/artist-117/work-2.jpeg",
+        "/artist-117/work-3.png",
+      ],
+      poster: "/artist-117/poster.png",
       name: "Cardelucci",
       info:
         `
@@ -1271,7 +1472,7 @@ She is noted for her efforts to elevate women in the industry and advocate for a
 Cardelucci's work is a testament to her ongoing exploration of the art world, from her use of 19th-century platinum print processes to her experimentation with cyanotypes. 
 All the while, she remains dedicated to her craft and is passionate about sharing her art and the experiences it encapsulates with the world.
 
-We look forward to seeing what she brings in card 113 on June 19th, 2023!
+We look forward to seeing what contrasts she highlights in card 117 on June 29th, 2023!
         `,
       links: [
         {

@@ -1,0 +1,63 @@
+{
+  "cells": [
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "0",
+      "value": "import Head from \"next/head\";\nimport HeaderPlaceholder from \"@/components/header/HeaderPlaceholder\";\nimport dynamic from \"next/dynamic\";\nimport { Container, Row, Col } from 'react-bootstrap';\n",
+      "kind": 2,
+      "metadata": {
+        "id": 0,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "1",
+      "value": "\nconst Header = dynamic(() => import(\"../../components/header/Header\"), {\n  ssr: false,\n  loading: () => <HeaderPlaceholder />,\n});\n",
+      "kind": 2,
+      "metadata": {
+        "id": 1,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "2",
+      "value": "\n\nexport default function Memes() {\n  return (\n    <>\n      <Head>\n        <title>About | The OM Pub</title>\n        <meta\n          property=\"og:url\"\n          content={`https://om.pub/faq`}\n        />\n        <meta\n          property=\"og:title\"\n          content={`About | The OM Pub`}\n        />\n        <meta property=\"og:image\" content={`/om-pub-logo.webp`} />\n      </Head>\n      <Header />\n      <Container>\n        <Row>\n          <Col>\n            <h2>The Memes by 6529</h2>\n            <h3>A Digital Revolution Unfurls</h3>\n          </Col>\n        </Row>\n        <Row>\n          <Col>\n            <h4>Another NFT collection?</h4>\n            <p>\n              Hardly.\n              \"The Memes by 6529\" is a digital insurgency, an array of meme-themed NFTs on the Ethereum blockchain, devised by the world's most prominent collectooor Punk6529, and the multi-disciplinary artist, 6529er.\n              The collection is not just about immortalizing memes in the digital realm; it's about leading the charge in advocating for a decentralized open metaverse (OM).\n            </p>\n            <p>\n              The collection is an assembly of ERC-1155 tokens minted on a standalone Manifold contract, with the art preserved in the globally-distrubted vault of Arweave.\n              The collection comprises collaborations with numerous esteemed artists, photographers, and 3D designers, highlighting diversity and versatility of creative expression.\n            </p>\n            <p>\n              But \"The Memes by 6529\" is more than an art project...\n              It's a movement.\n              To build up a self-sovereign, decentralized metaverse community, the collection is designed for eventual mass adoption. It's ongoing seasons, edition sizes, and price make it accessible, to ensure many people can pick up a piece as one way to aid in spreading awareness and ownership of the open metaverse ideals.\n            </p>\n          </Col>\n        </Row>\n        <Row>\n          <Col>\n            <h4>Does \"art\" help create an Open Metaverse?</h4>\n            <p>\n              \"The Memes by 6529\" is not just a collection; it's a call to action.\n              The mission? Amplify the urgency for a decentralized open metaverse - the OM.\n              By immortalizing memes on the Ethereum blockchain, Punk6529 and team are offering a shared cultural experience as broad and diverse as the internet itself.\n              This mirrors the vision for the open metaverse, a digital space that is owned and operated by the people who inhabit it.\n            </p>\n            <p>\n              The very nature of the collection – its decentralization, its accessibility, and its community focus – reflects the principles of the open metaverse.\n              In a world where digital power has consolidated to major corporations, \"The Memes by 6529\" offers a vision of a different future: one where power is in the hands of the many, not the few.\n            </p>\n          </Col>\n        </Row>\n        <Row>\n          <Col>\n            <h4>Join the Uprising: Embrace the Open Metaverse</h4>\n            <p>\n              Are you ready to be a part of building the future of the open metaverse?\n              Eager for a movement that puts power back into the hands of individuals?\n              There are many ways you can get involved.\n            </p>\n            <ol>\n              <li>\n                First, you can start by learning more about the open metaverse.\n                Explore the education Twitter threads of [Punk6529](https://twitter.com/punk6529), and read about the impact of memetic ideas at [seize.io](https://seize.io/about/faq).\n              </li>\n              <li>\n                The artwork of The Memes is always CC0 - free to use, remix, and share.\n                When it's minted, it's released into the public domain.\n                That means you can use it for your own projects, and even mint your own NFTs with the art or derivative works.\n                Permission granted: you don't need to ask.\n",
+      "kind": 2,
+      "metadata": {
+        "id": 2,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "3",
+      "value": "              </li>\n              <li>\n                Owning a piece from \"The Memes by 6529\" collection is another option.\n                Not only will you be supporting the artists and the vision, but you'll also be contributing to the spread of awareness about the open metaverse.\n                The collection was intentionally designed to be large and affordable, ensuring as many people as possible can participate in this unique cultural moment.\n              </li>\n              <li>\n                Keep an eye out for collaborations with other artists and opportunities to contribute your own work to the growing body of rememes, that remix and share the core ideas.\n                Remember, the open metaverse is a community-centric project, and every voice matters.\n                Let yours be heard.\n              </li>\n            </ol>\n            <p>\n              Join us as we pave the way towards a more open, decentralized future. The revolution is here, and it beckons.\n            </p>\n          </Col>\n        </Row>\n        <Row>\n          <Col>\n            <h4>The Prememes</h4>\n            <p>\n              Before new meme cards are minted, the artists are announced on Twitter.\n              In that magical time between the announcement and the minting, we can only guess what artist wonders the artist's vision will bring.\n              That guess is a PREMEME: an introduction to the artist's style, paired with notes on their background and some highlights of their previous work.\n            </p>\n            <p>\n              The prememe is a way to get to know the artist, and to get share our excitement about the upcoming mint.\n            </p>\n            <ul>\n              <li>Season 3</li>\n              <ul>\n                <li>Artist Preview: <a href=\"/memes/115/artist\">Meme Artist 115 - Camibus</a></li>\n                <li>Artist Preview: <a href=\"/memes/114/artist\">Meme Artist 114 - Laura El</a></li>\n                <li>Artist Preview: <a href=\"/memes/113/artist\">Meme Artist 113 - CARDELUCCI</a></li>\n                <li>Artist Preview: <a href=\"/memes/112/artist\">Meme Artist 112 - Nikolina Petolas</a></li>\n                <li>Artist Preview: <a href=\"/memes/111/artist\">Meme Artist 111 - yakob</a></li>\n                <li>Artist Preview: <a href=\"/memes/110/artist\">Meme Artist 110 - YuYu</a></li>\n                <li>Artist Preview: <a href=\"/memes/109/artist\">Meme Artist 109 - Unknown</a></li>\n                <li>Artist Preview: <a href=\"/memes/108/artist\">Meme Artist 108 - Donglu Yu</a></li>\n                <li>Artist Preview: <a href=\"/memes/107/artist\">Meme Artist 107 - yungwknd</a></li>\n                <li>Artist Preview: <a href=\"/memes/106/artist\">Meme Artist 106 - ICKI / noCreative</a></li>\n                <li>Artist Preview: <a href=\"/memes/105/artist\">Meme Artist 105 - José Ramos</a></li>\n                <li>Artist Preview: <a href=\"/memes/104/artist\">Meme Artist 104 - Timpers</a></li>\n                <li>Artist Preview: <a href=\"/memes/103/artist\">Meme Artist 103 - Jack Butcher</a></li>\n                <li>Artist Preview: <a href=\"/memes/102/artist\">Meme Artist 102 - GxngYxng</a></li>\n                <li>Artist Preview: <a href=\"/memes/101/artist\">Meme Artist 101 - LordJamieVShiLL</a></li>\n                <li>Artist Preview: <a href=\"/memes/100/artist\">Meme Artist 100 - 6529er</a></li>\n                <li>Artist Preview: <a href=\"/memes/99/artist\">Meme Artist 99 - Mike Hirshon</a></li>\n                <li>Artist Preview: <a href=\"/memes/98/artist\">Meme Artist 98 - Degen Alfie</a></li>\n                <li>Artist Preview: <a href=\"/memes/97/artist\">Meme Artist 97 - Matt Doogue</a></li>\n                <li>Artist Preview: <a href=\"/memes/96/artist\">Meme Artist 96 - Billy Dinh</a></li>\n                <li>Artist Preview: <a href=\"/memes/95/artist\">Meme Artist 95 - Andreas Preis</a></li>\n                <li>Artist Preview: <a href=\"/memes/94/artist\">Meme Artist 94 - Jeff Soto</a></li>\n                <li>Artist Preview: <a href=\"/memes/93/artist\">Meme Artist 93 - mbsjq</a></li>\n",
+      "kind": 2,
+      "metadata": {
+        "id": 3,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "4",
+      "value": "                <li>Artist Preview: <a href=\"/memes/92/artist\">Meme Artist 92 - Angela Nikolau</a></li>\n                <li>Artist Preview: <a href=\"/memes/90/artist\">Meme Artist 90 - Meg Thorpe</a></li>\n                <li>Artist Preview: <a href=\"/memes/89/artist\">Meme Artist 89 - CyptoClimates: Made by Megan</a></li>\n                <li>Artist Preview: <a href=\"/memes/88/artist\">Meme Artist 88 - Ryan Koopmans</a></li>\n                <li>Artist Preview: <a href=\"/memes/87/artist\">Meme Artist 87 - DeeKay Motion</a></li>\n              </ul>\n              <li>Season 2</li>\n              <ul>\n                <li>Artist Preview: <a href=\"/memes/86/artist\">Meme Artist 86 - Pop Wonder</a></li>\n                <li>Artist Preview: <a href=\"/memes/85/artist\">Meme Artist 85 - 6529er</a></li>\n                <li>Artist Preview: <a href=\"/memes/83/artist\">Meme Artist 83 - Luna Leonis</a></li>\n              </ul>\n            </ul>\n          </Col>\n        </Row>\n      </Container>\n    </>\n  )\n}\n",
+      "kind": 2,
+      "metadata": {
+        "id": 4,
+        "type": "originalCode"
+      }
+    }
+  ],
+  "metadata": {
+    "defaultDir": ".boost",
+    "sourceFile": "./web/src/pages/memes/index.tsx"
+  }
+}

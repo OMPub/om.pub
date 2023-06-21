@@ -1,0 +1,19 @@
+{
+  "cells": [
+    {
+      "outputs": [],
+      "languageId": "json",
+      "id": "0",
+      "value": "{\n  \"name\": \"om.pub\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev -p 3001\",\n    \"build\": \"next build\",\n    \"start\": \"next start -p 3001\",\n    \"lint\": \"next lint\"\n  },\n  \"dependencies\": {\n    \"@next/font\": \"13.1.5\",\n    \"@types/node\": \"18.11.18\",\n    \"@types/react\": \"18.0.27\",\n    \"@types/react-dom\": \"18.0.10\",\n    \"bootstrap\": \"^5.2.3\",\n    \"eslint\": \"8.32.0\",\n    \"eslint-config-next\": \"13.1.5\",\n    \"ethers\": \"^5.7.2\",\n    \"next\": \"13.1.5\",\n    \"react\": \"18.2.0\",\n    \"react-bootstrap\": \"^2.7.0\",\n    \"react-device-detect\": \"^2.2.3\",\n    \"react-dom\": \"18.2.0\",\n    \"react-markdown\": \"8.0.6\",\n    \"react-scroll-parallax\": \"^3.4.2\",\n    \"sass\": \"^1.57.1\",\n    \"typed.js\": \"^2.0.16\",\n    \"typescript\": \"4.9.4\",\n    \"wagmi\": \"^0.12.1\"\n  }\n}\n",
+      "kind": 2,
+      "metadata": {
+        "id": 0,
+        "type": "originalCode"
+      }
+    }
+  ],
+  "metadata": {
+    "defaultDir": ".boost",
+    "sourceFile": "./package.json"
+  }
+}
