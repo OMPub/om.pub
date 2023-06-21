@@ -1,0 +1,41 @@
+{
+  "summary": {
+    "summaryUrl": "/Users/brookr/projects/om.pub/.boost/om.pub.summary.boost-notebook",
+    "filesToAnalyze": 56567,
+    "filesAnalyzed": 0,
+    "issues": [
+      "No issues found"
+    ]
+  },
+  "sectionSummary": [
+    {
+      "analysisType": "explainCode",
+      "status": "completed",
+      "completed": 0,
+      "error": 0,
+      "total": 0
+    },
+    {
+      "analysisType": "archblueprintCode",
+      "status": "completed",
+      "completed": 0,
+      "error": 0,
+      "total": 0
+    },
+    {
+      "analysisType": "complianceCode",
+      "status": "completed",
+      "completed": 0,
+      "error": 0,
+      "total": 0
+    },
+    {
+      "analysisType": "bugAnalysis",
+      "status": "completed",
+      "completed": 0,
+      "error": 0,
+      "total": 0
+    }
+  ],
+  "analysis": []
+}

@@ -115,9 +115,12 @@ export default function Memes() {
             <ul>
               <li>Season 3</li>
               <ul>
-                <li>Artist Preview: <a href="/memes/115/artist">Meme Artist 115 - Camibus</a></li>
-                <li>Artist Preview: <a href="/memes/114/artist">Meme Artist 114 - Laura El</a></li>
-                <li>Artist Preview: <a href="/memes/113/artist">Meme Artist 113 - CARDELUCCI</a></li>
+                <li>Artist Preview: <a href="/memes/118/artist">Meme Artist 118 - ???</a></li>
+                <li>Artist Preview: <a href="/memes/117/artist">Meme Artist 117 - CARDELUCCI</a></li>
+                <li>Artist Preview: <a href="/memes/116/artist">Meme Artist 116 - ???</a></li>
+                <li>Artist Preview: <a href="/memes/115/artist">Meme Artist 115 - ???</a></li>
+                <li>Artist Preview: <a href="/memes/114/artist">Meme Artist 114 - Camibus</a></li>
+                <li>Artist Preview: <a href="/memes/113/artist">Meme Artist 113 - Laura El</a></li>
                 <li>Artist Preview: <a href="/memes/112/artist">Meme Artist 112 - Nikolina Petolas</a></li>
                 <li>Artist Preview: <a href="/memes/111/artist">Meme Artist 111 - yakob</a></li>
                 <li>Artist Preview: <a href="/memes/110/artist">Meme Artist 110 - YuYu</a></li>

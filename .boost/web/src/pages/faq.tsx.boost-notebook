@@ -1,0 +1,41 @@
+{
+  "cells": [
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "0",
+      "value": "import Head from \"next/head\";\nimport styles from \"@/styles/Home.module.scss\";\nimport { Col, Container, Row } from \"react-bootstrap\";\n",
+      "kind": 2,
+      "metadata": {
+        "id": 0,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "1",
+      "value": "import dynamic from \"next/dynamic\";\nimport HeaderPlaceholder from \"@/components/header/HeaderPlaceholder\";\n\nconst Header = dynamic(() => import(\"../components/header/Header\"), {\n  ssr: false,\n  loading: () => <HeaderPlaceholder />,\n});\n",
+      "kind": 2,
+      "metadata": {
+        "id": 1,
+        "type": "originalCode"
+      }
+    },
+    {
+      "outputs": [],
+      "languageId": "unknown",
+      "id": "2",
+      "value": "\nexport default function FAQ() {\n  return (\n    <>\n      <Head>\n        <title>About | The OM Pub</title>\n        <meta\n          property=\"og:url\"\n          content={`https://om.pub/faq`}\n        />\n        <meta\n          property=\"og:title\"\n          content={`About | The OM Pub`}\n        />\n        <meta property=\"og:image\" content={`/om-pub-logo.webp`} />\n      </Head>\n      <Header />\n      <Container className={`${styles.main}`}>\n        <Row className=\"pb-5\">\n          <Col\n            className=\"font-larger\">\n            <main>\n              <h1>\n                Questions?\n              </h1>\n              <div className=\"text-subheading pt-3\">The Open Metaverse: Building a sufficiently decentralized future </div>\n              <h3>What can I do here?</h3>\n              <p className=\"question-answer\">Not much yet, hang tight.</p>\n              <h3>Wen useful?</h3>\n              <p className=\"question-answer\">Soon.</p>\n              <h3>Where'd this page come from?</h3>\n              <p className=\"question-answer\">Layout and structure is heavily borrowed from the GDRC project, a CC0 codebase.</p>\n            </main>\n          </Col>\n        </Row>\n      </Container>\n    </>\n  );\n}\n",
+      "kind": 2,
+      "metadata": {
+        "id": 2,
+        "type": "originalCode"
+      }
+    }
+  ],
+  "metadata": {
+    "defaultDir": ".boost",
+    "sourceFile": "./web/src/pages/faq.tsx"
+  }
+}
