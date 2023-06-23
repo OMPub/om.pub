@@ -1360,30 +1360,50 @@ She's the artist behind Card 113, which we will see at last on June 21st, 2023!
     {
       tokenId: 114,
       images: [
-        "/artist-114/work-1.png",
-        "/artist-114/work-2.png",
-        "/artist-114/work-3.png",
+        "/artist-114/work-1.jpeg",
+        "/artist-114/work-2.jpg",
+        "/artist-114/work-3.gif",
       ],
       poster: "/artist-114/poster.png",
       name: "Camibus",
       info:
         `
-Card 114 will be here soon... We will see all the details on June 23rd, 2023!
+Camibus's art is deeply symbolic, and she has provided an in-depth explanation of the approach she takes to her work.
+
+Camibus often depicts their characters in the nude, not to sexualize them, but to show them in their most vulnerable and true state. 
+She states that clothing too-often acts as a mask: creating a construct that people identify with. 
+By removing clothing, Camibus aims to challenge this construct and get to the essence of what it means to be human.
+        
+Camibus's stylistic choices seek to achieve a balance between realism and surrealism. 
+Her characters, often floating on legs that couldn't support their weight, are reminiscent of Dali's impossible elephants or the way ballerinas achieve a look of floating effortlessly through the air. 
+This balance represents the effort it takes to maintain the appearance of effortlessness, which is a concept Camibus has centered her art around. 
+The characters' black legs, inspired by the dark extremities of Siamese cats and high stockings, and their faces, similar to a Disney character but painted in a realistic manner, further emphasize this juxtaposition between reality and illusion.
+        
+The world depicted in Camibus's artwork is often empty and barren, reflecting the artist's thoughts on our overcrowded, chaotic world. 
+This emptiness is also a commentary on climate change, highlighting the predicting that global warming will turn parts of Europe into a desert by the end of the century. 
+Despite the barren landscapes, Camibus often paints lavish sunsets, showing that we can find beauty even in negative things like pollution.
+        
+Camibus encourages viewers to find their own meaning in their art. 
+Rather than trying to convey a specific message, she aims to evoke a feeling. 
+Camibus wants to showcase the elegance, fragility, and strength of the female body, and to challenge the perception of nudity being sexual. 
+They want viewers to see the human body from a different perspective, acknowledging our natural state, with nothing to hide behind.
+
+What will be laid bare in Meme Card 114? We will see all the details revealed on June 23rd, 2023!
         `,
       links: [
         {
           name: "Camibus' Twitter",
-          url: "https://twitter.com/",
+          url: "https://twitter.com/camibus_",
           target: "_blank"
         },
         {
-          name: "Camibus' website",
-          url: "",
+          name: "Camibus' OM Gallery",
+          url: "https://oncyber.io/camibus",
           target: "_blank"
         },
         {
           name: "Camibus' Instagram",
-          url: "",
+          url: "https://www.instagram.com/camibus.eth/",
           target: "_blank"
         },
       ]
