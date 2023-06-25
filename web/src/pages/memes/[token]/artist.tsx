@@ -1416,25 +1416,25 @@ What will be laid bare in Meme Card 114? We will see all the details revealed on
         "/artist-115/work-3.png",
       ],
       poster: "/artist-115/poster.png",
-      name: "???",
+      name: "Giovanni Motta",
       info:
         `
 Card 115 will be here soon... We will see all the details on June 26th, 2023!
         `,
       links: [
         {
-          name: "??? Twitter",
-          url: "https://twitter.com/",
+          name: "Giovanni's Twitter",
+          url: "https://twitter.com/mottagio1971",
           target: "_blank"
         },
         {
-          name: "??? website",
-          url: "",
+          name: "Giovanni's website",
+          url: "http://www.giovannimotta.it",
           target: "_blank"
         },
         {
-          name: "??? Instagram",
-          url: "",
+          name: "Giovanni's Instagram",
+          url: "https://instagram.com/mottagiovanni",
           target: "_blank"
         },
       ]
@@ -1447,25 +1447,25 @@ Card 115 will be here soon... We will see all the details on June 26th, 2023!
         "/artist-116/work-3.png",
       ],
       poster: "/artist-116/poster.png",
-      name: "???",
+      name: "Sadboi",
       info:
         `
 Card 116 will be here soon... We will see all the details on June 28th, 2023!
         `,
       links: [
         {
-          name: "???' Twitter",
+          name: "Sadboi's Twitter",
           url: "https://twitter.com/",
           target: "_blank"
         },
         {
-          name: "???' website",
-          url: "",
+          name: "Sadboi's website",
+          url: "http://www.hedstrom-art.com/",
           target: "_blank"
         },
         {
-          name: "???' Instagram",
-          url: "",
+          name: "Sadboi's Instagram",
+          url: "https://www.instagram.com/sadboi_illustration/",
           target: "_blank"
         },
       ]
@@ -1508,6 +1508,37 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
         {
           name: "Cardelucci's website",
           url: "https://cardelucci.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 118,
+      images: [
+        "/artist-118/work-1.jpeg",
+        "/artist-118/work-2.jpeg",
+        "/artist-118/work-3.png",
+      ],
+      poster: "/artist-118/poster.png",
+      name: "Botto",
+      info:
+        `
+What does the hive-mind have in store for us? We find out with the SZN3 Capstone, in card 118 on June 30th, 2023!
+        `,
+      links: [
+        {
+          name: "Botto's Twitter",
+          url: "https://twitter.com/bottoproject",
+          target: "_blank"
+        },
+        {
+          name: "Botto's Instagram",
+          url: "https://instagram.com/bottoproject",
+          target: "_blank"
+        },
+        {
+          name: "Botto's website",
+          url: "https://botto.com",
           target: "_blank"
         }
       ]
