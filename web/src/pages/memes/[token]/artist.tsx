@@ -622,15 +622,15 @@ With Andreas Preis's kaleidoscope of colors and intricate illustrations, The Mem
       "info":
         `
 Meet Billy Dinh, the avant-garde lens virtuoso who's been reshaping the face of modern photography. 
-Known for his ingenious integration of everyday life and surrealism, Dinh’s work seizes the ephemeral, turning fleeting moments into timeless art.
+Known for his ingenious integration of everyday life and surrealism, Dinh's work seizes the ephemeral, turning fleeting moments into timeless art.
 
 Born in the vibrant streets of Houston, Texas, Dinh's artistic journey is as colorful as his portfolio. 
 His knack for capturing the essence of his subjects, whether it's the raw energy of urban spaces or the nuanced play of light on a tranquil landscape, is truly distinctive.
 
 In the world of memes, where ideas spread and evolve at a breakneck pace, Billy brings his unique touch of authenticity and creativity. 
-Dinh’s genius lies in his ability to see the extraordinary in the ordinary, transforming the mundane into visuals that speak volumes.
+Dinh's genius lies in his ability to see the extraordinary in the ordinary, transforming the mundane into visuals that speak volumes.
 
-Billy Dinh doesn’t just take photos—he crafts stories, immortalizing moments with a click, challenging perceptions, and pushing the boundaries of photographic storytelling.
+Billy Dinh doesn't just take photos—he crafts stories, immortalizing moments with a click, challenging perceptions, and pushing the boundaries of photographic storytelling.
 
 So now we embark on the memetic journey with Billy Dinh, with excitement to see his signature style develop in this new frame of reference!
 `,
@@ -1411,7 +1411,7 @@ What will be laid bare in Meme Card 114? We will see all the details revealed on
     {
       tokenId: 115,
       images: [
-        "/artist-115/work-1.png",
+        "/artist-115/work-1.webp",
         "/artist-115/work-2.png",
         "/artist-115/work-3.png",
       ],
@@ -1419,7 +1419,30 @@ What will be laid bare in Meme Card 114? We will see all the details revealed on
       name: "Giovanni Motta",
       info:
         `
-Card 115 will be here soon... We will see all the details on June 26th, 2023!
+Giovanni Motta, born in 1971, is an NFT and crypto artist known for his character Jonny Boy. 
+Through his art, Motta aims to rediscover his inner child by creating works that are an emotional bridge to the soul. 
+His artworks stem from an introspective approach, where he engages with his most intimate self, reflecting his emotional relationship with the world and everyday objects. 
+Motta's creative process involves a unique meditative technique that allows him to travel back in time and relive memories. 
+During meditation, he immerses himself in past scenes, experiencing smells, sounds, people, and atmospheres. 
+Once he feels that he has gathered enough information, he takes notes and transforms them into artworks. 
+This process is deeply nostalgic for him, as it focuses on re-experiencing emotional memories.
+
+Giovanni Motta's artwork is influenced by the aesthetics of cartoons. 
+He is passionate about cartoons because they played a vital role in his childhood, which he describes as a challenging time. 
+His family didn't believe in his abilities, which led to a lot of frustration as a creative child. 
+The world of cartoons provided him solace and inspiration.
+
+As an artist, Motta works with both physical and NFT forms of art. 
+He doesn't differentiate between the two in terms of value; for him, the creative process is always the same and begins with meditation. 
+Whether it's a painting, 3D printing, or a digital piece, he decides what to create on a case-by-case basis without letting the medium dictate the value of his work.
+
+In early 2020, after taking a leap of faith to go all-in as a professional artist, Motta came across an article about NFTs. 
+Despite the scarce information available at that time, he reached out to Hackatao (also an artist in The Memes), who were some of the most famous NFT artists in Italy at the time. 
+They explained the world of crypto to him, how to open a MetaMask, about marketplaces, and how to apply for SuperRare. 
+They onboarded him, sharing the values of the crypto community, and welcoming a fellow artist. 
+This led to Motta supporting other artists as well.
+
+Will Jonny Boy make an appearance in Card 115?... We will find out on June 26th, 2023!
         `,
       links: [
         {
