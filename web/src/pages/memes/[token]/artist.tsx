@@ -1465,15 +1465,35 @@ Will Jonny Boy make an appearance in Card 115?... We will find out on June 26th,
     {
       tokenId: 116,
       images: [
-        "/artist-116/work-1.png",
-        "/artist-116/work-2.png",
+        "/artist-116/work-1.jpeg",
+        "/artist-116/work-2.jpeg",
         "/artist-116/work-3.png",
+        "/artist-116/work-4.jpeg",
       ],
       poster: "/artist-116/poster.png",
       name: "Sadboi",
       info:
         `
-Card 116 will be here soon... We will see all the details on June 28th, 2023!
+Joel Hedstrom, professionally known as sadboi, is an illustrator and artist based in Minneapolis, Minnesota. 
+He received a Bachelor of Fine Arts (BFA) from the College of Visual Arts in 2010, and since then, he has been focusing on both personal and freelance art projects.
+
+Sadboi specializes in digitally hand-drawn art. 
+His work is characterized by a carefully-developed style that he has honed over the last decade. 
+His art pieces often explore themes of duality, such as good versus evil, life and death, and memetic myths and iconography.
+The digital medium allows him to experiment with forms and textures, creating textured, layered pieces that emotionally engage the viewer.
+
+Sadboi's art delves into the contrasts and juxtapositions present in life and mythology. 
+His work seeks to explore the dual nature of existence through various thematic elements. 
+By incorporating aspects of mythic memes and iconography, sadboi adds depth to his compositions, bringing forth ancient stories and symbolism into the modern age. 
+His use of contrast not only reflects in the themes but is also evident in his art style, where the interplay between light and dark, soft and hard, and abstract and concrete are common.
+
+After completing his education, sadboi ventured into freelance projects and has worked with notable clients, including Wizards of the Coast and Warner Music Group. He has produced art for editorial, corporate, and publishing sectors, showcasing his versatility as an artist. 
+His commitment to his personal vision, along with his ability to adapt to various professional requirements, has made him a sought-after artist in different industries.
+
+Will Card 116 reflect sadboi's exploration of the complexities of life and the human condition in memetic style? 
+Surely The Memes community will be drawn-in to contemplate the duality within themselves and the world around them, bridging the gap between ancient memes (aka myths) and contemporary experiences.
+
+We will know for sure on June 28th, 2023!
         `,
       links: [
         {
