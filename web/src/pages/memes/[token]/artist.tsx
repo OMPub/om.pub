@@ -1558,8 +1558,8 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
     {
       tokenId: 118,
       images: [
-        "/artist-118/work-1.jpeg",
-        "/artist-118/work-2.jpeg",
+        "/artist-118/work-1.png",
+        "/artist-118/work-2.png",
         "/artist-118/work-3.png",
       ],
       poster: "/artist-118/poster.png",
