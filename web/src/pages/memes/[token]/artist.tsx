@@ -1558,8 +1558,8 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
     {
       tokenId: 118,
       images: [
-        "/artist-118/work-1.jpeg",
-        "/artist-118/work-2.jpeg",
+        "/artist-118/work-1.png",
+        "/artist-118/work-2.png",
         "/artist-118/work-3.png",
       ],
       poster: "/artist-118/poster.png",
@@ -1582,6 +1582,7 @@ Concurrently, Botto continues to produce a new round of art fragments to maintai
 
 Botto's art is not just a product of an algorithm, but rather an amalgamation of collective creativity, guided by the community's ever-evolving aesthetic preferences. 
 This dynamic interaction between the algorithm and the community ensures that Botto's art is fluid and responsive, making it a truly groundbreaking project in the realm of digital art.
+
 What does the hive-mind have in store for us? We find out with the SZN3 Capstone, in card 118 on June 30th, 2023!
         `,
       links: [
