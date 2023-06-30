@@ -1566,6 +1566,23 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
       name: "Botto",
       info:
         `
+Botto is an avant-garde artist, employing generative algorithms to create art. 
+What sets Botto apart from traditional artists is that it operates as a decentralized and autonomous artist, governed by a community.
+
+Botto's artistic process is deeply rooted in the involvement of its community. 
+It creates art on a recurring basis, presenting them to the community as a 'round'. 
+These art pieces are referred to as 'fragments'. 
+The community of DAO members then votes on these art fragments, with the votes serving as a representation of what participants find aesthetically pleasing. 
+The collective feedback of the votes is taken into account by Botto's generative algorithm, which guides the direction in which Botto creates its next round of art pieces. 
+This iterative process ensures that Botto's art is constantly evolving based on the preferences and input of the community, making it a truly democratic and participatory form of art creation.
+        
+Furthermore, Botto actively engages with the community by putting one art fragment up for auction on SuperRare each week. 
+The proceeds from the auction are returned to the community. 
+Concurrently, Botto continues to produce a new round of art fragments to maintain the creative cycle.
+
+Botto's art is not just a product of an algorithm, but rather an amalgamation of collective creativity, guided by the community's ever-evolving aesthetic preferences. 
+This dynamic interaction between the algorithm and the community ensures that Botto's art is fluid and responsive, making it a truly groundbreaking project in the realm of digital art.
+
 What does the hive-mind have in store for us? We find out with the SZN3 Capstone, in card 118 on June 30th, 2023!
         `,
       links: [
