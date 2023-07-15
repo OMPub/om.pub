@@ -113,6 +113,10 @@ export default function Memes() {
               The prememe is a way to get to know the artist, and to get share our excitement about the upcoming mint.
             </p>
             <ul>
+              <li>Season 4</li>
+              <ul>
+                <li>Artist Preview: <a href="/memes/119/artist">Meme Artist 119 - Idil Dursun</a></li>
+              </ul>
               <li>Season 3</li>
               <ul>
                 <li>Artist Preview: <a href="/memes/118/artist">Meme Artist 118 - Botto</a></li>
