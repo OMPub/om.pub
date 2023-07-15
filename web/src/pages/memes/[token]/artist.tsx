@@ -1602,6 +1602,55 @@ What does the hive-mind have in store for us? We find out with the SZN3 Capstone
           target: "_blank"
         }
       ]
+    },
+    {
+      tokenId: 119,
+      images: [
+        "/artist-119/work-1.jpeg",
+        "/artist-119/work-2.jpeg",
+        "/artist-119/work-3.jpeg",
+      ],
+      poster: "/artist-119/poster.png",
+      name: "Idil Dursun",
+      info:
+        `
+Idil Dursun is a digital artist based in Ankara, Turkey, whose work is deeply rooted in the realm of cyberpunk and concept art. 
+Her journey into the world of art began at a young age, with a love for painting that has evolved and grown over time. 
+From landscapes painted with acrylics and oil to charcoal sketches of portraits, her early work was diverse and exploratory. 
+However, it was the world of video games and cyberpunk culture that truly ignited her passion and led her to the path of becoming a concept artist. 
+A significant influence was the game World of Warcraft, which had a profound impact on her decision to pursue this particular art form.
+
+Dursun's work is characterized by her fascination with the concept of 'threshold' or a state of change. 
+This is evident in her piece "One Way Ticket," where she contrasts a densely populated city with a more expansive and epic upper realm, symbolizing a journey to a new and unfamiliar place. 
+Her work often features massive buildings and dystopic sceneries, a testament to her love for cyberpunk culture and concept art.
+        
+Her education in architecture has also played a significant role in shaping her art. 
+It has provided her with the technical knowledge and software skills needed to create her futuristic world concepts. 
+This blend of architectural understanding and artistic vision allows her to create pieces that are not only visually stunning but also deeply layered with meaning.
+                
+Despite her success in NFTs, Dursun remains grounded and continually seeks inspiration from her favorite artists and the art community. 
+She believes in the importance of constantly immersing oneself in new art to expand one's vision. 
+This philosophy, coupled with her passion for video games and cyberpunk culture, continues to fuel her creativity and drive her forward in her artistic journey.
+
+The next stop is the SZN4 opener, in card 119 on July 17th, 2023!
+        `,
+      links: [
+        {
+          name: "Idil's Twitter",
+          url: "https://twitter.com/jarvinart",
+          target: "_blank"
+        },
+        {
+          name: "Idil's Instagram",
+          url: "https://www.instagram.com/jarvinart",
+          target: "_blank"
+        },
+        {
+          name: "Idil on Foundation",
+          url: "https://foundation.app/@jarvinart",
+          target: "_blank"
+        }
+      ]
     }
   ]
 } 
