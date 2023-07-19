@@ -176,7 +176,7 @@ His works in The Memes are infused with meaning, and blur the lines between digi
 Despite his enigmatic persona, 6529er actively engages with the NFT community, providing leadership and support to The Memes community. 
 As the NFT landscape evolves, 6529er's distinctive artistry continues to intrigue and delight, making them a force to be reckoned with in the metaverse.
 
-Stoked for more from 6529er
+Stoked for more from 6529er!
         .`,
       links: [
         {
@@ -1648,6 +1648,50 @@ The next stop is the SZN4 opener, in card 119 on July 17th, 2023!
         {
           name: "Idil on Foundation",
           url: "https://foundation.app/@jarvinart",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 120,
+      images: [
+        "/artist-120/work-1.jpeg",
+        "/artist-120/work-2.gif",
+        "/artist-120/work-3.png",
+        "/artist-120/work-4.jpeg"
+      ],
+      poster: "/artist-120/poster.gif",
+      posterMintUrl: "",
+      name: "6529er",
+      info:
+        `
+It's always an exciting moment to see what 6529er has up his sleeve. 
+
+The Memes are truly anchored by 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
+Emerging in the crypto-art realm in 2021, 6529er has gained a place of prominence as the pre-eminent artist of The Memes by 6529 collection, for his sleek, thought-provoking designs.
+
+With a penchant for geometric shapes, bold colors, and a touch of wry humor, 6529er crafts pieces that invite deep contemplation. 
+His works in The Memes are infused with meaning, and blur the lines between digital art and hard-hitting educational experiences.
+
+Despite his enigmatic persona, 6529er actively engages with the NFT community, providing leadership and support to The Memes community. 
+As the NFT landscape evolves, 6529er's distinctive artistry continues to intrigue and delight, making them a force to be reckoned with in the metaverse.
+
+With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
+`,
+      links: [
+        {
+          name: "6529er's Twitter",
+          url: "https://twitter.com/6529er",
+          target: "_blank"
+        },
+        {
+          name: "6529er on Foundation",
+          url: "https://foundation.app/@6529er",
+          target: "_blank"
+        },
+        {
+          name: "Find @6529er in the OM Discord Server",
+          url: "https://discord.gg/JAhzGprv",
           target: "_blank"
         }
       ]

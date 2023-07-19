@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/120/artist">Meme Artist 120 - 6529er</a></li>
                 <li>Artist Preview: <a href="/memes/119/artist">Meme Artist 119 - Idil Dursun</a></li>
               </ul>
               <li>Season 3</li>
