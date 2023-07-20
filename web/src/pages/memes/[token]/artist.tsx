@@ -279,7 +279,7 @@ We can't wait to see how The Memes are interpreted in his fun and spirited art!
           target: "_blank"
         },
         {
-          name: "Deekay's Web Site",
+          name: "Deekay's Website",
           url: "https://deekaykwon.com/",
           target: "_blank"
         },
@@ -327,7 +327,7 @@ We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait
           target: "_blank"
         },
         {
-          name: "Ryan's Web Site",
+          name: "Ryan's Website",
           url: "https://www.ryankoopmans.com/",
           target: "_blank"
         },
@@ -363,7 +363,7 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
           target: "_blank"
         },
         {
-          name: "Megan's Web Site",
+          name: "Megan's Website",
           url: "https://www.madebymegan.io/",
           target: "_blank"
         },
@@ -992,7 +992,7 @@ We are excited to see what Timpers has in placed into pixels for us in Meme Card
           target: "_blank"
         },
         {
-          name: "Timpers' Web Site",
+          name: "Timpers' Website",
           url: "https://timpers.format.com",
           target: "_blank"
         }
@@ -1044,7 +1044,7 @@ What is José's vision for Meme Card 105? We can't wait to see!
           target: "_blank"
         },
         {
-          name: "José's Web Site",
+          name: "José's Website",
           url: "https://timpers.format.com",
           target: "_blank"
         }
@@ -1692,6 +1692,57 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
         {
           name: "Find @6529er in the OM Discord Server",
           url: "https://discord.gg/JAhzGprv",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 121,
+      images: [
+        "/artist-121/work-1.jpeg",
+        "/artist-121/work-2.gif",
+        "/artist-121/work-3.png",
+        "/artist-121/work-4.jpeg"
+      ],
+      poster: "/artist-121/poster.gif",
+      posterMintUrl: "",
+      name: "Eric Paré",
+      info:
+        `
+Eric Paré is a luminary in the realm of light-painting photography. 
+His unique style is characterized by the use of tubes to create ethereal and mesmerizing light trails, often set against breathtaking natural landscapes or urban backdrops. 
+Paré's journey with light-painting began with a project titled "LightSpin," where he collaborated with Kim, who later became a significant muse and partner in his artistic endeavors. 
+This collaboration marked the beginning of a decade-long journey of exploration and innovation.
+
+Over the years, their adventures took them to diverse locations, from the mossy landscapes of Iceland to the futuristic cityscapes of Shanghai. 
+Each location provided a unique canvas for Paré's light-painting, resulting in a myriad of captivating images.
+        
+A recurring theme in Paré's work is the interplay of different layers in each composition. 
+He often juxtaposes a foreground lit by the tube, a figure with a light-painting trace, a dark layer such as hills or dunes, and a vibrant sky. 
+This layering technique adds depth and dimension to his images, making them visually striking.
+        
+Beyond the aesthetics, Paré's work is also about experimentation and pushing boundaries. 
+Whether it's playing with unexpected light sources, like the green lights in Vietnam, or exploring new terrains like the salt flats of Bolivia, Paré's approach is always about discovery and innovation.
+        
+In essence, Eric Paré's artistry is a blend of technical prowess, innovative thinking, and a deep connection with the world around him. 
+His light-painting images are not just photographs; they are visual narratives that capture moments of wonder, exploration, and serendipity.
+
+What memes will Card 121 explore? Eric will shed light on it on July 21st, 2023!
+`,
+      links: [
+        {
+          name: "Eric's Twitter",
+          url: "https://twitter.com/ericpare",
+          target: "_blank"
+        },
+        {
+          name: "Eric's Instagram",
+          url: "https://www.instagram.com/ericparephoto",
+          target: "_blank"
+        },
+        {
+          name: "Eric's Website",
+          url: "https://ericpare.com/",
           target: "_blank"
         }
       ]
