@@ -1700,9 +1700,8 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
       tokenId: 121,
       images: [
         "/artist-121/work-1.jpeg",
-        "/artist-121/work-2.gif",
-        "/artist-121/work-3.png",
-        "/artist-121/work-4.jpeg"
+        "/artist-121/work-2.,p4",
+        "/artist-121/work-3.jpeg"
       ],
       poster: "/artist-121/poster.png",
       posterMintUrl: "",
