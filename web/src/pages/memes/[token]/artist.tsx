@@ -1660,7 +1660,7 @@ The next stop is the SZN4 opener, in card 119 on July 17th, 2023!
         "/artist-120/work-3.png",
         "/artist-120/work-4.jpeg"
       ],
-      poster: "/artist-120/poster.gif",
+      poster: "/artist-120/poster.png",
       posterMintUrl: "",
       name: "6529er",
       info:
@@ -1704,7 +1704,7 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
         "/artist-121/work-3.png",
         "/artist-121/work-4.jpeg"
       ],
-      poster: "/artist-121/poster.gif",
+      poster: "/artist-121/poster.png",
       posterMintUrl: "",
       name: "Eric Paré",
       info:
