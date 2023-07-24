@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/124/artist">Meme Artist 124 - Afonso Caravaggio</a></li>
+                <li>Artist Preview: <a href="/memes/123/artist">Meme Artist 123 - SamJ Studios</a></li>
+                <li>Artist Preview: <a href="/memes/122/artist">Meme Artist 122 - Dre Dogue</a></li>
                 <li>Artist Preview: <a href="/memes/121/artist">Meme Artist 121 - Eric Paré</a></li>
                 <li>Artist Preview: <a href="/memes/120/artist">Meme Artist 120 - 6529er</a></li>
                 <li>Artist Preview: <a href="/memes/119/artist">Meme Artist 119 - Idil Dursun</a></li>

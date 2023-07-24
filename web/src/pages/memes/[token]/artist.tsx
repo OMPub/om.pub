@@ -1700,7 +1700,7 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
       tokenId: 121,
       images: [
         "/artist-121/work-1.jpeg",
-        "/artist-121/work-2.,p4",
+        "/artist-121/work-2.mp4",
         "/artist-121/work-3.jpeg"
       ],
       poster: "/artist-121/poster.png",
@@ -1742,6 +1742,171 @@ What memes will Card 121 explore? Eric will shed light on it on July 21st, 2023!
         {
           name: "Eric's Website",
           url: "https://ericpare.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 122,
+      images: [
+        "/artist-122/work-1.png",
+        "/artist-122/work-2.png",
+        "/artist-122/work-3.jpeg"
+      ],
+      poster: "/artist-122/poster.png",
+      posterMintUrl: "",
+      name: "Dre Dogue",
+      info:
+        `
+In the vast realm of NFT art, @dredogue is emerging as a beacon of innovation, seamlessly merging the nostalgic charm of 35mm film with the dynamic world of NFTs. 
+His works, often characterized by evocative nude photography, capture the raw essence of human vulnerability and beauty. 
+These intimate portrayals are juxtaposed with urban scenes, where the pulse of city life and its myriad stories come alive through his lens. 
+Each portrait, whether set against the backdrop of a bustling city or in the quietude of a studio, speaks volumes, revealing layers of emotions, desires, and dreams.
+
+Dredogue's artistic message delves deep into themes of love, passion, and the complexities of human relationships. 
+Projects like "Sweet Temptation" and "Tainted Love" not only hint at the transient nature of modern relationships but also explore the depth and intensity of human connections. 
+His art is not just a visual treat; it's an experience. 
+The interactive elements in some of his NFTs invite audiences to engage, participate, and even shape the journey of the artwork.
+        
+With a vision that transcends traditional boundaries, @dredogue invites viewers to a world where the past and present coalesce, where the digital realm meets the tangible, and where every shot is a narrative waiting to be unraveled.
+
+What memetic narrative will Card 122 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Dre's Twitter",
+          url: "https://twitter.com/dredogue",
+          target: "_blank"
+        },
+        {
+          name: "Dre's OS",
+          url: "https://opensea.io/dredogue/created",
+          target: "_blank"
+        },
+        {
+          name: "Dre's Linktree",
+          url: "https://linktr.ee/dredogue",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 123,
+      images: [
+        "/artist-123/work-1.png",
+        "/artist-123/work-2.gif",
+        "/artist-123/work-3.gif"
+      ],
+      poster: "/artist-123/poster.png",
+      posterMintUrl: "",
+      name: "SamJ Studios",
+      info:
+        `
+In the heart of Amsterdam's artistic quarters, SamJ has established a creative sanctuary, crafting narratives that resonate deeply with the digital age. 
+Born into the dynamic late '90s, their tech-native journey from acquiring a Graphic Design degree at James Madison University to becoming a beacon in the NFT art realm is nothing short of inspiring.
+
+What does such a perspective bring to bear in the world of 3d / VR art and video graphics?
+Their pieces, a blend of posthumanist ideologies and avant-garde digital techniques, speak volumes about identity dynamics, gender fluidity, and the intricate dance of self-expression. 
+It's no wonder that global powerhouses like Gucci and esteemed platforms such as the Museum of Crypto Art have showcased SamJ's work. 
+Their innovative approach has not only garnered attention but also admiration from web3 art trailblazers like Fewocious and gmoney.
+        
+From the illustrious stages of Miami's SCOPE Art Basel to the revered halls of the Gucci Vault, SamJ's influence is undeniable. 
+As we delve deeper into the digital era, their footprint continues to expand, marking them as a true pioneer in the world of digital artistry.
+
+We happily welcome such a young and energetic voice to Card 123 on July 26th, 2023!
+`,
+      links: [
+        {
+          name: "SamJ's Twitter",
+          url: "https://twitter.com/samjstudios",
+          target: "_blank"
+        },
+        {
+          name: "SamJ's Website",
+          url: "http://samjstudios.com/",
+          target: "_blank"
+        },
+        {
+          name: "SamJ's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 124,
+      images: [
+        "/artist-124/work-1.png",
+        "/artist-124/work-2.gif",
+        "/artist-124/work-3.gif"
+      ],
+      poster: "/artist-124/poster.png",
+      posterMintUrl: "",
+      name: "Afonso Caravaggio",
+      info:
+        `
+Afonso Caravaggio is not just a digital artist, but a storyteller of the modern age. 
+His works, which seamlessly blend the classical with the contemporary, are a testament to his prowess in merging traditional art sensibilities with the dynamic realm of digital creation.
+
+Caravaggio's Italian-Brazilian roots are fully on display, infusing his works with a rich tapestry of cultural narratives. 
+The vibrant energy of Brazil melds with the timeless elegance of classical Italy, creating visuals that are both evocative and transformative.
+        
+Caravaggio's approach, deeply introspective and rooted in his dual heritage, often delves into the nuances of the digital era while drawing profound inspiration from traditional art forms. 
+From the abstract concepts to the culturally rich narratives, his works challenge perceptions, inviting viewers to question, reflect, and immerse themselves in his artistic vision.
+        
+His overarching message is clear: art is a bridge between epochs, a medium that connects the past's grandeur with the present's innovations and challenges. 
+Afonso invites us on a journey that celebrates the beauty of tradition, the excitement of the present, and the limitless possibilities of the future.
+
+And the possibilities for Meme Card 124 have us excited to see it all on July 28th, 2023!
+`,
+      links: [
+        {
+          name: "Afonso's Twitter",
+          url: "https://twitter.com/carav4ggio",
+          target: "_blank"
+        },
+        {
+          name: "Afonso's Instagram",
+          url: "https://www.instagram.com/afonsocaravaggio",
+          target: "_blank"
+        },
+        {
+          name: "Afonso's Website",
+          url: "https://afonsocaravaggio.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
           target: "_blank"
         }
       ]
