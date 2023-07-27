@@ -1797,7 +1797,7 @@ What memetic narrative will Card 122 explore? We will see what is exposed on Jul
         "/artist-123/work-2.gif",
         "/artist-123/work-3.gif"
       ],
-      poster: "/artist-123/poster.png",
+      poster: "/artist-123/poster.mp4",
       posterMintUrl: "",
       name: "SamJ Studios",
       info:
