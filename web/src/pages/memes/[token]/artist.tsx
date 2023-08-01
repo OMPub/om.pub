@@ -1878,6 +1878,150 @@ And the possibilities for Meme Card 124 have us excited to see it all on July 28
       ]
     },
     {
+      tokenId: 125,
+      images: [
+        "/artist-125/work-1.mp4",
+        "/artist-125/work-2.mp4",
+        "/artist-125/work-3.mp4"
+      ],
+      poster: "/artist-125/poster.mp4",
+      posterMintUrl: "",
+      name: "Ryan D. Anderson",
+      info:
+        `
+Ryan Anderson, hailing from the vibrant city of Toronto, Canada, is not just an animator; he's a storyteller, a dreamer, and an artist who paints with motion. 
+From the innocent days of playing with his dad's Hi-8 camcorder to mastering the intricate world of animation, Ryan's journey has been nothing short of cinematic.
+
+It all began with the simple discovery of the interval button on his father's camcorder. 
+That moment sparked a passion in young Ryan, leading him down a path of stop-motion fascination. 
+But his artistic voyage didn't stop there. 
+With formal education in cinematography, Ryan honed his skills, wearing multiple hats - from a film editor and music video director to a photographer. 
+Each role he undertook added a new dimension to his understanding of motion and storytelling.
+        
+In the realm of animation, Ryan employs a unique blend of techniques. 
+Utilizing advanced 3D software, he meticulously crafts scenes, bringing them to life with his animation prowess. 
+These animated scenes are then transformed into 2D images through a process of photography and rendering. 
+The result? A mesmerizing blend of reality and imagination.
+
+But what truly sets Ryan apart is the soul he infuses into his work, blending his experiences, dreams, and the myriad skills he's acquired over the years. 
+Ryan's works delve deep into the themes of nostalgia, distilling visions of the impossible into memories etched in time. 
+He presents a world that is not just seen but heard felt, reminiscent of dreams or the grainy, warm hues of an old Hi-8 tape.
+His animations are not just about motion; they are about emotion, capturing moments that tug at the heartstrings and evoke a sense of longing and nostalgia.
+
+For those keen on exploring the world through the lens of memes, watch for Card 125 to bring art that speaks to the soul, on July 31st, 2023!
+`,
+      links: [
+        {
+          name: "Ryan's Twitter",
+          url: "https://twitter.com/itsryananderson",
+          target: "_blank"
+        },
+        {
+          name: "Ryan's Instagram",
+          url: "https://www.instagram.com/itsryandanderson",
+          target: "_blank"
+        },
+        {
+          name: "Ryan's Linktree",
+          url: "https://linktr.ee/ryandanderson",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 126,
+      images: [
+        "/artist-126/work-1.mp4",
+        "/artist-126/work-2.jpeg",
+        "/artist-126/work-3.jpeg"
+      ],
+      poster: "/artist-126/poster.png",
+      posterMintUrl: "",
+      name: "Marcel Deneuve",
+      info:
+        `
+Marcel Deneuve is an illustrious illustrator and concept artist whose work is a testament to his profound understanding of visual storytelling. 
+His proflific sci-fi themed work is built around creating illustrations that captivate and inspire, across a variety of platforms.
+
+Marcel's portfolio showcases a range of techniques, from detailed illustrations to concept art that breathes life into imaginative worlds. 
+His online presence is a testament to his dedication to sharing knowledge, offering tutorials, and engaging with his community. 
+He provides insights into his creative process, sharing useful links, books, and even shader samples that give a glimpse into his techniques. 
+Marcel's work also includes intricate terrain maps, alphas for rocks, cracks, and damage, and even VDB cloud packs, indicating a versatile skill set that spans both 2D and 3D realms.
+        
+Furthermore, Marcel's enthusiasm for connecting with his audience is evident through his efforts to launch a Discord server, aiming to foster a community where fans and collectors can interact directly with him.
+        
+In essence, Marcel Deneuve is not just an artist; he's a creator, educator, and community builder, dedicated to pushing the boundaries of illustration and concept art while nurturing a space for learning and collaboration.
+
+Surely his community spirit will be on display in Meme Card 126! It's coming on Aug 2nd, 2023!
+`,
+      links: [
+        {
+          name: "Marcel's Twitter",
+          url: "https://twitter.com/marceldeneuve",
+          target: "_blank"
+        },
+        {
+          name: "Marcel's Instagram",
+          url: "https://www.instagram.com/marceldeneuve",
+          target: "_blank"
+        },
+        {
+          name: "Marcel's Art Station",
+          url: "https://marceldeneuve.artstation.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 127,
+      images: [
+        "/artist-127/work-1.mp4",
+        "/artist-127/work-2.jpeg",
+        "/artist-127/work-3.jpeg"
+      ],
+      poster: "/artist-127/poster.png",
+      posterMintUrl: "",
+      name: "Dominik Gümbel",
+      info:
+        `
+Dominik Gümbel, hailing from Germany, is a name that resonates with versatility and depth in the world of concept art and visual development. 
+As a freelance concept artist and illustrator, he has lent his expertise to renowned studios such as Massive Black and Nuare Studios, showcasing a portfolio that spans across character design, advertisement illustration, and both 2D and 3D animation.
+
+His geographical footprint in the art world is vast. Beyond the realms of gaming and cinema, Gümbel has ventured into the domain of exhibition design, curating experiences for museums scattered throughout Germany. 
+Yet, his artistic journey doesn't halt at professional engagements. 
+Passionately pursuing his personal art career, Dominik's creations have graced global platforms, from the iconic screens of New York's Times Square to the bustling Shibuya Crossing in Tokyo.
+        
+Gümbel's skill set is as diverse as his experience. 
+He is adept at character and costume design, visual development, graphic design, and illustration. 
+His proficiency with tools is equally commendable, working masterfully with a range of software like Photoshop, Illustrator, InDesign, After Effects, Premiere, Blender, and Procreate.
+                
+Educationally, Dominik has a Bachelor of Arts in Communication Design from HTWG Konstanz. 
+His academic journey encompassed a spectrum of fields, from classic graphic design to animation and UI/UX design. 
+His bachelor's thesis, focusing on worldbuilding for video games with an emphasis on character design and splash illustration, speaks volumes about his passion for the craft.
+                
+In essence, Dominik Gümbel is not just an artist; he's a storyteller, a visionary, and a beacon of creativity in the ever-evolving world of art and design.
+
+His stories come to The Memes on Aug 4th, 2023!
+`,
+      links: [
+        {
+          name: "DominikG's Twitter",
+          url: "https://twitter.com/0xdominikg",
+          target: "_blank"
+        },
+        {
+          name: "DominikG's Instagram",
+          url: "https://www.instagram.com/dominikguembel",
+          target: "_blank"
+        },
+        {
+          name: "DominikG's Art Station",
+          url: "https://dominikguembel.artstation.com/albums/8891027",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
