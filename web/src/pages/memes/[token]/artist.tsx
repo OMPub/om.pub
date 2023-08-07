@@ -2022,6 +2022,119 @@ His stories come to The Memes on Aug 4th, 2023!
       ]
     },
     {
+      tokenId: 128,
+      images: [
+        "/artist-128/work-1.gif",
+        "/artist-128/work-2.mp4",
+        "/artist-128/work-3.mp4"
+      ],
+      poster: "/artist-128/poster.png",
+      posterMintUrl: "",
+      name: "Fabiano Speziari",
+      info:
+        `
+Fabiano Speziari, a multifaceted artist born in 1977, has seamlessly blended his roles as an industrial technical designer and an artist. 
+His canvas paintings of trees and natural forms, along with unique resin-made animals, marked the beginning of his artistic journey. 
+As he delved deeper, Speziari ventured into land art, crafting installations that resonated with nature's essence. 
+His transition into the realm of light and geometric shapes gave birth to the profound “Message in a pencil” series, where luminous pencils became more than just tools, but storytellers.
+
+Driven by a quest to fathom the human soul and its relationship with nature, Speziari's art often mirrors humanity's introspective journey, filled with endless questions seeking elusive answers. 
+By 2018, he was captivated by the digital world of cryptoart, leading to the creation of the "Clods" project. 
+This series, intertwining elements of dystopia and irony, portrays minuscule earth clods as symbols of a fragmented planet, echoing the resilience of survivors amidst chaos.
+
+His evolving artistic vision is further showcased in exhibitions such as "Light WWW Luminose in mostra," "NFT Revolution," and "Dystopian Visions." 
+These works not only highlight his adaptability and forward-thinking approach but also his continuous exploration of themes ranging from the digital art landscape to the contemplative nature of time and the stark realities of a dystopian future. 
+Through his work, Speziari invites viewers into a world of reflection, challenging perceptions and sparking dialogue.
+
+This dialogue will continue with Card 128 on Aug 7th, 2023!
+`,
+      links: [
+        {
+          name: "Fabiano's Twitter",
+          url: "https://twitter.com/fabianospeziari",
+          target: "_blank"
+        },
+        {
+          name: "Fabiano's Instagram",
+          url: "https://www.instagram.com/fabianospeziari",
+          target: "_blank"
+        },
+        {
+          name: "Fabiano's Website",
+          url: "https://fabianospeziari.io/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
