@@ -2067,35 +2067,49 @@ This dialogue will continue with Card 128 on Aug 7th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 129,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-129/work-1.webp",
+        "/artist-129/work-2.webp",
+        "/artist-129/work-3.webp"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-129/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "@fak3panelcrimes",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Known on Twitter as @fak3panelcrimes (after their orignal account was locked), and generally as "Threepanelcrimes", the next Memes Artist is a distinctive artistic endeavor that has carved a niche in the realm of visual storytelling. 
+Operating within the constraints of just three panels, the artist masterfully weaves tales of crime, suspense, and intrigue. 
+Every detail, from nuanced character expressions to subtle background elements, is meticulously crafted to convey a narrative, emphasizing the power of visual narrative.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Through their self-described appellation: "CRIME HAIKU CREATOOOR," we know to look for poetry in the art.
+This ethos is further defined by two cardinal rules: no dialogue and no word balloons. 
+Such constraints underscore the artist's commitment to pure visual storytelling, where images alone carry the weight of the narrative. 
+Collaboration lies at the heart of this project. 
+Over the years, Threepanelcrimes has joined forces with over 200 global artists, illustrators, animators, and musicians. 
+This collaborative spirit not only introduces a rich tapestry of styles and perspectives but also makes the content universally relatable. 
+Each story, while concise, is a testament to the diverse artistic voices that contribute to the project.
+        
+In the digital age, Threepanelcrimes seamlessly integrates contemporary forms of art distribution. 
+With a robust presence on platforms like Instagram and well-established in the world of NFTs, the artist engages with modern audiences, emphasizing the importance of visual literacy. 
+For those delving into their work, it's an invitation to "read" images, derive meaning from visual cues, and appreciate the art of concise storytelling.
+
+What story will Card 129 reveal? The tale is revealed on Aug 9th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Threepanelcrimes' Twitter",
+          url: "https://twitter.com/fak3panelcrimes",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Threepanelcrimes' SuperRare",
+          url: "https://superrare.com/threepanelcrimes",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Threepanelcrimes' Instagram",
+          url: "https://www.instagram.com/threepanelcrimes",
           target: "_blank"
         }
       ]
