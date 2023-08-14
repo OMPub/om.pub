@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/130/artist">Meme Artist 130 - Kelly McDermott</a></li>
                 <li>Artist Preview: <a href="/memes/129/artist">Meme Artist 129 - ThreePanelCrimes</a></li>
                 <li>Artist Preview: <a href="/memes/128/artist">Meme Artist 128 - Fabiano Speziari</a></li>
                 <li>Artist Preview: <a href="/memes/127/artist">Meme Artist 127 - DominikG</a></li>

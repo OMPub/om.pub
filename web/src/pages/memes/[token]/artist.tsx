@@ -2115,35 +2115,44 @@ What story will Card 129 reveal? The tale is revealed on Aug 9th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 130,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-130/work-1.gif",
+        "/artist-130/work-2.png",
+        "/artist-130/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-130/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Kelly McDermott",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+"KΞLLY" McDermott, known in the online community as @bykellymcd on Twitter and kellymcdnft on Instagram, is a standout artist in the realm of digital creation. 
+Her signature style is rooted in pixel manipulation prowess, where she often shares mesmerizing videos on Instagram that unveil her creation process, revealing each brush stroke that culminates in a final masterpiece.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Her artwork is not just visually captivating but also rich in narrative. 
+One of her pieces, "Cryptic Connections," available on SuperRare, is described as a "love story that transcends the boundaries of code, a tale of star-crossed cryptocurrencies destined to forever impact the world of finance and technology." 
+Another poignant piece, "50/50," reflects the duality of emotions, calling out: "Life hasn’t been as colourful since you left. At any given moment, I am 50% happy and 50% sad." 
+Yet another artwork, titled "adeus tristeza," succinctly conveys a message of hope and rejuvenation with the description, "goodbye sadness, I want to sing again."
+        
+For those navigating the vast seas of digital art, Kelly McDermott emerges as a beacon of innovation and emotional depth. 
+Her ability to intertwine striking visual imagery with profound narratives makes her a standout figure in the contemporary digital art landscape.
+
+What memetic narrative will Card 130 explore? We will see what is exposed on Aug 11th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Kelly's Twitter",
+          url: "http://www.twitter.com/bykellymcd",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Kelly's Website",
+          url: "https://www.kellymcd.art",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Kelly's Instagram",
+          url: "http://www.instagram.com/kellymcdnft",
           target: "_blank"
         }
       ]
