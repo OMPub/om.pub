@@ -2158,6 +2158,154 @@ What memetic narrative will Card 130 explore? We will see what is exposed on Aug
       ]
     },
     {
+      tokenId: 131,
+      images: [
+        "/artist-131/work-1.jpeg",
+        "/artist-131/work-2.jpeg",
+        "/artist-131/work-3.jpeg"
+      ],
+      poster: "/artist-131/poster.png",
+      posterMintUrl: "",
+      name: "David Fairs",
+      info:
+        `
+David Fairs, the creative force behind @newlightvisuals, is a multifaceted artist with a profound connection to the natural world. 
+His association with platforms like Nifty Gateway and his role as both an artist and curator showcase his prominence in the digital art community.
+
+David is not just a photographer; he wears many hats, including that of a filmmaker, painter, illustrator, and digital artist. 
+His obsession with the ocean is evident, as he dedicates himself to documenting the beauty of nature. 
+This passion is particularly highlighted in his "Storm Surfers" series, where he captures the raw and unhinged moments of the sea during tumultuous storms. 
+His belief is strong and clear: creators possess a value that often surpasses societal perceptions.
+
+His work on the blockchain is pioneering, with series like "Drone Surfers," which captures surfers from a bird's-eye view, marking it as the first of its kind on the blockchain. 
+David's commitment to innovation is also evident in his animations, where he collaborates and experiments with early animation styles, hinting at a future focus in this domain. 
+
+For those exploring the intersection of nature, art, and digital innovation, David Fairs offers a captivating blend of visual mastery and lightning-in-a-bottle captures of exciting moments. 
+His work is not just a visual treat but also an invitation to appreciate the intricate beauty of the world around us.
+
+What memetic narrative will Card 131 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "David's Twitter",
+          url: "https://twitter.com/newlightvisuals",
+          target: "_blank"
+        },
+        {
+          name: "David's Website",
+          url: "https://www.newlightvisual.com/nft-art",
+          target: "_blank"
+        },
+        {
+          name: "David's Instagram",
+          url: "https://www.instagram.com/newlightvisuals",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
