@@ -2162,7 +2162,7 @@ What memetic narrative will Card 130 explore? We will see what is exposed on Aug
       images: [
         "/artist-131/work-1.jpeg",
         "/artist-131/work-2.jpeg",
-        "/artist-131/work-3.jpeg"
+        "/artist-131/work-3.gif"
       ],
       poster: "/artist-131/poster.png",
       posterMintUrl: "",
@@ -2183,7 +2183,7 @@ David's commitment to innovation is also evident in his animations, where he col
 For those exploring the intersection of nature, art, and digital innovation, David Fairs offers a captivating blend of visual mastery and lightning-in-a-bottle captures of exciting moments. 
 His work is not just a visual treat but also an invitation to appreciate the intricate beauty of the world around us.
 
-What memetic narrative will Card 131 explore? We will see what is exposed on July 24th, 2023!
+Where does this innovation lead Card 131? All is revealed on Aug 14th, 2023!
 `,
       links: [
         {
