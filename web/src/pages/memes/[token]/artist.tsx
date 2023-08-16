@@ -2164,7 +2164,7 @@ What memetic narrative will Card 130 explore? We will see what is exposed on Aug
         "/artist-131/work-2.jpeg",
         "/artist-131/work-3.gif"
       ],
-      poster: "/artist-131/poster.png",
+      poster: "/artist-131/poster.mp4",
       posterMintUrl: "",
       name: "David Fairs",
       info:
