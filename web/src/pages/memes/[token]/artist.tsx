@@ -1147,7 +1147,7 @@ What's coming for Card 107? A generative piece? An interactive NFT? We find out 
       poster: "/artist-108/poster.png",
       name: "Donglu Yu",
       info:
-`
+        `
 Donglu Yu, an acclaimed artist and dreamer, is known for her striking contributions to the world of concept art, illustration, and visual development. 
 Yu's work has gained international recognition, and her art has even been sold on prestigious platforms like Sotheby's.
 
@@ -1190,7 +1190,7 @@ Card 108 is in her hands... How will she meme it? We find out on June 7th, 2023!
       poster: "/artist-109/poster.png",
       name: "Unknown",
       info:
-`
+        `
 The artist for Card 109? Not announced ahead of time! 
 
 This drop will happen on the anniversary of the genesis Meme Cards, June 9th, 2022.
@@ -1200,7 +1200,7 @@ The Memes turn 1 year old! What a year it's been.
 We'll see the artist and the art on June 9th, 2023!
 `,
       links: [
-        
+
       ]
     },
     {
@@ -2204,69 +2204,96 @@ Where does this innovation lead Card 131? All is revealed on Aug 14th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 132,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-132/work-1.jpeg",
+        "/artist-132/work-2.jpeg",
+        "/artist-132/work-3.jpeg"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-132/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Hugo Korhonen",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Hugo Korhonen, a young artist from Kuopio, Finland, has a profound connection with nature, which is evident in his photographic works. 
+Despite facing bullying throughout his school years, Hugo found solace and empowerment in the natural world. 
+This bond with nature not only provided an escape from his distressing school experiences but also paved the way for his professional journey.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Hugo's photography is deeply rooted in his appreciation for the environment. 
+He captures nature in all its glory, often juxtaposing the vastness of landscapes with the minuteness of human figures. 
+This style emphasizes the harmonious relationship between humans and nature, suggesting that when treated with respect, nature reciprocates with kindness. Hugo's images are not just aesthetically pleasing; they carry a message. 
+He hopes to inspire viewers to value and protect the environment and make sustainable choices.
+        
+Hugo's journey into photography began during a summer at a cottage when he witnessed a captivating weather front approaching. 
+Inspired by a cousin's photography, he delved into the world of cameras and photography through YouTube. 
+The abundant nature in Kuopio became his refuge, where he could detach from painful school memories and immerse himself in his newfound passion. 
+Over time, Hugo's dedication to photography led him to participate in photo competitions, collaborate with businesses, and even sell his works. 
+He also generously contributes a portion of his earnings to tree-planting projects in developing countries.
+        
+Hugo Korhonen's artistry is a testament to the healing power of nature and the resilience of the human spirit. 
+Through his lens, he not only showcases the beauty of the world around us but also advocates for its preservation.
+
+Will Meme Card 132 will carry this same message? We find out on August 16th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Hugo's Twitter",
+          url: "https://twitter.com/hugoraphy",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Hugo's Website and Portfolio",
+          url: "https://www.hugokorhonen.com",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Hugo's Instagram",
+          url: "https://instagram.com/hugoraphy",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 133,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-133/work-1.mp4",
+        "/artist-133/work-2.mp4",
+        "/artist-133/work-3.jpeg"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-133/poster.mp4",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Michael Kozlowski",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Michael Kozlowski, known as mpkoz on Twitter, is a generative artist who envisions a world where art is not confined to traditional mediums.
+He's a multifaceted American media artist and software developer who seamlessly blends the realms of 3D graphics, mixed reality, and interactivity.
+His work often places generative objects in real space, showcasing the power of digital art, and how it can redefine our understanding of visual experiences. 
+One of the recurring themes in his posts is the exploration of repurposing and transforming 2D artwork into 3D, suggesting a vision where art is fluid, dynamic, and ever-evolving.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Mpkoz's style is a harmonious blend of technology and artistry. 
+He frequently employs the trompe l'oeil technique, a method that uses realistic imagery to create optical illusions. 
+An example of this is his "Manifold Still Life with Hydrangea," where he uses a viewer's head position to simulate perspective in real-time, without any post-production visual effects or compositing. 
+This approach not only challenges the viewer's perception but also offers a fresh, immersive experience that bridges the gap between the virtual and the real.
+        
+His portfolio showcases a profound exploration of generative art, where he harnesses the power of algorithms to create captivating visual compositions. 
+Through his works, Michael not only pushes the boundaries of contemporary art but also offers a glimpse into the potential future of galleries and museums.
+        
+Will we get generative art in Card 133? Few truly know, until Aug 18th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Mpkoz's Twitter",
+          url: "https://twitter.com/mpkoz",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Mpkoz's Website",
+          url: "https://www.mpkoz.com",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Mpkoz's Instagram",
+          url: "https://www.instagram.com/mpkoz",
           target: "_blank"
         }
       ]
