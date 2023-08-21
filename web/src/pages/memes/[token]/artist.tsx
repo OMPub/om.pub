@@ -2299,6 +2299,163 @@ Will we get generative art in Card 133? Few truly know, until Aug 18th, 2023!
       ]
     },
     {
+      tokenId: 134,
+      images: [
+        "/artist-134/work-1.jpeg",
+        "/artist-134/work-2.jpg",
+        "/artist-134/work-3.jpg"
+      ],
+      poster: "/artist-134/poster.png",
+      posterMintUrl: "",
+      name: "MiraRuido",
+      info:
+`
+Hailing from Vitoria-Gasteiz, a quaint city in northern Spain, Joseba Elorza, widely recognized as @MiraRuido, has etched his name in the digital art world. 
+With over a decade of experience as a freelance artist, he has collaborated with renowned entities like National Geographic Channel, and even music legends like Green Day. 
+But it's not just the impressive clientele that sets Elorza apart; it's his unique approach to art. 
+As he puts it, “I think that to make simply beautiful works there are already many people who are better than me; my intention is to generate some kind of feeling in the viewer, whether of disbelief, uneasiness or an ironic half smile.”
+
+Elorza's fascination with collage is evident in his works. 
+He views it as a medium to "reconstruct realities and create new worlds" that reflect and critique our daily lives. 
+This sentiment is further echoed in his words, “I see collage as a way of reconstructing realities and creating new worlds to reflect, highlight and denounce different aspects of our day to day life, of our most everyday reality.” 
+Not just content with static visuals, Elorza ventured into the realm of animation, transforming his collages by adding the dimension of time, a self-taught skill that opened a "new world of possibilities" for him.
+
+One of the standout techniques in Elorza's repertoire is rotoscoping, a meticulous process he employs to extract characters from vintage videos and films, introducing them into fresh, often surreal contexts. 
+His passion for space, astrophysics, and surrealism frequently manifests in his creations, serving as allegorical tools to address universal themes. 
+As he beautifully articulates, “I'm crazy about everything related to space and astrophysics... It is inevitable that this will end up appearing in my work, as well as surrealism, which is the clearest way I see of dealing with universal themes with attractive allegories.”
+
+From across time and space, @MiraRuido brings us Meme Card 134 on Aug 21th, 2023!
+`,
+      links: [
+        {
+          name: "Mira's Twitter",
+          url: "https://twitter.com/miraruido",
+          target: "_blank"
+        },
+        {
+          name: "Mira's instagram",
+          url: "https://www.instagram.com/mira.ruido",
+          target: "_blank"
+        },
+        {
+          name: "Mira's Website",
+          url: "https://www.miraruido.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 135,
+      images: [
+        "/artist-135/work-1.png",
+        "/artist-135/work-2.png",
+        "/artist-135/work-3.jpeg"
+      ],
+      poster: "/artist-135/poster.png",
+      posterMintUrl: "",
+      name: "Rust",
+      info:
+        `
+In the ever-evolving realm of digital art, rust (@rustnfteth) stands out as a crypto-native artist, bringing a distinctive flavor of web3 art to the blockchain. 
+Choosing to remain shrouded in anonymity, rust's identity is as enigmatic as the stories they tell through their art. 
+With a commitment to releasing a unique, single-edition piece daily, rust has carved a niche in the NFT space, showcasing their prolific nature and dedication to the craft.
+
+Diving deeper into rust's creations, one is immediately captivated by their signature glitch animations. 
+These dynamic visuals, often in the form of looping GIFs, are more than just eye-catching graphics. 
+They are narratives that delve into the intricate relationship between humans and technology, exploring the profound impact of the digital age on our lives, psyche, and interactions.
+        
+As technology continues to shape and redefine our existence, artists like rust challenge us to reflect on its implications. 
+Through their crypto-native artworks, rust not only captures the zeitgeist of our times but also prompts introspection on the symbiotic, and often tumultuous, relationship between humanity and its technological creations.
+
+Looks like Meme Card 135 is gettin' glitchy wit it onAug 23th, 2023!
+`,
+      links: [
+        {
+          name: "Rust's Twitter",
+          url: "https://twitter.com/rustnfteth",
+          target: "_blank"
+        },
+        {
+          name: "Rust's Tezos Editions",
+          url: "https://objkt.com/profile/rust/created",
+          target: "_blank"
+        },
+        {
+          name: "Rust's Everydays",
+          url: "https://opensea.io/collection/foureightybyrust",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",

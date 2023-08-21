@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/136/artist">Meme Artist 136 - @POSTWOOK</a></li>
+                <li>Artist Preview: <a href="/memes/135/artist">Meme Artist 135 - @rustnfteth</a></li>
+                <li>Artist Preview: <a href="/memes/134/artist">Meme Artist 134 - MiraRuido</a></li>
                 <li>Artist Preview: <a href="/memes/133/artist">Meme Artist 133 - mpkoz</a></li>
                 <li>Artist Preview: <a href="/memes/132/artist">Meme Artist 132 - Hugo Korhonen</a></li>
                 <li>Artist Preview: <a href="/memes/131/artist">Meme Artist 131 - David Fairs</a></li>
