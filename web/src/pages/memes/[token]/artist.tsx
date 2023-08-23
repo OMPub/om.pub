@@ -2347,11 +2347,11 @@ From across time and space, @MiraRuido brings us Meme Card 134 on Aug 21th, 2023
     {
       tokenId: 135,
       images: [
-        "/artist-135/work-1.png",
-        "/artist-135/work-2.png",
-        "/artist-135/work-3.jpeg"
+        "/artist-135/work-1.gif",
+        "/artist-135/work-2.gif",
+        "/artist-135/work-3.webp"
       ],
-      poster: "/artist-135/poster.png",
+      poster: "/artist-135/poster.mp4",
       posterMintUrl: "",
       name: "Rust",
       info:
@@ -2367,7 +2367,7 @@ They are narratives that delve into the intricate relationship between humans an
 As technology continues to shape and redefine our existence, artists like rust challenge us to reflect on its implications. 
 Through their crypto-native artworks, rust not only captures the zeitgeist of our times but also prompts introspection on the symbiotic, and often tumultuous, relationship between humanity and its technological creations.
 
-Looks like Meme Card 135 is gettin' glitchy wit it onAug 23th, 2023!
+Looks like Meme Card 135 is gettin' glitchy wit it on Aug 23th, 2023!
 `,
       links: [
         {
