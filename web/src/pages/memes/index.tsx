@@ -77,7 +77,7 @@ export default function Memes() {
             <ol>
               <li>
                 First, you can start by learning more about the open metaverse.
-                Explore the education Twitter threads of [Punk6529](https://twitter.com/punk6529), and read about the impact of memetic ideas at [seize.io](https://seize.io/about/faq).
+                Explore the education Twitter threads of <a href="https://twitter.com/punk6529" target="_blank">@Punk6529</a>, and read about the impact of memetic ideas at <a href="https://seize.io/about/faq" target="_blank">seize.io</a>.
               </li>
               <li>
                 The artwork of The Memes is always CC0 - free to use, remix, and share.
