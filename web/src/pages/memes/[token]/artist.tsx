@@ -2388,35 +2388,46 @@ Looks like Meme Card 135 is gettin' glitchy wit it on Aug 23th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 136,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-136/work-1.jpg",
+        "/artist-136/work-2.jpg",
+        "/artist-136/work-3.jpg"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-136/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Postwook",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Natasha Chomko, known in the digital art world as Postwook, is a Los Angeles-based artist born in 1995. 
+Her primary focus lies in creating surreal landscape collage art, seamlessly blending refined visionary and psychedelic elements. 
+This unique style is designed to appeal to a broad audience, from the seasoned psychonaut to the average art enthusiast and everyone in between.
+        
+Chomko's artistic journey is deeply rooted in her love for landscapes, celestial bodies like the sun and moon, nature, and various elements that evoke emotions. 
+She uses art as a medium to process emotions, describing it as a therapeutic way to express and release her feelings. 
+Her inspirations in the digital art space include artists like ACK (Alpha Centauri Kid), whose narrative-centric and tech-infused works resonate with her.
+        
+Beyond her individual creations, Chomko's perspective on the evolving digital art landscape is insightful. 
+She sees technology as a propellant for art, envisioning a future where innovations in tech will lead to more dynamic and interactive art forms. 
+She dreams of a world where the moving photographs from Harry Potter become a reality, social media platforms support interactive art, and gameplay offers seamless realism. 
+Moreover, Chomko is actively involved in groundbreaking projects, such as her role as the Creative Director for "Forever in Space," a startup that aims to send photos and audio clips into space via a Space X satellite.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Memers get to step into the surreal with Postwook on Aug 25th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Postwook's Twitter",
+          url: "https://twitter.com/postwook",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Postwook's Instagram",
+          url: "https://instagram.com/postwook",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Postwook's Website",
+          url: "https://postwook.com",
           target: "_blank"
         }
       ]
