@@ -2433,35 +2433,47 @@ Memers get to step into the surreal with Postwook on Aug 25th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 137,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-137/work-1.mp4",
+        "/artist-137/work-2.mp4",
+        "/artist-137/work-3.mp4"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-137/poster.mp4",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Jan Sladecko",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Jan Sladecko, a creative director and motion designer from the Czech Republic, has carved a niche for himself in the world of digital art and animation. 
+With a passion for CG that ignited at the young age of 12, Sladecko's journey in the industry has been marked by innovation, creativity, and a deep love for storytelling. 
+His portfolio, rich with a blend of humor and intricate design elements, showcases his unique style that appeals to a broad spectrum of audiences. 
+From his early days of Flash animations to mastering 3D art, Sladecko's evolution as an artist is a testament to his dedication and skill.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+One of his notable works, "Space Struggle," is a testament to his ability to weave humor into compelling visual narratives. 
+This short CGI animated series began as a playful take on Elon Musk's initiative of sending a car into space, evolving into a humorous tale of astronauts navigating the challenges of space. 
+Beyond individual projects, Sladecko's experience spans collaborations with renowned studios, including The Mill.
+ Here, he contributed to diverse projects, with "IMAX: Transformers" standing out as a personal favorite, showcasing his prowess in animation and design.
+        
+Throughout his career, Sladecko has consistently pushed the boundaries of motion design. 
+His works, whether they are short animations or extensive projects, always carry a distinct narrative flair, often infused with humor and intricate design elements. 
+As he looks to the future, Sladecko aims to pivot towards more personal projects, seeking deeper connections with his audience and exploring new avenues in digital art enabled by web3.
+
+Card 137 will surely bring us Sladecko's signature memetic morphing memes on Aug 28th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Jan's Twitter",
+          url: "https://twitter.com/jan_sladecko",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Jan's Instagram",
+          url: "https://jansladecko.com/instagram",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Jan's Website",
+          url: "jansladecko.com",
           target: "_blank"
         }
       ]
