@@ -2479,35 +2479,45 @@ Card 137 will surely bring us Sladecko's signature memetic morphing memes on Aug
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 138,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-138/work-1.png",
+        "/artist-138/work-2.gif",
+        "/artist-138/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-138/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Eleni Tomadaki",
       info:
-        `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+`
+Eleni Tomadaki, a visionary artist bopping between London and Athens, has carved a niche for herself with her unique exploration of the intricate relationships between individuals and the multifaceted "Other." 
+This exploration, deeply rooted in her artistic vision, delves into the complexities of identity, resistance, and the dichotomy of belonging. 
+Through non-linear storytelling narratives and a distorted use of language, Eleni challenges conventional symbols and perceptions, offering a fresh perspective on the human experience.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+Her standout project, "Eleni is bored again," is a testament to her innovative approach. 
+Initiated in 2015 as an auto-fictitious blend of illustrations and texts, it evolved into a collection of 299 NFTs, raising existential and psychosocial questions about everyday life and self-reflection. 
+This collection engages viewers in a process of unlearning, revisiting the world through a child's psyche, and confronting the often-neglected innocence of adulthood, which undergoes various transformations capturing the multifaceted nature of human emotions.
+        
+Eleni's mission transcends traditional artistic boundaries. 
+Whether through her NFT collections, which challenge concepts of value and decision-making, or her physical artworks that question our relationship with the surrounding world, Eleni's art is a journey of engagement and reflection. 
+Her work, showcased in prestigious venues from the Elizabeth Street Gallery in Soho, NY to Times Square, embodies a thought-provoking narrative that resonates with a global audience, making her a beacon in contemporary art.        
+
+Illustrative memetic messages are sure to emerge in Card 138 explore, coming to us on Aug 30th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
+          name: "Eleni's Twitter",
           url: "https://twitter.com/Arty",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Eleni's Instagram",
+          url: "https://www.instagram.com/eleni.tomadaki",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Eleni's Website",
+          url: "https://isboredagain.com/",
           target: "_blank"
         }
       ]
@@ -2526,7 +2536,7 @@ What memetic narrative will Card 333 explore? We will see what is exposed on Jul
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on July 24th, 2023!
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
 `,
       links: [
         {
