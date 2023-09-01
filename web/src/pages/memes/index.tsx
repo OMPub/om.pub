@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/139/artist">Meme Artist 139 - @synccreation</a></li>
                 <li>Artist Preview: <a href="/memes/138/artist">Meme Artist 138 - Eleni Tomadaki</a></li>
                 <li>Artist Preview: <a href="/memes/137/artist">Meme Artist 137 - Jan Sladecko</a></li>
                 <li>Artist Preview: <a href="/memes/136/artist">Meme Artist 136 - @postwook</a></li>

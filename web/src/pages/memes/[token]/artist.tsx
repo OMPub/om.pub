@@ -2523,6 +2523,188 @@ Illustrative memetic messages are sure to emerge in Card 138 explore, coming to 
       ]
     },
     {
+      tokenId: 139,
+      images: [
+        "/artist-139/work-1.mp4",
+        "/artist-139/work-2.mp4",
+        "/artist-139/work-3.mp4"
+      ],
+      poster: "/artist-139/poster.png",
+      posterMintUrl: "",
+      name: "@synccreation",
+      info:
+        `
+@synccreation, a digital 3D artist, is celebrated for his unparalleled talent in crafting distinct videographic artworks from scratch. 
+His meticulous attention to detail allows him to seamlessly blend various elements like modeling, animation, texturing, and sound design, resulting in visuals that are nothing short of mesmerizing. 
+A hallmark of his work is the juxtaposition of intricate devices against a stark, empty backdrop, creating a captivating contrast. 
+This combination of creativity and technical prowess culminates in a audiovisual symphony that ensnares both the heart and mind.
+
+More than just digital renderings, @synccreation's pieces are virtual devices that challenge conventional perceptions and ignite curiosity. 
+These elaborate designs epitomize his fervor for both art and technology, merging the domains of creativity and innovation to reveal unparalleled horizons. 
+His works are not just displays of artistry but are also testaments to his commitment to excellence.
+        
+Understanding the importance of collaboration, @synccreation believes in forging strong partnerships with his clients. 
+By grasping their vision, he ensures that every project mirrors their ideas, often exceeding their expectations. 
+Whether one is a game developer, filmmaker, advertiser, or anyone seeking 3D expertise, @synccreation emerges as the go-to creative ally. 
+With him, ideas are transformed into breathtaking 3D masterpieces, pushing the boundaries of what's imaginable.
+
+Can you imagine what memetic devices Card 139 will explore on Sept 1st, 2023??
+`,
+      links: [
+        {
+          name: "@synccreation's Twitter",
+          url: "https://twitter.com/synccreationn",
+          target: "_blank"
+        },
+        {
+          name: "@synccreation's Instagram",
+          url: "https://www.instagram.com/synccreation",
+          target: "_blank"
+        },
+        {
+          name: "@synccreation's Website",
+          url: "https://www.synccreation.me/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
