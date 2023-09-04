@@ -2569,35 +2569,46 @@ Can you imagine what memetic devices Card 139 will explore on Sept 1st, 2023??
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 140,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-140/work-1.png",
+        "/artist-140/work-2.png",
+        "/artist-140/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-140/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Diogo Sampaio",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Hailing from Porto, Portugal, Diogo Sampaio stands out as a distinguished matte painter and concept artist. 
+His approach to art is refreshingly unique; rather than capturing mere moments like a photographic snap, Sampaio captures ideas. 
+With the aid of his camera and a vivid imagination, he crafts surreal scenes that, while containing elements of the impossible, are rendered with such realism that they challenge the viewer's perception. 
+His work is a testament to his problem-solving prowess, always seeking innovative ways to depict the unimaginable.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Throughout his career, Sampaio has collaborated with clients from all corners of the globe, working on both personal and commissioned projects. 
+His expertise is not limited to just creating art; he also possesses a keen understanding of his clients' visions, ensuring that each project is a genuine reflection of their ideas. 
+This collaborative spirit has led him to work with renowned entities, including Christiano Ronaldo, and the Colosseum of Rome.
+        
+Beyond his primary roles, Diogo Sampaio's skills span a wide range, from environment design and matte painting to photo-manipulation and surrealism. 
+He is proficient in tools like Photoshop and Blender, further showcasing his versatility in the digital art realm. 
+Whether it's designing posters for iconic bands like "The Rolling Stones" and "Imagine Dragons" or crafting cover artworks for magazines, Sampaio's artistry consistently shines through, making him a sought-after talent in the world of digital art.
+
+It's a little surreal that we are already at Card 140... to be revealed on Sept 4th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Diogo's Twitter",
+          url: "https://twitter.com/diogosampaioART",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Diogo's Instagram",
+          url: "https://instagram.com/diogosampaio_art",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Diogo's Website",
+          url: "https://diogosampaioart.com/",
           target: "_blank"
         }
       ]
