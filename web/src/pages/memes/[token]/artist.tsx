@@ -2614,34 +2614,49 @@ It's a little surreal that we are already at Card 140... to be revealed on Sept 
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 141,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-141/work-1.mp4",
+        "/artist-141/work-2.mp4",
+        "/artist-141/work-3.mp4"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-141/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Bastien",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Bastien, known on Twitter as @Bastienjpg, is an artist who offers a distinctive perspective through the world of animation. 
+With the mantra of "Offering you a chance to never stop being a kid," Bastien crafts animations that resonate with the inner child in all of us. 
+His works are not just mere animations; they are a journey back to our fondest memories, a nostalgic trip that reminds us of the joys of childhood.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+His artistic vision is clear: to create animations, often paired with stories, that evoke emotions and memories from our past. 
+By doing so, he bridges the gap between the past and the present, allowing viewers to relive moments of pure joy and wonder. 
+Bastien's stylistic approach is deeply rooted in this vision, as he often incorporates elements that are reminiscent of childhood games, toys, and adventures.
+Each piece a scene, a snapshot, a single frame that you turn over in your mind, trying to recall the details even while the emotion of the moments hits hard.
+        
+His standout approach to animation and evocative imagery make him a standout artist in the digital realm.
+        
+#### Exploration of Insights:
+        
+1. Nostalgia in Art: Bastien's work is a testament to the power of nostalgia in art. How do memories from our past influence our appreciation of art in the present?
+1. Art as a Portal: Each Bastien NFT acts as a portal, transporting viewers back to simpler times. In an age where technology and rapid change dominate, how crucial is it for art to serve as a respite, allowing individuals to escape, even momentarily, from the complexities of modern life?
+1. The Inner Child: Bastien's focus on the "inner child" is a reminder that no matter our age, there's always a part of us that remains youthful and curious. How can art help us reconnect with this often forgotten part of ourselves?
+
+Will Card 141 help us look ahead by looking to the past? Our inner child finds out on Sept 6th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Bastien's Twitter",
+          url: "https://twitter.com/Bastienjpg",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Bastien's Instagram",
+          url: "https://instagram.com/bastienjpg",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
+          name: "Bastien's Linktree",
           url: "https://linktr.ee/Arty",
           target: "_blank"
         }
