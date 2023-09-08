@@ -2683,7 +2683,7 @@ For instance, her "White Infinity" collection captures the stark realities of vi
         
 Emektar's photography is not just about capturing moments but delving deep into the stories behind those moments. 
 Her ability to intertwine raw reality with artistic interpretation sets her apart from her contemporaries. 
-The diverse accolades she has received, from the Stellar Art Awards to the grand prize in Japan, are a testament to her versatility and prowess in the field.
+The diverse accolades she has received, from the Stellar Art Awards to the Global Photography Competition grand prize in Japan, are a testament to her versatility and prowess in the field.
 
 All that's captured in Card 142 will be revealed on Sept 24th, 2023!
 `,
