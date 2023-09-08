@@ -2663,35 +2663,44 @@ Will Card 141 help us look ahead by looking to the past? Our inner child finds o
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 142,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-142/work-1.png",
+        "/artist-142/work-2.png",
+        "/artist-142/work-3.jpeg"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-142/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Leyla Emektar",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Leyla Emektar, an esteemed photographer from Adana, Turkey, embarked on her artistic journey at Çukurova University's Art Department. 
+She has since worn multiple hats, from a Visual Arts Teacher to a part-time instructor at Kocaeli University's Department of Photography. 
+Emektar's works predominantly span travel, conceptual, fine art, and portrait genres, each piece echoing profound narratives and deeper meanings.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Her unique approach to "Creative Photography" pushes conventional boundaries, making her stand out in the global photography arena. 
+For instance, her "White Infinity" collection captures the stark realities of villagers trapped by intense snowfall, while "Children and Dreams" poignantly portrays the innocence of childhood juxtaposed against the complexities of the adult world.
+        
+Emektar's photography is not just about capturing moments but delving deep into the stories behind those moments. 
+Her ability to intertwine raw reality with artistic interpretation sets her apart from her contemporaries. 
+The diverse accolades she has received, from the Stellar Art Awards to the grand prize in Japan, are a testament to her versatility and prowess in the field.
+
+All that's captured in Card 142 will be revealed on Sept 24th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Leyla's Twitter",
+          url: "https://twitter.com/leylaemektar2",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Leyla's Instagram",
+          url: "https://www.instagram.com/leylaemektar",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Leyla's Linktree",
+          url: "http://www.leylaemektar.com",
           target: "_blank"
         }
       ]
