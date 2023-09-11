@@ -2712,7 +2712,7 @@ All that's captured in Card 142 will be revealed on Sept 24th, 2023!
         "/artist-143/work-2.jpeg",
         "/artist-143/work-3.png"
       ],
-      poster: "/artist-143/poster.png",
+      poster: "/artist-143/poster.mov",
       posterMintUrl: "",
       name: "Hannes Hummel",
       info:
@@ -2760,7 +2760,7 @@ Look for organic meme integrations in the drop on Sept 11th, 2023!
         "/artist-333/work-2.png",
         "/artist-333/work-3.jpeg"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-333/poster.mov",
       posterMintUrl: "",
       name: "Arty McPainterson",
       info:
