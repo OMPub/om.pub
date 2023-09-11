@@ -2712,7 +2712,7 @@ All that's captured in Card 142 will be revealed on Sept 24th, 2023!
         "/artist-143/work-2.jpeg",
         "/artist-143/work-3.png"
       ],
-      poster: "/artist-143/poster.mov",
+      poster: "/artist-143/poster.mp4",
       posterMintUrl: "",
       name: "Hannes Hummel",
       info:
