@@ -2706,35 +2706,49 @@ All that's captured in Card 142 will be revealed on Sept 24th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 143,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-143/work-1.jpeg",
+        "/artist-143/work-2.jpeg",
+        "/artist-143/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-143/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Hannes Hummel",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Hannes Hummel is a distinguished artist and designer rooted in Germany. 
+He delves deep into the nexus between contemporary technologies and time-honored design methodologies. 
+Drawing profound inspiration from historical art movements, Hannes masterfully reinterprets them through the digital medium. 
+His recent digital artworks illuminate the intricate nature of organic structures, emphasizing symmetry, tessellations, and the mesmerizing patterns within patterns. 
+This approach showcases his unique talent for reinterpreting nature through a digital prism.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Hannes's creations have graced galleries across the globe, earning widespread critical acclaim for their groundbreaking approach and meticulous attention to detail. 
+Beyond his investments in crafting digital masterpieces, he is also an educator, offering workshops and lectures on digital and VR-design concepts. 
+His dedication to sharing his expertise has enriched the knowledge of countless students and fellow artists.
+
+Venturing into the realms of NFTs and web3, Hannes has forged collaborations with an array of brands in the fashion and tech sectors. 
+His creative capacity is evident in his partnerships with events such as New York Fashion Week and London Fashion Week.
+
+Furthermore, Hannes co-founded BLOOM, an avant-garde, artist-centric design and art collective. 
+BLOOM stands as a beacon of quality, integrity, and diversity, leading the charge in harnessing the vast potential of web3.
+
+Look for organic meme integrations in the drop on Sept 11th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Hannes' Twitter",
+          url: "https://twitter.com/hanneshummel",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Hannes' Instagram",
+          url: "https://www.instagram.com/hummel.studio",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Hannes' Website",
+          url: "https://www.hanneshummel.art/",
           target: "_blank"
         }
       ]

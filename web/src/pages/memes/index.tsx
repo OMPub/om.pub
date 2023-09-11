@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/145/artist">Meme Artist 145 - teexels</a></li>
+                <li>Artist Preview: <a href="/memes/144/artist">Meme Artist 144 - Filip Hodas</a></li>
+                <li>Artist Preview: <a href="/memes/143/artist">Meme Artist 143 - Hannes Hummel</a></li>
                 <li>Artist Preview: <a href="/memes/142/artist">Meme Artist 142 - Leyla Emektar</a></li>
                 <li>Artist Preview: <a href="/memes/141/artist">Meme Artist 141 - Bastien</a></li>
                 <li>Artist Preview: <a href="/memes/140/artist">Meme Artist 140 - Diogo Sampaio</a></li>
