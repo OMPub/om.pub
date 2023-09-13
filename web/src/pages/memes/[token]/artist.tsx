@@ -2754,13 +2754,232 @@ Look for organic meme integrations in the drop on Sept 11th, 2023!
       ]
     },
     {
+      tokenId: 144,
+      images: [
+        "/artist-144/work-1.jpg",
+        "/artist-144/work-2.mp4",
+        "/artist-144/work-3.png"
+      ],
+      poster: "/artist-144/poster.png",
+      posterMintUrl: "",
+      name: "Filip Hodas",
+      info:
+        `
+Filip Hodas is a pioneering figure in the realm of 3D art, known for his hyperreal and intricately detailed environments. 
+A trailblazer in leveraging GPU render technology, Hodas has been instrumental in pushing the boundaries of 3D art, introducing a fresh aesthetic that is an inspiration to many. 
+His signature style is evident in his "Pop Culture Dystopia" series, where he presents decaying icons from popular culture set against desolate, post-apocalyptic landscapes. 
+These digital portraits, featuring characters like Mickey Mouse, Pac-Man, and Hello Kitty, are portrayed in states of severe neglect and corrosion, symbolizing the transient nature of pop culture and the inevitable passage of time.
+
+Hodas says, "I believe nature will always find a way to survive, even if people think we can control it." 
+This sentiment is reflected in his artworks, where nature often reclaims abandoned and decaying man-made structures. 
+Hodas's journey into 3D art began with creating 2D graphics for DJs and music artists. 
+However, feeling constrained, he ventured into more personal projects, exploring the vast potential of 3D art. 
+His dedication to the craft is evident in his daily render project on Instagram, which lasted nearly 400 days and garnered significant attention, establishing him as one of the most followed 3D artists globally.
+        
+Hodas's work is not just visually captivating but also carries a deeper message. 
+His pieces often exude a sense of melancholy, capturing the essence of abandonment and decay. 
+This thematic style is a commentary on the fleeting nature of fame, consumerism, and cultural icons. 
+As Hodas puts it, his artworks, especially those from the "Pop Culture Dystopia" series, resonate with viewers as they evoke memories of childhood and the nostalgia associated with bygone eras. 
+The juxtaposition of vibrant characters in desolate settings serves as a poignant reminder of the impermanence of all things, making Hodas's art both visually stunning and deeply thought-provoking.
+
+Memetic decay may well be coming to Card 144 on Sept 13th, 2023!
+`,
+      links: [
+        {
+          name: "Filip's Twitter",
+          url: "https://twitter.com/FilipHodas",
+          target: "_blank"
+        },
+        {
+          name: "Filip's Instagram",
+          url: "https://www.instagram.com/hoodass",
+          target: "_blank"
+        },
+        {
+          name: "Filip's NFTs",
+          url: "https://superrare.com/hoodass",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
         "/artist-333/work-2.png",
         "/artist-333/work-3.jpeg"
       ],
-      poster: "/artist-333/poster.mov",
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's OS",
+          url: "https://opensea.io/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Linktree",
+          url: "https://linktr.ee/Arty",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
       posterMintUrl: "",
       name: "Arty McPainterson",
       info:
