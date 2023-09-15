@@ -2803,35 +2803,45 @@ Memetic decay may well be coming to Card 144 on Sept 13th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 145,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-145/work-1.png",
+        "/artist-145/work-2.png",
+        "/artist-145/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-145/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Teexels",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Much more than a mere manager of memetic mints, the 6529 community knows teexels as a skilled photographer and insightful artist in his own right.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Teexels.eth (aka @teexels) is a dedicated street and landscape photographer based in Greece, who has established himself as a visionary digital artist.
+His photographs invites collectors into a world where the ethereal beauty of nature and the intricacies of human ingenuity converge. 
+Through his most recent collection, he offers a bird's-eye view of the Grecian skies, captured with the fresh perspective of aerial photography. 
+These images unveil a realm where ancient landscapes stretch out to meet endless horizons, crafting a vivid tapestry of natural wonders contrasted with humanity's "inevitable" impact. 
+This thematic approach is exemplified in his works like "Rusted Remnants": a train yard threatened by an imposing storm, showcasing the coexistence of nature alongside industrial growth and decay.
+
+Teexels's artistic vision is a testament to his profound appreciation for both the natural world and human progress. 
+Whether it's the mesmerizing hues of a sunset, urban reflections, or an twisted web of roadways, his works serve as a reminder of the beauty that surrounds us, often in the most unexpected places. 
+For collectors, each piece is not just an artwork but a journey—a journey that celebrates the beauty found in nature's grandeur and mankind's achievements.
+        
+Prepare to behold the memetic masterpiece of one of our own, on Sept 15th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Teexels' Twitter",
+          url: "https://twitter.com/teexels",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Teexels' Instagram",
+          url: "https://www.instagram.com/teexels/"
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Teexels' Website",
+          url: "https://dimitrisfatisis.com/",
           target: "_blank"
         }
       ]
