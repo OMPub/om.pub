@@ -2836,7 +2836,7 @@ Prepare to behold the memetic masterpiece of one of our own, on Sept 15th, 2023!
         },
         {
           name: "Teexels' Instagram",
-          url: "https://www.instagram.com/teexels/"
+          url: "https://www.instagram.com/teexels/",
           target: "_blank"
         },
         {
