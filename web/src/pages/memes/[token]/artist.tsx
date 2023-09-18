@@ -2847,35 +2847,52 @@ Prepare to behold the memetic masterpiece of one of our own, on Sept 15th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 146,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-146/work-1.gif",
+        "/artist-146/work-2.png",
+        "/artist-146/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-146/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Vetigo",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Dive into the enigmatic world of F. Borousan, more popularly known as Vertigo. 
+From a young age, he was captivated by the fantastical realms of comics and science fiction. 
+As he matured, his artistic inclinations evolved, drawing him towards the classical arts and, notably, surrealism. 
+This passion for phantasmagorical contexts is not merely a fleeting interest; it's a profound influence that has shaped his artistic journey, fueled by surreal art, music, and films.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Vertigo is not just an artist's pseudonym; it's an alter ego, a distinct persona that contrasts starkly with Borousan's inherent nature. 
+While Borousan might shy away from social interactions, Vertigo thrives in them, perhaps because he is a creation of imagination, unburdened by the constraints of reality. 
+This duality is evident in his creations, each piece a reflection of life's observations, dreams, memories, and profound emotions. 
+His art seeks to draw in viewers, aiming to evoke and expose emotions, existential thoughts, or even unmasked fears.
+        
+A recurring theme in his artwork is the exploration of truth and uncovered identity. 
+Through description statements like "Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth," Vertigo delves into the complexities of human nature and the masks we wear. 
+His art challenges perceptions, urging viewers to confront delusions and embrace the naked truths, no matter how unsettling.
+        
+In the age of digital art, Vertigo has embraced NFTs, not just as a medium but as a testament to his desire for immortality. 
+Each piece he creates is a step towards that eternal legacy, with the hope that future generations will discover his works on the blockchain, recognizing the passion and soul of an artist who aspired to craft an entirely new world.
+        
+For collectors, Vertigo's art is not just a visual treat; it's an emotional and philosophical journey, a chance to engage with the profound musings of an artist who lived, loved, and breathed to experiment at the boundaries of reality itself.
+
+The truth of Card 146 is revealed on Sept 18th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Vertigo's Twitter",
+          url: "https://twitter.com/0x_vertigo",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Vertigo's Instagram",
+          url: "https://www.instagram.com/0xvertigo",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Vertigo's Website",
+          url: "https://0xvertigo.com",
           target: "_blank"
         }
       ]

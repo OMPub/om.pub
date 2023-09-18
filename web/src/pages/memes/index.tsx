@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/148/artist">Meme Artist 148 - SuperElmer</a></li>
+                <li>Artist Preview: <a href="/memes/147/artist">Meme Artist 147 - Rupture</a></li>
+                <li>Artist Preview: <a href="/memes/146/artist">Meme Artist 146 - Vertigo</a></li>
                 <li>Artist Preview: <a href="/memes/145/artist">Meme Artist 145 - teexels</a></li>
                 <li>Artist Preview: <a href="/memes/144/artist">Meme Artist 144 - Filip Hodas</a></li>
                 <li>Artist Preview: <a href="/memes/143/artist">Meme Artist 143 - Hannes Hummel</a></li>
