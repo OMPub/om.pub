@@ -2898,35 +2898,45 @@ The truth of Card 146 is revealed on Sept 18th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 147,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-147/work-1.png",
+        "/artist-147/work-2.webp",
+        "/artist-147/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-147/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Rupture",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Morris Vogel, known in the art world as Rupture, is a master of weaving intricate narratives that delve deep into the human experience and the complexities of our entangled intersubjective realities. 
+His works consistently explore themes of struggle, loss, and the ethereal, juxtaposed against the overwhelming nature of contemporary media and the illusions it often presents. 
+He touches upon the haunting realms of imagination and the challenges of discerning reality in a world saturated with distractions.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Vogel's artistry doesn't shy away from addressing the darker facets of society. 
+He delves into the tactics of manipulation, control, and the pervasive nature of fear, as seen in "COME AND SEE." 
+These themes resonate with his broader artistic vision, where he often portrays a world grappling with its own destructive tendencies and the dilemmas of the digital age. 
+His pieces challenge viewers to confront their innermost fears, question societal norms, and seek truth amidst chaos.
+        
+In essence, Rupture's art is a reflection of contemporary challenges, offering a unique lens through which to view the world. 
+His ability to encapsulate profound messages in his art makes him a beacon for collectors seeking depth, introspection, and a fresh perspective on the world around them.
+        
+In a new twist for Meme Card 147, Rupture will bring on-chain an acrylic-on-canvas piece he created earlier this year. Explore the artist's links to get a glimpse of it... and mint it in all it's digital glory on Sept 20th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Rupture's Twitter",
+          url: "https://twitter.com/RuptureNFT",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Rupture's Instagram",
+          url: "https://instagram.com/rupture.art",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Rupture's Website",
+          url: "https://www.morrisvogel.com",
           target: "_blank"
         }
       ]
@@ -2943,7 +2953,6 @@ What memetic narrative will Card 333 explore? We will see what is exposed on Sep
       name: "Arty McPainterson",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
 What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
 `,
