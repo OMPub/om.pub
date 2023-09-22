@@ -2977,8 +2977,8 @@ Surely meme maxis will get a memetic masterpiece in Cart 148 on Sept 22th, 2023!
           target: "_blank"
         },
         {
-          name: "Superelmer's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Superelmer's GetCraft",
+          url: "https://getcraft.com/superelmer",
           target: "_blank"
         }
       ]
