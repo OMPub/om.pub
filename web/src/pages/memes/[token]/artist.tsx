@@ -2942,33 +2942,42 @@ In a new twist for Meme Card 147, Rupture will bring on-chain an acrylic-on-canv
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 148,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-148/work-1.png",
+        "/artist-148/work-2.png",
+        "/artist-148/work-3.png",
+        "/artist-148/work-4.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-148/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Superelmer",
       info:
         `
+Superelmer stands out as a contemporary cartoon artist who seamlessly blends humor, cultural pride, and modern themes into his creations. 
+Hailing from a Filipino background, he playfully describes himself as "Half Filipino-Half Amazing," a testament to his pride in his heritage and his unique approach to art. 
+His works, which he described as "somewhat meaningful sketches" ("Mga drawing na medyo may kwenta"), revolve around a myriad of themes, from video games and comics to potent memes and everyday insights. 
+In a simple but impactful two-panel comic, he emphasizes the power of belief, suggesting that "To be successful, you only need one person to believe." 
+This sentiment, combined with his light-hearted takes on everyday situations, showcases Superelmer's ability to resonate with a broad audience. 
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+Furthermore, his collaborations with brands like Huawei and Enervon, as well as his references to modern platforms like Netflix, highlight his knack for intertwining commercial appeal with personal artistic expression. 
+In a digital age where content is abundant, Superelmer's memetic approach stands as a testament to the power of authenticity, humor, and cultural pride.
+
+Surely meme maxis will get a memetic masterpiece in Cart 148 on Sept 22th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Superelmer's Twitter",
+          url: "https://twitter.com/superelmerds",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Superelmer's Facebook",
+          url: "https://www.facebook.com/SuperElmerDS",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
+          name: "Superelmer's Linktree",
           url: "https://linktr.ee/Arty",
           target: "_blank"
         }
