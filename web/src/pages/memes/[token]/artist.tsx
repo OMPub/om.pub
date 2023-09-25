@@ -2984,35 +2984,45 @@ Surely meme maxis will get a memetic masterpiece in Cart 148 on Sept 22th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 149,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-149/work-1.png",
+        "/artist-149/work-2.png",
+        "/artist-149/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-149/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Roger Skaer",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Roger Skaer rapidly ascended to digital prominence with his insightful "Fuck Around and Find Out" meme on TikTok. 
+This meme, which cleverly illustrated via whiteboard the relationship between taking risks and discovering outcomes, amassed millions of views in a short span, establishing Roger as an internet icon. 
+His straightforward message struck a chord with many, bringing to light what we all already know: the significance of experience and exploration in understanding life's outcomes.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+The evolution of Roger's meme into the world of web3 is particularly noteworthy. 
+The decentralized nature of web3 offers a unique platform not just for artists, but many types of digital content creators, ensuring authenticity, provenance, and ownership of digital assets. 
+Roger's meme, with its widespread recognition, is a perfect fit in this space. 
+By tokenizing his meme as an NFT on platforms like Melon.ooo and The Memes by 6529, Roger ensures its digital uniqueness and traceable lineage, previous unattainable.
+        
+For collectors, owning a piece of Roger Skaer's meme isn't just about having a digital asset; it's about being part of a cultural phenomenon that has bridged the gap between traditional internet culture and the burgeoning world of decentralized digital assets. 
+Roger's meme, now immortalized as an NFT, offers collectors a blend of wit, wisdom, and a tangible link to a pivotal moment in internet history.
+
+The Memes gets ever more memetic on Sept 25th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Roger's Twitter",
+          url: "https://twitter.com/rogerskaer",
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Roger's Instagram",
+          url: "https://www.instagram.com/rogerskaer",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Roger's TikTok",
+          url: "https://www.tiktok.com/@rogerskaer",
           target: "_blank"
         }
       ]

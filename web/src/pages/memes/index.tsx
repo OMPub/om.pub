@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/151/artist">Meme Artist 151 - Killer Acid</a></li>
+                <li>Artist Preview: <a href="/memes/150/artist">Meme Artist 150 - Efdot</a></li>
+                <li>Artist Preview: <a href="/memes/149/artist">Meme Artist 149 - Roger Skaer</a></li>
                 <li>Artist Preview: <a href="/memes/148/artist">Meme Artist 148 - Superelmer</a></li>
                 <li>Artist Preview: <a href="/memes/147/artist">Meme Artist 147 - Rupture</a></li>
                 <li>Artist Preview: <a href="/memes/146/artist">Meme Artist 146 - Vertigo</a></li>
