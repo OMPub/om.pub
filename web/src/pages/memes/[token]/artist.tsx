@@ -3028,6 +3028,50 @@ The Memes gets ever more memetic on Sept 25th, 2023!
       ]
     },
     {
+      tokenId: 150,
+      images: [
+        "/artist-150/work-1.gif",
+        "/artist-150/work-2.jpeg",
+        "/artist-150/work-3.png"
+      ],
+      poster: "/artist-150/poster.png",
+      posterMintUrl: "",
+      name: "Efdot",
+      info:
+        `
+Eric Friedensohn, better known in the art world as Efdot, encapsulates the spirit and energy of street culture in his digital masterpieces. 
+Growing up with a skateboard under his feet, he spent countless hours exploring the architectural marvels of Manhattan and admiring the vibrant street art along the Hudson River. 
+He saw the city as a "visual, literal playground," where the edgy energy and art of the streets became an integral part of his creative DNA.
+
+"Like skateboarding, art is about pure expression," Efdot writes on his webpage, drawing parallels between the exhilaration of landing a new skate trick and the thrill of unveiling a fresh piece of artwork. 
+Each digital creation he crafts is a continuation of that very quest for discovery and elation that began on the streets of New York. 
+His artistic approach, marked by a unique blend of abstract and figurative styles, mirrors the unpredictable, limitless nature of skateboarding, where there are "no rules, no limitations."
+        
+Today, Efdot's art serves as a visual escape "for optimists", providing a bridge between the tactile grit of street culture and the expansive potential of the digital realm.
+All the more remarkable, Efdot's colorblindness has proven no obstacle to his artistic vision coming to life on canvas, or in a mural, or as a digital asset.
+Drawing upon his experiences of urban exploration, community outreach, and self-discovery, Efdot offers the NFT community (and more than a few big brands) a unique blend of authenticity and innovation, inviting everyone to embark on their own journey of exploration and understanding through his art.
+
+So Card 150 will surely bring some NYC energy with a positive outlook on Sept 27th, 2023!
+`,
+      links: [
+        {
+          name: "Efdot's Twitter",
+          url: "https://twitter.com/Efdot",
+          target: "_blank"
+        },
+        {
+          name: "Efdot's Instagram",
+          url: "https://www.instagram.com/Efdot/",
+          target: "_blank"
+        },
+        {
+          name: "Efdot's Website",
+          url: "https://efdot.art/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 333,
       images: [
         "/artist-333/work-1.png",
@@ -3041,7 +3085,7 @@ The Memes gets ever more memetic on Sept 25th, 2023!
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Sept 24th, 2023!
+What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
@@ -3050,13 +3094,81 @@ What memetic narrative will Card 333 explore? We will see what is exposed on Sep
           target: "_blank"
         },
         {
-          name: "Arty's OS",
-          url: "https://opensea.io/Arty",
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
           target: "_blank"
         },
         {
-          name: "Arty's Linktree",
-          url: "https://linktr.ee/Arty",
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 333,
+      images: [
+        "/artist-333/work-1.png",
+        "/artist-333/work-2.png",
+        "/artist-333/work-3.jpeg"
+      ],
+      poster: "/artist-333/poster.png",
+      posterMintUrl: "",
+      name: "Arty McPainterson",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
           target: "_blank"
         }
       ]
