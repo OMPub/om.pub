@@ -3072,35 +3072,48 @@ So Card 150 will surely bring some NYC energy with a positive outlook on Sept 27
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 151,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-151/work-1.gif",
+        "/artist-151/work-2.webp",
+        "/artist-151/work-3.gif"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-151/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Killer Acid",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Rob Corradetti, more commonly known by his artistic alias Killer Acid, is celebrated for his ability to intertwine whimsical, psychedelic, and surreal elements in his artwork. 
+His creations, deeply embedded in personal experiences and psychological themes, are also enriched by the adept incorporation of familiar memetic themes and cultural references. 
+Each artwork is not just a visual expression but a story, echoing the influences of lowbrow and psychedelic art movements. 
+In an interview with Hop Culture, Corradetti described his art as a journey marked by humor and discovery, where contemporary memes and cultural nuances are captured with his distinctive style.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
+The evolution of Killer Acid's artistry is closely tied to Corradetti's geographical and personal transitions. 
+His journey from Delaware to the bustling art scene of New York City, and eventually the serene landscapes of the West Coast, have contributed to the multifaceted nature of his creations. 
+The art is a harmonious blend of loud, irreverent elements and introspective touches, offering viewers an engaging visual and emotional experience. 
+The infusion of culturally memetic idea, captured with his own distinctive flair, adds a layer of relatability and contemporary relevance to his works.
+        
+In the realm of NFTs, Killer Acid has established himself as a force to be reckoned with, being one of the top 30 bestselling artists on SuperRare. 
+"Bong Love," his debut NFT, encapsulates his signature blend of bright, stormy colors, cartoonish psychedelia, and cultural motifs. 
+Each digital piece is a visual journey, where contemporary cultural elements are seamlessly integrated with personal and psychological themes. 
+Killer Acid's digital art portfolio stands as a testament to his ability to create art that is not only visually captivating but also rich in thematic content, bridging the personal, the psychedelic, and the cultural with finesse.
+
+And now, as season 4 of The Memes concludes with Card 151, we get to take a trip with Killer Acid on Sept 29th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Killer Acid's Twitter",
+          url: "https://twitter.com/killeracid",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Killer Acid's Instagram",
+          url: "https://www.instagram.com/killeracid",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Killer Acid's Website",
+          url: "https://killeracid.com",
           target: "_blank"
         }
       ]
@@ -3108,9 +3121,9 @@ What memetic narrative will Card 333 explore? We will see what is exposed on Oct
     {
       tokenId: 333,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-333/work-1.gif",
+        "/artist-333/work-2.webp",
+        "/artist-333/work-3.gif"
       ],
       poster: "/artist-333/poster.png",
       posterMintUrl: "",
