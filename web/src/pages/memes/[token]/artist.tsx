@@ -3125,7 +3125,7 @@ And now, as season 4 of The Memes concludes with Card 151, we get to take a trip
         "/artist-152/work-2.png",
         "/artist-152/work-3.mp4"
       ],
-      poster: "/artist-152/poster.png",
+      poster: "/artist-152/poster.mp4",
       posterMintUrl: "",
       name: "Miss AL Simpson",
       info:
