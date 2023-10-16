@@ -113,6 +113,10 @@ export default function Memes() {
               The prememe is a way to get to know the artist, and to get share our excitement about the upcoming mint.
             </p>
             <ul>
+              <li>Season 5</li>
+              <ul>
+                <li>Artist Preview: <a href="/memes/152/artist">Meme Artist 152 - Miss AL Simpson</a></li>
+              </ul>
               <li>Season 4</li>
               <ul>
                 <li>Artist Preview: <a href="/memes/151/artist">Meme Artist 151 - Killer Acid</a></li>

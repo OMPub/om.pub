@@ -3119,35 +3119,46 @@ And now, as season 4 of The Memes concludes with Card 151, we get to take a trip
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 152,
       images: [
-        "/artist-333/work-1.gif",
-        "/artist-333/work-2.webp",
-        "/artist-333/work-3.gif"
+        "/artist-152/work-1.webp",
+        "/artist-152/work-2.png",
+        "/artist-152/work-3.mp4"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-152/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "Miss AL Simpson",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Miss AL Simpson, an award-winning cryptoartist based in Edinburgh, has carved a distinctive niche in the highest tiers of NFT art. 
+Renowned for her innovative style, Simpson seamlessly merges the raw abstraction of traditional oil painting with the precision of AI-generated imagery, creating works that delve deep into themes of memory, time, and perception. 
+Her highly-stylized approach, often described as a blend of digital graffiti reminiscent of legendary artists Basquiat, Rauschenberg, and Kippenberger, often integrates animated 3D collage or historical motifs, establishing a signature vibe that has been celebrated in esteemed publications and showcased in major global art centers, from London to Tokyo.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
+Miss AL Simpson's artistic prowess goes beyond just blending mediums; she deftly tackles the intricate portrayal of women in art. 
+Drawing from her personal experiences and insights, her works often depict the depth, complexity, and multifaceted nature of women, eschewing traditional tropes and objectification. 
+Her artistic techniques of layered collage, animated blends, and overpaintign provide both a tangible presence to intangible memories and an introspective exploration of womanhood within the fluid tapestry of time. 
+As she challenges conventional narratives and showcases women through a fresh, empathetic lens, Simpson reminds us of art's profound capability to enrich our perception, urging us to see the world with depth, nuance, and a humanistic understanding.
+
+From her early days as a struggling artist in Edinburgh to her ascent as a top-ranked figure on platforms like Super Rare Art, Simpson's journey exemplifies resilience and innovation. 
+Her background, which spans a transition from corporate law to art, coupled with the challenges of motherhood, has deeply informed her work. 
+Today, as both a pioneer and an advocate for the democratization of art, Miss AL Simpson stands as a testament to the transformative potential of creativity in the NFT space, inviting collectors to reevaluate traditional paradigms and embrace the boundless horizons of crypto art.
+
+Look for a great depth of insight in Card 152, revealing on Oct 16th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Miss AL's Twitter",
+          url: "https://twitter.com/missalsimpson",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Miss AL's Instagram",
+          url: "https://www.instagram.com/annalouisesimpson",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Miss AL's Website",
+          url: "https://www.missalsimpsonartist.com/",
           target: "_blank"
         }
       ]
