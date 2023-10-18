@@ -3131,7 +3131,7 @@ And now, as season 4 of The Memes concludes with Card 151, we get to take a trip
       info:
         `
 Miss AL Simpson, an award-winning cryptoartist based in Edinburgh, has carved a distinctive niche in the highest tiers of NFT art. 
-Renowned for her innovative style, Simpson seamlessly merges the raw abstraction of traditional oil painting with the precision of AI-generated imagery, creating works that delve deep into themes of memory, time, and perception. 
+Renowned for her innovative ⚙️style, Simpson seamlessly merges the raw abstraction of traditional oil painting with the precision of AI-generated imagery, creating works that delve deep into themes of memory, time, and perception. 
 Her highly-stylized approach, often described as a blend of digital graffiti reminiscent of legendary artists Basquiat, Rauschenberg, and Kippenberger, often integrates animated 3D collage or historical motifs, establishing a signature vibe that has been celebrated in esteemed publications and showcased in major global art centers, from London to Tokyo.
 
 Miss AL Simpson's artistic prowess goes beyond just blending mediums; she deftly tackles the intricate portrayal of women in art. 
@@ -3164,20 +3164,234 @@ Look for a great depth of insight in Card 152, revealing on Oct 16th, 2023!
       ]
     },
     {
-      tokenId: 333,
+      tokenId: 153,
       images: [
-        "/artist-333/work-1.png",
-        "/artist-333/work-2.png",
-        "/artist-333/work-3.jpeg"
+        "/artist-153/work-1.png",
+        "/artist-153/work-2.gif",
+        "/artist-153/work-3.png"
       ],
-      poster: "/artist-333/poster.png",
+      poster: "/artist-153/poster.png",
       posterMintUrl: "",
-      name: "Arty McPainterson",
+      name: "PhotonTide",
+      info:
+        `
+Photon Tide, known by the pseudonym Pho, is a mixed-media artist and musician whose work encompasses a broad spectrum of creative ventures, including graphic and motion design, writing, music, and directing. 
+His digital art is recognized for its psychedelic, immersive, and experimental style, which draws connoisseurs into a realm of trance and self-exploration. 
+
+The thematic core of Photon Tide's work revolves around self-exploration, the chaotic nature of existence, and the relentless pursuit of authentic self-expression. 
+Through pieces like "seconds after death, I left my body" and "the illusion of control," Pho delves into introspective and existential themes. 
+His work on "chaos theory" reflects an interest in the aesthetics of chaos and the beauty that can emerge from disorder, a theme that resonates through other pieces which explore the impact of seemingly insignificant choices on the larger tapestry of life.
+        
+Photon Tide's artistic journey reflects a continuous endeavor towards self-actualization, as seen in "time to be who you were meant to be." 
+This piece, born at a pivotal moment in his life, symbolizes the triumph of self-expression over conformity, encouraging individuals to embrace their true selves. 
+His work not only serves as a mirror to his own life experiences but also as a beacon encouraging others on their path of self-discovery. 
+Through his visionary digital creations, Photon Tide provides a vivid exploration of life's intricacies, making his work a rich domain for those seeking a deeper understanding of self and the chaotic yet beautiful nature of existence.
+
+What will we discover about ourselves in Card 153 by Pho? Embrace the chaos on Oct 18th, 2023!
+`,
+      links: [
+        {
+          name: "PhotonTide's Twitter",
+          url: "https://twitter.com/photonisdead",
+          target: "_blank"
+        },
+        {
+          name: "PhotonTide's Instagram",
+          url: "https://www.instagram.com/photontide",
+          target: "_blank"
+        },
+        {
+          name: "PhotonTide's Website",
+          url: "https://www.photonisdead.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 333 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 159,
+      images: [
+        "/artist-159/work-1.png",
+        "/artist-159/work-2.mp4",
+        "/artist-159/work-3.jpeg"
+      ],
+      poster: "/artist-159/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
