@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/153/artist">Meme Artist 153 - PhotonTide</a></li>
                 <li>Artist Preview: <a href="/memes/152/artist">Meme Artist 152 - Miss AL Simpson</a></li>
               </ul>
               <li>Season 4</li>
