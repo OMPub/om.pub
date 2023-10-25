@@ -115,6 +115,10 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/157/artist">Meme Artist 157 - Mark Constantine Inducil</a></li>
+                <li>Artist Preview: <a href="/memes/156/artist">Meme Artist 156 - BÈFÈ The Mad</a></li>
+                <li>Artist Preview: <a href="/memes/155/artist">Meme Artist 155 - Redrum</a></li>
+                <li>Artist Preview: <a href="/memes/154/artist">Meme Artist 154 - PRGuitarman</a></li>
                 <li>Artist Preview: <a href="/memes/153/artist">Meme Artist 153 - PhotonTide</a></li>
                 <li>Artist Preview: <a href="/memes/152/artist">Meme Artist 152 - Miss AL Simpson</a></li>
               </ul>
