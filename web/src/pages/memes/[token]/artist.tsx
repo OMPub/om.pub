@@ -3208,103 +3208,124 @@ What will we discover about ourselves in Card 153 by Pho? Embrace the chaos on O
       ]
     },
     {
-      tokenId: 159,
+      tokenId: 154,
       images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
+        "/artist-154/work-1.png",
+        "/artist-154/work-2.mp4",
+        "/artist-154/work-3.jpeg"
       ],
-      poster: "/artist-159/poster.png",
+      poster: "/artist-154/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "PRGuitarman",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 154 explore? We will see what is mintable on Oct 20th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "PRGuitarman's Twitter",
+          url: "https://twitter.com/prguitarman",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "PRGuitarman's Genesis on Foundation",
+          url: "https://foundation.app/@NyanCat",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "PRGuitarman's Website",
+          url: "https://www.nyan.cat",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 159,
+      tokenId: 155,
       images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
+        "/artist-155/work-1.webp",
+        "/artist-155/work-2.png",
+        "/artist-155/work-3.png"
       ],
-      poster: "/artist-159/poster.png",
+      poster: "/artist-155/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "RedruM",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Redrum, a name that resonates with danger and mystery, has firmly established themselves as a prolific figure in the realm of NFT artistry. 
+With a distinct and powerful visual style, their work delves deep into thematic explorations of contrast — between the organic and the artificial, the known and the unknown, and the serene versus the formidable. 
+Each piece serves as a tableau of vibrant reds, a color choice that not only anchors their signature style but also evokes a myriad of emotions, from passionate fervor to latent danger.
 
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+In Redrum's universe, viewers are often invited into seemingly surreal landscapes where the familiar and the alien coexist in a tenuous balance. 
+Animals, whether they are of this world or reminiscent of otherworldly beings, often interact with enigmatic humanoid figures, prompting introspection about human nature, our relationship with the world, and the masks we don to navigate it. 
+This intertwining of creatures and man-made elements, set against stark backdrops, constructs a narrative that is both dreamlike and disconcertingly realistic.
+        
+Yet, for all its vivid imagery, Redrum's artistry is not merely about the visual spectacle. 
+The layers of symbolism in each piece beckon viewers to probe deeper, to question and to reflect. 
+The recurring themes of anonymity, the juxtaposition of nature versus civilization, and the underlying currents of emotion make Redrum's works a compelling journey into the psyche of modern existence. 
+Through their unique lens, we are challenged to confront our perceptions, our fears, and our hopes in this ever-evolving digital age.
+
+How will Card 155 bring the redness? We will see on Oct 23rd, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Redrum's Twitter",
+          url: "https://twitter.com/redrumxart",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Redrum's Linktree",
+          url: "https://linktr.ee/redrumxnft",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Redrum's Website",
+          url: "https://linktr.ee/redrumxnft",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 159,
+      tokenId: 156,
       images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
+        "/artist-156/work-1.gif",
+        "/artist-156/work-2.png",
+        "/artist-156/work-3.mp4"
       ],
-      poster: "/artist-159/poster.png",
+      poster: "/artist-156/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "BÈFÈ The Mad",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+BÈFÈ The Mad presents as a contemporary artist whose works delve deep into the human psyche, revealing a multifaceted exploration of emotion, form, and the juxtaposition of the ordinary with the surreal. 
+One cannot help but be drawn into the haunting visuals of "Insomnious Thoughts," where the canvas comes alive with the melancholy of the enigmatic face, each line and shadow revealing an underlying tension and vulnerability. 
+This powerful portrayal of internal struggle, set against an atmospheric backdrop, showcases BÈFÈ's ability to tap into shared human experiences, making them both intimate and universal.
 
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+In the vastness of space depicted in another piece, BÈFÈ raises many questions by presenting a figure seemingly adrift. 
+The silhouette, floating upside down amid a star-studded expanse, encapsulates a sense of weightlessness and solitude. 
+This contrast between the human form and the boundless universe prompts viewers to reflect on humanity's place in the cosmos, and perhaps, the existential questions that accompany such contemplation. 
+Through this artwork, BÈFÈ crafts a narrative of dislocation and wonder, pushing boundaries and beckoning audiences to venture into the unknown.
+        
+Further delving into the realms of the surreal, BÈFÈ presents yet another captivating piece: a man in a crisp suit, poised on a chair, seemingly suspended in a void of stark whiteness. 
+The dynamic tension within the pose, combined with the isolation of the setting, paints a scene that is both playful and introspective. 
+The heavy boot-like shoes, the starkness of the suit, and the minimalist chair all intertwine, creating a delicate dance between reality and fantasy. 
+Through such evocative visuals, BÈFÈ The Mad consistently invites viewers to embark on a journey where the boundaries of perception are blurred, and the realms of imagination are boundless.
+
+What memetic madness will Card 156 present? We will see on Oct 25th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "BÈFÈ's Twitter",
+          url: "https://twitter.com/befethemad",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "BÈFÈ's Linktree",
+          url: "https://linktr.ee/befeart/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "BÈFÈ's Website",
+          url: "https://linktr.ee/befeart",
           target: "_blank"
         }
       ]
