@@ -3333,18 +3333,55 @@ What memetic madness will Card 156 present? We will see on Oct 25th, 2023!
     {
       tokenId: 159,
       images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
+        "/artist-159/work-1.gif",
+        "/artist-159/work-2.webp",
+        "/artist-159/work-3.webp"
       ],
-      poster: "/artist-159/poster.png",
+      poster: "/artist-159/poster.mp4",
+      posterMintUrl: "",
+      name: "Des Lucréce",
+      info:
+        `
+Delve into the monster-filled realm of Des Lucréce, an artist whose creations uniquely juxtapose the anguish of "No Home Center" with the vibrancy of contemporary digital artistry. 
+Drawing inspiration from legends like Basquiat, Keith Haring, and the personal nuances of his own multicultural experiences, Lucréce crafts a world where monsters signify the complexities of identity and intertwined lines echo the interconnectedness of our globalized era. 
+Each piece, distictive in its bold use of color and glitch-monsters, not only challenges the viewer's perception of belonging and desire but also beckons them to reflect on the themes of diaspora, xenophobia, and the eternal human quest for self-understanding. 
+Welcome to the captivating odyssey that is Des Lucréce's artistic vision!
+
+What kind of Halloween treats will Card 159 be? Come and knock on the door on Oct 30th, 2023!
+`,
+      links: [
+        {
+          name: "Des Lucréce's Twitter",
+          url: "https://twitter.com/deslucrece",
+          target: "_blank"
+        },
+        {
+          name: "Des Lucréce's SR",
+          url: "https://superrare.com/deslucrece",
+          target: "_blank"
+        },
+        {
+          name: "Des Lucréce's Website",
+          url: "https://deslucrece.super.site/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 161,
+      images: [
+        "/artist-161/work-1.png",
+        "/artist-161/work-2.mp4",
+        "/artist-161/work-3.jpeg"
+      ],
+      poster: "/artist-161/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 161 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
@@ -3365,54 +3402,20 @@ What memetic narrative will Card 159 explore? We will see what is exposed on Oct
       ]
     },
     {
-      tokenId: 159,
+      tokenId: 161,
       images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
+        "/artist-161/work-1.png",
+        "/artist-161/work-2.mp4",
+        "/artist-161/work-3.jpeg"
       ],
-      poster: "/artist-159/poster.png",
+      poster: "/artist-161/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
-`,
-      links: [
-        {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
-          target: "_blank"
-        },
-        {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
-          target: "_blank"
-        },
-        {
-          name: "Arty's Website",
-          url: "https://Arty.com",
-          target: "_blank"
-        }
-      ]
-    },
-    {
-      tokenId: 159,
-      images: [
-        "/artist-159/work-1.png",
-        "/artist-159/work-2.mp4",
-        "/artist-159/work-3.jpeg"
-      ],
-      poster: "/artist-159/poster.png",
-      posterMintUrl: "",
-      name: "Arty",
-      info:
-        `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 159 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 161 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {

@@ -115,7 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
-                <li>Artist Preview: <a href="/memes/157/artist">Meme Artist 157 - Mark Constantine Inducil</a></li>
+                <li>Artist Preview: <a href="/memes/159/artist">Meme Artist 159 - Des Lucréce</a></li>
+                <li>Artist Preview: <a href="/memes/158/artist">Meme Artist 158 - Mark Constantine Inducil</a></li>
+                <li>Artist Preview: <a href="/memes/157/artist">Meme Artist 157 - @6529er</a></li>
                 <li>Artist Preview: <a href="/memes/156/artist">Meme Artist 156 - BÈFÈ The Mad</a></li>
                 <li>Artist Preview: <a href="/memes/155/artist">Meme Artist 155 - Redrum</a></li>
                 <li>Artist Preview: <a href="/memes/154/artist">Meme Artist 154 - PRGuitarman</a></li>
