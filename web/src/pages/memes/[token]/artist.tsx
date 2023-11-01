@@ -3368,35 +3368,50 @@ What kind of Halloween treats will Card 159 be? Come and knock on the door on Oc
       ]
     },
     {
-      tokenId: 161,
+      tokenId: 160,
       images: [
-        "/artist-161/work-1.png",
-        "/artist-161/work-2.mp4",
-        "/artist-161/work-3.jpeg"
+        "/artist-160/work-1.jpeg",
+        "/artist-160/work-2.jpeg",
+        "/artist-160/work-3.jpeg"
       ],
-      poster: "/artist-161/poster.png",
+      poster: "/artist-160/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "fesq",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Felipe Queiroz, known in the art world as Fesq, is a self-taught Brazilian Art Director and 3D Artist based in Rio de Janeiro. 
+His digital mastery is a blend of self-exploration and the cosmic realm, providing powerful, visually engaging artwork. 
+Fesq is recognized for his use of a simplistic three-color palette to render futuristic stills and animations that immerse viewers in a matrix-like scenario. 
+His artistry delves into a range of themes from the critical, such as technological disruption in dystopian settings, to the sentimental, exploring the intimacy of human emotions. 
+Encouraged by the renowned digital artist Beeple, Fesq's commitment to daily 3D art creation has honed his skills and developed his unique style.
 
-What memetic narrative will Card 161 explore? We will see what is exposed on Oct 14th, 2023!
+Analyzing Fesq's work unveils a profound exploration of existential and introspective themes. 
+In one image, the juxtaposition of cosmic purples and fiery reds against a towering spiraled red pillar divides the composition, hinting at the complexity and depth of human isolation within a broader cosmic narrative. 
+Another piece, dominated by a colossal, skull-like rendering, faces down themes of life, death, and interconnectedness, symbolizing mortality and collective memory against a ethereal backdrop. 
+The imagery Fesq employs, filled with silhouetted figures and cosmic elements, invites a contemplation on themes of existence, consciousness, and the universe.
+        
+Fesq's artwork is not only a visual feast but also an invitation for deeper exploration of meaning. 
+His use of color contrasts, compelling shapes, and silhouetted figures are signature elements that draw viewers into a narrative far beyond the surface. 
+With exhibitions like "Journey to Self" showcased at significant venues like Beeple's studio grand opening, Fesq is progressively making a notable imprint in the digital art and NFT space. 
+
+Collectors new to his work will find a harmonious blend of the cosmic, the cerebral, and the introspective, intertwined with visually stunning elements that stimulate both aesthetic appreciation and philosophical pondering.
+
+We can likely count on Card 160 showing up in purples, reds, and blues... But meme theme? We find out on Nov 1st, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "fesq's Twitter",
+          url: "https://twitter.com/iamfesq",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "fesq's Instagram",
+          url: "https://www.instagram.com/iamfesq",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "fesq's Website",
+          url: "https://www.iamfesq.com/",
           target: "_blank"
         }
       ]
