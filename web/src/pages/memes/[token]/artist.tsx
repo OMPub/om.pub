@@ -3419,18 +3419,301 @@ We can likely count on Card 160 showing up in purples, reds, and blues... But me
     {
       tokenId: 161,
       images: [
-        "/artist-161/work-1.png",
+        "/artist-161/work-1.mp4",
         "/artist-161/work-2.mp4",
-        "/artist-161/work-3.jpeg"
+        "/artist-161/work-3.mp4"
       ],
       poster: "/artist-161/poster.png",
+      posterMintUrl: "",
+      name: "Noealz",
+      info:
+        `
+Noe Alonzo, known in the digital realm as @Noealz, is a captivating NFT artist whose still and animated photographic works resonate with depth and a sense of exploration. 
+His style, heavily influenced by rainy cyberpunk and infrared photography, channels a vivid blend of colors, palettes embracing the overstimulating neon worlds of urban Asia. 
+Growing up in a small city in South Texas, his journey from early financial struggles to self-taught photography in Korea, reveals a narrative of resilience and self-discovery, which distinctly colors his artistic vision.
+
+In "Joy of Missing Out", @Noealz explores the essence of real-world experiences amidst the transient pursuits of material wealth during our "deflationary" lifetimes. 
+Meanwhile, "The Light" reflects his altruistic spirit, dedicating the piece to frontline workers during the 2020 Coronavirus epidemic, thus symbolizing hope amidst adversity. 
+His storytelling transcends mere visual allure, embedding a message reflected in rainy streets from so many pieces that nudges the audience towards a deeper societal or personal introspection.
+        
+His venture into the NFT space is also a testament to his evolving artistic narrative. 
+In "Yeong-Kwang Chemical", @Noealz portrays his continual quest for technical growth and the influence of cyberpunk and neon-noir aesthetics on his work. 
+His inspirations drawn from iconic dystopian narratives like Bladerunner and Ghost in the Shell, are vividly encapsulated in his pieces, melding the gritty reality of a futuristic corporate-dominated world with the profound yet subtle societal messages he wishes to convey. 
+Through his NFTs, @Noealz invites collectors into a contemplative journey, mirroring both the aesthetic allure and the evocative messages that define his digital artistry.
+        
+What memetic narrative will Card 161 reflect? We get to behold it on Nov 3rd, 2023!
+`,
+      links: [
+        {
+          name: "Noealz's Twitter",
+          url: "https://twitter.com/Noealz",
+          target: "_blank"
+        },
+        {
+          name: "Noealz's OnCyber Gallery",
+          url: "https://oncyber.io/studio?inviteId=NuHdob0tEbiQit7gSwHD",
+          target: "_blank"
+        },
+        {
+          name: "Noealz's Website",
+          url: "https://noealz.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 161 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
