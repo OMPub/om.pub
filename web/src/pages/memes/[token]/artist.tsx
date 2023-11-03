@@ -3419,9 +3419,9 @@ We can likely count on Card 160 showing up in purples, reds, and blues... But me
     {
       tokenId: 161,
       images: [
-        "/artist-161/work-1.mp4",
-        "/artist-161/work-2.mp4",
-        "/artist-161/work-3.mp4"
+        "/artist-161/work-1.gif",
+        "/artist-161/work-2.gif",
+        "/artist-161/work-3.gif"
       ],
       poster: "/artist-161/poster.png",
       posterMintUrl: "",
