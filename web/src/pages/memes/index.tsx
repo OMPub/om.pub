@@ -115,6 +115,9 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/164/artist">Meme Artist 164 - Jonathan Nash</a></li>
+                <li>Artist Preview: <a href="/memes/163/artist">Meme Artist 163 - Camila Nogueira</a></li>
+                <li>Artist Preview: <a href="/memes/162/artist">Meme Artist 162 - Eszter Lakatos</a></li>
                 <li>Artist Preview: <a href="/memes/161/artist">Meme Artist 161 - Noealz</a></li>
                 <li>Artist Preview: <a href="/memes/160/artist">Meme Artist 160 - fesq</a></li>
                 <li>Artist Preview: <a href="/memes/159/artist">Meme Artist 159 - Des Lucréce</a></li>

@@ -3462,102 +3462,102 @@ What memetic narrative will Card 161 reflect? We get to behold it on Nov 3rd, 20
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 162,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-162/work-1.png",
+        "/artist-162/work-2.mp4",
+        "/artist-162/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-162/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Eszter Lakatos",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Tell me about the NFT artist Eszter Lakatos, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 162 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Eszter's Twitter",
+          url: "https://twitter.com/8r122",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
+          name: "Eszter's Instagram",
           url: "https://www.instagram.com/Arty/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
+          name: "Eszter's Website",
           url: "https://Arty.com",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 163,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-163/work-1.png",
+        "/artist-163/work-2.mp4",
+        "/artist-163/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-163/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Camila Nogueira",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Tell me about the NFT artist Camila Nogueira, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 163 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Camila's Twitter",
+          url: "https://twitter.com/camila_artwork",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
+          name: "Camila's Instagram",
           url: "https://www.instagram.com/Arty/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
+          name: "Camila's Website",
           url: "https://Arty.com",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 164,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-164/work-1.png",
+        "/artist-164/work-2.mp4",
+        "/artist-164/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-164/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Jonathan Nash",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Tell me about the NFT artist Jonathan Nash, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 164 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Jonathan's Twitter",
+          url: "https://twitter.com/offshoot3D",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
+          name: "Jonathan's Instagram",
           url: "https://www.instagram.com/Arty/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
+          name: "Jonathan's Website",
           url: "https://Arty.com",
           target: "_blank"
         }
