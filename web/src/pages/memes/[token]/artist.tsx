@@ -3473,9 +3473,7 @@ What memetic narrative will Card 161 reflect? We get to behold it on Nov 3rd, 20
       name: "Eszter Lakatos",
       info:
         `
-Tell me about the NFT artist Eszter Lakatos, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 162 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic styles will Card 162 explore? We will see what is revealed on Nov 6th, 2023!
 `,
       links: [
         {
@@ -3507,9 +3505,7 @@ What memetic narrative will Card 162 explore? We will see what is exposed on Oct
       name: "Camila Nogueira",
       info:
         `
-Tell me about the NFT artist Camila Nogueira, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 163 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic themes will Card 163 explore? We will see what is revealed on Nov 8th, 2023!
 `,
       links: [
         {
@@ -3541,9 +3537,7 @@ What memetic narrative will Card 163 explore? We will see what is exposed on Oct
       name: "Jonathan Nash",
       info:
         `
-Tell me about the NFT artist Jonathan Nash, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 164 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 164 explore? We will see what is revealed on Nov 10th, 2023!
 `,
       links: [
         {
@@ -3564,69 +3558,81 @@ What memetic narrative will Card 164 explore? We will see what is exposed on Oct
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 165,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-171/work-1.jpeg",
+        "/artist-171/work-2.jpeg",
+        "/artist-171/work-3.mp4"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-165/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Giulio Aprin",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Tell me about the NFT artist Giulio Aprin, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 165 explore? We will see what is exposed on Oct 14th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Giulio's Twitter",
+          url: "https://twitter.com/guiloaprin",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Giulio's Instagram",
+          url: "https://instagram.com/giulioaprin",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Giulio's Website",
+          url: "https://giulioaprin.xyz",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 166,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-166/work-1.png",
+        "/artist-166/work-2.png",
+        "/artist-166/work-3.png"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-166/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Sasha Katz",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Sasha Katz, an Athens-based digital artist, emerges as a distinctive voice in the digital art scene, best known for her evocative 3D renderings that blend the boundaries between the bodies and dreams. 
+Her artistic narrative is deeply rooted in the exploration of female identity, characterized by a poignant blend of intimate tenderness and physical fragility. 
+Katz's creations often reflect her personal experiences and views on beauty standards, challenging societal norms and embracing a spectrum of unconventional beauty through her digital characters. 
+Her work, while resonating with a deeply human texture, maintains a deliberate distance from reality, inviting a dialogue about the fluidity of identity in the modern age.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+Katz's stylistic choices are heavily influenced by her background in illustration and her fascination with the 3D digital space. 
+Her transition from pixel art to intricate 3D models showcases a journey through various forms of digital expression. 
+Utilizing platforms like Tumblr, Katz has honed a distinctive style that incorporates elements of kitsch, camp, and art deco, alongside a profound appreciation for impressionism and new aesthetics. 
+
+For new collectors, Katz's work represents not only a visual investment but also an emotional and intellectual one. 
+Her artworks serve as a conduit for contemporary themes such as sensuality, empowerment, and the deconstruction of sexual standards, all while employing a blend of old-school digital techniques and modern 3D modeling. 
+Collecting a piece by Sasha Katz means participating in a broader conversation about the digital representation of femininity and the role of art in the ongoing discourse around personal and societal identity. 
+Her works are a celebration of a queer narrative and also a collective experience, crafted within the infinite NFT landscape.
+        
+Card 166 will surely take us to new perspectives, when all is exposed on Nov 15th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Sasha's Twitter",
+          url: "https://twitter.com/wonderkatzi",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Sasha's Instagram",
+          url: "https://www.instagram.com/wonderkatzi",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Sasha's Website",
+          url: "https://sashakatz.com/",
           target: "_blank"
         }
       ]
