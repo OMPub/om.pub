@@ -3638,35 +3638,48 @@ Card 166 will surely take us to new perspectives, when all is exposed on Nov 15t
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 167,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-167/work-1.png",
+        "/artist-167/work-2.mp4",
+        "/artist-167/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-167/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "@toadswiback",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Collectors new to the work of Mark Wilson, Indiana-based artist and writer known as diewiththemostlikes, may not be prepared for the unsettling journey into the heart of contemporary satire and social commentary. 
+Wilson's style is immediately recognizable for its raw and unapologetic portrayal of American consumer culture, often served with a side of dark humor and grotesque exaggeration. 
+His digital paintings bustle with caricatured figures and absurd juxtapositions (vibes of corporate logos cross-shredded with a meat zine) that highlight the excesses and oddities of modern life. 
+These jpegs but memetic narratives that compel viewers to confront uncomfortable truths about the world around them, all while navigating through a tangle of surprising details and twisted forms that are as thought-provoking as they are visually arresting.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+The thematic messages in Wilson's art are deeply rooted in the mundane yet bizarre realities of today's daily existence. 
+He delves into themes of consumption, digital obsession, and the commodification of the human experience, portraying a society eager to devour and be devoured by the ever-churning machinery of capitalism and media. 
+The figures in his work, often distorted reflections of the human form, are enveloped in scenes of both the familiar and the surreal, suggesting a blurring line between harsh realities and the life ads tell us to lead. 
+His art acts as a macroscope, to reveal the world as it is perceived through the haze of digital screens and the relentless pursuit of our salvation: more likes.
+        
+What makes Wilson's style truly distinctive is his ability to wield irony and satire not merely as artistic tools but as a language through which he communicates with his audience. 
+His art (and long-form writing) is an unflinching exploration on the state of the human condition, delivered with a wit and candor that is as engaging as it is confronting. 
+Each piece is an invitation to explore not just an image but a story—a story that questions, critiques, and often mocks the very essence of what it means to exist in a world oversaturated with information yet starving for meaning. 
+For collectors, Wilson's work is more than an aesthetic choice; it's a statement, a rebel's megaphone, and a stair-step on the artist's relentless quest to document the madness of the times we live in.
+        
+Prepare yourself for the madness of Card 167, hitting you in the eyeballs on Nov 17th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "DWTML's Twitter",
+          url: "https://twitter.com/toadswiback",
           target: "_blank"
         },
         {
           name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          url: "https://instagram.com/diewiththemostlikes/",
           target: "_blank"
         },
         {
           name: "Arty's Website",
-          url: "https://Arty.com",
+          url: "https://onetie-alltie.com",
           target: "_blank"
         }
       ]
