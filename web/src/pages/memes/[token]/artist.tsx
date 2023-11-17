@@ -3640,9 +3640,9 @@ Card 166 will surely take us to new perspectives, when all is exposed on Nov 15t
     {
       tokenId: 167,
       images: [
-        "/artist-167/work-1.png",
-        "/artist-167/work-2.mp4",
-        "/artist-167/work-3.jpeg"
+        "/artist-167/work-1.jpeg",
+        "/artist-167/work-2.jpeg",
+        "/artist-167/work-3.gif"
       ],
       poster: "/artist-167/poster.png",
       posterMintUrl: "",
