@@ -3674,12 +3674,12 @@ Prepare yourself for the madness of Card 167, hitting you in the eyeballs on Nov
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
+          name: "DWTML's Instagram",
           url: "https://instagram.com/diewiththemostlikes/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
+          name: "DWTML's Website",
           url: "https://onetie-alltie.com",
           target: "_blank"
         }
