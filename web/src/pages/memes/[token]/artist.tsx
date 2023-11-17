@@ -3661,7 +3661,8 @@ His art acts as a macroscope, to reveal the world as it is perceived through the
         
 What makes Wilson's style truly distinctive is his ability to wield irony and satire not merely as artistic tools but as a language through which he communicates with his audience. 
 His art (and long-form writing) is an unflinching exploration on the state of the human condition, delivered with a wit and candor that is as engaging as it is confronting. 
-Each piece is an invitation to explore not just an image but a story—a story that questions, critiques, and often mocks the very essence of what it means to exist in a world oversaturated with information yet starving for meaning. 
+Don't miss his take on rememes of class 6529 cards! 
+Each of his creations is an invitation to explore not just an image but a story—a story that questions, critiques, and often mocks the very essence of what it means to exist in a world oversaturated with information yet starving for meaning. 
 For collectors, Wilson's work is more than an aesthetic choice; it's a statement, a rebel's megaphone, and a stair-step on the artist's relentless quest to document the madness of the times we live in.
         
 Prepare yourself for the madness of Card 167, hitting you in the eyeballs on Nov 17th, 2023!
