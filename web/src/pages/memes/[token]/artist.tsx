@@ -3686,35 +3686,46 @@ Prepare yourself for the madness of Card 167, hitting you in the eyeballs on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 168,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-168/work-1.jpg",
+        "/artist-168/work-2.gif",
+        "/artist-168/work-3.jpg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-168/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Li Boar",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Embarking on a journey through the digital landscapes crafted by @liboar is an invitation into a world where the boundaries of time, culture, and reality blur into a vivid tapestry of color and imagination. 
+Known for a distinctive style that marries chromatic depth with a reverence for artistic heritage, Li's creations are in tension between historic artistic movements and the limitless possibilities of digital expression and gamelike worlds. 
+The works are intricate collages of references, blending elements of surrealism, impossible architecture, and narrative art into a unique digital vernacular.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+Thematically, Li Boar (a Transylvanian), navigates the realms of myth, literature, and existential musing with a fearless and playful hand. 
+The canvases become arenas where historical motifs, literary references, and personal tributes coalesce into intricate stories. 
+Whether it's reimagining the works of Giger or paying homage to weird fiction, Li's art is a portal to realms that are at once eerily familiar and startlingly novel. 
+Collectors are not merely acquiring a piece of digital art; they are inheriting a segment of a broader narrative that the artist weaves across his oeuvre.
+        
+Li presents an opportunity to engage with art that is both a visual spectacle and a cerebral exploration. 
+The style is immediately recognizable, characterized by its isometric perspectives, lush color palettes, and a harmony of forms that challenge conventional perception. 
+The themes often tread the line between the macabre and the fantastical, the real and the surreal, inviting a contemplation that is as much about the internal world of the viewer as it is about the external vision of the artist. 
+
+On Nov 20th, 2023 we get to see what imaginative worlds Li will bring to The Memes in Card 168!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Li's Twitter",
+          url: "https://twitter.com/liboar",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Li's Ninfa",
+          url: "https://ninfa.io/@LiBoar/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Li's Links",
+          url: "https://lynkfire.com/liboar",
           target: "_blank"
         }
       ]
