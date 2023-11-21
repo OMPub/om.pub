@@ -3731,6 +3731,86 @@ On Nov 20th, 2023 we get to see what imaginative worlds Li will bring to The Mem
       ]
     },
     {
+      tokenId: 169,
+      images: [
+        "/artist-169/work-1.png",
+        "/artist-169/work-2.png",
+        "/artist-169/work-3.png",
+        "/artist-169/work-4.png",
+        "/artist-169/work-5.png"
+      ],
+      poster: "/artist-169/poster.png",
+      posterMintUrl: "",
+      name: "Dylan Wade",
+      info:
+        `
+Dylan Wade is a digital artist whose creative spark is ignited by nostalgia and the emotional depth of personal memories. 
+His artistic journey began with personal videos in his teens, capturing life's fleeting moments, a practice that has profoundly influenced his current digital artwork. 
+With a background in video, his work is marked by a keen sense of lighting and perspective, aimed at creating immersive scenes that resonate with the viewers' own experiences.
+
+Transitioning into digital art at 26, Wade embraced a minimalistic style after years of videography, meticulously learning the tools of Adobe Illustrator to bring his visions to life. 
+His pieces often start with deeply personal inspirations, like the "Winter Wonderland," based on his childhood street. 
+This personal touch brings a unique authenticity to his art, inviting collectors to connect with the universal emotions encapsulated in his work.
+
+For new collectors, Dylan Wade's artwork serves as a profound exploration of nostalgia through digital mediums. 
+Each piece is a careful composition of simplified forms and a deliberate simplified color palette. 
+Wade's art, with its roots in personal history and everyday moments, transcends the ordinary, inviting viewers to find a piece of their own story within his suggestive landscapes. 
+His work is not just a visual experience; it's a reflective journey that resonates with the collective memory and stirs a deep-seated recognition in us all.
+
+Will Card 169 awaken nostalgia within you? We find out on Nov 22th, 2023!
+        `,
+      links: [
+        {
+          name: "Dylan's Twitter",
+          url: "https://twitter.com/dylanwadefilm",
+          target: "_blank"
+        },
+        {
+          name: "Dylan's Foundation",
+          url: "https://foundation.app/collection/dylanwadevol2",
+          target: "_blank"
+        },
+        {
+          name: "Dylan's Website",
+          url: "https://dylanwade.xyz/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+
+        test
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 171,
       images: [
         "/artist-171/work-1.png",
@@ -3744,7 +3824,211 @@ On Nov 20th, 2023 we get to see what imaginative worlds Li will bring to The Mem
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Oct 14th, 2023!
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 171,
+      images: [
+        "/artist-171/work-1.png",
+        "/artist-171/work-2.mp4",
+        "/artist-171/work-3.jpeg"
+      ],
+      poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
