@@ -3778,34 +3778,49 @@ Will Card 169 awaken nostalgia within you? We find out on Nov 22th, 2023!
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 170,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-170/work-1.mp4",
+        "/artist-170/work-2.webp",
+        "/artist-170/work-3.webp"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-170/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "bluugu",
       info:
         `
+Welcome to the world of bluugu, a Korean-Australian artist whose work is a kaleidoscope of cultural narratives and personal inquiries. 
+As you navigate through his realms, you'll encounter questions of identity in the NFT artwork like "Who Am I?" 
+This piece, like many others by bluugu, is a deep reflection on the artist's bicultural roots, expressed through a striking juxtaposition of Australian symbolism and Korean traditional motifs. 
+His art not only captures the eye with its vivid, intricate details but also captures the heart with its poignant, introspective themes.
 
-        test
+Bluugu's stylistic approach is a harmonious blend of his diverse background in fine art, industrial design, and illustration. 
+His daily "GM" series showcases a commitment to practice and exploration, revealing a spectrum of subjects from the serene to the surreal. 
+Even the simple act of greeting the morning becomes a canvas for creativity. 
+His use of bright colors, bold lines, and a distinctive integration of 3D design elements invites viewers into a space that is both futuristic and deeply rooted in personal narrative.
+        
+Entering Bluutopia, bluugu's PFP collection co-created with his brother Guma, you'll find a world that extends beyond art into a cultural phenomenon. 
+It is a brand, a movement, and a community aiming to unite those with third-culture experiences. 
+Every piece in this collection is a celebration of diversity and an invitation to dialogue, offering collectors not just a visual delight but also a seat at the table of cultural empowerment. 
+
+As a new collector, you are welcomed into the vibrant tapestry that bluugu weaves, one that holds the potential to enlighten, connect, and expand the horizons of digital artistry.
+
+How will Card 170 show us these bright new worlds? We will see on Nov 24th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "bluugu's Twitter",
+          url: "https://x.com/bluugu",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "bluugu's Instagram",
+          url: "https://www.instagram.com/bluugu",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "bluugu's Website",
+          url: "https://www.bluugu.com/",
           target: "_blank"
         }
       ]
