@@ -3878,7 +3878,7 @@ On Nov 27th, 2023, we'll see what new open cyberscapes come to The Memes in Card
         "/artist-179/work-2.mp4",
         "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "/artist-179/poster.mp4",
       posterMintUrl: "",
       name: "Arty",
       info:
