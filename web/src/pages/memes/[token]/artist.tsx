@@ -3560,9 +3560,9 @@ What memetic narrative will Card 164 explore? We will see what is revealed on No
     {
       tokenId: 165,
       images: [
-        "/artist-171/work-1.jpeg",
-        "/artist-171/work-2.jpeg",
-        "/artist-171/work-3.mp4"
+        "/artist-179/work-1.jpeg",
+        "/artist-179/work-2.jpeg",
+        "/artist-179/work-3.mp4"
       ],
       poster: "/artist-165/poster.png",
       posterMintUrl: "",
@@ -3829,17 +3829,62 @@ How will Card 170 show us these bright new worlds? We will see on Nov 24th, 2023
       tokenId: 171,
       images: [
         "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-171/work-2.png",
+        "/artist-171/work-3.gif"
       ],
       poster: "/artist-171/poster.png",
+      posterMintUrl: "",
+      name: "Dana Ulama",
+      info:
+        `
+Welcome to the captivating digital realms of Dana Ulama, a visionary artist whose work is a deep dive into the symbiotic relationship between humanity and technology. 
+Ulama's art is a unique blend of cyberpunk futurism and poignant urban narratives, where neon-lit cityscapes and introspective characters tell stories of isolation, contemplation, and the human condition. 
+Her art invites visual explorations that challenge viewers to question the boundaries between the organic and the artificial. 
+For the new collector, Ulama's portfolio offers a journey through vibrant and meticulously crafted digital cityscapes that speak to the soul of a society intertwined with technology.
+        
+Ulama's progression as an artist is evident in the evolution of her themes and the deepening complexity of her subjects. 
+Beginning with psychedelic vector art inspired by the counterculture movements, she has journeyed through the realms of science fiction, settling into the gritty, neon-drenched corridors of cyberpunk. 
+In her recent works, you can see a shift towards a more emotional narrative, moving away from stereotypical portrayals to characters and scenes that resonate with deeper emotional undercurrents. 
+These are pieces that encapsulate the ethos of our times, addressing the omnipresent topics of the digital age such as internet culture, pervasive screens, and the quest for personal connection in an increasingly disconnected world.
+        
+Her commitment to pushing the boundaries of digital expression is evident in her dedication to expanding her skills in atmosphere and animation, bringing a cinematic quality to her NFTs. 
+Her works are not only visually arresting but are also loaded with memetic significance, making them perfect for collectors who seek both aesthetic appeal and thematic depth. 
+As she forges ahead with plans for unique 1/1 NFTs and artist collaborations, Ulama's art stands as a testament to the powerful voice of digital creativity in the modern art world.
+        
+On Nov 27th, 2023, we'll see what new open cyberscapes come to The Memes in Card 171!
+`,
+      links: [
+        {
+          name: "Dana's Twitter",
+          url: "https://twitter.com/DanaUlama",
+          target: "_blank"
+        },
+        {
+          name: "Dana's Instagram",
+          url: "https://www.instagram.com/dana_ulama_artworks",
+          target: "_blank"
+        },
+        {
+          name: "Dana's Website",
+          url: "https://dana-ulama.myportfolio.com/",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 179,
+      images: [
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
+      ],
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
@@ -3860,20 +3905,20 @@ What memetic narrative will Card 171 explore? We will see what is exposed on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 179,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
@@ -3894,20 +3939,20 @@ What memetic narrative will Card 171 explore? We will see what is exposed on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 179,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
@@ -3928,20 +3973,20 @@ What memetic narrative will Card 171 explore? We will see what is exposed on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 179,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
@@ -3962,20 +4007,20 @@ What memetic narrative will Card 171 explore? We will see what is exposed on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 179,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
@@ -3996,54 +4041,20 @@ What memetic narrative will Card 171 explore? We will see what is exposed on Nov
       ]
     },
     {
-      tokenId: 171,
+      tokenId: 179,
       images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
+        "/artist-179/work-1.png",
+        "/artist-179/work-2.mp4",
+        "/artist-179/work-3.jpeg"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
-`,
-      links: [
-        {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
-          target: "_blank"
-        },
-        {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
-          target: "_blank"
-        },
-        {
-          name: "Arty's Website",
-          url: "https://Arty.com",
-          target: "_blank"
-        }
-      ]
-    },
-    {
-      tokenId: 171,
-      images: [
-        "/artist-171/work-1.png",
-        "/artist-171/work-2.mp4",
-        "/artist-171/work-3.jpeg"
-      ],
-      poster: "/artist-171/poster.png",
-      posterMintUrl: "",
-      name: "Arty",
-      info:
-        `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
-
-What memetic narrative will Card 171 explore? We will see what is exposed on Nov 24th, 2023!
+What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
