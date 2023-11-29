@@ -3832,7 +3832,7 @@ How will Card 170 show us these bright new worlds? We will see on Nov 24th, 2023
         "/artist-171/work-2.png",
         "/artist-171/work-3.gif"
       ],
-      poster: "/artist-171/poster.png",
+      poster: "/artist-171/poster.mp4",
       posterMintUrl: "",
       name: "Dana Ulama",
       info:
@@ -3851,7 +3851,7 @@ Her commitment to pushing the boundaries of digital expression is evident in her
 Her works are not only visually arresting but are also loaded with memetic significance, making them perfect for collectors who seek both aesthetic appeal and thematic depth. 
 As she forges ahead with plans for unique 1/1 NFTs and artist collaborations, Ulama's art stands as a testament to the powerful voice of digital creativity in the modern art world.
         
-On Nov 27th, 2023, we'll see what new open cyberscapes come to The Memes in Card 171!
+On Nov 27th, 2023, we'll see what new urban  come to The Memes in Card 171!
 `,
       links: [
         {
@@ -3872,68 +3872,88 @@ On Nov 27th, 2023, we'll see what new open cyberscapes come to The Memes in Card
       ]
     },
     {
-      tokenId: 179,
+      tokenId: 172,
       images: [
-        "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-172/work-1.webp",
+        "/artist-172/work-2.webp",
+        "/artist-172/work-3.webp"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "",
       posterMintUrl: "",
-      name: "Arty",
+      name: "@6529er and @6529",
       info:
         `
+We know and love @6529er as the pseudonymous designer for Punk 6529. He's an artist whose digital creations encapsulate a profound narrative depth with a keen eye for thematic resonance. 
+He consistently weaves a tapestry of contemporary issues through the utilization of historical and iconic imagery, striking a delicate balance between homage and commentary. 
+By adopting motifs from such sources as protest art and classical references, @6529er in partnership with 6529 forms a bridge between the artistic eras, employing visual storytelling to spark discourse on power dynamics, societal cycles, and the complexities of web3.
+        
+In terms of style, @6529er adopts a bold approach reminiscent of graphic novels and propaganda posters, a choice that resonates with the immediacy of digital media consumption. 
+The crisp lines, assertive forms, and strategic color schemes in his artwork are not just a nod to aesthetic preference but a method to captivate and convey potent messages in a single glance. 
+This striking visual language is instrumental in amplifying the intended narratives, whether they address calls for societal change, reflections on historical repetition, or satirical observations of current social behaviors.
+        
+@6529er's thematic explorations are a reflection of the broader human condition, as seen through the prism of the digital era.
+Their work is steeped in the discourse of power and human emotion, revealing the nuanced ways in which history informs the present.
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
-`,
+On Nov 28th, 2023 some lucky memers get airdropped of the latest blending of irony with earnestness, the multifaceted dialogue, from our own chronicler and a critic of the digital age's unfolding narrative.`,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "6529er's Twitter",
+          url: "https://twitter.com/6529er",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "6529's Twitter",
+          url: "https://twitter.com/punk6529",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "6529's Website",
+          url: "https://seize.io",
           target: "_blank"
         }
       ]
     },
     {
-      tokenId: 179,
+      tokenId: 173,
       images: [
-        "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-173/work-1.jpeg",
+        "/artist-173/work-2.jpeg",
+        "/artist-173/work-3.jpeg"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "/artist-173/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Ricardo Alves is a professional digital artist whose expertise lies in the intricate realm of character and facial modeling. 
+His artistic style is characterized by a profound understanding of anatomy and texture, which allows him to breathe life into 3D characters with remarkable realism. 
+Alves's technical skill is matched by a nuanced sensitivity to the emotive potential of facial expressions, enabling him to create digital beings that convey a wide spectrum of human emotions and conditions. 
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+In the digital arts landscape, Alves has distinguished himself with a style that harmonizes detail-oriented craftsmanship with thematic depth. 
+His approach is not just about achieving a high degree of photorealism; it's also about crafting a narrative through visual cues embedded in his characters' features. 
+Whether through the subtle crease of a smile or the complex interplay of muscles in a frown, Alves's creations speak to the viewer, often carrying a thematic message that transcends the medium itself. 
+His characters are not mere digital constructs but are imbued with a sense of story and purpose, inviting the audience to engage with them beyond the surface level.
+        
+Looking past the pixels and polygons, Alves's artistic narrative is one of constant evolution, marked by an industry-acknowledged ability to lead and inspire teams. 
+His professional trajectory through leading visual effects studios around the globe reflects a career that is both dynamic and influential. 
+Alves's artistry is rooted in a passion for storytelling and a commitment to pushing the boundaries of what digital character modeling can achieve, both aesthetically and emotionally.
+
+Will new stories be told with memetic characters in Card 173? We will find out on Nov 29th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Rico's Twitter",
+          url: "https://x.com/incalstory",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Rico's Instagram",
+          url: "https://instagram.com/ricardoalvesj",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Rico's Website",
+          url: "https://ricardoalves.co.uk",
           target: "_blank"
         }
       ]
