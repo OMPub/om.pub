@@ -1,0 +1,28 @@
+name: Check HTTP to HTTPS Redirect
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-https-redirect:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Run HTTP to HTTPS Redirect Check
+      run: |
+        ./scripts/check_https_redirect.sh om.pub
+      continue-on-error: true
+
+    - name: Check Result and Block Push
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "Check passed."
+        else
+          echo "Check failed. Blocking push to main."
+          exit 1
+        fi
