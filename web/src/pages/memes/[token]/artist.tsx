@@ -3992,7 +3992,7 @@ We will see what Dutchtide wants to buidl in the memes with Card 174 on Dec 1st,
         },
         {
           name: "Dutchtide's Instagram",
-          url: "https://instagram/dutchtide",
+          url: "https://instagram.com/dutchtide",
           target: "_blank"
         },
         {
