@@ -3959,35 +3959,45 @@ Will new stories be told with memetic characters in Card 173? We will find out o
       ]
     },
     {
-      tokenId: 179,
+      tokenId: 174,
       images: [
-        "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-174/work-1.gif",
+        "/artist-174/work-2.gif",
+        "/artist-174/work-3.mp4"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "/artist-174/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Dutchtide",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Dutchtide emerges as a distinctive voice in the digital art landscape, crafting pieces that resonate with the quiet introspection of urban solitude and the complex interplay between man-made and natural environments. 
+His works, especially evident in series like "Midnight Breeze," often feature architectural structures — from lone apartment blocks to neon-lit convenience stores — set against the backdrop of nature or the stark vastness of the night. 
+The contrasting elements of his compositions are not just visual but thematic, delving into philosophical musings on capitalism, wealth, and the environment, all while engaging with the digital medium's inherent properties and possibilities.
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+Stylistically, Dutchtide's art is marked by a harmonious blend of Japanese and Dutch aesthetics, a synthesis inspired by his deep appreciation for the organizational frameworks of Japanese art and the compositional mastery characteristic of the Dutch Golden Age.
+The pixel art technique he employs imbues his works with a nostalgic digital quality, reminiscent of early video game aesthetics, yet the themes he explores are contemporary — isolation in urbanity, the search for true luxury, and the meaning of home in the digital age. 
+His choice of this medium is deliberate, aligning with the NFT space's spirit and its community of collectors seeking authenticity and connection.
+        
+For new collectors, Dutchtide offers more than digital ownership; his artworks are invitations to contemplative journeys through spaces that feel both alien and intimately familiar. 
+You are invited into a narrative tableau, encouraging personal reflection on the spaces we inhabit and how they shape our experiences. 
+As NFTs continue to blur the lines between art and audience, Dutchtide's creations stand out for their ability to evoke emotion and provoke thought, promising a rich and engaging experience for those who choose to immerse themselves in his digital realms.
+
+We will see what Dutchtide wants to buidl in the memes with Card 174 on Dec 1st, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Dutchtide's Twitter",
+          url: "https://twitter.com/Dutchtide",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Dutchtide's Instagram",
+          url: "https://instagram/dutchtide",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Dutchtide's Website",
+          url: "https://www.midnightbreeze.io/",
           target: "_blank"
         }
       ]
