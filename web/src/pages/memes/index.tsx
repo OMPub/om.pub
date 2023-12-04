@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/175/artist">Meme Artist 175 - Bryan Brinkman</a></li>
                 <li>Artist Preview: <a href="/memes/174/artist">Meme Artist 174 - Dutchtide</a></li>
                 <li>Artist Preview: <a href="/memes/173/artist">Meme Artist 173 - Ricardo Alves</a></li>
                 <li>Artist Preview: <a href="/memes/172/artist">Meme Artist 172 - @6529er & Punku</a></li>

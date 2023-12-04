@@ -4003,35 +4003,53 @@ We will see what Dutchtide wants to buidl in the memes with Card 174 on Dec 1st,
       ]
     },
     {
-      tokenId: 179,
+      tokenId: 175,
       images: [
-        "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-175/work-1.gif",
+        "/artist-175/work-2.gif",
+        "/artist-175/work-3.gif",
+        "/artist-175/work-4.gif",
+        "/artist-175/work-5.gif"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "/artist-175/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Bryan Brinkman",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Bryan Brinkman's artistic journey encapsulates a dynamic fusion of traditional animation's charm with the avant-garde flair of digital art, readily embracing NFTs. 
+His artistic themes often pivot around humor, a nuanced legacy from his tenure on shows like "Saturday Night Live" and "The Tonight Show." 
+The transition from these platforms to the realm of NFTs has allowed Brinkman to deepen his narrative, leveraging animation's unique storytelling capabilities. 
+His works in the NFT marketplace don't just aim to entertain but also to resonate on a personal level with the viewers, reflecting on the shared human experience through the lens of digital culture.
+Brinkman's art becomes a vessel for exploring themes of connectivity, feelings of movement, and the evolving relationship between technology and artistry.
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+Stylistically, Brinkman is a digital pop artist who thrives in the realm of mixed media, seamlessly blending 2D and 3D elements to create vibrant, engaging pieces. 
+His artistic style is characterized by a playful yet sophisticated use of color and form, which is vividly apparent in his animations. 
+By intertwining various techniques and software, including Cinema 4D, After Effects, and Gravity Sketch, Brinkman crafts pieces that are not just visually striking but also imbued with movement and life. 
+His approach is reminiscent of the simplicity and visual impact of pop art icons like Keith Haring, yet it also incorporates the complexity and depth afforded by digital tools. 
+This blend of old and new, simplicity and complexity, allows his artwork to stand out in the crowded NFT space, attracting a diverse mix of high-profile collectors and admirers.
+        
+At the core of Brinkman's work lies a deep understanding of the NFT ecosystem, where he navigates the nuances of art creation, publication, and community engagement with a strategic division of his time and effort. 
+He views his pieces not just as artworks but as nodes in a broader narrative of digital art's evolution, underscoring the importance of each piece's role in the ongoing discourse of the crypto world. 
+His thematic explorations often address the concept of permanence and legacy within the digital age, as he considers how his pieces will exist indefinitely on the blockchain. 
+Through his art, Brinkman not only captures the zeitgeist of the digital art movement but also actively shapes it, prompting discussions on discoverability, artist liquidity, and the complexities of the royalties debate. 
+His holistic approach to digital artistry cements his role as a pivotal figure in defining the artistic and cultural implications of NFTs.
+
+He'll bring his delightful creative energy to Card 175 on Dec 4th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Bryan's Twitter",
+          url: "https://twitter.com/bryanbrinkman",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Bryan's Instagram",
+          url: "https://www.instagram.com/brinkmanatee",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Bryan's Website",
+          url: "https://www.bryanbrinkman.com/",
           target: "_blank"
         }
       ]
