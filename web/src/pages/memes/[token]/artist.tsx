@@ -4055,35 +4055,47 @@ He'll bring his delightful creative energy to Card 175 on Dec 4th, 2023!
       ]
     },
     {
-      tokenId: 179,
+      tokenId: 176,
       images: [
-        "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-176/work-1.webp",
+        "/artist-176/work-2.png",
+        "/artist-176/work-3.png"
       ],
-      poster: "/artist-179/poster.png",
+      poster: "/artist-176/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Rocketgirl",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Rocketgirl is a multidisciplinary artist hailing from Scotland, whose creative endeavors have carved a space in the world of NFT art that is very much her own. 
+With a traditional background in painting, primarily using oils and inks, she has embraced the digital revolution, integrating AI into her art to transcend the conventional boundaries of the medium. 
+Her journey into AI art began out of a serendipitous encounter with illness, where, too weak to stand at her easel, she channeled the dystopian visions of her fever dreams into her first AI-assisted piece, "SUNDAY BEST / FALSE IDOLS," which garnered acclaim by winning second prize in an art contest. 
+This fusion of AI and traditional artistry is a hallmark of her work, which she describes as "pure, unadulterated chaos" and a "mixed-media chaos engine," indicating a process as spontaneous and unpredictable as the outcomes are compelling.
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+In her own words, Rocketgirl's drive to create is fueled by "a 100% selfish desire to live on through my work," highlighting a pursuit of immortality through art that echoes the sentiments of many artists before her. 
+The thematic essence of her work often revolves around abstract chaos and dark dystopia, capturing the intensity and complexity of human emotions against the backdrop of a world in flux. 
+Her artwork, characterized by bold strokes and a vibrant palette, invites viewers into a realm where the traditional and the digital converge, creating a visual language that speaks to the chaos of the modern world.
+        
+Rocketgirl's vision as an artist is as clear-cut as her stylistic approach is fluid. 
+She envisions AI art becoming as uncontroversial as photography, a tool for future generations to express their own dystopian dreams or utopian ideals. 
+With a keen eye on the horizon, she aims to be "a renowned and mildly notorious artist with a style that is unforgettable," leaving a legacy that challenges and inspires. 
+Her work is not just a reflection of her innermost visions but also a dialogue with the ever-evolving digital landscape, an exploration of how humanity interacts with the increasingly blurred lines between the organic and the artificial.
+
+What memetic chaos will Card 176 introduce on Dec 6th, 2023?
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Rocketgirl's Twitter",
+          url: "https://twitter.com/rocketgirlNFT",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Rocketgirl's Instagram",
+          url: "https://www.instagram.com/rocketgirlnft/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Rocketgirl's Newsletter",
+          url: "https://paragraph.xyz/@rocketgirl/rocket-boom",
           target: "_blank"
         }
       ]
