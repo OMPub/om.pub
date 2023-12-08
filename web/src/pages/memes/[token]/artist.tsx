@@ -3851,7 +3851,7 @@ Her commitment to pushing the boundaries of digital expression is evident in her
 Her works are not only visually arresting but are also loaded with memetic significance, making them perfect for collectors who seek both aesthetic appeal and thematic depth. 
 As she forges ahead with plans for unique 1/1 NFTs and artist collaborations, Ulama's art stands as a testament to the powerful voice of digital creativity in the modern art world.
         
-On Nov 27th, 2023, we'll see what new urban  come to The Memes in Card 171!
+On Nov 27th, 2023, we'll see what new urban themes come to The Memes in Card 171!
 `,
       links: [
         {
@@ -4101,6 +4101,83 @@ What memetic chaos will Card 176 introduce on Dec 6th, 2023?
       ]
     },
     {
+      tokenId: 177,
+      images: [
+        "/artist-177/work-1.jpeg",
+        "/artist-177/work-2.mp4",
+        "/artist-177/work-3.gif"
+      ],
+      poster: "/artist-177/poster.png",
+      posterMintUrl: "",
+      name: "Rare Scrilla",
+      info:
+        `
+Rare Scrilla, also known as DJ J-Scrilla, is an artist deeply entrenched in the digital revolution of art and music, often exploring the thematic intersections between technology, economics, and culture.
+Through his work, he comments on the fluid nature of value in the digital age, epitomized by his track "Faith In My Money (Money Printer Go Brrr)," which wryly observes the effects of economic policies on personal wealth and the surreal nature of fiat currency's value in a world at the mercy of the money printer.
+
+Artistically, Scrilla's style is a blend of the vibrant, often chaotic ethos of internet meme culture and the gritty, street-wise aesthetics of hip hop.
+His visual art, particularly his tokenized "Rare Pepe" NFTs, showcases a collage of cultural references (including all 4 elements of hip hop), utilizing the iconic Pepe meme to satirize and celebrate various aspects of urban and crypto culture.
+The use of recognizable characters, bold text, and mixed media elements gives his artwork a distinctive, irreverent energy that is immediately fun, memetic, and thought-provoking.
+
+In the realm of audio, Scrilla's style is similarly boundary-pushing, with Ordinal drops.
+His foray into audio NFTs demonstrates his innovative spirit, merging his skills as a hip hop music producer with his savvy in crypto-art to create unique, collectible pieces of music.
+These audio NFTs carry the thematic weight of his visual art, often containing samples and soundscapes that reflect on the economic and social themes he's known for, while also providing a new avenue for musical expression and artist-audience interaction in the digital space.
+
+Will card 177 boost The Memes with some street savvy on Dec 8th, 2023? We can only hope!
+`,
+      links: [
+        {
+          name: "Rare Scrilla's Twitter",
+          url: "https://twitter.com/scrillaventura",
+          target: "_blank"
+        },
+        {
+          name: "Rare Scrilla's Instagram",
+          url: "https://www.instagram.com/thescrillionaire/",
+          target: "_blank"
+        },
+        {
+          name: "Rare Scrilla's Website",
+          url: "https://y.at/%F0%9F%94%A5%F0%9F%A5%81%F0%9F%94%A5",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 178,
+      images: [
+        "/artist-178/work-1.png",
+        "/artist-178/work-2.mp4",
+        "/artist-178/work-3.jpeg"
+      ],
+      poster: "/artist-178/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 178 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
       tokenId: 179,
       images: [
         "/artist-179/work-1.png",
@@ -4115,6 +4192,40 @@ What memetic chaos will Card 176 introduce on Dec 6th, 2023?
 Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
 
 What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+`,
+      links: [
+        {
+          name: "Arty's Twitter",
+          url: "https://twitter.com/Arty",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Instagram",
+          url: "https://www.instagram.com/Arty/",
+          target: "_blank"
+        },
+        {
+          name: "Arty's Website",
+          url: "https://Arty.com",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 180,
+      images: [
+        "/artist-180/work-1.png",
+        "/artist-180/work-2.mp4",
+        "/artist-180/work-3.jpeg"
+      ],
+      poster: "/artist-180/poster.png",
+      posterMintUrl: "",
+      name: "Arty",
+      info:
+        `
+Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+
+What memetic narrative will Card 180 explore? We will see what is exposed on Nov 24th, 2023!
 `,
       links: [
         {
