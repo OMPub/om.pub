@@ -4146,33 +4146,44 @@ Will card 177 boost The Memes with some street savvy on Dec 8th, 2023? We can on
     {
       tokenId: 178,
       images: [
-        "/artist-178/work-1.png",
-        "/artist-178/work-2.mp4",
-        "/artist-178/work-3.jpeg"
+        "/artist-178/work-1.jpeg",
+        "/artist-178/work-2.jpeg",
+        "/artist-178/work-3.png"
       ],
       poster: "/artist-178/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Fran Rodríguez",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Fran Rodríguez, known in the digital art world as "La cabeza en las nubes" (Head in the Clouds), is a Barcelona-based artist whose canvas is the boundary between reality and the dreamlike. 
+His digital works are a tapestry of surrealism, seamlessly blending elements of nature with cosmic and ethereal motifs to create scenes that transcend ordinary perception. 
+The fusion of these elements is handled with such finesse that viewers find themselves suspended between the familiar and the fantastical, inviting introspection into the depths of the subconscious.
 
-What memetic narrative will Card 178 explore? We will see what is exposed on Nov 24th, 2023!
+Rodríguez's artistic style is marked by a rich palette that spills across dreamscapes, defying gravity and logic with a masterful use of digital manipulation. 
+His creations often incorporate a central, grounding figure or object—a nod to human experiences and emotions—surrounded by an intricate dance of surreal elements. 
+This intentional design anchors the observer, while the surrounding swirl of colors and shapes in motion stirs a sense of the infinite. 
+His work is not just seen, but felt, as it resonates with the inner strings of wonder and curiosity.
+        
+Collaborating with bands such as Weezer, Tame Impala, and Twin Shadow, Rodríguez extends his artistry into the auditory realm, crafting visuals that echo the music's emotive core. 
+The synesthetic interplay of his visuals with sound creates a multi-sensory experience that is both immersive and evocative. 
+Fran Rodríguez stands as a modern digital alchemist, turning the digital medium into meaningful art, with each piece a doorway to the vastness of imagination, reminding us that, indeed, "There are other worlds, but they are in this one."
+
+What dreams will Card 178 awaken within? We will open our eyes to it on Dec 11th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Fran's Twitter",
+          url: "https://twitter.com/Fran_nubes",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Fran's Instagram",
+          url: "https://www.instagram.com/lacabezaenlasnubes/",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Fran's Website",
+          url: "https://lacabezaenlasnubes.cargo.site/",
           target: "_blank"
         }
       ]
