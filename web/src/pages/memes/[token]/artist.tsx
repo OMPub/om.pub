@@ -4192,32 +4192,44 @@ What dreams will Card 178 awaken within? We will open our eyes to it on Dec 11th
       tokenId: 179,
       images: [
         "/artist-179/work-1.png",
-        "/artist-179/work-2.mp4",
-        "/artist-179/work-3.jpeg"
+        "/artist-179/work-2.png",
+        "/artist-179/work-3.png"
       ],
       poster: "/artist-179/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Lisa Fogarty",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+Welcome to the evocative world of Lisa Fogarty, an artist whose self-taught brilliance has carved out a space all her own in the digital art landscape. 
+Fogarty's oeuvre is a vibrant tribute to feminine power, capturing the essence of the female gaze through a lens that is both introspective and rebellious. 
+Her art, influenced by a childhood fascination with comic book heroines, reimagines these figures not as mere objects of fantasy but as icons of strength and resilience. 
+Each piece is a confluence of vibrant hues and intricate details, inviting viewers to a visual feast that champions female empowerment and challenges traditional narratives.
 
-What memetic narrative will Card 179 explore? We will see what is exposed on Nov 24th, 2023!
+As a new collector, you are about to embark on a journey through a gallery of digital masterpieces that tell poignant stories of mental health, beauty, and trauma. 
+Fogarty's signature collection "FEELING BLUE" is a profound exploration of anxiety, portrayed with a raw honesty that resonates deeply with the human experience. 
+Her art transcends the superficial, drawing you into a world where every brushstroke and pixel holds a piece of a larger narrative. 
+The universal appeal of her work is evidenced by its presence in cultural hubs worldwide, from the historic streets of Milan to the vibrant landscapes of Lagos, underscoring the global language of her artistry.
+        
+Investing in a Lisa Fogarty piece means more than owning a fragment of digital creativity; it signifies holding a story that speaks to the boundless potential within every viewer. 
+Her artworks are not just seen; they are felt, reflecting our own struggles, joys, and the journey towards self-discovery. 
+As her works have graced the iconic billboards of Times Square, so too will they bring a distinctive voice to your collection, one that continues to grow in cultural significance and artistic value. 
+
+Step into this world on Dec 13th, 2023 — and let NFTLisa's Card 179 redefine your experience of digital art and the power it holds to move and inspire.
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Lisa's Twitter",
+          url: "https://twitter.com/nftlisa",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Lisa's Instagram",
+          url: "https://www.instagram.com/lisakfogarty ",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Lisa's Website",
+          url: "https://lisafogarty.se",
           target: "_blank"
         }
       ]
