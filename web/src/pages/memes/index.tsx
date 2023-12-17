@@ -115,6 +115,8 @@ export default function Memes() {
             <ul>
               <li>Season 5</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/180/artist">Meme Artist 180 - Victor Mosquera</a></li>
+                <li>Artist Preview: <a href="/memes/179/artist">Meme Artist 179 - Lisa Fogarty</a></li>
                 <li>Artist Preview: <a href="/memes/179/artist">Meme Artist 179 - Lisa Fogarty</a></li>
                 <li>Artist Preview: <a href="/memes/178/artist">Meme Artist 178 - Fran Rodríguez</a></li>
                 <li>Artist Preview: <a href="/memes/177/artist">Meme Artist 177 - Rare Scrilla</a></li>

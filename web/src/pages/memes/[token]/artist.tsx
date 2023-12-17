@@ -4237,18 +4237,30 @@ Step into this world on Dec 13th, 2023 — and let NFTLisa's Card 179 redefine y
     {
       tokenId: 180,
       images: [
-        "/artist-180/work-1.png",
-        "/artist-180/work-2.mp4",
-        "/artist-180/work-3.jpeg"
+        "/artist-180/work-1.jpeg",
+        "/artist-180/work-2.jpeg",
+        "/artist-180/work-3.mp4"
       ],
       poster: "/artist-180/poster.png",
       posterMintUrl: "",
       name: "Arty",
       info:
         `
-Tell me about the NFT artist @ArtyMcPainterson, with an emphasis on their style, artistic message, and vision.
+As we approach the culmination of Season 5, a journey adorned with an eclectic tapestry of digital masterpieces, it is with great anticipation that we introduce the final art drop by none other than Victor Mosquera. 
+His work is not merely a visual delight but a gateway to transcendence, a reflection of the very essence of what this season has celebrated: high-caliber artistry that resonates with the soul and elevates the spirit. 
+Victor's pieces, rich in philosophical inquiry and cosmic wonder, offer a fitting crescendo to our collective exploration of the digital artscape.
 
-What memetic narrative will Card 180 explore? We will see what is exposed on Nov 24th, 2023!
+Victor's art takes us beyond the traditional boundaries of digital art, navigating the realms of the metaphysical and the abstract with a grace that is as rare as it is captivating. 
+Each piece serves as a conduit for contemplation, inviting viewers to traverse landscapes of the mind and the universe that lie beyond the canvas. 
+His deft manipulation of color, texture, and near-tangible form crafts a visual language that speaks to the quest for meaning and connection in the digital age. 
+This season's final drop promises to be a testament to Victor's ability to harness the digital medium not just to create but to communicate, to stir the imagination, and to kindle the embers of introspection.
+        
+Celebrating a season filled with remarkable art, Victor Mosquera's contribution stands as a beacon of excellence. 
+We can only predict that Card 180 will encapsulate the spirit of Season 5, embodying the passion, innovation, and depth that have defined each art drop. 
+As we draw the curtains on this season, we do so with a profound sense of gratitude and admiration for the artists like Victor, whose transcendent works have not only graced our gallery but have also imprinted upon the hearts and minds of The Memes community. 
+Let us savor this final offering, a harmonious blend of vision and virtuosity, and carry its inspiration with us into the seasons to come.
+
+Season 5 conludes with Card 180 on Dec 18th, 2023!
 `,
       links: [
         {
