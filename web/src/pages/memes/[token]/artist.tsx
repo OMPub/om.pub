@@ -1,26 +1,25 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Container } from "react-bootstrap";
 import styles from "@/styles/Home.module.scss";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import ArtistProfile from "@/components/artistProfile/ArtistProfile";
 
 interface Link {
-  url: string,
-  name: string,
-  target: string
+  url: string;
+  name: string;
 }
 
 interface Artist {
-  tokenId: number,
-  images: string[],
-  poster: string,
-  posterMintUrl: string,
-  name: string,
-  info: string
-  links: Link[]
+  tokenId: number;
+  images: string[];
+  poster: string;
+  posterMintUrl: string;
+  name: string;
+  info: string;
+  links: Link[];
 }
 
 interface Props {
@@ -40,20 +39,29 @@ export default function Artist(props: Props) {
     <>
       <Head>
         <title>{`Preview: Meme Artist ${artistId} | The OM Pub`}</title>
-        <meta
-          property="og:url"
-          content={`https://om.pub/artist`}
-        />
+        <meta property="og:url" content={`https://om.pub/artist`} />
         <meta
           property="og:title"
           content={`Preview: Meme Artist ${artistId} | The OM Pub`}
         />
-        <meta property="og:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
+        <meta
+          property="og:image"
+          content={`https://om.pub/artist-${artistId}/poster.gif`}
+        />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@OM_Pub_" />
-        <meta name="twitter:title" content={`Preview: Meme Artist ${artistId}`} />
-        <meta name="twitter:description" content="Celebrating the artist of a new card in The Memes fam!" />
-        <meta name="twitter:image" content={`https://om.pub/artist-${artistId}/poster.gif`} />
+        <meta
+          name="twitter:title"
+          content={`Preview: Meme Artist ${artistId}`}
+        />
+        <meta
+          name="twitter:description"
+          content="Celebrating the artist of a new card in The Memes fam!"
+        />
+        <meta
+          name="twitter:image"
+          content={`https://om.pub/artist-${artistId}/poster.gif`}
+        />
       </Head>
       <Header />
       <Container className={`${styles.main}`}>
@@ -61,21 +69,21 @@ export default function Artist(props: Props) {
       </Container>
     </>
   );
-};
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = artistsData.artists.map((artist) => ({
-    params: { token: artist.tokenId.toString() }
-  }))
+    params: { token: artist.tokenId.toString() },
+  }));
 
-  return { paths, fallback: false }
-}
+  return { paths, fallback: false };
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
-    props: artistsData
-  }
-}
+    props: artistsData,
+  };
+};
 
 const artistsData = {
   artists: [
@@ -84,13 +92,12 @@ const artistsData = {
       images: [
         "/artist-83/work-1.jpeg",
         "/artist-83/work-2.jpeg",
-        "/artist-83/work-3.jpeg"
+        "/artist-83/work-3.jpeg",
       ],
       poster: "/artist-83/poster.gif",
       posterMintUrl: "https://app.manifold.xyz/c/rememeposter",
       name: "Luna Leonis",
-      info:
-        `We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
+      info: `We are proud to welcome Luna Leonis to the 6529 Meme artist family. 
 
 She's well known for creating whimsical and magical digital art. Her artwork tells stories conveyed through vibrant colors and bold patterns, capturing the imagination of her viewers. Her use of the moon (thus the name Luna) creates a dreamlike quality in her pieces.
 
@@ -105,53 +112,46 @@ In addition to her work as an artist, Luna also advocates for women's empowermen
 Luna's art embodies a sense of wonder and imagination, inviting the viewer to experience a world of whimsy and magic. We can't wait to see what she has created for our community...and the world.`,
       links: [
         {
-          "name": "Luna's Twitter",
-          "url": "https://twitter.com/lunaleonis",
-          "target": "_blank"
+          name: "Luna's Twitter",
+          url: "https://twitter.com/lunaleonis",
         },
         {
-          "name": "Luna's Linktree",
-          "url": "https://linktr.ee/lunaleonis",
-          "target": "_blank"
+          name: "Luna's Linktree",
+          url: "https://linktr.ee/lunaleonis",
         },
         {
-          "name": "Luna's Wonderland Discord Server",
-          "url": "https://discord.gg/JAhzGprv",
-          "target": "_blank"
-        }
-      ]
+          name: "Luna's Wonderland Discord Server",
+          url: "https://discord.gg/JAhzGprv",
+        },
+      ],
     },
     {
       tokenId: 84,
       images: [
         "/artist-84/work-1.jpeg",
         "/artist-84/work-2.jpeg",
-        "/artist-84/work-3.jpeg"
+        "/artist-84/work-3.jpeg",
       ],
       poster: "/artist-84/poster.png",
       posterMintUrl: "",
       name: "UNNKNOWN",
-      info:
-        `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
+      info: `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
 
 ...We can't wait to see what she has created for our community...and the world.`,
       links: [
         {
-          "name": "UNNKNOWN's Twitter",
-          "url": "https://twitter.com/UNNKNOWN",
-          "target": "_blank"
+          name: "UNNKNOWN's Twitter",
+          url: "https://twitter.com/UNNKNOWN",
         },
         {
-          "name": "UNNKNOWN's Linktree",
-          "url": "https://linktr.ee/UNNKNOWN",
-          "target": "_blank"
+          name: "UNNKNOWN's Linktree",
+          url: "https://linktr.ee/UNNKNOWN",
         },
         {
-          "name": "UNNKNOWN's Discord Server",
-          "url": "https://discord.gg/UNNKNOWN",
-          "target": "_blank"
-        }
-      ]
+          name: "UNNKNOWN's Discord Server",
+          url: "https://discord.gg/UNNKNOWN",
+        },
+      ],
     },
     {
       tokenId: 85,
@@ -159,13 +159,12 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
         "/artist-85/work-1.jpeg",
         "/artist-85/work-2.gif",
         "/artist-85/work-3.png",
-        "/artist-85/work-4.jpeg"
+        "/artist-85/work-4.jpeg",
       ],
       poster: "/artist-85/poster.gif",
       posterMintUrl: "",
       name: "6529er",
-      info:
-        `We are proud to welcome 6529er back to the 6529 Meme artist family. 
+      info: `We are proud to welcome 6529er back to the 6529 Meme artist family. 
 
 Dive into the mysterious world of 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
 Emerging in the crypto-art realm in 2021, 6529er has gained a place of prominence as the pre-eminent artist of The Memes by 6529 collection, for his sleek, thought-provoking designs.
@@ -182,32 +181,28 @@ Stoked for more from 6529er!
         {
           name: "6529er's Twitter",
           url: "https://twitter.com/6529er",
-          target: "_blank"
         },
         {
           name: "6529er on Foundation",
           url: "https://foundation.app/@6529er",
-          target: "_blank"
         },
         {
           name: "Find @6529er in the OM Discord Server",
           url: "https://discord.gg/JAhzGprv",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 86,
       images: [
         "/artist-86/work-1.gif",
         "/artist-86/work-2.png",
-        "/artist-86/work-3.png"
+        "/artist-86/work-3.png",
       ],
       poster: "/artist-86/poster.gif",
       posterMintUrl: "",
       name: "PopWonder",
-      info:
-        `Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
+      info: `Hailing from the vibrant city of Portland, Oregon, Pop Wonder is an enigmatic NFT artist who has taken the digital world by storm. 
 With a particular style that fuses pop culture and vivid imagination, Pop Wonder casts a spell over collectors and enthusiasts alike.
 
 Born in a city known for its quirky individualism, Pop Wonder infuses his art with a healthy dose of whimsy, irony, and humor. 
@@ -225,37 +220,32 @@ Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" m
         {
           name: "PopWonder's Twitter",
           url: "https://twitter.com/PopWonderNFT",
-          target: "_blank"
         },
         {
           name: "PopWonder's Linktree",
           url: "https://linktr.ee/popwonder/",
-          target: "_blank"
         },
         {
           name: "PopWonder's Discord",
           url: "https://discord.com/invite/Jxw5CWumEK",
-          target: "_blank"
         },
         {
           name: "An Interview with PopWonder",
           url: "https://mirror.xyz/atriumart.eth/RQ9W1aEes7i9PEklaX2IW0xFxmILmyKeu2bFC72ntfM",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 87,
       images: [
         "/artist-87/work-1.mp4",
         "/artist-87/work-2.mp4",
-        "/artist-87/work-3.mp4"
+        "/artist-87/work-3.mp4",
       ],
       poster: "/artist-87/poster.mp4",
       posterMintUrl: "https://app.manifold.xyz/c/Prememe",
       name: "DeeKay",
-      info:
-        `
+      info: `
 DeeKay is a South Korean NFT artist based in the Bay Area whose work is known for its striking use of vibrant colors, intricate details, and dynamic motion. 
 His digital creations often feature familiar characters and surrealistic themes, blending together elements of nature, technology, and fantasy to create immersive and visually stunning worlds.
 
@@ -271,37 +261,32 @@ We can't wait to see how The Memes are interpreted in his fun and spirited art!
         {
           name: "Deekay's Twitter",
           url: "https://twitter.com/deekaymotion",
-          target: "_blank"
         },
         {
           name: "Deekay's Linktree",
           url: "https://linktr.ee/deekaymotion/",
-          target: "_blank"
         },
         {
           name: "Deekay's Website",
           url: "https://deekaykwon.com/",
-          target: "_blank"
         },
         {
           name: "An Interview with Deekay",
           url: "https://hypemoon.com/2022/9/deekay-nft-animator-interview",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 88,
       images: [
         "/artist-88/work-1.webp",
         "/artist-88/work-2.gif",
-        "/artist-88/work-3.gif"
+        "/artist-88/work-3.gif",
       ],
       poster: "/artist-88/poster.png",
       posterMintUrl: "",
       name: "Ryan Koopmans",
-      info:
-        `
+      info: `
 Ryan Koopmans is a Canadian-born NFT artist whose work combines elements of photography, digital art, and graphic design to create immersive and visually stunning worlds. 
 With a keen eye for detail, Ryan's artwork often features surreal and dreamlike landscapes, juxtaposed against elements of modernity and technology. 
 His digital creations showcase a high degree of technical skill, with intricate and thoughtfully composed scenes that are rich in color and texture.
@@ -319,35 +304,28 @@ We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait
         {
           name: "Ryan's Twitter",
           url: "https://twitter.com/ryankoopmans",
-          target: "_blank"
         },
         {
           name: "Ryan's Linktree",
           url: "https://linktr.ee/ryankoopmans/",
-          target: "_blank"
         },
         {
           name: "Ryan's Website",
           url: "https://www.ryankoopmans.com/",
-          target: "_blank"
         },
         {
           name: "Ryan's Discord",
           url: "https://discord.com/invite/AVeGUcAMdY",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 89,
-      images: [
-        "/artist-89/work-1.gif",
-      ],
+      images: ["/artist-89/work-1.gif"],
       poster: "/artist-89/poster.gif",
       posterMintUrl: "",
       name: "Made by Megan",
-      info:
-        `
+      info: `
 Megan, AKA @CryptoClimates, is an NFT artist committed to working for sustainable living and conservation. 
 She's created individual mini environments as NFT, and is also an artist with @The_GhostClub.
 
@@ -360,19 +338,16 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
         {
           name: "Megan's Twitter",
           url: "https://twitter.com/CryptoClimates",
-          target: "_blank"
         },
         {
           name: "Megan's Website",
           url: "https://www.madebymegan.io/",
-          target: "_blank"
         },
         {
           name: "Megan's Discord",
           url: "https://discord.gg/PRsKywkuqU",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 90,
@@ -384,8 +359,7 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
       poster: "/artist-90/poster.gif",
       posterMintUrl: "",
       name: "Meg Thorpe",
-      info:
-        `
+      info: `
 Megan Thorpe describes herself as, "A visual artist who explores the theme of identity through the lens of mental illness." 
 
 Her powerful images evoke the themes of headspace being destroyed and recreated, our minds opened to (or shattered by?) the world beyond us. 
@@ -399,19 +373,16 @@ We are so glad to have Meg on board as the artist of Card 90!
         {
           name: "Meg Thorpe's Twitter",
           url: "https://twitter.com/megthorpeart",
-          target: "_blank"
         },
         {
           name: "Meg Thorpe's Instagram",
           url: "https://www.instagram.com/megthorpeart/",
-          target: "_blank"
         },
         {
           name: "Meg Thorpe's Digital Gallery",
           url: "https://oncyber.io/megthorpeart",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 91,
@@ -423,22 +394,19 @@ We are so glad to have Meg on board as the artist of Card 90!
       poster: "/artist-91/poster.gif",
       posterMintUrl: "",
       name: "Fidel Amos",
-      info:
-        `
+      info: `
 Fidel creates NFT photos. 
 `,
       links: [
         {
           name: "Fidel's Twitter",
           url: "https://twitter.com/FidelEverywhere",
-          target: "_blank"
         },
         {
           name: "Fidel's LinkTree",
           url: "https://linktr.ee/fideleverywhere/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 92,
@@ -450,8 +418,7 @@ Fidel creates NFT photos.
       poster: "/artist-92/poster.png",
       posterMintUrl: "",
       name: "Angela Nikolau",
-      info:
-        `
+      info: `
 We welcome Angela Nikolau, the Russian photographer known for her daring and adventurous photos, as the artist of Meme Card 92! 
 Her artistic style, which is often characterized by surreal and dizzying photos taken from high-up and dangerous locations, has been translated into the digital realm through her unique NFT photographic artwork.
 
@@ -469,32 +436,28 @@ Angela's contribution will surely take The Memes to new heights!
         {
           name: "Angela's Twitter",
           url: "https://twitter.com/angelanikolau_",
-          target: "_blank"
         },
         {
           name: "Angela's Instagram",
           url: "https://www.instagram.com/angela_nikolau/",
-          target: "_blank"
         },
         {
           name: "Angela's Art on Foundation",
           url: "https://foundation.app/@Angela_Nikolau",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
-      "tokenId": 93,
-      "images": [
+      tokenId: 93,
+      images: [
         "/artist-93/work-1.png",
         "/artist-93/work-2.gif",
-        "/artist-93/work-3.jpeg"
+        "/artist-93/work-3.jpeg",
       ],
-      "poster": "/artist-93/poster.png",
-      "posterMintUrl": "",
-      "name": "@mbsjq",
-      "info":
-        `
+      poster: "/artist-93/poster.png",
+      posterMintUrl: "",
+      name: "@mbsjq",
+      info: `
 We are excited to present Jonathan Quintin, the digital artist and graphic designer from the United Kingdom, professionally recognized as "mbsjq" or "Astro," as the creative mind behind Meme Card 93. 
 With a [career](https://www.artinnovationgallery.com/artist.php?id=6225d81155e51) spanning more than 20 years, mbsjq has been involved in numerous collaborations with internationally renowned companies. 
 His artwork is often characterized by a blend of vivid hues, celestial elements, and surrealism, drawing inspiration from the universe and his daughter.
@@ -509,36 +472,32 @@ Additionally, mbsjq was selected to commemorate Freddie Mercury's 75th birthday 
 In 2021, mbsjq's art appeared on billboards across LA, New York, and London, while his work was exhibited at prestigious events and locations such as Art Basel Miami, Dubai, London, and Shanghai. 
 As he continues to push the boundaries of digital art, mbsjq aspires to collaborate with prestigious organizations like NASA and Nike.
 `,
-      "links": [
+      links: [
         {
-          "name": "mbsjq's Twitter",
-          "url": "https://twitter.com/mbsjq",
-          "target": "_blank"
+          name: "mbsjq's Twitter",
+          url: "https://twitter.com/mbsjq",
         },
         {
-          "name": "mbsjq's Instagram",
-          "url": "https://www.instagram.com/madebystudiojq/",
-          "target": "_blank"
+          name: "mbsjq's Instagram",
+          url: "https://www.instagram.com/madebystudiojq/",
         },
         {
-          "name": "mbsjq's Homepage",
-          "url": "https://www.madebystudiojq.com/",
-          "target": "_blank"
-        }
-      ]
+          name: "mbsjq's Homepage",
+          url: "https://www.madebystudiojq.com/",
+        },
+      ],
     },
     {
-      "tokenId": 94,
-      "images": [
+      tokenId: 94,
+      images: [
         "/artist-94/work-1.gif",
         "/artist-94/work-2.png",
-        "/artist-94/work-3.png"
+        "/artist-94/work-3.png",
       ],
-      "poster": "/artist-94/poster.png",
-      "posterMintUrl": "",
-      "name": "Jeff Soto",
-      "info":
-        `
+      poster: "/artist-94/poster.png",
+      posterMintUrl: "",
+      name: "Jeff Soto",
+      info: `
 We welcome Jeff Soto, the renowned artist and illustrator, as the artist of Meme Card 94! 
 
 Jeff Soto is a contemporary artist, illustrator, and muralist who has been active in the art scene since the early 2000s. 
@@ -547,36 +506,32 @@ His art often features colorful and imaginative characters or creatures, as well
 
 Jeff Soto's vibrant fusion of pop surrealism and street art is bound to paint a whole new dimension of creativity onto The Memes project canvas!
 `,
-      "links": [
+      links: [
         {
-          "name": "Jeff's Twitter",
-          "url": "https://twitter.com/jeffsotoart",
-          "target": "_blank"
+          name: "Jeff's Twitter",
+          url: "https://twitter.com/jeffsotoart",
         },
         {
-          "name": "Jeff's Instagram",
-          "url": "https://www.instagram.com/jeffsotoart/",
-          "target": "_blank"
+          name: "Jeff's Instagram",
+          url: "https://www.instagram.com/jeffsotoart/",
         },
         {
-          "name": "Jeff's Homepage",
-          "url": "https://jeffsoto.com/",
-          "target": "_blank"
-        }
-      ]
+          name: "Jeff's Homepage",
+          url: "https://jeffsoto.com/",
+        },
+      ],
     },
     {
-      "tokenId": 95,
-      "images": [
+      tokenId: 95,
+      images: [
         "/artist-95/work-1.jpeg",
         "/artist-95/work-2.jpeg",
-        "/artist-95/work-3.png"
+        "/artist-95/work-3.png",
       ],
-      "poster": "/artist-95/poster.png",
-      "posterMintUrl": "",
-      "name": "Andreas Preis",
-      "info":
-        `
+      poster: "/artist-95/poster.png",
+      posterMintUrl: "",
+      name: "Andreas Preis",
+      info: `
 Andreas Preis is a Berlin-based artist, illustrator, and designer known for his versatile and vibrant artistic style. 
 Born in 1984, he studied communications design in Nuremberg, Germany. 
 Preis has worked with various high-profile clients, including Adidas, Adobe, Coca-Cola, DC Comics, ESPN, Ford, Nike, and Samsung.
@@ -591,36 +546,32 @@ As a versatile and innovative artist, Andreas Preis continues to push the bounda
 
 With Andreas Preis's kaleidoscope of colors and intricate illustrations, The Memes project is set to leap off the canvas and into a wildly imaginative realm of artistic expression!
 `,
-      "links": [
+      links: [
         {
-          "name": "Andreas's Twitter",
-          "url": "https://twitter.com/andreaspreis",
-          "target": "_blank"
+          name: "Andreas's Twitter",
+          url: "https://twitter.com/andreaspreis",
         },
         {
-          "name": "Andreas's Instagram",
-          "url": "https://www.instagram.com/andreaspreis/",
-          "target": "_blank"
+          name: "Andreas's Instagram",
+          url: "https://www.instagram.com/andreaspreis/",
         },
         {
-          "name": "Andreas's Art on Foundation",
-          "url": "https://foundation.app/@AndreasPreis",
-          "target": "_blank"
-        }
-      ]
+          name: "Andreas's Art on Foundation",
+          url: "https://foundation.app/@AndreasPreis",
+        },
+      ],
     },
     {
-      "tokenId": 96,
-      "images": [
+      tokenId: 96,
+      images: [
         "/artist-96/work-1.jpeg",
         "/artist-96/work-2.jpeg",
-        "/artist-96/work-3.png"
+        "/artist-96/work-3.png",
       ],
-      "poster": "/artist-96/poster.png",
-      "posterMintUrl": "",
-      "name": "Billy Dinh",
-      "info":
-        `
+      poster: "/artist-96/poster.png",
+      posterMintUrl: "",
+      name: "Billy Dinh",
+      info: `
 Meet Billy Dinh, the avant-garde lens virtuoso who's been reshaping the face of modern photography. 
 Known for his ingenious integration of everyday life and surrealism, Dinh's work seizes the ephemeral, turning fleeting moments into timeless art.
 
@@ -634,36 +585,32 @@ Billy Dinh doesn't just take photos—he crafts stories, immortalizing moments w
 
 So now we embark on the memetic journey with Billy Dinh, with excitement to see his signature style develop in this new frame of reference!
 `,
-      "links": [
+      links: [
         {
-          "name": "Billy's Twitter",
-          "url": "http://twitter.com/billydeee_",
-          "target": "_blank"
+          name: "Billy's Twitter",
+          url: "http://twitter.com/billydeee_",
         },
         {
-          "name": "Billy's Instagram",
-          "url": "http://instagram.com/billydeee",
-          "target": "_blank"
+          name: "Billy's Instagram",
+          url: "http://instagram.com/billydeee",
         },
         {
-          "name": "Billy's Website",
-          "url": "http://billydinh.com",
-          "target": "_blank"
-        }
-      ]
+          name: "Billy's Website",
+          url: "http://billydinh.com",
+        },
+      ],
     },
     {
-      "tokenId": 97,
-      "images": [
+      tokenId: 97,
+      images: [
         "/artist-97/work-1.png",
         "/artist-97/work-2.png",
-        "/artist-97/work-3.png"
+        "/artist-97/work-3.png",
       ],
-      "poster": "/artist-97/poster.png",
-      "posterMintUrl": "",
-      "name": "Matt Doogue",
-      "info":
-        `
+      poster: "/artist-97/poster.png",
+      posterMintUrl: "",
+      name: "Matt Doogue",
+      info: `
 Immerse yourself in the captivating universe of Matt Doogue, the London-based Macro Maestro. 
 His photographic wizardry brings the minute wonders of our natural world into awe-inspiring focus. 
 From dew-kissed spider webs to the subtle patterns on a butterfly's wing, Doogue's lens unveils a realm usually hidden from the naked eye.
@@ -677,36 +624,32 @@ His work is an exploration, a celebration, and an homage to the wonders of the n
 As we welcome Matt to our collective, we look forward to zooming into his world, where every photograph is a journey into the exquisite detail of life. 
 Get ready to see the world in a whole new light, through the macro lens of Matt Doogue.
 `,
-      "links": [
+      links: [
         {
-          "name": "Matt's Twitter",
-          "url": "https://www.twitter.com/mattdoogue",
-          "target": "_blank"
+          name: "Matt's Twitter",
+          url: "https://www.twitter.com/mattdoogue",
         },
         {
-          "name": "Matt's Instagram",
-          "url": "https://instagram.com/mattd85",
-          "target": "_blank"
+          name: "Matt's Instagram",
+          url: "https://instagram.com/mattd85",
         },
         {
-          "name": "Matt's Website",
-          "url": "https://mattsmacro.co.uk",
-          "target": "_blank"
-        }
-      ]
+          name: "Matt's Website",
+          url: "https://mattsmacro.co.uk",
+        },
+      ],
     },
     {
-      "tokenId": 98,
-      "images": [
+      tokenId: 98,
+      images: [
         "/artist-98/work-1.png",
         "/artist-98/work-2.gif",
-        "/artist-98/work-3.jpeg"
+        "/artist-98/work-3.jpeg",
       ],
-      "poster": "/artist-98/poster.png",
-      "posterMintUrl": "",
-      "name": "Degen Alfie",
-      "info":
-        `
+      poster: "/artist-98/poster.png",
+      posterMintUrl: "",
+      name: "Degen Alfie",
+      info: `
 Degen Alfie is The Memes artist number 98, so get excited! 
 
 Alfie is based in the UK and creates art influenced by a variety of sources, including cyberpunk, anime, and video games. 
@@ -720,36 +663,32 @@ His ambitious projects include the Degen Alphabet, which chronicles the events, 
 
 He's shared his sketch process, he's shared his art with the world, and now he shares the glory of The Memes with us all.
 `,
-      "links": [
+      links: [
         {
-          "name": "Alfie's Twitter",
-          "url": "https://twitter.com/Degen_Alfie",
-          "target": "_blank"
+          name: "Alfie's Twitter",
+          url: "https://twitter.com/Degen_Alfie",
         },
         {
-          "name": "Matt's Instagram",
-          "url": "https://instagram.com/mattd85",
-          "target": "_blank"
+          name: "Matt's Instagram",
+          url: "https://instagram.com/mattd85",
         },
         {
-          "name": "Alfie's Website",
-          "url": "https://degenalphabet.com/",
-          "target": "_blank"
-        }
-      ]
+          name: "Alfie's Website",
+          url: "https://degenalphabet.com/",
+        },
+      ],
     },
     {
-      "tokenId": 99,
-      "images": [
+      tokenId: 99,
+      images: [
         "/artist-99/work-1.jpeg",
         "/artist-99/work-2.jpeg",
-        "/artist-99/work-3.webp"
+        "/artist-99/work-3.webp",
       ],
-      "poster": "/artist-99/poster.png",
-      "posterMintUrl": "",
-      "name": "Mike Hirshon",
-      "info":
-        `
+      poster: "/artist-99/poster.png",
+      posterMintUrl: "",
+      name: "Mike Hirshon",
+      info: `
 Michael Hirshon is a versatile freelance illustrator and an esteemed Assistant Professor of Illustration. 
 He holds impressive academic credentials, with a BFA in Visual Communication and Psychology from Washington University in St. Louis and an MFA in Illustration as Visual Essay from the School of Visual Arts in New York City. 
 Over the past decade, he has developed a diverse portfolio, working with a wide array of prestigious clients such as The New York Times, HarperCollins Publishers, Amazon, The Washington Post, Forbes, and American Express. 
@@ -764,37 +703,33 @@ This personal work has evolved into an exploration of cultural differences, anxi
 
 We are thrilled to welcome Mike to The Memes and look forward to how his illustrious style will play out within the project's vision.
 `,
-      "links": [
+      links: [
         {
-          "name": "Mike's Twitter",
-          "url": "https://twitter.com/MikeHirshon",
-          "target": "_blank"
+          name: "Mike's Twitter",
+          url: "https://twitter.com/MikeHirshon",
         },
         {
-          "name": "Mike's Instagram",
-          "url": "https://instagram.com/MichaelHirshon",
-          "target": "_blank"
+          name: "Mike's Instagram",
+          url: "https://instagram.com/MichaelHirshon",
         },
         {
-          "name": "Mike's Website",
-          "url": "https://hirshon.net",
-          "target": "_blank"
-        }
-      ]
+          name: "Mike's Website",
+          url: "https://hirshon.net",
+        },
+      ],
     },
     {
-      "tokenId": 100,
-      "images": [
+      tokenId: 100,
+      images: [
         "/artist-100/work-1.jpeg",
         "/artist-100/work-2.gif",
         "/artist-100/work-3.png",
-        "/artist-100/work-4.jpeg"
+        "/artist-100/work-4.jpeg",
       ],
       poster: "/artist-100/poster.gif",
       posterMintUrl: "",
       name: "6529er",
-      info:
-        `
+      info: `
 We are proud to welcome 6529er back to the 6529 Meme artist family. 
 
 Dive into the mysterious world of 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
@@ -812,32 +747,28 @@ Stoked for more from 6529er!
         {
           name: "6529er's Twitter",
           url: "https://twitter.com/6529er",
-          target: "_blank"
         },
         {
           name: "6529er on Foundation",
           url: "https://foundation.app/@6529er",
-          target: "_blank"
         },
         {
           name: "Find @6529er in the OM Discord Server",
           url: "https://discord.gg/JAhzGprv",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
-      "tokenId": 101,
-      "images": [
+      tokenId: 101,
+      images: [
         "/artist-101/work-1.gif",
         "/artist-101/work-2.png",
-        "/artist-101/work-3.gif"
+        "/artist-101/work-3.gif",
       ],
-      "poster": "/artist-101/poster.gif",
-      "posterMintUrl": "",
-      "name": "Lord Jamie V Shill",
-      "info":
-        `
+      poster: "/artist-101/poster.gif",
+      posterMintUrl: "",
+      name: "Lord Jamie V Shill",
+      info: `
 LordJamieVShiLL is a boundary-pushing artist entrenched in the Bitcoin and NFT realm. 
 
 As the self-proclaimed "Master of the ShiLL", he is widely recognized for his creations that seem to build from a subversive exploration of digital and blockchain mediums. 
@@ -850,36 +781,32 @@ LordJamieVShiLL's work can be found on various digital art platforms, where he s
 
 We don't yet know what LordJamieVShiLL will brings to The Memes, but don't bet against a Pepe!
 `,
-      "links": [
+      links: [
         {
-          "name": "Jamie's Twitter",
-          "url": "https://twitter.com/LordJamieVShiLL",
-          "target": "_blank"
+          name: "Jamie's Twitter",
+          url: "https://twitter.com/LordJamieVShiLL",
         },
         {
-          "name": "Jamie's Fake Rares",
-          "url": "https://pepe.wtf/artists/Lord-Jamie-V.-Shill",
-          "target": "_blank"
+          name: "Jamie's Fake Rares",
+          url: "https://pepe.wtf/artists/Lord-Jamie-V.-Shill",
         },
         {
-          "name": "3PEACE's OM Gallery",
-          "url": "https://oncyber.io/spaces/H82ITP1XLj59OvHTiI7t?coords=-1.71x2.03x-12.96x-1.74",
-          "target": "_blank"
-        }
-      ]
+          name: "3PEACE's OM Gallery",
+          url: "https://oncyber.io/spaces/H82ITP1XLj59OvHTiI7t?coords=-1.71x2.03x-12.96x-1.74",
+        },
+      ],
     },
     {
-      "tokenId": 102,
-      "images": [
+      tokenId: 102,
+      images: [
         "/artist-102/work-1.gif",
         "/artist-102/work-2.jpeg",
-        "/artist-102/work-3.png"
+        "/artist-102/work-3.png",
       ],
-      "poster": "/artist-102/poster.gif",
-      "posterMintUrl": "",
-      "name": "@GxngYxng",
-      "info":
-        `
+      poster: "/artist-102/poster.gif",
+      posterMintUrl: "",
+      name: "@GxngYxng",
+      info: `
 GxngYxng is a Japan-based NFT artist best known for his Ghxsts collection, a series of hand-drawn artworks transformed into NFTs. 
 His distinctive and instantly recognizable style, drawn from his personal experiences and feelings, has set him apart in the non-generative art space. 
 His journey as an artist began in childhood, and his commitment to his craft led him to leave his animation industry job to focus on creating NFTs full-time. 
@@ -895,35 +822,31 @@ By offering additional ways for collectors to engage with his work, GxngYxng has
 
 We look forward what GxngYxng is crafting for Meme Card 102!
 `,
-      "links": [
+      links: [
         {
-          "name": "GxngYxng's Twitter",
-          "url": "https://twitter.com/gxngyxng",
-          "target": "_blank"
+          name: "GxngYxng's Twitter",
+          url: "https://twitter.com/gxngyxng",
         },
         {
-          "name": "GxngYxng's creations",
-          "url": "https://opensea.io/GxngYxngNFT/created",
-          "target": "_blank"
+          name: "GxngYxng's creations",
+          url: "https://opensea.io/GxngYxngNFT/created",
         },
         {
-          "name": "GxngYxng's website",
-          "url": "https://ghxsts.com/",
-          "target": "_blank"
-        }
-      ]
+          name: "GxngYxng's website",
+          url: "https://ghxsts.com/",
+        },
+      ],
     },
     {
       tokenId: 103,
       images: [
         "/artist-103/work-1.jpeg",
         "/artist-103/work-2.svg",
-        "/artist-103/work-3.svg"
+        "/artist-103/work-3.svg",
       ],
       poster: "/artist-103/poster.gif",
       name: "Jack Butcher",
-      info:
-        `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
+      info: `Jack Butcher the creator of "VV - Checks" is a former creative director for multi-billion dollar brands, having spent a decade working in Fortune 100 advertising in New York City. Despite the industry's excitement, he felt restricted by the lack of freedom in his work. In search of a solution, he started his own advertising agency but found even less freedom.
 
 After two years of trial and error, Jack discovered the secret to transitioning to a highly-specialized and enjoyable consulting business and a product business that could scale infinitely. 
 
@@ -939,31 +862,27 @@ Welcome to the Memes Community Jack...we look forward to "Check"ing what you hav
         {
           name: "Jack's Twitter",
           url: "https://twitter.com/jackbutcher",
-          target: "_blank"
         },
         {
           name: "Jack's Check Art",
           url: "https://checks.art/",
-          target: "_blank"
         },
         {
           name: "Jack's Blog Posts",
           url: "https://visualizevalue.com/blogs/visuals",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 104,
       images: [
         "/artist-104/work-1.png",
         "/artist-104/work-2.gif",
-        "/artist-104/work-3.gif"
+        "/artist-104/work-3.gif",
       ],
       poster: "/artist-104/poster.gif",
       name: "Timpers",
-      info:
-        `
+      info: `
 Timpers, known on Twitter as @TimpersHD or "timpers.chimp," is an innovative artist who specializes in the creation of pixel art. 
 He describes himself as a "Pixel placer" which speaks to his unique ability to arrange pixels to create intricate and colorful designs.
 
@@ -984,31 +903,27 @@ We are excited to see what Timpers has in placed into pixels for us in Meme Card
         {
           name: "Timpers' Twitter",
           url: "https://twitter.com/TimpersHD",
-          target: "_blank"
         },
         {
           name: "Timpers on Foundation",
           url: "https://foundation.app/Timpers",
-          target: "_blank"
         },
         {
           name: "Timpers' Website",
           url: "https://timpers.format.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 105,
       images: [
         "/artist-105/work-1.png",
         "/artist-105/work-2.png",
-        "/artist-105/work-3.png"
+        "/artist-105/work-3.png",
       ],
       poster: "/artist-105/poster.png",
       name: "José Ramos",
-      info:
-        `
+      info: `
 José Ramos is a seasoned landscape photographer and psychiatrist based in Lisbon, Portugal. 
 Balancing two careers, he has developed a strong artistic voice over the past 18 years, expressing his unique perspective and love for nature through his photography. 
 Ramos' work focuses on the beauty and power of the world around us, with each image containing embedded concepts, stories, and philosophies. 
@@ -1036,19 +951,16 @@ What is José's vision for Meme Card 105? We can't wait to see!
         {
           name: "José's Twitter",
           url: "https://twitter.com/jose_ramos",
-          target: "_blank"
         },
         {
           name: "José on SuperRare",
           url: "https://superrare.com/joseramos",
-          target: "_blank"
         },
         {
           name: "José's Website",
           url: "https://timpers.format.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 106,
@@ -1056,12 +968,11 @@ What is José's vision for Meme Card 105? We can't wait to see!
         "/artist-106/work-1.jpeg",
         "/artist-106/work-2.png",
         "/artist-106/work-3.png",
-        "/artist-106/work-4.png"
+        "/artist-106/work-4.png",
       ],
       poster: "/artist-106/poster.png",
       name: "ICKI x noCreative",
-      info:
-        `
+      info: `
 Meme Card 106 looks to break new ground with a collaboration between two innovative NFT artists: Icki and noCreative.
 Since they are both founding members of the Bloom Collective, we can count on their experience in working together to produce something great!
 
@@ -1083,19 +994,16 @@ With noCreative's signature 3D work and Icki's subversive commentary, their coll
         {
           name: "ICKI's Twitter",
           url: "https://twitter.com/The_Kid_Icarus",
-          target: "_blank"
         },
         {
           name: "noCreative's Twitter",
           url: "https://twitter.com/nocreative_eth",
-          target: "_blank"
         },
         {
           name: "Bloom Collective",
           url: "https://thisisbloom.xyz",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 107,
@@ -1106,8 +1014,7 @@ With noCreative's signature 3D work and Icki's subversive commentary, their coll
       ],
       poster: "/artist-107/poster.png",
       name: "yungwknd",
-      info:
-        `
+      info: `
 The artist for Meme Card 107 is yungwknd: a Seattle-based generative artist. 
 He has made a significant impact on the web3 NFT space since his arrival in March 2021. 
 Traversing the spectrum from abstract on-chain art to realistic drawings made with code, his work embodies the intersection of art and technology. 
@@ -1123,19 +1030,16 @@ What's coming for Card 107? A generative piece? An interactive NFT? We find out 
         {
           name: "yungwknd's Twitter",
           url: "https://twitter.com/yungwknd",
-          target: "_blank"
         },
         {
           name: "yungwknd's Website",
           url: "https://www.yungwknd.xyz/",
-          target: "_blank"
         },
         {
           name: "yungwknd's Website",
           url: "https://www.yungwknd.xyz/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 108,
@@ -1146,8 +1050,7 @@ What's coming for Card 107? A generative piece? An interactive NFT? We find out 
       ],
       poster: "/artist-108/poster.png",
       name: "Donglu Yu",
-      info:
-        `
+      info: `
 Donglu Yu, an acclaimed artist and dreamer, is known for her striking contributions to the world of concept art, illustration, and visual development. 
 Yu's work has gained international recognition, and her art has even been sold on prestigious platforms like Sotheby's.
 
@@ -1168,29 +1071,23 @@ Card 108 is in her hands... How will she meme it? We find out on June 7th, 2023!
         {
           name: "Donglu's Twitter",
           url: "https://twitter.com/dongluyu",
-          target: "_blank"
         },
         {
           name: "Donglu's Instagram",
           url: "http://instagram.com/donglulittlefish",
-          target: "_blank"
         },
         {
           name: "Donglu on Superrare",
           url: "https://superrare.com/donglu",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 109,
-      images: [
-
-      ],
+      images: [],
       poster: "/artist-109/poster.png",
       name: "Unknown",
-      info:
-        `
+      info: `
 The artist for Card 109? Not announced ahead of time! 
 
 This drop will happen on the anniversary of the genesis Meme Cards, June 9th, 2022.
@@ -1199,9 +1096,7 @@ The Memes turn 1 year old! What a year it's been.
 
 We'll see the artist and the art on June 9th, 2023!
 `,
-      links: [
-
-      ]
+      links: [],
     },
     {
       tokenId: 110,
@@ -1212,8 +1107,7 @@ We'll see the artist and the art on June 9th, 2023!
       ],
       poster: "/artist-110/poster.png",
       name: "YuYu",
-      info:
-        `
+      info: `
 YuLiang Liu, also known as YuYu or Cyber_Yuyu, is a Berlin-based artist renowned for his thought-provoking and unconventional digital collages. 
 Born in Taiwan, YuYu embarked on his artistic journey after relocating to Europe, where he began exploring his identity as a queer Asian in Western society. 
 His unique artwork bridges disparate styles, media, and eras, leveraging Western cultural history to challenge conventional art definitions, critique elitist and theological attitudes towards art, and offer a modern perspective on beauty.
@@ -1235,19 +1129,16 @@ Card 110 teasers are already online... Watch for the full reveal on June 12th, 2
         {
           name: "YuYu's Twitter",
           url: "https://twitter.com/cyber_yuyu",
-          target: "_blank"
         },
         {
           name: "An interview with YuYu",
           url: "https://www.kaltblut-magazine.com/a-striking-critique-of-modern-societyyuyus-bold-take-on-the-tortured-genius/",
-          target: "_blank"
         },
         {
           name: "YuYu's Editions on OS",
           url: "https://opensea.io/assets/ethereum/0xa6d2420c814b7594f3c8a0fad0ec1f01454f0f1c/1",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 111,
@@ -1258,27 +1149,23 @@ Card 110 teasers are already online... Watch for the full reveal on June 12th, 2
       ],
       poster: "/artist-111/poster.png",
       name: "Yakob",
-      info:
-        `
+      info: `
 Card 111 teasers are already online... Watch for the full reveal on June 14th, 2023!
         `,
       links: [
         {
           name: "Yakob's Twitter",
           url: "https://twitter.com/Yakob",
-          target: "_blank"
         },
         {
           name: "Yakob's website",
           url: "",
-          target: "_blank"
         },
         {
           name: "Yakob's Instagram",
           url: "",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 112,
@@ -1289,27 +1176,23 @@ Card 111 teasers are already online... Watch for the full reveal on June 14th, 2
       ],
       poster: "/artist-112/poster.png",
       name: "Nikolina Petolas",
-      info:
-        `
+      info: `
 Card 112 will be here soon... We will see all the details on June 16th, 2023!
         `,
       links: [
         {
           name: "Nikolina's Twitter",
           url: "https://twitter.com/",
-          target: "_blank"
         },
         {
           name: "Nikolina's website",
           url: "",
-          target: "_blank"
         },
         {
           name: "Nikolina's Instagram",
           url: "",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 113,
@@ -1320,8 +1203,7 @@ Card 112 will be here soon... We will see all the details on June 16th, 2023!
       ],
       poster: "/artist-113/poster.png",
       name: "Laura El",
-      info:
-        `
+      info: `
 Laura Connelly, known in the art world as Laura El, is a digital artist who has made a significant impact in the NFT space. 
 Based in Brooklyn, New York, Laura is the founder of Stellar Villa, a company that specializes in custom wall art. 
 However, her artistic journey has expanded beyond traditional mediums, embracing the world of NFTs finding serious collectors at Sotheby's and SuperRare.
@@ -1343,19 +1225,16 @@ She's the artist behind Card 113, which we will see at last on June 21st, 2023!
         {
           name: "Laura's Twitter",
           url: "https://twitter.com/iamlaurael",
-          target: "_blank"
         },
         {
           name: "Laura tells her story",
           url: "https://thestoryexchange.org/laura-connelly-wall-art-by-stellar-villa/",
-          target: "_blank"
         },
         {
           name: "Laura's Instagram",
           url: "https://www.instagram.com/iamlaurael/",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 114,
@@ -1366,8 +1245,7 @@ She's the artist behind Card 113, which we will see at last on June 21st, 2023!
       ],
       poster: "/artist-114/poster.png",
       name: "Camibus",
-      info:
-        `
+      info: `
 Camibus's art is deeply symbolic, and she has provided an in-depth explanation of the approach she takes to her work.
 
 Camibus often depicts their characters in the nude, not to sexualize them, but to show them in their most vulnerable and true state. 
@@ -1394,19 +1272,16 @@ What will be laid bare in Meme Card 114? We will see all the details revealed on
         {
           name: "Camibus' Twitter",
           url: "https://twitter.com/camibus_",
-          target: "_blank"
         },
         {
           name: "Camibus' OM Gallery",
           url: "https://oncyber.io/camibus",
-          target: "_blank"
         },
         {
           name: "Camibus' Instagram",
           url: "https://www.instagram.com/camibus.eth/",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 115,
@@ -1417,8 +1292,7 @@ What will be laid bare in Meme Card 114? We will see all the details revealed on
       ],
       poster: "/artist-115/poster.png",
       name: "Giovanni Motta",
-      info:
-        `
+      info: `
 Giovanni Motta, born in 1971, is an NFT and crypto artist known for his character Jonny Boy. 
 Through his art, Motta aims to rediscover his inner child by creating works that are an emotional bridge to the soul. 
 His artworks stem from an introspective approach, where he engages with his most intimate self, reflecting his emotional relationship with the world and everyday objects. 
@@ -1448,19 +1322,16 @@ Will Jonny Boy make an appearance in Card 115?... We will find out on June 26th,
         {
           name: "Giovanni's Twitter",
           url: "https://twitter.com/mottagio1971",
-          target: "_blank"
         },
         {
           name: "Giovanni's website",
           url: "http://www.giovannimotta.it",
-          target: "_blank"
         },
         {
           name: "Giovanni's Instagram",
           url: "https://instagram.com/mottagiovanni",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 116,
@@ -1472,8 +1343,7 @@ Will Jonny Boy make an appearance in Card 115?... We will find out on June 26th,
       ],
       poster: "/artist-116/poster.png",
       name: "Sadboi",
-      info:
-        `
+      info: `
 Joel Hedstrom, professionally known as sadboi, is an illustrator and artist based in Minneapolis, Minnesota. 
 He received a Bachelor of Fine Arts (BFA) from the College of Visual Arts in 2010, and since then, he has been focusing on both personal and freelance art projects.
 
@@ -1499,19 +1369,16 @@ We will know for sure on June 28th, 2023!
         {
           name: "Sadboi's Twitter",
           url: "https://twitter.com/",
-          target: "_blank"
         },
         {
           name: "Sadboi's website",
           url: "http://www.hedstrom-art.com/",
-          target: "_blank"
         },
         {
           name: "Sadboi's Instagram",
           url: "https://www.instagram.com/sadboi_illustration/",
-          target: "_blank"
         },
-      ]
+      ],
     },
     {
       tokenId: 117,
@@ -1522,8 +1389,7 @@ We will know for sure on June 28th, 2023!
       ],
       poster: "/artist-117/poster.png",
       name: "Cardelucci",
-      info:
-        `
+      info: `
 Jessica Cardelucci is a self-taught photographer from California who uses her lens to capture intimate moments, often in black and white. 
 Her work has received recognition from prestigious platforms such as the IPA Int'l Photography Awards, Black & White Spider Awards, and Neutral Density Photography Awards, and has been exhibited in numerous venues.
 
@@ -1541,19 +1407,16 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
         {
           name: "Cardelucci's Twitter",
           url: "http://twitter.com/cardelucci",
-          target: "_blank"
         },
         {
           name: "Cardelucci's Instagram",
           url: "https://instagram.com/cardelucci",
-          target: "_blank"
         },
         {
           name: "Cardelucci's website",
           url: "https://cardelucci.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 118,
@@ -1564,8 +1427,7 @@ We look forward to seeing what contrasts she highlights in card 117 on June 29th
       ],
       poster: "/artist-118/poster.png",
       name: "Botto",
-      info:
-        `
+      info: `
 Botto is an avant-garde artist, employing generative algorithms to create art. 
 What sets Botto apart from traditional artists is that it operates as a decentralized and autonomous artist, governed by a community.
 
@@ -1589,19 +1451,16 @@ What does the hive-mind have in store for us? We find out with the SZN3 Capstone
         {
           name: "Botto's Twitter",
           url: "https://twitter.com/bottoproject",
-          target: "_blank"
         },
         {
           name: "Botto's Instagram",
           url: "https://instagram.com/bottoproject",
-          target: "_blank"
         },
         {
           name: "Botto's website",
           url: "https://botto.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 119,
@@ -1612,8 +1471,7 @@ What does the hive-mind have in store for us? We find out with the SZN3 Capstone
       ],
       poster: "/artist-119/poster.png",
       name: "Idil Dursun",
-      info:
-        `
+      info: `
 Idil Dursun is a digital artist based in Ankara, Turkey, whose work is deeply rooted in the realm of cyberpunk and concept art. 
 Her journey into the world of art began at a young age, with a love for painting that has evolved and grown over time. 
 From landscapes painted with acrylics and oil to charcoal sketches of portraits, her early work was diverse and exploratory. 
@@ -1638,19 +1496,16 @@ The next stop is the SZN4 opener, in card 119 on July 17th, 2023!
         {
           name: "Idil's Twitter",
           url: "https://twitter.com/jarvinart",
-          target: "_blank"
         },
         {
           name: "Idil's Instagram",
           url: "https://www.instagram.com/jarvinart",
-          target: "_blank"
         },
         {
           name: "Idil on Foundation",
           url: "https://foundation.app/@jarvinart",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 120,
@@ -1658,13 +1513,12 @@ The next stop is the SZN4 opener, in card 119 on July 17th, 2023!
         "/artist-120/work-1.jpeg",
         "/artist-120/work-2.gif",
         "/artist-120/work-3.png",
-        "/artist-120/work-4.jpeg"
+        "/artist-120/work-4.jpeg",
       ],
       poster: "/artist-120/poster.png",
       posterMintUrl: "",
       name: "6529er",
-      info:
-        `
+      info: `
 It's always an exciting moment to see what 6529er has up his sleeve. 
 
 The Memes are truly anchored by 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
@@ -1682,32 +1536,28 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
         {
           name: "6529er's Twitter",
           url: "https://twitter.com/6529er",
-          target: "_blank"
         },
         {
           name: "6529er on Foundation",
           url: "https://foundation.app/@6529er",
-          target: "_blank"
         },
         {
           name: "Find @6529er in the OM Discord Server",
           url: "https://discord.gg/JAhzGprv",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 121,
       images: [
         "/artist-121/work-1.jpeg",
         "/artist-121/work-2.mp4",
-        "/artist-121/work-3.jpeg"
+        "/artist-121/work-3.jpeg",
       ],
       poster: "/artist-121/poster.png",
       posterMintUrl: "",
       name: "Eric Paré",
-      info:
-        `
+      info: `
 Eric Paré is a luminary in the realm of light-painting photography. 
 His unique style is characterized by the use of tubes to create ethereal and mesmerizing light trails, often set against breathtaking natural landscapes or urban backdrops. 
 Paré's journey with light-painting began with a project titled "LightSpin," where he collaborated with Kim, who later became a significant muse and partner in his artistic endeavors. 
@@ -1732,32 +1582,28 @@ What memes will Card 121 explore? Eric will shed light on it on July 21st, 2023!
         {
           name: "Eric's Twitter",
           url: "https://twitter.com/ericpare",
-          target: "_blank"
         },
         {
           name: "Eric's Instagram",
           url: "https://www.instagram.com/ericparephoto",
-          target: "_blank"
         },
         {
           name: "Eric's Website",
           url: "https://ericpare.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 122,
       images: [
         "/artist-122/work-1.png",
         "/artist-122/work-2.png",
-        "/artist-122/work-3.jpeg"
+        "/artist-122/work-3.jpeg",
       ],
       poster: "/artist-122/poster.png",
       posterMintUrl: "",
       name: "Dre Dogue",
-      info:
-        `
+      info: `
 In the vast realm of NFT art, @dredogue is emerging as a beacon of innovation, seamlessly merging the nostalgic charm of 35mm film with the dynamic world of NFTs. 
 His works, often characterized by evocative nude photography, capture the raw essence of human vulnerability and beauty. 
 These intimate portrayals are juxtaposed with urban scenes, where the pulse of city life and its myriad stories come alive through his lens. 
@@ -1776,32 +1622,28 @@ What memetic narrative will Card 122 explore? We will see what is exposed on Jul
         {
           name: "Dre's Twitter",
           url: "https://twitter.com/dredogue",
-          target: "_blank"
         },
         {
           name: "Dre's OS",
           url: "https://opensea.io/dredogue/created",
-          target: "_blank"
         },
         {
           name: "Dre's Linktree",
           url: "https://linktr.ee/dredogue",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 123,
       images: [
         "/artist-123/work-1.png",
         "/artist-123/work-2.gif",
-        "/artist-123/work-3.gif"
+        "/artist-123/work-3.gif",
       ],
       poster: "/artist-123/poster.mp4",
       posterMintUrl: "",
       name: "SamJ Studios",
-      info:
-        `
+      info: `
 In the heart of Amsterdam's artistic quarters, SamJ has established a creative sanctuary, crafting narratives that resonate deeply with the digital age. 
 Born into the dynamic late '90s, their tech-native journey from acquiring a Graphic Design degree at James Madison University to becoming a beacon in the NFT art realm is nothing short of inspiring.
 
@@ -1819,32 +1661,28 @@ We happily welcome such a young and energetic voice to Card 123 on July 26th, 20
         {
           name: "SamJ's Twitter",
           url: "https://twitter.com/samjstudios",
-          target: "_blank"
         },
         {
           name: "SamJ's Website",
           url: "http://samjstudios.com/",
-          target: "_blank"
         },
         {
           name: "SamJ's Linktree",
           url: "https://linktr.ee/Arty",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 124,
       images: [
         "/artist-124/work-1.png",
         "/artist-124/work-2.gif",
-        "/artist-124/work-3.gif"
+        "/artist-124/work-3.gif",
       ],
       poster: "/artist-124/poster.png",
       posterMintUrl: "",
       name: "Afonso Caravaggio",
-      info:
-        `
+      info: `
 Afonso Caravaggio is not just a digital artist, but a storyteller of the modern age. 
 His works, which seamlessly blend the classical with the contemporary, are a testament to his prowess in merging traditional art sensibilities with the dynamic realm of digital creation.
 
@@ -1863,32 +1701,28 @@ And the possibilities for Meme Card 124 have us excited to see it all on July 28
         {
           name: "Afonso's Twitter",
           url: "https://twitter.com/carav4ggio",
-          target: "_blank"
         },
         {
           name: "Afonso's Instagram",
           url: "https://www.instagram.com/afonsocaravaggio",
-          target: "_blank"
         },
         {
           name: "Afonso's Website",
           url: "https://afonsocaravaggio.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 125,
       images: [
         "/artist-125/work-1.mp4",
         "/artist-125/work-2.mp4",
-        "/artist-125/work-3.mp4"
+        "/artist-125/work-3.mp4",
       ],
       poster: "/artist-125/poster.mp4",
       posterMintUrl: "",
       name: "Ryan D. Anderson",
-      info:
-        `
+      info: `
 Ryan Anderson, hailing from the vibrant city of Toronto, Canada, is not just an animator; he's a storyteller, a dreamer, and an artist who paints with motion. 
 From the innocent days of playing with his dad's Hi-8 camcorder to mastering the intricate world of animation, Ryan's journey has been nothing short of cinematic.
 
@@ -1914,32 +1748,28 @@ For those keen on exploring the world through the lens of memes, watch for Card 
         {
           name: "Ryan's Twitter",
           url: "https://twitter.com/itsryananderson",
-          target: "_blank"
         },
         {
           name: "Ryan's Instagram",
           url: "https://www.instagram.com/itsryandanderson",
-          target: "_blank"
         },
         {
           name: "Ryan's Linktree",
           url: "https://linktr.ee/ryandanderson",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 126,
       images: [
         "/artist-126/work-1.mp4",
         "/artist-126/work-2.jpeg",
-        "/artist-126/work-3.jpeg"
+        "/artist-126/work-3.jpeg",
       ],
       poster: "/artist-126/poster.png",
       posterMintUrl: "",
       name: "Marcel Deneuve",
-      info:
-        `
+      info: `
 Marcel Deneuve is an illustrious illustrator and concept artist whose work is a testament to his profound understanding of visual storytelling. 
 His proflific sci-fi themed work is built around creating illustrations that captivate and inspire, across a variety of platforms.
 
@@ -1958,32 +1788,28 @@ Surely his community spirit will be on display in Meme Card 126! It's coming on 
         {
           name: "Marcel's Twitter",
           url: "https://twitter.com/marceldeneuve",
-          target: "_blank"
         },
         {
           name: "Marcel's Instagram",
           url: "https://www.instagram.com/marceldeneuve",
-          target: "_blank"
         },
         {
           name: "Marcel's Art Station",
           url: "https://marceldeneuve.artstation.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 127,
       images: [
         "/artist-127/work-1.mp4",
         "/artist-127/work-2.jpeg",
-        "/artist-127/work-3.jpeg"
+        "/artist-127/work-3.jpeg",
       ],
       poster: "/artist-127/poster.png",
       posterMintUrl: "",
       name: "Dominik Gümbel",
-      info:
-        `
+      info: `
 Dominik Gümbel, hailing from Germany, is a name that resonates with versatility and depth in the world of concept art and visual development. 
 As a freelance concept artist and illustrator, he has lent his expertise to renowned studios such as Massive Black and Nuare Studios, showcasing a portfolio that spans across character design, advertisement illustration, and both 2D and 3D animation.
 
@@ -2007,32 +1833,28 @@ His stories come to The Memes on Aug 4th, 2023!
         {
           name: "DominikG's Twitter",
           url: "https://twitter.com/0xdominikg",
-          target: "_blank"
         },
         {
           name: "DominikG's Instagram",
           url: "https://www.instagram.com/dominikguembel",
-          target: "_blank"
         },
         {
           name: "DominikG's Art Station",
           url: "https://dominikguembel.artstation.com/albums/8891027",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 128,
       images: [
         "/artist-128/work-1.gif",
         "/artist-128/work-2.mp4",
-        "/artist-128/work-3.mp4"
+        "/artist-128/work-3.mp4",
       ],
       poster: "/artist-128/poster.png",
       posterMintUrl: "",
       name: "Fabiano Speziari",
-      info:
-        `
+      info: `
 Fabiano Speziari, a multifaceted artist born in 1977, has seamlessly blended his roles as an industrial technical designer and an artist. 
 His canvas paintings of trees and natural forms, along with unique resin-made animals, marked the beginning of his artistic journey. 
 As he delved deeper, Speziari ventured into land art, crafting installations that resonated with nature's essence. 
@@ -2052,32 +1874,28 @@ This dialogue will continue with Card 128 on Aug 7th, 2023!
         {
           name: "Fabiano's Twitter",
           url: "https://twitter.com/fabianospeziari",
-          target: "_blank"
         },
         {
           name: "Fabiano's Instagram",
           url: "https://www.instagram.com/fabianospeziari",
-          target: "_blank"
         },
         {
           name: "Fabiano's Website",
           url: "https://fabianospeziari.io/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 129,
       images: [
         "/artist-129/work-1.webp",
         "/artist-129/work-2.webp",
-        "/artist-129/work-3.webp"
+        "/artist-129/work-3.webp",
       ],
       poster: "/artist-129/poster.png",
       posterMintUrl: "",
       name: "@fak3panelcrimes",
-      info:
-        `
+      info: `
 Known on Twitter as @fak3panelcrimes (after their orignal account was locked), and generally as "Threepanelcrimes", the next Memes Artist is a distinctive artistic endeavor that has carved a niche in the realm of visual storytelling. 
 Operating within the constraints of just three panels, the artist masterfully weaves tales of crime, suspense, and intrigue. 
 Every detail, from nuanced character expressions to subtle background elements, is meticulously crafted to convey a narrative, emphasizing the power of visual narrative.
@@ -2100,32 +1918,28 @@ What story will Card 129 reveal? The tale is revealed on Aug 9th, 2023!
         {
           name: "Threepanelcrimes' Twitter",
           url: "https://twitter.com/fak3panelcrimes",
-          target: "_blank"
         },
         {
           name: "Threepanelcrimes' SuperRare",
           url: "https://superrare.com/threepanelcrimes",
-          target: "_blank"
         },
         {
           name: "Threepanelcrimes' Instagram",
           url: "https://www.instagram.com/threepanelcrimes",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 130,
       images: [
         "/artist-130/work-1.gif",
         "/artist-130/work-2.png",
-        "/artist-130/work-3.png"
+        "/artist-130/work-3.png",
       ],
       poster: "/artist-130/poster.png",
       posterMintUrl: "",
       name: "Kelly McDermott",
-      info:
-        `
+      info: `
 "KΞLLY" McDermott, known in the online community as @bykellymcd on Twitter and kellymcdnft on Instagram, is a standout artist in the realm of digital creation. 
 Her signature style is rooted in pixel manipulation prowess, where she often shares mesmerizing videos on Instagram that unveil her creation process, revealing each brush stroke that culminates in a final masterpiece.
 
@@ -2143,32 +1957,28 @@ What memetic narrative will Card 130 explore? We will see what is exposed on Aug
         {
           name: "Kelly's Twitter",
           url: "http://www.twitter.com/bykellymcd",
-          target: "_blank"
         },
         {
           name: "Kelly's Website",
           url: "https://www.kellymcd.art",
-          target: "_blank"
         },
         {
           name: "Kelly's Instagram",
           url: "http://www.instagram.com/kellymcdnft",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 131,
       images: [
         "/artist-131/work-1.jpeg",
         "/artist-131/work-2.jpeg",
-        "/artist-131/work-3.gif"
+        "/artist-131/work-3.gif",
       ],
       poster: "/artist-131/poster.mp4",
       posterMintUrl: "",
       name: "David Fairs",
-      info:
-        `
+      info: `
 David Fairs, the creative force behind @newlightvisuals, is a multifaceted artist with a profound connection to the natural world. 
 His association with platforms like Nifty Gateway and his role as both an artist and curator showcase his prominence in the digital art community.
 
@@ -2189,32 +1999,28 @@ Where does this innovation lead Card 131? All is revealed on Aug 14th, 2023!
         {
           name: "David's Twitter",
           url: "https://twitter.com/newlightvisuals",
-          target: "_blank"
         },
         {
           name: "David's Website",
           url: "https://www.newlightvisual.com/nft-art",
-          target: "_blank"
         },
         {
           name: "David's Instagram",
           url: "https://www.instagram.com/newlightvisuals",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 132,
       images: [
         "/artist-132/work-1.jpeg",
         "/artist-132/work-2.jpeg",
-        "/artist-132/work-3.jpeg"
+        "/artist-132/work-3.jpeg",
       ],
       poster: "/artist-132/poster.png",
       posterMintUrl: "",
       name: "Hugo Korhonen",
-      info:
-        `
+      info: `
 Hugo Korhonen, a young artist from Kuopio, Finland, has a profound connection with nature, which is evident in his photographic works. 
 Despite facing bullying throughout his school years, Hugo found solace and empowerment in the natural world. 
 This bond with nature not only provided an escape from his distressing school experiences but also paved the way for his professional journey.
@@ -2239,32 +2045,28 @@ Will Meme Card 132 will carry this same message? We find out on August 16th, 202
         {
           name: "Hugo's Twitter",
           url: "https://twitter.com/hugoraphy",
-          target: "_blank"
         },
         {
           name: "Hugo's Website and Portfolio",
           url: "https://www.hugokorhonen.com",
-          target: "_blank"
         },
         {
           name: "Hugo's Instagram",
           url: "https://instagram.com/hugoraphy",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 133,
       images: [
         "/artist-133/work-1.mp4",
         "/artist-133/work-2.mp4",
-        "/artist-133/work-3.jpeg"
+        "/artist-133/work-3.jpeg",
       ],
       poster: "/artist-133/poster.mp4",
       posterMintUrl: "",
       name: "Michael Kozlowski",
-      info:
-        `
+      info: `
 Michael Kozlowski, known as mpkoz on Twitter, is a generative artist who envisions a world where art is not confined to traditional mediums.
 He's a multifaceted American media artist and software developer who seamlessly blends the realms of 3D graphics, mixed reality, and interactivity.
 His work often places generative objects in real space, showcasing the power of digital art, and how it can redefine our understanding of visual experiences. 
@@ -2284,32 +2086,28 @@ Will we get generative art in Card 133? Few truly know, until Aug 18th, 2023!
         {
           name: "Mpkoz's Twitter",
           url: "https://twitter.com/mpkoz",
-          target: "_blank"
         },
         {
           name: "Mpkoz's Website",
           url: "https://www.mpkoz.com",
-          target: "_blank"
         },
         {
           name: "Mpkoz's Instagram",
           url: "https://www.instagram.com/mpkoz",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 134,
       images: [
         "/artist-134/work-1.jpeg",
         "/artist-134/work-2.jpg",
-        "/artist-134/work-3.jpg"
+        "/artist-134/work-3.jpg",
       ],
       poster: "/artist-134/poster.png",
       posterMintUrl: "",
       name: "MiraRuido",
-      info:
-`
+      info: `
 Hailing from Vitoria-Gasteiz, a quaint city in northern Spain, Joseba Elorza, widely recognized as @MiraRuido, has etched his name in the digital art world. 
 With over a decade of experience as a freelance artist, he has collaborated with renowned entities like National Geographic Channel, and even music legends like Green Day. 
 But it's not just the impressive clientele that sets Elorza apart; it's his unique approach to art. 
@@ -2330,32 +2128,28 @@ From across time and space, @MiraRuido brings us Meme Card 134 on Aug 21th, 2023
         {
           name: "Mira's Twitter",
           url: "https://twitter.com/miraruido",
-          target: "_blank"
         },
         {
           name: "Mira's instagram",
           url: "https://www.instagram.com/mira.ruido",
-          target: "_blank"
         },
         {
           name: "Mira's Website",
           url: "https://www.miraruido.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 135,
       images: [
         "/artist-135/work-1.gif",
         "/artist-135/work-2.gif",
-        "/artist-135/work-3.webp"
+        "/artist-135/work-3.webp",
       ],
       poster: "/artist-135/poster.mp4",
       posterMintUrl: "",
       name: "Rust",
-      info:
-        `
+      info: `
 In the ever-evolving realm of digital art, rust (@rustnfteth) stands out as a crypto-native artist, bringing a distinctive flavor of web3 art to the blockchain. 
 Choosing to remain shrouded in anonymity, rust's identity is as enigmatic as the stories they tell through their art. 
 With a commitment to releasing a unique, single-edition piece daily, rust has carved a niche in the NFT space, showcasing their prolific nature and dedication to the craft.
@@ -2373,32 +2167,28 @@ Looks like Meme Card 135 is gettin' glitchy wit it on Aug 23th, 2023!
         {
           name: "Rust's Twitter",
           url: "https://twitter.com/rustnfteth",
-          target: "_blank"
         },
         {
           name: "Rust's Tezos Editions",
           url: "https://objkt.com/profile/rust/created",
-          target: "_blank"
         },
         {
           name: "Rust's Everydays",
           url: "https://opensea.io/collection/foureightybyrust",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 136,
       images: [
         "/artist-136/work-1.jpg",
         "/artist-136/work-2.jpg",
-        "/artist-136/work-3.jpg"
+        "/artist-136/work-3.jpg",
       ],
       poster: "/artist-136/poster.png",
       posterMintUrl: "",
       name: "Postwook",
-      info:
-        `
+      info: `
 Natasha Chomko, known in the digital art world as Postwook, is a Los Angeles-based artist born in 1995. 
 Her primary focus lies in creating surreal landscape collage art, seamlessly blending refined visionary and psychedelic elements. 
 This unique style is designed to appeal to a broad audience, from the seasoned psychonaut to the average art enthusiast and everyone in between.
@@ -2418,32 +2208,28 @@ Memers get to step into the surreal with Postwook on Aug 25th, 2023!
         {
           name: "Postwook's Twitter",
           url: "https://twitter.com/postwook",
-          target: "_blank"
         },
         {
           name: "Postwook's Instagram",
           url: "https://instagram.com/postwook",
-          target: "_blank"
         },
         {
           name: "Postwook's Website",
           url: "https://postwook.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 137,
       images: [
         "/artist-137/work-1.mp4",
         "/artist-137/work-2.mp4",
-        "/artist-137/work-3.mp4"
+        "/artist-137/work-3.mp4",
       ],
       poster: "/artist-137/poster.mp4",
       posterMintUrl: "",
       name: "Jan Sladecko",
-      info:
-        `
+      info: `
 Jan Sladecko, a creative director and motion designer from the Czech Republic, has carved a niche for himself in the world of digital art and animation. 
 With a passion for CG that ignited at the young age of 12, Sladecko's journey in the industry has been marked by innovation, creativity, and a deep love for storytelling. 
 His portfolio, rich with a blend of humor and intricate design elements, showcases his unique style that appeals to a broad spectrum of audiences. 
@@ -2464,32 +2250,28 @@ Card 137 will surely bring us Sladecko's signature memetic morphing memes on Aug
         {
           name: "Jan's Twitter",
           url: "https://twitter.com/jan_sladecko",
-          target: "_blank"
         },
         {
           name: "Jan's Instagram",
           url: "https://jansladecko.com/instagram",
-          target: "_blank"
         },
         {
           name: "Jan's Website",
           url: "jansladecko.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 138,
       images: [
         "/artist-138/work-1.png",
         "/artist-138/work-2.gif",
-        "/artist-138/work-3.png"
+        "/artist-138/work-3.png",
       ],
       poster: "/artist-138/poster.png",
       posterMintUrl: "",
       name: "Eleni Tomadaki",
-      info:
-`
+      info: `
 Eleni Tomadaki, a visionary artist bopping between London and Athens, has carved a niche for herself with her unique exploration of the intricate relationships between individuals and the multifaceted "Other." 
 This exploration, deeply rooted in her artistic vision, delves into the complexities of identity, resistance, and the dichotomy of belonging. 
 Through non-linear storytelling narratives and a distorted use of language, Eleni challenges conventional symbols and perceptions, offering a fresh perspective on the human experience.
@@ -2508,32 +2290,28 @@ Illustrative memetic messages are sure to emerge in Card 138 explore, coming to 
         {
           name: "Eleni's Twitter",
           url: "https://twitter.com/Arty",
-          target: "_blank"
         },
         {
           name: "Eleni's Instagram",
           url: "https://www.instagram.com/eleni.tomadaki",
-          target: "_blank"
         },
         {
           name: "Eleni's Website",
           url: "https://isboredagain.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 139,
       images: [
         "/artist-139/work-1.mp4",
         "/artist-139/work-2.mp4",
-        "/artist-139/work-3.mp4"
+        "/artist-139/work-3.mp4",
       ],
       poster: "/artist-139/poster.png",
       posterMintUrl: "",
       name: "@synccreation",
-      info:
-        `
+      info: `
 @synccreation, a digital 3D artist, is celebrated for his unparalleled talent in crafting distinct videographic artworks from scratch. 
 His meticulous attention to detail allows him to seamlessly blend various elements like modeling, animation, texturing, and sound design, resulting in visuals that are nothing short of mesmerizing. 
 A hallmark of his work is the juxtaposition of intricate devices against a stark, empty backdrop, creating a captivating contrast. 
@@ -2554,32 +2332,28 @@ Can you imagine what memetic devices Card 139 will explore on Sept 1st, 2023??
         {
           name: "@synccreation's Twitter",
           url: "https://twitter.com/synccreationn",
-          target: "_blank"
         },
         {
           name: "@synccreation's Instagram",
           url: "https://www.instagram.com/synccreation",
-          target: "_blank"
         },
         {
           name: "@synccreation's Website",
           url: "https://www.synccreation.me/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 140,
       images: [
         "/artist-140/work-1.png",
         "/artist-140/work-2.png",
-        "/artist-140/work-3.png"
+        "/artist-140/work-3.png",
       ],
       poster: "/artist-140/poster.png",
       posterMintUrl: "",
       name: "Diogo Sampaio",
-      info:
-        `
+      info: `
 Hailing from Porto, Portugal, Diogo Sampaio stands out as a distinguished matte painter and concept artist. 
 His approach to art is refreshingly unique; rather than capturing mere moments like a photographic snap, Sampaio captures ideas. 
 With the aid of his camera and a vivid imagination, he crafts surreal scenes that, while containing elements of the impossible, are rendered with such realism that they challenge the viewer's perception. 
@@ -2599,32 +2373,28 @@ It's a little surreal that we are already at Card 140... to be revealed on Sept 
         {
           name: "Diogo's Twitter",
           url: "https://twitter.com/diogosampaioART",
-          target: "_blank"
         },
         {
           name: "Diogo's Instagram",
           url: "https://instagram.com/diogosampaio_art",
-          target: "_blank"
         },
         {
           name: "Diogo's Website",
           url: "https://diogosampaioart.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 141,
       images: [
         "/artist-141/work-1.mp4",
         "/artist-141/work-2.mp4",
-        "/artist-141/work-3.mp4"
+        "/artist-141/work-3.mp4",
       ],
       poster: "/artist-141/poster.png",
       posterMintUrl: "",
       name: "Bastien",
-      info:
-        `
+      info: `
 Bastien, known on Twitter as @Bastienjpg, is an artist who offers a distinctive perspective through the world of animation. 
 With the mantra of "Offering you a chance to never stop being a kid," Bastien crafts animations that resonate with the inner child in all of us. 
 His works are not just mere animations; they are a journey back to our fondest memories, a nostalgic trip that reminds us of the joys of childhood.
@@ -2648,32 +2418,28 @@ Will Card 141 help us look ahead by looking to the past? Our inner child finds o
         {
           name: "Bastien's Twitter",
           url: "https://twitter.com/Bastienjpg",
-          target: "_blank"
         },
         {
           name: "Bastien's Instagram",
           url: "https://instagram.com/bastienjpg",
-          target: "_blank"
         },
         {
           name: "Bastien's Linktree",
           url: "https://linktr.ee/Arty",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 142,
       images: [
         "/artist-142/work-1.png",
         "/artist-142/work-2.png",
-        "/artist-142/work-3.jpeg"
+        "/artist-142/work-3.jpeg",
       ],
       poster: "/artist-142/poster.png",
       posterMintUrl: "",
       name: "Leyla Emektar",
-      info:
-        `
+      info: `
 Leyla Emektar, an esteemed photographer from Adana, Turkey, embarked on her artistic journey at Çukurova University's Art Department. 
 She has since worn multiple hats, from a Visual Arts Teacher to a part-time instructor at Kocaeli University's Department of Photography. 
 Emektar's works predominantly span travel, conceptual, fine art, and portrait genres, each piece echoing profound narratives and deeper meanings.
@@ -2691,32 +2457,28 @@ All that's captured in Card 142 will be revealed on Sept 24th, 2023!
         {
           name: "Leyla's Twitter",
           url: "https://twitter.com/leylaemektar2",
-          target: "_blank"
         },
         {
           name: "Leyla's Instagram",
           url: "https://www.instagram.com/leylaemektar",
-          target: "_blank"
         },
         {
           name: "Leyla's Linktree",
           url: "http://www.leylaemektar.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 143,
       images: [
         "/artist-143/work-1.jpeg",
         "/artist-143/work-2.jpeg",
-        "/artist-143/work-3.png"
+        "/artist-143/work-3.png",
       ],
       poster: "/artist-143/poster.mp4",
       posterMintUrl: "",
       name: "Hannes Hummel",
-      info:
-        `
+      info: `
 Hannes Hummel is a distinguished artist and designer rooted in Germany. 
 He delves deep into the nexus between contemporary technologies and time-honored design methodologies. 
 Drawing profound inspiration from historical art movements, Hannes masterfully reinterprets them through the digital medium. 
@@ -2739,32 +2501,28 @@ Look for organic meme integrations in the drop on Sept 11th, 2023!
         {
           name: "Hannes' Twitter",
           url: "https://twitter.com/hanneshummel",
-          target: "_blank"
         },
         {
           name: "Hannes' Instagram",
           url: "https://www.instagram.com/hummel.studio",
-          target: "_blank"
         },
         {
           name: "Hannes' Website",
           url: "https://www.hanneshummel.art/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 144,
       images: [
         "/artist-144/work-1.jpg",
         "/artist-144/work-2.mp4",
-        "/artist-144/work-3.png"
+        "/artist-144/work-3.png",
       ],
       poster: "/artist-144/poster.png",
       posterMintUrl: "",
       name: "Filip Hodas",
-      info:
-        `
+      info: `
 Filip Hodas is a pioneering figure in the realm of 3D art, known for his hyperreal and intricately detailed environments. 
 A trailblazer in leveraging GPU render technology, Hodas has been instrumental in pushing the boundaries of 3D art, introducing a fresh aesthetic that is an inspiration to many. 
 His signature style is evident in his "Pop Culture Dystopia" series, where he presents decaying icons from popular culture set against desolate, post-apocalyptic landscapes. 
@@ -2788,32 +2546,28 @@ Memetic decay may well be coming to Card 144 on Sept 13th, 2023!
         {
           name: "Filip's Twitter",
           url: "https://twitter.com/FilipHodas",
-          target: "_blank"
         },
         {
           name: "Filip's Instagram",
           url: "https://www.instagram.com/hoodass",
-          target: "_blank"
         },
         {
           name: "Filip's NFTs",
           url: "https://superrare.com/hoodass",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 145,
       images: [
         "/artist-145/work-1.png",
         "/artist-145/work-2.png",
-        "/artist-145/work-3.png"
+        "/artist-145/work-3.png",
       ],
       poster: "/artist-145/poster.png",
       posterMintUrl: "",
       name: "Teexels",
-      info:
-        `
+      info: `
 Much more than a mere manager of memetic mints, the 6529 community knows teexels as a skilled photographer and insightful artist in his own right.
 
 Teexels.eth (aka @teexels) is a dedicated street and landscape photographer based in Greece, who has established himself as a visionary digital artist.
@@ -2832,32 +2586,28 @@ Prepare to behold the memetic masterpiece of one of our own, on Sept 15th, 2023!
         {
           name: "Teexels' Twitter",
           url: "https://twitter.com/teexels",
-          target: "_blank"
         },
         {
           name: "Teexels' Instagram",
           url: "https://www.instagram.com/teexels/",
-          target: "_blank"
         },
         {
           name: "Teexels' Website",
           url: "https://dimitrisfatisis.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 146,
       images: [
         "/artist-146/work-1.gif",
         "/artist-146/work-2.png",
-        "/artist-146/work-3.png"
+        "/artist-146/work-3.png",
       ],
       poster: "/artist-146/poster.png",
       posterMintUrl: "",
       name: "Vetigo",
-      info:
-        `
+      info: `
 Dive into the enigmatic world of F. Borousan, more popularly known as Vertigo. 
 From a young age, he was captivated by the fantastical realms of comics and science fiction. 
 As he matured, his artistic inclinations evolved, drawing him towards the classical arts and, notably, surrealism. 
@@ -2883,32 +2633,28 @@ The truth of Card 146 is revealed on Sept 18th, 2023!
         {
           name: "Vertigo's Twitter",
           url: "https://twitter.com/0x_vertigo",
-          target: "_blank"
         },
         {
           name: "Vertigo's Instagram",
           url: "https://www.instagram.com/0xvertigo",
-          target: "_blank"
         },
         {
           name: "Vertigo's Website",
           url: "https://0xvertigo.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 147,
       images: [
         "/artist-147/work-1.png",
         "/artist-147/work-2.webp",
-        "/artist-147/work-3.png"
+        "/artist-147/work-3.png",
       ],
       poster: "/artist-147/poster.png",
       posterMintUrl: "",
       name: "Rupture",
-      info:
-        `
+      info: `
 Morris Vogel, known in the art world as Rupture, is a master of weaving intricate narratives that delve deep into the human experience and the complexities of our entangled intersubjective realities. 
 His works consistently explore themes of struggle, loss, and the ethereal, juxtaposed against the overwhelming nature of contemporary media and the illusions it often presents. 
 He touches upon the haunting realms of imagination and the challenges of discerning reality in a world saturated with distractions.
@@ -2927,19 +2673,16 @@ In a new twist for Meme Card 147, Rupture will bring on-chain an acrylic-on-canv
         {
           name: "Rupture's Twitter",
           url: "https://twitter.com/RuptureNFT",
-          target: "_blank"
         },
         {
           name: "Rupture's Instagram",
           url: "https://instagram.com/rupture.art",
-          target: "_blank"
         },
         {
           name: "Rupture's Website",
           url: "https://www.morrisvogel.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 148,
@@ -2947,13 +2690,12 @@ In a new twist for Meme Card 147, Rupture will bring on-chain an acrylic-on-canv
         "/artist-148/work-1.png",
         "/artist-148/work-2.png",
         "/artist-148/work-3.png",
-        "/artist-148/work-4.png"
+        "/artist-148/work-4.png",
       ],
       poster: "/artist-148/poster.png",
       posterMintUrl: "",
       name: "Superelmer",
-      info:
-        `
+      info: `
 Superelmer stands out as a contemporary cartoon artist who seamlessly blends humor, cultural pride, and modern themes into his creations. 
 Hailing from a Filipino background, he playfully describes himself as "Half Filipino-Half Amazing," a testament to his pride in his heritage and his unique approach to art. 
 His works, which he described as "somewhat meaningful sketches" ("Mga drawing na medyo may kwenta"), revolve around a myriad of themes, from video games and comics to potent memes and everyday insights. 
@@ -2969,32 +2711,28 @@ Surely meme maxis will get a memetic masterpiece in Cart 148 on Sept 22th, 2023!
         {
           name: "Superelmer's Twitter",
           url: "https://twitter.com/superelmerds",
-          target: "_blank"
         },
         {
           name: "Superelmer's Facebook",
           url: "https://www.facebook.com/SuperElmerDS",
-          target: "_blank"
         },
         {
           name: "Superelmer's GetCraft",
           url: "https://getcraft.com/superelmer",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 149,
       images: [
         "/artist-149/work-1.png",
         "/artist-149/work-2.png",
-        "/artist-149/work-3.png"
+        "/artist-149/work-3.png",
       ],
       poster: "/artist-149/poster.png",
       posterMintUrl: "",
       name: "Roger Skaer",
-      info:
-        `
+      info: `
 Roger Skaer rapidly ascended to digital prominence with his insightful "Fuck Around and Find Out" meme on TikTok. 
 This meme, which cleverly illustrated via whiteboard the relationship between taking risks and discovering outcomes, amassed millions of views in a short span, establishing Roger as an internet icon. 
 His straightforward message struck a chord with many, bringing to light what we all already know: the significance of experience and exploration in understanding life's outcomes.
@@ -3013,32 +2751,28 @@ The Memes gets ever more memetic on Sept 25th, 2023!
         {
           name: "Roger's Twitter",
           url: "https://twitter.com/rogerskaer",
-          target: "_blank"
         },
         {
           name: "Roger's Instagram",
           url: "https://www.instagram.com/rogerskaer",
-          target: "_blank"
         },
         {
           name: "Roger's TikTok",
           url: "https://www.tiktok.com/@rogerskaer",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 150,
       images: [
         "/artist-150/work-1.gif",
         "/artist-150/work-2.jpeg",
-        "/artist-150/work-3.png"
+        "/artist-150/work-3.png",
       ],
       poster: "/artist-150/poster.png",
       posterMintUrl: "",
       name: "Efdot",
-      info:
-        `
+      info: `
 Eric Friedensohn, better known in the art world as Efdot, encapsulates the spirit and energy of street culture in his digital masterpieces. 
 Growing up with a skateboard under his feet, he spent countless hours exploring the architectural marvels of Manhattan and admiring the vibrant street art along the Hudson River. 
 He saw the city as a "visual, literal playground," where the edgy energy and art of the streets became an integral part of his creative DNA.
@@ -3057,32 +2791,28 @@ So Card 150 will surely bring some NYC energy with a positive outlook on Sept 27
         {
           name: "Efdot's Twitter",
           url: "https://twitter.com/Efdot",
-          target: "_blank"
         },
         {
           name: "Efdot's Instagram",
           url: "https://www.instagram.com/Efdot/",
-          target: "_blank"
         },
         {
           name: "Efdot's Website",
           url: "https://efdot.art/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 151,
       images: [
         "/artist-151/work-1.gif",
         "/artist-151/work-2.webp",
-        "/artist-151/work-3.gif"
+        "/artist-151/work-3.gif",
       ],
       poster: "/artist-151/poster.png",
       posterMintUrl: "",
       name: "Killer Acid",
-      info:
-        `
+      info: `
 Rob Corradetti, more commonly known by his artistic alias Killer Acid, is celebrated for his ability to intertwine whimsical, psychedelic, and surreal elements in his artwork. 
 His creations, deeply embedded in personal experiences and psychological themes, are also enriched by the adept incorporation of familiar memetic themes and cultural references. 
 Each artwork is not just a visual expression but a story, echoing the influences of lowbrow and psychedelic art movements. 
@@ -3104,32 +2834,28 @@ And now, as season 4 of The Memes concludes with Card 151, we get to take a trip
         {
           name: "Killer Acid's Twitter",
           url: "https://twitter.com/killeracid",
-          target: "_blank"
         },
         {
           name: "Killer Acid's Instagram",
           url: "https://www.instagram.com/killeracid",
-          target: "_blank"
         },
         {
           name: "Killer Acid's Website",
           url: "https://killeracid.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 152,
       images: [
         "/artist-152/work-1.webp",
         "/artist-152/work-2.png",
-        "/artist-152/work-3.mp4"
+        "/artist-152/work-3.mp4",
       ],
       poster: "/artist-152/poster.mp4",
       posterMintUrl: "",
       name: "Miss AL Simpson",
-      info:
-        `
+      info: `
 Miss AL Simpson, an award-winning cryptoartist based in Edinburgh, has carved a distinctive niche in the highest tiers of NFT art. 
 Renowned for her innovative ⚙️style, Simpson seamlessly merges the raw abstraction of traditional oil painting with the precision of AI-generated imagery, creating works that delve deep into themes of memory, time, and perception. 
 Her highly-stylized approach, often described as a blend of digital graffiti reminiscent of legendary artists Basquiat, Rauschenberg, and Kippenberger, often integrates animated 3D collage or historical motifs, establishing a signature vibe that has been celebrated in esteemed publications and showcased in major global art centers, from London to Tokyo.
@@ -3149,32 +2875,28 @@ Look for a great depth of insight in Card 152, revealing on Oct 16th, 2023!
         {
           name: "Miss AL's Twitter",
           url: "https://twitter.com/missalsimpson",
-          target: "_blank"
         },
         {
           name: "Miss AL's Instagram",
           url: "https://www.instagram.com/annalouisesimpson",
-          target: "_blank"
         },
         {
           name: "Miss AL's Website",
           url: "https://www.missalsimpsonartist.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 153,
       images: [
         "/artist-153/work-1.png",
         "/artist-153/work-2.gif",
-        "/artist-153/work-3.png"
+        "/artist-153/work-3.png",
       ],
       poster: "/artist-153/poster.png",
       posterMintUrl: "",
       name: "PhotonTide",
-      info:
-        `
+      info: `
 Photon Tide, known by the pseudonym Pho, is a mixed-media artist and musician whose work encompasses a broad spectrum of creative ventures, including graphic and motion design, writing, music, and directing. 
 His digital art is recognized for its psychedelic, immersive, and experimental style, which draws connoisseurs into a realm of trance and self-exploration. 
 
@@ -3193,64 +2915,56 @@ What will we discover about ourselves in Card 153 by Pho? Embrace the chaos on O
         {
           name: "PhotonTide's Twitter",
           url: "https://twitter.com/photonisdead",
-          target: "_blank"
         },
         {
           name: "PhotonTide's Instagram",
           url: "https://www.instagram.com/photontide",
-          target: "_blank"
         },
         {
           name: "PhotonTide's Website",
           url: "https://www.photonisdead.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 154,
       images: [
         "/artist-154/work-1.png",
         "/artist-154/work-2.mp4",
-        "/artist-154/work-3.jpeg"
+        "/artist-154/work-3.jpeg",
       ],
       poster: "/artist-154/poster.png",
       posterMintUrl: "",
       name: "PRGuitarman",
-      info:
-        `
+      info: `
 What memetic narrative will Card 154 explore? We will see what is mintable on Oct 20th, 2023!
 `,
       links: [
         {
           name: "PRGuitarman's Twitter",
           url: "https://twitter.com/prguitarman",
-          target: "_blank"
         },
         {
           name: "PRGuitarman's Genesis on Foundation",
           url: "https://foundation.app/@NyanCat",
-          target: "_blank"
         },
         {
           name: "PRGuitarman's Website",
           url: "https://www.nyan.cat",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 155,
       images: [
         "/artist-155/work-1.webp",
         "/artist-155/work-2.png",
-        "/artist-155/work-3.png"
+        "/artist-155/work-3.png",
       ],
       poster: "/artist-155/poster.png",
       posterMintUrl: "",
       name: "RedruM",
-      info:
-        `
+      info: `
 Redrum, a name that resonates with danger and mystery, has firmly established themselves as a prolific figure in the realm of NFT artistry. 
 With a distinct and powerful visual style, their work delves deep into thematic explorations of contrast — between the organic and the artificial, the known and the unknown, and the serene versus the formidable. 
 Each piece serves as a tableau of vibrant reds, a color choice that not only anchors their signature style but also evokes a myriad of emotions, from passionate fervor to latent danger.
@@ -3270,32 +2984,28 @@ How will Card 155 bring the redness? We will see on Oct 23rd, 2023!
         {
           name: "Redrum's Twitter",
           url: "https://twitter.com/redrumxart",
-          target: "_blank"
         },
         {
           name: "Redrum's Linktree",
           url: "https://linktr.ee/redrumxnft",
-          target: "_blank"
         },
         {
           name: "Redrum's Website",
           url: "https://linktr.ee/redrumxnft",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 156,
       images: [
         "/artist-156/work-1.gif",
         "/artist-156/work-2.png",
-        "/artist-156/work-3.mp4"
+        "/artist-156/work-3.mp4",
       ],
       poster: "/artist-156/poster.png",
       posterMintUrl: "",
       name: "BÈFÈ The Mad",
-      info:
-        `
+      info: `
 BÈFÈ The Mad presents as a contemporary artist whose works delve deep into the human psyche, revealing a multifaceted exploration of emotion, form, and the juxtaposition of the ordinary with the surreal. 
 One cannot help but be drawn into the haunting visuals of "Insomnious Thoughts," where the canvas comes alive with the melancholy of the enigmatic face, each line and shadow revealing an underlying tension and vulnerability. 
 This powerful portrayal of internal struggle, set against an atmospheric backdrop, showcases BÈFÈ's ability to tap into shared human experiences, making them both intimate and universal.
@@ -3316,32 +3026,28 @@ What memetic madness will Card 156 present? We will see on Oct 25th, 2023!
         {
           name: "BÈFÈ's Twitter",
           url: "https://twitter.com/befethemad",
-          target: "_blank"
         },
         {
           name: "BÈFÈ's Linktree",
           url: "https://linktr.ee/befeart/",
-          target: "_blank"
         },
         {
           name: "BÈFÈ's Website",
           url: "https://linktr.ee/befeart",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 159,
       images: [
         "/artist-159/work-1.gif",
         "/artist-159/work-2.webp",
-        "/artist-159/work-3.webp"
+        "/artist-159/work-3.webp",
       ],
       poster: "/artist-159/poster.mp4",
       posterMintUrl: "",
       name: "Des Lucréce",
-      info:
-        `
+      info: `
 Delve into the monster-filled realm of Des Lucréce, an artist whose creations uniquely juxtapose the anguish of "No Home Center" with the vibrancy of contemporary digital artistry. 
 Drawing inspiration from legends like Basquiat, Keith Haring, and the personal nuances of his own multicultural experiences, Lucréce crafts a world where monsters signify the complexities of identity and intertwined lines echo the interconnectedness of our globalized era. 
 Each piece, distictive in its bold use of color and glitch-monsters, not only challenges the viewer's perception of belonging and desire but also beckons them to reflect on the themes of diaspora, xenophobia, and the eternal human quest for self-understanding. 
@@ -3353,32 +3059,28 @@ What kind of Halloween treats will Card 159 be? Come and knock on the door on Oc
         {
           name: "Des Lucréce's Twitter",
           url: "https://twitter.com/deslucrece",
-          target: "_blank"
         },
         {
           name: "Des Lucréce's SR",
           url: "https://superrare.com/deslucrece",
-          target: "_blank"
         },
         {
           name: "Des Lucréce's Website",
           url: "https://deslucrece.super.site/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 160,
       images: [
         "/artist-160/work-1.jpeg",
         "/artist-160/work-2.jpeg",
-        "/artist-160/work-3.jpeg"
+        "/artist-160/work-3.jpeg",
       ],
       poster: "/artist-160/poster.png",
       posterMintUrl: "",
       name: "fesq",
-      info:
-        `
+      info: `
 Felipe Queiroz, known in the art world as Fesq, is a self-taught Brazilian Art Director and 3D Artist based in Rio de Janeiro. 
 His digital mastery is a blend of self-exploration and the cosmic realm, providing powerful, visually engaging artwork. 
 Fesq is recognized for his use of a simplistic three-color palette to render futuristic stills and animations that immerse viewers in a matrix-like scenario. 
@@ -3402,32 +3104,28 @@ We can likely count on Card 160 showing up in purples, reds, and blues... But me
         {
           name: "fesq's Twitter",
           url: "https://twitter.com/iamfesq",
-          target: "_blank"
         },
         {
           name: "fesq's Instagram",
           url: "https://www.instagram.com/iamfesq",
-          target: "_blank"
         },
         {
           name: "fesq's Website",
           url: "https://www.iamfesq.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 161,
       images: [
         "/artist-161/work-1.gif",
         "/artist-161/work-2.gif",
-        "/artist-161/work-3.gif"
+        "/artist-161/work-3.gif",
       ],
       poster: "/artist-161/poster.png",
       posterMintUrl: "",
       name: "Noealz",
-      info:
-        `
+      info: `
 Noe Alonzo, known in the digital realm as @Noealz, is a captivating NFT artist whose still and animated photographic works resonate with depth and a sense of exploration. 
 His style, heavily influenced by rainy cyberpunk and infrared photography, channels a vivid blend of colors, palettes embracing the overstimulating neon worlds of urban Asia. 
 Growing up in a small city in South Texas, his journey from early financial struggles to self-taught photography in Korea, reveals a narrative of resilience and self-discovery, which distinctly colors his artistic vision.
@@ -3447,128 +3145,112 @@ What memetic narrative will Card 161 reflect? We get to behold it on Nov 3rd, 20
         {
           name: "Noealz's Twitter",
           url: "https://twitter.com/Noealz",
-          target: "_blank"
         },
         {
           name: "Noealz's OnCyber Gallery",
           url: "https://oncyber.io/studio?inviteId=NuHdob0tEbiQit7gSwHD",
-          target: "_blank"
         },
         {
           name: "Noealz's Website",
           url: "https://noealz.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 162,
       images: [
         "/artist-162/work-1.png",
         "/artist-162/work-2.mp4",
-        "/artist-162/work-3.jpeg"
+        "/artist-162/work-3.jpeg",
       ],
       poster: "/artist-162/poster.png",
       posterMintUrl: "",
       name: "Eszter Lakatos",
-      info:
-        `
+      info: `
 What memetic styles will Card 162 explore? We will see what is revealed on Nov 6th, 2023!
 `,
       links: [
         {
           name: "Eszter's Twitter",
           url: "https://twitter.com/8r122",
-          target: "_blank"
         },
         {
           name: "Eszter's Instagram",
           url: "https://www.instagram.com/Arty/",
-          target: "_blank"
         },
         {
           name: "Eszter's Website",
           url: "https://Arty.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 163,
       images: [
         "/artist-163/work-1.png",
         "/artist-163/work-2.mp4",
-        "/artist-163/work-3.jpeg"
+        "/artist-163/work-3.jpeg",
       ],
       poster: "/artist-163/poster.png",
       posterMintUrl: "",
       name: "Camila Nogueira",
-      info:
-        `
+      info: `
 What memetic themes will Card 163 explore? We will see what is revealed on Nov 8th, 2023!
 `,
       links: [
         {
           name: "Camila's Twitter",
           url: "https://twitter.com/camila_artwork",
-          target: "_blank"
         },
         {
           name: "Camila's Instagram",
           url: "https://www.instagram.com/Arty/",
-          target: "_blank"
         },
         {
           name: "Camila's Website",
           url: "https://Arty.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 164,
       images: [
         "/artist-164/work-1.png",
         "/artist-164/work-2.mp4",
-        "/artist-164/work-3.jpeg"
+        "/artist-164/work-3.jpeg",
       ],
       poster: "/artist-164/poster.png",
       posterMintUrl: "",
       name: "Jonathan Nash",
-      info:
-        `
+      info: `
 What memetic narrative will Card 164 explore? We will see what is revealed on Nov 10th, 2023!
 `,
       links: [
         {
           name: "Jonathan's Twitter",
           url: "https://twitter.com/offshoot3D",
-          target: "_blank"
         },
         {
           name: "Jonathan's Instagram",
           url: "https://www.instagram.com/Arty/",
-          target: "_blank"
         },
         {
           name: "Jonathan's Website",
           url: "https://Arty.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 165,
       images: [
         "/artist-179/work-1.jpeg",
         "/artist-179/work-2.jpeg",
-        "/artist-179/work-3.mp4"
+        "/artist-179/work-3.mp4",
       ],
       poster: "/artist-165/poster.png",
       posterMintUrl: "",
       name: "Giulio Aprin",
-      info:
-        `
+      info: `
 Tell me about the NFT artist Giulio Aprin, with an emphasis on their style, artistic message, and vision.
 
 What memetic narrative will Card 165 explore? We will see what is exposed on Oct 14th, 2023!
@@ -3577,32 +3259,28 @@ What memetic narrative will Card 165 explore? We will see what is exposed on Oct
         {
           name: "Giulio's Twitter",
           url: "https://twitter.com/guiloaprin",
-          target: "_blank"
         },
         {
           name: "Giulio's Instagram",
           url: "https://instagram.com/giulioaprin",
-          target: "_blank"
         },
         {
           name: "Giulio's Website",
           url: "https://giulioaprin.xyz",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 166,
       images: [
         "/artist-166/work-1.png",
         "/artist-166/work-2.png",
-        "/artist-166/work-3.png"
+        "/artist-166/work-3.png",
       ],
       poster: "/artist-166/poster.png",
       posterMintUrl: "",
       name: "Sasha Katz",
-      info:
-        `
+      info: `
 Sasha Katz, an Athens-based digital artist, emerges as a distinctive voice in the digital art scene, best known for her evocative 3D renderings that blend the boundaries between the bodies and dreams. 
 Her artistic narrative is deeply rooted in the exploration of female identity, characterized by a poignant blend of intimate tenderness and physical fragility. 
 Katz's creations often reflect her personal experiences and views on beauty standards, challenging societal norms and embracing a spectrum of unconventional beauty through her digital characters. 
@@ -3623,32 +3301,28 @@ Card 166 will surely take us to new perspectives, when all is exposed on Nov 15t
         {
           name: "Sasha's Twitter",
           url: "https://twitter.com/wonderkatzi",
-          target: "_blank"
         },
         {
           name: "Sasha's Instagram",
           url: "https://www.instagram.com/wonderkatzi",
-          target: "_blank"
         },
         {
           name: "Sasha's Website",
           url: "https://sashakatz.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 167,
       images: [
         "/artist-167/work-1.jpeg",
         "/artist-167/work-2.jpeg",
-        "/artist-167/work-3.gif"
+        "/artist-167/work-3.gif",
       ],
       poster: "/artist-167/poster.png",
       posterMintUrl: "",
       name: "@toadswiback",
-      info:
-        `
+      info: `
 Collectors new to the work of Mark Wilson, Indiana-based artist and writer known as diewiththemostlikes, may not be prepared for the unsettling journey into the heart of contemporary satire and social commentary. 
 Wilson's style is immediately recognizable for its raw and unapologetic portrayal of American consumer culture, often served with a side of dark humor and grotesque exaggeration. 
 His digital paintings bustle with caricatured figures and absurd juxtapositions (vibes of corporate logos cross-shredded with a meat zine) that highlight the excesses and oddities of modern life. 
@@ -3671,32 +3345,28 @@ Prepare yourself for the madness of Card 167, hitting you in the eyeballs on Nov
         {
           name: "DWTML's Twitter",
           url: "https://twitter.com/toadswiback",
-          target: "_blank"
         },
         {
           name: "DWTML's Instagram",
           url: "https://instagram.com/diewiththemostlikes/",
-          target: "_blank"
         },
         {
           name: "DWTML's Website",
           url: "https://onetie-alltie.com",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 168,
       images: [
         "/artist-168/work-1.jpg",
         "/artist-168/work-2.gif",
-        "/artist-168/work-3.jpg"
+        "/artist-168/work-3.jpg",
       ],
       poster: "/artist-168/poster.png",
       posterMintUrl: "",
       name: "Li Boar",
-      info:
-        `
+      info: `
 Embarking on a journey through the digital landscapes crafted by @liboar is an invitation into a world where the boundaries of time, culture, and reality blur into a vivid tapestry of color and imagination. 
 Known for a distinctive style that marries chromatic depth with a reverence for artistic heritage, Li's creations are in tension between historic artistic movements and the limitless possibilities of digital expression and gamelike worlds. 
 The works are intricate collages of references, blending elements of surrealism, impossible architecture, and narrative art into a unique digital vernacular.
@@ -3716,19 +3386,16 @@ On Nov 20th, 2023 we get to see what imaginative worlds Li will bring to The Mem
         {
           name: "Li's Twitter",
           url: "https://twitter.com/liboar",
-          target: "_blank"
         },
         {
           name: "Li's Ninfa",
           url: "https://ninfa.io/@LiBoar/",
-          target: "_blank"
         },
         {
           name: "Li's Links",
           url: "https://lynkfire.com/liboar",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 169,
@@ -3737,13 +3404,12 @@ On Nov 20th, 2023 we get to see what imaginative worlds Li will bring to The Mem
         "/artist-169/work-2.png",
         "/artist-169/work-3.png",
         "/artist-169/work-4.png",
-        "/artist-169/work-5.png"
+        "/artist-169/work-5.png",
       ],
       poster: "/artist-169/poster.png",
       posterMintUrl: "",
       name: "Dylan Wade",
-      info:
-        `
+      info: `
 Dylan Wade is a digital artist whose creative spark is ignited by nostalgia and the emotional depth of personal memories. 
 His artistic journey began with personal videos in his teens, capturing life's fleeting moments, a practice that has profoundly influenced his current digital artwork. 
 With a background in video, his work is marked by a keen sense of lighting and perspective, aimed at creating immersive scenes that resonate with the viewers' own experiences.
@@ -3763,32 +3429,28 @@ Will Card 169 awaken nostalgia within you? We find out on Nov 22th, 2023!
         {
           name: "Dylan's Twitter",
           url: "https://twitter.com/dylanwadefilm",
-          target: "_blank"
         },
         {
           name: "Dylan's Foundation",
           url: "https://foundation.app/collection/dylanwadevol2",
-          target: "_blank"
         },
         {
           name: "Dylan's Website",
           url: "https://dylanwade.xyz/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 170,
       images: [
         "/artist-170/work-1.mp4",
         "/artist-170/work-2.webp",
-        "/artist-170/work-3.webp"
+        "/artist-170/work-3.webp",
       ],
       poster: "/artist-170/poster.png",
       posterMintUrl: "",
       name: "bluugu",
-      info:
-        `
+      info: `
 Welcome to the world of bluugu, a Korean-Australian artist whose work is a kaleidoscope of cultural narratives and personal inquiries. 
 As you navigate through his realms, you'll encounter questions of identity in the NFT artwork like "Who Am I?" 
 This piece, like many others by bluugu, is a deep reflection on the artist's bicultural roots, expressed through a striking juxtaposition of Australian symbolism and Korean traditional motifs. 
@@ -3811,32 +3473,28 @@ How will Card 170 show us these bright new worlds? We will see on Nov 24th, 2023
         {
           name: "bluugu's Twitter",
           url: "https://x.com/bluugu",
-          target: "_blank"
         },
         {
           name: "bluugu's Instagram",
           url: "https://www.instagram.com/bluugu",
-          target: "_blank"
         },
         {
           name: "bluugu's Website",
           url: "https://www.bluugu.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 171,
       images: [
         "/artist-171/work-1.png",
         "/artist-171/work-2.png",
-        "/artist-171/work-3.gif"
+        "/artist-171/work-3.gif",
       ],
       poster: "/artist-171/poster.mp4",
       posterMintUrl: "",
       name: "Dana Ulama",
-      info:
-        `
+      info: `
 Welcome to the captivating digital realms of Dana Ulama, a visionary artist whose work is a deep dive into the symbiotic relationship between humanity and technology. 
 Ulama's art is a unique blend of cyberpunk futurism and poignant urban narratives, where neon-lit cityscapes and introspective characters tell stories of isolation, contemplation, and the human condition. 
 Her art invites visual explorations that challenge viewers to question the boundaries between the organic and the artificial. 
@@ -3857,32 +3515,28 @@ On Nov 27th, 2023, we'll see what new urban themes come to The Memes in Card 171
         {
           name: "Dana's Twitter",
           url: "https://twitter.com/DanaUlama",
-          target: "_blank"
         },
         {
           name: "Dana's Instagram",
           url: "https://www.instagram.com/dana_ulama_artworks",
-          target: "_blank"
         },
         {
           name: "Dana's Website",
           url: "https://dana-ulama.myportfolio.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 172,
       images: [
         "/artist-172/work-1.webp",
         "/artist-172/work-2.webp",
-        "/artist-172/work-3.webp"
+        "/artist-172/work-3.webp",
       ],
       poster: "",
       posterMintUrl: "",
       name: "@6529er and @6529",
-      info:
-        `
+      info: `
 We know and love @6529er as the pseudonymous designer for Punk 6529. He's an artist whose digital creations encapsulate a profound narrative depth with a keen eye for thematic resonance. 
 He consistently weaves a tapestry of contemporary issues through the utilization of historical and iconic imagery, striking a delicate balance between homage and commentary. 
 By adopting motifs from such sources as protest art and classical references, @6529er in partnership with 6529 forms a bridge between the artistic eras, employing visual storytelling to spark discourse on power dynamics, societal cycles, and the complexities of web3.
@@ -3899,32 +3553,28 @@ On Nov 28th, 2023 some lucky memers get airdropped of the latest blending of iro
         {
           name: "6529er's Twitter",
           url: "https://twitter.com/6529er",
-          target: "_blank"
         },
         {
           name: "6529's Twitter",
           url: "https://twitter.com/punk6529",
-          target: "_blank"
         },
         {
           name: "6529's Website",
           url: "https://seize.io",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 173,
       images: [
         "/artist-173/work-1.jpeg",
         "/artist-173/work-2.jpeg",
-        "/artist-173/work-3.jpeg"
+        "/artist-173/work-3.jpeg",
       ],
       poster: "/artist-173/poster.png",
       posterMintUrl: "",
       name: "Arty",
-      info:
-        `
+      info: `
 Ricardo Alves is a professional digital artist whose expertise lies in the intricate realm of character and facial modeling. 
 His artistic style is characterized by a profound understanding of anatomy and texture, which allows him to breathe life into 3D characters with remarkable realism. 
 Alves's technical skill is matched by a nuanced sensitivity to the emotive potential of facial expressions, enabling him to create digital beings that convey a wide spectrum of human emotions and conditions. 
@@ -3944,32 +3594,28 @@ Will new stories be told with memetic characters in Card 173? We will find out o
         {
           name: "Rico's Twitter",
           url: "https://x.com/incalstory",
-          target: "_blank"
         },
         {
           name: "Rico's Instagram",
           url: "https://instagram.com/ricardoalvesj",
-          target: "_blank"
         },
         {
           name: "Rico's Website",
           url: "https://ricardoalves.co.uk",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 174,
       images: [
         "/artist-174/work-1.gif",
         "/artist-174/work-2.gif",
-        "/artist-174/work-3.mp4"
+        "/artist-174/work-3.mp4",
       ],
       poster: "/artist-174/poster.png",
       posterMintUrl: "",
       name: "Dutchtide",
-      info:
-        `
+      info: `
 Dutchtide emerges as a distinctive voice in the digital art landscape, crafting pieces that resonate with the quiet introspection of urban solitude and the complex interplay between man-made and natural environments. 
 His works, especially evident in series like "Midnight Breeze," often feature architectural structures — from lone apartment blocks to neon-lit convenience stores — set against the backdrop of nature or the stark vastness of the night. 
 The contrasting elements of his compositions are not just visual but thematic, delving into philosophical musings on capitalism, wealth, and the environment, all while engaging with the digital medium's inherent properties and possibilities.
@@ -3988,19 +3634,16 @@ We will see what Dutchtide wants to buidl in the memes with Card 174 on Dec 1st,
         {
           name: "Dutchtide's Twitter",
           url: "https://twitter.com/Dutchtide",
-          target: "_blank"
         },
         {
           name: "Dutchtide's Instagram",
           url: "https://instagram.com/dutchtide",
-          target: "_blank"
         },
         {
           name: "Dutchtide's Website",
           url: "https://www.midnightbreeze.io/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 175,
@@ -4009,13 +3652,12 @@ We will see what Dutchtide wants to buidl in the memes with Card 174 on Dec 1st,
         "/artist-175/work-2.gif",
         "/artist-175/work-3.gif",
         "/artist-175/work-4.gif",
-        "/artist-175/work-5.gif"
+        "/artist-175/work-5.gif",
       ],
       poster: "/artist-175/poster.png",
       posterMintUrl: "",
       name: "Bryan Brinkman",
-      info:
-        `
+      info: `
 Bryan Brinkman's artistic journey encapsulates a dynamic fusion of traditional animation's charm with the avant-garde flair of digital art, readily embracing NFTs. 
 His artistic themes often pivot around humor, a nuanced legacy from his tenure on shows like "Saturday Night Live" and "The Tonight Show." 
 The transition from these platforms to the realm of NFTs has allowed Brinkman to deepen his narrative, leveraging animation's unique storytelling capabilities. 
@@ -4040,32 +3682,28 @@ He'll bring his delightful creative energy to Card 175 on Dec 4th, 2023!
         {
           name: "Bryan's Twitter",
           url: "https://twitter.com/bryanbrinkman",
-          target: "_blank"
         },
         {
           name: "Bryan's Instagram",
           url: "https://www.instagram.com/brinkmanatee",
-          target: "_blank"
         },
         {
           name: "Bryan's Website",
           url: "https://www.bryanbrinkman.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 176,
       images: [
         "/artist-176/work-1.webp",
         "/artist-176/work-2.png",
-        "/artist-176/work-3.png"
+        "/artist-176/work-3.png",
       ],
       poster: "/artist-176/poster.png",
       posterMintUrl: "",
       name: "Rocketgirl",
-      info:
-        `
+      info: `
 Rocketgirl is a multidisciplinary artist hailing from Scotland, whose creative endeavors have carved a space in the world of NFT art that is very much her own. 
 With a traditional background in painting, primarily using oils and inks, she has embraced the digital revolution, integrating AI into her art to transcend the conventional boundaries of the medium. 
 Her journey into AI art began out of a serendipitous encounter with illness, where, too weak to stand at her easel, she channeled the dystopian visions of her fever dreams into her first AI-assisted piece, "SUNDAY BEST / FALSE IDOLS," which garnered acclaim by winning second prize in an art contest. 
@@ -4086,32 +3724,28 @@ What memetic chaos will Card 176 introduce on Dec 6th, 2023?
         {
           name: "Rocketgirl's Twitter",
           url: "https://twitter.com/rocketgirlNFT",
-          target: "_blank"
         },
         {
           name: "Rocketgirl's Instagram",
           url: "https://www.instagram.com/rocketgirlnft/",
-          target: "_blank"
         },
         {
           name: "Rocketgirl's Newsletter",
           url: "https://paragraph.xyz/@rocketgirl/rocket-boom",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 177,
       images: [
         "/artist-177/work-1.jpeg",
         "/artist-177/work-2.mp4",
-        "/artist-177/work-3.gif"
+        "/artist-177/work-3.gif",
       ],
       poster: "/artist-177/poster.png",
       posterMintUrl: "",
       name: "Rare Scrilla",
-      info:
-        `
+      info: `
 Rare Scrilla, also known as DJ J-Scrilla, is an artist deeply entrenched in the digital revolution of art and music, often exploring the thematic intersections between technology, economics, and culture.
 Through his work, he comments on the fluid nature of value in the digital age, epitomized by his track "Faith In My Money (Money Printer Go Brrr)," which wryly observes the effects of economic policies on personal wealth and the surreal nature of fiat currency's value in a world at the mercy of the money printer.
 
@@ -4129,32 +3763,28 @@ Will card 177 boost The Memes with some street savvy on Dec 8th, 2023? We can on
         {
           name: "Rare Scrilla's Twitter",
           url: "https://twitter.com/scrillaventura",
-          target: "_blank"
         },
         {
           name: "Rare Scrilla's Instagram",
           url: "https://www.instagram.com/thescrillionaire/",
-          target: "_blank"
         },
         {
           name: "Rare Scrilla's Website",
           url: "https://y.at/%F0%9F%94%A5%F0%9F%A5%81%F0%9F%94%A5",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 178,
       images: [
         "/artist-178/work-1.jpeg",
         "/artist-178/work-2.jpeg",
-        "/artist-178/work-3.png"
+        "/artist-178/work-3.png",
       ],
       poster: "/artist-178/poster.png",
       posterMintUrl: "",
       name: "Fran Rodríguez",
-      info:
-        `
+      info: `
 Fran Rodríguez, known in the digital art world as "La cabeza en las nubes" (Head in the Clouds), is a Barcelona-based artist whose canvas is the boundary between reality and the dreamlike. 
 His digital works are a tapestry of surrealism, seamlessly blending elements of nature with cosmic and ethereal motifs to create scenes that transcend ordinary perception. 
 The fusion of these elements is handled with such finesse that viewers find themselves suspended between the familiar and the fantastical, inviting introspection into the depths of the subconscious.
@@ -4174,32 +3804,28 @@ What dreams will Card 178 awaken within? We will open our eyes to it on Dec 11th
         {
           name: "Fran's Twitter",
           url: "https://twitter.com/Fran_nubes",
-          target: "_blank"
         },
         {
           name: "Fran's Instagram",
           url: "https://www.instagram.com/lacabezaenlasnubes/",
-          target: "_blank"
         },
         {
           name: "Fran's Website",
           url: "https://lacabezaenlasnubes.cargo.site/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 179,
       images: [
         "/artist-179/work-1.png",
         "/artist-179/work-2.png",
-        "/artist-179/work-3.png"
+        "/artist-179/work-3.png",
       ],
       poster: "/artist-179/poster.png",
       posterMintUrl: "",
       name: "Lisa Fogarty",
-      info:
-        `
+      info: `
 Welcome to the evocative world of Lisa Fogarty, an artist whose self-taught brilliance has carved out a space all her own in the digital art landscape. 
 Fogarty's oeuvre is a vibrant tribute to feminine power, capturing the essence of the female gaze through a lens that is both introspective and rebellious. 
 Her art, influenced by a childhood fascination with comic book heroines, reimagines these figures not as mere objects of fantasy but as icons of strength and resilience. 
@@ -4220,32 +3846,28 @@ Step into this world on Dec 13th, 2023 — and let NFTLisa's Card 179 redefine y
         {
           name: "Lisa's Twitter",
           url: "https://twitter.com/nftlisa",
-          target: "_blank"
         },
         {
           name: "Lisa's Instagram",
           url: "https://www.instagram.com/lisakfogarty ",
-          target: "_blank"
         },
         {
           name: "Lisa's Website",
           url: "https://lisafogarty.se",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 180,
       images: [
         "/artist-180/work-1.jpeg",
         "/artist-180/work-2.jpeg",
-        "/artist-180/work-3.mp4"
+        "/artist-180/work-3.mp4",
       ],
       poster: "/artist-180/poster.png",
       posterMintUrl: "",
       name: "Victor Mosquera",
-      info:
-`
+      info: `
 As we approach the culmination of Season 5, a journey adorned with an eclectic tapestry of digital masterpieces, it is with great anticipation that we introduce the final art drop by none other than Victor Mosquera. 
 His work is not merely a visual delight but a gateway to transcendence, a reflection of the very essence of what this season has celebrated: high-caliber artistry that resonates with the soul and elevates the spirit. 
 Victor's pieces, rich in philosophical inquiry and cosmic wonder, offer a fitting crescendo to our collective exploration of the digital artscape.
@@ -4266,32 +3888,28 @@ Season 5 conludes with Card 180 on Dec 18th, 2023!
         {
           name: "Victor's Twitter",
           url: "https://twitter.com/victormosquerar",
-          target: "_blank"
         },
         {
           name: "Victor's Super Rare",
           url: "https://superrare.com/victormosquera",
-          target: "_blank"
         },
         {
           name: "Victor's Linktree",
           url: "https://linktr.ee/victormosquera?ltsid=90501cd2-6e56-40c7-9c7a-09052a0b2261",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
     },
     {
       tokenId: 181,
       images: [
         "/artist-181/work-1.jpeg",
         "/artist-181/work-2.jpeg",
-        "/artist-181/work-3.jpeg"
+        "/artist-181/work-3.jpeg",
       ],
       poster: "/artist-181/poster.png",
       posterMintUrl: "",
       name: "Tristan Eaton",
-      info:
-`
+      info: `
 Are you ready for seizing in Season 6? 
 We're thrilled to introduce a powerhouse of creativity to kick off this season: muralist and painter Tristan Eaton.
 
@@ -4313,19 +3931,44 @@ This new szn kicks off with Card 181 on Jan 1st, 2024!
         {
           name: "Tristan's Twitter",
           url: "https://twitter.com/tristaneaton",
-          target: "_blank"
         },
         {
           name: "Tristan's Instagram",
           url: "http://instagram.com/tristaneaton",
-          target: "_blank"
         },
         {
           name: "Tristan's website",
           url: "https://www.tristaneaton.com/",
-          target: "_blank"
-        }
-      ]
+        },
+      ],
+    },
+    {
+      tokenId: 690,
+      images: [
+        "/artist-690/work-1.jpeg",
+        "/artist-690/work-2.png",
+        "/artist-690/work-3.mp4",
+      ],
+      poster: "/artist-690/poster.png",
+      posterMintUrl: "",
+      name: "UNNKNOWN",
+      info: `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
+
+...We can't wait to see what she has created for our community... on Jan 4th, 2024.`,
+      links: [
+        {
+          name: "UNNKNOWN's Twitter",
+          url: "https://twitter.com/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's Instagram",
+          url: "https://linktr.ee/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's website",
+          url: "https://discord.gg/UNNKNOWN",
+        },
+      ],
     }
-  ]
-} 
+  ],
+};
