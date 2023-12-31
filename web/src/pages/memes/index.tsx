@@ -113,6 +113,10 @@ export default function Memes() {
               The prememe is a way to get to know the artist, and to get share our excitement about the upcoming mint.
             </p>
             <ul>
+              <li>Season 4</li>
+              <ul>
+                <li>Artist Preview: <a href="/memes/181/artist">Meme Artist 181 - Tristan Easton</a></li>
+              </ul>                
               <li>Season 5</li>
               <ul>
                 <li>Artist Preview: <a href="/memes/180/artist">Meme Artist 180 - Victor Mosquera</a></li>

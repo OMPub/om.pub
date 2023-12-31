@@ -4243,9 +4243,9 @@ Step into this world on Dec 13th, 2023 — and let NFTLisa's Card 179 redefine y
       ],
       poster: "/artist-180/poster.png",
       posterMintUrl: "",
-      name: "Arty",
+      name: "Victor Mosquera",
       info:
-        `
+`
 As we approach the culmination of Season 5, a journey adorned with an eclectic tapestry of digital masterpieces, it is with great anticipation that we introduce the final art drop by none other than Victor Mosquera. 
 His work is not merely a visual delight but a gateway to transcendence, a reflection of the very essence of what this season has celebrated: high-caliber artistry that resonates with the soul and elevates the spirit. 
 Victor's pieces, rich in philosophical inquiry and cosmic wonder, offer a fitting crescendo to our collective exploration of the digital artscape.
@@ -4264,18 +4264,65 @@ Season 5 conludes with Card 180 on Dec 18th, 2023!
 `,
       links: [
         {
-          name: "Arty's Twitter",
-          url: "https://twitter.com/Arty",
+          name: "Victor's Twitter",
+          url: "https://twitter.com/victormosquerar",
           target: "_blank"
         },
         {
-          name: "Arty's Instagram",
-          url: "https://www.instagram.com/Arty/",
+          name: "Victor's Super Rare",
+          url: "https://superrare.com/victormosquera",
           target: "_blank"
         },
         {
-          name: "Arty's Website",
-          url: "https://Arty.com",
+          name: "Victor's Linktree",
+          url: "https://linktr.ee/victormosquera?ltsid=90501cd2-6e56-40c7-9c7a-09052a0b2261",
+          target: "_blank"
+        }
+      ]
+    },
+    {
+      tokenId: 181,
+      images: [
+        "/artist-181/work-1.jpeg",
+        "/artist-181/work-2.jpeg",
+        "/artist-181/work-3.jpeg"
+      ],
+      poster: "/artist-181/poster.png",
+      posterMintUrl: "",
+      name: "Tristan Eaton",
+      info:
+`
+Are you ready for seizing in Season 6? 
+We're thrilled to introduce a powerhouse of creativity to kick off this season: muralist and painter Tristan Eaton.
+
+For those of you who may not yet be acquainted with his work, Tristan Eaton is a tour de force in the contemporary art scene. 
+Hailing from the sun-soaked streets of Hollywood, California, Eaton has etched his mark on the urban landscapes across the globe, from the buzzing arteries of Detroit to the historic textures of London. 
+A virtuoso of visual storytelling, his murals are a symphony of bold graphics, vibrant characters, and interwoven patterns, each piece a dialogue between the viewer and the wall-become-canvas.
+
+But Eaton's prowess extends beyond large-scale murals; he's a maestro of the designer toy world as well. 
+As a co-founder of Kid Robot, he's responsible for some of the most iconic figures in the designer toy movement. 
+His creations like the Dunny and Munny are not mere collectibles but are heralded as artifacts of pop culture, where the toy becomes the artistic medium, and the owner it's artist.
+
+As we prepare for the first drop of Season 6 featuring Tristan Eaton, prepare yourselves for a blend of street art grit and sophisticated gallery aesthetics, all infused with the quintessential message and meaning that "The Memes" collection embodies. 
+So, whether you're drawn to the revolutionary spirit of graffiti or the refined strokes of fine art, Eaton's contributions to "The Memes" are sure to captivate and add a new layer of depth to the collection. 
+Who better than Eaton to help us get ready to embrace a season brimming with artistic innovation and cultural resonance?
+
+This new szn kicks off with Card 181 on Jan 1st, 2024!
+`,
+      links: [
+        {
+          name: "Tristan's Twitter",
+          url: "https://twitter.com/tristaneaton",
+          target: "_blank"
+        },
+        {
+          name: "Tristan's Instagram",
+          url: "http://instagram.com/tristaneaton",
+          target: "_blank"
+        },
+        {
+          name: "Tristan's website",
+          url: "https://www.tristaneaton.com/",
           target: "_blank"
         }
       ]
