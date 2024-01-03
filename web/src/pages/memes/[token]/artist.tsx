@@ -3943,6 +3943,48 @@ This new szn kicks off with Card 181 on Jan 1st, 2024!
       ],
     },
     {
+      tokenId: 182,
+      images: [
+        "/artist-182/work-1.gif",
+        "/artist-182/work-2.gif",
+        "/artist-182/work-3.jpeg",
+      ],
+      poster: "/artist-182/poster.png",
+      posterMintUrl: "",
+      name: "@atmonez",
+      info: `
+Atmo's artistic style is a captivating fusion of cybernetic detail and heartfelt emotion, crafting visual narratives that resonate deeply within the digital zeitgeist. 
+His compositions, often bathed in neon glows and punctuated by intricate tech motifs, explore the nuanced relationship between humans and our ever-more computerized worlds. 
+There is an inherent sincerity in his work, a call to remember and cherish the human element amidst the binary codes and pixelated vistas. 
+Atmonez masterfully balances the cold precision of technology with the warm ambiguity of human sentiment, creating pieces that awaken a sense of exploration, beckoning viewers to look beyond the immediate surface.
+
+The vision of Atmo extends into the realm of speculative fiction, where science meets soul, and the future is tinged with the full spectrum of human emotion. 
+His pieces are not just visually arresting; they serve as totems of the digital age, reminders of the flesh-and-blood passions that animate our interactions in virtual spaces. 
+Through his art, Atmonez invites contemplation on how we express and perceive affection and identity within the digital echo chambers of society. 
+The recurring motifs of glowing circuits intertwined with human elements suggest a symbiosis, a coalescence of what is human and what is created, reflecting a belief in the possibility of harmony between these realms.
+
+In an era where digital connections often substitute for physical presence, Atmo's art stands as a beacon of authenticity. 
+His works are a vibrant call to acknowledge the profound impact of our online engagements on the human psyche. 
+By highlighting themes of connectivity, surveillance, and virtual existence, Atmo not only captures the aesthetic of a digital native but also embodies the soul-searching questions that arise within this modern context. 
+His art is a bridge between the seen and unseen, a reminder that beneath the avatars and usernames, there are real hearts beating with the desire for genuine connection and understanding.
+
+Can card 182 really bring all this The Memes on Jan 3rd, 2024? We'll see!`,
+      links: [
+        {
+          name: "Atmo's Twitter",
+          url: "https://x.com/atmonez",
+        },
+        {
+          name: "Atmo's Instagram",
+          url: "https://instagram.com/atmonez",
+        },
+        {
+          name: "Atmo's Linktree",
+          url: "https://linktr.ee/Atmonez",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
@@ -3951,10 +3993,9 @@ This new szn kicks off with Card 181 on Jan 1st, 2024!
       ],
       poster: "/artist-690/poster.png",
       posterMintUrl: "",
-      name: "UNNKNOWN",
-      info: `We are proud to welcome UNNKNOWN to the 6529 Meme artist family. 
-
-...We can't wait to see what she has created for our community... on Jan 4th, 2024.`,
+      name: "@UNNKNOWN",
+      info: `
+...We can't wait to see what she has created in Card 690 for our community... on Jan 4th, 2024.`,
       links: [
         {
           name: "UNNKNOWN's Twitter",

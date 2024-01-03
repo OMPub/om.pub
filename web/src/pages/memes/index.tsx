@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 4</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/182/artist">Meme Artist 182 - @atmonez</a></li>
                 <li>Artist Preview: <a href="/memes/181/artist">Meme Artist 181 - Tristan Easton</a></li>
               </ul>                
               <li>Season 5</li>

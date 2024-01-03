@@ -87,7 +87,7 @@ const ArtistProfile = (props: Props) => {
       </Col>
       <Col className={`${styles.artistWorks}`}>
         <Row className="h-50">
-          <Carousel interval={3000} fade>
+          <Carousel interval={5000} fade>
             {artist.images.map((image, index) => (
               <Carousel.Item key={index}>
                 {image.endsWith(".mp4") ? (
