@@ -3985,6 +3985,48 @@ Can card 182 really bring all this The Memes on Jan 3rd, 2024? We'll see!`,
       ],
     },
     {
+      tokenId: 183,
+      images: [
+        "/artist-183/work-1.jpeg",
+        "/artist-183/work-2.png",
+        "/artist-183/work-3.mp4",
+      ],
+      poster: "/artist-183/poster.png",
+      posterMintUrl: "",
+      name: "@1dontknows",
+      info: `
+Let us welcome to The Memes 1dontknows, the pseudonym of Thai artist Phanuwat Chukoed. 
+His digital collages are a surreal interplay of history and psyche, where the Renaissance meets a dream-like future. 
+Each piece is a dialogue without words, without faces, urging the observer to look past the individual and into the collective journey of the soul. 
+His works are not just visual spectacles; they are invitations to explore concepts like metempsychosis, the eternal cycle of life and death, freedom and entrapment, justice and rebirth.
+
+1DK's unique approach to digital art speaks to the introspective and the universal. 
+He weaves his personal narrative of self-taught artistry and the challenges of a global pandemic into each creation. 
+His canvases, while absent of traditional faces, express a shy artist's emotions and thoughts, resonating with his belief that art requires creativity, not just the ability to draw. 
+Each collage is a testament to his journey from graphic designer to a full-time NFT artist, a narrative that enriches the layers of his digital tapestries.
+      
+For collectors who seek depth and storytelling, 1dontknows offers an exceptional portfolio. 
+His art is an amalgamation of inspirations—from music to mythology—filtered through his visionary lens. 
+To own a 1dontknows is to possess a fragment of the artist's soul, a piece of the ever-turning wheel of artistic rebirth. 
+His work promises not only aesthetic pleasure but also a philosophical engagement with the timeless questions of existence, all immortalized on the immutable ledger of the blockchain.
+
+1DK brings it all The Memes on Jan 5th, 2024.`,
+      links: [
+        {
+          name: "1dontknows's Twitter",
+          url: "https://twitter.com/1dontknows",
+        },
+        {
+          name: "1dontknows's Instagram",
+          url: "https://www.instagram.com/1dontknows",
+        },
+        {
+          name: "1dontknows's website",
+          url: "https://1dontknows.art",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
