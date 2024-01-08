@@ -4027,6 +4027,46 @@ His work promises not only aesthetic pleasure but also a philosophical engagemen
       ],
     },
     {
+      tokenId: 184,
+      images: [
+        "/artist-184/work-1.jpeg",
+        "/artist-184/work-2.jpeg",
+        "/artist-184/work-3.jpeg",
+      ],
+      poster: "/artist-184/poster.png",
+      posterMintUrl: "",
+      name: "Martin Kozlowski",
+      info: `
+Please welcome to "The Memes" Martin Kozlowski, a celebrated artist with a storied career that spans over four decades.
+Martin's journey began in 1980, and since then, he has been a dynamic force in the world of political cartoons, known for his incisive and humorous illustrations that have graced the pages of renowned publications such as the New York Times and the Wall Street Journal.
+His keen eye for the social and political landscape has made him a pivotal voice in editorial illustration, capturing the zeitgeist with wit and an unerring sense of relevance.
+
+Kozlowski's artistic endeavors extend beyond the traditional canvas, embodying a diverse range of skills.
+As the art director and contributor to inxart.com, he has showcased his talent in steering visual narratives, while his comic strips have found homes in various newspapers and digital platforms, including the Hartford Courant and the Daily Star in Beirut.
+His flair for design led him to establish his own firm in Union Square, NYC, and his tenure as an art director at the New York Times, especially on the Op-ed page, is a testament to his profound impact on visual storytelling.
+      
+Joining "The Memes" collection, Martin Kozlowski brings his rich tapestry of experience and his distinctive artistic voice to the world of digital art.
+This foray into NFTs represents a convergence of his traditional social-commentary roots and the memetic rails of ethereum tokens.
+Kozlowski's work, characterized by sharp satire and engaging humor, is poised to add a unique and thought-provoking dimension to our collection.
+We are honored to have him as part of "The Memes," where his art will continue to challenge, entertain, and inspire in this new digital frontier.
+      
+What will his wit target on Jan 8th, 2024?`,
+      links: [
+        {
+          name: "Martin's Twitter",
+          url: "https://twitter.com/TrumpAltAmerica",
+        },
+        {
+          name: "Martin's Instagram",
+          url: "https://www.instagram.com/martinkozlowskiart",
+        },
+        {
+          name: "Martin's website",
+          url: "http://www.martinkozlowski.com",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
