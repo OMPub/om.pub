@@ -4046,9 +4046,9 @@ As the art director and contributor to inxart.com, he has showcased his talent i
 His flair for design led him to establish his own firm in Union Square, NYC, and his tenure as an art director at the New York Times, especially on the Op-ed page, is a testament to his profound impact on visual storytelling.
       
 Joining "The Memes" collection, Martin Kozlowski brings his rich tapestry of experience and his distinctive artistic voice to the world of digital art.
-This foray into NFTs represents a convergence of his traditional social-commentary roots and the memetic rails of ethereum tokens.
+This, his first foray into NFTs, represents a convergence of his traditional social-commentary roots and the memetic rails of ethereum tokens.
 Kozlowski's work, characterized by sharp satire and engaging humor, is poised to add a unique and thought-provoking dimension to our collection.
-We are honored to have him as part of "The Memes," where his art will continue to challenge, entertain, and inspire in this new digital frontier.
+We are honored to have his genesis drop as part of "The Memes," where his art will surely challenge, entertain, and inspire in this new digital frontier.
       
 What will his wit target on Jan 8th, 2024?`,
       links: [
