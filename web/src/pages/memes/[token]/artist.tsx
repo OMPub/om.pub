@@ -4067,6 +4067,42 @@ What will his wit target on Jan 8th, 2024?`,
       ],
     },
     {
+      tokenId: 185,
+      images: [
+        "/artist-185/work-1.gif",
+        "/artist-185/work-2.jpeg",
+        "/artist-185/work-3.gif",
+      ],
+      poster: "/artist-185/poster.png",
+      posterMintUrl: "",
+      name: "Jæn",
+      info: `
+In Card 185 of "The Memes" collection, we gladly welcome the digital artistry of Jæn, an artist whose work delves into the heart of existence through the lens of the digital medium.
+Jæn's creations are beyond mere images; they are intricate animations woven with threads like quantum theory and human consciousness, inviting us into a dialogue with the deeper realities of our universe.
+      
+Jæn's pieces, characterized by their vibrant aesthetic of color and evocative symbolism, offer a reflection on the nature of reality and our place within it.
+The artist's distinctive vision guides us through a digital exploration of space, time, and identity, merging scientific intrigue with metaphysical inquiry.
+      
+As you encounter Jæn's works, be prepared to engage with art that transcends the static, art that echoes the complexities of the cosmos and the intricacies of the soul.
+This is an invitation to experience the profound narrative of digital creation, as told by Jæn — a narrative that weaves together the fabric of the known and the imagined into a tapestry of profound artistic expression.
+      
+We will see all that Card 185 expresses on Jan 10th, 2024.`,
+      links: [
+        {
+          name: "Jæn's Twitter",
+          url: "https://twitter.com/jaendotart",
+        },
+        {
+          name: "Jæn's Instagram",
+          url: "https://instagram.com/jaen.art",
+        },
+        {
+          name: "Jæn's website",
+          url: "https://jaen.art",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
