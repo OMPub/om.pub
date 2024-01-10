@@ -4074,7 +4074,7 @@ What will his wit target on Jan 8th, 2024?`,
         "/artist-185/work-3.gif",
       ],
       poster: "/artist-185/poster.png",
-      posterMintUrl: "",
+      posterMintUrl: "https://foundation.app/@WintermuteGAN/prememe/27",
       name: "Jæn",
       info: `
 In Card 185 of "The Memes" collection, we gladly welcome the digital artistry of Jæn, an artist whose work delves into the heart of existence through the lens of the digital medium.
