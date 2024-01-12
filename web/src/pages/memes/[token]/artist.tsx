@@ -4111,7 +4111,7 @@ We will see all that Card 185 expresses on Jan 10th, 2024.`,
       ],
       poster: "/artist-186/poster.png",
       posterMintUrl: "",
-      name: "@UNNKNOWN",
+      name: "Nude Yoga Girl",
       info: `
 Nude Yoga Girl is an enigmatic figure in the digital art world, an anon photographer and artist whose work presents the human body via a lens of natural beauty and powerful stillness. 
 In a society where the naked form is often subjected to censorship and sexualization, her art stands as a silent yet potent rebellion. 
