@@ -19,6 +19,11 @@ export default function Header() {
           <Nav className="me-auto"></Nav>
           <Nav>
             <Nav.Link
+              href="https://www.shop.om.pub/"
+              target="_blank">
+              Shop
+            </Nav.Link>                     
+            <Nav.Link
               href="/memes"
               className={router.pathname == "/memes" ? styles.linkActive : ""}>
               The Memes

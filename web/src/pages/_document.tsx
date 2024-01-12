@@ -61,7 +61,13 @@ export default function Document() {
               Instagram
             </a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            Tip your server? ompub.eth
+            {/* Add link to shop.om.pub: */}
+            <a
+              href="https://www.shop.om.pub/"
+              target="_blank"
+              rel="noreferrer">
+            Shop now for Memes IRL: shop.om.pub
+            </a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
           </p>
           <p>
