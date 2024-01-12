@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 6</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/186/artist">Meme Artist 186 - Nude Yoga Girl</a></li>
                 <li>Artist Preview: <a href="/memes/185/artist">Meme Artist 185 - Jæn</a></li>
                 <li>Artist Preview: <a href="/memes/184/artist">Meme Artist 184 - Martin Kozlowski</a></li>
                 <li>Artist Preview: <a href="/memes/183/artist">Meme Artist 183 - @1dontknows</a></li>

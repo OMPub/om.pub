@@ -4103,6 +4103,48 @@ We will see all that Card 185 expresses on Jan 10th, 2024.`,
       ],
     },
     {
+      tokenId: 186,
+      images: [
+        "/artist-186/work-1.jpeg",
+        "/artist-186/work-2.jpeg",
+        "/artist-186/work-3.jpeg",
+      ],
+      poster: "/artist-186/poster.png",
+      posterMintUrl: "",
+      name: "@UNNKNOWN",
+      info: `
+Nude Yoga Girl is an enigmatic figure in the digital art world, an anon photographer and artist whose work presents the human body via a lens of natural beauty and powerful stillness. 
+In a society where the naked form is often subjected to censorship and sexualization, her art stands as a silent yet potent rebellion. 
+Her black and white portraits, which marry the form and fluidity of yoga with the vulnerability of nudity, transcend mere aesthetics to become a statement of liberation.
+She seeks the freedom to express the human form gloriously, advocating for a world where the line between art and stigma is redefined, allowing for a celebration of the body in its most honest state.
+
+Her artistic message is clear: to normalize the natural body and promote self-love and acceptance through the intersection two deeply personal disciplines—yoga and photography.
+Nude Yoga Girl's photoshoots are introspective explorations, self-portraits that use light, shadow, and composition to tell stories of empowerment and grace.
+The strength of her work lies not only in its visual impact but also in its ability to connect with the viewer on an intimate level, challenging them to confront their own perceptions of nudity and self-acceptance.
+In the face of social/media censorship, her art becomes an oasis for those needing a reminder that their bodies are worthy of uplifting appreciation, not cloaked judgment.
+      
+Nude Yoga Girl's artistic strengths lie in her profound understanding of the body's expressive potential and her skillful manipulation of visual elements to amplify her message.
+Each photograph is a meticulous orchestration of balance, form, and meaning, often requiring physical rigor and precise timing to capture the ephemeral interplay of the human silhouette against a backdrop of serene landscapes or stark minimalism.
+Her anonymity further intensifies the focus on her artistic vision, granting her the freedom to express without the constraints of personal identity, and inviting viewers to project their own narratives onto her work.
+This anonymity, paired with her advocacy for unshackled artistic expression, positions Nude Yoga Girl as a compelling voice in the dialogue on freedom, censorship, and the inherent beauty of the human form.
+
+The medium is so clearly the message in her art, and maybe even in Card 186... to be fully revealed on Jan 12th, 2024!`,
+      links: [
+        {
+          name: "NYG's Twitter",
+          url: "https://x.com/nudeyogagirl",
+        },
+        {
+          name: "NYG's Instagram",
+          url: "https://www.instagram.com/nude_yogagirl",
+        },
+        {
+          name: "NYG's website",
+          url: "https://discord.gg/UNNKNOWN",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
