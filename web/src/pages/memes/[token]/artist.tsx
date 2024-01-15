@@ -4145,6 +4145,44 @@ The medium is so clearly the message in her art, and maybe even in Card 186... t
       ],
     },
     {
+      tokenId: 187,
+      images: [
+        "/artist-187/work-1.gif",
+        "/artist-187/work-2.png",
+        "/artist-187/work-3.jpeg",
+        "/artist-187/work-4.png",
+      ],
+      poster: "/artist-187/poster.png",
+      posterMintUrl: "",
+      name: "@viva_la_vandal",
+      info: `
+Viva La Vandal, a UK-born artist with deep ties to the graffiti and street art scene, joins "The Memes" with surely a palpable sense of rebellion and cultural critique.
+His artistic journey has seen a fascinating pivot from physical walls to the boundless digital canvas, where he blends the raw aesthetics of spray paint with the viral nature of internet culture. 
+His pieces lean into a celebration of his graffiti roots as well as the dankest memes as a tool for layered commentary, via bitcoin 'stamps' or ethereum NFTs.
+      
+His approach to art in the NFT space is marked by a distinctive use of color, form, and internet-era symbols, which confronts his collectors with vibrant reflections on freedom, control, and identity. 
+Viva La Vandal's works serve as bold statements on the power dynamics woven into the fabric of our online and offline lives. 
+      
+Incorporating elements from popular culture and cryptocurrency into his digital creations, Viva La Vandal offers a fresh take that resonates with the crypto-native generation.
+With his inclusion in "The Memes" collection, we'll likely get the pulsating energy and disruptive spirit of street art, as it continues to thrive in the virtual worlds of OM.
+
+Here comes Card 187 (to an Opem Metaverse wall near you?) on Jan 15th, 2024!`,
+      links: [
+        {
+          name: "Viva La Vandal's Twitter",
+          url: "https://twitter.com/viva_la_vandal",
+        },
+        {
+          name: "Viva La Vandal's OpenSea",
+          url: "https://opensea.io/collection/viva-la-vandal",
+        },
+        {
+          name: "Viva La Vandal's website",
+          url: "https://www.vivalavandal.biz",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
