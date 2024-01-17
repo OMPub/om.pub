@@ -4183,6 +4183,46 @@ Here comes Card 187 (to an Opem Metaverse wall near you?) on Jan 15th, 2024!`,
       ],
     },
     {
+      tokenId: 188,
+      images: [
+        "/artist-188/work-1.jpeg",
+        "/artist-188/work-2.jpeg",
+        "/artist-188/work-3.jpeg",
+      ],
+      poster: "/artist-188/poster.png",
+      posterMintUrl: "",
+      name: "Wÿn Jackz",
+      info: `
+Wÿn's artistry unfolds across a monochromatic dreamscape where each hue of blue is a verse in a visual poem.
+His works are layered compositions that delve beyond aesthetic allure, inviting an exploration of a realm where the subconscious dances with conscious intent.
+In his digital universe, traditional boundaries dissipate, allowing historical iconography, modern motifs, and personal symbols to coalesce.
+Wÿn's approach is not about filling space but about creating it, offering each beholder an invitaiton to broader horizons within their inner landscape.
+
+In every piece, Wÿn choreographs a narrative that is unfettered by time or expectation, a narrative that speaks to the fluidity and dynamism of the digital medium.
+His compositions are not static, though they are JPEGs; they pulse with the potential of stories yet to unfold, each symbol a character, each line a path to myriad interpretations.
+The careful consideration of space and form reflects his understanding that the story of each piece is co-authored by the audience, whose perspectives breathe unique life into the digital tableau.
+      
+Wÿn's signature monochrome is not merely a stylistic choice but a deliberate invitation to viewers to engage with texture, line, and symbolism without the distraction of color.
+His art becomes a testament to the nuances of shade and light, each work a study in how such subtleties can evoke emotion and provoke thought.
+Through the lens of his artistic vision, the familiar is reimagined, and the ethereal is anchored.
+
+On Jan 4th, 2024 we see how he reimagines a theme from The Memes!`,
+      links: [
+        {
+          name: "Wÿn's Twitter",
+          url: "https://x.com/wynjacks",
+        },
+        {
+          name: "Wÿn's Instagram",
+          url: "https://instagram.com/wynjackz",
+        },
+        {
+          name: "Wÿn's website",
+          url: "https://wynjackz.com",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
