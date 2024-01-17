@@ -4206,7 +4206,7 @@ Wÿn's signature monochrome is not merely a stylistic choice but a deliberate in
 His art becomes a testament to the nuances of shade and light, each work a study in how such subtleties can evoke emotion and provoke thought.
 Through the lens of his artistic vision, the familiar is reimagined, and the ethereal is anchored.
 
-On Jan 4th, 2024 we see how he reimagines a theme from The Memes!`,
+On Jan 17th, 2024 we see how he reimagines a theme from The Memes!`,
       links: [
         {
           name: "Wÿn's Twitter",
