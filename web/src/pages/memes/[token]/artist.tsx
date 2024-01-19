@@ -4223,6 +4223,46 @@ On Jan 17th, 2024 we see how he reimagines a theme from The Memes!`,
       ],
     },
     {
+      tokenId: 189,
+      images: [
+        "/artist-189/work-1.webp",
+        "/artist-189/work-2.jpeg",
+        "/artist-189/work-3.jpeg",
+      ],
+      poster: "/artist-189/poster.png",
+      posterMintUrl: "",
+      name: "@pixelord",
+      info: `
+Alexey Devyanin, known as Pixelord in the digital art and electronic music scenes, harnesses the evocative power of the nostalgic pasts while forging into the avant-garde of digital expression.
+His art is a time capsule propelled into the future, capturing the essence of pixel art's golden age and infusing it with the boundless possibilities of contemporary techniques.
+Pixelord's pieces—from sound to NFT to ordinal inscription—are a testament to the memetic evolution of art, homage to the past and a building block for what is around the next technical corner.
+His canvases are rich with historical references, yet they bristle with the energy of the now, often marrying the aesthetics of 8-bit / video game art with the conceptual depth of modern technology.
+
+In Pixelord's universe, art trancends time and bridges eras.
+This digital renaissance man's work is a dialogue between epochs, with many pieces echoing the brushstrokes of old masters while whispering the binary language of new media.
+The impact of his art lies in this interplay, a memetic dance that invites the viewer to ponder the continuity of human experience through the lens of art enmeshed with technology.
+      
+Pixelord's vision is one of continuity and contrast. His work is a span over the digital divide, connecting the rich history of artistic expression with the immersive potential of modern media.
+So often creating as a re-memer, he reinterprets the classic, transforming iconic symbols and narratives into a language that speaks to the interconnected, meme-savvy generation.
+Through his art, Pixelord challenges us to re-envision the historic familiarity, redefining what it means to interact with art in a world where the past is ever-present, and the future is now.
+
+On Jan 19th, 2024, we'll see what memetic merger of multiverses he has for us in Card 189.`,
+      links: [
+        {
+          name: "Pixelord's Twitter",
+          url: "https://twitter.com/pixelord",
+        },
+        {
+          name: "Pixelord's Instagram",
+          url: "https://instagram.com/pixelord.eth",
+        },
+        {
+          name: "Pixelord's website",
+          url: "https://linktr.ee/pixelord",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
