@@ -4263,6 +4263,47 @@ On Jan 19th, 2024, we'll see what memetic merger of multiverses he has for us in
       ],
     },
     {
+      tokenId: 190,
+      images: [
+        "/artist-190/work-1.jpeg",
+        "/artist-190/work-2.jpeg",
+        "/artist-190/work-3.jpeg",
+      ],
+      poster: "/artist-190/poster.png",
+      posterMintUrl: "",
+      name: "Emanuele Ferrari",
+      info: `
+Emanuele Ferrari stands as a distinguished figure in the landscape of fashion photography, earning acclaim through a career marked by global recognition and celebrated achievements.
+His lens has captured the vibrant essence of fashion, distilling its fluidity and form into images that have graced the pages of some of the most illustrious international magazines.
+Ferrari's work, with its clean lines and engaging compositions, secures a spot in the upper echelons of the genre, resonating with a wide audience that spans continents and cultures.
+
+Emanuele Ferrari's photographic signature is a sophisticated blend of immediacy and nuance.
+His compositions, rich with unstaged charm, capture the essence of fleeting moments through a lens that is as intimate as it is discerning.
+In Ferrari's world, monochromes breathe depth while colors burst forth with purpose, each frame chosen to encapsulate a feeling or an experience rather than just an image.
+His photographs are an invitation to pause and ponder the layers of story each one holds.
+Without resorting to the grandiose, Ferrari's work maintains a steady hum of impact, resonating with a contemporary audience that seeks meaning beyond the surface.
+
+Beyond the magazine pages and the campaigns, Ferrari's artistic footprint extends into the burgeoning world of digital artistry, where his work adopts new forms and functions.
+His embrace of digital platforms reflects a keen understanding of the evolving art market and the shifting paradigms of art consumption and appreciation in the digital age.
+His foresight in traversing the physical and digital realms continues to augment his professional repertoire, carving out a legacy that is both impactful and enduring in the dynamic world of visual art.
+
+NFT collectors can beg 'wen lambo' all day, but collectors of The Memes know 'wen ferarri': Card 190, on Jan 22th, 2024.`,
+      links: [
+        {
+          name: "Emanuele's Twitter",
+          url: "http://twitter.com/eferrariph",
+        },
+        {
+          name: "Emanuele's Instagram",
+          url: "https://www.instagram.com/emanueleferrariph",
+        },
+        {
+          name: "Emanuele's website",
+          url: "http://www.emanueleferrari.it/",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
