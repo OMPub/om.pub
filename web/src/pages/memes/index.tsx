@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 6</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/191/artist">Meme Artist 191 - Hasan Göktepe</a></li>
                 <li>Artist Preview: <a href="/memes/190/artist">Meme Artist 190 - Emanuele Ferrari</a></li>
                 <li>Artist Preview: <a href="/memes/189/artist">Meme Artist 189 - @pixelord</a></li>
                 <li>Artist Preview: <a href="/memes/188/artist">Meme Artist 188 - Wÿn Jackz</a></li>

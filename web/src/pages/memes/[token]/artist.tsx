@@ -4304,6 +4304,45 @@ NFT collectors can beg 'wen lambo' all day, but collectors of The Memes know 'we
       ],
     },
     {
+      tokenId: 191,
+      images: [
+        "/artist-191/work-1.jpeg",
+        "/artist-191/work-2.jpeg",
+        "/artist-191/work-3.jpeg",
+        "/artist-191/work-4.jpeg",
+      ],
+      poster: "/artist-191/poster.png",
+      posterMintUrl: "",
+      name: "Hasan Göktepe",
+      info: `
+Hasan Göktepe stands at the technically-advanced edge of digital art, blending his background in computer engineering with an innate flair for visual storytelling.
+His work delves often into the realm of voxel art, where each 'volumetric pixel' or 'voxel' serves as a building block to construct intricate 3D environments and characters, as in "Parking Problems" highlighted here (see details included).
+Göktepe's artistry transforms these cubic elements into stunningly detailed and vibrant worlds, brimming with a unique blend of futurism and palpable vitality.
+His pieces, while seemingly nostalgic with their blocky textures reminiscent of building with Lego, and early video game aesthetics, push the envelope in digital craftsmanship and thematic exploration.
+
+As an artist who bridges the technical precision of 3D modeling with the boundless imagination of an environment designer, Göktepe has contributed to various games and movies, collaborating with notable industry names such as Roblox, Apple, and Gameforge.
+His portfolio reveals a versatile command of digital tools like Unreal Engine, ZBrush, and Maya, allowing for the creation of textures and forms that challenge the constraints of traditional 3D modeling.
+The resulting environments are not only visually rich but also narratively engaging, hinting at stories and worlds beyond their digital borders.
+      
+Göktepe's foray into NFTs is a nod to both his mastery of digital trends and his vision of art's evolving trajectory, making his works highly coveted pieces for those looking to expand their collection in new dimensions.
+
+On Jan 24th, 2024 we will see what new dimensions will he bring to The Memes in Card 191.`,
+      links: [
+        {
+          name: "Hasan's Seize",
+          url: "https://seize.io/HasanGoktepe",
+        },
+        {
+          name: "Hasan's Twitter",
+          url: "https://twitter.com/hasangoktepe3d",
+        },
+        {
+          name: "Hasan's website",
+          url: "https://hasangoktepe.art/",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
