@@ -4343,6 +4343,46 @@ On Jan 24th, 2024 we will see what new dimensions will he bring to The Memes in 
       ],
     },
     {
+      tokenId: 192,
+      images: [
+        "/artist-192/work-1.jpeg",
+        "/artist-192/work-2.gif",
+        "/artist-192/work-3.png",
+        "/artist-192/work-4.jpeg",
+      ],
+      poster: "/artist-192/poster.png",
+      posterMintUrl: "",
+      name: "6529er",
+      info: `
+It's always an exciting moment to see what 6529er has up his sleeve. 
+
+The Memes are truly anchored by 6529er, a visionary NFT artist who captivates collectors with his minimalist masterpieces. 
+Emerging in the crypto-art realm in 2021, 6529er has gained a place of prominence as the pre-eminent artist of The Memes by 6529 collection, for his sleek, thought-provoking designs.
+
+With a penchant for geometric shapes, bold colors, and a touch of wry humor, 6529er crafts NFT artwork that awakens contemplation. 
+His works in The Memes are infused with meaning, and blur the lines between digital art and hard-hitting educational experiences.
+
+Despite his enigmatic persona, 6529er actively engages with the NFT community, providing leadership and support to The Memes community. 
+As the NFT landscape evolves, 6529er's distinctive artistry continues to intrigue and delight, making him a force to be reckoned with in the metaverse.
+
+With Card 192, we once again get more 6529er, once again in collaboration with Punk 6529!
+`,
+      links: [
+        {
+          name: "6529er's Twitter",
+          url: "https://twitter.com/6529er",
+        },
+        {
+          name: "6529er on Foundation",
+          url: "https://foundation.app/@6529er",
+        },
+        {
+          name: "6529er on Seize",
+          url: "https://seize.io/6529er",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
