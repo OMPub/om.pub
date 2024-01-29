@@ -4383,6 +4383,46 @@ With Card 192, we once again get more 6529er, once again in collaboration with P
       ],
     },
     {
+      tokenId: 193,
+      images: [
+        "/artist-193/work-1.jpeg",
+        "/artist-193/work-2.jpeg",
+        "/artist-193/work-3.jpeg",
+      ],
+      poster: "/artist-193/poster.png",
+      posterMintUrl: "",
+      name: "Alexis Olin",
+      info: `
+For new collectors venturing into the vibrant world of Alexis Olin, also known in the digital realm as Darklunni, you're embarking on a journey through a kaleidoscope of artistic expression that merges the fantastical with the philosophical.
+Olin's Ukrainian heritage and extensive background in graphic novels and comics, particularly through his leadership roles in the iconic Ukrainian magazine "K9" and the organization of the '9 World' International Festival, have profoundly shaped his visual language.
+His works are a striking blend of the story-based depth of Franco-Belgian comics, the aesthetic sensibilities of cutting-edge contemporary digital art. 
+Each piece is a layered narrative, inviting viewers to decipher a world of symbol, meme, and surreal—all delightfully blurred.
+
+Alexis Olin's thematic messages are as intricate as his stylistic choices.
+His art delves into reflections on the ego's role, and the shape of our identities and desires within the confines of societal norms.
+His works act as a canvas for existential contemplation, presenting a stage where the characters, often depicted in dream-like scenarios, symbolize the myriad facets of human personality and cultural influence.
+For Olin, art is not just a visual presentation but an intellectual engagement, prompting viewers to reflect on their perceptions and the complex interplay between self-awareness and external pressures.
+      
+As a collector of Alexis Olin's art, you're picking up more than just a piece for aesthetic appreciation; you're participating in a dialogue with an artist who is constantly pushing the frontiers of digital expression. 
+Whether through his intricate digital canvases or his innovative application of art on fashion with the Métrique brand, Olin's work is a testament to the transformative power of art in shaping and reflecting our understanding of the world around us.
+
+We look forward to the colorful explorations in Card 193 on Jan 29th, 2024.`,
+      links: [
+        {
+          name: "Alexis's Twitter",
+          url: "https://twitter.com/alexisolinart",
+        },
+        {
+          name: "Alexis's Instagram",
+          url: "https://www.instagram.com/alexis_olin",
+        },
+        {
+          name: "Alexis's website",
+          url: "https://alexisolin.com/en/",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
