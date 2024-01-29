@@ -4413,8 +4413,8 @@ We look forward to the colorful explorations in Card 193 on Jan 29th, 2024.`,
           url: "https://twitter.com/alexisolinart",
         },
         {
-          name: "Alexis's Instagram",
-          url: "https://www.instagram.com/alexis_olin",
+          name: "Alexis's Seize",
+          url: "https://seize.io/alexisolinart",
         },
         {
           name: "Alexis's website",
