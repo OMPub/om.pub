@@ -4423,6 +4423,47 @@ We look forward to the colorful explorations in Card 193 on Jan 29th, 2024.`,
       ],
     },
     {
+      tokenId: 194,
+      images: [
+        "/artist-194/work-1.jpeg",
+        "/artist-194/work-2.webp",
+        "/artist-194/work-3.png",
+        "/artist-194/work-4.gif",
+      ],
+      poster: "/artist-194/poster.png",
+      posterMintUrl: "",
+      name: "Mr Richi",
+      info: `
+Mr. Richi, a digital artist hailing from Belgrade, stands as a testament to the transformative power of contemporary digital mediums, seamlessly weaving together classics with the rebellious spirit of street art, the vibrant punch of pop art, and the resonant chords of punk music within the burgeoning realm of crypto art culture.
+His works feel native to the crypto epoch: they are a pulsating, living commentary on it, reflecting the dynamic interplay of tradition and innovation. 
+"I like to let my art do the talking instead of me," he asserts, a statement that resonates through his bold visual narratives, etched with the memetic messaging that echoes across the blockchain era.
+
+Diving into the metaverse with a fervent passion, Mr. Richi has crafted an oeuvre that remixes the icons of classical art with the symbols of the digital zeitgeist, bridging centuries and stirring dialogues across time.
+His series "Venus de Crypto: Defender of the Metaverse" encapsulates this vision, merging mythological beauty with the broken yet beautiful landscape of crypto art.
+"When you are a crypto artist, you eat, breathe, and live crypto art. I used that passion to fuel the stories," Mr. Richi explains, revealing his profound immersion in the community that is the muse of his artistic eye.
+      
+At the heart of Mr. Richi's artistic journey lies a profound respect for the masters of yore, coupled with a keen eye for the pulse of NFT and degen life.\
+His creative process is a brash alchemy of inspiration, patience, and an unwavering commitment to authenticity.
+"There's a lot of rethinking, choosing elements over and over again, and playing until I get what I want. If I am not happy with how it turned out, I never mint it," he divulges. 
+This meticulous approach to creation ensures that each piece not only resonates with the vibrancy of now but also endures as a snapshot of digital culture for future generations.
+
+How will it all layer together in Card 194 for The Memes? Our community finds out on Jan 31st, 2024.`,
+      links: [
+        {
+          name: "Mr Richi's Twitter",
+          url: "https://twitter.com/Richi0118",
+        },
+        {
+          name: "Mr Richi's Instagram",
+          url: "https://www.instagram.com/mrrichi.eth",
+        },
+        {
+          name: "Mr Richi's Seize",
+          url: "https://seize.io/MrRichi",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
