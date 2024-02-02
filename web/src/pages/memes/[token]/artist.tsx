@@ -4409,15 +4409,15 @@ Whether through his intricate digital canvases or his innovative application of 
 We look forward to the colorful explorations in Card 193 on Jan 29th, 2024.`,
       links: [
         {
-          name: "Alexis's Twitter",
+          name: "Alexis' Twitter",
           url: "https://twitter.com/alexisolinart",
         },
         {
-          name: "Alexis's Seize",
+          name: "Alexis' Seize",
           url: "https://seize.io/alexisolinart",
         },
         {
-          name: "Alexis's website",
+          name: "Alexis' website",
           url: "https://alexisolin.com/en/",
         },
       ],
@@ -4442,7 +4442,7 @@ Diving into the metaverse with a fervent passion, Mr. Richi has crafted an oeuvr
 His series "Venus de Crypto: Defender of the Metaverse" encapsulates this vision, merging mythological beauty with the broken yet beautiful landscape of crypto art.
 "When you are a crypto artist, you eat, breathe, and live crypto art. I used that passion to fuel the stories," Mr. Richi explains, revealing his profound immersion in the community that is the muse of his artistic eye.
       
-At the heart of Mr. Richi's artistic journey lies a profound respect for the masters of yore, coupled with a keen eye for the pulse of NFT and degen life.\
+At the heart of Mr. Richi's artistic journey lies a profound respect for the masters of yore, coupled with a keen eye for the pulse of NFT and degen life.
 His creative process is a brash alchemy of inspiration, patience, and an unwavering commitment to authenticity.
 "There's a lot of rethinking, choosing elements over and over again, and playing until I get what I want. If I am not happy with how it turned out, I never mint it," he divulges. 
 This meticulous approach to creation ensures that each piece not only resonates with the vibrancy of now but also endures as a snapshot of digital culture for future generations.
@@ -4460,6 +4460,45 @@ How will it all layer together in Card 194 for The Memes? Our community finds ou
         {
           name: "Mr Richi's Seize",
           url: "https://seize.io/MrRichi",
+        },
+      ],
+    },
+    {
+      tokenId: 195,
+      images: [
+        "/artist-195/work-1.jpeg",
+        "/artist-195/work-2.jpeg",
+        "/artist-195/work-3.mp4",
+      ],
+      poster: "/artist-195/poster.png",
+      posterMintUrl: "",
+      name: "Louis Dazy",
+      info: `
+Louis Dazy's artistry is marked by an adept fusion of light work and portraiture, where neon lights are not mere accents but conduits of mood and character.
+He paints his digital canvases so often with the glow of artificial lights, which bathe his subjects in hues that evoke complex emotional landscapes.
+His portraits transcend simple depictions of people; they are explorations of moments, often suspended in a palette of nocturnal colors that suggest introspection and a subtle melange of solitude and serenity.
+
+Dazy's thematic messages are conveyed through the interplay of light and environment, with a pronounced use of contrasting colors and shadows that seem to reach beyond the visual to the experiential.
+His art often features urban landscapes and motifs that act as silent narrators to the solitary figures within them.
+The recurring theme of isolation amidst an electrified world is palpable, with neon signs serving as symbols of modern life's pervasive glow, yet hinting at the underlying disconnect of contemporary existence.
+      
+The stylistic consistency of Dazy's work—its deliberate pacing, the careful choreography of illuminated and obscured features—creates a distinct atmosphere that resonates with his collectors.
+His images are cinematic in the balance of warmth against the cool backdrop of the night, a dance of intimacy and distance.
+This stylistic choice reflects a love for the visual language of 1960's film special effects, a nod to the era's mastery of light and shadow, and a testament to Dazy's commitment to the timeless art of storytelling through imagery.
+
+And now we can only guess he brings light and dark, neon and shadow to The Memes in Card 195 on Feb 2nd, 2024.`,
+      links: [
+        {
+          name: "Louis' Twitter",
+          url: "http://twitter.com/louisdazy",
+        },
+        {
+          name: "Louis' website",
+          url: "https://www.louisdazy.com/",
+        },
+        {
+          name: "Louis' Seize",
+          url: "https://seize.io/louisdazy",
         },
       ],
     },
