@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 6</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/196/artist">Meme Artist 196 - Paul Reid</a></li>
                 <li>Artist Preview: <a href="/memes/195/artist">Meme Artist 195 - Louis Dazy</a></li>
                 <li>Artist Preview: <a href="/memes/194/artist">Meme Artist 194 - Mr Richi</a></li>
                 <li>Artist Preview: <a href="/memes/193/artist">Meme Artist 193 - Alexis Olin</a></li>

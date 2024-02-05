@@ -4503,6 +4503,46 @@ And now we can only guess he brings light and dark, neon and shadow to The Memes
       ],
     },
     {
+      tokenId: 196,
+      images: [
+        "/artist-196/work-1.webp",
+        "/artist-196/work-2.webp",
+        "/artist-196/work-3.webp",
+      ],
+      poster: "/artist-196/poster.png",
+      posterMintUrl: "",
+      name: "Paul Reid",
+      info: `
+
+Will Paul Reid's upcoming drop be in line with his signature convergence of classical artistry and mythic innovation?
+Known for his large-scale mythological scenes, Reid's work is marked by a deep understanding of oil painting techniques, adapted to embrace the digital canvas.
+The pieces in this collection feature a blend of precise, old-master inspired realism with the limitless possibilities of digital artistry, offering collectors a unique opportunity to own a piece of art that bridges traditional techniques with modern digital provenance.
+
+Reid's artwork pulls from ancient myths, reinterpreted and rendered with a cinematic quality that Reid has honed over decades.
+His choice to capture the decisive moments of the classical myths lends each piece an arresting sense of drama and dynamism.
+The attention to human form, the play of light and shadow, and the richly textured environments showcase Reid's dedication to his craft, promising collectors not just a digital asset, but a slice of contemporary mythology.
+      
+With the advent of NFTs, Reid steps into a novel domain, bringing with him into web3 the gravitas of fine art.
+This drop is not merely a sale of digital items, but a testament to the evolving landscape of art collection.
+It's an invitation to connoisseurs of the NFT space to welcome to their portfolios with works that encapsulate the essence of classical realism, reimagined through the lens of today's digital possibilities.
+
+Mythical worlds open to The Memes on Feb 5th, 2024!`,
+      links: [
+        {
+          name: "Paul's Twitter",
+          url: "https://twitter.com/minotaur_man",
+        },
+        {
+          name: "Paul's Website",
+          url: "https://www.paulreidart.co.uk/",
+        },
+        {
+          name: "Paul's Seize",
+          url: "https://seize.io/Minotaur_Man",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
@@ -4513,7 +4553,7 @@ And now we can only guess he brings light and dark, neon and shadow to The Memes
       posterMintUrl: "",
       name: "@UNNKNOWN",
       info: `
-...We can't wait to see what she has created in Card 690 for our community... on Jan 4th, 2024.`,
+...We can't wait to see what she has created in Card 690 for our community... on Feb 4th, 2024.`,
       links: [
         {
           name: "UNNKNOWN's Twitter",
