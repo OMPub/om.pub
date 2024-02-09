@@ -4543,6 +4543,49 @@ Mythical worlds open to The Memes on Feb 5th, 2024!`,
       ],
     },
     {
+      tokenId: 197,
+      images: [
+        "/artist-197/work-1.jpeg",
+        "/artist-197/work-2.jpeg",
+        "/artist-197/work-3.jpeg",
+        "/artist-197/work-4.jpeg",
+      ],
+      poster: "/artist-197/poster.jpg",
+      posterMintUrl: "",
+      name: "Kirill Pobedin",
+      info: `
+Welcome to Kirill Pobedin's realm of NFTs, a true testament to the nuanced capabilities of digital expression.
+His approach transcends the traditional and the expected, engaging with digital assets as a medium for introspective storytelling.
+With a penchant for examining the human psyche, Pobedin's work often reflects on the emotional landscape of life's experiences, as seen in his "Five Stages of Grief" project.
+His style, characterized by an interplay of digital expertise and a photographer's eye, captures fleeting moments with a permanence granted by blockchain technology, creating a digital footprint that is both ethereal and tactile.
+
+Pobedin's innovative use of smart contracts in projects like "Manifesto" reveals his inclination toward a symbiotic relationship between art and technology.
+Burning Polaroids and translating that into a digital artifact is a bold move that showcases his ability to transform a momentary act into an everlasting digital narrative.
+His work is not just a visual feast but also a conceptual dialogue that questions and expands the boundaries of artistic rarity and value in the digital age.
+Through his art, Pobedin invites viewers to witness the beauty of transience, the volatility of reality, and the profound stories that lie within simple, yet deliberate actions.
+      
+At the heart of Kirill Pobedin's ethos lies The Frame Society, his co-creation that stands as a beacon for emerging talent in the NFT art space.
+This initiative is a reflection of his artistic philosophy: a belief in the power of community and the importance of fostering a collaborative environment.
+Pobedin's narrative is woven into the very fabric of his creations and the society he nurtures, embodying a message that champions collective growth, knowledge sharing, and the democratization of artistic success.
+His art, therefore, is not a solitary journey but a shared voyage that underscores the transformative potential of embracing the digital frontier.
+      
+On Feb 9th, he embraces the memetic frontiers with Card 197!`,
+      links: [
+        {
+          name: "pobedeen's Twitter",
+          url: "https://x.com/pobedeen",
+        },
+        {
+          name: "pobedeen's Instagram",
+          url: "https://instagram.com/pobedeen",
+        },
+        {
+          name: "pobedeen's Seize",
+          url: "https://seize.io/pobedeen",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
