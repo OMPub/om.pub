@@ -4586,6 +4586,48 @@ On Feb 9th, he embraces the memetic frontiers with Card 197!`,
       ],
     },
     {
+      tokenId: 198,
+      images: [
+        "/artist-198/work-1.jpeg",
+        "/artist-198/work-2.jpeg",
+        "/artist-198/work-3.jpeg",
+      ],
+      poster: "/artist-198/poster.png",
+      posterMintUrl: "",
+      name: "Orkhan Isayev",
+      info: `
+"Be brave in your decisions. The real barriers are in your head only." [*](https://x.com/isayev_art/status/1755273913880166509?s=20)
+
+Orkhan Isayev's artistry resides in the creation of futuristic realms where the boundaries of unlived futures blend seamlessly.
+His pieces are not simple illustrations; they are architectural symphonies composed with a digital brush, where each line is a note and the urban landscapes form the melody.
+His distinctive use of retrofuturism goes beyond mere aesthetic; it is a narrative device that tells stories of grandiosity rooted in the echoes of Art Deco and whispers of cyberpunk, all while firmly grasping the viewer's reality with familiar urban landmarks.
+This juxtaposition invites the viewer to a dance of epochs, a visual dialogue between the nostalgic past and the envisioned future.
+
+His mastery lies in the bold decisions of his color palette and the precision of his lines, which come together in a courageous display that defies the "real barriers" in one's mind, as he suggests. 
+Isayev's advice to "be brave in your decisions" is not just a mantra for personal growth but is vividly reflected in his compositions.
+Each artwork is a decision, a brave stroke that captures the enormity of cityscapes with an almost cartographic obsession for detail, telling us that every window, every shadow cast, is a story waiting to be told, a dream resisting the theft by doubt.
+
+Navigating through Isayev's work, one feels the undercurrent of his belief that although "doubt is a natural part of life," it should not become a permanent residency.
+His creations are a testament to pushing beyond the initial hesitation, reaching for a dream that could easily slip away if one dwells too long in the valleys of uncertainty.
+The vibrancy of his worlds—saturated with future-past lore and bustling with the potential of what could be—reminds us that dreams are the blueprints of reality, and it is through the unwavering pursuit of these dreams that true artistry is born.
+
+What dreams will he bring to The Memes in Card 198 on Feb 12th, 2024?`,
+      links: [
+        {
+          name: "Isayev's Twitter",
+          url: "https://twitter.com/Isayev_art",
+        },
+        {
+          name: "Isayev's Instagram",
+          url: "https://www.instagram.com/isayev_art",
+        },
+        {
+          name: "Isayev's Seize",
+          url: "https://seize.io/Isayev_Art",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
@@ -4607,8 +4649,8 @@ On Feb 9th, he embraces the memetic frontiers with Card 197!`,
           url: "https://linktr.ee/UNNKNOWN",
         },
         {
-          name: "UNNKNOWN's website",
-          url: "https://discord.gg/UNNKNOWN",
+          name: "UNNKNOWN's Seize",
+          url: "https://seize.io/UNNKNOWN",
         },
       ],
     }
