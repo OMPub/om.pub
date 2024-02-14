@@ -4628,6 +4628,47 @@ What dreams will he bring to The Memes in Card 198 on Feb 12th, 2024?`,
       ],
     },
     {
+      tokenId: 199,
+      images: [
+        "/artist-199/work-1.jpg",
+        "/artist-199/work-2.jpg",
+        "/artist-199/work-3.jpg",
+      ],
+      poster: "/artist-199/poster.png",
+      posterMintUrl: "",
+      name: "JSKY",
+      info: `
+JSKY's artistic style is a kaleidoscopic journey into a world where the whimsical bursts forth in neon glory.
+Her work is characterized by a vivid amalgamation of the familiar and the fantastical, where animals are not just creatures but symbols imbued with human emotions and societal commentary.
+The signature vibrant palette she readily catches the eye, while the intricate details and elements of surrealism draw in the viewer.
+The digital canvas becomes a stage for JSKY's visual symphony, where each piece is a complex composition of color, form, and narrative.
+      
+In the fast-evolving landscape of web3, JSKY's art strikes a chord with the digitally native community.
+Her creations resonate with the ethos of this space — decentralized, boundless, and innovative.
+Her work goes beyond mere visual appeal, engaging with the web3 audience on a conceptual level.
+The WRAKX collection, in particular, showcases her skill in crafting digital beings that are not only unique but also carry the weight of contemporary themes, speaking directly to the heart of the NFT community.
+      
+JSKY herself encapsulates the connection between her work and the audience it's meant for, "Having a common focus and desire to develop the web3 space, because only here I feel free and can do what I want."
+This sense of freedom is the core of web3, and JSKY's art is a testament to the unbridled creativity that thrives within this new era of digital expression.
+Each piece is glimpse into universes barely-explored, an invitation to imagine a world where creativity knows no bounds.
+
+And Card 199 brings her visonary expressiveness to The Memes on Feb 14th, 2024.`,
+      links: [
+        {
+          name: "JSKY's Twitter",
+          url: "https://twitter.com/jsky_crypto",
+        },
+        {
+          name: "JSKY's Instagram",
+          url: "https://www.instagram.com/jsky_crypto",
+        },
+        {
+          name: "JSKY's Seize",
+          url: "https://seize.io/JSKY",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
