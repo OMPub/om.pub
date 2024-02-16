@@ -4669,6 +4669,50 @@ And Card 199 brings her visonary expressiveness to The Memes on Feb 14th, 2024.`
       ],
     },
     {
+      tokenId: 200,
+      images: [
+        "/artist-200/work-1.gif",
+        "/artist-200/work-2.gif",
+        "/artist-200/work-3.gif",
+        "/artist-200/work-4.gif",
+      ],
+      poster: "/artist-200/poster.png",
+      posterMintUrl: "",
+      name: "cadmonkey",
+      info: `
+Cadmonkey creates in 3D, where the confluence of art and technology paints a narrative of self-exploration.
+Operating deeply in web3, his artistic signature is etched in the complex language of algorithms and parametric design, expressed through the medium of NFTs.
+His series "Self, a Journey" captures the essence of an introspective creator voyage, articulated through the intricate dance of geometry and motion.
+Each piece in the series—selfDiscovery, selfGrowth, and selfFulfillment—symbolizes the stages of an existential progression, meticulously crafted to show emergent the thematic core of identity exploration.
+As a digital maestro, Cadmonkey sculpts time and algorithms, transcending beyond mere visual appeal to evoke a sense of personal evolution and introspection.
+
+Cadmonkey's methodology is a testament to his name—a blend of precision and playful creativity.
+Delving into the artistic process of Cadmonkey is akin to observing a multi-dimensional socerer at work.
+His canvas is the virtual expanse of 3D modeling environments like Rhino and Grasshopper3D, where he conjures forms from a nexus of mathematics and artistry.
+He adapts and scripts algorithms to serve his artistic intent, harnessing feature-aligned quad remeshing, image-based differential growth, and space-filling polyhedra to translate complex concepts into tangible visual experiences.
+The resulting artworks are not static images but dynamic entities; animated unfurling images, evolving visualizations, and interactive 3D models that invite viewers to engage with the art on multiple levels, from aesthetic appreciation to profound contemplation.
+
+The vision of Cadmonkey is futuristic yet rooted in the current digital zeitgeist, exemplifying a connection between artist, process, and viewer.
+His work eschews willful form-making for a deeper integration of concept, aesthetics, and digital technique, allowing the generative nature of the algorithms to guide the final form.
+Cadmonkey stands at the vanguard of digital artistry, crafting Vision Pro-ready experiences that encapsulate the fluidity of digital identity and the boundless potential of the metaverse, heralding a new renaissance where art is not only seen but experienced and lived in full 3 dimensions.
+
+Prepare for the multidimensional "elegant" experience of Card 200 on Feb 16th, 2024!`,
+      links: [
+        {
+          name: "cadmonkey's Twitter",
+          url: "https://twitter.com/apeinacoupe",
+        },
+        {
+          name: "cadmonkey's Deca",
+          url: "https://deca.art/cadmonkey",
+        },
+        {
+          name: "cadmonkey's Seize",
+          url: "https://seize.io/cadmonkey",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
