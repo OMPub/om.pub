@@ -4713,6 +4713,42 @@ Prepare for the multidimensional "elegant" experience of Card 200 on Feb 16th, 2
       ],
     },
     {
+      tokenId: 201,
+      images: [
+        "/artist-201/work-1.jpeg",
+        "/artist-201/work-2.jpeg",
+        "/artist-201/work-3.jpeg",
+      ],
+      poster: "/artist-201/poster.png",
+      posterMintUrl: "",
+      name: "Exolorian",
+      info: `
+Exolorian's artistic style stands out for its cinematic grandeur and meticulous attention to detail, which are central to the hypnotic allure of his digital drops.
+His compositions often feature a blend of hyperrealistic textures and surreal elements, forging a visual experience where the boundaries of reality are intriguingly distorted.
+The precision in his work is evident in the lifelike surfaces and the way light dances across them, creating an immersive world in which we can readily imagine ourselves.
+
+The color schemes in Exolorian's art are deliberately chosen to amplify the mood of each piece.
+Cool blues and warm ambers aren't just shades but are instrumental in shaping the atmosphere of his digital realms.
+The interplay of light and shadow is masterfully used to sculpt forms, giving each creation a sense of depth and volume.
+Exolorian's skilled manipulation of hues and contrast imbues his works with an emotional depth that transcends the visual, inviting the audience into a uniquely compelling aesthetic experience.      
+
+How will all these imagined realities appear in Card 201? We find out on Feb 19th, 2024.`,
+      links: [
+        {
+          name: "Exolorian's Twitter",
+          url: "https://twitter.com/UNNKNOWN",
+        },
+        {
+          name: "Exolorian's Instagram",
+          url: "https://linktr.ee/UNNKNOWN",
+        },
+        {
+          name: "Exolorian's Seize",
+          url: "https://seize.io/UNNKNOWN",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",

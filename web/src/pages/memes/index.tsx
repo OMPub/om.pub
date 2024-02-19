@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 6</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/201/artist">Meme Artist 201 - Exolorian</a></li>
                 <li>Artist Preview: <a href="/memes/200/artist">Meme Artist 200 - cadmonkey</a></li>
                 <li>Artist Preview: <a href="/memes/199/artist">Meme Artist 199 - J_SKY</a></li>
                 <li>Artist Preview: <a href="/memes/198/artist">Meme Artist 198 - Orkhan Isayev</a></li>
