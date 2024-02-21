@@ -1945,7 +1945,7 @@ Her signature style is rooted in pixel manipulation prowess, where she often sha
 
 Her artwork is not just visually captivating but also rich in narrative. 
 One of her pieces, "Cryptic Connections," available on SuperRare, is described as a "love story that transcends the boundaries of code, a tale of star-crossed cryptocurrencies destined to forever impact the world of finance and technology." 
-Another poignant piece, "50/50," reflects the duality of emotions, calling out: "Life hasn’t been as colourful since you left. At any given moment, I am 50% happy and 50% sad." 
+Another poignant piece, "50/50," reflects the duality of emotions, calling out: "Life hasn't been as colourful since you left. At any given moment, I am 50% happy and 50% sad." 
 Yet another artwork, titled "adeus tristeza," succinctly conveys a message of hope and rejuvenation with the description, "goodbye sadness, I want to sing again."
         
 For those navigating the vast seas of digital art, Kelly McDermott emerges as a beacon of innovation and emotional depth. 
@@ -4745,6 +4745,47 @@ How will all these imagined realities appear in Card 201? We find out on Feb 19t
         {
           name: "Exolorian's Seize",
           url: "https://seize.io/UNNKNOWN",
+        },
+      ],
+    },
+    {
+      tokenId: 202,
+      images: [
+        "/artist-202/work-1.jpeg",
+        "/artist-202/work-2.gif",
+        "/artist-202/work-3.gif",
+      ],
+      poster: "/artist-202/poster.png",
+      posterMintUrl: "",
+      name: "Roberta Railaitė",
+      info: `
+Roberta Railaitė's artwork is a terror-drenched journey into the shadows of the human psyche, a place where the stark interplay of light and darkness crafts scenes brimming with existential dread and poignant beauty.
+Her distinctive artistic style is immediately recognizable, characterized by a limited yet bold color palette that leans heavily on reds, blues, black, and white.
+Railaitė's mastery of shade and contrast forms the backbone of her visuals, creating cinematic tableaus that resonate with the eerie stillness of film-noir settings.
+These are compositions that speak in near-audible whispers and flickering shadows, where the source of light—be it a single bulb or the glow of a phone screen—acts as a beacon, drawing the viewer's eye and underscoring the isolation and deadly distraction within each piece.
+
+Thematically, Railaitė's work plunges into the depths of 'existential horror,' a term she coins that perfectly encapsulates the evocative nature of her illustrations.
+Her pieces are a querying of the innermost feelings of anxiety, loneliness, and an insatiable yearning for understanding and connection.
+The figures in her art, often shrouded in darkness or distorted by their environment, mirror the complexity of human emotions and the struggle against the intangible fears that haunt us.
+The presence of spectral figures and looming visages in her work suggests an omnipresent watchfulness, evoking the sensation that our inner turmoils and demons are as tangible and inescabable as the characters depicted within these haunting scenes.
+
+Railaitė's illustrations do more than just depict a moment; they are an exploration of the space between reality and the surreal, the external world and the internal landscape of the self.
+Her use of stark, isolating environments and ethereal, ghostly figures invites the viewer to confront the darker corners of their own minds.
+Railaitė's art is a testament to the power of digital illustration to not only capture the imagination but also to provoke a deeper, introspective examination of the human condition.
+
+What deep dark places will Card 202 take us to? We pull back the curtain on Feb 21st, 2024.`,
+      links: [
+        {
+          name: "Roberta's Twitter",
+          url: "https://twitter.com/railaiter",
+        },
+        {
+          name: "Roberta's Instagram",
+          url: "https://www.instagram.com/railaite.rob",
+        },
+        {
+          name: "Roberta's Seize",
+          url: "https://seize.io/railaiter",
         },
       ],
     },
