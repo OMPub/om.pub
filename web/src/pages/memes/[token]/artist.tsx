@@ -4790,6 +4790,44 @@ What deep dark places will Card 202 take us to? We pull back the curtain on Feb 
       ],
     },
     {
+      tokenId: 203,
+      images: [
+        "/artist-203/work-1.jpeg",
+        "/artist-203/work-2.jpeg",
+        "/artist-203/work-3.jpeg",
+      ],
+      poster: "/artist-203/poster.png",
+      posterMintUrl: "",
+      name: "8th Project",
+      info: `
+8th Project's artistic expression emerges from a probing deconstruction of reality, a style that captures the viewer's attention with its bold and unconventional approach.
+His work showcases an intricate interplay of shapes and colors, reflecting a strong influence from abstract art luminaries a la Kandinsky and Picasso.
+The digital canvas becomes a playground for experimentation, where familiar forms are broken down into fundamental geometric patterns and reassembled to reorient the observer's perception.
+8th Project's pieces, rich in both abstract elements and memetic components, push the boundaries of traditional visual representation, offering a fresh perspective on the order and complexity of our reality.
+
+The message that 8th Project conveys is one of transformation—both of the self and of the medium.
+His oeuvre is a compelling account of finding one's voice in the silence of adversity, where the act of creating becomes a catharsis and a reinvention.
+His shift from traditional mediums to digital and the embrace of NFTs underscores a commitment to evolving with the times, all while maintaining a stylistic integrity that is distinctly his own.
+8th Project's art is a testament to the digital age's potential for self-expression and community, a bridge between the artist's inner world and the expansive digital canvas that connects us all.
+His work stands as an open invitation to journey through an artistic landscape where every line, shape, and color is a story waiting to be discovered.
+
+Soon we will see how Card 203 reorients our reality, on Feb 23rd, 2024.`,
+      links: [
+        {
+          name: "8th's Twitter",
+          url: "https://twitter.com/8thproject1",
+        },
+        {
+          name: "8th's Instagram",
+          url: "https://www.instagram.com/8th_project",
+        },
+        {
+          name: "8th's Seize",
+          url: "https://seize.io/8thproject",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
