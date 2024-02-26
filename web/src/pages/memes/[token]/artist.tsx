@@ -4830,9 +4830,9 @@ Soon we will see how Card 203 reorients our reality, on Feb 23rd, 2024.`,
     {
       tokenId: 204,
       images: [
-        "/artist-204/work-1.jpeg",
-        "/artist-204/work-2.png",
-        "/artist-204/work-3.mp4",
+        "/artist-204/work-1.gif",
+        "/artist-204/work-2.jpeg",
+        "/artist-204/work-3.jpeg",
       ],
       poster: "/artist-204/poster.png",
       posterMintUrl: "",
