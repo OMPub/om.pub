@@ -115,6 +115,7 @@ export default function Memes() {
             <ul>
               <li>Season 6</li>
               <ul>
+                <li>Artist Preview: <a href="/memes/204/artist">Meme Artist 204 - subwway</a></li>
                 <li>Artist Preview: <a href="/memes/203/artist">Meme Artist 203 - 8th Project</a></li>
                 <li>Artist Preview: <a href="/memes/202/artist">Meme Artist 202 - Roberta Railaitė</a></li>
                 <li>Artist Preview: <a href="/memes/201/artist">Meme Artist 201 - Exolorian</a></li>

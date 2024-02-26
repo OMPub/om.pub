@@ -4828,6 +4828,45 @@ Soon we will see how Card 203 reorients our reality, on Feb 23rd, 2024.`,
       ],
     },
     {
+      tokenId: 204,
+      images: [
+        "/artist-204/work-1.jpeg",
+        "/artist-204/work-2.png",
+        "/artist-204/work-3.mp4",
+      ],
+      poster: "/artist-204/poster.png",
+      posterMintUrl: "",
+      name: "subwway",
+      info: `
+In the digital art world, subwway emerges as an artist with a distinctive voice, creating vivid tapestries that brim with color, complexity, and a touch of the surreal.
+Each piece is a microcosm of fantastical elements and contemporary motifs, woven together in a style that defies the mundane and leaps into the extraordinary.
+Bold outlines and an almost psychedelic use of color are signature to subwway's work, creating a visual rhythm that pulses with the energy of a neon-lit metropolis infused with elements of a dreamlike, alternate reality.
+
+Thematically, subwway embarks on a thematic mission to merge disparate timelines, cultural symbols, and technological epochs into a single frame, challenging viewers to reimagine the boundaries between past, present, and future. 
+Dinosaurs coexist with futuristic vehicles, ancient architecture intersects with sci-fi landscapes, and traditional attire is juxtaposed with otherworldly characters. 
+This deliberate anachronism isn't just a stylistic choice; it's a story-telling device that invites contemplation on the cyclical nature of history, the evolution of culture, and our place within this ever-changing tapestry.
+      
+Subwway's work is a testament to the power of digital art to transcend conventional storytelling, offering instead a kaleidoscopic portal to worlds that are as deeply rooted in memetic elements and history as they are in the boundless potential of science fiction. 
+With each piece serving as a standalone narrative-in-a-frame, the artist beckons us to peer through their digital looking glass, an relish details large and small. 
+Subwway doesn't just create art; they capture story in a way that lingers in the mind long after the initial viewing, marking their artistic mission as one that is both a visual feast and a cerebral journey.
+
+Card 204 will surely brighten the day for our community on Feb 26th, 2024.`,
+      links: [
+        {
+          name: "subwway's Twitter",
+          url: "https://twitter.com/SubwwayM",
+        },
+        {
+          name: "subwway's Instagram",
+          url: "https://www.instagram.com/subwway.eth",
+        },
+        {
+          name: "subwway's Seize",
+          url: "https://seize.io/Subwway",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
