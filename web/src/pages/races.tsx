@@ -26,7 +26,7 @@ const LeaderboardPage = () => {
     { id: 23, name: "Indigenous Journeys", seizer: "ryan", rep: 0 },
     { id: 289, name: "Three Amigos", seizer: "lotsofreasons", rep: 0 },
     { id: 269, name: "Eye of Sauron", seizer: "maybe", rep: 0 },
-    { id: 457, name: "Woman with the Orange Hat", seizer: "MoMO", rep: 0 },
+    { id: 457, name: "Woman with Orange Hat", seizer: "MoMO", rep: 0 },
     { id: 94, name: "Currents of Cobalt Calm", seizer: "Paul", rep: 0 },
     { id: 423, name: "Blue Epoch", seizer: "blocknoob", rep: 0 },
     { id: 250, name: "Concert Hallucinations", seizer: "spritey", rep: 0 },
