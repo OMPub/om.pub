@@ -14,12 +14,11 @@ const fetchPebbleReps = async (seizer: string) => {
     const items = response.data.data;
 
     // Filter items based on 'new_rating' within 'contents'
-    const validPebbles = items.filter((item: { contents: { new_rating: number; }; }) => {
+    const vaildReps = items.filter((item: { contents: { new_rating: number; }; }) => {
       const newRating = item.contents.new_rating;
       return newRating > 0 && newRating <= 100;
     });
-
-    return validPebbles;
+    return vaildReps;
   } catch (error) {
     console.error('Error fetching pebble reps:', error);
     return [];

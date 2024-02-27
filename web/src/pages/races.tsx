@@ -24,7 +24,7 @@ const LeaderboardPage = () => {
     { id: 882, name: "Dive School", seizer: "chrisroc", rep: 0 },
     { id: 3, name: "Ghost of Nazcar", seizer: "chrisroc", rep: 0 },
     { id: 23, name: "Indigenous Journeys", seizer: "ryan", rep: 0 },
-    { id: 289, name: "The Three Amigos", seizer: "lotsofreasons", rep: 0 },
+    { id: 289, name: "Three Amigos", seizer: "lotsofreasons", rep: 0 },
     { id: 269, name: "Eye of Sauron", seizer: "maybe", rep: 0 },
     { id: 457, name: "Woman with the Orange Hat", seizer: "MoMO", rep: 0 },
     { id: 94, name: "Currents of Cobalt Calm", seizer: "Paul", rep: 0 },
@@ -56,7 +56,8 @@ const LeaderboardPage = () => {
       const data = [];
       for (const pebble of pebbles) {
         const res = await fetchPebbleReps(pebble.seizer);
-        data.push(res[0]);
+        data.push(...res);
+        console.log(`Fetched reps for ${pebble.name}:`,res);
       }
       const reps = data.reduce((acc, rep) => {
         let name = rep?.contents?.rating_category
@@ -64,10 +65,12 @@ const LeaderboardPage = () => {
           ?.match(pebbleNames)?.[0];
         if (name) {
           acc[name] = acc[name] || 0;
-          acc[name] = rep.contents.new_rating;
+          acc[name] += rep.contents.new_rating;
+          console.log(`Adding ${rep.contents.new_rating} to ${name}`);
         }
         return acc;
       }, {});
+      console.log(`Reps for :`, reps);
 
       const validPebbles = pebbles.map((pebble) => {
         pebble.rep = reps[pebble.name.toLowerCase()] || 0;
