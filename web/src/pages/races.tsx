@@ -57,7 +57,6 @@ const LeaderboardPage = () => {
       for (const pebble of pebbles) {
         const res = await fetchPebbleReps(pebble.seizer);
         data.push(...res);
-        console.log(`Fetched reps for ${pebble.name}:`,res);
       }
       const reps = data.reduce((acc, rep) => {
         let name = rep?.contents?.rating_category
@@ -66,11 +65,9 @@ const LeaderboardPage = () => {
         if (name) {
           acc[name] = acc[name] || 0;
           acc[name] += rep.contents.new_rating;
-          console.log(`Adding ${rep.contents.new_rating} to ${name}`);
         }
         return acc;
       }, {});
-      console.log(`Reps for :`, reps);
 
       const validPebbles = pebbles.map((pebble) => {
         pebble.rep = reps[pebble.name.toLowerCase()] || 0;
