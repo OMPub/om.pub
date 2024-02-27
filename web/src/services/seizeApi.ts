@@ -14,7 +14,7 @@ const fetchPebbleReps = async (seizer: string) => {
     const items = response.data.data;
 
     // Filter items based on 'new_rating' within 'contents'
-    const validPebbles = items.filter(item => {
+    const validPebbles = items.filter((item: { contents: { new_rating: number; }; }) => {
       const newRating = item.contents.new_rating;
       return newRating > 0 && newRating <= 100;
     });
