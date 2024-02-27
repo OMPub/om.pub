@@ -80,24 +80,24 @@ const LeaderboardPage = () => {
     return () => clearInterval(interval);
   }, [delay]);
 
-  const sortedPebbles = pebbles.sort((a, b) => b.rep - a.rep);
+  //const sortedPebbles = pebbles.sort((a, b) => b.rep - a.rep);
   const colors = [
-    "#FFA6FE", // Pink Lavender
-    "#00FFFF", // Cyan
-    "#FF0099", // Neon Pink
-    "#FFFF00", // Neon Yellow
-    "#0AFF99", // Bright Green
-    "#FF00FF", // Magenta
-    "#FF0000", // Bright Red
-    "#0000FF", // Blue
-    "#01FFFE", // Aqua
-    "#FFDB66", // Saffron
-    "#006401", // Dark Green
-    "#010067", // Midnight Blue
-    "#95003A", // Dark Red
-    "#007DB5", // Sky Blue
-    "#FF00F6", // Bright Magenta
-    "#774D00", // Bronze
+    "#BF92FF80", // Light Purple with 50% transparency
+    "#80DEEA80", // Light Cyan with 50% transparency
+    "#FF80AB80", // Light Pink with 50% transparency
+    "#E6EE9C80", // Light Lime with 50% transparency
+    "#A5D6A780", // Light Green with 50% transparency
+    "#CE93D880", // Light Magenta with 50% transparency
+    "#FFAB9180", // Light Red with 50% transparency
+    "#9FA8DA80", // Light Blue with 50% transparency
+    "#80CBC480", // Light Aqua with 50% transparency
+    "#FFF59D80", // Light Yellow with 50% transparency
+    "#80CBC480", // Light Teal with 50% transparency
+    "#B39DDB80", // Light Dark Purple with 50% transparency
+    "#EF9A9A80", // Light Tomato with 50% transparency
+    "#90CAF980", // Light Cerulean with 50% transparency
+    "#F48FB180", // Light Crimson with 50% transparency
+    "#BCAAA480", // Light Brown with 50% transparency
   ];
   const highestRep = Math.max(...pebbles.map((peb) => peb.rep));
 
@@ -116,9 +116,9 @@ const LeaderboardPage = () => {
           Welcome to the inaugural Pebble Race, where pebbles compete for glory
           and your precious rep. Add rep on Seize to boost your favorite racers!
         </p>
-        {races.map((race, index) => (
+        {races.map((race, idx) => (
           <div className="race">
-            <h4>Race {index + 1}</h4>
+            <h4>Race {idx + 1}</h4>
             {[pebbles[race[0] - 1], pebbles[race[1] - 1]].map((pebble, index) => (
               <div
                 className="progress-container"
@@ -140,7 +140,7 @@ const LeaderboardPage = () => {
                       width: `${
                         highestRep ? (pebble.rep / highestRep) * 100 : 0
                       }%`,
-                      backgroundColor: colors[index % colors.length],
+                      backgroundColor: colors[idx % colors.length],
                       height: "100%",
                     }}
                     layout
