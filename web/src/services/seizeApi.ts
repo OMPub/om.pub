@@ -14,9 +14,12 @@ const fetchPebbleReps = async (seizer: string) => {
     const items = response.data.data;
 
     // Filter items based on 'new_rating' within 'contents'
-    const vaildReps = items.filter((item: { contents: { new_rating: number; }; }) => {
+    const vaildReps = items.filter((item: { contents: { new_rating: number }, created_at: number, target_profile_handle: string }) => {
       const newRating = item.contents.new_rating;
-      return newRating > 0 && newRating <= 100;
+      const timestamp = new Date(item.created_at).getTime()/1000;
+      return (newRating > 0 && newRating <= 100) 
+        && (timestamp > 1709067758 && timestamp < 1709154000)
+        && item.target_profile_handle === seizer;
     });
     return vaildReps;
   } catch (error) {

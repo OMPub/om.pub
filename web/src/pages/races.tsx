@@ -52,7 +52,7 @@ const LeaderboardPage = () => {
   const [delay, setDelay] = useState(2420);
 
   useEffect(() => {
-    const interval = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       const data = [];
       for (const pebble of pebbles) {
         const res = await fetchPebbleReps(pebble.seizer);
@@ -77,7 +77,7 @@ const LeaderboardPage = () => {
       setDelay(delay * 1.1); // Increase delay by 10% each time
     }, delay);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, [delay]);
 
   //const sortedPebbles = pebbles.sort((a, b) => b.rep - a.rep);
