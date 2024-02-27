@@ -21,22 +21,47 @@ interface Pebble {
 
 const LeaderboardPage = () => {
   const [pebbles, setPebbles] = useState<Pebble[]>([
+    { id: 882, name: "Dive School", seizer: "chrisroc", rep: 0 },
+    { id: 3, name: "Ghost of Nazcar", seizer: "chrisroc", rep: 0 },
     { id: 23, name: "Indigenous Journeys", seizer: "ryan", rep: 0 },
+    { id: 289, name: "The Three Amigos", seizer: "lotsofreasons", rep: 0 },
+    { id: 269, name: "Eye of Sauron", seizer: "maybe", rep: 0 },
+    { id: 457, name: "Woman with the Orange Hat", seizer: "MoMO", rep: 0 },
+    { id: 94, name: "Currents of Cobalt Calm", seizer: "Paul", rep: 0 },
     { id: 423, name: "Blue Epoch", seizer: "blocknoob", rep: 0 },
+    { id: 250, name: "Concert Hallucinations", seizer: "spritey", rep: 0 },
+    { id: 155, name: "Carbon Copy", seizer: "RegularDad", rep: 0 },
+    { id: 141, name: "Talking with God", seizer: "ricodemus", rep: 0 },
+    { id: 962, name: "Night Journeys", seizer: "4lteredBeast", rep: 0 },
+    { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
+    { id: 563, name: "The Penguin", seizer: "boredsurgeon", rep: 0 },
+    { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
+    { id: 660, name: "Black Rock", seizer: "eddiejpegs", rep: 0 },
   ]);
   const pebbleNames = pebbles.map((peb) => peb.name.toLowerCase()).join("|");
+  const races = [
+    [1, 16],
+    [8, 9],
+    [4, 13],
+    [5, 12],
+    [2, 15],
+    [7, 10],
+    [3, 14],
+    [6, 11],
+  ];
+  const [delay, setDelay] = useState(2420);
 
   useEffect(() => {
-    const interval = setInterval(async () => {
+    const interval = setTimeout(async () => {
       const data = [];
       for (const pebble of pebbles) {
         const res = await fetchPebbleReps(pebble.seizer);
         data.push(res[0]);
       }
       const reps = data.reduce((acc, rep) => {
-        let name = rep.contents.rating_category
-          .toLowerCase()
-          .match(pebbleNames)[0];
+        let name = rep?.contents?.rating_category
+          ?.toLowerCase()
+          ?.match(pebbleNames)?.[0];
         if (name) {
           acc[name] = acc[name] || 0;
           acc[name] = rep.contents.new_rating;
@@ -49,10 +74,11 @@ const LeaderboardPage = () => {
         return pebble;
       });
       setPebbles(validPebbles);
-    }, 2000);
+      setDelay(delay * 1.1); // Increase delay by 10% each time
+    }, delay);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [delay]);
 
   const sortedPebbles = pebbles.sort((a, b) => b.rep - a.rep);
   const colors = [
@@ -78,73 +104,82 @@ const LeaderboardPage = () => {
   return (
     <>
       <Head>
-        <title>About | The OM Pub</title>
+        <title>Pebble Racing! | Leaderboard at The OM Pub</title>
         <meta property="og:url" content={`https://om.pub/faq`} />
         <meta property="og:title" content={`About | The OM Pub`} />
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
-      <Container  className={`${styles.main} leaderboard-container`}>
-        <h2>Pebble Race Leaderboard</h2>
-        {sortedPebbles.map((pebble, index) => (
-          <motion.div
-            layout
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            transition={{ duration: 0.5 }}
-            key={pebble.id}
-            className="leaderboard-item"
-          >
-            <div
-              className="progress-container"
-              style={{ position: "relative", flexGrow: 1 }}
-            >
+      <Container className={`${styles.main} leaderboard-container`}>
+        <h2>Pebble Racing!</h2>
+        <p>
+          Welcome to the inaugural Pebble Race, where pebbles compete for glory
+          and your precious rep. Add rep on Seize to boost your favorite racers!
+        </p>
+        {races.map((race, index) => (
+          <div className="race">
+            <h4>Race {index + 1}</h4>
+            {[pebbles[race[0] - 1], pebbles[race[1] - 1]].map((pebble, index) => (
               <div
-                className="progress"
-                style={{
-                  backgroundColor: "#f0f0f0",
-                  width: "100%",
-                  borderRadius: "5px",
-                  overflow: "hidden",
-                  position: "absolute",
-                }}
+                className="progress-container"
+                style={{ position: "relative", flexGrow: 1 }}
               >
-                <motion.div
-                  className="progress-bar"
+                <div
+                  className="progress"
                   style={{
-                    width: `${
-                      highestRep ? (pebble.rep / highestRep) * 100 : 0
-                    }%`,
-                    backgroundColor: colors[index % colors.length],
-                    height: "100%",
+                    backgroundColor: "#f0f0f0",
+                    width: "100%",
+                    borderRadius: "5px",
+                    overflow: "hidden",
+                    position: "absolute",
                   }}
-                  layout
-                  initial={{ width: 0 }}
-                  animate={{
-                    width: `${
-                      highestRep ? (pebble.rep / highestRep) * 100 : 0
-                    }%`,
-                  }}
-                  transition={{ duration: 0.5 }}
-                ></motion.div>
+                >
+                  <motion.div
+                    className="progress-bar"
+                    style={{
+                      width: `${
+                        highestRep ? (pebble.rep / highestRep) * 100 : 0
+                      }%`,
+                      backgroundColor: colors[index % colors.length],
+                      height: "100%",
+                    }}
+                    layout
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${
+                        highestRep ? (pebble.rep / highestRep) * 100 : 0
+                      }%`,
+                    }}
+                    transition={{ duration: 0.5 }}
+                  ></motion.div>
+                </div>
+                <span
+                  className="rep"
+                  style={{ position: "absolute", zIndex: 1 }}
+                >
+                  <img
+                    src={`https://media.generator.seize.io/mainnet/thumbnail/10000000${String(
+                      pebble.id
+                    ).padStart(3, "0")}`}
+                    alt={`${pebble.name}`}
+                    className="pebble-image"
+                  />
+                  <span className="rank">{index + 1}.</span>
+                  <a
+                    href={`https://seize.io/${pebble.seizer}`}
+                    target="_blank"
+                    className="name"
+                  >
+                    {pebble.name} - {pebble.seizer}
+                  </a>
+                  <span className="" style={{ fontSize: "large" }}>
+                    {pebble.rep}
+                  </span>
+                </span>
               </div>
-              <span className="rep" style={{ position: "absolute", zIndex: 1 }}>
-                <img
-                  src={`https://media.generator.seize.io/mainnet/thumbnail/10000000${String(
-                    pebble.id
-                  ).padStart(3, "0")}`}
-                  alt={`${pebble.name}`}
-                  className="pebble-image"
-                />
-                <span className="rank">{index + 1}.</span>
-                <a href={`https://seize.io/${pebble.seizer}`} target="_blank" className="name">{pebble.name}</a>
-                <span className="" style={{fontSize: "large"}}>{pebble.rep}</span>
-              </span>
-            </div>
-          </motion.div>
+            ))}
+          </div>
         ))}
-
         <style jsx>{`
           .leaderboard-container {
             max-width: 800px;
