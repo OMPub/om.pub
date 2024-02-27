@@ -84,7 +84,7 @@ const LeaderboardPage = () => {
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
-      <div className="leaderboard-container">
+      <Container  className={`${styles.main} leaderboard-container`}>
         <h2>Pebble Race Leaderboard</h2>
         {sortedPebbles.map((pebble, index) => (
           <motion.div
@@ -138,8 +138,8 @@ const LeaderboardPage = () => {
                   className="pebble-image"
                 />
                 <span className="rank">{index + 1}.</span>
-                <span className="name">{pebble.name}</span>
-                {pebble.rep}
+                <a href={`https://seize.io/${pebble.seizer}`} target="_blank" className="name">{pebble.name}</a>
+                <span className="" style={{fontSize: "large"}}>{pebble.rep}</span>
               </span>
             </div>
           </motion.div>
@@ -163,6 +163,8 @@ const LeaderboardPage = () => {
           .rank,
           .name {
             margin: 0 10px;
+            color: #333;
+            text-decoration: none;
           }
           .progress-container {
             display: flex;
@@ -187,6 +189,7 @@ const LeaderboardPage = () => {
             transform: translate(-50%, -50%);
             width: 100%;
             text-align: center;
+            color: white;
           }
           .pebble-image {
             width: 50px;
@@ -195,7 +198,7 @@ const LeaderboardPage = () => {
             margin-left: 10px;
           }
         `}</style>
-      </div>
+      </Container>
     </>
   );
 };
