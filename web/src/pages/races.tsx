@@ -17,6 +17,7 @@ interface Pebble {
   name: string;
   seizer: string;
   rep: number;
+  reppers?: string[];
 }
 
 const LeaderboardPage = () => {
@@ -53,18 +54,21 @@ const LeaderboardPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const data = [];
       const reps: { [key: string]: number } = {}; // Add index signature to reps object
+      
       for (const pebble of pebbles) {
+        const reppers: string[] = [];
         const res = await fetchPebbleReps(pebble.seizer);
-        data.push(...res);
-
-        reps[pebble.name.toLowerCase()] = res.reduce((acc: any, rep: { contents: { rating_category: string; new_rating: number; }; }) => {
+        reps[pebble.name.toLowerCase()] = res.reduce((acc: any, rep: { profile_handle: string, contents: { rating_category: string; new_rating: number; }; }) => {
           if (rep.contents.rating_category.toLowerCase().match(pebble.name.toLowerCase())) {
-            acc += rep.contents.new_rating;
+            if (!reppers.includes(rep.profile_handle)) {
+              reppers.push(rep.profile_handle);
+              acc += rep.contents.new_rating;
+            }
           }
           return acc;
         }, 0);
+        pebble.reppers = reppers;
       }
 
       const validPebbles = pebbles.map((pebble) => {
@@ -170,7 +174,7 @@ const LeaderboardPage = () => {
                     {pebble.name} - {pebble.seizer}
                   </a>
                 </span>
-                  <span className="text">
+                  <span className="text" title={`Unique reppers: ${pebble.reppers?.length}`}>
                     {pebble.rep}
                   </span>
               </div>
