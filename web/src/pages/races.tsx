@@ -36,7 +36,7 @@ const LeaderboardPage = () => {
     { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
     { id: 563, name: "The Penguin", seizer: "boredsurgeon", rep: 0 },
     { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
-    { id: 660, name: "Black Rock", seizer: "eddiejpegs", rep: 0 },
+    { id: 660, name: "Black Rock|Blackrock", seizer: "eddiejpegs", rep: 0 },
   ]);
   const pebbleNames = pebbles.map((peb) => peb.name.toLowerCase()).join("|");
   const races = [
@@ -54,20 +54,18 @@ const LeaderboardPage = () => {
   useEffect(() => {
     const timer = setTimeout(async () => {
       const data = [];
+      const reps: { [key: string]: number } = {}; // Add index signature to reps object
       for (const pebble of pebbles) {
         const res = await fetchPebbleReps(pebble.seizer);
         data.push(...res);
+
+        reps[pebble.name.toLowerCase()] = res.reduce((acc: any, rep: { contents: { rating_category: string; new_rating: number; }; }) => {
+          if (rep.contents.rating_category.toLowerCase().match(pebble.name.toLowerCase())) {
+            acc += rep.contents.new_rating;
+          }
+          return acc;
+        }, 0);
       }
-      const reps = data.reduce((acc, rep) => {
-        let name = rep?.contents?.rating_category
-          ?.toLowerCase()
-          ?.match(pebbleNames)?.[0];
-        if (name) {
-          acc[name] = acc[name] || 0;
-          acc[name] += rep.contents.new_rating;
-        }
-        return acc;
-      }, {});
 
       const validPebbles = pebbles.map((pebble) => {
         pebble.rep = reps[pebble.name.toLowerCase()] || 0;
