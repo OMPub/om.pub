@@ -164,7 +164,6 @@ const LeaderboardPage = () => {
                     alt={`${pebble.name}`}
                     className="pebble-image"
                   />
-                  <span className="rank">{index + 1}.</span>
                   <a
                     href={`https://seize.io/${pebble.seizer}`}
                     target="_blank"
@@ -172,10 +171,10 @@ const LeaderboardPage = () => {
                   >
                     {pebble.name} - {pebble.seizer}
                   </a>
-                  <span className="" style={{ fontSize: "large" }}>
+                </span>
+                  <span className="text">
                     {pebble.rep}
                   </span>
-                </span>
               </div>
             ))}
           </div>
@@ -198,8 +197,9 @@ const LeaderboardPage = () => {
           .rank,
           .name {
             margin: 0 10px;
-            color: #333;
+            color: #2222ccaa;
             text-decoration: none;
+            vertical-align: middle;
           }
           .progress-container {
             display: flex;
@@ -220,11 +220,10 @@ const LeaderboardPage = () => {
             position: absolute;
             z-index: 2;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(0, -50%);
             width: 100%;
-            text-align: center;
-            color: white;
+            text-align: right;
+            font-size: xx-large;
           }
           .pebble-image {
             width: 50px;
