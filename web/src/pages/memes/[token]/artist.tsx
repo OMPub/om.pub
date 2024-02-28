@@ -4867,6 +4867,45 @@ Card 204 will surely brighten the day for our community on Feb 26th, 2024.`,
       ],
     },
     {
+      tokenId: 205,
+      images: [
+        "/artist-205/work-1.gif",
+        "/artist-205/work-2.jpeg",
+        "/artist-205/work-3.jpeg",
+      ],
+      poster: "/artist-205/poster.png",
+      posterMintUrl: "",
+      name: "mendezmendez",
+      info: `
+Chema Mendez throws down as a digital alchemist, mixing media across the digital realm to produce intriguing and well-considered works of art.
+With a career spanning over a decade, Mendez has honed his craft in the digital space, making a name for himself with his unique blend of surrealism and fine art that has captured the imagination of music and publishing industries alike.
+His works, often serving as the visual counterparts to the auditory experiences of top musicians, adorn album and magazine covers with a signature flair that is out of bounds of the traditional canvas.
+
+Mendez's artistry is a dance between the ethereal and the concrete, employing a wide array of digital techniques to manipulate images into thought-provoking compositions.
+His pieces often evoke a sense of otherworldliness, with themes that delve into the subconscious and flirt with the boundaries of reality.
+The digital brushstrokes of Mendez's work bring to life the abstract concepts and emotions, painting a landscape that invites viewers to interpret and find personal connection somewhere within its layered depths.
+      
+As we navigate through Mendez's portfolio, we encounter a visual symphony of popping colors, sliced shapes, and tactile textures that speak to the versatility of digital art.
+Each piece is a testament to his ability to adapt and thrive within the ever-evolving art world, reflecting not only a mastery of his craft but also a continuous exploration of what digital art can be.
+Mendez stands as a beacon for aspiring and experienced digital artists alike, exemplifying how one can leave a lasting impression in the pixelated medium of our time.
+
+What worlds will be invoked by Card 205 Feb 28th, 2024?`,
+      links: [
+        {
+          name: "mendezmendez's Twitter",
+          url: "https://www.twitter.com/mendezmendezart",
+        },
+        {
+          name: "mendezmendez's Instagram",
+          url: "https://www.instagram.com/mendezmendezart",
+        },
+        {
+          name: "mendezmendez's Seize",
+          url: "https://seize.io/mendezmendez",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
