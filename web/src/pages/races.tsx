@@ -103,8 +103,8 @@ const LeaderboardPage = () => {
     <>
       <Head>
         <title>Pebble Racing! | Leaderboard at The OM Pub</title>
-        <meta property="og:url" content={`https://om.pub/faq`} />
-        <meta property="og:title" content={`About | The OM Pub`} />
+        <meta property="og:url" content={`https://om.pub/races`} />
+        <meta property="og:title" content={`Pebble Racing | The OM Pub`} />
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
