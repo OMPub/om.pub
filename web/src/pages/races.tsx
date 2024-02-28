@@ -2,9 +2,9 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import styles from "@/styles/Home.module.scss";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Accordion, Card, useAccordionToggle } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { fetchPebbleReps } from "../services/seizeApi";
+import { fetchPebbleReps, raceHistory } from "../services/seizeApi";
 import { motion } from "framer-motion";
 
 const Header = dynamic(() => import("../components/header/Header"), {
@@ -18,57 +18,52 @@ interface Pebble {
   seizer: string;
   rep: number;
   reppers?: string[];
+  repGiven?: number[];
 }
 
 const LeaderboardPage = () => {
-  const [pebbles, setPebbles] = useState<Pebble[]>([
-    { id: 882, name: "Dive School", seizer: "chrisroc", rep: 0 },
-    { id: 3, name: "Ghost of Nazcar", seizer: "chrisroc", rep: 0 },
-    { id: 23, name: "Indigenous Journeys", seizer: "ryan", rep: 0 },
-    { id: 289, name: "Three Amigos", seizer: "lotsofreasons", rep: 0 },
-    { id: 269, name: "Eye of Sauron", seizer: "maybe", rep: 0 },
-    { id: 457, name: "Woman with Orange Hat", seizer: "MoMO", rep: 0 },
-    { id: 94, name: "Currents of Cobalt Calm", seizer: "Paul", rep: 0 },
-    { id: 423, name: "Blue Epoch", seizer: "blocknoob", rep: 0 },
-    { id: 250, name: "Concert Hallucinations", seizer: "spritey", rep: 0 },
-    { id: 155, name: "Carbon Copy", seizer: "RegularDad", rep: 0 },
-    { id: 141, name: "Talking with God", seizer: "ricodemus", rep: 0 },
-    { id: 962, name: "Night Journeys", seizer: "4lteredBeast", rep: 0 },
-    { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
-    { id: 563, name: "The Penguin", seizer: "boredsurgeon", rep: 0 },
-    { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
-    { id: 660, name: "Black Rock|Blackrock", seizer: "eddiejpegs", rep: 0 },
-  ]);
+  const lastRace: number = raceHistory.length - 1;
+  const currentRace = raceHistory[lastRace];
+  const [pebbles, setPebbles] = useState<Pebble[]>(
+    currentRace.pebbles
+  );
   const pebbleNames = pebbles.map((peb) => peb.name.toLowerCase()).join("|");
-  const races = [
-    [1, 16],
-    [8, 9],
-    [4, 13],
-    [5, 12],
-    [2, 15],
-    [7, 10],
-    [3, 14],
-    [6, 11],
-  ];
+  const currentRaces = currentRace.races;
   const [delay, setDelay] = useState(2420);
 
   useEffect(() => {
     const timer = setTimeout(async () => {
       const reps: { [key: string]: number } = {}; // Add index signature to reps object
-      
+
       for (const pebble of pebbles) {
         const reppers: string[] = [];
-        const res = await fetchPebbleReps(pebble.seizer);
-        reps[pebble.name.toLowerCase()] = res.reduce((acc: any, rep: { profile_handle: string, contents: { rating_category: string; new_rating: number; }; }) => {
-          if (rep.contents.rating_category.toLowerCase().match(pebble.name.toLowerCase())) {
-            if (!reppers.includes(rep.profile_handle)) {
-              reppers.push(rep.profile_handle);
-              acc += rep.contents.new_rating;
+        const repGiven: number[] = [];
+        const res = await fetchPebbleReps(pebble.seizer, currentRace);
+        reps[pebble.name.toLowerCase()] = res.reduce(
+          (
+            acc: any,
+            rep: {
+              profile_handle: string;
+              contents: { rating_category: string; new_rating: number };
             }
-          }
-          return acc;
-        }, 0);
+          ) => {
+            if (
+              rep.contents.rating_category
+                .toLowerCase()
+                .match(pebble.name.toLowerCase())
+            ) {
+              if (!reppers.includes(rep.profile_handle)) {
+                reppers.push(rep.profile_handle);
+                repGiven.push(rep.contents.new_rating);
+                acc += rep.contents.new_rating;
+              }
+            }
+            return acc;
+          },
+          0
+        );
         pebble.reppers = reppers;
+        pebble.repGiven = repGiven;
       }
 
       const validPebbles = pebbles.map((pebble) => {
@@ -77,6 +72,7 @@ const LeaderboardPage = () => {
       });
       setPebbles(validPebbles);
       setDelay(delay * 1.1); // Increase delay by 10% each time
+      // console.log("State of the Race:", JSON.stringify(validPebbles));
     }, delay);
 
     return () => clearTimeout(timer);
@@ -113,72 +109,77 @@ const LeaderboardPage = () => {
       </Head>
       <Header />
       <Container className={`${styles.main} leaderboard-container`}>
-        <h2>Pebble Race - Round 1</h2>
+        <h1>Pebble Races</h1>
         <p>
           Welcome to the inaugural Pebble Race, where pebbles compete for glory
           and your precious rep. Add rep on Seize to boost your favorite racers!
         </p>
-        {races.map((race, idx) => (
+        {currentRaces.map((race, idx) => (
           <div className="race">
             <h4>Race {idx + 1}</h4>
-            {[pebbles[race[0] - 1], pebbles[race[1] - 1]].map((pebble, index) => (
-              <div
-                className="progress-container"
-                style={{ position: "relative", flexGrow: 1 }}
-              >
+            {[pebbles[race[0] - 1], pebbles[race[1] - 1]].map(
+              (pebble, index) => (
                 <div
-                  className="progress"
-                  style={{
-                    backgroundColor: "#f0f0f0",
-                    width: "100%",
-                    borderRadius: "5px",
-                    overflow: "hidden",
-                    position: "absolute",
-                  }}
+                  className="progress-container"
+                  style={{ position: "relative", flexGrow: 1 }}
                 >
-                  <motion.div
-                    className="progress-bar"
+                  <div
+                    className="progress"
                     style={{
-                      width: `${
-                        highestRep ? (pebble.rep / highestRep) * 100 : 0
-                      }%`,
-                      backgroundColor: colors[idx % colors.length],
-                      height: "100%",
+                      backgroundColor: "#f0f0f0",
+                      width: "100%",
+                      borderRadius: "5px",
+                      overflow: "hidden",
+                      position: "absolute",
                     }}
-                    layout
-                    initial={{ width: 0 }}
-                    animate={{
-                      width: `${
-                        highestRep ? (pebble.rep / highestRep) * 100 : 0
-                      }%`,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  ></motion.div>
-                </div>
-                <span
-                  className="rep"
-                  style={{ position: "absolute", zIndex: 1 }}
-                >
-                  <img
-                    src={`https://media.generator.seize.io/mainnet/thumbnail/10000000${String(
-                      pebble.id
-                    ).padStart(3, "0")}`}
-                    alt={`${pebble.name}`}
-                    className="pebble-image"
-                  />
-                  <a
-                    href={`https://seize.io/${pebble.seizer}`}
-                    target="_blank"
-                    className="name"
                   >
-                    {pebble.name} - {pebble.seizer}
-                  </a>
-                </span>
-                  <span className="text" title={`Unique reppers: ${pebble.reppers?.length}`}>
+                    <motion.div
+                      className="progress-bar"
+                      style={{
+                        width: `${
+                          highestRep ? (pebble.rep / highestRep) * 100 : 0
+                        }%`,
+                        backgroundColor: colors[idx % colors.length],
+                        height: "100%",
+                      }}
+                      layout
+                      initial={{ width: 0 }}
+                      animate={{
+                        width: `${
+                          highestRep ? (pebble.rep / highestRep) * 100 : 0
+                        }%`,
+                      }}
+                      transition={{ duration: 0.5 }}
+                    ></motion.div>
+                  </div>
+                  <span
+                    className="rep"
+                    style={{ position: "absolute", zIndex: 1 }}
+                  >
+                    <img
+                      src={`https://media.generator.seize.io/mainnet/thumbnail/10000000${String(
+                        pebble.id
+                      ).padStart(3, "0")}`}
+                      alt={`${pebble.name}`}
+                      className="pebble-image"
+                    />
+                    <a
+                      href={`https://seize.io/${pebble.seizer}`}
+                      target="_blank"
+                      className="name"
+                    >
+                      {pebble.name} - {pebble.seizer}
+                    </a>
+                  </span>
+                  <span
+                    className="text"
+                    title={`Unique reppers: ${pebble.reppers?.length}`}
+                  >
                     {pebble.rep}
                   </span>
-              </div>
-            ))}
+                </div>
+              )
+            )}
           </div>
         ))}
         <style jsx>{`
