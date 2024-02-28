@@ -106,14 +106,14 @@ const LeaderboardPage = () => {
   return (
     <>
       <Head>
-        <title>Pebble Racing! | Leaderboard at The OM Pub</title>
+        <title>Pebble Racing | Leaderboard at The OM Pub</title>
         <meta property="og:url" content={`https://om.pub/races`} />
         <meta property="og:title" content={`Pebble Racing | The OM Pub`} />
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
       <Container className={`${styles.main} leaderboard-container`}>
-        <h2>Pebble Racing!</h2>
+        <h2>Pebble Race - Round 1</h2>
         <p>
           Welcome to the inaugural Pebble Race, where pebbles compete for glory
           and your precious rep. Add rep on Seize to boost your favorite racers!
