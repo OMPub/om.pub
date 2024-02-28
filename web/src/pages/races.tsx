@@ -218,7 +218,7 @@ const LeaderboardPage = () => {
           }
           .text {
             position: absolute;
-            z-index: 2;
+            z-index: 0;
             top: 50%;
             transform: translate(0, -50%);
             width: 100%;
