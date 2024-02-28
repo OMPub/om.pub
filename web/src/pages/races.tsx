@@ -2,7 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import styles from "@/styles/Home.module.scss";
-import { Container, Row, Col, Accordion, Card, useAccordionToggle } from "react-bootstrap";
+import { Container, Row, Col, Accordion, Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { fetchPebbleReps, raceHistory } from "../services/seizeApi";
 import { motion } from "framer-motion";
