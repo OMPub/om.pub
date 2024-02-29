@@ -42,7 +42,7 @@ const raceHistory = [
     name: "Race 1, Round 2",
     id: 2,
     startsAt: 1709154000,
-    endsAt: 1709954000,
+    endsAt: 1709228000,
     minRep: 100,
     maxRep: 1000,
     pebbles: [
@@ -61,7 +61,26 @@ const raceHistory = [
       [5, 6],
       [7, 8],
     ],
-    data: [],
+    data: [{"id":882,"name":"Dive School","seizer":"chrisroc","rep":8258,"reppers":["crunch","blocknoob","fertilejim","ricodemus","RegularDad","MintFace","boredsurgeon","justanother","100series"],"repGiven":[1000,969,1000,869,1000,420,1000,1000,1000]},{"id":423,"name":"Blue Epoch","seizer":"blocknoob","rep":3398,"reppers":["AnimatedNFT","chrisroc","ricodemus","RegularDad"],"repGiven":[1000,929,469,1000]},{"id":41,"name":"Pathway to Disorder","seizer":"AnimatedNFT","rep":5489,"reppers":["blocknoob","ricodemus","RegularDad","MintFace","boredsurgeon","justanother","100series"],"repGiven":[300,769,1000,420,1000,1000,1000]},{"id":962,"name":"Night Journeys","seizer":"4lteredBeast","rep":5238,"reppers":["crunch","blocknoob","ricodemus","RegularDad","brookr","mememaxis"],"repGiven":[1000,700,569,1000,969,1000]},{"id":81,"name":"Shadow of Satoshi","seizer":"OMdegen","rep":5589,"reppers":["spritey","blocknoob","ricodemus","MintFace","mememaxis","justanother","100series"],"repGiven":[1000,200,969,420,1000,1000,1000]},{"id":155,"name":"Carbon Copy","seizer":"RegularDad","rep":5669,"reppers":["crunch","AnimatedNFT","blocknoob","ricodemus","vanto","boredsurgeon"],"repGiven":[1000,1000,800,869,1000,1000]},{"id":563,"name":"The Penguin","seizer":"boredsurgeon","rep":4369,"reppers":["mememaxis","blocknoob","ricodemus","RegularDad","100series"],"repGiven":[1000,800,569,1000,1000]},{"id":141,"name":"Talking with God","seizer":"ricodemus","rep":5589,"reppers":["crunch","mememaxis","blocknoob","chrisroc","RegularDad","MintFace","justanother"],"repGiven":[1000,1000,200,969,1000,420,1000]}], // prettier-ignore
+  },
+  {
+    name: "Race 1, Round 3",
+    id: 2,
+    startsAt: 1709228731,
+    endsAt: 1709354000,
+    minRep: 1000,
+    maxRep: 10000,
+    pebbles: [
+      { id: 882, name: "Dive School", seizer: "chrisroc", rep: 0 },
+      { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
+      { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
+      { id: 141, name: "Talking with God", seizer: "ricodemus", rep: 0 },
+    ],
+    races: [
+      [1, 2],
+      [3, 4],
+    ],
+    data: []
   }
 ];
 
