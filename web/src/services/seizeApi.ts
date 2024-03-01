@@ -80,6 +80,22 @@ const raceHistory = [
       [1, 2],
       [3, 4],
     ],
+    data: [{"id":882,"name":"Dive School","seizer":"chrisroc","rep":49903,"reppers":["maybe","fertilejim","blocknoob","agnimax","ricodemus","brookr"],"repGiven":[10000,10000,10000,9634,6000,4269]},{"id":41,"name":"Pathway to Disorder","seizer":"AnimatedNFT","rep":56969,"reppers":["boredsurgeon","4lteredBeast","ricodemus","dsanchesGM","100series","justanother"],"repGiven":[10000,10000,6969,10000,10000,10000]},{"id":81,"name":"Shadow of Satoshi","seizer":"OMdegen","rep":61677,"reppers":["blocknoob","chrisroc","GhostPepper","ricodemus","vanto","100series","spritey","justanother"],"repGiven":[10000,10000,3000,6900,1777,10000,10000,10000]},{"id":141,"name":"Talking with God","seizer":"ricodemus","rep":25069,"reppers":["agnimax","4lteredBeast","NotRealFranc","mememaxis"],"repGiven":[3000,10000,2069,10000]}], // prettier-ignore
+  },
+  {
+    name: "Race 1, Round 4",
+    id: 2,
+    startsAt: 1709330000,
+    endsAt: 1709432846,
+    minRep: 1000,
+    maxRep: 10000,
+    pebbles: [
+      { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
+      { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
+    ],
+    races: [
+      [1, 2],
+    ],
     data: []
   }
 ];
