@@ -4906,6 +4906,43 @@ What worlds will be invoked by Card 205 Feb 28th, 2024?`,
       ],
     },
     {
+      tokenId: 206,
+      images: [
+        "/artist-206/work-1.gif",
+        "/artist-206/work-2.gif",
+        "/artist-206/work-3.gif",
+      ],
+      poster: "/artist-206/poster.png",
+      posterMintUrl: "",
+      name: "Cullen Colors",
+      info: `
+Cullen Colors has etched his place in the digital art landscape, with his relatable storytelling and emotional resonance set his work apart.
+His artistic journey is deeply intertwined with his personal narrative, often reflecting on experiences, emotions, and moments that are universally relatable yet uniquely his own.
+Through a blend of digital techniques, Cullen captures colors and vibes, imbuing them with a sense of depth that transcends the visual. 
+
+In the realm of NFTs, Cullen Colors has carved out a niche for himself, collected by a global audience and pushing the value of art in the digital age.
+His existing collectors are drawn not only to the aesthetic appeal of his work but also to the stories behind each piece, the authenticity of his creative expression, and the potential for emotional and intellectual engagement.
+      
+For new collectors, delving into Cullen Colors' portfolio is an invitation to explore human stories, emotion-packed digital craftsmanship, and memetic publishing. 
+Cullen's artistic endeavors continue to explore new horizons and express his vision through the ever-changing landscape of digital art and NFTs.
+
+Card 206 will bring Cullen (and his colors) to The Memes on Mar 1st, 2024.`,
+      links: [
+        {
+          name: "Cullen's Twitter",
+          url: "https://www.x.com/CullenColors",
+        },
+        {
+          name: "Cullen's Instagram",
+          url: "https://www.instagram.com/CullenColors",
+        },
+        {
+          name: "Cullen's Seize",
+          url: "https://seize.io/CullenColors",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
@@ -4916,7 +4953,7 @@ What worlds will be invoked by Card 205 Feb 28th, 2024?`,
       posterMintUrl: "",
       name: "@UNNKNOWN",
       info: `
-...We can't wait to see what she has created in Card 690 for our community... on Feb 4th, 2024.`,
+...We can't wait to see what she has created in Card 690 for our community... on Mar 4th, 2024.`,
       links: [
         {
           name: "UNNKNOWN's Twitter",
@@ -4924,7 +4961,7 @@ What worlds will be invoked by Card 205 Feb 28th, 2024?`,
         },
         {
           name: "UNNKNOWN's Instagram",
-          url: "https://linktr.ee/UNNKNOWN",
+          url: "https://www.instagram.com/UNNKNOWN",
         },
         {
           name: "UNNKNOWN's Seize",
