@@ -176,19 +176,23 @@ const fetchMomoReps = async () => {
           },
         }
       );
-      const newItems = response.data.data.filter( (item: any) => {
-        return item.target_profile_handle === "MoMO" 
-          && new Date(item.created_at).getTime() > 1709172603000
-          && item.contents.rating_category.match(/^wwoh/i)
-          && item.contents.new_rating === 1;
-      }).map( (item: any) => {
-        return {
-          id: item.id,
-          author: item.profile_handle,
-          text: item.contents.rating_category.replace(/^wwoh/i, "").trim(),
-          timestamp: new Date(item.created_at).getTime(),
-        };
-      });
+      const newItems = response.data.data
+        .filter((item: any) => {
+          return (
+            item.target_profile_handle === "MoMO" &&
+            new Date(item.created_at).getTime() > 1709172603000 &&
+            item.contents.rating_category.match(/^wwoh/i) &&
+            item.contents.new_rating === 1
+          );
+        })
+        .map((item: any) => {
+          return {
+            id: item.id,
+            author: item.profile_handle,
+            text: item.contents.rating_category.replace(/^wwoh/i, "").trim(),
+            timestamp: new Date(item.created_at).getTime(),
+          };
+        });
 
       console.log("newItems", newItems);
       items = [...items, ...newItems];
@@ -200,6 +204,51 @@ const fetchMomoReps = async () => {
     }
   }
 
+  return items;
+};
+
+const fetchRep = async (
+  username: string,
+  direction: string,
+  matchText: string
+) => {
+  let page = 1;
+  const pageSize = 100;
+  let items: any[] = [];
+  let shouldContinue = true;
+  matchText = matchText.trim() || "";
+
+  while (shouldContinue) {
+    try {
+      const response = await axios.get(
+        "https://api.seize.io/api/profile-logs",
+        {
+          params: {
+            page: page,
+            page_size: pageSize,
+            include_incoming: true,
+            rating_matter: "REP",
+            profile: username,
+          },
+        }
+      );
+      const newItems = response.data.data.filter((item: any) => {
+        return (
+          (direction === "outbound"
+          ? item.profile_handle.toLowerCase() === username.toLowerCase()
+          : item.profile_handle.toLowerCase() !== username.toLowerCase()) &&
+          item.contents.rating_matter == "REP" &&
+          item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
+        );
+      });
+      items = [...items, ...newItems];
+      shouldContinue = newItems.length === pageSize;
+      page += 1;
+    } catch (error) {
+      console.error("Error fetching rep:", error);
+      shouldContinue = false;
+    }
+  }
   return items;
 };
 
@@ -227,6 +276,6 @@ const timeAgo = (milliseconds: number): string => {
   } else {
     return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
   }
-}
+};
 
-export { fetchPebbleReps, raceHistory, fetchMomoReps, timeAgo };
+export { fetchPebbleReps, raceHistory, fetchMomoReps, fetchRep, timeAgo };

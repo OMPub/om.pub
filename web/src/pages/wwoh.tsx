@@ -68,17 +68,30 @@ const StoryPage = () => {
       >
         <h1>Woman with Orange Hat</h1>
         <p>
-          Who is WwOH? What is her story? Details are in <a style={{textDecoration: 'none'}} href="https://discord.com/channels/963043925554237482/1203782401843793971/1212814004255195136" target="_blank">Proposal #25</a>.
+          Who is WwOH? What is her story? Details are in{" "}
+          <a
+            style={{ textDecoration: "none" }}
+            href="https://discord.com/channels/963043925554237482/1203782401843793971/1212814004255195136"
+            target="_blank"
+          >
+            Proposal #25
+          </a>
+          .
         </p>
-        <p style={{ overflow: 'auto' }}>
-          <button onClick={toggleSortOrder} style={{float: 'right', border: 'none', backgroundColor: '#fff'}}>
+        <p style={{ overflow: "auto" }}>
+          <button
+            onClick={toggleSortOrder}
+            style={{ float: "right", border: "none", backgroundColor: "#fff" }}
+          >
             {sortOrder === "asc" ? "🔼" : "🔽"}
           </button>
         </p>
         {sortedStoryLines.map((storyLine) => (
-          <Card className="story-line" style={{border: 'none'}}>
+          <Card className="story-line" style={{ border: "none" }}>
             <Card.Body>
-              <Card.Text style={{ fontFamily: "Lora, serif", fontSize: 'large' }}>
+              <Card.Text
+                style={{ fontFamily: "Lora, serif", fontSize: "large" }}
+              >
                 {storyLine.text}
               </Card.Text>
               <Card.Subtitle
@@ -95,15 +108,10 @@ const StoryPage = () => {
         ))}
       </Container>
       <style jsx>{`
-        .story-container {
-          ,         
-          .story-line {
-          margin-bottom: 20px;
-        }
         .story-line-info {
           text-align: right;
           color: #00f;
-        }      
+        }
       `}</style>
     </>
   );
