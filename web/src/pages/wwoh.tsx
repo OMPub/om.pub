@@ -33,6 +33,7 @@ const StoryPage = () => {
   const toggleSortOrder = () => {
     setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
   };
+  
   useEffect(() => {
     const getStoryLines = async () => {
       try {

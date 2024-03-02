@@ -4,13 +4,30 @@ import styles from "@/styles/Home.module.scss";
 import { Form, Button, Card, Col, Row, Container } from "react-bootstrap";
 
 const RepPage = () => {
+  const delay = 500; // delay in milliseconds
   const [username, setUsername] = useState("");
   const [direction, setDirection] = useState("inbound");
   const [matchText, setMatchText] = useState("");
-  const [repText, setRepText] = useState<RepResponse[]>([]);
-  const delay = 500; // delay in milliseconds
+  const [reps, setReps] = useState<RepResponse[]>([]);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const timeoutRef = useRef<number | null>(null);
   const usernameRef = useRef<HTMLInputElement | null>(null);
+
+  const sortedReps = [...reps].sort((a, b) => {
+    if (sortOrder === "asc") {
+      return (
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+    } else {
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    }
+  });
+
+  const toggleSortOrder = () => {
+    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
+  };
 
   interface RepResponse {
     id: string;
@@ -38,7 +55,7 @@ const RepPage = () => {
   const handleSubmit = async () => {
     try {
       const data = await fetchRep(username, direction, matchText);
-      setRepText(data);
+      setReps(data);
     } catch (error) {
       console.error("Error fetching rep:", error);
     }
@@ -86,10 +103,10 @@ const RepPage = () => {
               onChange={(e) => setMatchText(e.target.value)}
             />
           </Col>
-          <Col>
+          <Col xs="3">
             <Form.Check
               inline
-              label="Inbound"
+              label="Rep In"
               type="radio"
               id="inbound"
               checked={direction === "inbound"}
@@ -97,17 +114,28 @@ const RepPage = () => {
             />
             <Form.Check
               inline
-              label="Outbound"
+              label="Rep Out"
               type="radio"
               id="outbound"
               checked={direction === "outbound"}
               onChange={() => setDirection("outbound")}
             />
           </Col>
+          <Col xs="1">
+            <Button
+              onClick={toggleSortOrder}
+              style={{
+                float: "right",
+                border: "none",
+                backgroundColor: "#fff",
+              }}
+            >
+              {sortOrder === "asc" ? "🔼" : "🔽"}
+            </Button>
+          </Col>
         </Row>
       </Form>
-
-      {repText.map((rep) => (
+      {sortedReps.map((rep) => (
         <>
           <Card className="rep" style={{ border: "none" }}>
             <Card.Body>
