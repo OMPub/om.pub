@@ -87,8 +87,8 @@ const raceHistory = [
     id: 2,
     startsAt: 1709330000,
     endsAt: 1709432846,
-    minRep: 1000,
-    maxRep: 10000,
+    minRep: 10000,
+    maxRep: 100000,
     pebbles: [
       { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
       { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
