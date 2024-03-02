@@ -10,6 +10,7 @@ const RepPage = () => {
   const [repText, setRepText] = useState<RepResponse[]>([]);
   const delay = 500; // delay in milliseconds
   const timeoutRef = useRef<number | null>(null);
+  const usernameRef = useRef<HTMLInputElement | null>(null);
 
   interface RepResponse {
     id: string;
@@ -27,7 +28,6 @@ const RepPage = () => {
     profile_handle: string;
     target_profile_handle: string;
   }
-  const usernameRef = useRef(null);
 
   useEffect(() => {
     if (usernameRef.current) {
