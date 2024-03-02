@@ -86,7 +86,7 @@ const StoryPage = () => {
                 style={{ textAlign: "right", color: "#ccc" }}
               >
                 by {storyLine.author} at&nbsp;
-                <span title={new Date(storyLine.timestamp)}>
+                <span title={new Date(storyLine.timestamp).toISOString()}>
                   {timeAgo(storyLine.timestamp)}
                 </span>
               </Card.Subtitle>
