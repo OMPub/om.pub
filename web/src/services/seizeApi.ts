@@ -93,14 +93,32 @@ const raceHistory = [
       { id: 41, name: "Pathway to Disorder", seizer: "AnimatedNFT", rep: 0 },
       { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
     ],
-    races: [
-      [1, 2],
-    ],
-    data: []
-  }
+    races: [[1, 2]],
+    data: [],
+  },
 ];
 
-const fetchPebbleReps = async (seizer: string, currentRace: { name: string; id: number; startsAt: number; endsAt: number; minRep: number; maxRep: number; pebbles: { id: number; name: string; seizer: string; rep: number; }[]; races: number[][]; data: { id: number; name: string; seizer: string; rep: number; reppers: string[]; repGiven: number[]; }[]; }) => {
+const fetchPebbleReps = async (
+  seizer: string,
+  currentRace: {
+    name: string;
+    id: number;
+    startsAt: number;
+    endsAt: number;
+    minRep: number;
+    maxRep: number;
+    pebbles: { id: number; name: string; seizer: string; rep: number }[];
+    races: number[][];
+    data: {
+      id: number;
+      name: string;
+      seizer: string;
+      rep: number;
+      reppers: string[];
+      repGiven: number[];
+    }[];
+  }
+) => {
   try {
     const response = await axios.get("https://api.seize.io/api/profile-logs", {
       params: {
@@ -138,4 +156,77 @@ const fetchPebbleReps = async (seizer: string, currentRace: { name: string; id: 
   }
 };
 
-export { fetchPebbleReps, raceHistory };
+const fetchMomoReps = async () => {
+  let page = 1;
+  const pageSize = 100;
+  let items: any[] = [];
+  let shouldContinue = true;
+
+  while (shouldContinue) {
+    try {
+      const response = await axios.get(
+        "https://api.seize.io/api/profile-logs",
+        {
+          params: {
+            page: page,
+            page_size: pageSize,
+            include_incoming: true,
+            rating_matter: "REP",
+            profile: "MoMO",
+          },
+        }
+      );
+      const newItems = response.data.data.filter( (item: any) => {
+        return item.target_profile_handle === "MoMO" 
+          && new Date(item.created_at).getTime() > 1709172603000
+          && item.contents.rating_category.match(/^wwoh/i)
+          && item.contents.new_rating === 1;
+      }).map( (item: any) => {
+        return {
+          id: item.id,
+          author: item.profile_handle,
+          text: item.contents.rating_category.replace(/^wwoh/i, "").trim(),
+          timestamp: new Date(item.created_at).getTime(),
+        };
+      });
+
+      console.log("newItems", newItems);
+      items = [...items, ...newItems];
+      shouldContinue = newItems.length === pageSize;
+      page += 1;
+    } catch (error) {
+      console.error("Error fetching MoMO reps:", error);
+      shouldContinue = false;
+    }
+  }
+
+  return items;
+};
+
+const timeAgo = (milliseconds: number): string => {
+  const currentTime = new Date().getTime();
+  const timeDifference = currentTime - milliseconds;
+
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
+
+  if (years > 0) {
+    return `${years} year${years > 1 ? "s" : ""} ago`;
+  } else if (months > 0) {
+    return `${months} month${months > 1 ? "s" : ""} ago`;
+  } else if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
+  }
+}
+
+export { fetchPebbleReps, raceHistory, fetchMomoReps, timeAgo };
