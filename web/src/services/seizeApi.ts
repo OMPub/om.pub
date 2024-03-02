@@ -232,7 +232,9 @@ const fetchRep = async (
           },
         }
       );
-      const newItems = response.data.data.filter((item: any) => {
+      let newItems = response.data.data
+      shouldContinue = newItems.length === pageSize;
+      newItems = newItems.filter((item: any) => {
         return (
           (direction === "outbound"
           ? item.profile_handle.toLowerCase() === username.toLowerCase()
@@ -242,7 +244,6 @@ const fetchRep = async (
         );
       });
       items = [...items, ...newItems];
-      shouldContinue = newItems.length === pageSize;
       page += 1;
     } catch (error) {
       console.error("Error fetching rep:", error);

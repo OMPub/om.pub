@@ -27,6 +27,13 @@ const RepPage = () => {
     profile_handle: string;
     target_profile_handle: string;
   }
+  const usernameRef = useRef(null);
+
+  useEffect(() => {
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -43,9 +50,9 @@ const RepPage = () => {
     }
 
     timeoutRef.current = window.setTimeout(() => {
-      return username && handleSubmit(); 
+      return username && handleSubmit();
     }, delay);
-  
+
     // Clean up function
     return () => {
       if (timeoutRef.current !== null) {
@@ -53,7 +60,7 @@ const RepPage = () => {
       }
     };
   }, [username, direction, matchText]);
-  
+
   return (
     <Container
       className={`${styles.main}`}
@@ -64,6 +71,7 @@ const RepPage = () => {
         <Row>
           <Col>
             <Form.Control
+              ref={usernameRef}
               type="text"
               placeholder="Enter username"
               value={username}
@@ -112,15 +120,15 @@ const RepPage = () => {
                 className="mb-2"
                 style={{ textAlign: "right", color: "#ccc" }}
               >
-                from {' '}
+                from{" "}
                 <a href={rep.profile_handle} target="_blank">
                   {rep.profile_handle}
-                </a> {' '}
-                to {' '}
+                </a>{" "}
+                to{" "}
                 <a href={rep.target_profile_handle} target="_blank">
                   {rep.target_profile_handle}
                 </a>
-                , {' '}
+                ,{" "}
                 <span title={new Date(rep.created_at).toISOString()}>
                   {timeAgo(new Date(rep.created_at).getTime())}
                 </span>
