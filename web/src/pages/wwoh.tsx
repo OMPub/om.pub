@@ -82,9 +82,9 @@ const StoryPage = () => {
         <p style={{ overflow: "auto" }}>
           <button
             onClick={toggleSortOrder}
-            style={{ float: "right", border: "none", backgroundColor: "#fff" }}
+            style={{ float: "right", border: "none", backgroundColor: "#fff", color: "#ccc" }}
           >
-            {sortOrder === "asc" ? "🔼" : "🔽"}
+            {sortedStoryLines.length} / 420 {sortOrder === "asc" ? "🔼" : "🔽"}
           </button>
         </p>
         {sortedStoryLines.map((storyLine) => (
