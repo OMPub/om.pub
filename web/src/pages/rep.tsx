@@ -90,7 +90,7 @@ const RepPage = () => {
             <Form.Control
               ref={usernameRef}
               type="text"
-              placeholder="Enter username"
+              placeholder="Enter profile"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -98,7 +98,7 @@ const RepPage = () => {
           <Col>
             <Form.Control
               type="text"
-              placeholder="Enter match text"
+              placeholder="Search text"
               value={matchText}
               onChange={(e) => setMatchText(e.target.value)}
             />

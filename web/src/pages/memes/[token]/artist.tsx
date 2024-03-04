@@ -4943,6 +4943,48 @@ Card 206 will bring Cullen (and his colors) to The Memes on Mar 1st, 2024.`,
       ],
     },
     {
+      tokenId: 207,
+      images: [
+        "/artist-207/work-1.gif",
+        "/artist-207/work-2.gif",
+        "/artist-207/work-3.gif",
+      ],
+      poster: "/artist-207/poster.png",
+      posterMintUrl: "",
+      name: "VSTRVL",
+      info: `
+VSTRVL's artistic aesthetic is a compelling fusion of digital expressionism and web3-native glitch art.
+The artwork often reflects a post-internet sensibility, where the digital and physical realms collide in vibrant and unexpected ways.
+Utilizing a palette that is at once jarring and yet balanced, VSTRVL's pieces are imbued with flickering colors bringing movement and immediacy.
+Elements of pixelation and retro video game graphics are juxtaposed with stark, bold lines and organic shapes, creating a visual language that speaks to the chaos and clutter of online life.
+These visual choices serve not just as a stylistic hallmark, but as a narrative device, crafting stories that resonate with the experiences of a society steeped in technology and virtual interaction.
+
+The recurring themes in VSTRVL's work often revolve around the complexities of life.
+Figures and symbols emerge from chaotic backdrops, signifying the struggle between identity and anonymity in an age where the self is often commodified and surveilled.
+Titles like "I Was In A Dark Place When I Met You" and "The Noise That Keeps Me Calm" suggest a deeply personal connection to the artwork, inviting viewers to connect with such realities in their own lives.
+This introspective quality is a testament to VSTRVL's ability to harness the digital medium as a tool for exploring the psychological landscapes that define the human condition vis-a-vis endless screens.
+
+At the heart of VSTRVL's message is a poignant observation of the world—a world rife with contradictions and battles both internal and external.
+The artworks are digital hells are just around the corner, which is at once oppressive and liberating.
+Through the interplay of shadow and light, noise and silence, VSTRVL captures the essence of what it means to be alive in a time of overwhelming stimuli, offering a mirror to the viewer's own engagement with the digital age.
+
+What digital reflections screen-based hells await us in Card 207? We get to see on Mar 4th, 2024.`,
+      links: [
+        {
+          name: "VSTRVL's Twitter",
+          url: "https://twitter.com/VSTRVL_FFF",
+        },
+        {
+          name: "VSTRVL's Showcase",
+          url: "https://vstrvl.eth.co/",
+        },
+        {
+          name: "VSTRVL's Seize",
+          url: "https://seize.io/VSTRVL",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
