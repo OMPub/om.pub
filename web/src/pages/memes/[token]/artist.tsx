@@ -4949,7 +4949,7 @@ Card 206 will bring Cullen (and his colors) to The Memes on Mar 1st, 2024.`,
         "/artist-207/work-2.gif",
         "/artist-207/work-3.gif",
       ],
-      poster: "/artist-207/poster.png",
+      poster: "/artist-207/poster.gif",
       posterMintUrl: "",
       name: "VSTRVL",
       info: `
