@@ -149,11 +149,11 @@ const RepPage = () => {
                 style={{ textAlign: "right", color: "#ccc" }}
               >
                 from{" "}
-                <a href={rep.profile_handle} target="_blank">
+                <a href={'https://seize.io/' + rep.profile_handle} target="_blank">
                   {rep.profile_handle}
                 </a>{" "}
                 to{" "}
-                <a href={rep.target_profile_handle} target="_blank">
+                <a href={'https://seize.io/' + rep.target_profile_handle} target="_blank">
                   {rep.target_profile_handle}
                 </a>
                 ,{" "}
