@@ -4985,6 +4985,73 @@ What digital reflections screen-based hells await us in Card 207? We get to see 
       ],
     },
     {
+      tokenId: 208,
+      images: [
+        "/artist-208/work-1.jpeg",
+        "/artist-208/work-2.jpeg",
+        "/artist-208/work-3.gif",
+      ],
+      poster: "/artist-208/poster.png",
+      posterMintUrl: "",
+      name: "BOUBOY",
+      info: `
+BOUBOY, a digital artist from Thailand, is swiftly defining his footprint in the digital art realm with a distinctive collage style that bridges traditional printmaking with an array of digital techniques.
+His works are characterized by their bold commentary on socio-political themes, often layered with a sense of urgency and a surreal, graphic aesthetic that beckons viewers to look closer and explore.
+The promise to provide art prints to collectors for many works illustrates BOUBOY's commitment to tangible art in an increasingly digital landscape.
+
+Let's take a look at some of his existing work...
+
+The artist's creations, such as the "STOP THE WAR" piece, evoke a powerful response through the juxtaposition of warlike imagery with surreal and symbolic elements.
+This particular artwork employs a rich tapestry of textures and motifs that resonates with our universal desire for peace, revealing the far-reaching impacts of conflict.
+      
+Another artwork depicts a dystopian take on the innocent game of musical chairs, utilizing nude figures and oversized records to critique the competitive nature of society and the scramble for resources.
+This piece, alongside the striking visual of a smiley face engulfed in concentric circles, highlights BOUBOY's use of familiar imagery to create new, thought-provoking contexts.
+Through these compelling visuals, BOUBOY invites us into a world where traditional forms are reborn with digital vibrancy, inviting meme enjoyoors to explore a new take on memetic themes.
+            
+We can't wait to see what new takes are revealed in Card 208 on Mar 6th, 2024.`,
+      links: [
+        {
+          name: "BOUBOY's Twitter",
+          url: "https://x.com/bouboybkk",
+        },
+        {
+          name: "BOUBOY's Instagram",
+          url: "https://instagram.com/bouboy.bkk",
+        },
+        {
+          name: "BOUBOY's Seize",
+          url: "https://seize.io/BOUBOY",
+        },
+      ],
+    },
+    {
+      tokenId: 690,
+      images: [
+        "/artist-690/work-1.jpeg",
+        "/artist-690/work-2.png",
+        "/artist-690/work-3.mp4",
+      ],
+      poster: "/artist-690/poster.png",
+      posterMintUrl: "",
+      name: "@UNNKNOWN",
+      info: `
+...We can't wait to see what she has created in Card 690 for our community... on Mar 4th, 2024.`,
+      links: [
+        {
+          name: "UNNKNOWN's Twitter",
+          url: "https://twitter.com/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's Instagram",
+          url: "https://www.instagram.com/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's Seize",
+          url: "https://seize.io/UNNKNOWN",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",

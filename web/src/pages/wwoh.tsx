@@ -65,7 +65,7 @@ const StoryPage = () => {
       <Header />
       <Container
         className={`${styles.main}`}
-        style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}
+        style={{ maxWidth: "850px", margin: "auto", padding: "20px" }}
       >
         <h1>Woman with Orange Hat</h1>
         <p>
