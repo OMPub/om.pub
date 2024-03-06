@@ -182,7 +182,7 @@ const fetchMomoReps = async () => {
             item.target_profile_handle === "MoMO" &&
             new Date(item.created_at).getTime() > 1709172603000 &&
             item.contents.rating_category.match(/^wwoh/i) &&
-            item.contents.new_rating === 1
+            (item.contents.new_rating === 1 || item.contents.new_rating === -1)
           );
         })
         .map((item: any) => {
