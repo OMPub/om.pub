@@ -176,13 +176,32 @@ const fetchMomoReps = async () => {
           },
         }
       );
+      // sort data by timestamp
+      const data = response.data.data.sort((a: any, b: any) => {
+        return (
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+      });
       const newItems = response.data.data
+        .reduce((acc: any, item: any) => {
+          // keep only the most recent unique rating_category
+          if (
+            !acc.some(
+              (i: any) =>
+                i.contents.rating_category === item.contents.rating_category
+            )
+          ) {
+            acc.push(item);
+          }
+          return acc;
+        }, [])
         .filter((item: any) => {
           return (
             item.target_profile_handle === "MoMO" &&
             new Date(item.created_at).getTime() > 1709172603000 &&
             item.contents.rating_category.match(/^wwoh/i) &&
-            (item.contents.new_rating === 1 || item.contents.new_rating === -1)
+            (item.contents.new_rating === 1 ||
+              (item.contents.new_rating === -1 && item.profile_handle == "Karen"))
           );
         })
         .map((item: any) => {
@@ -191,6 +210,7 @@ const fetchMomoReps = async () => {
             author: item.profile_handle,
             text: item.contents.rating_category.replace(/^wwoh/i, "").trim(),
             timestamp: new Date(item.created_at).getTime(),
+            rep: item.contents.new_rating,
           };
         });
 
@@ -232,13 +252,13 @@ const fetchRep = async (
           },
         }
       );
-      let newItems = response.data.data
+      let newItems = response.data.data;
       shouldContinue = newItems.length === pageSize;
       newItems = newItems.filter((item: any) => {
         return (
           (direction === "outbound"
-          ? item.profile_handle.toLowerCase() === username.toLowerCase()
-          : item.profile_handle.toLowerCase() !== username.toLowerCase()) &&
+            ? item.profile_handle.toLowerCase() === username.toLowerCase()
+            : item.profile_handle.toLowerCase() !== username.toLowerCase()) &&
           item.contents.rating_matter == "REP" &&
           item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
         );
