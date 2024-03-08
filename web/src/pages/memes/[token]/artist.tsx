@@ -5025,29 +5025,44 @@ We can't wait to see what new takes are revealed in Card 208 on Mar 6th, 2024.`,
       ],
     },
     {
-      tokenId: 690,
+      tokenId: 209,
       images: [
-        "/artist-690/work-1.jpeg",
-        "/artist-690/work-2.png",
-        "/artist-690/work-3.mp4",
+        "/artist-209/work-1.gif",
+        "/artist-209/work-2.gif",
+        "/artist-209/work-3.jpeg",
+        "/artist-209/work-4.gif",
       ],
-      poster: "/artist-690/poster.png",
+      poster: "/artist-209/poster.png",
       posterMintUrl: "",
-      name: "@UNNKNOWN",
+      name: "Fawkes",
       info: `
-...We can't wait to see what she has created in Card 690 for our community... on Mar 4th, 2024.`,
+Fawkes emerges as a digital virtuoso, crafting vivid realms where the pulse of cyberpunk beats at the heart of every creation.
+With a keen eye for the retro-futuristic aesthetic that defined the '80s and '90s, Fawkes' art is a neon-drenched odyssey into worlds where technology and humanity collide in a symphony of pixels and possibilities.
+The pieces often exude a narrative strength, suggesting stories begging to be told within their meticulously arranged compositions.
+These digital canvases beckon viewers into viewing depths, echoing the artist's reverence for the cyberpunk ethos and its continuous dialogue with the evolution of Web3 technology.
+
+Delving into the visual lexicon of Fawkes' work, one encounters a cross-pollination of inspirations, from the fluorescent glow of classic anime spaceships to the dusky corners of cybernetic control rooms where the future is incessantly monitored and rerouted.
+The artist's work is a testament to the power of digital tools in sculpting not just images, but gateways to alternative realities.
+This is where nostalgia is reimagined: the familiar is reborn through a kaleidoscope of vibrant colors and intricate designs that pay homage to the days of early computing and the boundless frontiers of the internet age.
+
+Fawkes' art, however, transcends mere aesthetic allure; it becomes a canvas of inquiry.
+It urges the onlooker to ponder the symbiotic relationship between technology and individuality within the digital age.
+The playful yet poignant use of language, interspersed with technological symbols and motifs, cultivates a dialogue that spans cultures and languages.
+Fawkes' portfolio not only captures the imagination but also sparks a conversation about the direction in which our global, interconnected societies might be headed, all the while preserving a sense of wonder for the digital landscapes that could lie ahead.
+
+Might Card 209 hold a 3D Pepe final boss for Memes hodlers? We will see on Mar 8th, 2024.`,
       links: [
         {
-          name: "UNNKNOWN's Twitter",
-          url: "https://twitter.com/UNNKNOWN",
+          name: "Fawkes' Twitter",
+          url: "https://www.x.com/cryptofawkek",
         },
         {
-          name: "UNNKNOWN's Instagram",
-          url: "https://www.instagram.com/UNNKNOWN",
+          name: "Fawkes' Instagram",
+          url: "https://www.instagram.com/fawkek",
         },
         {
-          name: "UNNKNOWN's Seize",
-          url: "https://seize.io/UNNKNOWN",
+          name: "Fawkes' Seize",
+          url: "https://seize.io/Fawkes",
         },
       ],
     },
