@@ -67,7 +67,7 @@ const raceHistory = [
     name: "Race 1, Round 3",
     id: 2,
     startsAt: 1709228731,
-    endsAt: 1709954000,
+    endsAt: 1709354000,
     minRep: 1000,
     maxRep: 10000,
     pebbles: [
@@ -86,7 +86,7 @@ const raceHistory = [
     name: "Race 1, Round 4",
     id: 2,
     startsAt: 1709330000,
-    endsAt: 1709432846,
+    endsAt: 1709932846,
     minRep: 10000,
     maxRep: 100000,
     pebbles: [
