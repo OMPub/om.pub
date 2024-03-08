@@ -141,7 +141,7 @@ const fetchPebbleReps = async (
         const newRating = item.contents.new_rating;
         const timestamp = new Date(item.created_at).getTime() / 1000;
         return (
-          newRating > currentRace.minRep &&
+          newRating >= currentRace.minRep &&
           newRating <= currentRace.maxRep &&
           timestamp > currentRace.startsAt &&
           timestamp < currentRace.endsAt &&
