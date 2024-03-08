@@ -94,7 +94,7 @@ const raceHistory = [
       { id: 81, name: "Shadow of Satoshi", seizer: "OMdegen", rep: 0 },
     ],
     races: [[1, 2]],
-    data: [],
+    data: [{"id":41,"name":"Pathway to Disorder","seizer":"AnimatedNFT","rep":1074015,"reppers":["696","Giopetto","jonnypickles","RegularDad","chrisroc","boredsurgeon","chimpanchz","dsanchesGM","crableu","pete","maybe","perilousvault","btang8","johndoe8891","MSV","ricodemus","blocknoob","4lteredBeast","100series"],"repGiven":[100000,69000,69420,100000,29547,100000,20000,50000,45000,26529,30000,50000,20000,100000,30000,42000,30000,72519,90000]},{"id":81,"name":"Shadow of Satoshi","seizer":"OMdegen","rep":617000,"reppers":["justanother","boredsurgeon","mememaxis","ricodemus","web3at50","blocknoob","agnimax","spritey"],"repGiven":[60000,100000,100000,69000,100000,70000,18000,100000]}], // prettier-ignore
   },
 ];
 
