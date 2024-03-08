@@ -5,7 +5,7 @@ const raceHistory = [
     name: "Race 1, Round 1",
     id: 1,
     startsAt: 1709067758,
-    endsAt: 1709954000,
+    endsAt: 1709154000,
     minRep: 0,
     maxRep: 100,
     pebbles: [
@@ -67,7 +67,7 @@ const raceHistory = [
     name: "Race 1, Round 3",
     id: 2,
     startsAt: 1709228731,
-    endsAt: 1709354000,
+    endsAt: 1709954000,
     minRep: 1000,
     maxRep: 10000,
     pebbles: [
@@ -141,7 +141,7 @@ const fetchPebbleReps = async (
         const newRating = item.contents.new_rating;
         const timestamp = new Date(item.created_at).getTime() / 1000;
         return (
-          newRating >= currentRace.minRep &&
+          newRating > currentRace.minRep &&
           newRating <= currentRace.maxRep &&
           timestamp > currentRace.startsAt &&
           timestamp < currentRace.endsAt &&
