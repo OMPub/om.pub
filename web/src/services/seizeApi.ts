@@ -5,7 +5,7 @@ const raceHistory = [
     name: "Race 1, Round 1",
     id: 1,
     startsAt: 1709067758,
-    endsAt: 1709154000,
+    endsAt: 1709954000,
     minRep: 0,
     maxRep: 100,
     pebbles: [
