@@ -6,28 +6,12 @@ import { Form, Button, Card, Col, Row, Container } from "react-bootstrap";
 const RepPage = () => {
   const delay = 500; // delay in milliseconds
   const [username, setUsername] = useState("");
-  const [direction, setDirection] = useState("inbound");
+  const [direction, setDirection] = useState("");
   const [matchText, setMatchText] = useState("");
   const [reps, setReps] = useState<RepResponse[]>([]);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const timeoutRef = useRef<number | null>(null);
   const usernameRef = useRef<HTMLInputElement | null>(null);
-
-  const sortedReps = [...reps].sort((a, b) => {
-    if (sortOrder === "asc") {
-      return (
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      );
-    } else {
-      return (
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      );
-    }
-  });
-
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
-  };
 
   interface RepResponse {
     id: string;
@@ -46,10 +30,31 @@ const RepPage = () => {
     target_profile_handle: string;
   }
 
+  const sortedReps = [...reps].sort((a, b) => {
+    if (sortOrder === "asc") {
+      return (
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+    } else {
+      return (
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+    }
+  });
+
+  const toggleSortOrder = () => {
+    setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
+  };
+
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    setUsername(queryParams.get("username") || "");
+    setDirection(queryParams.get("direction") || "outbound");
+    setMatchText(queryParams.get("search") || "");
     if (usernameRef.current) {
       usernameRef.current.focus();
     }
+    console.log("queryParams", queryParams);
   }, []);
 
   const handleSubmit = async () => {
@@ -149,11 +154,17 @@ const RepPage = () => {
                 style={{ textAlign: "right", color: "#ccc" }}
               >
                 from{" "}
-                <a href={'https://seize.io/' + rep.profile_handle} target="_blank">
+                <a
+                  href={"https://seize.io/" + rep.profile_handle}
+                  target="_blank"
+                >
                   {rep.profile_handle}
                 </a>{" "}
                 to{" "}
-                <a href={'https://seize.io/' + rep.target_profile_handle} target="_blank">
+                <a
+                  href={"https://seize.io/" + rep.target_profile_handle}
+                  target="_blank"
+                >
                   {rep.target_profile_handle}
                 </a>
                 ,{" "}
