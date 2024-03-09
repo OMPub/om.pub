@@ -242,8 +242,7 @@ const fetchRep = async (
 
   const repsFromJsonResponse = await fetch("/reps.json");
   items = await repsFromJsonResponse.json();
-  const latestRepTimestamp =
-    items.length > 0 ? items[0].created_at : 0;
+  const latestRepTimestamp = items.length > 0 ? items[0].created_at : 0;
 
   while (shouldContinue) {
     try {
@@ -264,24 +263,28 @@ const fetchRep = async (
         return item.created_at > latestRepTimestamp;
       });
       shouldContinue = newItems.length === pageSize;
+      console.log("items", items.length);
+      console.log("newItems", newItems.length);
       items = [...newItems, ...items];
-      items = items.filter((item: any) => {
-        return (
-          (!username
-            ? true
-            : direction === "outbound"
-            ? item.profile_handle.toLowerCase() === username.toLowerCase()
-            : item.profile_handle.toLowerCase() !== username.toLowerCase()) &&
-          item.contents.rating_matter == "REP" &&
-          item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
-        );
-      });
+      console.log("items now", items.length);
       page += 1;
     } catch (error) {
       console.error("Error fetching rep:", error);
       shouldContinue = false;
     }
   }
+  items = items.filter((item: any) => {
+    return (
+      item.profile_handle && item.target_profile_handle && item.contents.rating_matter &&
+      (!username
+        ? true
+        : direction === "outbound"
+        ? item.profile_handle.toLowerCase() === username.toLowerCase()
+        : item.target_profile_handle.toLowerCase() === username.toLowerCase()) &&
+      item.contents.rating_matter == "REP" &&
+      item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
+    );
+  });
   return items;
 };
 
