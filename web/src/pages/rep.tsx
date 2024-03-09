@@ -12,6 +12,8 @@ const RepPage = () => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const timeoutRef = useRef<number | null>(null);
   const usernameRef = useRef<HTMLInputElement | null>(null);
+  const [displayCount, setDisplayCount] = useState(20); // Number of reps to display initially
+  const loader = useRef(null);
 
   interface RepResponse {
     id: string;
@@ -29,6 +31,27 @@ const RepPage = () => {
     profile_handle: string;
     target_profile_handle: string;
   }
+
+  const loadMore = (entries: any[]) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setDisplayCount((prevCount) => prevCount + 20); // Load 20 more reps when the user scrolls to the bottom
+    }
+  };
+
+  useEffect(() => {
+    var options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(loadMore, options);
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+  }, []);
 
   const sortedReps = [...reps].sort((a, b) => {
     if (sortOrder === "asc") {
@@ -72,7 +95,7 @@ const RepPage = () => {
     }
 
     timeoutRef.current = window.setTimeout(() => {
-      return username && handleSubmit();
+      return handleSubmit();
     }, delay);
 
     // Clean up function
@@ -140,7 +163,7 @@ const RepPage = () => {
           </Col>
         </Row>
       </Form>
-      {sortedReps.map((rep) => (
+      {sortedReps.slice(0, displayCount).map((rep) => (
         <>
           <Card className="rep" style={{ border: "none" }}>
             <Card.Body>
@@ -182,6 +205,7 @@ const RepPage = () => {
           `}</style>
         </>
       ))}
+      <div ref={loader}>--</div>
     </Container>
   );
 };

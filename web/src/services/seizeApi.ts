@@ -202,7 +202,8 @@ const fetchMomoReps = async () => {
             new Date(item.created_at).getTime() > 1709172603000 &&
             item.contents.rating_category.match(/^wwoh/i) &&
             (item.contents.new_rating === 1 ||
-              (item.contents.new_rating === -1 && item.profile_handle == "Karen"))
+              (item.contents.new_rating === -1 &&
+                item.profile_handle == "Karen"))
           );
         })
         .map((item: any) => {
@@ -239,6 +240,11 @@ const fetchRep = async (
   let shouldContinue = true;
   matchText = matchText.trim() || "";
 
+  const repsFromJsonResponse = await fetch("/reps.json");
+  items = await repsFromJsonResponse.json();
+  const latestRepTimestamp =
+    items.length > 0 ? items[0].created_at : 0;
+
   while (shouldContinue) {
     try {
       const response = await axios.get(
@@ -254,17 +260,22 @@ const fetchRep = async (
         }
       );
       let newItems = response.data.data;
-      shouldContinue = newItems.length === pageSize;
       newItems = newItems.filter((item: any) => {
+        return item.created_at > latestRepTimestamp;
+      });
+      shouldContinue = newItems.length === pageSize;
+      items = [...newItems, ...items];
+      items = items.filter((item: any) => {
         return (
-          (direction === "outbound"
+          (!username
+            ? true
+            : direction === "outbound"
             ? item.profile_handle.toLowerCase() === username.toLowerCase()
             : item.profile_handle.toLowerCase() !== username.toLowerCase()) &&
           item.contents.rating_matter == "REP" &&
           item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
         );
       });
-      items = [...items, ...newItems];
       page += 1;
     } catch (error) {
       console.error("Error fetching rep:", error);
