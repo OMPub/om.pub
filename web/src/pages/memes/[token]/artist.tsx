@@ -5102,7 +5102,7 @@ We can't wait to see what Pondering has created in Card 210 of The Memes, reveal
       ],
       poster: "/artist-211/poster.png",
       posterMintUrl: "",
-      name: "Intrpid",
+      name: "Intrepid",
       info: `
 We can—at long last—welcome Intrepid not just as a meme maxi, but as a Meme Artist. 
 
