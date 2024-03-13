@@ -5108,14 +5108,14 @@ We can—at long last—welcome Intrepid not just as a meme maxi, but as a Meme 
 
 His art crashes over the digital scene like a wave of his own untamed experiences.
 Each image is an echo in pixels of his life of adventure, shouts the mantra that the freedom to transact is as vital as air.
-His camera lens doesn't just capture light; it seizes moments of unfettered natural beauty, channeling his message of resilience and liberty directly to the viewer's core.
+His camera lens doesn't just capture light; it seizes moments of unfettered natural beauty, channeling the message of resilience and liberty directly to the viewer's core.
 
-In his nomadic journey across oceans and continents, Intrepid has honed a visual language that speaks in the language of the untamed wilds.
+In his nomadic journey across oceans and continents, Intrepid has honed a visual style that speaks in the language of the untamed wilds.
 His works are not static pictures but dynamic stories—each photo a diary entry of his life's voyage.
 They cut to the heart of his message: living deeply, freely, with the courage to explore the edges of the map and beyond.
       
 Stranded at sea, living off-grid, Intrepid's life is a manifesto of defiance against convention, mirrored perfectly in his art.
-Through his lens, the medium itself becomes the message: a life unanchored, a spirit uncontained, an art unconfined.
+Through his lens, the medium itself becomes the message: a life permissionless, a spirit uncontained, a perspective unconfined.
 
 We eagerly await Card 211 of The Memes as Intrepid shows us the keys to freedom on Mar 13th, 2024.`,
       links: [
