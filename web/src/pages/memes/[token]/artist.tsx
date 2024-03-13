@@ -5067,6 +5067,100 @@ Might Card 209 hold a 3D Pepe final boss for Memes hodlers? We will see on Mar 8
       ],
     },
     {
+      tokenId: 210,
+      images: [
+        "/artist-210/work-1.png",
+        "/artist-210/work-2.png",
+        "/artist-210/work-3.png",
+      ],
+      poster: "/artist-210/poster.png",
+      posterMintUrl: "",
+      name: "@PonderingDraw",
+      info: `
+We can't wait to see what Pondering has created in Card 210 of The Memes, revealed on Mar 11th, 2024.`,
+      links: [
+        {
+          name: "Pondering's Twitter",
+          url: "https://twitter.com/Ponderingdraw",
+        },
+        {
+          name: "Pondering's Instagram",
+          url: "https://www.instagram.com/UNNKNOWN",
+        },
+        {
+          name: "Pondering's Seize",
+          url: "https://seize.io/Pondering",
+        },
+      ],
+    },
+    {
+      tokenId: 211,
+      images: [
+        "/artist-211/work-1.jpeg",
+        "/artist-211/work-2.jpeg",
+        "/artist-211/work-3.jpeg",
+      ],
+      poster: "/artist-211/poster.png",
+      posterMintUrl: "",
+      name: "Intrpid",
+      info: `
+We can—at long last—welcome Intrepid not just as a meme maxi, but as a Meme Artist. 
+
+His art crashes over the digital scene like a wave of his own untamed experiences.
+Each image is an echo in pixels of his life of adventure, shouts the mantra that the freedom to transact is as vital as air.
+His camera lens doesn't just capture light; it seizes moments of unfettered natural beauty, channeling his message of resilience and liberty directly to the viewer's core.
+
+In his nomadic journey across oceans and continents, Intrepid has honed a visual language that speaks in the language of the untamed wilds.
+His works are not static pictures but dynamic stories—each photo a diary entry of his life's voyage.
+They cut to the heart of his message: living deeply, freely, with the courage to explore the edges of the map and beyond.
+      
+Stranded at sea, living off-grid, Intrepid's life is a manifesto of defiance against convention, mirrored perfectly in his art.
+Through his lens, the medium itself becomes the message: a life unanchored, a spirit uncontained, an art unconfined.
+
+We eagerly await Card 211 of The Memes as Intrepid shows us the keys to freedom on Mar 13th, 2024.`,
+      links: [
+        {
+          name: "Intrepid's Twitter",
+          url: "https://x.com/intrepid_p",
+        },
+        {
+          name: "Intrepid's Instagram",
+          url: "https://instagram.com/intrepidphotos",
+        },
+        {
+          name: "Intrepid's Seize",
+          url: "https://seize.io/intrepid",
+        },
+      ],
+    },
+    {
+      tokenId: 212,
+      images: [
+        "/artist-212/work-1.jpeg",
+        "/artist-212/work-2.png",
+        "/artist-212/work-3.mp4",
+      ],
+      poster: "/artist-212/poster.png",
+      posterMintUrl: "",
+      name: "@UNNKNOWN",
+      info: `
+...We can't wait to see what she has created in Card 212 for our community... on Mar 4th, 2024.`,
+      links: [
+        {
+          name: "UNNKNOWN's Twitter",
+          url: "https://twitter.com/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's Instagram",
+          url: "https://www.instagram.com/UNNKNOWN",
+        },
+        {
+          name: "UNNKNOWN's Seize",
+          url: "https://seize.io/UNNKNOWN",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
