@@ -5136,27 +5136,37 @@ We eagerly await Card 211 of The Memes as Intrepid shows us the keys to freedom 
     {
       tokenId: 212,
       images: [
-        "/artist-212/work-1.jpeg",
+        "/artist-212/work-1.png",
         "/artist-212/work-2.png",
-        "/artist-212/work-3.mp4",
+        "/artist-212/work-3.png",
       ],
       poster: "/artist-212/poster.png",
       posterMintUrl: "",
-      name: "@UNNKNOWN",
+      name: "Rebecca Rose",
       info: `
-...We can't wait to see what she has created in Card 212 for our community... on Mar 4th, 2024.`,
+Rebecca Rose is a vanguard in the digital collage realm, fusing traditional collage techniques with cutting-edge digital artistry.
+Her 20-year journey has been marked by daring forays into sculptural and holographic mediums, earning her a place among the avant-garde of contemporary art.
+With a deft hand, she layers history with innovation, crafting pieces that speak to both the past and the future of artistic expression.
+
+Her work, characterized by a striking interplay of motion and tableau, light and shadow, is a literal journey through emotional landscapes.
+Rose's collages slides viewers directly into a world where joy meets melancholy, revolution disrupts power, and creation intersects with entropy.
+In spite of the faceless characters, each artwork resonates with the rhythms of a deeper human narrative.
+
+Supported by the most esteemed art foundations, Rose's repertoire is both an artistic feat and a bridge to viewers' innermost reflections.
+
+Thanks to an early reveal, Card 212 is now on display for all, and minting on Mar 15th, 2024.`,
       links: [
         {
-          name: "UNNKNOWN's Twitter",
-          url: "https://twitter.com/UNNKNOWN",
+          name: "Rebecca's Twitter",
+          url: "https://twitter.com/rebeccarosenft",
         },
         {
-          name: "UNNKNOWN's Instagram",
-          url: "https://www.instagram.com/UNNKNOWN",
+          name: "Rebecca's Instagram",
+          url: "https://www.instagram.com/rebeccarosenft",
         },
         {
-          name: "UNNKNOWN's Seize",
-          url: "https://seize.io/UNNKNOWN",
+          name: "Rebecca's Seize",
+          url: "https://seize.io/rebeccarose",
         },
       ],
     },
