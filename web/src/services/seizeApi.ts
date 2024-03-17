@@ -156,6 +156,42 @@ const fetchPebbleReps = async (
   }
 };
 
+const fetchAwardReps = async () => {
+  let page = 1;
+  const pageSize = 100;
+  let items: any[] = [];
+  let shouldContinue = true;
+
+  while (shouldContinue) {
+    try {
+      const response = await axios.get(
+        "https://api.seize.io/api/profile-logs",
+        {
+          params: {
+            page: page,
+            page_size: pageSize,
+            include_incoming: true,
+            rating_matter: "REP",
+          },
+        }
+      );
+      shouldContinue = response.data.data.length === pageSize && response.data.data.created_at < 1710670964000;
+      page += 1;
+      items = [...response.data.data, ...items];
+    } catch (error) {
+      console.error("Error fetching award reps:", error);
+      shouldContinue = false;
+    }
+  }
+  return items = items
+    .filter((item: any) => {
+      return (
+        item.contents.rating_category.match(/^SAS6/i) &&
+        item.contents.new_rating > 0
+      );
+    })
+}
+
 const fetchMomoReps = async () => {
   let page = 1;
   const pageSize = 100;
@@ -261,10 +297,7 @@ const fetchRep = async (
         return item.created_at > latestRepTimestamp;
       });
       shouldContinue = newItems.length === pageSize;
-      console.log("items", items.length);
-      console.log("newItems", newItems.length);
       items = [...newItems, ...items];
-      console.log("items now", items.length);
       page += 1;
     } catch (error) {
       console.error("Error fetching rep:", error);
@@ -315,4 +348,4 @@ const timeAgo = (milliseconds: number): string => {
   }
 };
 
-export { fetchPebbleReps, raceHistory, fetchMomoReps, fetchRep, timeAgo };
+export { fetchPebbleReps, raceHistory, fetchAwardReps, fetchMomoReps, fetchRep, timeAgo };
