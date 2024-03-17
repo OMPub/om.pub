@@ -3,7 +3,8 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import styles from "@/styles/Home.module.scss";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { fetchAwardReps, timeAgo } from "@/services/seizeApi";
 
@@ -41,17 +42,20 @@ type Votes = {
 
 const AwardsPage = () => {
   const [reps, setReps] = useState<Rep[]>([]);
-  const [votes, setVotes] = useState<Votes>([]);
+  const [votes, setVotes] = useState<Votes>({});
   const [categories, setCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getReps = async () => {
+      setLoading(true);
       try {
         const data = await fetchAwardReps();
         setReps(data);
       } catch (error) {
         console.error("Error fetching reps:", error);
       }
+      setLoading(false);
     };
 
     getReps();
@@ -139,44 +143,74 @@ const AwardsPage = () => {
         <meta property="og:image" content="https://om.pub/og-image.jpg" />
       </Head>
       <Header />
-      <Container>
-        <Row>
-          <Col>
-            <h1>S6 Seizer Awards</h1>
-            {categories.map((category: string) => (
-              <React.Fragment key={category}>
-                <Card className={styles.repCard}>
-                  <Card.Body>
-                    <Card.Title>{category}</Card.Title>
-                    <Card.Text>
-                      {votes[category].map((vote: any, index: number) => (
-                        <span style={{display: 'block'}} key={index}>
-                          {vote.rep} &mdash;{" "}
-                          <a
-                            href={`https://seize.io/${vote.nominee}`}
-                            target="_blank"
-                          >
-                            {vote.nominee}
-                          </a>{" "}
-                          from{" "}
-                          <span title={vote.voters.join(", ")}>
-                            {vote.voters.length +
-                              (vote.voters.length > 1 ? " voters" : " voter")}
+      {loading ? (
+        <span className="center">
+          <i className="fas fa-trophy"></i>
+        </span>
+      ) : (
+        <Container>
+          <Row>
+            <Col>
+              <h1>S6 Seizer Awards</h1>
+              {categories.map((category: string) => (
+                <React.Fragment key={category}>
+                  <Card className={styles.repCard}>
+                    <Card.Body>
+                      <Card.Title>{category}</Card.Title>
+                      <Card.Text>
+                        {votes[category].map((vote: any, index: number) => (
+                          <span style={{ display: "block" }} key={index}>
+                            {vote.rep} &mdash;{" "}
+                            <a
+                              href={`https://seize.io/${vote.nominee}`}
+                              target="_blank"
+                            >
+                              {vote.nominee}
+                            </a>{" "}
+                            from{" "}
+                            <span title={vote.voters.join(", ")}>
+                              {vote.voters.length +
+                                (vote.voters.length > 1 ? " voters" : " voter")}
+                            </span>
                           </span>
-                        </span>
-                      ))}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </React.Fragment>
-            ))}
-          </Col>
-        </Row>
-      </Container>
+                        ))}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </React.Fragment>
+              ))}
+            </Col>
+          </Row>
+        </Container>
+      )}
       <style jsx>{`
         a {
           text-decoration: none;
           color: #02c;
+        }
+        .center {
+          display: flex;
+          justify-content: center;
+        }
+        .fas.fa-trophy {
+          font-size: 13em;
+          animation: pulse .69s infinite;
+          color: #ddd;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(0.6);
+            opacity: 0.5;
+          }
+          50% {
+            transform: scale(1.1);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0.5;
+          }
         }
       `}</style>
     </>
