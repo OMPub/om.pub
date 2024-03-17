@@ -175,7 +175,9 @@ const fetchAwardReps = async () => {
           },
         }
       );
-      shouldContinue = response.data.data.length === pageSize && response.data.data.created_at < 1710670964000;
+      shouldContinue =
+        response.data.data.length === pageSize &&
+        response.data.data.created_at < 1710670964000;
       page += 1;
       items = [...response.data.data, ...items];
     } catch (error) {
@@ -183,14 +185,28 @@ const fetchAwardReps = async () => {
       shouldContinue = false;
     }
   }
-  return items = items
+  return (items
+    .reduce((acc: any, item: any) => {
+      // keep only the most recent unique rating_category
+      if (
+        !acc.some(
+          (i: any) =>
+            i.contents.rating_category === item.contents.rating_category &&
+            i.target_profile_handle === item.target_profile_handle &&
+            i.profile_handle === item.profile_handle
+        )
+      ) {
+        acc.push(item);
+      }
+      return acc;
+    }, [])
     .filter((item: any) => {
       return (
-        item.contents.rating_category.match(/^SAS6/i) &&
-        item.contents.new_rating > 0
+        item.contents.new_rating > 0 && item.contents.rating_category.match(/^SAS6/i)
       );
     })
-}
+    );
+};
 
 const fetchMomoReps = async () => {
   let page = 1;
@@ -214,7 +230,7 @@ const fetchMomoReps = async () => {
       );
       shouldContinue = response.data.data.length === pageSize;
       page += 1;
-      
+
       items = [...response.data.data, ...items];
       // sort data by timestamp
       items = items.sort((a: any, b: any) => {
@@ -348,4 +364,11 @@ const timeAgo = (milliseconds: number): string => {
   }
 };
 
-export { fetchPebbleReps, raceHistory, fetchAwardReps, fetchMomoReps, fetchRep, timeAgo };
+export {
+  fetchPebbleReps,
+  raceHistory,
+  fetchAwardReps,
+  fetchMomoReps,
+  fetchRep,
+  timeAgo,
+};

@@ -152,6 +152,26 @@ const AwardsPage = () => {
           <Row>
             <Col>
               <h1>S6 Seizer Awards</h1>
+              <h3>
+                Cast your vote at seize.io. 
+              </h3>
+              <ol>
+                <li>
+                Review <a href="https://seize.io/the-memes?szn=6&sort=age&sort_dir=ASC " target="_blank">SZN 6 Memes on Seize</a>
+                </li>  
+                <li>
+                Find the <a href="https://seize.io/community?page=1&curation=meme-artists-szn-6-sRm1dSEhAHJhtiKYysoKxb" target="_blank">SZN 6 artists on Seize</a>
+                </li>
+                <li>
+                Rep with <pre>SAS6</pre> followed by the category your want to vote for (existing categories will be listed)
+                </li>
+                <li>
+                Choose the amount of Rep you want to give: Only up to 10 will count towards the awards, but you can give as much as you want
+                </li>
+                <li>
+                Create a new award if you want using <pre>SAS6</pre> as the prefix
+                </li>
+              </ol>
               {categories.map((category: string) => (
                 <React.Fragment key={category}>
                   <Card className={styles.repCard}>
@@ -188,13 +208,24 @@ const AwardsPage = () => {
           text-decoration: none;
           color: #02c;
         }
+        pre {
+          display: inline;
+          padding: 0.2em 0.4em;
+          margin: 0;
+          font-size: 85%;
+          font-weight: 700;
+          line-height: 1;
+          color: #fff;
+          background-color: #000;
+          border-radius: 0.2em;
+        }
         .center {
           display: flex;
           justify-content: center;
         }
         .fas.fa-trophy {
           font-size: 13em;
-          animation: pulse .69s infinite;
+          animation: pulse 0.69s infinite;
           color: #ddd;
         }
 
