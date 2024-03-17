@@ -163,13 +163,13 @@ const AwardsPage = () => {
                 Find the <a href="https://seize.io/community?page=1&curation=meme-artists-szn-6-sRm1dSEhAHJhtiKYysoKxb" target="_blank">SZN 6 artists on Seize</a>
                 </li>
                 <li>
-                Rep with <pre>SAS6</pre> followed by the category your want to vote for (existing categories will be listed)
+                Rep on Seize with <pre>SAS6</pre> followed by the category your want to vote for (existing categories will be listed)
                 </li>
                 <li>
                 Choose the amount of Rep you want to give: Only up to 10 will count towards the awards, but you can give as much as you want
                 </li>
                 <li>
-                Create a new award if you want using <pre>SAS6</pre> as the prefix
+                Create a new award if you want: use <pre>SAS6</pre> as the prefix
                 </li>
               </ol>
               {categories.map((category: string) => (
