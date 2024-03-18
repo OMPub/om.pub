@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import styles from "@/styles/Home.module.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
+import { Tooltip } from "react-tooltip";
 import { fetchAwardReps, timeAgo } from "@/services/seizeApi";
 
 const Header = dynamic(() => import("../components/header/Header"), {
@@ -152,24 +153,37 @@ const AwardsPage = () => {
           <Row>
             <Col>
               <h1>S6 Seizer Awards</h1>
-              <h3>
-                Cast your vote at seize.io. 
-              </h3>
+              <h3>Cast your vote at seize.io</h3>
               <ol>
                 <li>
-                Review <a href="https://seize.io/the-memes?szn=6&sort=age&sort_dir=ASC " target="_blank">SZN 6 Memes on Seize</a>
-                </li>  
-                <li>
-                Find the <a href="https://seize.io/community?page=1&curation=meme-artists-szn-6-sRm1dSEhAHJhtiKYysoKxb" target="_blank">SZN 6 artists on Seize</a>
+                  Review{" "}
+                  <a
+                    href="https://seize.io/the-memes?szn=6&sort=age&sort_dir=ASC "
+                    target="_blank"
+                  >
+                    SZN 6 Memes on Seize
+                  </a>
                 </li>
                 <li>
-                Rep on Seize with <pre>SAS6</pre> followed by the category your want to vote for (existing categories will be listed)
+                  Find the{" "}
+                  <a
+                    href="https://seize.io/community?page=1&curation=meme-artists-szn-6-sRm1dSEhAHJhtiKYysoKxb"
+                    target="_blank"
+                  >
+                    SZN 6 artists on Seize
+                  </a>
                 </li>
                 <li>
-                Choose the amount of Rep you want to give: Only up to 10 will count towards the awards, but you can give as much as you want
+                  Rep on Seize with <pre>SAS6</pre> followed by the category
+                  your want to vote for (existing categories will be listed)
                 </li>
                 <li>
-                Create a new award if you want: use <pre>SAS6</pre> as the prefix
+                  Choose the amount of Rep you want to give: Only up to 10 will
+                  count towards the awards, but you can give as much as you want
+                </li>
+                <li>
+                  Create a new award if you want: use <pre>SAS6</pre> as the
+                  prefix
                 </li>
               </ol>
               {categories.map((category: string) => (
@@ -188,10 +202,14 @@ const AwardsPage = () => {
                               {vote.nominee}
                             </a>{" "}
                             from{" "}
-                            <span title={vote.voters.join(", ")}>
+                            <a
+                              data-tooltip-id={`tooltip-${index}`}
+                              data-tooltip-content={vote.voters.join(", ")}
+                            >
                               {vote.voters.length +
                                 (vote.voters.length > 1 ? " voters" : " voter")}
-                            </span>
+                            </a>
+                            <Tooltip id={`tooltip-${index}`} place="right" />
                           </span>
                         ))}
                       </Card.Text>

@@ -176,7 +176,6 @@ const fetchAwardReps = async () => {
         }
       );
       
-      console.log(new Date(response.data.data[0].created_at).getTime())
       shouldContinue =
         response.data.data.length === pageSize &&
         new Date(response.data.data[0].created_at).getTime() > 1710670964000;
