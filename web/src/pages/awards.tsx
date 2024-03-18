@@ -204,7 +204,8 @@ const AwardsPage = () => {
                             from{" "}
                             <a
                               data-tooltip-id={`tooltip-${index}`}
-                              data-tooltip-content={vote.voters.join(", ")}
+                              // data-tooltip-content={vote.voters.join(", ")}
+                              title={vote.voters.join(", ")}
                             >
                               {vote.voters.length +
                                 (vote.voters.length > 1 ? " voters" : " voter")}
