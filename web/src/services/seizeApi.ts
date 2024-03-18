@@ -175,9 +175,11 @@ const fetchAwardReps = async () => {
           },
         }
       );
+      
+      console.log(new Date(response.data.data[0].created_at).getTime())
       shouldContinue =
         response.data.data.length === pageSize &&
-        response.data.data.created_at < 1710670964000;
+        new Date(response.data.data[0].created_at).getTime() > 1710670964000;
       page += 1;
       items = [...response.data.data, ...items];
     } catch (error) {
