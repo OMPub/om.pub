@@ -175,7 +175,7 @@ const fetchAwardReps = async () => {
           },
         }
       );
-      
+
       shouldContinue =
         response.data.data.length === pageSize &&
         new Date(response.data.data[0].created_at).getTime() > 1710670964000;
@@ -186,7 +186,8 @@ const fetchAwardReps = async () => {
       shouldContinue = false;
     }
   }
-  return (items
+  return items
+    .filter((item: any) => item.contents.change_reason !== "LOST_TDH")
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
@@ -203,10 +204,10 @@ const fetchAwardReps = async () => {
     }, [])
     .filter((item: any) => {
       return (
-        item.contents.new_rating > 0 && item.contents.rating_category.match(/^SAS6/i)
+        item.contents.new_rating > 0 &&
+        item.contents.rating_category.match(/^SAS6/i)
       );
-    })
-    );
+    });
 };
 
 const fetchMomoReps = async () => {
@@ -245,6 +246,7 @@ const fetchMomoReps = async () => {
     }
   }
   items = items
+    .filter((item: any) => item.contents.change_reason !== "LOST_TDH")
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
