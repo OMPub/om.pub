@@ -5171,6 +5171,43 @@ Thanks to an early reveal, Card 212 is now on display for all, and minting on Ma
       ],
     },
     {
+      tokenId: 213,
+      images: [
+        "/artist-213/work-1.jpeg",
+        "/artist-213/work-2.png",
+        "/artist-213/work-3.gif",
+      ],
+      poster: "/artist-213/poster.mp4",
+      posterMintUrl: "",
+      name: "Ix Shells",
+      info: `
+IX Shells is an artist who lives out the pioneering spirit of the digital art movement.
+Immersed in the web3 landscape, she commenced her artistic venture by minting her first piece on Foundation back in 2020, laying the groundwork for a journey into the realms of NFTs and digital expression.
+She says of her early experience, "I spent a lot of time on Discord, where I eventually became a moderator for Foundation."
+This reflects her dedication, her willingness to put in the effort, and also her commitment to cultivating a community within the digital art space.
+
+Her contribution to digital art is multifaceted, marked by significant achievements such as her notable involvement with the Tor Project which culminated in a groundbreaking 500ETH auction for charity.
+IX Shells' artistic practice is deeply rooted in her personal narrative and the technological zeitgeist, a synthesis that she adeptly transforms into visually arresting digital artworks.
+
+Her generative art integrate technique and emotion, weaving together the threads of her life experiences with the digital tools at her disposal.
+
+We will see how her generative flair will come to The Memes in Card 213 ... on Apr 1st, 2024.`,
+      links: [
+        {
+          name: "Ix's Twitter",
+          url: "https://twitter.com/ix_shells",
+        },
+        {
+          name: "Ix's Foundation",
+          url: "https://foundation.app/@IXSHELLS",
+        },
+        {
+          name: "Ix's Seize",
+          url: "https://seize.io/IXSHELLS",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
@@ -5181,7 +5218,7 @@ Thanks to an early reveal, Card 212 is now on display for all, and minting on Ma
       posterMintUrl: "",
       name: "@UNNKNOWN",
       info: `
-...We can't wait to see what she has created in Card 690 for our community... on Mar 4th, 2024.`,
+...We can't wait to see what she has created in Card 690 for our community... on Apr 4th, 2024.`,
       links: [
         {
           name: "UNNKNOWN's Twitter",
