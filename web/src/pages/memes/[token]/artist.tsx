@@ -5208,6 +5208,121 @@ We will see how her generative flair will come to The Memes in Card 213 ... on A
       ],
     },
     {
+      tokenId: 214,
+      images: [
+        "/artist-214/work-1.jpeg",
+        "/artist-214/work-2.png",
+        "/artist-214/work-3.mp4",
+      ],
+      poster: "/artist-214/poster.png",
+      posterMintUrl: "",
+      name: "@BushRobins",
+      info: `
+...We can't wait to see what BushRobins has created in Card 214 for our community... on Apr 4th, 2024.`,
+      links: [
+        {
+          name: "BushRobins's Twitter",
+          url: "https://twitter.com/BushRobins",
+        },
+        {
+          name: "BushRobins's Instagram",
+          url: "https://www.instagram.com/BushRobins",
+        },
+        {
+          name: "BushRobins's Seize",
+          url: "https://seize.io/BushRobins",
+        },
+      ],
+    },
+    {
+      tokenId: 215,
+      images: [
+        "/artist-215/work-1.jpeg",
+        "/artist-215/work-2.png",
+        "/artist-215/work-3.mp4",
+      ],
+      poster: "/artist-215/poster.png",
+      posterMintUrl: "",
+      name: "@Random_Freaks",
+      info: `
+...We can't wait to see what RandomFreaks has created in Card 215 for our community... on Apr 5th, 2024.`,
+      links: [
+        {
+          name: "Random_Freaks's Twitter",
+          url: "https://twitter.com/Random_Freaks",
+        },
+        {
+          name: "Random_Freaks's Instagram",
+          url: "https://www.instagram.com/UNNKNOWN",
+        },
+        {
+          name: "Random_Freaks's Seize",
+          url: "https://seize.io/RandomFreaks",
+        },
+      ],
+    },
+    {
+      tokenId: 216,
+      images: [
+        "/artist-216/work-1.jpeg",
+        "/artist-216/work-2.png",
+        "/artist-216/work-3.mp4",
+      ],
+      poster: "/artist-216/poster.png",
+      posterMintUrl: "",
+      name: "@PixelGustavo",
+      info: `
+...We can't wait to see what PixelGustavo has created in Card 216 for our community... on Apr 8th, 2024.`,
+      links: [
+        {
+          name: "PixelGustavo's Twitter",
+          url: "https://twitter.com/PixelGustavo",
+        },
+        {
+          name: "PixelGustavo's Instagram",
+          url: "https://www.instagram.com/PixelGustavo",
+        },
+        {
+          name: "PixelGustavo's Seize",
+          url: "https://seize.io/PixelGustavo",
+        },
+      ],
+    },
+    {
+      tokenId: 217,
+      images: [
+        "/artist-217/work-1.jpeg",
+        "/artist-217/work-2.mp4",
+        "/artist-217/work-3.jpeg",
+      ],
+      poster: "/artist-217/poster-lg.gif",
+      posterMintUrl: "",
+      name: "@Hoizonart",
+      info: `
+Hoizon has a talent for harnessing the vast potential of cryptoart to create pieces that blend traditional artistic elements with modern crypto cyberscapes. 
+In many artworks, we see a stark contrast not only in thematic elements but also in the approach to digital painting itself.
+Creations often boast glitch movement and a vivid, almost psychedelic exploration of form and color. 
+Hoizon utilizes digital brushes to mimic the energetic strokes of physical paint, creating a sense of movement and vitality. 
+The fluorescent colors and the intricate details give it an almost tactile quality. 
+There's a freedom in the way Hoizon allows the digital medium to surpass the boundaries of the conventional, playing with proportions, perspectives, and colors in a way that marks the work as distinct Hoizon.
+
+We can't wait to see what Hoizon expores in Card 217 for The Memes community, dropping on Apr 10th, 2024!`,
+      links: [
+        {
+          name: "Hoizon's Twitter",
+          url: "https://x.com/HoizonArt",
+        },
+        {
+          name: "Hoizon's Instagram",
+          url: "https://instagram.com/hoizon.art",
+        },
+        {
+          name: "Hoizon's Seize",
+          url: "https://seize.io/Hoizon",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",

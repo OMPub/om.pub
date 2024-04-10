@@ -145,10 +145,11 @@ export default function Memes() {
             <ul>
               <li>Season 7</li>
               <ul>
-                <li>
-                  Artist Preview:{" "}
-                  <a href="/memes/213/artist">Meme Artist 213 - IX Shells</a>
-                </li>
+                <li>Artist Preview:{" "}<a href="/memes/217/artist">Meme Artist 217 - HoizonArt</a></li>
+                <li>Artist Preview:{" "}<a href="/memes/216/artist">Meme Artist 216 - PixelGustavo</a></li>
+                <li>Artist Preview:{" "}<a href="/memes/215/artist">Meme Artist 215 - Random_Freaks</a></li>
+                <li>Artist Preview:{" "}<a href="/memes/214/artist">Meme Artist 214 - BushRobins</a></li>
+                <li>Artist Preview:{" "}<a href="/memes/213/artist">Meme Artist 213 - IX Shells</a></li>
               </ul>
             </ul>
 
