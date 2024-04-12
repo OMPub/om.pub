@@ -5323,6 +5323,38 @@ We can't wait to see what Hoizon expores in Card 217 for The Memes community, dr
       ],
     },
     {
+      tokenId: 218,
+      images: [
+        "/artist-218/work-1.jpeg",
+        "/artist-218/work-2.jpg",
+        "/artist-218/work-3.jpg",
+      ],
+      poster: "/artist-218/poster.png",
+      posterMintUrl: "",
+      name: "Zhuk",
+      info: `
+Zhuk is an artist who fluidly integrates the flexibility and collectability of digital art with the meticulous strokes of tassel painting, a technique that involves creating a textured effect similar to brushwork in traditional painting.
+Her sensual artwork stands out for the distinctive way it channels the intensity of classical motifs through a modern digital medium, reframing age-old narratives with a fresh and bright femme visual vocabulary. 
+By careful transfer of each piece to digital format, the tactile sensation of tassel strokes are preserved.
+Zhuk crafts a bridge between the artisan's hand and the digital medium, challenging viewers to find new beauty in the timeless tales of history and mythology. 
+
+Now we'll get to see Zhuk's powerful perspective in Card 218 on Apr 12th, 2024!`,
+      links: [
+        {
+          name: "Zhuk's Twitter",
+          url: "https://twitter.com/Zhuk_live",
+        },
+        {
+          name: "Zhuk's Instagram",
+          url: "https://www.instagram.com/zhuk.live",
+        },
+        {
+          name: "Zhuk's Seize",
+          url: "https://seize.io/Zhuk",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
