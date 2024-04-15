@@ -5355,6 +5355,38 @@ Now we'll get to see Zhuk's powerful perspective in Card 218 on Apr 12th, 2024!`
       ],
     },
     {
+      tokenId: 219,
+      images: [
+        "/artist-219/work-1.jpeg",
+        "/artist-219/work-2.gif",
+        "/artist-219/work-3.jpeg",
+      ],
+      poster: "/artist-219/poster.png",
+      posterMintUrl: "",
+      name: "LavaaGang",
+      info: `
+LavaaGang distinguishes themselves with a digital style that's intricate yet approachable, brimming with a riot of colors and clean lines.
+There's a precision to the artist's work that belies the whimsical chaos of the subject matter, revealing an underlying order to the placement of each character and element.
+LavaaGang's approach is meme-packed, each figure is infused with personality and an invitation to guess at the backstory and to linger over the details. 
+The style is erupting with community feels, embodying the digital medium's capacity for both connection and complexity, marking LavaaGang's artistic signature as one of vibrant individuality and colorful inclusion.
+
+Now we get a The Memes version of this whimsical chaos in Card 219, dropping on Apr 15th, 2024.`,
+      links: [
+        {
+          name: "LavaaGang's Twitter",
+          url: "https://twitter.com/GangLavaa",
+        },
+        {
+          name: "LavaaGang's Instagram",
+          url: "http://instagram.com/lavaa.gang",
+        },
+        {
+          name: "LavaaGang's Seize",
+          url: "https://seize.io/LavaaGang",
+        },
+      ],
+    },
+    {
       tokenId: 690,
       images: [
         "/artist-690/work-1.jpeg",
