@@ -253,7 +253,7 @@ const fetchMomoReps = async () => {
         !acc.some(
           (i: any) =>
             i.contents.rating_category === item.contents.rating_category &&
-            i.contents.profile_handle === item.contents.profile_handle
+            i.profile_handle === item.profile_handle
         )
       ) {
         acc.push(item);
