@@ -30,9 +30,7 @@ const StoryPage = () => {
   const sortedAuthors = Object.keys(authorsWithCount).sort();
   
   useEffect(() => {
-    const authors = [
-      ...new Set(storyLines.map((storyLine) => storyLine.author)),
-    ];
+    const authors = Array.from(new Set(storyLines.map((storyLine) => storyLine.author)));
     setSelectedAuthors(authors);
   }, [storyLines]);
 
@@ -103,7 +101,7 @@ const StoryPage = () => {
           <Col md={3}>
             {Array.from(
               new Set(storyLines.map((storyLine) => storyLine.author))
-            ).map((author) => (
+            ).sort((a, b) => authorsWithCount[b] - authorsWithCount[a]).map((author) => (
               <div key={author}>
                 <Form.Check
                   type="checkbox"
