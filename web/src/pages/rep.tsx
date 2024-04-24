@@ -176,7 +176,7 @@ const RepPage = () => {
                 className="mb-2"
                 style={{ textAlign: "right", color: "#ccc" }}
               >
-                from{" "}
+                {rep.contents.new_rating} from{" "}
                 <a
                   href={"https://seize.io/" + rep.profile_handle}
                   target="_blank"
