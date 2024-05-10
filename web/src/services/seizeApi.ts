@@ -246,7 +246,7 @@ const fetchMomoReps = async () => {
     }
   }
   items = items
-    .filter((item: any) => item.contents.change_reason !== "LOST_TDH")
+    .filter((item: any) => item.contents.change_reason !== "LOST_TDH" && !item.contents.change_reason.match(/^Profile/))
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
@@ -335,6 +335,7 @@ const fetchRep = async (
         : item.target_profile_handle.toLowerCase() ===
           username.toLowerCase()) &&
       item.contents.rating_matter == "REP" &&
+      !item.contents.change_reason.match(/^Profile/) &&
       item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
     );
   });
