@@ -178,7 +178,7 @@ const fetchAwardReps = async () => {
 
       shouldContinue =
         response.data.data.length === pageSize &&
-        new Date(response.data.data[0].created_at).getTime() > 1710670964000;
+        new Date(response.data.data[0].created_at).getTime() > 1718714264000;
       page += 1;
       items = [...response.data.data, ...items];
     } catch (error) {
@@ -187,7 +187,8 @@ const fetchAwardReps = async () => {
     }
   }
   return items
-    .filter((item: any) => item.contents.change_reason !== "LOST_TDH")
+    .filter((item: any) => item.contents.change_reason !== "LOST_TDH"&&
+      !item.contents.change_reason.match(/^Profile/))
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
@@ -205,16 +206,17 @@ const fetchAwardReps = async () => {
     .filter((item: any) => {
       return (
         item.contents.new_rating > 0 &&
-        item.contents.rating_category.match(/^SAS6/i)
+        item.contents.rating_category.match(/^SAS7/i)
       );
     });
 };
 
-const fetchMomoReps = async () => {
+const fetchMomoReps = async (endTime: String) => {
   let page = 1;
   const pageSize = 100;
   let items: any[] = [];
   let shouldContinue = true;
+  endTime = endTime ? endTime.trim() : '2030-01-01";
 
   while (shouldContinue) {
     try {
@@ -246,10 +248,15 @@ const fetchMomoReps = async () => {
     }
   }
   items = items
-    .filter((item: any) => item.contents.change_reason !== "LOST_TDH" && !item.contents.change_reason.match(/^Profile/))
+    .filter(
+      (item: any) =>
+        item.contents.change_reason !== "LOST_TDH" &&
+        !item.contents.change_reason.match(/^Profile/)
+    )
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
+        new Date(item.created_at).getTime() < 1715212800000 &&
         !acc.some(
           (i: any) =>
             i.contents.rating_category === item.contents.rating_category &&
@@ -260,15 +267,14 @@ const fetchMomoReps = async () => {
       }
       return acc;
     }, [])
-    .filter((item: any) => {
-      return (
+    .filter(
+      (item: any) =>
         item.target_profile_handle === "MoMO" &&
         new Date(item.created_at).getTime() > 1709172603000 &&
         item.contents.rating_category.match(/^wwoh/i) &&
         (item.contents.new_rating === 1 ||
           (item.contents.new_rating === -1 && item.profile_handle == "Karen"))
-      );
-    })
+    )
     .map((item: any) => {
       return {
         id: item.id,
