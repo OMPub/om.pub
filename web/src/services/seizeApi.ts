@@ -211,12 +211,12 @@ const fetchAwardReps = async () => {
     });
 };
 
-const fetchMomoReps = async (endTime: String) => {
+const fetchMomoReps = async (endTime: String = '2030-01-01') => {
   let page = 1;
   const pageSize = 100;
   let items: any[] = [];
   let shouldContinue = true;
-  endTime = endTime ? endTime.trim() : '2030-01-01";
+  endTime = endTime.trim();
 
   while (shouldContinue) {
     try {
