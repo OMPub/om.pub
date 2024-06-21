@@ -68,9 +68,9 @@ const AwardsPage = () => {
       try {
         const data = reps.reduce((acc: any, item: any) => {
           // collate reps by category, as key, with total rep for each nominee and their voters as value,
-          // e.g. { "SAS7 Best Rememer": [{ nominee: 'RegularDad', rep: 10, voters: ["user1", "user2"] }] }
+          // e.g. { "SAS7 Best Rememer": [{ nominee: 'RegularDad', rep: 1, voters: ["user1", "user2"] }] }
           let rep = item.contents.new_rating;
-          rep = rep > 10 ? 10 : rep < 0 ? 0 : rep;
+          rep = rep > 1 ? 1 : rep < 0 ? 0 : rep;
           if (acc[item.contents.rating_category]) {
             const nominee = acc[item.contents.rating_category].find(
               (x: any) => x.nominee === item.target_profile_handle
@@ -158,7 +158,7 @@ const AwardsPage = () => {
                 <li>
                   Review{" "}
                   <a
-                    href="https://seize.io/the-memes?szn=7&sort=age&sort_dir=ASC "
+                    href="https://seize.io/the-memes?szn=7&sort=age&sort_dir=DESC "
                     target="_blank"
                   >
                     SZN 7 Memes on Seize
@@ -178,8 +178,8 @@ const AwardsPage = () => {
                   your want to vote for (existing categories will be listed)
                 </li>
                 <li>
-                  Choose the amount of Rep you want to give: Only up to 10 will
-                  count towards the awards, but you can give as much as you want
+                  Cast your vote by giving Rep, in any amount: One (1) vote is counted 
+                  for each profile who reps a nominee
                 </li>
                 <li>
                   Create a new award if you want: use <pre>SAS7</pre> as the
