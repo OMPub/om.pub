@@ -23,6 +23,7 @@ interface MemeCard {
   season: number;
   memeName: string;
   thumbnailUrl: string;
+  rank: number | null;
 }
 
 const MemeRankPage = () => {
@@ -31,7 +32,6 @@ const MemeRankPage = () => {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-
   const sortedMemeCards = React.useMemo(() => {
     let sortableItems = [...memeCards];
     if (sortConfig !== null) {
@@ -39,11 +39,25 @@ const MemeRankPage = () => {
         const aValue = a[sortConfig.key as keyof MemeCard];
         const bValue = b[sortConfig.key as keyof MemeCard];
 
-        if (aValue < bValue) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (aValue > bValue) {
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null)
           return sortConfig.direction === "ascending" ? 1 : -1;
+        if (bValue === null)
+          return sortConfig.direction === "ascending" ? -1 : 1;
+
+        let compareResult;
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          compareResult = aValue
+            .toLowerCase()
+            .localeCompare(bValue.toLowerCase());
+        } else {
+          compareResult = aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+        }
+
+        if (compareResult !== 0) {
+          return sortConfig.direction === "ascending"
+            ? compareResult
+            : -compareResult;
         }
 
         // Secondary sort by average rep
@@ -59,6 +73,17 @@ const MemeRankPage = () => {
         return 0;
       });
     }
+
+    // Assign ranks to cards with ratings
+    let currentRank = 1;
+    sortableItems.forEach((card, index) => {
+      if (card.rep !== 0) {
+        card.rank = currentRank++;
+      } else {
+        card.rank = null;
+      }
+    });
+
     return sortableItems;
   }, [memeCards, sortConfig]);
 
@@ -122,17 +147,18 @@ const MemeRankPage = () => {
                 value: string | number;
               }>
             )?.find((attr) => attr.trait_type === "Type - Season")?.value;
-            const memeName = (
-              cardData?.metadata?.attributes as Array<{
-                trait_type: string;
-                value: string;
-              }>
-            )?.find((attr) => attr.trait_type === "Meme Name")?.value ?? "";
+            const memeName =
+              (
+                cardData?.metadata?.attributes as Array<{
+                  trait_type: string;
+                  value: string;
+                }>
+              )?.find((attr) => attr.trait_type === "Meme Name")?.value ?? "";
 
             return {
               id,
               name,
-              rep: typedData.total / typedData.count,
+              rep: typedData.count > 0 ? typedData.total / typedData.count : 0,
               lastRepTimestamp: typedData.lastTimestamp,
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
@@ -140,9 +166,44 @@ const MemeRankPage = () => {
               season: seasonValue ? Number(seasonValue) : 0,
               thumbnailUrl: cardData?.thumbnail ?? "",
               memeName,
+              rank: null,
             };
           }
         );
+
+        // Add missing cards (1 through 155)
+        for (let i = 1; i <= 155; i++) {
+          if (!memeCards.some((card) => card.id === i)) {
+            const cardData = cardInfo[i.toString() as keyof typeof cardInfo];
+            const seasonValue = (
+              cardData?.metadata?.attributes as Array<{
+                trait_type: string;
+                value: string | number;
+              }>
+            )?.find((attr) => attr.trait_type === "Type - Season")?.value;
+            const memeName =
+              (
+                cardData?.metadata?.attributes as Array<{
+                  trait_type: string;
+                  value: string;
+                }>
+              )?.find((attr) => attr.trait_type === "Meme Name")?.value ?? "";
+
+            memeCards.push({
+              id: i,
+              name: `Card ${i}`,
+              rep: 0,
+              lastRepTimestamp: 0,
+              cardName: cardData?.name ?? "",
+              artist: cardData?.artist ?? "",
+              url: `https://seize.io/the-memes/${i}`,
+              season: seasonValue ? Number(seasonValue) : 0,
+              thumbnailUrl: cardData?.thumbnail ?? "",
+              memeName,
+              rank: null,
+            });
+          }
+        }
 
         setMemeCards(memeCards.sort((a, b) => b.rep - a.rep));
       } catch (error) {
@@ -158,18 +219,73 @@ const MemeRankPage = () => {
       <Head>
         <title>Memetic Power Ratings | The OM Pub</title>
         <meta property="og:url" content={`https://om.pub/mpr`} />
-        <meta property="og:title" content={`Memetic Power Ratings | The OM Pub`} />
+        <meta
+          property="og:title"
+          content={`Memetic Power Ratings | The OM Pub`}
+        />
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
       <Container
         className={`${styles.main}`}
-        style={{ maxWidth: "850px", margin: "auto", padding: "20px" }}
+        style={{ maxWidth: "850px", margin: "auto", padding: "20px", fontSize: "1.3rem" }}
       >
         <Row>
           <Col>
             <h1>Memetic Power Ratings</h1>
-            <p>Community rating of meme cards, based on rep sent to MintFace.</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <p>
+              Memetic Power Ratings (MPR) by MintFace empowers frens on Seize to
+              upvote or downvote any meme. You can:
+            </p>
+            <ul style={{ listStyleType: "none" }}>
+              <li>🍒 rate your favorite memes between +1 and +5 rep</li>
+              <li>🪨 downrate memes you love to hate between -1 and -5 rep</li>
+              <li>
+                👉 place an MPR vote by sending "Card xx" rep from -5 to +5 rep per card to{" "}
+                <a
+                  href="https://seize.io/mintface/rep"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none" }}
+                >
+                  /mintface
+                </a>{" "}
+              </li>
+              <li>
+                {" "}
+                📊 eg:{" "}
+                <pre style={{ display: "inline" }}>
+                  Category: Card 53 | Total Rep: 5
+                </pre>{" "}
+              </li>
+            </ul>
+            <p>
+              Votes are totalled and given a live Memetic Power Rating between
+              -5 and +5.
+            </p>
+            <p>🍒 All positive meme ratings get cherry emojis.</p>
+            <p>🪨 All negative meme ratings get rock emojis.</p>
+          </Col>
+          </Row>
+          <Row>
+          <Col>
+            <aside
+              style={{
+                backgroundColor: "#f8f9fa",
+                padding: "0.5em",
+                borderRadius: "0.5em",
+                fontSize: "0.8em",
+                fontStyle: "italic",
+              }}
+            >
+              <p>Dashboard created by <a href="https://seize.io/brookr/rep" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>/brookr</a>.
+                If you got value from the MPR Dashboard, send rep, Ξ, memes, or good
+                vibes. <br />Get a Dashboard for YOUR project via ✅ CheckID FlashDash</p>
+            </aside>
           </Col>
         </Row>
         <Row>
@@ -177,42 +293,72 @@ const MemeRankPage = () => {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th onClick={() => requestSort("id")}>Rank</th>
+                  <th onClick={() => requestSort("rank")}>Rank</th>
+                  <th onClick={() => requestSort("rep")}>MPR</th>
                   <th onClick={() => requestSort("cardName")}>Card Name</th>
                   <th onClick={() => requestSort("memeName")}>Meme Name</th>
+                  <th onClick={() => requestSort("id")}>Card</th>
                   <th onClick={() => requestSort("season")}>Season</th>
-                  <th onClick={() => requestSort("artist")}>Artist</th>
-                  <th onClick={() => requestSort("rep")}>Power Rank</th>
                   <th onClick={() => requestSort("lastRepTimestamp")}>
                     Last Rep
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {sortedMemeCards.map((card, index) => (
+                {sortedMemeCards.map((card) => (
                   <tr key={card.id}>
-                    <td>{index + 1}</td>
-                    <td style={{ display: 'flex', alignItems: 'center' }}>
-                      <img src={card.thumbnailUrl} alt={card.cardName} style={{width: '50px', height: '50px', marginRight: '10px', flexShrink: 0}} />
-                      <a
-                        href={card.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
-                      >
-                        {card.cardName}
-                      </a>
-                    </td>
-                    <td>{card.memeName}</td>
-                    <td>{card.season}</td>
-                    <td>{card.artist}</td>
-                    <td title={card.rep.toString()} style={{ minWidth: '110px' }}>
+                    <td>{card.rank !== null ? card.rank : "--"}</td>
+                    <td
+                      title={card.rep.toString()}
+                      style={{ minWidth: "110px" }}
+                    >
                       {card.rep > 0
                         ? "🍒".repeat(Math.min(5, Math.round(card.rep)))
-                        : "🪨".repeat(Math.min(5, Math.abs(Math.round(card.rep))))}
+                        : "🪨".repeat(
+                            Math.min(5, Math.abs(Math.round(card.rep)))
+                          )}
                     </td>
-                    <td title={card.lastRepTimestamp.toString()}>
-                      {timeAgo(new Date(card.lastRepTimestamp).getTime())}
+                    <td>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                          src={card.thumbnailUrl}
+                          alt={card.cardName}
+                          style={{
+                            width: "50px",
+                            height: "auto",
+                            marginRight: "10px",
+                            flexShrink: 0,
+                            objectFit: "contain",
+                          }}
+                        />
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            textDecoration: "none",
+                          }}
+                        >
+                          {card.cardName}
+                        </a>
+                      </div>
+                    </td>
+                    <td>{card.memeName}</td>
+                    <td>{card.id}</td>
+                    <td>{card.season}</td>
+                    <td
+                      title={
+                        card.lastRepTimestamp > 0
+                          ? card.lastRepTimestamp.toString()
+                          : "--"
+                      }
+                    >
+                      {card.lastRepTimestamp
+                        ? timeAgo(new Date(card.lastRepTimestamp).getTime())
+                        : "--"}
                     </td>
                   </tr>
                 ))}
