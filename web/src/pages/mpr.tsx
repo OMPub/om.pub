@@ -156,9 +156,9 @@ const MemeRankPage = () => {
   return (
     <>
       <Head>
-        <title>Meme Card Rankings | The OM Pub</title>
+        <title>Memetic Power Ratings | The OM Pub</title>
         <meta property="og:url" content={`https://om.pub/mpr`} />
-        <meta property="og:title" content={`Meme Card Rankings | The OM Pub`} />
+        <meta property="og:title" content={`Memetic Power Ratings | The OM Pub`} />
         <meta property="og:image" content={`/om-pub-logo.webp`} />
       </Head>
       <Header />
@@ -168,8 +168,8 @@ const MemeRankPage = () => {
       >
         <Row>
           <Col>
-            <h1>Meme Power Rankings</h1>
-            <p>Rankings of meme cards based on rep sent to mintface.</p>
+            <h1>Memetic Power Ratings</h1>
+            <p>Community rating of meme cards, based on rep sent to MintFace.</p>
           </Col>
         </Row>
         <Row>
