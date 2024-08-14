@@ -107,8 +107,11 @@ const MemeRankPage = () => {
         const processedCards = data
           .filter((card: { contents: { rating_category: string } }) => {
             const match = card.contents.rating_category.match(/\d+/);
-            console.log(match[0])
-            return match && parseInt(match[0]) <= 151;
+            if (match) {
+              console.log(match[0]);
+              return parseInt(match[0]) <= 151;
+            }
+            return false;
           })
           .reduce(
             (
