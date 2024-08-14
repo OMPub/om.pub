@@ -187,8 +187,11 @@ const fetchAwardReps = async () => {
     }
   }
   return items
-    .filter((item: any) => item.contents.change_reason !== "LOST_TDH"&&
-      !item.contents.change_reason.match(/^Profile/))
+    .filter(
+      (item: any) =>
+        item.contents.change_reason !== "LOST_TDH" &&
+        !item.contents.change_reason.match(/^Profile/)
+    )
     .reduce((acc: any, item: any) => {
       // keep only the most recent unique rating_category
       if (
@@ -210,8 +213,69 @@ const fetchAwardReps = async () => {
       );
     });
 };
+const fetchMintfaceReps = async () => {
+  let page = 1;
+  const pageSize = 100;
+  let items: any[] = [];
+  let shouldContinue = true;
 
-const fetchMomoReps = async (endTime: String = '2030-01-01') => {
+  while (shouldContinue) {
+    try {
+      const response = await axios.get(
+        "https://api.seize.io/api/profile-logs",
+        {
+          params: {
+            page: page,
+            page_size: pageSize,
+            include_incoming: true,
+            rating_matter: "REP",
+            profile: "MintFace",
+          },
+        }
+      );
+      // console.log(page, pageSize, items, response.data.data);
+
+      shouldContinue =
+        response.data.data.length === pageSize &&
+        new Date(response.data.data[0].created_at).getTime() > 1723603000000;
+      page += 1;
+      items = [...response.data.data, ...items];
+    } catch (error) {
+      console.error("Error fetching MF reps:", error);
+      shouldContinue = false;
+    }
+  }
+  return items
+    .filter(
+      (item: any) =>
+        item.contents.change_reason !== "LOST_TDH" &&
+        !item.contents.change_reason.match(/^Profile/)
+    )
+    .reduce((acc: any, item: any) => {
+      // keep only the most recent unique rating_category
+      if (
+        !acc.some(
+          (i: any) =>
+            i.contents.rating_category === item.contents.rating_category &&
+            i.target_profile_handle === item.target_profile_handle &&
+            i.profile_handle === item.profile_handle
+        )
+      ) {
+        acc.push(item);
+      }
+      return acc;
+    }, [])
+    .filter((item: any) => {
+      console.log(item.contents.new_rating >= -5, item.contents.new_rating <= 5, item.contents.rating_category.match(/^card \d+/i))
+      return (
+        item.contents.new_rating >= -5 &&
+        item.contents.new_rating <= 5 &&
+        item.contents.rating_category.match(/^card \d+/i)
+      );
+    })
+};
+
+const fetchMomoReps = async (endTime: String = "2030-01-01") => {
   let page = 1;
   const pageSize = 100;
   let items: any[] = [];
@@ -297,7 +361,9 @@ const fetchRep = async (
   const pageSize = 100;
   let items: any[] = [];
   let shouldContinue = true;
-  const matchRegex = matchText.trim() ? new RegExp(matchText.trim(), "i") : /.*/;
+  const matchRegex = matchText.trim()
+    ? new RegExp(matchText.trim(), "i")
+    : /.*/;
 
   const repsFromJsonResponse = await fetch("/reps.json");
   items = await repsFromJsonResponse.json();
@@ -348,6 +414,24 @@ const fetchRep = async (
   return items;
 };
 
+const fetchCardInfo = async (cardId: string) => {
+  try {
+    const response = await axios.get(
+      "https://api.seize.io/api/nfts",
+      {
+        params: {
+          id: cardId,
+          contract: "0x33FD426905F149f8376e227d0C9D3340AaD17aF1",
+        },
+      }
+    );
+    return response.data.data[0];
+  } catch (error) {
+    console.error("Error fetching card info:", error);
+    return null;
+  }
+};
+
 const timeAgo = (milliseconds: number): string => {
   const currentTime = new Date().getTime();
   const timeDifference = currentTime - milliseconds;
@@ -374,7 +458,9 @@ export {
   fetchPebbleReps,
   raceHistory,
   fetchAwardReps,
+  fetchMintfaceReps,
   fetchMomoReps,
   fetchRep,
+  fetchCardInfo,
   timeAgo,
 };
