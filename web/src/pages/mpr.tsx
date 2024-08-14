@@ -103,41 +103,45 @@ const MemeRankPage = () => {
     const getMemeCards = async () => {
       try {
         const data = await fetchMintfaceReps();
-        console.log(data);
 
-        const processedCards = data.reduce(
-          (
-            acc: {
-              [key: string]: {
-                total: number;
-                count: number;
-                lastTimestamp: number;
-              };
+        const processedCards = data
+          .filter((card: { contents: { rating_category: string } }) => {
+            const match = card.contents.rating_category.match(/\d+/);
+            return match && parseInt(match[0], 10) < 151;
+          })
+          .reduce(
+            (
+              acc: {
+                [key: string]: {
+                  total: number;
+                  count: number;
+                  lastTimestamp: string;
+                };
+              },
+              item: any
+            ) => {
+              const cardNumber = item.contents.rating_category.match(/\d+/)[0];
+              const cardName = `Card ${cardNumber}`;
+
+              if (!acc[cardName]) {
+                acc[cardName] = { total: 0, count: 0, lastTimestamp: 0 };
+              }
+
+              acc[cardName].total += item.contents.new_rating;
+              acc[cardName].count++;
+              acc[cardName].lastTimestamp = new Date(item.created_at).toString();
+
+              return acc;
             },
-            item: any
-          ) => {
-            const cardNumber = item.contents.rating_category.match(/\d+/)[0];
-            const cardName = `Card ${cardNumber}`;
-
-            if (!acc[cardName]) {
-              acc[cardName] = { total: 0, count: 0, lastTimestamp: 0 };
-            }
-
-            acc[cardName].total += item.contents.new_rating;
-            acc[cardName].count++;
-            acc[cardName].lastTimestamp = item.created_at;
-
-            return acc;
-          },
-          {}
-        );
+            {}
+          );
 
         const memeCards: MemeCard[] = Object.entries(processedCards).map(
           ([name, data]: [string, unknown]) => {
             const typedData = data as {
               total: number;
               count: number;
-              lastTimestamp: number;
+              lastTimestamp: string;
             };
             const id = parseInt(name.split(" ")[1], 10);
             const cardData = cardInfo[id.toString() as keyof typeof cardInfo];
@@ -171,8 +175,8 @@ const MemeRankPage = () => {
           }
         );
 
-        // Add missing cards (1 through 155)
-        for (let i = 1; i <= 155; i++) {
+        // Add missing cards (only szn1 - szn4 for now)
+        for (let i = 1; i <= 151; i++) {
           if (!memeCards.some((card) => card.id === i)) {
             const cardData = cardInfo[i.toString() as keyof typeof cardInfo];
             const seasonValue = (
@@ -228,11 +232,20 @@ const MemeRankPage = () => {
       <Header />
       <Container
         className={`${styles.main}`}
-        style={{ maxWidth: "850px", margin: "auto", padding: "20px", fontSize: "1.3rem" }}
+        style={{
+          maxWidth: "850px",
+          margin: "auto",
+          padding: "20px",
+          fontSize: "1.3rem",
+        }}
       >
         <Row>
           <Col>
-            <h1>Memetic Power Ratings</h1>
+            <h1 style={{ fontSize: "6rem" }}>
+              Memetic <br />
+              Power <br />
+              Ratings
+            </h1>
           </Col>
         </Row>
         <Row>
@@ -242,10 +255,13 @@ const MemeRankPage = () => {
               upvote or downvote any meme. You can:
             </p>
             <ul style={{ listStyleType: "none" }}>
-              <li>🍒 rate your favorite SZN1 - SZN4 memes between +1 and +5 rep</li>
+              <li>
+                🍒 rate your favorite SZN1 - SZN4 memes between +1 and +5 rep
+              </li>
               <li>🪨 downrate memes you love to hate between -1 and -5 rep</li>
               <li>
-                👉 place an MPR vote by sending "Card xx" rep from -5 to +5 rep per card to{" "}
+                👉 place an MPR vote by sending "Card xx" rep from -5 to +5 rep
+                per card to{" "}
                 <a
                   href="https://seize.io/mintface/rep"
                   target="_blank"
@@ -270,8 +286,8 @@ const MemeRankPage = () => {
             <p>🍒 All positive meme ratings get cherry emojis.</p>
             <p>🪨 All negative meme ratings get rock emojis.</p>
           </Col>
-          </Row>
-          <Row>
+        </Row>
+        <Row>
           <Col>
             <aside
               style={{
@@ -282,9 +298,20 @@ const MemeRankPage = () => {
                 fontStyle: "italic",
               }}
             >
-              <p>Dashboard created by <a href="https://seize.io/brookr/rep" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>/brookr</a>.
-                If you got value from the MPR Dashboard, send rep, Ξ, memes, or
-                +vibes. <br />Get a Dashboard for YOUR project via ✅ CheckID FlashDash</p>
+              <p>
+                Dashboard created by{" "}
+                <a
+                  href="https://seize.io/brookr/rep"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none" }}
+                >
+                  /brookr
+                </a>
+                . If you got value from the MPR Dashboard, send rep, Ξ, memes,
+                or +vibes. <br />
+                Get a Dashboard for YOUR project via ✅ CheckID FlashDash
+              </p>
             </aside>
           </Col>
         </Row>
@@ -298,7 +325,7 @@ const MemeRankPage = () => {
                   <th onClick={() => requestSort("cardName")}>Card Name</th>
                   <th onClick={() => requestSort("memeName")}>Meme Name</th>
                   <th onClick={() => requestSort("id")}>Card</th>
-                  <th onClick={() => requestSort("season")}>Season</th>
+                  <th onClick={() => requestSort("season")}>SZN</th>
                   <th onClick={() => requestSort("lastRepTimestamp")}>
                     Last Rep
                   </th>
@@ -351,8 +378,8 @@ const MemeRankPage = () => {
                     <td>{card.season}</td>
                     <td
                       title={
-                        card.lastRepTimestamp > 0
-                          ? card.lastRepTimestamp.toString()
+                        card.lastRepTimestamp.length > 1
+                          ? card.lastRepTimestamp
                           : "--"
                       }
                     >
