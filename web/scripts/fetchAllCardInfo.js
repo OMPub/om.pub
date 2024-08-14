@@ -18,16 +18,19 @@ async function fetchCardInfo(cardId) {
     return null;
   }
 }
-
 async function fetchAllCards() {
   const cards = {};
-  for (let i = 1; i <= 155; i++) {
+  for (let i = 1; i <= 5; i++) {
     const cardInfo = await fetchCardInfo(i.toString());
     cards[i] = cardInfo;
     console.log(`Fetched info for card ${i}`);
   }
-  fs.writeFileSync('./public/cardInfo.json', JSON.stringify(cards, null, 2));
+  const cardsWithNumberKeys = Object.fromEntries(
+    Object.entries(cards).map(([key, value]) => [Number(key), value])
+  );
+  fs.writeFileSync('./public/cardInfo.json', JSON.stringify(cardsWithNumberKeys, null, 2), { encoding: 'utf8', flag: 'w' });
   console.log('All card info fetched and saved to cardInfo.json');
 }
+
 
 fetchAllCards();

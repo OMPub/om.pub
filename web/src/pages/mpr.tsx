@@ -23,36 +23,44 @@ interface MemeCard {
   season: number;
 }
 
-
-
 const MemeRankPage = () => {
   const [memeCards, setMemeCards] = useState<MemeCard[]>([]);
-  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'ascending' | 'descending' } | null>(null);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "ascending" | "descending";
+  } | null>(null);
 
   const sortedMemeCards = React.useMemo(() => {
     let sortableItems = [...memeCards];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
+        const aValue = a[sortConfig.key as keyof MemeCard];
+        const bValue = b[sortConfig.key as keyof MemeCard];
+
+        if (aValue < bValue) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
         }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
+        if (aValue > bValue) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
         }
         return 0;
       });
     }
     return sortableItems;
   }, [memeCards, sortConfig]);
-  
+
   const requestSort = (key: string) => {
-    let direction: 'ascending' | 'descending' = 'ascending';
-    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+    let direction: "ascending" | "descending" = "ascending";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
     }
     setSortConfig({ key, direction });
   };
-  
+
   useEffect(() => {
     const getMemeCards = async () => {
       try {
@@ -86,21 +94,34 @@ const MemeRankPage = () => {
           {}
         );
 
-        const memeCards: MemeCard[] = Object.entries(processedCards).map(([name, data]) => {
-          const id = parseInt(name.split(' ')[1]);
-          const cardData = cardInfo[id];
-          return {
-            id,
-            name,
-            rep: data.total / data.count,
-            lastRepTimestamp: data.lastTimestamp,
-            cardName: cardData.name,
-            artist: cardData.artist,
-            url: `https://seize.io/the-memes/${id}`,
-            season: cardData.metadata.attributes.find((attr: any) => attr.trait_type === "Type - Season").value
-          };
-        });
-        
+        const memeCards: MemeCard[] = Object.entries(processedCards).map(
+          ([name, data]: [string, unknown]) => {
+            const typedData = data as {
+              total: number;
+              count: number;
+              lastTimestamp: number;
+            };
+            const id = parseInt(name.split(" ")[1], 10);
+            const cardData = cardInfo[id.toString() as keyof typeof cardInfo];
+            const seasonValue = (
+              cardData?.metadata?.attributes as Array<{
+                trait_type: string;
+                value: string | number;
+              }>
+            )?.find((attr) => attr.trait_type === "Type - Season")?.value;
+
+            return {
+              id,
+              name,
+              rep: typedData.total / typedData.count,
+              lastRepTimestamp: typedData.lastTimestamp,
+              cardName: cardData?.name ?? "",
+              artist: cardData?.artist ?? "",
+              url: `https://seize.io/the-memes/${id}`,
+              season: typeof seasonValue === "number" ? seasonValue : 0,
+            };
+          }
+        );
 
         setMemeCards(memeCards.sort((a, b) => b.rep - a.rep));
       } catch (error) {
