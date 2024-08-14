@@ -21,6 +21,8 @@ interface MemeCard {
   artist: string;
   url: string;
   season: number;
+  memeName: string;
+  thumbnailUrl: string;
 }
 
 const MemeRankPage = () => {
@@ -43,6 +45,17 @@ const MemeRankPage = () => {
         if (aValue > bValue) {
           return sortConfig.direction === "ascending" ? 1 : -1;
         }
+
+        // Secondary sort by average rep
+        const aAvgRep = a.rep;
+        const bAvgRep = b.rep;
+        if (aAvgRep < bAvgRep) {
+          return 1;
+        }
+        if (aAvgRep > bAvgRep) {
+          return -1;
+        }
+
         return 0;
       });
     }
@@ -109,6 +122,12 @@ const MemeRankPage = () => {
                 value: string | number;
               }>
             )?.find((attr) => attr.trait_type === "Type - Season")?.value;
+            const memeName = (
+              cardData?.metadata?.attributes as Array<{
+                trait_type: string;
+                value: string;
+              }>
+            )?.find((attr) => attr.trait_type === "Meme Name")?.value ?? "";
 
             return {
               id,
@@ -118,7 +137,9 @@ const MemeRankPage = () => {
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
               url: `https://seize.io/the-memes/${id}`,
-              season: typeof seasonValue === "number" ? seasonValue : 0,
+              season: seasonValue ? Number(seasonValue) : 0,
+              thumbnailUrl: cardData?.thumbnail ?? "",
+              memeName,
             };
           }
         );
@@ -158,9 +179,10 @@ const MemeRankPage = () => {
                 <tr>
                   <th onClick={() => requestSort("id")}>Rank</th>
                   <th onClick={() => requestSort("cardName")}>Card Name</th>
+                  <th onClick={() => requestSort("memeName")}>Meme Name</th>
                   <th onClick={() => requestSort("season")}>Season</th>
                   <th onClick={() => requestSort("artist")}>Artist</th>
-                  <th onClick={() => requestSort("rep")}>Total Rep</th>
+                  <th onClick={() => requestSort("rep")}>Power Rank</th>
                   <th onClick={() => requestSort("lastRepTimestamp")}>
                     Last Rep
                   </th>
@@ -170,21 +192,24 @@ const MemeRankPage = () => {
                 {sortedMemeCards.map((card, index) => (
                   <tr key={card.id}>
                     <td>{index + 1}</td>
-                    <td>
+                    <td style={{ display: 'flex', alignItems: 'center' }}>
+                      <img src={card.thumbnailUrl} alt={card.cardName} style={{width: '50px', height: '50px', marginRight: '10px', flexShrink: 0}} />
                       <a
                         href={card.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
                       >
                         {card.cardName}
                       </a>
                     </td>
+                    <td>{card.memeName}</td>
                     <td>{card.season}</td>
                     <td>{card.artist}</td>
-                    <td title={card.rep.toString()}>
+                    <td title={card.rep.toString()} style={{ minWidth: '110px' }}>
                       {card.rep > 0
-                        ? "🍒".repeat(Math.round(card.rep))
-                        : "🪨".repeat(Math.round(card.rep))}
+                        ? "🍒".repeat(Math.min(5, Math.round(card.rep)))
+                        : "🪨".repeat(Math.min(5, Math.abs(Math.round(card.rep))))}
                     </td>
                     <td title={card.lastRepTimestamp.toString()}>
                       {timeAgo(new Date(card.lastRepTimestamp).getTime())}
