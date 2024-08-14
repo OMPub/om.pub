@@ -297,7 +297,7 @@ const fetchRep = async (
   const pageSize = 100;
   let items: any[] = [];
   let shouldContinue = true;
-  matchText = matchText.trim() || "";
+  const matchRegex = matchText.trim() ? new RegExp(matchText.trim(), "i") : /.*/;
 
   const repsFromJsonResponse = await fetch("/reps.json");
   items = await repsFromJsonResponse.json();
@@ -342,7 +342,7 @@ const fetchRep = async (
           username.toLowerCase()) &&
       item.contents.rating_matter == "REP" &&
       !item.contents.change_reason.match(/^Profile/) &&
-      item.contents.rating_category.match(new RegExp(matchText || /./, "i"))
+      item.contents.rating_category.match(matchRegex)
     );
   });
   return items;
