@@ -242,7 +242,7 @@ const MemeRankPage = () => {
               upvote or downvote any meme. You can:
             </p>
             <ul style={{ listStyleType: "none" }}>
-              <li>🍒 rate your favorite memes between +1 and +5 rep</li>
+              <li>🍒 rate your favorite SZN1 - SZN4 memes between +1 and +5 rep</li>
               <li>🪨 downrate memes you love to hate between -1 and -5 rep</li>
               <li>
                 👉 place an MPR vote by sending "Card xx" rep from -5 to +5 rep per card to{" "}
@@ -283,8 +283,8 @@ const MemeRankPage = () => {
               }}
             >
               <p>Dashboard created by <a href="https://seize.io/brookr/rep" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>/brookr</a>.
-                If you got value from the MPR Dashboard, send rep, Ξ, memes, or good
-                vibes. <br />Get a Dashboard for YOUR project via ✅ CheckID FlashDash</p>
+                If you got value from the MPR Dashboard, send rep, Ξ, memes, or
+                +vibes. <br />Get a Dashboard for YOUR project via ✅ CheckID FlashDash</p>
             </aside>
           </Col>
         </Row>
