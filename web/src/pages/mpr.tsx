@@ -310,7 +310,7 @@ const MemeRankPage = () => {
                     <td>{card.rank !== null ? card.rank : "--"}</td>
                     <td
                       title={card.rep.toString()}
-                      style={{ minWidth: "110px" }}
+                      style={{ minWidth: "130px" }}
                     >
                       {card.rep > 0
                         ? "🍒".repeat(Math.min(5, Math.round(card.rep)))
