@@ -266,7 +266,6 @@ const fetchMintfaceReps = async () => {
       return acc;
     }, [])
     .filter((item: any) => {
-      console.log(item.contents.new_rating >= -5, item.contents.new_rating <= 5, item.contents.rating_category.match(/^card \d+/i))
       return (
         item.contents.new_rating >= -5 &&
         item.contents.new_rating <= 5 &&

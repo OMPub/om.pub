@@ -16,7 +16,7 @@ interface MemeCard {
   id: number;
   name: string;
   rep: number;
-  lastRepTimestamp: number;
+  lastRepTimestamp: string;
   cardName: string;
   artist: string;
   url: string;
@@ -107,7 +107,8 @@ const MemeRankPage = () => {
         const processedCards = data
           .filter((card: { contents: { rating_category: string } }) => {
             const match = card.contents.rating_category.match(/\d+/);
-            return match && parseInt(match[0], 10) < 151;
+            console.log(match[0])
+            return match && parseInt(match[0]) <= 151;
           })
           .reduce(
             (
@@ -124,7 +125,7 @@ const MemeRankPage = () => {
               const cardName = `Card ${cardNumber}`;
 
               if (!acc[cardName]) {
-                acc[cardName] = { total: 0, count: 0, lastTimestamp: 0 };
+                acc[cardName] = { total: 0, count: 0, lastTimestamp: '--' };
               }
 
               acc[cardName].total += item.contents.new_rating;
@@ -197,7 +198,7 @@ const MemeRankPage = () => {
               id: i,
               name: `Card ${i}`,
               rep: 0,
-              lastRepTimestamp: 0,
+              lastRepTimestamp: '--',
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
               url: `https://seize.io/the-memes/${i}`,
@@ -378,12 +379,12 @@ const MemeRankPage = () => {
                     <td>{card.season}</td>
                     <td
                       title={
-                        card.lastRepTimestamp.length > 1
+                        card.lastRepTimestamp.length > 2
                           ? card.lastRepTimestamp
                           : "--"
                       }
                     >
-                      {card.lastRepTimestamp
+                      {card.lastRepTimestamp.length > 2
                         ? timeAgo(new Date(card.lastRepTimestamp).getTime())
                         : "--"}
                     </td>
