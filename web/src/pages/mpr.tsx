@@ -358,7 +358,6 @@ const MemeRankPage = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
-                            whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             textDecoration: "none",
@@ -377,6 +376,9 @@ const MemeRankPage = () => {
                           ? card.lastRepTimestamp
                           : "--"
                       }
+                      style={{
+                        whiteSpace: "nowrap",
+                      }}
                     >
                       {card.lastRepTimestamp.length > 2
                         ? timeAgo(new Date(card.lastRepTimestamp).getTime())
