@@ -53,8 +53,10 @@ const MemeRankPage = () => {
             compareResult = aValue
               .toLowerCase()
               .localeCompare(bValue.toLowerCase());
-          } else {
+          } else if (aValue !== null && bValue !== null) {
             compareResult = aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+          } else {
+            compareResult = 0;
           }
 
           if (compareResult !== 0) {
