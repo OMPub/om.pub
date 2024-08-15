@@ -31,47 +31,44 @@ const MemeRankPage = () => {
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
-  } | null>(null);
+  }>({ key: "rep", direction: "descending" });
+
   const sortedMemeCards = React.useMemo(() => {
     let sortableItems = [...memeCards];
     if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        const aValue = a[sortConfig.key as keyof MemeCard];
-        const bValue = b[sortConfig.key as keyof MemeCard];
+      const cardsWithRep = sortableItems.filter(
+        (card) => card.rep > 0 || card.rep < 0
+      );
+      const cardsWithoutRep = sortableItems.filter(
+        (card) => card.rep == 0 || card.rep === null || card.rep === undefined
+      );
+      console.log(cardsWithRep.length, cardsWithoutRep.length);
+      cardsWithRep.sort((a, b) => {
+        if (sortConfig !== null) {
+          const aValue = a[sortConfig.key as keyof MemeCard];
+          const bValue = b[sortConfig.key as keyof MemeCard];
 
-        if (aValue === null && bValue === null) return 0;
-        if (aValue === null)
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        if (bValue === null)
-          return sortConfig.direction === "ascending" ? -1 : 1;
+          let compareResult;
+          if (typeof aValue === "string" && typeof bValue === "string") {
+            compareResult = aValue
+              .toLowerCase()
+              .localeCompare(bValue.toLowerCase());
+          } else {
+            compareResult = aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+          }
 
-        let compareResult;
-        if (typeof aValue === "string" && typeof bValue === "string") {
-          compareResult = aValue
-            .toLowerCase()
-            .localeCompare(bValue.toLowerCase());
-        } else {
-          compareResult = aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+          if (compareResult !== 0) {
+            return sortConfig.direction === "ascending"
+              ? compareResult
+              : -compareResult;
+          }
         }
 
-        if (compareResult !== 0) {
-          return sortConfig.direction === "ascending"
-            ? compareResult
-            : -compareResult;
-        }
-
-        // Secondary sort by average rep
-        const aAvgRep = a.rep;
-        const bAvgRep = b.rep;
-        if (aAvgRep < bAvgRep) {
-          return 1;
-        }
-        if (aAvgRep > bAvgRep) {
-          return -1;
-        }
-
-        return 0;
+        // Secondary sort by rep (descending)
+        return b.rep - a.rep;
       });
+
+      sortableItems = [...cardsWithRep, ...cardsWithoutRep];
     }
 
     // Assign ranks to cards with ratings
@@ -108,7 +105,6 @@ const MemeRankPage = () => {
           .filter((card: { contents: { rating_category: string } }) => {
             const match = card.contents.rating_category.match(/\d+/);
             if (match) {
-              console.log(match[0]);
               return parseInt(match[0]) <= 151;
             }
             return false;
@@ -128,12 +124,14 @@ const MemeRankPage = () => {
               const cardName = `Card ${cardNumber}`;
 
               if (!acc[cardName]) {
-                acc[cardName] = { total: 0, count: 0, lastTimestamp: '--' };
+                acc[cardName] = { total: 0, count: 0, lastTimestamp: "--" };
               }
 
               acc[cardName].total += item.contents.new_rating;
               acc[cardName].count++;
-              acc[cardName].lastTimestamp = new Date(item.created_at).toString();
+              acc[cardName].lastTimestamp = new Date(
+                item.created_at
+              ).toString();
 
               return acc;
             },
@@ -201,7 +199,7 @@ const MemeRankPage = () => {
               id: i,
               name: `Card ${i}`,
               rep: 0,
-              lastRepTimestamp: '--',
+              lastRepTimestamp: "--",
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
               url: `https://seize.io/the-memes/${i}`,
@@ -237,7 +235,7 @@ const MemeRankPage = () => {
       <Container
         className={`${styles.main}`}
         style={{
-          maxWidth: "850px",
+          maxWidth: "920px",
           margin: "auto",
           padding: "20px",
           fontSize: "1.3rem",
@@ -260,28 +258,19 @@ const MemeRankPage = () => {
             </p>
             <ul style={{ listStyleType: "none" }}>
               <li>
-                🍒 rate your favorite SZN1 - SZN4 memes between +1 and +5 rep
-              </li>
-              <li>🪨 downrate memes you love to hate between -1 and -5 rep</li>
-              <li>
-                👉 place an MPR vote by sending "Card xx" rep from -5 to +5 rep
-                per card to{" "}
+                👉 send rep between -5 and +5 for "Card xx" to{" "}
                 <a
                   href="https://seize.io/mintface/rep"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none" }}
                 >
-                  /mintface
+                  seize.io/mintface
                 </a>{" "}
               </li>
-              <li>
-                {" "}
-                📊 eg:{" "}
-                <pre style={{ display: "inline" }}>
-                  Category: Card 53 | Total Rep: 5
-                </pre>{" "}
-              </li>
+              <li>📊 rate all the memes from the first four seasons</li>
+              <li>🍒 upvote the memes you love</li>
+              <li>🪨 downrate the ngmi memes</li>
             </ul>
             <p>
               Votes are totalled and given a live Memetic Power Rating between
