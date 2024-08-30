@@ -33,59 +33,33 @@ const MemeRankPage = () => {
     direction: "ascending" | "descending";
   }>({ key: "rep", direction: "descending" });
 
-  const sortedMemeCards = React.useMemo(() => {
+  const sortedMemeCards = useMemo(() => {
     let sortableItems = [...memeCards];
     if (sortConfig !== null) {
-      const cardsWithRep = sortableItems.filter(
-        (card) => card.rep > 0 || card.rep < 0
-      );
-      const cardsWithoutRep = sortableItems.filter(
-        (card) => card.rep == 0 || card.rep === null || card.rep === undefined
-      );
-      console.log(cardsWithRep.length, cardsWithoutRep.length);
-      cardsWithRep.sort((a, b) => {
-        if (sortConfig !== null) {
-          const aValue = a[sortConfig.key as keyof MemeCard];
-          const bValue = b[sortConfig.key as keyof MemeCard];
+      sortableItems.sort((a, b) => {
+        const aValue = a[sortConfig.key as keyof MemeCard];
+        const bValue = b[sortConfig.key as keyof MemeCard];
 
-          let compareResult;
-          if (typeof aValue === "string" && typeof bValue === "string") {
-            compareResult = aValue
-              .toLowerCase()
-              .localeCompare(bValue.toLowerCase());
-          } else if (aValue !== null && bValue !== null) {
-            compareResult = aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
-          } else {
-            compareResult = 0;
-          }
-
-          if (compareResult !== 0) {
-            return sortConfig.direction === "ascending"
-              ? compareResult
-              : -compareResult;
-          }
+        if (typeof aValue === 'number' && typeof bValue === 'number') {
+          return sortConfig.direction === 'ascending' ? aValue - bValue : bValue - aValue;
+        } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+          return sortConfig.direction === 'ascending'
+            ? aValue.localeCompare(bValue)
+            : bValue.localeCompare(aValue);
+        } else {
+          // Handle other types or null/undefined values
+          if (aValue === bValue) return 0;
+          if (aValue === null || aValue === undefined) return 1;
+          if (bValue === null || bValue === undefined) return -1;
+          return sortConfig.direction === 'ascending'
+            ? (aValue < bValue ? -1 : 1)
+            : (bValue < aValue ? -1 : 1);
         }
-
-        // Secondary sort by rep (descending)
-        return b.rep - a.rep;
       });
-
-      sortableItems = [...cardsWithRep, ...cardsWithoutRep];
     }
-
-    // Assign ranks to cards with ratings
-    let currentRank = 1;
-    sortableItems.forEach((card, index) => {
-      if (card.rep !== 0) {
-        card.rank = currentRank++;
-      } else {
-        card.rank = null;
-      }
-    });
 
     return sortableItems;
   }, [memeCards, sortConfig]);
-
   const requestSort = (key: string) => {
     let direction: "ascending" | "descending" = "ascending";
     if (
@@ -122,7 +96,7 @@ const MemeRankPage = () => {
               },
               item: any
             ) => {
-              const cardNumber = item.contents.rating_category.match(/\d+/)[0];
+              const cardNumber = parseInt(item.contents.rating_category.match(/\d+/)[0]);
               const cardName = `Card ${cardNumber}`;
 
               if (!acc[cardName]) {
