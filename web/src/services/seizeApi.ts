@@ -178,7 +178,7 @@ const fetchAwardReps = async () => {
 
       shouldContinue =
         response.data.data.length === pageSize &&
-        new Date(response.data.data[0].created_at).getTime() > 1718714264000;
+        new Date(response.data.data[0].created_at).getTime() > 1726381848000;
       page += 1;
       items = [...response.data.data, ...items];
     } catch (error) {
@@ -209,7 +209,7 @@ const fetchAwardReps = async () => {
     .filter((item: any) => {
       return (
         item.contents.new_rating > 0 &&
-        item.contents.rating_category.match(/^SAS7/i)
+        item.contents.rating_category.match(/^SAS8/i)
       );
     });
 };

@@ -68,7 +68,7 @@ const AwardsPage = () => {
       try {
         const data = reps.reduce((acc: any, item: any) => {
           // collate reps by category, as key, with total rep for each nominee and their voters as value,
-          // e.g. { "SAS7 Best Rememer": [{ nominee: 'RegularDad', rep: 1, voters: ["user1", "user2"] }] }
+          // e.g. { "SAS8 Best Rememer": [{ nominee: 'RegularDad', rep: 1, voters: ["user1", "user2"] }] }
           let rep = item.contents.new_rating;
           rep = rep > 1 ? 1 : rep < 0 ? 0 : rep;
           if (acc[item.contents.rating_category]) {
@@ -136,10 +136,10 @@ const AwardsPage = () => {
         />
         <title>Awards Page | The OM Pub</title>
         <meta property="og:url" content={`https://om.pub/awards`} />
-        <meta property="og:title" content="Seizer Awards Szn 7 | The OM Pub" />
+        <meta property="og:title" content="Seizer Awards Szn 8 | The OM Pub" />
         <meta
           property="og:description"
-          content="Seizer Awards Szn 7 | The OM Pub"
+          content="Seizer Awards Szn 8 | The OM Pub"
         />
         <meta property="og:image" content="https://om.pub/og-image.jpg" />
       </Head>
@@ -152,29 +152,29 @@ const AwardsPage = () => {
         <Container>
           <Row>
             <Col>
-              <h1>S7 Seizer Awards</h1>
+              <h1>S8 Seizer Awards</h1>
               <h3>Cast your vote at seize.io</h3>
               <ol>
                 <li>
                   Review{" "}
                   <a
-                    href="https://seize.io/the-memes?szn=7&sort=age&sort_dir=DESC "
+                    href="https://seize.io/the-memes?szn=8&sort=age&sort_dir=DESC "
                     target="_blank"
                   >
-                    SZN 7 Memes on Seize
+                    SZN 8 Memes on Seize
                   </a>
                 </li>
                 <li>
                   Find the{" "}
                   <a
-                    href="https://seize.io/community?page=1&group=meme-artist-szn-7-vWxxadPGSUmZLbCTSoUCEC"
+                    href="https://seize.io/community?page=1&group=meme-artists-szn-8-ukTksHjSXp3Emo48VHz4h4"
                     target="_blank"
                   >
-                    SZN 7 artists on Seize
+                    SZN 8 artists on Seize
                   </a>
                 </li>
                 <li>
-                  Rep on Seize with <pre>SAS7</pre> followed by the category
+                  Rep on Seize with <pre>SAS8</pre> followed by the category
                   your want to vote for (existing categories will be listed)
                 </li>
                 <li>
@@ -182,7 +182,7 @@ const AwardsPage = () => {
                   for each profile who reps a nominee
                 </li>
                 <li>
-                  Create a new award if you want: use <pre>SAS7</pre> as the
+                  Create a new award if you want: use <pre>SAS8</pre> as the
                   prefix
                 </li>
               </ol>
