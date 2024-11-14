@@ -29,6 +29,7 @@ interface CardMetadata {
 
 interface CardInfo {
   metadata: CardMetadata;
+  mint_date?: string;
 }
 
 interface CardInfoMap {
@@ -94,15 +95,15 @@ const ArtistsPage = () => {
     }
 
     const sortedData = [...artists].sort((a, b) => {
-      if (key === 'cardId') {
+      if (key === 'cardId' || key === 'season') {
         return direction === 'asc' 
-          ? parseInt(a[key]) - parseInt(b[key])
-          : parseInt(b[key]) - parseInt(a[key]);
+          ? Number(a[key]) - Number(b[key])
+          : Number(b[key]) - Number(a[key]);
       }
       
       return direction === 'asc'
-        ? a[key].localeCompare(b[key])
-        : b[key].localeCompare(a[key]);
+        ? String(a[key]).localeCompare(String(b[key]))
+        : String(b[key]).localeCompare(String(a[key]));
     });
 
     setArtists(sortedData);
