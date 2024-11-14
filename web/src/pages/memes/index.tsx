@@ -76,6 +76,16 @@ export default function Memes() {
             </p>
           </Col>
         </Row>
+        <Row className="mb-4">
+          <Col>
+            <h4>Explore The Memes</h4>
+            <ul>
+              <li>
+                <a href="/memes/artists">View all Meme artists</a> - A comprehensive list of all artists who have contributed to The Memes collection
+              </li>
+            </ul>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <h4>Join the Uprising: Embrace the Open Metaverse</h4>

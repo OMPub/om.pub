@@ -453,6 +453,37 @@ const timeAgo = (milliseconds: number): string => {
   }
 };
 
+export async function getLatestCardNumber(): Promise<number> {
+  try {
+    // Get the last card number from cardInfo.json
+    const response = await fetch('/cardInfo.json');
+    const cardInfo = await response.json();
+    const lastKnownCard = Math.max(...Object.keys(cardInfo).map(Number));
+    
+    let lastCard = lastKnownCard;
+    let foundLast = false;
+    
+    // Keep checking until we find a 404
+    while (!foundLast) {
+      try {
+        const nextCard = await fetchCardInfo((lastCard + 1).toString());
+        if (nextCard) {
+          lastCard++;
+        } else {
+          foundLast = true;
+        }
+      } catch (err) {
+        foundLast = true;
+      }
+    }
+    
+    return lastCard;
+  } catch (err) {
+    console.error("Error fetching latest card number:", err);
+    return 0; // Return 0 if there's an error
+  }
+}
+
 export {
   fetchPebbleReps,
   raceHistory,
