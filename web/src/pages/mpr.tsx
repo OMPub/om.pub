@@ -81,7 +81,7 @@ const MemeRankPage = () => {
           .filter((card: { contents: { rating_category: string } }) => {
             const match = card.contents.rating_category.match(/\d+/);
             if (match) {
-              return parseInt(match[0]) <= 151;
+              return parseInt(match[0]) <= 278;
             }
             return false;
           })

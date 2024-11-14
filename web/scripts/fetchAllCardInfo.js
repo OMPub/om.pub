@@ -20,7 +20,7 @@ async function fetchCardInfo(cardId) {
 }
 async function fetchAllCards() {
   const cards = {};
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 300; i++) {
     const cardInfo = await fetchCardInfo(i.toString());
     cards[i] = cardInfo;
     console.log(`Fetched info for card ${i}`);
