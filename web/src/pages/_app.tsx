@@ -2,7 +2,6 @@ import "../styles/globals.scss";
 import "../styles/fonts.scss";
 
 import type { AppProps } from "next/app";
-import SSRProvider from "react-bootstrap/SSRProvider";
 
 import { alchemyProvider } from "wagmi/providers/alchemy";
 
@@ -61,11 +60,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <SSRProvider>
-        <WagmiConfig client={client}>
-          <Component {...pageProps} />
-        </WagmiConfig>
-      </SSRProvider>
+      <WagmiConfig client={client}>
+        <Component {...pageProps} />
+      </WagmiConfig>
     </>
   );
 }
