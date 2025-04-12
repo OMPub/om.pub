@@ -144,7 +144,7 @@ const MemeRankPage = () => {
               lastRepTimestamp: typedData.lastTimestamp,
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
-              url: `https://seize.io/the-memes/${id}`,
+              url: `https://6529.io/the-memes/${id}`,
               season: seasonValue ? Number(seasonValue) : 0,
               thumbnailUrl: cardData?.thumbnail ?? "",
               memeName,
@@ -178,7 +178,7 @@ const MemeRankPage = () => {
               lastRepTimestamp: "--",
               cardName: cardData?.name ?? "",
               artist: cardData?.artist ?? "",
-              url: `https://seize.io/the-memes/${i}`,
+              url: `https://6529.io/the-memes/${i}`,
               season: seasonValue ? Number(seasonValue) : 0,
               thumbnailUrl: cardData?.thumbnail ?? "",
               memeName,
@@ -229,19 +229,19 @@ const MemeRankPage = () => {
         <Row>
           <Col>
             <p>
-              Memetic Power Ratings (MPR) by MintFace empowers frens on Seize to
+              Memetic Power Ratings (MPR) by MintFace empowers frens on 6529 to
               upvote or downvote any meme. You can:
             </p>
             <ul style={{ listStyleType: "none" }}>
               <li>
                 👉 send rep between -5 and +5 for "Card xx" to{" "}
                 <a
-                  href="https://seize.io/mintface/rep"
+                  href="https://6529.io/mintface/rep"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none" }}
                 >
-                  seize.io/mintface
+                  6529.io/mintface
                 </a>{" "}
               </li>
               <li>📊 rate all the memes from the first four seasons</li>
@@ -270,12 +270,12 @@ const MemeRankPage = () => {
               <p>
                 Dashboard created by{" "}
                 <a
-                  href="https://seize.io/brookr/rep"
+                  href="https://6529.io/brookr/rep"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none" }}
                 >
-                  /brookr
+                  6529.io/brookr
                 </a>
                 . If you got value from the MPR Dashboard, send rep, Ξ, memes,
                 or +vibes. <br />

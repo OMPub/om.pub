@@ -52,6 +52,14 @@ export default function Memes() {
               to ensure many people can pick up a piece as one way to aid in
               spreading awareness and ownership of the open metaverse ideals.
             </p>
+            <p>
+              The Memes is the official 6529 Collections' NFT collection. You
+              can read more about The Memes at{" "}
+              <a href="https://6529.io/about/faq" target="_blank">
+                6529.io
+              </a>
+              .
+            </p>
           </Col>
         </Row>
         <Row>
@@ -102,8 +110,8 @@ export default function Memes() {
                   @Punk6529
                 </a>
                 , and read about the impact of memetic ideas at{" "}
-                <a href="https://seize.io/about/faq" target="_blank">
-                  seize.io
+                <a href="https://6529.io/about/faq" target="_blank">
+                  6529.io
                 </a>
                 .
               </li>

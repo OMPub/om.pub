@@ -3560,7 +3560,7 @@ On Nov 28th, 2023 some lucky memers get airdropped of the latest blending of iro
         },
         {
           name: "6529's Website",
-          url: "https://seize.io",
+          url: "https://6529.io",
         },
       ],
     },
@@ -3980,7 +3980,7 @@ Can card 182 really bring all this The Memes on Jan 3rd, 2024? We'll see!`,
         },
         {
           name: "Atmo's Seize",
-          url: "https://seize.io/Atmonez/identity",
+          url: "https://6529.io/Atmonez/identity",
         },
       ],
     },
@@ -4330,7 +4330,7 @@ On Jan 24th, 2024 we will see what new dimensions will he bring to The Memes in 
       links: [
         {
           name: "Hasan's Seize",
-          url: "https://seize.io/HasanGoktepe",
+          url: "https://6529.io/HasanGoktepe",
         },
         {
           name: "Hasan's Twitter",
@@ -4378,7 +4378,7 @@ With Card 192, we once again get more 6529er, once again in collaboration with P
         },
         {
           name: "6529er on Seize",
-          url: "https://seize.io/6529er",
+          url: "https://6529.io/6529er",
         },
       ],
     },
@@ -4414,7 +4414,7 @@ We look forward to the colorful explorations in Card 193 on Jan 29th, 2024.`,
         },
         {
           name: "Alexis' Seize",
-          url: "https://seize.io/alexisolinart",
+          url: "https://6529.io/alexisolinart",
         },
         {
           name: "Alexis' website",
@@ -4459,7 +4459,7 @@ How will it all layer together in Card 194 for The Memes? Our community finds ou
         },
         {
           name: "Mr Richi's Seize",
-          url: "https://seize.io/MrRichi",
+          url: "https://6529.io/MrRichi",
         },
       ],
     },
@@ -4498,7 +4498,7 @@ And now we can only guess he brings light and dark, neon and shadow to The Memes
         },
         {
           name: "Louis' Seize",
-          url: "https://seize.io/louisdazy",
+          url: "https://6529.io/louisdazy",
         },
       ],
     },
@@ -4538,7 +4538,7 @@ Mythical worlds open to The Memes on Feb 5th, 2024!`,
         },
         {
           name: "Paul's Seize",
-          url: "https://seize.io/Minotaur_Man",
+          url: "https://6529.io/Minotaur_Man",
         },
       ],
     },
@@ -4581,7 +4581,7 @@ On Feb 9th, he embraces the memetic frontiers with Card 197!`,
         },
         {
           name: "pobedeen's Seize",
-          url: "https://seize.io/pobedeen",
+          url: "https://6529.io/pobedeen",
         },
       ],
     },
@@ -4623,7 +4623,7 @@ What dreams will he bring to The Memes in Card 198 on Feb 12th, 2024?`,
         },
         {
           name: "Isayev's Seize",
-          url: "https://seize.io/Isayev_Art",
+          url: "https://6529.io/Isayev_Art",
         },
       ],
     },
@@ -4664,7 +4664,7 @@ And Card 199 brings her visonary expressiveness to The Memes on Feb 14th, 2024.`
         },
         {
           name: "JSKY's Seize",
-          url: "https://seize.io/JSKY",
+          url: "https://6529.io/JSKY",
         },
       ],
     },
@@ -4708,7 +4708,7 @@ Prepare for the multidimensional "elegant" experience of Card 200 on Feb 16th, 2
         },
         {
           name: "cadmonkey's Seize",
-          url: "https://seize.io/cadmonkey",
+          url: "https://6529.io/cadmonkey",
         },
       ],
     },
@@ -4744,7 +4744,7 @@ How will all these imagined realities appear in Card 201? We find out on Feb 19t
         },
         {
           name: "Exolorian's Seize",
-          url: "https://seize.io/UNNKNOWN",
+          url: "https://6529.io/UNNKNOWN",
         },
       ],
     },
@@ -4785,7 +4785,7 @@ What deep dark places will Card 202 take us to? We pull back the curtain on Feb 
         },
         {
           name: "Roberta's Seize",
-          url: "https://seize.io/railaiter",
+          url: "https://6529.io/railaiter",
         },
       ],
     },
@@ -4823,7 +4823,7 @@ Soon we will see how Card 203 reorients our reality, on Feb 23rd, 2024.`,
         },
         {
           name: "8th's Seize",
-          url: "https://seize.io/8thproject",
+          url: "https://6529.io/8thproject",
         },
       ],
     },
@@ -4862,7 +4862,7 @@ Card 204 will surely brighten the day for our community on Feb 26th, 2024.`,
         },
         {
           name: "subwway's Seize",
-          url: "https://seize.io/Subwway",
+          url: "https://6529.io/Subwway",
         },
       ],
     },
@@ -4901,7 +4901,7 @@ What worlds will be invoked by Card 205 Feb 28th, 2024?`,
         },
         {
           name: "mendezmendez's Seize",
-          url: "https://seize.io/mendezmendez",
+          url: "https://6529.io/mendezmendez",
         },
       ],
     },
@@ -4938,7 +4938,7 @@ Card 206 will bring Cullen (and his colors) to The Memes on Mar 1st, 2024.`,
         },
         {
           name: "Cullen's Seize",
-          url: "https://seize.io/CullenColors",
+          url: "https://6529.io/CullenColors",
         },
       ],
     },
@@ -4980,7 +4980,7 @@ What digital reflections screen-based hells await us in Card 207? We get to see 
         },
         {
           name: "VSTRVL's Seize",
-          url: "https://seize.io/VSTRVL",
+          url: "https://6529.io/VSTRVL",
         },
       ],
     },
@@ -5020,7 +5020,7 @@ We can't wait to see what new takes are revealed in Card 208 on Mar 6th, 2024.`,
         },
         {
           name: "BOUBOY's Seize",
-          url: "https://seize.io/BOUBOY",
+          url: "https://6529.io/BOUBOY",
         },
       ],
     },
@@ -5062,7 +5062,7 @@ Might Card 209 hold a 3D Pepe final boss for Memes hodlers? We will see on Mar 8
         },
         {
           name: "Fawkes' Seize",
-          url: "https://seize.io/Fawkes",
+          url: "https://6529.io/Fawkes",
         },
       ],
     },
@@ -5089,7 +5089,7 @@ We can't wait to see what Pondering has created in Card 210 of The Memes, reveal
         },
         {
           name: "Pondering's Seize",
-          url: "https://seize.io/Pondering",
+          url: "https://6529.io/Pondering",
         },
       ],
     },
@@ -5129,7 +5129,7 @@ We eagerly await Card 211 of The Memes as Intrepid shows us the keys to freedom 
         },
         {
           name: "Intrepid's Seize",
-          url: "https://seize.io/intrepid",
+          url: "https://6529.io/intrepid",
         },
       ],
     },
@@ -5166,7 +5166,7 @@ Thanks to an early reveal, Card 212 is now on display for all, and minting on Ma
         },
         {
           name: "Rebecca's Seize",
-          url: "https://seize.io/rebeccarose",
+          url: "https://6529.io/rebeccarose",
         },
       ],
     },
@@ -5203,7 +5203,7 @@ We will see how her generative flair will come to The Memes in Card 213 ... on A
         },
         {
           name: "Ix's Seize",
-          url: "https://seize.io/IXSHELLS",
+          url: "https://6529.io/IXSHELLS",
         },
       ],
     },
@@ -5230,7 +5230,7 @@ We will see how her generative flair will come to The Memes in Card 213 ... on A
         },
         {
           name: "BushRobins's Seize",
-          url: "https://seize.io/BushRobins",
+          url: "https://6529.io/BushRobins",
         },
       ],
     },
@@ -5257,7 +5257,7 @@ We will see how her generative flair will come to The Memes in Card 213 ... on A
         },
         {
           name: "Random_Freaks's Seize",
-          url: "https://seize.io/RandomFreaks",
+          url: "https://6529.io/RandomFreaks",
         },
       ],
     },
@@ -5284,7 +5284,7 @@ We will see how her generative flair will come to The Memes in Card 213 ... on A
         },
         {
           name: "PixelGustavo's Seize",
-          url: "https://seize.io/PixelGustavo",
+          url: "https://6529.io/PixelGustavo",
         },
       ],
     },
@@ -5318,7 +5318,7 @@ We can't wait to see what Hoizon expores in Card 217 for The Memes community, dr
         },
         {
           name: "Hoizon's Seize",
-          url: "https://seize.io/Hoizon",
+          url: "https://6529.io/Hoizon",
         },
       ],
     },
@@ -5350,7 +5350,7 @@ Now we'll get to see Zhuk's powerful perspective in Card 218 on Apr 12th, 2024!`
         },
         {
           name: "Zhuk's Seize",
-          url: "https://seize.io/Zhuk",
+          url: "https://6529.io/Zhuk",
         },
       ],
     },
@@ -5382,7 +5382,7 @@ Now we get a The Memes version of this whimsical chaos in Card 219, dropping on 
         },
         {
           name: "LavaaGang's Seize",
-          url: "https://seize.io/LavaaGang",
+          url: "https://6529.io/LavaaGang",
         },
       ],
     },
@@ -5409,7 +5409,7 @@ Now we get a The Memes version of this whimsical chaos in Card 219, dropping on 
         },
         {
           name: "UNNKNOWN's Seize",
-          url: "https://seize.io/UNNKNOWN",
+          url: "https://6529.io/UNNKNOWN",
         },
       ],
     }
