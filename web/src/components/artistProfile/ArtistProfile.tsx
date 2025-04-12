@@ -122,7 +122,7 @@ const ArtistProfile = (props: Props) => {
             className={`${styles.seizeButton}`}
             variant="outline-dark"
             size="lg"
-            href={`https://seize.io/the-memes/${artist.tokenId}?focus=live`}
+            href={`https://6529.io/the-memes/${artist.tokenId}?focus=live`}
             target="_blank"
           >
             Meme Card {artist.tokenId}

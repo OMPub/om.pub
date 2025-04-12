@@ -158,7 +158,7 @@ const AwardsPage = () => {
                 <li>
                   Review{" "}
                   <a
-                    href="https://seize.io/the-memes?szn=8&sort=age&sort_dir=DESC "
+                    href="https://6529.io/the-memes?szn=8&sort=age&sort_dir=DESC "
                     target="_blank"
                   >
                     SZN 8 Memes on Seize
@@ -167,7 +167,7 @@ const AwardsPage = () => {
                 <li>
                   Find the{" "}
                   <a
-                    href="https://seize.io/community?page=1&group=meme-artists-szn-8-ukTksHjSXp3Emo48VHz4h4"
+                    href="https://6529.io/community?page=1&group=meme-artists-szn-8-ukTksHjSXp3Emo48VHz4h4"
                     target="_blank"
                   >
                     SZN 8 artists on Seize
@@ -196,7 +196,7 @@ const AwardsPage = () => {
                           <span style={{ display: "block" }} key={index}>
                             {vote.rep} &mdash;{" "}
                             <a
-                              href={`https://seize.io/${vote.nominee}`}
+                              href={`https://6529.io/${vote.nominee}`}
                               target="_blank"
                             >
                               {vote.nominee}

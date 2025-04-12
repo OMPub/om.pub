@@ -4,7 +4,7 @@ const axios = require('axios');
 async function fetchCardInfo(cardId) {
   try {
     const response = await axios.get(
-      "https://api.seize.io/api/nfts",
+      "https://api.6529.io/api/nfts",
       {
         params: {
           id: cardId,

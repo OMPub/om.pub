@@ -176,7 +176,7 @@ const ArtistsPage = () => {
                   >
                     Artist Name{getSortIndicator('artistName')}
                   </th>
-                  <th>Seize Profile</th>
+                  <th>6529 Profile</th>
                   <th 
                     style={{ cursor: 'pointer' }}
                     onClick={() => sortData('mintDate')}
@@ -190,7 +190,7 @@ const ArtistsPage = () => {
                   <tr key={artist.cardId}>
                     <td>
                       <a
-                        href={`https://seize.io/the-memes/${artist.cardId}`}
+                        href={`https://6529.io/the-memes/${artist.cardId}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -201,7 +201,7 @@ const ArtistsPage = () => {
                     <td>{artist.artistName}</td>
                     <td>
                       <a
-                        href={`https://seize.io/${artist.seizeProfile}`}
+                        href={`https://6529.io/${artist.seizeProfile}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

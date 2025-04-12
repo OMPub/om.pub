@@ -157,14 +157,14 @@ const LeaderboardPage = () => {
                     style={{ position: "absolute", zIndex: 1 }}
                   >
                     <img
-                      src={`https://media.generator.seize.io/mainnet/thumbnail/10000000${String(
+                      src={`https://media.generator.6529.io/mainnet/thumbnail/10000000${String(
                         pebble.id
                       ).padStart(3, "0")}`}
                       alt={`${pebble.name}`}
                       className="pebble-image"
                     />
                     <a
-                      href={`https://seize.io/${pebble.seizer}`}
+                      href={`https://6529.io/${pebble.seizer}`}
                       target="_blank"
                       className="name"
                     >

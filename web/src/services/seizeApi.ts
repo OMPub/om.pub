@@ -120,7 +120,7 @@ const fetchPebbleReps = async (
   }
 ) => {
   try {
-    const response = await axios.get("https://api.seize.io/api/profile-logs", {
+    const response = await axios.get("https://api.6529.io/api/profile-logs", {
       params: {
         page: 1,
         page_size: 100,
@@ -165,7 +165,7 @@ const fetchAwardReps = async () => {
   while (shouldContinue) {
     try {
       const response = await axios.get(
-        "https://api.seize.io/api/profile-logs",
+        "https://api.6529.io/api/profile-logs",
         {
           params: {
             page: page,
@@ -222,7 +222,7 @@ const fetchMintfaceReps = async () => {
   while (shouldContinue) {
     try {
       const response = await axios.get(
-        "https://api.seize.io/api/profile-logs",
+        "https://api.6529.io/api/profile-logs",
         {
           params: {
             page: page,
@@ -284,7 +284,7 @@ const fetchMomoReps = async (endTime: String = "2030-01-01") => {
   while (shouldContinue) {
     try {
       const response = await axios.get(
-        "https://api.seize.io/api/profile-logs",
+        "https://api.6529.io/api/profile-logs",
         {
           params: {
             page: page,
@@ -371,7 +371,7 @@ const fetchRep = async (
   while (shouldContinue) {
     try {
       const response = await axios.get(
-        "https://api.seize.io/api/profile-logs",
+        "https://api.6529.io/api/profile-logs",
         {
           params: {
             page: page,
@@ -416,7 +416,7 @@ const fetchRep = async (
 const fetchCardInfo = async (cardId: string) => {
   try {
     const response = await axios.get(
-      "https://api.seize.io/api/nfts",
+      "https://api.6529.io/api/nfts",
       {
         params: {
           id: cardId,

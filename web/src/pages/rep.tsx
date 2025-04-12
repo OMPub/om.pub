@@ -178,14 +178,14 @@ const RepPage = () => {
               >
                 {rep.contents.new_rating} from{" "}
                 <a
-                  href={"https://seize.io/" + rep.profile_handle}
+                  href={"https://6529.io/" + rep.profile_handle}
                   target="_blank"
                 >
                   {rep.profile_handle}
                 </a>{" "}
                 to{" "}
                 <a
-                  href={"https://seize.io/" + rep.target_profile_handle}
+                  href={"https://6529.io/" + rep.target_profile_handle}
                   target="_blank"
                 >
                   {rep.target_profile_handle}
