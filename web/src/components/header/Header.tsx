@@ -19,15 +19,25 @@ export default function Header() {
           <Nav className="me-auto"></Nav>
           <Nav>
             <Nav.Link
-              href="https://www.shop.om.pub/"
-              target="_blank">
-              Shop
-            </Nav.Link>                     
+              href="/naka"
+              className={router.pathname == "/naka" ? styles.linkActive : ""}>
+              Naka
+            </Nav.Link>
             <Nav.Link
               href="/memes"
               className={router.pathname == "/memes" ? styles.linkActive : ""}>
               The Memes
-            </Nav.Link>            
+            </Nav.Link>
+            <Nav.Link
+              href="/rep"
+              className={router.pathname == "/rep" ? styles.linkActive : ""}>
+              Rep Filter
+            </Nav.Link>
+            <Nav.Link
+              href="/vote"
+              className={router.pathname == "/vote" ? styles.linkActive : ""}>
+              Main Stage Vote
+            </Nav.Link>
             <Nav.Link
               href="/faq"
               className={router.pathname == "/faq" ? styles.linkActive : ""}>
