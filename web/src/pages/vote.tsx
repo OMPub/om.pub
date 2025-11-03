@@ -561,7 +561,7 @@ export default function Vote() {
                         ))}
                       </div>
                     ) : (
-                      <Alert variant="info">You haven't cast any votes yet.</Alert>
+                      <Alert variant="info">You haven&apos;t cast any votes yet.</Alert>
                     )}
                   </Tab>
                   <Tab eventKey="voting" title="🎭 Main Stage Voting">

@@ -8,9 +8,13 @@ interface TopSubmission {
     handle: string;
     primary_address: string;
   };
+  title?: string;
   content?: string;
   picture?: string;
   vote_count: number;
+  raters_count: number;
+  rating_prediction: number;
+  realtime_rating: number;
   rank?: number;
 }
 
