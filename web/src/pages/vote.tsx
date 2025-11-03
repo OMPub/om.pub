@@ -407,7 +407,7 @@ export default function Vote() {
                 </div>
                 {accessToken && (
                   <div>
-                    <strong>Available TDH:</strong> {userTDHBalance.toLocaleString()}
+                    <strong>Available TDH:</strong> {userTDHBalance.toLocaleString()} / {(userTDHBalance + userVoteDistribution.reduce((sum, v) => sum + v.voteAmount, 0)).toLocaleString()} total
                   </div>
                 )}
               </div>
@@ -578,7 +578,7 @@ export default function Vote() {
                       </div>
                     ) : (
                       <>
-                        {topSubmissions.slice(0, displayedCount).map((drop) => (
+                        {allSubmissions.slice(0, displayedCount).map((drop) => (
                           <SubmissionCard
                             key={drop.id}
                             drop={drop}
