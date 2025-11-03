@@ -34,11 +34,6 @@ export default function Header() {
               Rep Filter
             </Nav.Link>
             <Nav.Link
-              href="/vote"
-              className={router.pathname == "/vote" ? styles.linkActive : ""}>
-              Main Stage Vote
-            </Nav.Link>
-            <Nav.Link
               href="/faq"
               className={router.pathname == "/faq" ? styles.linkActive : ""}>
               FAQ

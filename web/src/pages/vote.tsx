@@ -21,9 +21,17 @@ interface TopSubmission {
     handle: string;
     primary_address: string;
   };
+  metadata?: Array<{
+    data_key: string;
+    data_value: string;
+  }>;
+  title?: string;
   content?: string;
   picture?: string;
   vote_count: number;
+  raters_count: number;
+  rating_prediction: number;
+  realtime_rating: number;
   rank?: number;
 }
 
@@ -33,6 +41,53 @@ interface VoteDistribution {
 }
 
 export default function Vote() {
+  // Add CSS for smooth animations
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .vote-card-body-animated {
+        transition: all 0.3s ease-out;
+        transform-origin: top;
+        overflow: hidden;
+      }
+      
+      .vote-card-body-collapsed {
+        max-height: 0;
+        opacity: 0;
+        transform: scaleY(0.95);
+        padding: 0 !important;
+      }
+      
+      .vote-card-body-expanded {
+        max-height: 2000px;
+        opacity: 1;
+        transform: scaleY(1);
+      }
+      
+      .vote-card-header-clickable {
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+      }
+      
+      .vote-card-header-clickable:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+      }
+      
+      .chevron-icon {
+        transition: transform 0.3s ease;
+        display: inline-block;
+      }
+      
+      .chevron-icon.expanded {
+        transform: rotate(180deg);
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // Authentication state
   const [walletAddress, setWalletAddress] = useState<string>("");
   const [isConnecting, setIsConnecting] = useState(false);
@@ -162,18 +217,28 @@ export default function Vote() {
           const bVotes = b.vote_count || 0;
           return bVotes - aVotes;
         })
-        .map((item: any) => ({
-          id: item.id,
-          serial_no: item.serial_no,
-          author: {
-            handle: item.author.handle,
-            primary_address: item.author.primary_address,
-          },
-          content: item.parts?.[0]?.content || item.title || "",
-          picture: item.picture || item.image || item.media_url || (item.parts && item.parts[0]?.media && item.parts[0].media[0]?.url),
-          vote_count: item.rating_prediction || item.realtime_rating || item.rating || item.vote_count || item.votes || item.score || 0,
-          rank: item.rank,
-        }));
+        .map((item: any) => {
+          const title = item.metadata?.find((m: any) => m.data_key === 'title')?.data_value;
+          const description = item.metadata?.find((m: any) => m.data_key === 'description')?.data_value;
+          
+          return {
+            id: item.id,
+            serial_no: item.serial_no,
+            author: {
+              handle: item.author.handle,
+              primary_address: item.author.primary_address,
+            },
+            metadata: item.metadata,
+            title: title,
+            content: description || "",
+            picture: item.parts?.[0]?.media?.[0]?.url || item.parts?.[0]?.picture || item.picture || item.image || "",
+            vote_count: item.rating_prediction || item.realtime_rating || item.rating || 0,
+            raters_count: item.raters_count || 0,
+            rating_prediction: item.rating_prediction || 0,
+            realtime_rating: item.realtime_rating || 0,
+            rank: item.rank
+          };
+        });
 
       setTopSubmissions(allDrops.slice(0, 10));
       setAllSubmissions(allDrops);
@@ -391,8 +456,7 @@ export default function Vote() {
                           .map((vote) => (
                             <Card key={vote.drop.id} className="mb-3">
                               <Card.Header 
-                                className="d-flex justify-content-between align-items-center"
-                                style={{ cursor: 'pointer' }}
+                                className="d-flex justify-content-between align-items-center vote-card-header-clickable"
                                 onClick={() => {
                                   const expandedState = {...expandedVotes};
                                   expandedState[vote.drop.id] = !expandedState[vote.drop.id];
@@ -400,50 +464,59 @@ export default function Vote() {
                                 }}
                               >
                                 <div>
-                                  <strong>#{vote.drop.serial_no}</strong> by {vote.drop.author.handle}
+                                  <strong>
+                                    {vote.drop.title || 
+                                     (vote.drop.metadata?.find((m: any) => m.data_key === 'title')?.data_value) || 
+                                     `Meme #${vote.drop.serial_no}`}
+                                  </strong>
+                                  <div className="text-muted small">#{vote.drop.serial_no} by {vote.drop.author.handle}</div>
                                   {vote.drop.rank && (
-                                    <Badge bg="secondary" className="ms-2">Rank: {vote.drop.rank}</Badge>
+                                    <Badge bg="secondary" className="mt-1">Rank: {vote.drop.rank}</Badge>
                                   )}
                                 </div>
                                 <div className="d-flex align-items-center gap-2">
                                   <strong>{vote.voteAmount.toLocaleString()} TDH</strong>
-                                  <i className={`bi bi-chevron-${expandedVotes[vote.drop.id] ? 'up' : 'down'}`}></i>
+                                  <span className={`chevron-icon ${expandedVotes[vote.drop.id] ? 'expanded' : ''}`}>▼</span>
                                 </div>
                               </Card.Header>
                               
                               {expandedVotes[vote.drop.id] && (
-                                <Card.Body>
+                                <Card.Body className="vote-card-body-animated vote-card-body-expanded">
                                   <div className="row">
                                     <div className="col-md-6">
-                                      {vote.drop.picture && (
-                                        vote.drop.picture.toLowerCase().includes('.mp4') || 
-                                        vote.drop.picture.toLowerCase().includes('.mov') || 
-                                        vote.drop.picture.toLowerCase().includes('.webm') ? (
-                                          <video
-                                            controls
-                                            style={{ 
-                                              maxWidth: '100%', 
-                                              height: 'auto',
-                                              borderRadius: '4px',
-                                              border: '1px solid #dee2e6',
-                                              maxHeight: '300px'
-                                            }}
-                                          >
-                                            <source src={vote.drop.picture} type="video/mp4" />
-                                            Your browser does not support the video tag.
-                                          </video>
-                                        ) : (
-                                          <img
-                                            src={vote.drop.picture}
-                                            alt={`Meme #${vote.drop.serial_no}`}
-                                            style={{ 
-                                              maxWidth: '100%', 
-                                              height: 'auto',
-                                              borderRadius: '4px',
-                                              border: '1px solid #dee2e6'
-                                            }}
-                                          />
-                                        )
+                                      {vote.drop.picture ? (
+                                        <>
+                                          {vote.drop.picture.toLowerCase().includes('.mp4') || 
+                                           vote.drop.picture.toLowerCase().includes('.mov') || 
+                                           vote.drop.picture.toLowerCase().includes('.webm') ? (
+                                            <video
+                                              controls
+                                              style={{ 
+                                                maxWidth: '100%', 
+                                                height: 'auto',
+                                                borderRadius: '4px',
+                                                border: '1px solid #dee2e6',
+                                                maxHeight: '300px'
+                                              }}
+                                            >
+                                              <source src={vote.drop.picture} type="video/mp4" />
+                                              Your browser does not support the video tag.
+                                            </video>
+                                          ) : (
+                                            <img
+                                              src={vote.drop.picture}
+                                              alt={`Meme #${vote.drop.serial_no}`}
+                                              style={{ 
+                                                maxWidth: '100%', 
+                                                height: 'auto',
+                                                borderRadius: '4px',
+                                                border: '1px solid #dee2e6'
+                                              }}
+                                            />
+                                          )}
+                                        </>
+                                      ) : (
+                                        <div className="text-muted small">No picture data</div>
                                       )}
                                       {vote.drop.content && (
                                         <p className="mt-2 text-muted small">{vote.drop.content}</p>
@@ -467,10 +540,16 @@ export default function Vote() {
                                       <div className="mt-3">
                                         <div className="border-top pt-2">
                                           <small className="text-muted d-block">
-                                            <strong>Total TDH Voted:</strong> {vote.drop.vote_count.toLocaleString()}
+                                            <strong>Voters:</strong> {vote.drop.raters_count?.toLocaleString() || 'N/A'}
                                           </small>
                                           <small className="text-muted d-block">
-                                            <strong>Your Voting Power:</strong> {((vote.voteAmount / vote.drop.vote_count) * 100).toFixed(2)}% of total
+                                            <strong>Predicted TDH:</strong> {vote.drop.rating_prediction?.toLocaleString() || 'N/A'}
+                                          </small>
+                                          <small className="text-muted d-block">
+                                            <strong>Realtime TDH:</strong> {vote.drop.realtime_rating?.toLocaleString() || 'N/A'}
+                                          </small>
+                                          <small className="text-muted d-block">
+                                            <strong>Your Voting Power:</strong> {vote.drop.rating_prediction ? ((vote.voteAmount / vote.drop.rating_prediction) * 100).toFixed(2) : 'N/A'}% of predicted
                                           </small>
                                         </div>
                                       </div>

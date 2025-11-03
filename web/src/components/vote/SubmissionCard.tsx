@@ -8,9 +8,13 @@ interface TopSubmission {
     handle: string;
     primary_address: string;
   };
+  title?: string;
   content?: string;
   picture?: string;
   vote_count: number;
+  raters_count: number;
+  rating_prediction: number;
+  realtime_rating: number;
   rank?: number;
 }
 
@@ -35,11 +39,11 @@ export default function SubmissionCard({
         <div className="d-flex justify-content-between align-items-start mb-2">
           <div>
             <Card.Title className="mb-1">
-              #{drop.serial_no}
-              {drop.rank && <span className="text-muted ms-2">Rank: {drop.rank}</span>}
+              {drop.rank && <span>{drop.rank}: </span>}
+              {drop.title || `#${drop.serial_no}`}
             </Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              by{' '}
+              #{drop.serial_no} by{' '}
               <a
                 href={`/memes/${drop.serial_no}/artist/`}
                 target="_blank"
@@ -50,8 +54,9 @@ export default function SubmissionCard({
             </Card.Subtitle>
           </div>
           <div className="text-end">
-            <div className="text-muted small">Total TDH Voted</div>
-            <div className="fw-bold">{drop.vote_count.toLocaleString()}</div>
+            <div className="text-muted small">Projected TDH Vote</div>
+            <div className="fw-bold">{drop.rating_prediction?.toLocaleString() || 'N/A'}</div>
+            <div className="text-muted small">{drop.raters_count?.toLocaleString() || 'N/A'} voters</div>
           </div>
         </div>
 
