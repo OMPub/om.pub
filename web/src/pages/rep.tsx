@@ -1,7 +1,15 @@
+import Head from "next/head";
+import dynamic from "next/dynamic";
 import { fetchRep, timeAgo } from "@/services/seizeApi";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/Home.module.scss";
 import { Form, Button, Card, Col, Row, Container } from "react-bootstrap";
+import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
+
+const Header = dynamic(() => import("../components/header/Header"), {
+  ssr: false,
+  loading: () => <HeaderPlaceholder />,
+});
 
 const RepPage = () => {
   const delay = 500; // delay in milliseconds
@@ -107,10 +115,21 @@ const RepPage = () => {
   }, [username, direction, matchText]);
 
   return (
-    <Container
-      className={`${styles.main}`}
-      style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}
-    >
+    <>
+      <Head>
+        <title>Rep Filter - The OM Pub 🍻</title>
+        <meta property="og:url" content={`https://om.pub/rep`} />
+        <meta
+          property="og:title"
+          content={`Rep Filter - The OM Pub`}
+        />
+        <meta property="og:image" content={`/om-pub-logo.webp`} />
+      </Head>
+      <Header />
+      <Container
+        className={`${styles.main}`}
+        style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}
+      >
       <h1>Rep Filter</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
@@ -207,6 +226,7 @@ const RepPage = () => {
       ))}
       <div ref={loader}>--</div>
     </Container>
+    </>
   );
 };
 
