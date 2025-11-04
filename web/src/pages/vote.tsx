@@ -102,8 +102,9 @@ export default function Vote() {
   
   // UI state
   const [isLoadingMainStage, setIsLoadingMainStage] = useState(false);
+  const [isLoadingVotes, setIsLoadingVotes] = useState(true);
   const [displayedCount, setDisplayedCount] = useState(10);
-  const [activeTab, setActiveTab] = useState<string>('visualization');
+  const [activeTab, setActiveTab] = useState<string>('list');
   const [selectedVote, setSelectedVote] = useState<VoteDistribution | null>(null);
   const [expandedVotes, setExpandedVotes] = useState<{[key: string]: boolean}>({});
 
@@ -139,6 +140,10 @@ export default function Vote() {
       
       if (!nonceResponse.data.nonce || !nonceResponse.data.server_signature) {
         throw new Error("Invalid nonce response from server");
+      }
+
+      if (!window.ethereum) {
+        throw new Error("MetaMask is not installed");
       }
 
       const signature = await window.ethereum.request({
@@ -263,6 +268,7 @@ export default function Vote() {
         }
       });
       setUserVoteDistribution(userVoteDist);
+      setIsLoadingVotes(false);
 
       // Get user TDH balance
       const identityResponse = await axios.get(`https://api.6529.io/api/identities/${address}`, {
@@ -275,6 +281,7 @@ export default function Vote() {
 
     } catch (error) {
       console.error("Error fetching Main Stage:", error);
+      setIsLoadingVotes(false);
     } finally {
       setIsLoadingMainStage(false);
     }
@@ -435,21 +442,14 @@ export default function Vote() {
                   </div>
                 </div>
 
-                <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k || 'visualization')} className="mb-3">
-                  <Tab eventKey="visualization" title="🌲 Crystal Forest">
-                    {userVoteDistribution.length > 0 ? (
-                      <CrystalForestVisualization
-                        userVoteDistribution={userVoteDistribution}
-                        onCrystalClick={setSelectedVote}
-                      />
-                    ) : (
-                      <Alert variant="info">
-                        Cast some votes to see your 3D crystal forest visualization!
-                      </Alert>
-                    )}
-                  </Tab>
+                <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k || 'list')} className="mb-3">
                   <Tab eventKey="list" title="📋 My Votes">
-                    {userVoteDistribution.length > 0 ? (
+                    {isLoadingVotes ? (
+                      <div className="text-center py-5">
+                        <Spinner animation="border" />
+                        <p className="mt-2">Loading your votes...</p>
+                      </div>
+                    ) : userVoteDistribution.length > 0 ? (
                       <div>
                         {userVoteDistribution
                           .sort((a, b) => b.voteAmount - a.voteAmount)
@@ -561,7 +561,9 @@ export default function Vote() {
                         ))}
                       </div>
                     ) : (
-                      <Alert variant="info">You haven&apos;t cast any votes yet.</Alert>
+                      <Alert variant="info">
+                        <strong>No votes yet!</strong> Head to the Main Stage Voting tab to cast your first vote. 🎭
+                      </Alert>
                     )}
                   </Tab>
                   <Tab eventKey="voting" title="🎭 Main Stage Voting">
@@ -601,6 +603,18 @@ export default function Vote() {
                           <p>No Main Stage data available.</p>
                         )}
                       </>
+                    )}
+                  </Tab>
+                  <Tab eventKey="visualization" title="🌲 Crystal Forest">
+                    {userVoteDistribution.length > 0 ? (
+                      <CrystalForestVisualization
+                        userVoteDistribution={userVoteDistribution}
+                        onCrystalClick={setSelectedVote}
+                      />
+                    ) : (
+                      <Alert variant="info">
+                        Cast some votes to see your 3D crystal forest visualization!
+                      </Alert>
                     )}
                   </Tab>
                 </Tabs>

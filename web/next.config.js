@@ -7,8 +7,10 @@ const VERSION = require("child_process")
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   compress: true,
+  sassOptions: {
+    silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'mixed-decls'],
+  },
   env: {
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
     VERSION: VERSION,

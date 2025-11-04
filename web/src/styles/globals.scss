@@ -1,4 +1,5 @@
-@import "~bootstrap/scss/bootstrap.scss";
+// Import Bootstrap with modern @use syntax (no deprecation warnings)
+@use "bootstrap/scss/bootstrap";
 
 .dropdown-item.active,
 .dropdown-item:active {
