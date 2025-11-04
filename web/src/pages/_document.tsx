@@ -30,6 +30,7 @@ export default function Document() {
                 height="20"
                 src="/github.png"
                 alt="GitHub"
+                style={{ width: '20px', height: '20px' }}
               />{" "}
               GitHub
             </a>
@@ -44,6 +45,7 @@ export default function Document() {
                 height="20"
                 src="/twitter.png"
                 alt="Twitter"
+                style={{ width: '20px', height: '20px' }}
               />{" "}
               Twitter
             </a>
@@ -57,6 +59,7 @@ export default function Document() {
                 height="20"
                 src="/instagram.png"
                 alt="Instagram"
+                style={{ width: '20px', height: '20px' }}
               />{" "}
               Instagram
             </a>

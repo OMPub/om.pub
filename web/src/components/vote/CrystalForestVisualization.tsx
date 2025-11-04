@@ -35,7 +35,19 @@ export default function CrystalForestVisualization({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current || userVoteDistribution.length === 0) return;
+    if (!containerRef.current) {
+      console.error('CrystalForest: Container ref not available');
+      return;
+    }
+    
+    if (userVoteDistribution.length === 0) {
+      console.warn('CrystalForest: No vote distribution data');
+      return;
+    }
+
+    console.log('CrystalForest: Initializing with', userVoteDistribution.length, 'votes');
+
+    try {
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -43,9 +55,11 @@ export default function CrystalForestVisualization({
     scene.fog = new THREE.Fog(0x000000, 10, 100);
 
     // Camera setup
+    const containerWidth = containerRef.current.clientWidth || 1260; // fallback width
+    const containerHeight = containerRef.current.clientHeight || 500; // fallback height
     const camera = new THREE.PerspectiveCamera(
       75,
-      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      containerWidth / containerHeight,
       0.1,
       1000
     );
@@ -54,9 +68,33 @@ export default function CrystalForestVisualization({
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    
+    renderer.setSize(containerWidth, containerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    
+    // Make canvas interactive
+    renderer.domElement.style.cursor = 'grab';
+    renderer.domElement.tabIndex = 0; // Make focusable
+    
     containerRef.current.appendChild(renderer.domElement);
+    
+    console.log('CrystalForest: Canvas appended, size:', 
+      containerWidth, 'x', containerHeight);
+    
+    // Add resize observer to handle tab visibility changes
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        if (width > 0 && height > 0) {
+          renderer.setSize(width, height);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          console.log('CrystalForest: Resized to', width, 'x', height);
+        }
+      }
+    });
+    
+    resizeObserver.observe(containerRef.current);
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -85,6 +123,8 @@ export default function CrystalForestVisualization({
     // Create image bases with crystals growing from them
     const crystalGroups: THREE.Group[] = [];
     
+    console.log('CrystalForest: Creating crystals for', userVoteDistribution.length, 'votes');
+    
     userVoteDistribution.forEach((vote, index) => {
       // Calculate size based on TDH amount
       const logSize = Math.log10(Math.max(vote.voteAmount, 1));
@@ -105,12 +145,118 @@ export default function CrystalForestVisualization({
       // Create a group to hold everything
       const crystalGroup = new THREE.Group();
       crystalGroup.position.set(x, 0, z);
+      
+      if (index === 0) {
+        console.log('CrystalForest: First crystal at position:', x.toFixed(2), '0', z.toFixed(2));
+      }
+      
       crystalGroup.userData = { 
         voteData: vote,
         index
       };
       
-      // Load meme image as the BASE
+      // Create crystals FIRST (don't wait for texture)
+      // Much more dramatic scaling: low votes = barely visible, millions = massive
+      const crystalHeight = 0.5 + Math.pow(normalizedSize, 1.5) * 25; // Exponential scaling
+      const baseSize = 3 + normalizedSize * 5;
+      const crystalWidth = baseSize * 0.15;
+      
+      // Number of crystal shards based on vote size
+      const shardCount = Math.max(1, Math.floor(1 + normalizedSize * 8));
+      
+      for (let i = 0; i < shardCount; i++) {
+        // Vary height for each shard
+        const heightVariation = 0.7 + Math.random() * 0.6;
+        const shardHeight = crystalHeight * heightVariation;
+        const shardWidth = crystalWidth * (0.8 + Math.random() * 0.4);
+        
+        // Position shards in a cluster
+        const angle = (i / shardCount) * Math.PI * 2 + Math.random() * 0.5;
+        const distance = baseSize * 0.15 * Math.random();
+        const offsetX = Math.cos(angle) * distance;
+        const offsetZ = Math.sin(angle) * distance;
+        
+        // Create hexagonal crystal shard
+        const shardGeometry = new THREE.CylinderGeometry(
+          shardWidth * 0.1,  // Very pointy top
+          shardWidth,        // Wider bottom
+          shardHeight,
+          6,  // Hexagonal
+          1
+        );
+        
+        const shardMaterial = new THREE.MeshPhongMaterial({
+          color: crystalColor,
+          emissive: crystalColor,
+          emissiveIntensity: 0.6,
+          transparent: true,
+          opacity: 0.75,
+          side: THREE.DoubleSide,
+          shininess: 100
+        });
+        
+        const shard = new THREE.Mesh(shardGeometry, shardMaterial);
+        shard.position.set(offsetX, shardHeight / 2 + 0.02, offsetZ);
+        
+        // Slight random rotation for natural look
+        shard.rotation.z = (Math.random() - 0.5) * 0.2;
+        shard.userData = { 
+          isCrystal: true,
+          baseHeight: shardHeight / 2
+        };
+        crystalGroup.add(shard);
+        
+        // Add glowing tip to taller shards
+        if (heightVariation > 0.8) {
+          const tipGeometry = new THREE.OctahedronGeometry(shardWidth * 0.2, 0);
+          const tipMaterial = new THREE.MeshBasicMaterial({
+            color: crystalColor,
+            transparent: true,
+            opacity: 0.95
+          });
+          const tip = new THREE.Mesh(tipGeometry, tipMaterial);
+          tip.position.set(offsetX, shardHeight + 0.02, offsetZ);
+          tip.userData = { 
+            isTip: true,
+            shardIndex: i
+          };
+          crystalGroup.add(tip);
+        }
+      }
+      
+      // Add TDH energy particles
+      const particleCount = Math.min(25, 5 + Math.floor(normalizedSize * 20));
+      for (let i = 0; i < particleCount; i++) {
+        const particleGeometry = new THREE.SphereGeometry(0.12, 6, 6);
+        const particleMaterial = new THREE.MeshBasicMaterial({
+          color: crystalColor,
+          transparent: true,
+          opacity: 0.8
+        });
+        
+        const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+        const orbitRadius = baseSize * 0.7;
+        const orbitAngle = (i / particleCount) * Math.PI * 2;
+        
+        particle.position.set(
+          Math.cos(orbitAngle) * orbitRadius,
+          Math.random() * crystalHeight,
+          Math.sin(orbitAngle) * orbitRadius
+        );
+        
+        particle.userData = {
+          isParticle: true,
+          orbitAngle: orbitAngle,
+          orbitRadius: orbitRadius,
+          orbitSpeed: 0.5 + Math.random() * 0.5,
+          floatSpeed: 0.3 + Math.random() * 0.3,
+          targetHeight: crystalHeight
+        };
+        
+        crystalGroup.add(particle);
+      }
+      
+      // Load meme image as the BASE (optional enhancement)
       const textureLoader = new THREE.TextureLoader();
       textureLoader.crossOrigin = 'anonymous';
       
@@ -123,8 +269,7 @@ export default function CrystalForestVisualization({
           textureLoader.load(
             vote.drop.picture,
             (texture) => {
-              // Create image base - scales with TDH amount
-              const baseSize = 3 + normalizedSize * 5;
+              // Create image base - scales with TDH amount (added after crystals are already created)
               const baseGeometry = new THREE.PlaneGeometry(baseSize, baseSize);
               const baseMaterial = new THREE.MeshBasicMaterial({
                 map: texture,
@@ -150,109 +295,13 @@ export default function CrystalForestVisualization({
               glow.position.y = 0.01;
               crystalGroup.add(glow);
               
-              // Create multiple crystal shards growing UP from the image
-              // Much more dramatic scaling: low votes = barely visible, millions = massive
-              const crystalHeight = 0.5 + Math.pow(normalizedSize, 1.5) * 25; // Exponential scaling
-              const crystalWidth = baseSize * 0.15;
-              
-              // Number of crystal shards based on vote size
-              const shardCount = Math.max(1, Math.floor(1 + normalizedSize * 8));
-              
-              for (let i = 0; i < shardCount; i++) {
-                // Vary height for each shard
-                const heightVariation = 0.7 + Math.random() * 0.6;
-                const shardHeight = crystalHeight * heightVariation;
-                const shardWidth = crystalWidth * (0.8 + Math.random() * 0.4);
-                
-                // Position shards in a cluster
-                const angle = (i / shardCount) * Math.PI * 2 + Math.random() * 0.5;
-                const distance = baseSize * 0.15 * Math.random();
-                const offsetX = Math.cos(angle) * distance;
-                const offsetZ = Math.sin(angle) * distance;
-                
-                // Create hexagonal crystal shard
-                const shardGeometry = new THREE.CylinderGeometry(
-                  shardWidth * 0.1,  // Very pointy top
-                  shardWidth,        // Wider bottom
-                  shardHeight,
-                  6,  // Hexagonal
-                  1
-                );
-                
-                const shardMaterial = new THREE.MeshPhongMaterial({
-                  color: crystalColor,
-                  emissive: crystalColor,
-                  emissiveIntensity: 0.6,
-                  transparent: true,
-                  opacity: 0.75,
-                  side: THREE.DoubleSide,
-                  shininess: 100
-                });
-                
-                const shard = new THREE.Mesh(shardGeometry, shardMaterial);
-                shard.position.set(offsetX, shardHeight / 2 + 0.02, offsetZ);
-                
-                // Slight random rotation for natural look
-                shard.rotation.z = (Math.random() - 0.5) * 0.2;
-                shard.userData = { 
-                  isCrystal: true,
-                  baseHeight: shardHeight / 2
-                };
-                crystalGroup.add(shard);
-                
-                // Add glowing tip to taller shards
-                if (heightVariation > 0.8) {
-                  const tipGeometry = new THREE.OctahedronGeometry(shardWidth * 0.2, 0);
-                  const tipMaterial = new THREE.MeshBasicMaterial({
-                    color: crystalColor,
-                    transparent: true,
-                    opacity: 0.95
-                  });
-                  const tip = new THREE.Mesh(tipGeometry, tipMaterial);
-                  tip.position.set(offsetX, shardHeight + 0.02, offsetZ);
-                  tip.userData = { 
-                    isTip: true,
-                    shardIndex: i
-                  };
-                  crystalGroup.add(tip);
-                }
-              }
-              
-              // Add TDH energy particles
-              const particleCount = Math.min(25, 5 + Math.floor(normalizedSize * 20));
-              for (let i = 0; i < particleCount; i++) {
-                const particleGeometry = new THREE.SphereGeometry(0.12, 6, 6);
-                const particleMaterial = new THREE.MeshBasicMaterial({
-                  color: crystalColor,
-                  transparent: true,
-                  opacity: 0.8
-                });
-                
-                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-                const orbitRadius = baseSize * 0.7;
-                const orbitAngle = (i / particleCount) * Math.PI * 2;
-                
-                particle.position.set(
-                  Math.cos(orbitAngle) * orbitRadius,
-                  Math.random() * crystalHeight,
-                  Math.sin(orbitAngle) * orbitRadius
-                );
-                
-                particle.userData = {
-                  isParticle: true,
-                  orbitAngle: orbitAngle,
-                  orbitRadius: orbitRadius,
-                  orbitSpeed: 0.5 + Math.random() * 0.5,
-                  floatSpeed: 0.3 + Math.random() * 0.3,
-                  targetHeight: crystalHeight
-                };
-                
-                crystalGroup.add(particle);
+              if (index === 0) {
+                console.log('CrystalForest: First image loaded successfully');
               }
             },
             undefined,
             (error) => {
-              console.error('Error loading texture for drop:', vote.drop.serial_no, error);
+              console.error('CrystalForest: Error loading texture for drop', vote.drop.serial_no, ':', error);
             }
           );
         }
@@ -260,6 +309,10 @@ export default function CrystalForestVisualization({
       
       crystalGroups.push(crystalGroup);
       scene.add(crystalGroup);
+      
+      if (index === 0) {
+        console.log('CrystalForest: First crystal group added to scene, children count:', crystalGroup.children.length);
+      }
     });
 
     // Mouse interaction
@@ -270,10 +323,12 @@ export default function CrystalForestVisualization({
 
     const onMouseDown = (event: MouseEvent) => {
       isDragging = true;
+      renderer.domElement.style.cursor = 'grabbing';
       previousMousePosition = {
         x: event.clientX,
         y: event.clientY
       };
+      console.log('CrystalForest: Mouse down');
     };
 
     const onMouseMove = (event: MouseEvent) => {
@@ -294,6 +349,7 @@ export default function CrystalForestVisualization({
 
     const onMouseUp = () => {
       isDragging = false;
+      renderer.domElement.style.cursor = 'grab';
     };
 
     const onWheel = (event: WheelEvent) => {
@@ -303,6 +359,7 @@ export default function CrystalForestVisualization({
       
       camera.position.z += direction * zoomSpeed * 2;
       camera.position.z = Math.max(10, Math.min(60, camera.position.z));
+      console.log('CrystalForest: Zoom to', camera.position.z.toFixed(1));
     };
 
     const onClick = (event: MouseEvent) => {
@@ -327,11 +384,33 @@ export default function CrystalForestVisualization({
       }
     };
 
+    // Add both mouse and touch events
     renderer.domElement.addEventListener('mousedown', onMouseDown);
     renderer.domElement.addEventListener('mousemove', onMouseMove);
     renderer.domElement.addEventListener('mouseup', onMouseUp);
     renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
     renderer.domElement.addEventListener('click', onClick);
+    
+    // Touch events for trackpad
+    renderer.domElement.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        onMouseDown({ clientX: touch.clientX, clientY: touch.clientY } as MouseEvent);
+      }
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        onMouseMove({ clientX: touch.clientX, clientY: touch.clientY } as MouseEvent);
+      }
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchend', () => {
+      onMouseUp();
+    });
+    
+    console.log('CrystalForest: Mouse and touch event listeners attached to canvas');
 
     // Animation loop
     let animationId: number;
@@ -383,6 +462,8 @@ export default function CrystalForestVisualization({
       
       renderer.render(scene, camera);
     };
+    
+    console.log('CrystalForest: Starting animation loop, created', crystalGroups.length, 'crystal groups');
     animate();
 
     // Handle resize
@@ -396,10 +477,13 @@ export default function CrystalForestVisualization({
     
     window.addEventListener('resize', handleResize);
 
+    console.log('CrystalForest: Initialization complete');
+
     // Cleanup
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       renderer.domElement.removeEventListener('mousedown', onMouseDown);
       renderer.domElement.removeEventListener('mousemove', onMouseMove);
       renderer.domElement.removeEventListener('mouseup', onMouseUp);
@@ -412,6 +496,10 @@ export default function CrystalForestVisualization({
       
       renderer.dispose();
     };
+    
+    } catch (error) {
+      console.error('CrystalForest: Error during initialization:', error);
+    }
   }, [userVoteDistribution, onCrystalClick]);
 
   return (
@@ -421,7 +509,12 @@ export default function CrystalForestVisualization({
         width: '100%', 
         height: '500px',
         borderRadius: '8px',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: '#000',
+        position: 'relative',
+        border: '1px solid #333',
+        touchAction: 'none', // Prevent default touch behaviors
+        userSelect: 'none' // Prevent text selection
       }} 
     />
   );

@@ -3,13 +3,10 @@ import "../styles/fonts.scss";
 
 import type { AppProps } from "next/app";
 
-import { alchemyProvider } from "wagmi/providers/alchemy";
-
-import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
-import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { http, createConfig, WagmiProvider } from "wagmi";
 import { mainnet, goerli } from "wagmi/chains";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { metaMask, walletConnect, coinbaseWallet } from "wagmi/connectors";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Head from "next/head";
 
@@ -17,52 +14,40 @@ const PROJECT_ID = "afb10f134401c95e32e266f2f343cca3";
 const PROJECT_NAME = "The OM Pub";
 
 const CHAIN_ID = parseInt(process.env.CHAIN_ID!);
-let chain = null;
-if (CHAIN_ID == 1) {
-  chain = mainnet;
-} else if (CHAIN_ID == 5) {
-  chain = goerli;
-}
+const chain = CHAIN_ID === 1 ? mainnet : goerli;
 
-const { chains, provider } = configureChains(
-  [chain!],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY! })]
-);
-
-const client = createClient({
-  autoConnect: true,
+// Create wagmi config
+const config = createConfig({
+  chains: [chain],
   connectors: [
-    new MetaMaskConnector({
-      chains,
+    metaMask(),
+    walletConnect({
+      projectId: PROJECT_ID,
+      showQrModal: true,
     }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        projectId: PROJECT_ID,
-        showQrModal: true,
-      },
-    }),
-    new CoinbaseWalletConnector({
-      chains,
-      options: {
-        appName: PROJECT_NAME,
-      },
+    coinbaseWallet({
+      appName: PROJECT_NAME,
     }),
   ],
-  provider,
+  transports: {
+    [chain.id]: http(`https://eth-${chain.name.toLowerCase()}.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`),
+  },
 });
 
-export default function App({ Component, pageProps }: AppProps) {
-  pageProps.provider = provider;
+// Create a client for React Query
+const queryClient = new QueryClient();
 
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <WagmiConfig client={client}>
-        <Component {...pageProps} />
-      </WagmiConfig>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </WagmiProvider>
     </>
   );
 }
