@@ -1,0 +1,51 @@
+{
+  "name": "6529-voting-sdk",
+  "version": "1.0.0",
+  "description": "A pure JavaScript library for 6529 voting functionality that works with any wallet connection library",
+  "main": "6529-voting-sdk.js",
+  "types": "6529-voting-sdk.ts",
+  "files": [
+    "6529-voting-sdk.js",
+    "6529-voting-sdk.ts",
+    "README.md",
+    "demo.html"
+  ],
+  "scripts": {
+    "build": "echo 'No build step needed - pure JS/TS files'",
+    "demo": "open demo.html",
+    "test": "echo 'Add tests here'",
+    "prepublishOnly": "echo 'Ready to publish to npm'"
+  },
+  "keywords": [
+    "6529",
+    "voting",
+    "ethereum",
+    "web3",
+    "wallet",
+    "metamask",
+    "walletconnect",
+    "coinbase",
+    "tdh",
+    "nft",
+    "meme"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/6529-voting-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/6529-voting-sdk/issues"
+  },
+  "homepage": "https://github.com/yourusername/6529-voting-sdk#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "Chrome >= 60",
+    "Firefox >= 55",
+    "Safari >= 12",
+    "Edge >= 79"
+  ]
+}

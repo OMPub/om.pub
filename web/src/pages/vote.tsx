@@ -2,6 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { SixFiveTwoNineVotingSDK, VotingData, VoteDistribution as SDKVoteDistribution, Drop as SDKDrop } from "../lib/6529-voting-sdk";
 import { Card, Button, Spinner, Alert, Tabs, Tab, Container, Badge } from "react-bootstrap";
 import { toast, Toaster } from 'sonner';
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
@@ -35,7 +36,7 @@ interface TopSubmission {
   rank?: number;
 }
 
-interface VoteDistribution {
+interface LocalVoteDistribution {
   drop: TopSubmission;
   voteAmount: number;
 }
@@ -93,20 +94,87 @@ export default function Vote() {
   const [isConnecting, setIsConnecting] = useState(false);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   
+  // SDK instance
+  const [sdk, setSdk] = useState<SixFiveTwoNineVotingSDK | null>(null);
+
   // Data state
   const [topSubmissions, setTopSubmissions] = useState<TopSubmission[]>([]);
   const [allSubmissions, setAllSubmissions] = useState<TopSubmission[]>([]);
-  const [userVoteDistribution, setUserVoteDistribution] = useState<VoteDistribution[]>([]);
+  const [userVoteDistribution, setUserVoteDistribution] = useState<LocalVoteDistribution[]>([]);
   const [userVotes, setUserVotes] = useState<{[key: string]: number}>({});
   const [userTDHBalance, setUserTDHBalance] = useState<number>(0);
+  const [userTDHTotal, setUserTDHTotal] = useState<number>(0);
   
+  const totalTDHVoted = userVoteDistribution.reduce((sum, v) => sum + v.voteAmount, 0);
+
+  // Helper to convert SDK Drop to TopSubmission
+  const sdkDropToTopSubmission = (sdkDrop: SDKDrop): TopSubmission => ({
+    ...sdkDrop,
+    vote_count: sdkDrop.rating_prediction || sdkDrop.realtime_rating || 0
+  });
+
+  // Helper to convert SDK VoteDistribution to LocalVoteDistribution
+  const sdkVoteDistributionToLocal = (sdkDist: SDKVoteDistribution): LocalVoteDistribution => ({
+    drop: sdkDropToTopSubmission(sdkDist.drop),
+    voteAmount: sdkDist.voteAmount
+  });
+
+
   // UI state
   const [isLoadingMainStage, setIsLoadingMainStage] = useState(false);
   const [isLoadingVotes, setIsLoadingVotes] = useState(true);
   const [displayedCount, setDisplayedCount] = useState(10);
   const [activeTab, setActiveTab] = useState<string>('list');
-  const [selectedVote, setSelectedVote] = useState<VoteDistribution | null>(null);
+  const [selectedVote, setSelectedVote] = useState<LocalVoteDistribution | null>(null);
   const [expandedVotes, setExpandedVotes] = useState<{[key: string]: boolean}>({});
+
+  // Initialize SDK
+  useEffect(() => {
+    const votingSdk = new SixFiveTwoNineVotingSDK({
+      callbacks: {
+        onAuthenticated: (token) => {
+          setAccessToken(token);
+          toast.success("Authenticated with 6529 API successfully!");
+        },
+        onError: (error) => {
+          console.error("SDK Error:", error);
+          toast.error(error);
+        }
+      }
+    });
+    
+    setSdk(votingSdk);
+    
+    // Set up event listeners for debugging and background updates
+    votingSdk.on('dataLoaded', (data: VotingData | undefined) => {
+      if (data) {
+        console.debug('[SDK] Data loaded:', {
+          user: data.user,
+          submissionsCount: data.submissions.length,
+          userVotesCount: data.userVotes.length
+        });
+      }
+    });
+    
+    votingSdk.on('leaderboardUpdated', (data: any) => {
+      console.debug('[SDK] Background loading complete:', {
+        additionalDrops: data.drops?.length || 0
+      });
+      // Optionally refresh UI when background loading completes
+      // This ensures we have the complete dataset
+      if (data.drops && data.drops.length > 0) {
+        loadVotingData();
+      }
+    });
+    
+    votingSdk.on('voteSubmitted', (data) => {
+      console.debug('[SDK] Vote submitted:', data);
+    });
+    
+    return () => {
+      votingSdk.clearAuth();
+    };
+  }, []);
 
   // Connect wallet
   const connectWallet = async () => {
@@ -115,252 +183,147 @@ export default function Vote() {
       return;
     }
 
-    setIsConnecting(true);
-    try {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      const address = accounts[0];
-      setWalletAddress(address);
-      await authenticate(address);
-    } catch (error) {
-      console.error("Error connecting wallet:", error);
-      alert("Failed to connect wallet");
-    } finally {
-      setIsConnecting(false);
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const address = accounts[0];
+        setWalletAddress(address);
+        
+        // Update SDK with wallet address
+        if (sdk) {
+          sdk.setWalletAddress(address);
+        }
+        
+        // Auto-authenticate with 6529 API
+        await authenticate(address);
+      } catch (error) {
+        console.error("Error connecting wallet:", error);
+        toast.error("Failed to connect wallet");
+      }
+    } else {
+      toast.error("Please install MetaMask");
     }
   };
 
-  // Authenticate with 6529 API
+  // Authenticate with 6529 API using SDK
   const authenticate = async (address: string) => {
-    try {
-      const nonceResponse = await axios.get(
-        `https://api.6529.io/api/auth/nonce?signer_address=${address}`
-      );
-      
-      if (!nonceResponse.data.nonce || !nonceResponse.data.server_signature) {
-        throw new Error("Invalid nonce response from server");
-      }
-
-      if (!window.ethereum) {
-        throw new Error("MetaMask is not installed");
-      }
-
-      const signature = await window.ethereum.request({
-        method: "personal_sign",
-        params: [nonceResponse.data.nonce, address],
-      });
-
-      const authResponse = await axios.post(
-        `https://api.6529.io/api/auth/login?signer_address=${address}`,
-        {
-          client_address: address,
-          client_signature: signature,
-          server_signature: nonceResponse.data.server_signature,
-          is_safe_wallet: false,
-        }
-      );
-
-      const token = authResponse.data.token;
-      setAccessToken(token);
-      toast.success("Authenticated with 6529 API successfully!");
-      
-      await fetchMainStage(address, token);
-    } catch (error) {
-      console.error("Authentication error:", error);
-      alert("Authentication failed");
+    if (!sdk) {
+      toast.error("SDK not initialized");
+      return;
     }
-  };
-
-  // Fetch Main Stage data
-  const fetchMainStage = async (address: string, token?: string) => {
-    setIsLoadingMainStage(true);
-    try {
-      const authToken = token || accessToken;
-      const headers = { Authorization: `Bearer ${authToken}` };
-      
-      const MAIN_STAGE_WAVE_ID = "b6128077-ea78-4dd9-b381-52c4eadb2077";
-
-      // Get the Main Stage wave info
-      const waveResponse = await axios.get(`https://api.6529.io/api/waves/${MAIN_STAGE_WAVE_ID}`, {
-        headers,
-      });
-
-      // Fetch all submissions from the wave leaderboard
-      const response = await axios.get(`https://api.6529.io/api/waves/${MAIN_STAGE_WAVE_ID}/leaderboard`, {
-        headers,
-        params: {
-          page_size: 100,
-          page: 1,
-          sort: 'RANK',
-          sort_direction: 'ASC'
-        }
-      });
-
-      const allDrops = (response.data.drops || [])
-        .filter((item: any) => {
-          const hasRank = item.rank && item.rank > 0;
-          const hasRating = item.rating && item.rating > 0;
-          const hasVotes = item.vote_count && item.vote_count > 0;
-          const hasScore = item.score && item.score > 0;
-          const hasMedia = item.parts && item.parts.length > 0 && item.parts[0].media_url;
-          const hasImage = item.picture || item.image || item.media_url || (item.parts && item.parts[0]?.media && item.parts[0].media[0]?.url);
-          const isNotChat = item.drop_type !== 'CHAT';
-          
-          return item && (hasRank || hasRating || hasVotes || hasScore || hasMedia || hasImage || isNotChat);
-        })
-        .sort((a: any, b: any) => {
-          const aRank = a.rank || 999999;
-          const bRank = b.rank || 999999;
-          if (aRank !== bRank) return aRank - bRank;
-          
-          const aRating = a.context_profile_context?.rating || 0;
-          const bRating = b.context_profile_context?.rating || 0;
-          if (aRating !== bRating) return bRating - aRating;
-          
-          const aVotes = a.vote_count || 0;
-          const bVotes = b.vote_count || 0;
-          return bVotes - aVotes;
-        })
-        .map((item: any) => {
-          const title = item.metadata?.find((m: any) => m.data_key === 'title')?.data_value;
-          const description = item.metadata?.find((m: any) => m.data_key === 'description')?.data_value;
-          
-          return {
-            id: item.id,
-            serial_no: item.serial_no,
-            author: {
-              handle: item.author.handle,
-              primary_address: item.author.primary_address,
-            },
-            metadata: item.metadata,
-            title: title,
-            content: description || "",
-            picture: item.parts?.[0]?.media?.[0]?.url || item.parts?.[0]?.picture || item.picture || item.image || "",
-            vote_count: item.rating_prediction || item.realtime_rating || item.rating || 0,
-            raters_count: item.raters_count || 0,
-            rating_prediction: item.rating_prediction || 0,
-            realtime_rating: item.realtime_rating || 0,
-            rank: item.rank
-          };
-        });
-
-      setTopSubmissions(allDrops.slice(0, 10));
-      setAllSubmissions(allDrops);
-
-      // Extract user votes
-      const userVotesMap: {[key: string]: number} = {};
-      (response.data.drops || []).forEach((item: any) => {
-        if (item.id && item.context_profile_context?.rating && item.context_profile_context.rating > 0) {
-          userVotesMap[item.id] = item.context_profile_context.rating;
-        }
-      });
-      setUserVotes(userVotesMap);
-
-      // Create vote distribution
-      const userVoteDist: VoteDistribution[] = [];
-      allDrops.forEach((drop: TopSubmission) => {
-        if (userVotesMap[drop.id]) {
-          userVoteDist.push({
-            drop,
-            voteAmount: userVotesMap[drop.id]
-          });
-        }
-      });
-      setUserVoteDistribution(userVoteDist);
-      setIsLoadingVotes(false);
-
-      // Get user TDH balance
-      const identityResponse = await axios.get(`https://api.6529.io/api/identities/${address}`, {
-        headers,
-      });
-      
-      const totalVoted = Object.values(userVotesMap).reduce((sum, val) => sum + val, 0);
-      const tdh = identityResponse.data.tdh || 0;
-      setUserTDHBalance(tdh - totalVoted);
-
-    } catch (error) {
-      console.error("Error fetching Main Stage:", error);
-      setIsLoadingVotes(false);
-    } finally {
-      setIsLoadingMainStage(false);
-    }
-  };
-
-  // Refresh user voting data only (fast refresh)
-  const refreshUserData = async () => {
-    if (!walletAddress || !accessToken) return;
     
     try {
-      const headers = { Authorization: `Bearer ${accessToken}` };
-      const MAIN_STAGE_WAVE_ID = "b6128077-ea78-4dd9-b381-52c4eadb2077";
+      // Sign message with wallet
+      const signMessage = async (message: string) => {
+        return await window.ethereum.request({
+          method: 'personal_sign',
+          params: [message, address]
+        });
+      };
+      
+      const token = await sdk.authenticate(signMessage, address);
+      setAccessToken(token);
+      
+      // Load voting data after authentication
+      await loadVotingData();
+    } catch (error) {
+      console.error("Authentication error:", error);
+      toast.error("Authentication failed");
+    }
+  };
 
-      // Get updated leaderboard data
-      const response = await axios.get(`https://api.6529.io/api/waves/${MAIN_STAGE_WAVE_ID}/leaderboard`, {
-        headers,
-        params: {
-          page_size: 100,
-          page: 1,
-          sort: 'RANK',
-          sort_direction: 'ASC'
-        }
+  // Load voting data using SDK
+  const loadVotingData = async () => {
+    if (!sdk) return;
+    
+    setIsLoadingMainStage(true);
+    setIsLoadingVotes(true);
+    
+    try {
+      // Use immediate loading for faster initial display
+      const votingData = await sdk.getVotingData({ immediate: true });
+      
+      // Update state with SDK data
+      setTopSubmissions(votingData.submissions.slice(0, 10).map(sdkDropToTopSubmission));
+      setAllSubmissions(votingData.submissions.map(sdkDropToTopSubmission));
+      setUserVoteDistribution(votingData.userVoteDistribution.map(sdkVoteDistributionToLocal));
+      setUserVotes(votingData.userVotesMap);
+      setUserTDHTotal(votingData.user.tdh);
+      setUserTDHBalance(votingData.user.availableTDH);
+      
+      console.debug('[SDK] Voting data loaded immediately', {
+        totalSubmissions: votingData.submissions.length,
+        userVotes: votingData.userVotes.length,
+        tdh: votingData.user.tdh,
+        availableTDH: votingData.user.availableTDH
       });
+    } catch (error) {
+      console.error("Error loading voting data:", error);
+      toast.error("Failed to load voting data");
+    } finally {
+      setIsLoadingMainStage(false);
+      setIsLoadingVotes(false);
+    }
+  };
 
-      // Update user votes from fresh data
-      const userVotesMap: {[key: string]: number} = {};
-      (response.data.drops || []).forEach((item: any) => {
-        if (item.id && item.context_profile_context?.rating && item.context_profile_context.rating > 0) {
-          userVotesMap[item.id] = item.context_profile_context.rating;
-        }
-      });
-      setUserVotes(userVotesMap);
 
+  // Refresh user data using SDK
+  const refreshUserData = async () => {
+    if (!sdk) return;
+    
+    try {
+      const refreshedData = await sdk.refreshUserData();
+      
+      // Update state with refreshed data
+      setUserVotes(refreshedData.userVotesMap);
+      setUserTDHTotal(refreshedData.user.tdh);
+      setUserTDHBalance(refreshedData.user.availableTDH);
+      
       // Update vote distribution
-      const userVoteDist: VoteDistribution[] = [];
+      const userVoteDist: LocalVoteDistribution[] = [];
       allSubmissions.forEach((drop: TopSubmission) => {
-        if (userVotesMap[drop.id]) {
+        if (refreshedData.userVotesMap[drop.id]) {
           userVoteDist.push({
             drop,
-            voteAmount: userVotesMap[drop.id]
+            voteAmount: refreshedData.userVotesMap[drop.id]
           });
         }
       });
       setUserVoteDistribution(userVoteDist);
-
-      // Update TDH balance
-      const identityResponse = await axios.get(`https://api.6529.io/api/identities/${walletAddress}`, {
-        headers,
-      });
       
-      const totalVoted = Object.values(userVotesMap).reduce((sum, val) => sum + val, 0);
-      const tdh = identityResponse.data.tdh || 0;
-      setUserTDHBalance(tdh - totalVoted);
-
+      console.debug('[SDK] User data refreshed', {
+        tdh: refreshedData.user.tdh,
+        availableTDH: refreshedData.user.availableTDH
+      });
     } catch (error) {
       console.error("Error refreshing user data:", error);
+      toast.error("Failed to refresh user data");
     }
   };
 
-  // Submit vote
+  // Submit vote using SDK
   const submitVote = async (dropId: string, amount: number) => {
-    if (!accessToken) {
-      throw new Error("Please authenticate first");
+    if (!sdk) {
+      throw new Error("SDK not initialized");
     }
 
     try {
-      await axios.post(
-        `https://api.6529.io/api/drops/${dropId}/ratings`,
-        { rating: amount },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      );
-
+      console.debug('[Vote] Submitting vote:', { dropId, amount });
+      console.debug('[Vote] SDK state:', {
+        isAuthenticated: sdk.isAuthenticated(),
+        walletAddress: sdk.getWalletAddress(),
+        hasToken: !!sdk.getAccessToken()
+      });
+      
+      await sdk.submitVote(dropId, amount);
       toast.success(`Vote of ${amount} TDH submitted successfully!`);
       
-      // Fast refresh of user data only
+      // Refresh user data after successful vote
       await refreshUserData();
     } catch (error: any) {
       console.error("Error submitting vote:", error);
-      throw new Error(error.response?.data?.error || "Failed to submit vote");
+      toast.error(error.message || "Failed to submit vote");
+      throw error;
     }
   };
 
@@ -369,18 +332,38 @@ export default function Vote() {
     setDisplayedCount(prev => Math.min(prev + 10, allSubmissions.length));
   };
 
-  // Auto-connect wallet on mount
+  // Auto-connect wallet on mount and restore SDK state
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
       window.ethereum
         .request({ method: "eth_accounts" })
         .then((accounts: string[]) => {
-          if (accounts.length > 0) {
-            setWalletAddress(accounts[0]);
+          if (accounts.length > 0 && sdk) {
+            const address = accounts[0];
+            setWalletAddress(address);
+            sdk.setWalletAddress(address);
+            
+            // Try to restore session from localStorage if available
+            const savedToken = localStorage.getItem('6529_access_token');
+            if (savedToken) {
+              sdk.setAccessToken(savedToken);
+              setAccessToken(savedToken);
+              // Load voting data if we have a saved session
+              loadVotingData();
+            }
           }
         });
     }
-  }, []);
+  }, [sdk]);
+  
+  // Save token to localStorage when it changes
+  useEffect(() => {
+    if (accessToken) {
+      localStorage.setItem('6529_access_token', accessToken);
+    } else {
+      localStorage.removeItem('6529_access_token');
+    }
+  }, [accessToken]);
 
   return (
     <>
@@ -414,7 +397,7 @@ export default function Vote() {
                 </div>
                 {accessToken && (
                   <div>
-                    <strong>Available TDH:</strong> {userTDHBalance.toLocaleString()} / {(userTDHBalance + userVoteDistribution.reduce((sum, v) => sum + v.voteAmount, 0)).toLocaleString()} total
+                    <strong>Available TDH:</strong> {userTDHBalance.toLocaleString()} / {userTDHTotal.toLocaleString()} total
                   </div>
                 )}
               </div>
@@ -438,7 +421,7 @@ export default function Vote() {
                   </div>
                   <div>
                     <strong>Total TDH Voted:</strong>{' '}
-                    {userVoteDistribution.reduce((sum, v) => sum + v.voteAmount, 0).toLocaleString()}
+                    {totalTDHVoted.toLocaleString()}
                   </div>
                 </div>
 
