@@ -35,6 +35,11 @@ export default function CrystalForestVisualization({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      console.warn('CrystalForest: window is undefined, skipping initialization');
+      return;
+    }
+
     if (!containerRef.current) {
       console.error('CrystalForest: Container ref not available');
       return;
@@ -42,6 +47,11 @@ export default function CrystalForestVisualization({
     
     if (userVoteDistribution.length === 0) {
       console.warn('CrystalForest: No vote distribution data');
+      return;
+    }
+
+    if (typeof THREE?.WebGLRenderer !== 'function') {
+      console.error('CrystalForest: THREE.WebGLRenderer unavailable, skipping visualization');
       return;
     }
 

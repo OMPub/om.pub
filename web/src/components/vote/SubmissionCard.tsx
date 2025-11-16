@@ -1,4 +1,4 @@
-import { Card } from 'react-bootstrap';
+import { Card, Button, Spinner, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import VotingForm from './VotingForm';
 
 interface TopSubmission {
@@ -7,6 +7,7 @@ interface TopSubmission {
   author: {
     handle: string;
     primary_address: string;
+    id?: string;
   };
   title?: string;
   content?: string;
@@ -24,6 +25,11 @@ interface SubmissionCardProps {
   userTDHBalance: number;
   isAuthenticated: boolean;
   onVoteSubmit: (dropId: string, amount: number) => Promise<void>;
+  onInstantRep: (drop: TopSubmission) => Promise<void>;
+  instantRepEnabled: boolean;
+  instantRepLoading?: boolean;
+  instantRepAmount?: number;
+  instantRepCategory?: string;
 }
 
 export default function SubmissionCard({
@@ -31,8 +37,21 @@ export default function SubmissionCard({
   userVote,
   userTDHBalance,
   isAuthenticated,
-  onVoteSubmit
+  onVoteSubmit,
+  onInstantRep,
+  instantRepEnabled,
+  instantRepLoading = false,
+  instantRepAmount = 0,
+  instantRepCategory = 'Submission'
 }: SubmissionCardProps) {
+  const tooltip = (
+    <Tooltip id={`instant-rep-${drop.id}`}>
+      <div><strong>{instantRepAmount.toLocaleString()} REP</strong></div>
+      <div>→ {drop.author.handle}</div>
+      <div>for: "{instantRepCategory}"</div>
+    </Tooltip>
+  );
+
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -57,6 +76,35 @@ export default function SubmissionCard({
             <div className="text-muted small">Projected TDH Vote</div>
             <div className="fw-bold">{drop.rating_prediction?.toLocaleString() || 'N/A'}</div>
             <div className="text-muted small">{drop.raters_count?.toLocaleString() || 'N/A'} voters</div>
+            {isAuthenticated && (
+              <OverlayTrigger placement="left" overlay={tooltip}>
+                <span>
+                  <Button
+                    variant="outline-success"
+                    size="sm"
+                    className="mt-2"
+                    disabled={!instantRepEnabled || instantRepLoading}
+                    onClick={() => onInstantRep(drop)}
+                  >
+                    {instantRepLoading ? (
+                      <>
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                          className="me-2"
+                        />
+                        Sending…
+                      </>
+                    ) : (
+                      'Instant REP'
+                    )}
+                  </Button>
+                </span>
+              </OverlayTrigger>
+            )}
           </div>
         </div>
 

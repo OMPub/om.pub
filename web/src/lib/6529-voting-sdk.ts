@@ -55,6 +55,50 @@ export interface RepRatingResponse {
   rating: number;
 }
 
+export interface RepCredit {
+  cic_credit?: number;
+  rep_credit?: number;
+}
+
+export interface WaveActivity {
+  id: string;
+  name: string;
+  picture?: string | null;
+  description?: string;
+  latestActivityAt?: number | null;
+  activityCount: number;
+  url: string;
+  isDirectMessage?: boolean;
+}
+
+export interface NotificationItem {
+  id: number;
+  cause: string;
+  created_at: number;
+  read_at?: number | null;
+  related_identity?: {
+    id?: string;
+    handle?: string;
+    pfp?: string;
+  } | null;
+  additional_context?: Record<string, any> | null;
+  related_drops?: any[];
+  wave_ids?: string[];
+}
+
+export interface NotificationsResponse {
+  notifications: NotificationItem[];
+  unread_count: number;
+  category_counts: NotificationCategoryCounts;
+}
+
+export interface NotificationCategoryCounts {
+  mentionsAndReplies: number;
+  reactions: number;
+  identitySubscribed: number;
+  other: number;
+}
+
 export interface UserIdentity {
   tdh: number;
   address: string;
@@ -127,6 +171,7 @@ export interface SDKEventData {
   dataLoaded?: VotingData;
   dataError?: { error: string };
   voting?: { dropId: string; amount: number };
+  leaderboardUpdated?: { drops: any[] };
   voteSubmitted?: { dropId: string; amount: number; response: any };
   voteError?: { dropId: string; amount: number; error: string };
   repAssigning?: { identity: string; amount: number; category?: string };
@@ -137,7 +182,11 @@ export interface SDKEventData {
   stateImported?: SDKState;
 }
 
-export type EventCallback<T extends SDKEvent = SDKEvent> = (data: SDKEventData[T]) => void;
+export type EventPayload<T extends SDKEvent> = T extends keyof SDKEventData
+  ? NonNullable<SDKEventData[T]>
+  : never;
+
+export type EventCallback<T extends SDKEvent = SDKEvent> = (data: EventPayload<T>) => void;
 
 export interface SubmissionOptions {
   page?: number;
@@ -156,7 +205,7 @@ export class SixFiveTwoNineVotingSDK {
   private accessToken: string | null = null;
   private userAddress: string | null = null;
   private callbacks: VoteSDKOptions['callbacks'];
-  private eventListeners: Map<SDKEvent, EventCallback[]>;
+  private eventListeners: Map<SDKEvent, EventCallback<any>[]>;
 
   constructor(options: VoteSDKOptions = {}) {
     this.baseURL = options.baseURL || 'https://api.6529.io';
@@ -173,7 +222,7 @@ export class SixFiveTwoNineVotingSDK {
     }
     const listeners = this.eventListeners.get(event);
     if (listeners) {
-      listeners.push(callback as EventCallback);
+      listeners.push(callback as EventCallback<any>);
     }
   }
 
@@ -181,7 +230,7 @@ export class SixFiveTwoNineVotingSDK {
     if (this.eventListeners.has(event)) {
       const listeners = this.eventListeners.get(event);
       if (listeners) {
-        const index = listeners.indexOf(callback as EventCallback);
+        const index = listeners.indexOf(callback as EventCallback<any>);
         if (index > -1) {
           listeners.splice(index, 1);
         }
@@ -189,8 +238,8 @@ export class SixFiveTwoNineVotingSDK {
     }
   }
 
-  private emit<T extends SDKEvent>(event: T, data: SDKEventData[T]): void {
-    const listeners = this.eventListeners.get(event);
+  private emit<T extends SDKEvent>(event: T, data: EventPayload<T>): void {
+    const listeners = this.eventListeners.get(event) as EventCallback<T>[] | undefined;
     if (listeners) {
       listeners.forEach(callback => {
         try {
@@ -395,6 +444,40 @@ export class SixFiveTwoNineVotingSDK {
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
+  }
+
+  private async fetchRepRating(identity: string, params: URLSearchParams): Promise<RepRatingResponse> {
+    const query = params.toString();
+    const url = query ? `/api/profiles/${identity}/rep/rating?${query}` : `/api/profiles/${identity}/rep/rating`;
+    return this.authenticatedRequest(url) as Promise<RepRatingResponse>;
+  }
+
+  /**
+   * Retrieve total REP allocated to an identity (optionally filtered by category)
+   */
+  async getIdentityRepSummary(identity: string, category?: string): Promise<RepRatingResponse> {
+    if (!identity) {
+      throw new Error('Identity is required');
+    }
+
+    const params = new URLSearchParams();
+    if (category && category.trim()) {
+      params.set('category', category.trim());
+    }
+
+    return this.fetchRepRating(identity, params);
+  }
+
+  /**
+   * Retrieve total REP you (or the connected wallet) have received
+   */
+  async getMyRepReceived(category?: string): Promise<number> {
+    if (!this.userAddress) {
+      throw new Error('No wallet address set');
+    }
+
+    const summary = await this.getIdentityRepSummary(this.userAddress, category);
+    return summary.rating || 0;
   }
 
   /**
@@ -762,12 +845,152 @@ export class SixFiveTwoNineVotingSDK {
       params.set('from_identity', raterIdentity);
     }
 
-    const query = params.toString();
-    const url = query ? `/api/profiles/${identity}/rep/rating?${query}` : `/api/profiles/${identity}/rep/rating`;
-
-    const response = await this.authenticatedRequest(url);
-    const repResponse = response as RepRatingResponse;
+    const repResponse = await this.fetchRepRating(identity, params);
     return repResponse.rating || 0;
+  }
+
+  /**
+   * Retrieve available REP credit for the connected wallet (or supplied rater)
+   */
+  async getRepCredit(rater?: string, representative?: string): Promise<RepCredit> {
+    const raterIdentity = rater || this.userAddress;
+
+    if (!raterIdentity) {
+      throw new Error('Rater identity is required to get REP credit');
+    }
+
+    const params = new URLSearchParams({ rater: raterIdentity });
+    if (representative && representative.trim()) {
+      params.set('rater_representative', representative.trim());
+    }
+
+    const query = params.toString();
+    const url = `/api/ratings/credit?${query}`;
+    const response = await this.authenticatedRequest(url);
+    return response as RepCredit;
+  }
+
+  /**
+   * Retrieve up to `limit` recent waves the user has joined, ranked by most recent activity
+   */
+  async getRecentWaveActivity(limit = 5): Promise<WaveActivity[]> {
+    const pageSize = 20;
+    let offset = 0;
+    const aggregatedWaves: any[] = [];
+
+    while (true) {
+      const params = new URLSearchParams({
+        limit: String(pageSize),
+        offset: String(offset),
+        type: 'RECENTLY_DROPPED_TO',
+        only_waves_followed_by_authenticated_user: 'true'
+      });
+
+      const response = await this.authenticatedRequest(`/api/waves-overview?${params.toString()}`);
+      const page = (Array.isArray(response) ? response : response?.data || []) as any[];
+      aggregatedWaves.push(...page);
+
+      if (page.length < pageSize) {
+        break;
+      }
+
+      offset += pageSize;
+    }
+
+    const joinedWaves = aggregatedWaves
+      .map((wave) => {
+        const metrics = wave.metrics || {};
+        const chatGroup = wave.chat?.scope?.group || {};
+        const toNumber = (value: any): number | null => {
+          if (value === null || value === undefined) return null;
+          if (typeof value === 'number') return Number.isFinite(value) ? value : null;
+          const parsed = Number(value);
+          return Number.isFinite(parsed) ? parsed : null;
+        };
+
+        const waveLatestDropTs = toNumber(metrics.latest_drop_timestamp);
+        const userLatestDropTs = toNumber(metrics.your_latest_drop_timestamp);
+        const createdAt = toNumber(wave.created_at);
+        const latestActivityAt = waveLatestDropTs ?? userLatestDropTs ?? createdAt ?? 0;
+
+        return {
+          id: wave.id,
+          name: wave.name,
+          picture: wave.picture,
+          description: wave.description_drop?.title || wave.description_drop?.content,
+          latestActivityAt,
+          activityCount: Number(metrics.drops_count ?? 0),
+          url: `https://6529.io/waves/${wave.id}`,
+          isDirectMessage: chatGroup?.is_direct_message || false
+        } as WaveActivity;
+      });
+
+    return joinedWaves
+      .sort((a, b) => (b.latestActivityAt ?? 0) - (a.latestActivityAt ?? 0))
+      .slice(0, limit);
+  }
+
+  /**
+   * Fetch notifications for the authenticated user
+   */
+  async getNotifications(limit = 20, beforeId?: number): Promise<NotificationsResponse> {
+    const params = new URLSearchParams({ limit: String(Math.max(1, Math.min(limit, 100))) });
+    if (beforeId) {
+      params.set('id_less_than', String(beforeId));
+    }
+
+    const response = await this.authenticatedRequest(`/api/notifications?${params.toString()}`);
+
+    const categoryCounts: NotificationCategoryCounts = {
+      mentionsAndReplies: 0,
+      reactions: 0,
+      identitySubscribed: 0,
+      other: 0
+    };
+
+    const isMentionOrReply = (cause: string) => {
+      return cause === 'IDENTITY_MENTIONED' || cause === 'DROP_REPLIED' || cause === 'DROP_QUOTED';
+    };
+
+    const isReaction = (cause: string) => {
+      return cause === 'DROP_VOTED';
+    };
+
+    const isIdentitySubscribed = (cause: string) => {
+      return cause === 'IDENTITY_SUBSCRIBED';
+    };
+
+    const notifications: NotificationItem[] = (response?.notifications || []).map((notification: any) => {
+      const waveIds = new Set<string>();
+      (notification.related_drops || []).forEach((drop: any) => {
+        const waveId = drop?.wave?.id || drop?.wave_id;
+        if (waveId) {
+          waveIds.add(waveId);
+        }
+      });
+
+      const cause = notification.cause || '';
+      if (isMentionOrReply(cause)) {
+        categoryCounts.mentionsAndReplies += 1;
+      } else if (isReaction(cause)) {
+        categoryCounts.reactions += 1;
+      } else if (isIdentitySubscribed(cause)) {
+        categoryCounts.identitySubscribed += 1;
+      } else {
+        categoryCounts.other += 1;
+      }
+
+      return {
+        ...notification,
+        wave_ids: waveIds.size > 0 ? Array.from(waveIds) : undefined
+      } as NotificationItem;
+    });
+
+    return {
+      notifications,
+      unread_count: response?.unread_count ?? 0,
+      category_counts: categoryCounts
+    } as NotificationsResponse;
   }
 
   /**

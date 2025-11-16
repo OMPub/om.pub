@@ -1,14 +1,24 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { SixFiveTwoNineVotingSDK, VotingData, VoteDistribution as SDKVoteDistribution, Drop as SDKDrop } from "../lib/6529-voting-sdk";
+import { SixFiveTwoNineVotingSDK, VotingData, VoteDistribution as SDKVoteDistribution, Drop as SDKDrop, WaveActivity, NotificationItem, NotificationCategoryCounts } from "../lib/6529-voting-sdk";
 import { Card, Button, Spinner, Alert, Tabs, Tab, Container, Badge } from "react-bootstrap";
 import { toast, Toaster } from 'sonner';
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import CrystalForestVisualization from "@/components/vote/CrystalForestVisualization";
 import SubmissionCard from "@/components/vote/SubmissionCard";
 import VotingForm from "@/components/vote/VotingForm";
+
+declare global {
+  interface Window {
+    ethereum?: {
+      request: (args: { method: string; params?: any[] }) => Promise<any>;
+      on: (event: string, handler: (accounts: string[]) => void) => void;
+      removeListener: (event: string, handler: (accounts: string[]) => void) => void;
+    };
+  }
+}
 
 const Header = dynamic(() => import("../components/header/Header"), {
   ssr: false,
@@ -21,6 +31,7 @@ interface TopSubmission {
   author: {
     handle: string;
     primary_address: string;
+    id?: string;
   };
   metadata?: Array<{
     data_key: string;
@@ -40,6 +51,46 @@ interface LocalVoteDistribution {
   drop: TopSubmission;
   voteAmount: number;
 }
+
+const buildRepCategory = (drop: TopSubmission) => {
+  const fallback = `Submission #${drop.serial_no}`;
+  const metadataTitle = drop.metadata?.find((m) => m.data_key === "title")?.data_value;
+  const rawCategory = drop.title || metadataTitle || fallback;
+  const sanitized = rawCategory
+    .replace(/[^a-zA-Z0-9?!,."() ]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return (sanitized || fallback).slice(0, 100);
+};
+
+const formatRelativeTime = (timestamp?: number | null) => {
+  if (!timestamp) return "Unknown";
+
+  const diffMs = Date.now() - timestamp;
+  if (diffMs < 0) return "Just now";
+
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+
+  if (diffMs < minute) {
+    const seconds = Math.floor(diffMs / 1000);
+    return seconds <= 1 ? "Just now" : `${seconds}s ago`;
+  }
+
+  if (diffMs < hour) {
+    const minutes = Math.floor(diffMs / minute);
+    return `${minutes}m ago`;
+  }
+
+  if (diffMs < day) {
+    const hours = Math.floor(diffMs / hour);
+    return `${hours}h ago`;
+  }
+
+  const days = Math.floor(diffMs / day);
+  return `${days}d ago`;
+};
 
 export default function Vote() {
   // Add CSS for smooth animations
@@ -127,6 +178,152 @@ export default function Vote() {
   const [activeTab, setActiveTab] = useState<string>('list');
   const [selectedVote, setSelectedVote] = useState<LocalVoteDistribution | null>(null);
   const [expandedVotes, setExpandedVotes] = useState<{[key: string]: boolean}>({});
+  const [userRepAvailable, setUserRepAvailable] = useState<number>(0);
+  const [userRepReceived, setUserRepReceived] = useState<number>(0);
+  const [isLoadingRep, setIsLoadingRep] = useState(false);
+  const [instantRepStatus, setInstantRepStatus] = useState<{ [key: string]: boolean }>({});
+  const [recentActivity, setRecentActivity] = useState<WaveActivity[]>([]);
+  const defaultNotificationCounts: NotificationCategoryCounts = {
+    mentionsAndReplies: 0,
+    reactions: 0,
+    identitySubscribed: 0,
+    other: 0
+  };
+
+  const defaultNotificationGroups = {
+    mentionsAndReplies: [] as NotificationItem[],
+    reactions: [] as NotificationItem[],
+    identitySubscribed: [] as NotificationItem[],
+    other: [] as NotificationItem[]
+  };
+
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [notificationCategoryCounts, setNotificationCategoryCounts] = useState<NotificationCategoryCounts>(defaultNotificationCounts);
+  const [notificationGroups, setNotificationGroups] = useState(defaultNotificationGroups);
+  const [waveNotificationCounts, setWaveNotificationCounts] = useState<Record<string, number>>({});
+  const [isLoadingActivity, setIsLoadingActivity] = useState(false);
+  const [activityError, setActivityError] = useState<string | null>(null);
+
+  const loadRepData = useCallback(async () => {
+    if (!sdk || !sdk.isAuthenticated()) {
+      return;
+    }
+
+    setIsLoadingRep(true);
+    try {
+      const [credit, received] = await Promise.all([
+        sdk.getRepCredit(),
+        sdk.getMyRepReceived()
+      ]);
+      setUserRepAvailable(Number(credit?.rep_credit ?? 0));
+      setUserRepReceived(received || 0);
+    } catch (error) {
+      console.error("Error loading rep data:", error);
+      toast.error("Failed to load REP info");
+    } finally {
+      setIsLoadingRep(false);
+    }
+  }, [sdk]);
+
+  const loadActivityData = useCallback(async () => {
+    if (!sdk || !sdk.isAuthenticated()) {
+      return;
+    }
+
+    setIsLoadingActivity(true);
+    setActivityError(null);
+    try {
+      const [waves, notif] = await Promise.all([
+        sdk.getRecentWaveActivity(5),
+        sdk.getNotifications(50)
+      ]);
+
+      const unreadCounts: Record<string, number> = {};
+      notif.notifications.forEach((notification) => {
+        if (notification.read_at) {
+          return;
+        }
+        (notification.wave_ids || []).forEach((waveId) => {
+          unreadCounts[waveId] = (unreadCounts[waveId] || 0) + 1;
+        });
+      });
+
+      const causeToGroup = (cause: string): keyof typeof defaultNotificationGroups => {
+        if (cause === 'IDENTITY_MENTIONED' || cause === 'DROP_REPLIED' || cause === 'DROP_QUOTED') {
+          return 'mentionsAndReplies';
+        }
+        if (cause === 'DROP_VOTED') {
+          return 'reactions';
+        }
+        if (cause === 'IDENTITY_SUBSCRIBED') {
+          return 'identitySubscribed';
+        }
+        return 'other';
+      };
+
+      const grouped = {
+        mentionsAndReplies: [] as NotificationItem[],
+        reactions: [] as NotificationItem[],
+        identitySubscribed: [] as NotificationItem[],
+        other: [] as NotificationItem[]
+      };
+
+      notif.notifications.forEach((notification) => {
+        const groupKey = causeToGroup(notification.cause || '');
+        grouped[groupKey].push(notification);
+      });
+
+      setRecentActivity(waves);
+      setNotifications(notif.notifications);
+      setWaveNotificationCounts(unreadCounts);
+      setNotificationCategoryCounts(notif.category_counts || defaultNotificationCounts);
+      setNotificationGroups(grouped);
+    } catch (error) {
+      console.error("Error loading activity data:", error);
+      setActivityError("Failed to load activity");
+    } finally {
+      setIsLoadingActivity(false);
+    }
+  }, [sdk]);
+
+  const handleInstantRep = useCallback(async (drop: TopSubmission) => {
+    if (!sdk) {
+      toast.error("SDK not initialized");
+      return;
+    }
+
+    if (!accessToken) {
+      toast.error("Authenticate to send REP");
+      return;
+    }
+
+    const targetIdentity = drop.author?.id || drop.author?.handle;
+    if (!targetIdentity) {
+      toast.error("Unable to determine artist identity");
+      return;
+    }
+
+    const percentAmount = Math.floor(userRepAvailable * 0.01);
+    const repAmount = Math.min(percentAmount, 6967);
+    if (repAmount <= 0) {
+      toast.error("No REP available to send");
+      return;
+    }
+
+    const category = buildRepCategory(drop);
+    setInstantRepStatus((prev) => ({ ...prev, [drop.id]: true }));
+
+    try {
+      await sdk.assignRep(targetIdentity, repAmount, category);
+      toast.success(`Sent ${repAmount.toLocaleString()} REP to ${drop.author.handle}`);
+      await loadRepData();
+    } catch (error: any) {
+      console.error("Error sending instant REP:", error);
+      toast.error(error?.message || "Failed to send REP");
+    } finally {
+      setInstantRepStatus((prev) => ({ ...prev, [drop.id]: false }));
+    }
+  }, [sdk, accessToken, userRepAvailable, loadRepData]);
 
   // Initialize SDK
   useEffect(() => {
@@ -214,8 +411,14 @@ export default function Vote() {
     
     try {
       // Sign message with wallet
+      const provider = typeof window !== "undefined" ? window.ethereum : undefined;
+      if (!provider) {
+        toast.error("Please install MetaMask");
+        return;
+      }
+
       const signMessage = async (message: string) => {
-        return await window.ethereum.request({
+        return await provider.request({
           method: 'personal_sign',
           params: [message, address]
         });
@@ -226,6 +429,8 @@ export default function Vote() {
       
       // Load voting data after authentication
       await loadVotingData();
+      await loadRepData();
+      await loadActivityData();
     } catch (error) {
       console.error("Authentication error:", error);
       toast.error("Authentication failed");
@@ -295,6 +500,8 @@ export default function Vote() {
         tdh: refreshedData.user.tdh,
         availableTDH: refreshedData.user.availableTDH
       });
+
+      await loadRepData();
     } catch (error) {
       console.error("Error refreshing user data:", error);
       toast.error("Failed to refresh user data");
@@ -350,11 +557,13 @@ export default function Vote() {
               setAccessToken(savedToken);
               // Load voting data if we have a saved session
               loadVotingData();
+              loadRepData();
+              loadActivityData();
             }
           }
         });
     }
-  }, [sdk]);
+  }, [sdk, loadRepData, loadActivityData]);
   
   // Save token to localStorage when it changes
   useEffect(() => {
@@ -401,6 +610,18 @@ export default function Vote() {
                   </div>
                 )}
               </div>
+              {accessToken && (
+                <div className="d-flex justify-content-between align-items-center mt-2 flex-wrap gap-2">
+                  <div>
+                    <strong>Available REP:</strong>{' '}
+                    {isLoadingRep ? 'Loading…' : userRepAvailable.toLocaleString()}
+                  </div>
+                  <div className="text-muted small">
+                    Total REP Received:{' '}
+                    {isLoadingRep ? 'Loading…' : userRepReceived.toLocaleString()}
+                  </div>
+                </div>
+              )}
               {!accessToken && (
                 <Button onClick={() => authenticate(walletAddress)} className="mt-2" size="sm">
                   Authenticate with 6529 API
@@ -563,7 +784,9 @@ export default function Vote() {
                       </div>
                     ) : (
                       <>
-                        {allSubmissions.slice(0, displayedCount).map((drop) => (
+                        {allSubmissions.slice(0, displayedCount).map((drop) => {
+                          const instantRepAmount = Math.min(Math.floor(userRepAvailable * 0.01), 6967);
+                          return (
                           <SubmissionCard
                             key={drop.id}
                             drop={drop}
@@ -571,8 +794,14 @@ export default function Vote() {
                             userTDHBalance={userTDHBalance}
                             isAuthenticated={!!accessToken}
                             onVoteSubmit={submitVote}
+                            onInstantRep={handleInstantRep}
+                            instantRepEnabled={userRepAvailable > 0}
+                            instantRepLoading={!!instantRepStatus[drop.id]}
+                            instantRepAmount={instantRepAmount}
+                            instantRepCategory={buildRepCategory(drop)}
                           />
-                        ))}
+                          );
+                        })}
 
                         {displayedCount < allSubmissions.length && (
                           <div className="text-center mt-4">
@@ -598,6 +827,123 @@ export default function Vote() {
                       <Alert variant="info">
                         Cast some votes to see your 3D crystal forest visualization!
                       </Alert>
+                    )}
+                  </Tab>
+                  <Tab eventKey="activity" title="📡 Activity">
+                    {isLoadingActivity ? (
+                      <div className="text-center py-5">
+                        <Spinner animation="border" />
+                        <p className="mt-2">Loading activity...</p>
+                      </div>
+                    ) : (
+                      <div className="activity-tab">
+                        {activityError && (
+                          <Alert variant="danger">{activityError}</Alert>
+                        )}
+
+                        <div className="mb-4">
+                          <div className="d-flex justify-content-between align-items-center mb-2">
+                            <h5 className="mb-0">
+                              Recent Waves
+                              {(() => {
+                                const unreadTotal = recentActivity.reduce((sum, wave) => sum + (waveNotificationCounts[wave.id] || 0), 0);
+                                return unreadTotal > 0 ? ` (${unreadTotal} unread)` : '';
+                              })()}
+                            </h5>
+                            <Button variant="outline-secondary" size="sm" onClick={loadActivityData}>
+                              Refresh
+                            </Button>
+                          </div>
+                          {recentActivity.length === 0 ? (
+                            <Alert variant="info">No recent wave activity yet.</Alert>
+                          ) : (
+                            <div className="d-flex flex-wrap gap-3">
+                              {recentActivity.map((wave) => (
+                                <Card
+                                  key={wave.id}
+                                  style={{ width: '200px', cursor: 'pointer' }}
+                                  onClick={() => window.open(wave.url, '_blank')}
+                                >
+                                  {wave.picture ? (
+                                    <Card.Img variant="top" src={wave.picture} alt={wave.name} style={{ height: '120px', objectFit: 'cover' }} />
+                                  ) : (
+                                    <div style={{ height: '120px', backgroundColor: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#777' }}>
+                                      No Image
+                                    </div>
+                                  )}
+                                  <Card.Body>
+                                    <Card.Title style={{ fontSize: '1rem' }}>{wave.name}</Card.Title>
+                                    <Card.Text className="text-muted" style={{ fontSize: '0.85rem' }}>
+                                      Activity: {wave.activityCount.toLocaleString()}
+                                      <br />
+                                      Last active: {formatRelativeTime(wave.latestActivityAt)}
+                                      <br />
+                                      {wave.isDirectMessage ? 'Direct Message Wave' : 'Wave'}
+                                      {waveNotificationCounts[wave.id] ? (
+                                        <>
+                                          <br />
+                                          Unread notifications: <strong>{waveNotificationCounts[wave.id]}</strong>
+                                        </>
+                                      ) : null}
+                                    </Card.Text>
+                                  </Card.Body>
+                                </Card>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+                            <h5 className="mb-0">Notifications</h5>
+                            <div className="d-flex flex-wrap gap-2 small text-muted">
+                              <span>Mentions & Replies: <strong>{notificationCategoryCounts.mentionsAndReplies}</strong></span>
+                              <span>Reactions: <strong>{notificationCategoryCounts.reactions}</strong></span>
+                              <span>Identity Subscribed: <strong>{notificationCategoryCounts.identitySubscribed}</strong></span>
+                              <span>Other: <strong>{notificationCategoryCounts.other}</strong></span>
+                            </div>
+                          </div>
+                          {notifications.length === 0 ? (
+                            <Alert variant="info">No notifications yet.</Alert>
+                          ) : (
+                            <div className="d-flex flex-column gap-3">
+                              {([
+                                ['mentionsAndReplies', 'Mentions & Replies'],
+                                ['reactions', 'Reactions'],
+                                ['identitySubscribed', 'Identity Subscribed'],
+                                ['other', 'Other']
+                              ] as [keyof typeof notificationGroups, string][]).map(([key, label]) => (
+                                notificationGroups[key].length > 0 ? (
+                                  <div key={key}>
+                                    <h6 className="mb-2">{label}</h6>
+                                    <div className="list-group">
+                                      {notificationGroups[key].map((notification) => (
+                                        <div key={notification.id} className="list-group-item">
+                                          <div className="d-flex justify-content-between">
+                                            <strong>{notification.cause.replace(/_/g, ' ')}</strong>
+                                            <small className="text-muted">
+                                              {new Date(notification.created_at).toLocaleString()}
+                                            </small>
+                                          </div>
+                                          {notification.additional_context?.message && (
+                                            <div className="text-muted">{notification.additional_context.message}</div>
+                                          )}
+                                          {notification.related_identity?.handle && (
+                                            <div className="text-muted">From: {notification.related_identity.handle}</div>
+                                          )}
+                                          {notification.wave_ids && notification.wave_ids.length > 0 && (
+                                            <div className="text-muted small">Wave IDs: {notification.wave_ids.join(', ')}</div>
+                                          )}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : null
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     )}
                   </Tab>
                 </Tabs>
