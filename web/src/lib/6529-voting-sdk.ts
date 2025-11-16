@@ -141,26 +141,6 @@ export interface SDKState {
   isWalletConnected: boolean;
 }
 
-export type SDKEvent = 
-  | 'walletConnected'
-  | 'authenticating' 
-  | 'authenticated'
-  | 'authenticationError'
-  | 'authCleared'
-  | 'loadingData'
-  | 'dataLoaded'
-  | 'dataError'
-  | 'voting'
-  | 'voteSubmitted'
-  | 'leaderboardUpdated'
-  | 'voteError'
-  | 'repAssigning'
-  | 'repAssigned'
-  | 'repError'
-  | 'userDataRefreshed'
-  | 'userDataError'
-  | 'stateImported';
-
 export interface SDKEventData {
   walletConnected?: { address: string };
   authenticating?: {};
@@ -181,6 +161,8 @@ export interface SDKEventData {
   userDataError?: { error: string };
   stateImported?: SDKState;
 }
+
+export type SDKEvent = keyof SDKEventData;
 
 export type EventPayload<T extends SDKEvent> = T extends keyof SDKEventData
   ? NonNullable<SDKEventData[T]>
@@ -292,7 +274,7 @@ export class SixFiveTwoNineVotingSDK {
    */
   setAccessToken(token: string): void {
     this.accessToken = token;
-    this.emit('authenticated', { token } as any);
+    this.emit('authenticated', { token });
     this.callbacks?.onAuthenticated?.(token);
   }
 
@@ -302,7 +284,7 @@ export class SixFiveTwoNineVotingSDK {
   clearAuth(): void {
     this.accessToken = null;
     this.userAddress = null;
-    this.emit('authCleared', {} as any);
+    this.emit('authCleared', {});
   }
 
   /**
@@ -440,7 +422,7 @@ export class SixFiveTwoNineVotingSDK {
       
       return token;
     } catch (error) {
-      this.emit('authenticationError', { error: (error as Error).message } as any);
+      this.emit('authenticationError', { error: (error as Error).message });
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
@@ -780,12 +762,12 @@ export class SixFiveTwoNineVotingSDK {
         method: 'POST'
       }, { rating: amount });
 
-      this.emit('voteSubmitted', { dropId, amount, response } as any);
+      this.emit('voteSubmitted', { dropId, amount, response });
       this.callbacks?.onVoteSubmitted?.(dropId, amount);
       
       return response;
     } catch (error) {
-      this.emit('voteError', { dropId, amount, error: (error as Error).message } as any);
+      this.emit('voteError', { dropId, amount, error: (error as Error).message });
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
@@ -809,18 +791,19 @@ export class SixFiveTwoNineVotingSDK {
 
     try {
       const trimmedCategory = category.trim();
-      this.emit('repAssigning', { identity, amount, category: trimmedCategory } as any);
+      this.emit('repAssigning', { identity, amount, category: trimmedCategory });
 
       const response = await this.authenticatedRequest(`/api/profiles/${identity}/rep/rating`, {
         method: 'POST'
       }, { amount, category: trimmedCategory });
 
-      this.emit('repAssigned', { identity, amount, category: trimmedCategory, response } as any);
+      const repResponse = response as RepAssignmentResponse;
+      this.emit('repAssigned', { identity, amount, category: trimmedCategory, response: repResponse });
       this.callbacks?.onRepAssigned?.(identity, amount, trimmedCategory);
 
-      return response as RepAssignmentResponse;
+      return repResponse;
     } catch (error) {
-      this.emit('repError', { identity, amount, category, error: (error as Error).message } as any);
+      this.emit('repError', { identity, amount, category, error: (error as Error).message });
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
@@ -1062,7 +1045,7 @@ export class SixFiveTwoNineVotingSDK {
       this.emit('dataLoaded', result);
       return result;
     } catch (error) {
-      this.emit('dataError', { error: (error as Error).message } as any);
+      this.emit('dataError', { error: (error as Error).message });
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
@@ -1114,7 +1097,7 @@ export class SixFiveTwoNineVotingSDK {
       this.emit('userDataRefreshed', result);
       return result;
     } catch (error) {
-      this.emit('userDataError', { error: (error as Error).message } as any);
+      this.emit('userDataError', { error: (error as Error).message });
       this.callbacks?.onError?.((error as Error).message);
       throw error;
     }
