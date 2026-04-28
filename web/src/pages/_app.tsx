@@ -4,7 +4,7 @@ import "../styles/fonts.scss";
 import type { AppProps } from "next/app";
 
 import { http, createConfig, WagmiProvider } from "wagmi";
-import { mainnet, goerli } from "wagmi/chains";
+import { mainnet, sepolia as goerli } from "viem/chains";
 import { metaMask, walletConnect, coinbaseWallet } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -31,7 +31,7 @@ const config = createConfig({
   ],
   transports: {
     [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`),
-    [goerli.id]: http(`https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`),
+    [goerli.id]: http(`https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`),
   },
 });
 
