@@ -85,7 +85,7 @@ const StoryPage = () => {
           property="og:title"
           content={`Woman with Orange Hat | The OM Pub`}
         />
-        <meta property="og:image" content={`/om-pub-logo.webp`} />
+        <meta property="og:image" content={`/om-pub-logo.png`} />
       </Head>
       <Header />
       <Container

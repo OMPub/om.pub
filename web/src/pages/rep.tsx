@@ -123,7 +123,7 @@ const RepPage = () => {
           property="og:title"
           content={`Rep Filter - The OM Pub`}
         />
-        <meta property="og:image" content={`/om-pub-logo.webp`} />
+        <meta property="og:image" content={`/om-pub-logo.png`} />
       </Head>
       <Header />
       <Container

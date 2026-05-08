@@ -205,7 +205,7 @@ const MemeRankPage = () => {
           property="og:title"
           content={`Memetic Power Ratings | The OM Pub`}
         />
-        <meta property="og:image" content={`/om-pub-logo.webp`} />
+        <meta property="og:image" content={`/om-pub-logo.png`} />
       </Head>
       <Header />
       <Container

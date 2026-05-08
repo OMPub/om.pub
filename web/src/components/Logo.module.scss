@@ -1,0 +1,98 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none !important;
+  outline: none;
+  border-radius: 14px;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--brand-amber-1);
+  }
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 176, 0, 0.35), transparent 60%);
+
+  // amber halo
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: var(--gradient-amber);
+    filter: blur(12px);
+    opacity: 0.35;
+    z-index: 0;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px solid var(--border-default);
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+
+.link:hover .mark::before {
+  opacity: 0.6;
+}
+
+.markImg {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.wordmark {
+  font-family: "AsimovWide", "Inter", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.om {
+  background: var(--gradient-amber);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.dot {
+  color: var(--brand-leaf);
+  margin: 0 1px;
+}
+
+.pub {
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .wordmark {
+    font-size: 1.15rem;
+  }
+}

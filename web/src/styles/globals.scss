@@ -1,172 +1,538 @@
-// Import Bootstrap with modern @use syntax (no deprecation warnings)
+// ─────────────────────────────────────────────────────────────────────────────
+// OM Pub — global stylesheet
+// Design tokens, theme switching, base reset, typography rhythm.
+// ─────────────────────────────────────────────────────────────────────────────
+
 @use "bootstrap/scss/bootstrap";
 
-.dropdown-item.active,
-.dropdown-item:active {
-  background-color: rgb(34, 34, 34);
+// ── Design tokens ────────────────────────────────────────────────────────────
+:root {
+  // Brand — these read identically across themes
+  --brand-amber-1: #ffb000;
+  --brand-amber-2: #e65c00;
+  --brand-amber-deep: #b34800;
+  --brand-cream: #f6e3c5;
+  --brand-foam: #f1d9b5;
+  --brand-leaf: #4cae4f;
+  --brand-leaf-dark: #2f7d33;
+  --brand-ember: #ff5a36;
+  --brand-cyan: #00f0ff;
+
+  --gradient-amber: linear-gradient(135deg, #ffb000 0%, #e65c00 100%);
+  --gradient-amber-soft: linear-gradient(135deg, rgba(255, 176, 0, 0.18) 0%, rgba(230, 92, 0, 0.18) 100%);
+  --gradient-leaf: linear-gradient(135deg, #4cae4f 0%, #2f7d33 100%);
+
+  // Sizing & motion
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  --shadow-amber-sm: 0 4px 16px -4px rgba(230, 92, 0, 0.35);
+  --shadow-amber-md: 0 12px 40px -8px rgba(230, 92, 0, 0.45);
+  --shadow-amber-lg: 0 24px 80px -16px rgba(255, 176, 0, 0.4);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 480ms;
+
+  --container-max: 1280px;
+  --header-height: 76px;
+  --header-height-mobile: 64px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  // Default to dark; the no-flash script will set [data-theme="light"] if user prefers.
+  color-scheme: dark;
 }
 
-.nav-link {
-  margin-left: 10px;
-  margin-right: 10px;
-  line-height: 30px;
+// ── Dark theme (default) ─────────────────────────────────────────────────────
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-void: #09090b;
+  --bg-deep: #0c0a09;
+  --bg-elev-1: #161310;
+  --bg-elev-2: #1c1814;
+
+  --surface: rgba(25, 20, 20, 0.45);
+  --surface-strong: rgba(28, 22, 18, 0.78);
+  --surface-hover: rgba(36, 28, 22, 0.72);
+
+  --border-subtle: rgba(255, 176, 0, 0.12);
+  --border-default: rgba(255, 176, 0, 0.22);
+  --border-strong: rgba(255, 176, 0, 0.38);
+
+  --text-primary: #fafaf9;
+  --text-secondary: #a8a29e;
+  --text-tertiary: #78716c;
+  --text-on-amber: #1a0a04;
+
+  --link: #ffb000;
+  --link-hover: #ffd166;
+
+  --noise-opacity: 0.05;
+  --backdrop-blur: 20px;
+
+  --hero-glow-1: radial-gradient(60% 60% at 22% 28%, rgba(255, 176, 0, 0.22) 0%, rgba(255, 176, 0, 0) 65%);
+  --hero-glow-2: radial-gradient(55% 55% at 80% 70%, rgba(230, 92, 0, 0.18) 0%, rgba(230, 92, 0, 0) 60%);
+  --hero-glow-3: radial-gradient(50% 50% at 90% 10%, rgba(76, 174, 79, 0.08) 0%, rgba(76, 174, 79, 0) 60%);
 }
 
-@media only screen and (max-width: 1000px) {
-  .navbar-brand {
-    h3 {
-      font-size: 18px !important;
-    }
-  }
-  .navbar-nav {
-    text-align: center;
-  }
+// ── Light theme ──────────────────────────────────────────────────────────────
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-void: #fbf6ee;       // warm cream like beer foam
+  --bg-deep: #f6efe1;
+  --bg-elev-1: #fffaf2;
+  --bg-elev-2: #ffffff;
+
+  --surface: rgba(255, 250, 240, 0.7);
+  --surface-strong: rgba(255, 250, 240, 0.92);
+  --surface-hover: rgba(255, 245, 230, 0.95);
+
+  --border-subtle: rgba(120, 53, 15, 0.12);
+  --border-default: rgba(120, 53, 15, 0.2);
+  --border-strong: rgba(230, 92, 0, 0.45);
+
+  --text-primary: #1a0f0a;
+  --text-secondary: #5b4636;
+  --text-tertiary: #87715f;
+  --text-on-amber: #1a0a04;
+
+  --link: #c44900;
+  --link-hover: #8c2f00;
+
+  --noise-opacity: 0.03;
+  --backdrop-blur: 14px;
+
+  --hero-glow-1: radial-gradient(60% 60% at 22% 28%, rgba(255, 176, 0, 0.32) 0%, rgba(255, 176, 0, 0) 65%);
+  --hero-glow-2: radial-gradient(55% 55% at 80% 70%, rgba(230, 92, 0, 0.22) 0%, rgba(230, 92, 0, 0) 60%);
+  --hero-glow-3: radial-gradient(50% 50% at 90% 10%, rgba(76, 174, 79, 0.12) 0%, rgba(76, 174, 79, 0) 60%);
 }
 
-.form-control:focus {
-  border-color: rgb(34, 34, 34);
+// ── Reset & base ─────────────────────────────────────────────────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
 body {
-  color: black;
   margin: 0;
-  background-color: #fff !important;
+  padding: 0;
+  background-color: var(--bg-void) !important;
+  color: var(--text-primary);
+  font-family: "Inter", "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: "ss01", "cv11", "cv02";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
-textarea,
-select,
-input,
-button,
-video {
-  outline: 0 !important;
-  box-shadow: none !important;
+body {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-a {
-  outline: 0 !important;
+// Subtle global noise to keep dark surfaces from feeling flat
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
 }
 
-b {
-  font-family: "Inter-Bold";
+// Ambient backdrop glows — applied to body, fixed under everything
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: var(--hero-glow-1), var(--hero-glow-2), var(--hero-glow-3);
 }
 
-h1 {
-  font-size: 7.5rem;
-  line-height: 1 !important;
-  font-family: "Asimov";
+#__next {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-h2 {
-  font-size: 4rem;
-  font-family: "Asimov";
+main {
+  flex: 1 0 auto;
 }
 
-h3 {
-  font-size: 2.5rem;
-  font-family: "Asimov";
+// Selection
+::selection {
+  background: rgba(255, 176, 0, 0.45);
+  color: var(--text-primary);
 }
 
-h4 {
-  font-size: 2rem;
-  font-family: "Asimov";
+// Scrollbars
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-pill);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+  background-clip: padding-box;
+  border: 3px solid transparent;
 }
 
-@media only screen and (max-width: 1200px) {
-  h1 {
-    font-size: 6rem;
-  }
-  h2 {
-    font-size: 3.5rem;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  h1 {
-    font-size: 4.5rem;
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
-}
-
+// ── Typography ───────────────────────────────────────────────────────────────
+// Headings get sensible default vertical rhythm so legacy text-heavy pages
+// (memes, faq, contact) don't crash together. The home page's section
+// components reset margins where a tighter layout is needed.
 h1,
 h2,
 h3,
 h4,
-h5 {
-  font-family: "AsimovWide";
+h5,
+h6 {
+  font-family: "AsimovWide", "Inter", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0 0 0.5em;
+  line-height: 1.1;
 }
 
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p {
+  margin-top: 0;
+}
+
+p + h2,
+p + h3,
+p + h4,
+p + h5,
+p + h6,
+ul + h2,
+ul + h3,
+ul + h4,
+ol + h2,
+ol + h3,
+ol + h4 {
+  margin-top: 1.6em;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6.4vw, 5.5rem);
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  margin: 0 0 0.4em;
+}
+
+h2 {
+  font-size: clamp(1.85rem, 3.6vw, 3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.18;
+}
+
+h4 {
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+// Tight container — used by Home sections to neutralize global heading margins
+.tight :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+b,
+strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+// Reusable utility: gradient text
+.text-amber-grad {
+  background: var(--gradient-amber);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+// Eyebrow caption
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  font-family: "Inter", system-ui, sans-serif;
+
+  &::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--border-strong);
+  }
+}
+
+// ── Buttons (global) ─────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand-amber-1);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--gradient-amber) !important;
+  color: var(--text-on-amber) !important;
+  border: none !important;
+  box-shadow: var(--shadow-amber-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-amber-md);
+  color: var(--text-on-amber) !important;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+  color: var(--text-primary);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+
+// ── Forms ────────────────────────────────────────────────────────────────────
+textarea,
+select,
+input,
+button {
+  outline: 0 !important;
+  box-shadow: none !important;
+  font-family: inherit;
+}
+
+.form-control {
+  background: var(--surface) !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 12px 16px !important;
+  transition: border-color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out);
+}
+
+.form-control:focus {
+  border-color: var(--brand-amber-1) !important;
+  background: var(--surface-hover) !important;
+  box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.15) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-tertiary);
+}
+
+// ── Bootstrap shim overrides for dark theme ──────────────────────────────────
+.dropdown-menu {
+  background: var(--surface-strong);
+  border: 1px solid var(--border-default);
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+  border-radius: var(--radius-xs);
+  padding: 8px 12px;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: rgba(255, 176, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background: var(--gradient-amber);
+  color: var(--text-on-amber);
+}
+
+// Bootstrap card neutralization (we use our own glass cards)
+.card {
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+
+// Container max-width
+.container,
+.container-fluid {
+  max-width: var(--container-max);
+}
+
+// Legacy helpers kept for backwards compat with other pages
 .text-subheading {
-  color: #666666;
-  font-family: "Inter-Bold";
-  font-weight: normal !important;
-  letter-spacing: 0.2em;
-  font-size: larger;
+  color: var(--text-tertiary);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  font-size: 0.875rem;
+  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
-.no-padding {
-  padding: 0;
-}
-
-.font-larger {
-  font-size: larger;
-}
-
-.font-normal {
-  font-size: initial;
-}
-
-.font-grey {
-  color: #666666;
-}
+.no-padding { padding: 0; }
+.font-larger { font-size: 1.125rem; }
+.font-normal { font-size: 1rem; }
+.font-grey { color: var(--text-secondary); }
 
 .question-answer {
-  font-size: larger;
-  margin-left: 30px;
+  font-size: 1.125rem;
+  margin-left: 1.5rem;
   word-wrap: break-word;
-}
-
-#footer {
-  background-color: #CFDEE4;
-  padding: 1.5rem;
-  line-height: 18px;
-  color: #aca0a2;
-
-  img {
-    vertical-align: bottom;
-  }
-
-  a {
-    color: #666666;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  a:hover {
-    color: black;
-  }
+  color: var(--text-secondary);
 }
 
 .grey-link {
-  color: rgb(100, 100, 100);
+  color: var(--text-secondary);
 
   &:hover {
     text-decoration: underline;
-    color: black;
+    color: var(--text-primary);
   }
 }
 
 .black-link {
-  color: #E4572E;
+  color: var(--brand-ember);
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
-    color: rgb(100, 100, 100);
+    color: var(--brand-amber-1);
   }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Mobile typography tightening
+@media (max-width: 768px) {
+  body { font-size: 15px; }
 }

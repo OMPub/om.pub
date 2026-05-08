@@ -2,21 +2,19 @@ import "../styles/globals.scss";
 import "../styles/fonts.scss";
 
 import type { AppProps } from "next/app";
+import Head from "next/head";
 
 import { http, createConfig, WagmiProvider } from "wagmi";
 import { mainnet, sepolia as goerli } from "viem/chains";
 import { metaMask, walletConnect, coinbaseWallet } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import Head from "next/head";
+import { ThemeProvider } from "@/lib/theme";
+import Footer from "@/components/Footer";
 
 const PROJECT_ID = "afb10f134401c95e32e266f2f343cca3";
 const PROJECT_NAME = "The OM Pub";
 
-const CHAIN_ID = parseInt(process.env.CHAIN_ID!);
-const chain = CHAIN_ID === 1 ? mainnet : goerli;
-
-// Create wagmi config
 const config = createConfig({
   chains: [mainnet, goerli],
   connectors: [
@@ -35,7 +33,6 @@ const config = createConfig({
   },
 });
 
-// Create a client for React Query
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -44,11 +41,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
-        </QueryClientProvider>
-      </WagmiProvider>
+      <ThemeProvider>
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+            <Footer />
+          </QueryClientProvider>
+        </WagmiProvider>
+      </ThemeProvider>
     </>
   );
 }

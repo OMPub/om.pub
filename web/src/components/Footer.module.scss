@@ -1,0 +1,194 @@
+.footer {
+  position: relative;
+  margin-top: var(--space-9);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(20, 14, 10, 0.4) 35%, rgba(20, 14, 10, 0.7) 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:global([data-theme="light"]) .footer {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 240, 220, 0.5) 35%, rgba(255, 235, 210, 0.85) 100%);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 60% at 10% 0%, rgba(255, 176, 0, 0.12) 0%, transparent 60%),
+    radial-gradient(50% 50% at 95% 80%, rgba(230, 92, 0, 0.10) 0%, transparent 60%);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: var(--space-8);
+  align-items: flex-start;
+}
+
+.brand {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tagline {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.serif {
+  font-family: "AsimovWide", serif;
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.socials {
+  display: flex;
+  gap: 8px;
+  margin-top: var(--space-2);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    backdrop-filter: blur(var(--backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
+    transition: color var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out),
+      background var(--duration-base) var(--ease-out);
+  }
+
+  a:hover {
+    color: var(--brand-amber-1);
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+    transform: translateY(-2px);
+  }
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+}
+
+.col h4 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--text-primary);
+}
+
+.link svg {
+  opacity: 0.6;
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.link:hover svg {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-default) 50%,
+    transparent 100%
+  );
+  margin: var(--space-7) 0 var(--space-5) 0;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.fine {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 880px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+  .cols {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-top: var(--space-7);
+  }
+  .inner {
+    padding: 0 var(--space-5);
+  }
+  .cols {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
