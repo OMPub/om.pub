@@ -69,7 +69,7 @@ const NakaImage: React.FC<NakaImageProps> = ({
 
       formattedTitle = (
         <>
-          <svg dir="ltr" width="100%" viewBox="0 0 100 25" style={{ display: 'block', overflow: 'visible', marginBottom: marginB }}>
+          <svg width="100%" viewBox="0 0 100 25" style={{ display: 'block', overflow: 'visible', marginBottom: marginB }}>
             <text x="0" y="20" fontSize="25" textLength="100" lengthAdjust="spacingAndGlyphs" 
                   fontFamily='"Big Shoulders Stencil Display", "Impact", "Arial Black", system-ui, sans-serif' 
                   fontWeight="900" fill="#111" style={{ direction: 'ltr' }}>
@@ -86,7 +86,7 @@ const NakaImage: React.FC<NakaImageProps> = ({
       );
     } else {
       formattedTitle = (
-        <svg dir="ltr" width="100%" viewBox="0 0 100 25" style={{ display: 'block', overflow: 'visible' }}>
+        <svg width="100%" viewBox="0 0 100 25" style={{ display: 'block', overflow: 'visible' }}>
           <text x="0" y="20" fontSize="25" textLength="100" lengthAdjust="spacingAndGlyphs" 
                 fontFamily='"Big Shoulders Stencil Display", "Impact", "Arial Black", system-ui, sans-serif' 
                 fontWeight="900" fill="#111" style={{ direction: 'ltr' }}>
