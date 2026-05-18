@@ -121,7 +121,7 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
         },
         {
           name: "Luna's Wonderland Discord Server",
-          url: "https://discord.gg/JAhzGprv",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -149,7 +149,7 @@ Luna's art embodies a sense of wonder and imagination, inviting the viewer to ex
         },
         {
           name: "UNNKNOWN's Discord Server",
-          url: "https://discord.gg/UNNKNOWN",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -188,7 +188,7 @@ Stoked for more from 6529er!
         },
         {
           name: "Find @6529er in the OM Discord Server",
-          url: "https://discord.gg/JAhzGprv",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -227,7 +227,7 @@ Welcome to the Memes Community, Pop Wonder...we glad we won't have to "wonder" m
         },
         {
           name: "PopWonder's Discord",
-          url: "https://discord.com/invite/Jxw5CWumEK",
+          url: "https://6529.io/OMPub",
         },
         {
           name: "An Interview with PopWonder",
@@ -315,7 +315,7 @@ We are thrilled to welcome Ryan to the ranks of the Memes artist, and can't wait
         },
         {
           name: "Ryan's Discord",
-          url: "https://discord.com/invite/AVeGUcAMdY",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -345,7 +345,7 @@ We are grateful to have Megan and her vision and values as a part of The Memes c
         },
         {
           name: "Megan's Discord",
-          url: "https://discord.gg/PRsKywkuqU",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -754,7 +754,7 @@ Stoked for more from 6529er!
         },
         {
           name: "Find @6529er in the OM Discord Server",
-          url: "https://discord.gg/JAhzGprv",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -1543,7 +1543,7 @@ With Card 120, we get even more 6529er, aka "He Who Does Not Miss"!
         },
         {
           name: "Find @6529er in the OM Discord Server",
-          url: "https://discord.gg/JAhzGprv",
+          url: "https://6529.io/OMPub",
         },
       ],
     },
@@ -4140,7 +4140,7 @@ The medium is so clearly the message in her art, and maybe even in Card 186... t
         },
         {
           name: "NYG's website",
-          url: "https://discord.gg/UNNKNOWN",
+          url: "https://6529.io/OMPub",
         },
       ],
     },

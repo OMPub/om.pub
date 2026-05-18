@@ -119,7 +119,7 @@ const StoryPage = () => {
               Who is WwOH? What is her story? Details are in{" "}
               <a
                 style={{ textDecoration: "none" }}
-                href="https://discord.com/channels/963043925554237482/1203782401843793971/1212814004255195136"
+                href="https://6529.io/OMPub"
                 target="_blank"
               >
                 Proposal #25

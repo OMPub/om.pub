@@ -56,10 +56,10 @@ export default function Contact() {
                   <span className="font-grey">Discord: </span>
                   <a
                     className="black-link"
-                    href="https://discord.gg/join-om"
+                    href="https://6529.io/OMPub"
                     target="_blank"
                     rel="noreferrer">
-                    https://discord.gg/join-om
+                    https://6529.io/OMPub
                   </a>
                   <br />
                   <span className="font-normal">
