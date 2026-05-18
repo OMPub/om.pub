@@ -7,40 +7,6 @@ import { CSSProperties, ElementType, ReactNode } from "react";
 import styles from "@/styles/Home.module.scss";
 import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import AutoTyping from "@/components/AutoTyping";
-import fs from 'fs';
-import path from 'path';
-
-export async function getStaticProps() {
-  let memesCount = 295;
-  let artistsCount = 275;
-  try {
-    const cardInfoPath = path.join(process.cwd(), 'public', 'cardInfo.json');
-    const fileContents = fs.readFileSync(cardInfoPath, 'utf8');
-    const cards = JSON.parse(fileContents);
-    memesCount = Object.keys(cards).length;
-    
-    const artists = new Set();
-    Object.values(cards).forEach((card: any) => {
-      if (card && card.artist) {
-        artists.add(card.artist);
-      }
-    });
-    artistsCount = artists.size;
-  } catch (error) {
-    console.error("Error loading cardInfo.json", error);
-  }
-
-  // Round down to nearest 5
-  const memesDisplay = Math.floor(memesCount / 5) * 5;
-  const artistsDisplay = Math.floor(artistsCount / 5) * 5;
-
-  return {
-    props: {
-      memesCount: memesDisplay,
-      artistsCount: artistsDisplay
-    }
-  }
-}
 
 const Header = dynamic(() => import("../components/header/Header"), {
   ssr: false,
@@ -226,7 +192,7 @@ function Reveal({
   );
 }
 
-export default function Home({ memesCount = 250, artistsCount = 200 }) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -343,12 +309,12 @@ export default function Home({ memesCount = 250, artistsCount = 200 }) {
                 <span className={styles.statLabel}>Meme Seasons</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statValue}>{memesCount}+</span>
-                <span className={styles.statLabel}>CC0 Memes</span>
+                <span className={styles.statValue}>450+</span>
+                <span className={styles.statLabel}>CC0 Works of Art</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statValue}>{artistsCount}+</span>
-                <span className={styles.statLabel}>Artists</span>
+                <span className={styles.statValue}>3</span>
+                <span className={styles.statLabel}>Mints per Week</span>
               </div>
               <div className={styles.stat}>
                 <span className={styles.statValue}>∞</span>
