@@ -31,6 +31,11 @@ export default function Naka(props: any) {
   const [buttonText, setButtonText] = useState('');
   const local = nakaText[locale];
 
+  const sortedLocales = [...locales].sort((a, b) => a.localeCompare(b));
+  const currentIndex = sortedLocales.indexOf(locale);
+  const prevLocale = sortedLocales[(currentIndex - 1 + sortedLocales.length) % sortedLocales.length];
+  const nextLocale = sortedLocales[(currentIndex + 1) % sortedLocales.length];
+
   useEffect(() => {
     const loc = locale.toUpperCase();
     const local = nakaText[locale];
@@ -98,10 +103,10 @@ export default function Naka(props: any) {
 
             <div>
               <ul>
-                {locales.map((loc: string) => (
+                {sortedLocales.map((loc: string) => (
                   <li key={loc}>
                     <Link key={loc} href={asPath} locale={loc}>
-                      {loc}: {nakaText[loc].language}
+                      {loc}: {nakaText[loc]?.language || loc}
                     </Link>
                   </li>
                 ))}
@@ -115,6 +120,14 @@ export default function Naka(props: any) {
               alt={local.title}
               className="img-fluid"
             />
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem', marginBottom: '2rem' }}>
+              <Link href={asPath} locale={prevLocale} style={{ textDecoration: 'none', color: '#ff4d00', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                &larr; Previous
+              </Link>
+              <Link href={asPath} locale={nextLocale} style={{ textDecoration: 'none', color: '#ff4d00', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                Next &rarr;
+              </Link>
+            </div>
           </Col>
           <Col>
             <div>
@@ -185,7 +198,7 @@ const nakaText: NakaText = {
     "id": 3,
     "language": "Deutsch",
     "languageEn": "German",
-    "title": "Transaktionsfreiheit",
+    "title": "Freiheit zu handeln",
     "explainer": "Die Freiheit zu handeln ist die Grundlage aller anderen verfassungsm\u00e4\u00dfigen Rechte. Ohne die Freiheit zu handeln, hast du keine anderen verfassungsm\u00e4\u00dfigen Rechte.",
     "mintUrl": ""
   },
@@ -545,8 +558,8 @@ const nakaText: NakaText = {
     "id": 48,
     "language": "Simple English",
     "languageEn": "Simple English",
-    "title": "The ability to conduct transactions without restrictions or limitations",
-    "explainer": "Being able to do business freely is the foundation of all other rights in the Constitution. If you can't do business freely, then you won't have any other rights in the Constitution.",
+    "title": "Freedom to Trade",
+    "explainer": "Being able to trade freely is the foundation of all other rights. If you can't trade freely, you won't have any other rights.",
     "mintUrl": ""
   },
   "min": {

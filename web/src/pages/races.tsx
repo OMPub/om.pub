@@ -200,7 +200,6 @@ const LeaderboardPage = () => {
           .rank,
           .name {
             margin: 0 10px;
-            color: #2222ccaa;
             text-decoration: none;
             vertical-align: middle;
           }

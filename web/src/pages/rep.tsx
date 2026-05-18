@@ -184,18 +184,18 @@ const RepPage = () => {
       </Form>
       {sortedReps.slice(0, displayCount).map((rep) => (
         <>
-          <Card className="rep" style={{ border: "none" }}>
-            <Card.Body>
-              <Card.Text
-                style={{ fontFamily: "Lora, serif", fontSize: "large" }}
+          <Card className="rep" style={{ background: "transparent", border: "none" }}>
+            <Card.Body className="d-flex flex-column flex-md-row justify-content-between align-items-md-center py-3">
+              <div
+                style={{ fontFamily: "Lora, serif", fontSize: "1.1rem", fontWeight: 500, marginBottom: "0.5rem" }}
+                className="mb-md-0"
               >
                 {rep.contents.rating_category}
-              </Card.Text>
-              <Card.Subtitle
-                className="mb-2"
-                style={{ textAlign: "right", color: "#ccc" }}
+              </div>
+              <div
+                style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}
               >
-                {rep.contents.new_rating} from{" "}
+                <strong>{rep.contents.new_rating}</strong> from{" "}
                 <a
                   href={"https://6529.io/" + rep.profile_handle}
                   target="_blank"
@@ -209,19 +209,13 @@ const RepPage = () => {
                 >
                   {rep.target_profile_handle}
                 </a>
-                ,{" "}
+                <span className="mx-2">&middot;</span>
                 <span title={new Date(rep.created_at).toISOString()}>
                   {timeAgo(new Date(rep.created_at).getTime())}
                 </span>
-              </Card.Subtitle>
+              </div>
             </Card.Body>
           </Card>
-          <style jsx>{`
-            a {
-              text-decoration: none;
-              color: #2222cc55;
-            }
-          `}</style>
         </>
       ))}
       <div ref={loader}>--</div>

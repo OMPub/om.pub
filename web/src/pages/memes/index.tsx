@@ -237,10 +237,10 @@ export default function Memes() {
               <span className={styles.heroAccent}>prememes</span>.
             </h2>
             <p className={styles.sectionLede}>
-              Before each Meme card minted, we made a prememe &mdash; an
-              introduction to the artist and a glimpse of their style. The
-              practice has wound down. What remains is an archive: an
-              exhibition of every prememe ever made, all in one place.
+              For several seasons of The Memes, we made a prememe for each artist 
+              before their card minted &mdash; an introduction to their style and a 
+              glimpse of what was to come. The practice has wound down. What remains 
+              is an archive: an exhibition of every prememe ever made, all in one place.
             </p>
           </div>
 
