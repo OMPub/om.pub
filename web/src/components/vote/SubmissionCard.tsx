@@ -25,8 +25,8 @@ interface SubmissionCardProps {
   userTDHBalance: number;
   isAuthenticated: boolean;
   onVoteSubmit: (dropId: string, amount: number) => Promise<void>;
-  onInstantRep: (drop: TopSubmission) => Promise<void>;
-  instantRepEnabled: boolean;
+  onInstantRep?: (drop: TopSubmission) => Promise<void>;
+  instantRepEnabled?: boolean;
   instantRepLoading?: boolean;
   instantRepAmount?: number;
   instantRepCategory?: string;
@@ -39,7 +39,7 @@ export default function SubmissionCard({
   isAuthenticated,
   onVoteSubmit,
   onInstantRep,
-  instantRepEnabled,
+  instantRepEnabled = false,
   instantRepLoading = false,
   instantRepAmount = 0,
   instantRepCategory = 'Submission'
@@ -84,7 +84,7 @@ export default function SubmissionCard({
                     size="sm"
                     className="mt-2"
                     disabled={!instantRepEnabled || instantRepLoading}
-                    onClick={() => onInstantRep(drop)}
+                    onClick={() => onInstantRep?.(drop)}
                   >
                     {instantRepLoading ? (
                       <>

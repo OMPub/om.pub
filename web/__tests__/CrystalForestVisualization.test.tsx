@@ -4,18 +4,18 @@ import CrystalForestVisualization from '../src/components/vote/CrystalForestVisu
 
 // Mock Three.js completely to prevent WebGL initialization in tests
 vi.mock('three', () => ({
-  Scene: vi.fn(function() {
+  Scene: vi.fn(function(this: any) {
     this.add = vi.fn();
     this.background = null;
     this.fog = null;
   }),
-  PerspectiveCamera: vi.fn(function() {
+  PerspectiveCamera: vi.fn(function(this: any) {
     this.position = { set: vi.fn() };
     this.lookAt = vi.fn();
     this.updateProjectionMatrix = vi.fn();
     this.aspect = 1;
   }),
-  WebGLRenderer: vi.fn(function() {
+  WebGLRenderer: vi.fn(function(this: any) {
     this.setSize = vi.fn();
     this.setPixelRatio = vi.fn();
     this.getElement = vi.fn(() => document.createElement('canvas'));
@@ -27,35 +27,35 @@ vi.mock('three', () => ({
   PlaneGeometry: vi.fn(function() {}),
   MeshBasicMaterial: vi.fn(function() {}),
   MeshPhongMaterial: vi.fn(function() {}),
-  Mesh: vi.fn(function() {
+  Mesh: vi.fn(function(this: any) {
     this.rotation = { x: 0, y: 0, z: 0 };
     this.position = { x: 0, y: 0, z: 0 };
   }),
-  TextureLoader: vi.fn(function() {
+  TextureLoader: vi.fn(function(this: any) {
     this.load = vi.fn();
   }),
   AmbientLight: vi.fn(function() {}),
-  DirectionalLight: vi.fn(function() {
+  DirectionalLight: vi.fn(function(this: any) {
     this.position = { set: vi.fn() };
   }),
-  Vector2: vi.fn(function() {
+  Vector2: vi.fn(function(this: any) {
     this.x = 0;
     this.y = 0;
   }),
-  Vector3: vi.fn(function() {
+  Vector3: vi.fn(function(this: any) {
     this.x = 0;
     this.y = 0;
     this.z = 0;
   }),
-  Clock: vi.fn(function() {
+  Clock: vi.fn(function(this: any) {
     this.getDelta = vi.fn(() => 0.016);
     this.getElapsedTime = vi.fn(() => 1);
   }),
-  Color: vi.fn(function() {
+  Color: vi.fn(function(this: any) {
     this.setHSL = vi.fn();
   }),
   Fog: vi.fn(function() {}),
-  Group: vi.fn(function() {
+  Group: vi.fn(function(this: any) {
     this.position = { set: vi.fn() };
     this.userData = {};
     this.add = vi.fn();

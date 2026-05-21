@@ -551,7 +551,9 @@ export default function Vote() {
             sdk.setWalletAddress(address);
             
             // Try to restore session from localStorage if available
-            const savedToken = localStorage.getItem('6529_access_token');
+            const savedToken = typeof localStorage !== "undefined" && typeof localStorage.getItem === "function"
+              ? localStorage.getItem('6529_access_token')
+              : null;
             if (savedToken) {
               sdk.setAccessToken(savedToken);
               setAccessToken(savedToken);
@@ -567,10 +569,16 @@ export default function Vote() {
   
   // Save token to localStorage when it changes
   useEffect(() => {
-    if (accessToken) {
-      localStorage.setItem('6529_access_token', accessToken);
-    } else {
-      localStorage.removeItem('6529_access_token');
+    if (typeof localStorage !== "undefined") {
+      if (accessToken) {
+        if (typeof localStorage.setItem === "function") {
+          localStorage.setItem('6529_access_token', accessToken);
+        }
+      } else {
+        if (typeof localStorage.removeItem === "function") {
+          localStorage.removeItem('6529_access_token');
+        }
+      }
     }
   }, [accessToken]);
 
