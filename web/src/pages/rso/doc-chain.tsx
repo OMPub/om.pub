@@ -199,7 +199,7 @@ export default function RsoDocChain() {
                   rel="noreferrer">
                   docs/profile.md
                 </a>{" "}
-                (profile revision 1, 2026-06-10), which this page mirrors.
+                (profile revision 2, 2026-06-10), which this page mirrors.
               </p>
 
               <h3 className="pt-4">Live status</h3>
