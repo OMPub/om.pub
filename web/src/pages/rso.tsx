@@ -15,7 +15,9 @@ const Header = dynamic(() => import("../components/header/Header"), {
 const VIEWER_URL = "/rso/live";
 const RSO_REPO = "OMPub/RSO";
 const INDEX_URL = `https://raw.githubusercontent.com/${RSO_REPO}/main/indexer/generated/sepolia/rso-docchain-index.json`;
-const LEDGER_URL = `https://raw.githubusercontent.com/${RSO_REPO}/node/ledger.json`;
+// rso-latest-v1: the node's tiny head pointer (latest day, counts, hashes, asset url) —
+// purpose-built for consumers, unlike the ever-growing ledger.
+const LATEST_URL = `https://raw.githubusercontent.com/${RSO_REPO}/node/latest.json`;
 
 interface LiveStats {
   objects: number;
@@ -136,10 +138,9 @@ export default function RSO() {
         /* keep fallbacks */
       }
       try {
-        const ledger = await (await fetch(LEDGER_URL)).json();
-        if (Array.isArray(ledger) && ledger.length) {
-          next.objects = ledger[ledger.length - 1].object_count ?? next.objects;
-        }
+        const latest = await (await fetch(LATEST_URL)).json();
+        next.objects = latest?.object_count ?? next.objects;
+        if (latest?.date && latest.date > next.latest) next.latest = latest.date;
       } catch {
         /* keep fallbacks */
       }
