@@ -1,10 +1,9 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Card, Button, Spinner, Alert, Container, Row, Col, Modal } from "react-bootstrap";
+import { Card, Button, Spinner, Modal } from "react-bootstrap";
 import { toast, Toaster } from 'sonner';
-import HeaderPlaceholder from "@/components/header/HeaderPlaceholder";
 import { SixFiveTwoNineVotingSDK } from "../lib/6529-voting-sdk";
+import { motion } from "framer-motion";
 
 declare global {
   interface Window {
@@ -15,11 +14,6 @@ declare global {
     };
   }
 }
-
-const Header = dynamic(() => import("../components/header/Header"), {
-  ssr: false,
-  loading: () => <HeaderPlaceholder />,
-});
 
 interface TopSubmission {
   id: string;
@@ -125,15 +119,32 @@ export const getMediaUrl = (meme: TopSubmission) => {
   return meme.picture;
 };
 
-export const getRandomSpacedY = (activeList: FloatingMeme[], minVal: number, maxVal: number) => {
-  let y = minVal + Math.random() * (maxVal - minVal);
-  let attempts = 0;
-  while (attempts < 15) {
-    const overlaps = activeList.some(m => m.x > 75 && Math.abs(m.y - y) < 14);
-    if (!overlaps) break;
-    y = minVal + Math.random() * (maxVal - minVal);
-    attempts++;
+export const getLaneSpacedY = (activeList: FloatingMeme[], minVal: number, maxVal: number) => {
+  const numLanes = 8;
+  const range = Math.max(20, maxVal - minVal);
+  const laneHeight = range / Math.max(1, numLanes - 1);
+  
+  // Calculate max X in each lane
+  const laneMaxX = Array(numLanes).fill(-999);
+  activeList.forEach(m => {
+    const pct = (m.y - minVal) / (range || 1);
+    const laneIdx = Math.max(0, Math.min(numLanes - 1, Math.round(pct * (numLanes - 1))));
+    if (m.x > laneMaxX[laneIdx]) {
+      laneMaxX[laneIdx] = m.x;
+    }
+  });
+  
+  // Find the lane with the minimum max X
+  let bestLane = 0;
+  let minX = 9999;
+  for (let i = 0; i < numLanes; i++) {
+    if (laneMaxX[i] < minX) {
+      minX = laneMaxX[i];
+      bestLane = i;
+    }
   }
+  
+  const y = minVal + bestLane * laneHeight;
   return Math.max(2, Math.min(y, 90));
 };
 
@@ -232,18 +243,45 @@ const FloatingCard = ({
               draggable={false}
             />
           ) : (
-            <img src={mediaUrl} alt={meme.title} className="floating-card-media" draggable={false} />
+            <img src={mediaUrl} alt={meme.title} className="floating-card-media" draggable={false} loading="lazy" />
           )
         ) : (
           <div className="floating-card-fallback">Art</div>
         )}
+        <div style={{
+          position: 'absolute',
+          top: '4px',
+          right: '4px',
+          background: 'rgba(0,0,0,0.65)',
+          color: '#ffb000',
+          fontSize: '0.6rem',
+          fontWeight: 700,
+          padding: '1px 5px',
+          borderRadius: '4px',
+          pointerEvents: 'none',
+          lineHeight: '1.3'
+        }}>
+          #{meme.serial_no}
+        </div>
+      </div>
+      <div style={{
+        fontSize: '0.65rem',
+        color: '#c0c0c8',
+        padding: '2px 4px 1px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        width: '100%',
+        textAlign: 'center'
+      }}>
+        {meme.title}
       </div>
     </div>
   );
 };
 
 const getRandomSpeed = () => {
-  return 0.03 + Math.random() * 0.04;
+  return 0.045 + Math.random() * 0.05;
 };
 
 export default function Top20Voting() {
@@ -268,7 +306,7 @@ export default function Top20Voting() {
       }
       .form-control:disabled {
         background-color: rgba(255, 255, 255, 0.03) !important;
-        color: rgba(255, 255, 255, 0.45) !important;
+        color: rgba(255, 255, 255, 0.6) !important;
         border-color: rgba(255, 255, 255, 0.08) !important;
       }
       .card.bg-dark {
@@ -325,14 +363,15 @@ export default function Top20Voting() {
       }
       .rank-slot {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
-        padding: 10px 12px;
+        padding: 6px 12px;
         background: rgba(255, 255, 255, 0.01);
         border: 1px dashed rgba(255, 255, 255, 0.05);
         border-radius: 6px;
         margin-bottom: 6px;
-        min-height: 52px;
+        height: 54px;
+        box-sizing: border-box;
         transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         cursor: pointer;
         position: relative;
@@ -346,7 +385,7 @@ export default function Top20Voting() {
       .rank-number {
         font-size: 0.95rem;
         font-weight: 700;
-        color: rgba(255, 176, 0, 0.5);
+        color: rgba(255, 176, 0, 0.7);
         min-width: 18px;
         text-align: center;
       }
@@ -354,6 +393,8 @@ export default function Top20Voting() {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 176, 0, 0.15);
         cursor: grab;
+        height: 54px;
+        box-sizing: border-box;
       }
       .rank-slot.filled:active {
         cursor: grabbing;
@@ -380,7 +421,7 @@ export default function Top20Voting() {
       }
       .slot-artist {
         font-size: 0.65rem;
-        color: #888;
+        color: #b0b0b5;
         margin: 0;
         white-space: nowrap;
         overflow: hidden;
@@ -477,6 +518,8 @@ export default function Top20Voting() {
         justify-content: center;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
         transition: border-color 0.25s, box-shadow 0.25s;
+        will-change: transform;
+        transform: translateZ(0);
       }
       .floating-meme-card.hovered {
         border-color: #ffb000;
@@ -505,7 +548,7 @@ export default function Top20Voting() {
         justify-content: center;
         font-weight: 700;
         background: #121217;
-        color: #666;
+        color: #999;
         font-size: 0.8rem;
       }
       .nope-hole {
@@ -589,7 +632,7 @@ export default function Top20Voting() {
         border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.06);
         background: rgba(255, 255, 255, 0.02);
-        color: #aaa;
+        color: #c0c0c5;
         font-weight: 600;
         font-size: 0.8rem;
       }
@@ -655,6 +698,38 @@ export default function Top20Voting() {
         box-shadow: 0 0 10px rgba(255, 176, 0, 0.8);
         border: 2px solid #ffffff;
       }
+      .bg-dark-light {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+      }
+      .top20-modal .modal-content {
+        background-color: #12101e !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      }
+      .top20-modal .modal-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+      }
+      .top20-modal .modal-footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+      }
+      .top20-modal .text-danger-custom {
+        color: #ff6b6b !important;
+      }
+      .top20-modal .text-warning-custom {
+        color: #ffd740 !important;
+      }
+      .top20-modal .text-success-custom {
+        color: #4cd964 !important;
+      }
+      .top20-modal .plan-item-text {
+        color: #ffffff !important;
+        font-weight: 500;
+      }
+      .max-vh-25 {
+        max-height: 25vh;
+      }
     `;
     document.head.appendChild(style);
     return () => {
@@ -714,32 +789,57 @@ export default function Top20Voting() {
 
   const initialSavedVotesRef = useRef<{ drop: TopSubmission; voteAmount: number }[]>([]);
 
-  const visibleYRangeRef = useRef({ min: 5, max: 95 });
+  // Submit Confirmation States
+  const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
+  const [submitPlan, setSubmitPlan] = useState<{
+    unsets: { dropId: string; title: string; serial_no: number; prevAmount: number }[];
+    decreases: { dropId: string; title: string; serial_no: number; prevAmount: number; newAmount: number; slotIndex: number }[];
+    increases: { dropId: string; title: string; serial_no: number; prevAmount: number; newAmount: number; isNew: boolean; slotIndex: number }[];
+    unchangedCount: number;
+    totalNewTDH: number;
+  } | null>(null);
 
-  // Track viewport vertical scrolling boundaries as percentages of the document
-  useEffect(() => {
-    const handleScroll = () => {
-      const docHeight = document.documentElement.scrollHeight || 1300;
-      const scrollTop = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      
-      const minY = Math.max(2, (scrollTop / docHeight) * 100);
-      const maxY = Math.min(98, ((scrollTop + viewportHeight) / docHeight) * 100);
-      
-      visibleYRangeRef.current = { min: minY, max: maxY };
-    };
+  const draggedMemeRef = useRef<TopSubmission | null>(null);
+  const slotsBeforeDragRef = useRef<(TopSubmission | null)[]>([]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
-    
-    const interval = setInterval(handleScroll, 500);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      clearInterval(interval);
-    };
+  const visibleYRangeRef = useRef({ min: 5, max: 85 });
+  const poolContainerRef = useRef<HTMLDivElement | null>(null);
+
+  // Recalculate which vertical slice of the pool container is visible
+  const recalcVisibleRange = useCallback(() => {
+    const el = poolContainerRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const containerHeight = rect.height || 1250;
+    const vpHeight = window.innerHeight;
+
+    const visibleTopInContainer = Math.max(0, -rect.top);
+    const visibleBottomInContainer = Math.min(containerHeight, vpHeight - rect.top);
+
+    const minY = Math.max(2, (visibleTopInContainer / containerHeight) * 100);
+    const maxY = Math.min(95, (visibleBottomInContainer / containerHeight) * 100);
+
+    visibleYRangeRef.current = { min: minY, max: Math.max(minY + 10, maxY) };
   }, []);
+
+  // Callback ref — fires recalc immediately when pool container mounts
+  const poolContainerCallbackRef = useCallback((node: HTMLDivElement | null) => {
+    poolContainerRef.current = node;
+    if (node) recalcVisibleRange();
+  }, [recalcVisibleRange]);
+
+  // Track which vertical slice of the pool container is visible in the viewport
+  useEffect(() => {
+    window.addEventListener('scroll', recalcVisibleRange, { passive: true });
+    window.addEventListener('resize', recalcVisibleRange);
+    recalcVisibleRange();
+    
+    return () => {
+      window.removeEventListener('scroll', recalcVisibleRange);
+      window.removeEventListener('resize', recalcVisibleRange);
+    };
+  }, [recalcVisibleRange]);
 
   // Save void memes layout state to localStorage
   useEffect(() => {
@@ -784,10 +884,11 @@ export default function Top20Voting() {
     while (copy.length < 10 && floatingPoolRef.current.length > 0) {
       const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
       const sub = floatingPoolRef.current.splice(randIdx, 1)[0];
+      const spawnedY = getLaneSpacedY(copy, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
       copy.push({
         ...sub,
         x: 105,
-        y: 5 + Math.random() * 65,
+        y: spawnedY,
         speed: getRandomSpeed()
       });
     }
@@ -823,10 +924,11 @@ export default function Top20Voting() {
     while (copy.length < 10 && floatingPoolRef.current.length > 0) {
       const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
       const sub = floatingPoolRef.current.splice(randIdx, 1)[0];
+      const spawnedY = getLaneSpacedY(copy, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
       copy.push({
         ...sub,
         x: 105,
-        y: 5 + Math.random() * 65,
+        y: spawnedY,
         speed: getRandomSpeed()
       });
     }
@@ -966,18 +1068,18 @@ export default function Top20Voting() {
       // Store remaining queue in Ref
       floatingPoolRef.current = poolSubs;
 
-      // Populate up to 8 active floating memes on-screen from random positions in queue
+      // Populate up to 10 active floating memes on-screen from random positions in queue
       const initialActive: FloatingMeme[] = [];
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 10; i++) {
         if (floatingPoolRef.current.length === 0) break;
         const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
         const sub = floatingPoolRef.current.splice(randIdx, 1)[0];
-        const spawnedY = getRandomSpacedY(initialActive, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
+        const spawnedY = getLaneSpacedY(initialActive, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
         initialActive.push({
           ...sub,
           x: 5 + Math.random() * 80, // Random starting X
           y: spawnedY,
-          speed: 0.01 + Math.random() * 0.015
+          speed: getRandomSpeed()
         });
       }
       
@@ -1013,6 +1115,11 @@ export default function Top20Voting() {
   };
 
   // 60FPS animation loop for drifting conveyor (smooth continual stream)
+  const hoveredMemeIdRef = useRef<string | null>(null);
+  useEffect(() => {
+    hoveredMemeIdRef.current = hoveredMemeId;
+  }, [hoveredMemeId]);
+
   useEffect(() => {
     let animationFrameId: number;
     let lastTime = performance.now();
@@ -1021,52 +1128,58 @@ export default function Top20Voting() {
       const delta = (time - lastTime) / 16.666;
       lastTime = time;
       
-      setActiveMemes(prevActive => {
-        let changed = false;
-        const nextActive = prevActive.map(m => {
-          if (m.id === hoveredMemeId || inspectingMeme !== null || showVoidModal) {
-            return m; // Stop drifting on hover or when modals are open
-          }
-          const newX = m.x - m.speed * delta;
-          if (newX !== m.x) changed = true;
-          return { ...m, x: newX };
-        });
-
-        // Check if any items drifted off the left edge (-2% to prevent slot overlay)
-        const kept = nextActive.filter(m => m.x >= -2);
-        const drifted = nextActive.filter(m => m.x < -2);
-
-        if (drifted.length > 0) {
-          // Recycle off-screen items back into the queue
-          drifted.forEach(d => {
-            const { x, y, speed, ...rawDrop } = d;
-            floatingPoolRef.current.push(rawDrop);
+      if (inspectingMeme === null && !showVoidModal) {
+        const currentActive = activeMemesRef.current;
+        if (currentActive.length > 0) {
+          const currentHoveredId = hoveredMemeIdRef.current;
+          let changed = false;
+          
+          const nextActive = currentActive.map(m => {
+            // Freeze only the hovered meme
+            if (m.id === currentHoveredId) return m;
+            const newX = m.x - m.speed * delta;
+            changed = true;
+            return { ...m, x: newX };
           });
 
-          // Refill active display back to 10 from the queue randomly
-          while (kept.length < 10 && floatingPoolRef.current.length > 0) {
-            const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
-            const nextSub = floatingPoolRef.current.splice(randIdx, 1)[0];
-            const spawnedY = getRandomSpacedY(kept, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
-            kept.push({
-              ...nextSub,
-              x: 105, // start off-screen right
-              y: spawnedY,
-              speed: getRandomSpeed()
+          // Check if any items drifted off the left edge
+          const kept = nextActive.filter(m => m.x >= -30);
+          const drifted = nextActive.filter(m => m.x < -30);
+
+          if (drifted.length > 0) {
+            // Recycle off-screen items back into the queue
+            drifted.forEach(d => {
+              const { x, y, speed, ...rawDrop } = d;
+              if (!floatingPoolRef.current.some(item => item.id === rawDrop.id)) {
+                floatingPoolRef.current.push(rawDrop);
+              }
             });
+
+            // Refill active display back to 10 from the queue randomly
+            while (kept.length < 10 && floatingPoolRef.current.length > 0) {
+              const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
+              const nextSub = floatingPoolRef.current.splice(randIdx, 1)[0];
+              const spawnedY = getLaneSpacedY(kept, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
+              kept.push({
+                ...nextSub,
+                x: 105,
+                y: spawnedY,
+                speed: getRandomSpeed()
+              });
+            }
+            setActiveMemes(kept);
+          } else if (changed) {
+            setActiveMemes(nextActive);
           }
-          return kept;
         }
-        
-        return changed ? nextActive : prevActive;
-      });
+      }
       
       animationFrameId = requestAnimationFrame(updatePositions);
     };
     
     animationFrameId = requestAnimationFrame(updatePositions);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [hoveredMemeId, inspectingMeme, showVoidModal]);
+  }, [inspectingMeme, showVoidModal]);
 
   // Wallet Connection & Auth Callbacks
   const connectWallet = async () => {
@@ -1116,52 +1229,153 @@ export default function Top20Voting() {
   // Drag-and-Drop Event Handlers
   const handleDragStartFromStream = (e: React.DragEvent, meme: FloatingMeme) => {
     e.dataTransfer.setData("text/plain", JSON.stringify({ source: "stream", id: meme.id }));
+    const { x, y, speed, ...drop } = meme;
+    draggedMemeRef.current = drop;
     setTimeout(() => {
       setDraggedStreamMemeId(meme.id);
+      slotsBeforeDragRef.current = [...slots];
     }, 0);
   };
 
   const handleDragStartFromSlot = (e: React.DragEvent, index: number) => {
     isDropHandledRef.current = false;
+    const item = slots[index];
+    if (!item) return;
+    draggedMemeRef.current = item;
     e.dataTransfer.setData("text/plain", JSON.stringify({ source: "slot", index }));
+    
     setTimeout(() => {
       setDraggedSlotIndex(index);
+      
+      // Save current slots, filter out the dragged item, and compact them
+      const base = slots.filter((_, i) => i !== index);
+      const compacted = Array(20).fill(null);
+      let compIdx = 0;
+      base.forEach(s => {
+        if (s) compacted[compIdx++] = s;
+      });
+      slotsBeforeDragRef.current = compacted;
+      setSlots(compacted);
     }, 0);
   };
 
   const handleDragStartFromVoid = (e: React.DragEvent, meme: TopSubmission) => {
     e.dataTransfer.setData("text/plain", JSON.stringify({ source: "void", id: meme.id }));
+    draggedMemeRef.current = meme;
     setTimeout(() => {
       setDraggedVoidMemeId(meme.id);
+      slotsBeforeDragRef.current = [...slots];
     }, 0);
   };
 
   const handleDragEndStream = () => {
     setDraggedStreamMemeId(null);
+    if (slotsBeforeDragRef.current.length > 0) {
+      setSlots(slotsBeforeDragRef.current);
+    }
+    draggedMemeRef.current = null;
+    slotsBeforeDragRef.current = [];
   };
 
-  const handleDragEndSlot = () => {
+  const handleDragEndSlot = (e: React.DragEvent) => {
     if (!isDropHandledRef.current && draggedSlotIndex !== null) {
-      removeSlot(draggedSlotIndex);
+      if (draggedMemeRef.current) {
+        const itemToRemove = draggedMemeRef.current;
+        
+        // Calculate coordinates relative to the pool container
+        const rect = poolContainerRef.current?.getBoundingClientRect();
+        let safeX = 85; // Default to spawning on the right side so it floats left
+        let safeY = 40;
+        if (rect) {
+          if (e.clientX !== 0 || e.clientY !== 0) {
+            const dropX = ((e.clientX - rect.left - 100) / rect.width) * 100;
+            const dropY = ((e.clientY - rect.top - 80) / rect.height) * 100;
+            safeX = Math.max(0, Math.min(95, dropX));
+            safeY = Math.max(5, Math.min(85, dropY));
+          } else {
+            safeY = getLaneSpacedY(activeMemes, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
+          }
+        }
+
+        setActiveMemes(prev => {
+          const filtered = prev.filter(m => m.id !== itemToRemove.id);
+          filtered.push({
+            ...itemToRemove,
+            x: safeX,
+            y: safeY,
+            speed: getRandomSpeed()
+          });
+          return filtered;
+        });
+        toast.success(`Removed ${itemToRemove.title} from rankings`);
+      }
+    }
+    // Restore slots if not handled (should have been done by drag leave, but as a safety)
+    if (!isDropHandledRef.current && slotsBeforeDragRef.current.length > 0) {
+      setSlots(slotsBeforeDragRef.current);
     }
     setDraggedSlotIndex(null);
+    draggedMemeRef.current = null;
+    slotsBeforeDragRef.current = [];
   };
 
   const handleDragEndVoid = () => {
     setDraggedVoidMemeId(null);
+    if (slotsBeforeDragRef.current.length > 0) {
+      setSlots(slotsBeforeDragRef.current);
+    }
+    draggedMemeRef.current = null;
+    slotsBeforeDragRef.current = [];
   };
 
   const handleDragOverSlot = (e: React.DragEvent, index: number) => {
     e.preventDefault();
-    const filledCount = slots.filter(s => s !== null).length;
+    if (!draggedMemeRef.current) return;
+    
+    const baseList = slotsBeforeDragRef.current;
+    const filledCount = baseList.filter(s => s !== null).length;
     const targetIndex = Math.min(index, filledCount);
+    
     if (activeDragOverIndex !== targetIndex) {
       setActiveDragOverIndex(targetIndex);
+      
+      const preview = [...baseList];
+      // Insert a null placeholder at targetIndex to shift other cards down
+      preview.splice(targetIndex, 0, null);
+      
+      // Cap the preview list at 20 slots
+      const capped = Array(20).fill(null);
+      let capIdx = 0;
+      preview.forEach((s, pIdx) => {
+        if (capIdx < 20) {
+          if (pIdx === targetIndex) {
+            // Keep the placeholder slot empty/null
+            capped[capIdx++] = null;
+          }
+          if (s) {
+            capped[capIdx++] = s;
+          }
+        }
+      });
+      setSlots(capped);
     }
   };
 
   const handleDragLeaveSlot = () => {
     setActiveDragOverIndex(null);
+  };
+
+  const handleDragLeaveSlotsPane = (e: React.DragEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+      setActiveDragOverIndex(null);
+      if (slotsBeforeDragRef.current.length > 0) {
+        setSlots(slotsBeforeDragRef.current);
+      }
+    }
   };
 
   const handleDropOnSlot = (e: React.DragEvent, targetIndex: number) => {
@@ -1173,86 +1387,53 @@ export default function Top20Voting() {
       if (!dataStr) return;
       const data = JSON.parse(dataStr);
       
-      const filledCount = slots.filter(s => s !== null).length;
-
+      const baseList = slotsBeforeDragRef.current;
+      const filledCount = baseList.filter(s => s !== null).length;
+      const adjustedTargetIndex = Math.min(targetIndex, filledCount);
+      
+      const meme = draggedMemeRef.current;
+      if (!meme) return;
+      
+      const newSlots = [...baseList];
+      // Insert the actual dragged meme at the adjusted target index
+      newSlots.splice(adjustedTargetIndex, 0, meme);
+      
+      const compacted = Array(20).fill(null);
+      let cIdx = 0;
+      newSlots.forEach(s => {
+        if (s && cIdx < 20) compacted[cIdx++] = s;
+      });
+      
+      setSlots(compacted);
+      
       if (data.source === "stream") {
-        const meme = activeMemes.find(m => m.id === data.id);
-        if (!meme) return;
-        
-        const adjustedTargetIndex = Math.min(targetIndex, filledCount);
-        const { x, y, speed, ...drop } = meme;
-        const newSlots = [...slots];
-        const bumped = newSlots[19]; // Meme bumped out of slot 20
-        
-        // Shift right to make space for adjustedTargetIndex
-        for (let i = 19; i > adjustedTargetIndex; i--) {
-          newSlots[i] = newSlots[i - 1];
-        }
-        newSlots[adjustedTargetIndex] = drop;
-        setCompactedSlots(newSlots);
-        
-        // Filter out from active display and refill from queue randomly (keep 10 count)
+        // Remove from activeMemes
         setActiveMemes(prev => {
-          const filtered = prev.filter(m => m.id !== drop.id);
+          const filtered = prev.filter(m => m.id !== meme.id);
           while (filtered.length < 10 && floatingPoolRef.current.length > 0) {
             const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
             const nextSub = floatingPoolRef.current.splice(randIdx, 1)[0];
+            const spawnedY = getLaneSpacedY(filtered, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
             filtered.push({
               ...nextSub,
               x: 105,
-              y: 5 + Math.random() * 65,
+              y: spawnedY,
               speed: getRandomSpeed()
             });
           }
           return filtered;
         });
         
-        // Float the bumped item back
+        const bumped = baseList[19];
         if (bumped) {
           returnToPool(bumped);
         }
-        toast.success(`Slotted ${drop.title} at Rank ${adjustedTargetIndex + 1}`);
+        toast.success(`Slotted ${meme.title} at Rank ${adjustedTargetIndex + 1}`);
       } else if (data.source === "slot") {
-        const sourceIndex = data.index;
-        if (sourceIndex === targetIndex) return;
-        
-        const adjustedTargetIndex = Math.min(targetIndex, filledCount - 1);
-        if (sourceIndex === adjustedTargetIndex) return;
-
-        const newSlots = [...slots];
-        const itemToMove = newSlots[sourceIndex];
-        if (!itemToMove) return;
-        
-        newSlots[sourceIndex] = null;
-        
-        // Slot displacement shifting
-        if (sourceIndex < adjustedTargetIndex) {
-          for (let i = sourceIndex; i < adjustedTargetIndex; i++) {
-            newSlots[i] = newSlots[i + 1];
-          }
-        } else {
-          for (let i = sourceIndex; i > adjustedTargetIndex; i--) {
-            newSlots[i] = newSlots[i - 1];
-          }
-        }
-        newSlots[adjustedTargetIndex] = itemToMove;
-        setCompactedSlots(newSlots);
-        toast.success(`Moved ${itemToMove.title} to Rank ${adjustedTargetIndex + 1}`);
+        toast.success(`Moved ${meme.title} to Rank ${adjustedTargetIndex + 1}`);
       } else if (data.source === "void") {
-        const meme = nopedMemes.find(m => m.id === data.id);
-        if (!meme) return;
-        
-        const adjustedTargetIndex = Math.min(targetIndex, filledCount);
-        const newSlots = [...slots];
-        const bumped = newSlots[19];
-        for (let i = 19; i > adjustedTargetIndex; i--) {
-          newSlots[i] = newSlots[i - 1];
-        }
-        newSlots[adjustedTargetIndex] = meme;
-        setCompactedSlots(newSlots);
-        
         setNopedMemes(prev => prev.filter(m => m.id !== meme.id));
-        
+        const bumped = baseList[19];
         if (bumped) {
           returnToPool(bumped);
         }
@@ -1260,6 +1441,9 @@ export default function Top20Voting() {
       }
     } catch (err) {
       console.error("Drop error:", err);
+    } finally {
+      draggedMemeRef.current = null;
+      slotsBeforeDragRef.current = [];
     }
   };
 
@@ -1282,22 +1466,17 @@ export default function Top20Voting() {
       const data = JSON.parse(dataStr);
       
       const rect = e.currentTarget.getBoundingClientRect();
-      const dropX = ((e.clientX - rect.left - 80) / rect.width) * 100;
+      const dropX = ((e.clientX - rect.left - 100) / rect.width) * 100;
       const dropY = ((e.clientY - rect.top - 80) / rect.height) * 100;
       
-      const safeX = Math.max(0, Math.min(90, dropX));
-      const safeY = Math.max(0, Math.min(75, dropY));
+      const safeX = Math.max(0, Math.min(95, dropX));
+      const safeY = Math.max(5, Math.min(85, dropY));
 
       if (data.source === "stream") {
         setActiveMemes(prev => prev.map(m => m.id === data.id ? { ...m, x: safeX, y: safeY } : m));
       } else if (data.source === "slot") {
-        const index = data.index;
-        const itemToRemove = slots[index];
+        const itemToRemove = draggedMemeRef.current;
         if (!itemToRemove) return;
-        
-        const newSlots = [...slots];
-        newSlots[index] = null;
-        setCompactedSlots(newSlots);
         
         setActiveMemes(prev => {
           const filtered = prev.filter(m => m.id !== itemToRemove.id);
@@ -1354,10 +1533,11 @@ export default function Top20Voting() {
             while (filtered.length < 10 && floatingPoolRef.current.length > 0) {
               const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
               const nextSub = floatingPoolRef.current.splice(randIdx, 1)[0];
+              const spawnedY = getLaneSpacedY(filtered, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
               filtered.push({
                 ...nextSub,
                 x: 105,
-                y: 5 + Math.random() * 65,
+                y: spawnedY,
                 speed: getRandomSpeed()
               });
             }
@@ -1365,13 +1545,9 @@ export default function Top20Voting() {
           });
         }
       } else if (data.source === "slot") {
-        const index = data.index;
-        const drop = slots[index];
+        const drop = draggedMemeRef.current;
         if (drop) {
           itemToVoid = drop;
-          const newSlots = [...slots];
-          newSlots[index] = null;
-          setCompactedSlots(newSlots);
         }
       }
       
@@ -1436,10 +1612,11 @@ export default function Top20Voting() {
         while (filtered.length < 10 && floatingPoolRef.current.length > 0) {
           const randIdx = Math.floor(Math.random() * floatingPoolRef.current.length);
           const nextSub = floatingPoolRef.current.splice(randIdx, 1)[0];
+          const spawnedY = getLaneSpacedY(filtered, visibleYRangeRef.current.min, visibleYRangeRef.current.max - 15);
           filtered.push({
             ...nextSub,
             x: 105,
-            y: 5 + Math.random() * 65,
+            y: spawnedY,
             speed: getRandomSpeed()
           });
         }
@@ -1457,8 +1634,8 @@ export default function Top20Voting() {
     toast.success(`Placed ${inspectingMeme.title} at Rank ${newRankVal}`);
   };
 
-  // Submit batch batch transaction API calls
-  const submitBatchVotes = async () => {
+  // Prepare submission plan and show confirmation modal
+  const handleStartSubmit = () => {
     if (!sdk) return;
     if (!sdk.isAuthenticated()) {
       toast.error("Please authenticate first");
@@ -1473,50 +1650,186 @@ export default function Top20Voting() {
       return;
     }
 
+    // Build the submission plan
+    const previousVotesMap = new Map<string, number>();
+    initialSavedVotesRef.current.forEach(v => {
+      previousVotesMap.set(v.drop.id, v.voteAmount);
+    });
+
+    const newVotes = new Map<string, { amount: number; slotIndex: number }>();
+    for (let i = 0; i < 20; i++) {
+      const drop = slots[i];
+      if (drop) {
+        const amt = getAllocationForSlot(i);
+        if (amt > 0) {
+          newVotes.set(drop.id, { amount: amt, slotIndex: i });
+        }
+      }
+    }
+
+    const unsets: any[] = [];
+    previousVotesMap.forEach((prevAmount, dropId) => {
+      if (prevAmount > 0 && !newVotes.has(dropId)) {
+        const originalDrop = initialSavedVotesRef.current.find(v => v.drop.id === dropId)?.drop;
+        unsets.push({
+          dropId,
+          title: originalDrop?.title || `Meme #${dropId}`,
+          serial_no: originalDrop?.serial_no || 0,
+          prevAmount
+        });
+      }
+    });
+
+    const decreases: any[] = [];
+    const increases: any[] = [];
+    let unchangedCount = 0;
+
+    newVotes.forEach((val, dropId) => {
+      const prevAmount = previousVotesMap.get(dropId) || 0;
+      const drop = slots[val.slotIndex];
+      const serial_no = drop?.serial_no || 0;
+      const title = drop?.title || `Meme #${dropId}`;
+
+      if (prevAmount === val.amount) {
+        unchangedCount++;
+      } else if (prevAmount > 0 && val.amount < prevAmount) {
+        decreases.push({
+          dropId,
+          title,
+          serial_no,
+          prevAmount,
+          newAmount: val.amount,
+          slotIndex: val.slotIndex
+        });
+      } else {
+        increases.push({
+          dropId,
+          title,
+          serial_no,
+          prevAmount,
+          newAmount: val.amount,
+          isNew: prevAmount === 0,
+          slotIndex: val.slotIndex
+        });
+      }
+    });
+
+    // Check if we actually have any changes to submit
+    if (unsets.length === 0 && decreases.length === 0 && increases.length === 0) {
+      toast.info("No vote changes detected. Your current ranking matches the saved votes.");
+      return;
+    }
+
+    setSubmitPlan({
+      unsets,
+      decreases,
+      increases,
+      unchangedCount,
+      totalNewTDH: totalTDH
+    });
+    setShowSubmitConfirm(true);
+  };
+
+  // Submit batch transaction API calls sequentially
+  const submitBatchVotes = async () => {
+    if (!sdk || !submitPlan) return;
+    setShowSubmitConfirm(false);
     setIsVoting(true);
+
     let successCount = 0;
     let failCount = 0;
 
     try {
-      for (let i = 0; i < 20; i++) {
-        const drop = slots[i];
-        if (drop) {
-          const amt = getAllocationForSlot(i);
-          if (amt > 0) {
-            try {
-              await sdk.submitVote(drop.id, amt);
-              successCount++;
-              setConfirmedSlotIndices(prev => ({ ...prev, [i]: true }));
-              setTimeout(() => {
-                setConfirmedSlotIndices(prev => {
-                  const copy = { ...prev };
-                  delete copy[i];
-                  return copy;
-                });
-              }, 4000);
-            } catch (e) {
-              console.error(`Failed to submit vote for #${drop.serial_no}:`, e);
-              failCount++;
-            }
+      // 1. Process unsets (vote 0) to free up TDH immediately
+      for (const item of submitPlan.unsets) {
+        try {
+          await sdk.submitVote(item.dropId, 0);
+          successCount++;
+        } catch (e) {
+          console.error(`Failed to unset vote for #${item.serial_no}:`, e);
+          failCount++;
+        }
+      }
+
+      // 2. Process decreases to release more TDH
+      for (const item of submitPlan.decreases) {
+        try {
+          await sdk.submitVote(item.dropId, item.newAmount);
+          successCount++;
+          // Trigger checkmark animation for this slot
+          const sIdx = item.slotIndex;
+          if (sIdx !== undefined) {
+            setConfirmedSlotIndices(prev => ({ ...prev, [sIdx]: true }));
+            setTimeout(() => {
+              setConfirmedSlotIndices(prev => {
+                const copy = { ...prev };
+                delete copy[sIdx];
+                return copy;
+              });
+            }, 4000);
           }
+        } catch (e) {
+          console.error(`Failed to decrease vote for #${item.serial_no}:`, e);
+          failCount++;
+        }
+      }
+
+      // 3. Process increases / new votes with the freed up TDH
+      for (const item of submitPlan.increases) {
+        try {
+          await sdk.submitVote(item.dropId, item.newAmount);
+          successCount++;
+          // Trigger checkmark animation for this slot
+          const sIdx = item.slotIndex;
+          if (sIdx !== undefined) {
+            setConfirmedSlotIndices(prev => ({ ...prev, [sIdx]: true }));
+            setTimeout(() => {
+              setConfirmedSlotIndices(prev => {
+                const copy = { ...prev };
+                delete copy[sIdx];
+                return copy;
+              });
+            }, 4000);
+          }
+        } catch (e) {
+          console.error(`Failed to increase/submit vote for #${item.serial_no}:`, e);
+          failCount++;
         }
       }
 
       if (successCount > 0) {
-        toast.success(`Submitted ${successCount} ranked votes successfully!`);
+        toast.success(`Successfully processed ${successCount} vote changes!`);
         // Refresh session balances
         const refreshedData = await sdk.refreshUserData();
         setUserTDHBalance(refreshedData.user.availableTDH);
         setUserTDHTotal(refreshedData.user.tdh);
+
+        // Update the initial saved votes to reflect the new state
+        const updatedSaved: { drop: TopSubmission; voteAmount: number }[] = [];
+        for (let i = 0; i < 20; i++) {
+          const drop = slots[i];
+          if (drop) {
+            const amt = getAllocationForSlot(i);
+            if (amt > 0) {
+              updatedSaved.push({
+                drop,
+                voteAmount: amt
+              });
+            }
+          }
+        }
+        initialSavedVotesRef.current = updatedSaved;
       }
+      
       if (failCount > 0) {
-        toast.error(`Failed to submit ${failCount} votes.`);
+        toast.error(`Failed to update ${failCount} votes.`);
       }
     } catch (err) {
       console.error("Batch vote execution failure:", err);
       toast.error("Transaction error during batch dispatch");
     } finally {
       setIsVoting(false);
+      setSubmitPlan(null);
     }
   };
 
@@ -1549,7 +1862,7 @@ export default function Top20Voting() {
         ) : (
           <div className="top20-split-workspace">
             {/* Left rankings slots stack */}
-            <div className="slots-pane">
+            <div className="slots-pane" onDragLeave={handleDragLeaveSlotsPane}>
               <div className="mb-4 border-bottom border-secondary pb-3">
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h5 className="text-amber mb-0">Allocation Config</h5>
@@ -1610,7 +1923,7 @@ export default function Top20Voting() {
                   </div>
                 </div>
                 <Button 
-                  onClick={submitBatchVotes} 
+                  onClick={handleStartSubmit} 
                   disabled={isVoting || filledCount === 0} 
                   className="w-100 btn-amber mt-2"
                 >
@@ -1620,18 +1933,22 @@ export default function Top20Voting() {
                       Submitting Votes...
                     </>
                   ) : (
-                    `Batch Submit ${filledCount} Votes`
+                    `Submit ${filledCount} Votes — ${totalTDH.toLocaleString()} TDH`
                   )}
                 </Button>
               </div>
 
-              <h5 className="text-amber mb-3">Ranked Slots</h5>
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h5 className="text-amber mb-0">Ranked Slots</h5>
+                <span className="small" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>
+                  {filledCount}/20 filled
+                </span>
+              </div>
               {Array(20).fill(null).map((_, idx) => {
                 const drop = slots[idx];
                 const slotAllocation = getAllocationForSlot(idx);
-                const isCurrentlyDragged = draggedSlotIndex === idx;
-                const showFilled = drop && !isCurrentlyDragged;
-                const shouldShiftDown = activeDragOverIndex !== null && idx >= activeDragOverIndex && !isCurrentlyDragged;
+                const showFilled = !!drop;
+                const isEmptyBeyondFilled = !drop && idx > filledCount;
                 
                 return (
                   <div
@@ -1640,20 +1957,21 @@ export default function Top20Voting() {
                     onDragLeave={handleDragLeaveSlot}
                     onDrop={(e) => handleDropOnSlot(e, idx)}
                     className={`rank-slot ${showFilled ? 'filled' : ''} ${activeDragOverIndex === idx ? 'drag-over' : ''}`}
-                    draggable={!!drop}
+                    draggable={showFilled}
                     onDragStart={(e) => handleDragStartFromSlot(e, idx)}
                     onDragEnd={handleDragEndSlot}
+                    style={isEmptyBeyondFilled ? { opacity: 0.4 } : undefined}
                   >
                     <div className="rank-number">{idx + 1}</div>
                     {showFilled ? (
-                      <div
+                      <motion.div
+                        layoutId={`slot-card-${drop.id}`}
+                        layout
                         className="rank-slot-card-content"
                         style={{
-                          transform: shouldShiftDown ? 'translateY(120px)' : 'none',
-                          transition: 'transform 0.22s cubic-bezier(0.25, 1, 0.5, 1)',
                           display: 'flex',
                           flexDirection: 'row',
-                          alignItems: 'flex-start',
+                          alignItems: 'center',
                           flexGrow: 1,
                           width: '100%',
                           gap: '12px',
@@ -1670,16 +1988,24 @@ export default function Top20Voting() {
                           return (
                             <div 
                               onClick={() => setInspectingMeme(drop)} 
-                              style={{ pointerEvents: 'auto', cursor: 'pointer', flexGrow: 1, position: 'relative' }}
+                              style={{ 
+                                pointerEvents: 'auto', 
+                                cursor: 'pointer', 
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '12px',
+                                flexGrow: 1, 
+                                minWidth: 0
+                              }}
                             >
                               {dropMediaUrl ? (
                                 dropIsIframe ? (
-                                  <div style={{ position: "relative", width: "100%", height: "180px", borderRadius: "6px", overflow: "hidden" }}>
+                                  <div className="slot-thumbnail" style={{ position: "relative", overflow: "hidden", flexShrink: 0 }}>
                                     <iframe
                                       src={dropMediaUrl}
                                       title={drop.title}
                                       sandbox="allow-scripts allow-same-origin"
-                                      style={{ width: "100%", height: "100%", border: "none" }}
+                                      style={{ width: "100%", height: "100%", border: "none", transform: "scale(0.2)", transformOrigin: "0 0" }}
                                     />
                                     <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 10, background: "transparent" }} />
                                   </div>
@@ -1690,24 +2016,31 @@ export default function Top20Voting() {
                                     loop 
                                     autoPlay 
                                     playsInline 
-                                    style={{ maxWidth: "100%", maxHeight: "250px", height: "auto", display: "block", borderRadius: "6px" }} 
+                                    className="slot-thumbnail"
+                                    style={{ flexShrink: 0 }}
                                   />
                                 ) : (
                                   <img 
                                     src={dropMediaUrl} 
                                     alt={drop.title} 
-                                    style={{ maxWidth: "100%", maxHeight: "250px", height: "auto", display: "block", borderRadius: "6px" }} 
+                                    loading="lazy"
+                                    className="slot-thumbnail"
+                                    style={{ flexShrink: 0 }}
                                   />
                                 )
                               ) : (
-                                <div className="bg-secondary p-3 text-center text-white small" style={{ borderRadius: "6px" }}>#</div>
+                                <div className="slot-thumbnail bg-secondary d-flex align-items-center justify-content-center text-white small" style={{ flexShrink: 0 }}>#</div>
                               )}
+                              <div className="slot-info">
+                                <p className="slot-title">{drop.title}</p>
+                                <p className="slot-artist">by {drop.author.handle}</p>
+                              </div>
                             </div>
                           );
                         })()}
                         {slotAllocation > 0 && (
-                          <div className="d-flex flex-column align-items-center" style={{ alignSelf: 'flex-start', marginTop: '4px', gap: '2px' }}>
-                            <div className="slot-tdh" style={{ marginTop: 0 }}>
+                          <div className="d-flex align-items-center" style={{ gap: '6px', pointerEvents: 'auto' }}>
+                            <div className="slot-tdh" style={{ margin: 0 }}>
                               {slotAllocation.toLocaleString()}
                             </div>
                             {confirmedSlotIndices[idx] && (
@@ -1717,15 +2050,19 @@ export default function Top20Voting() {
                             )}
                           </div>
                         )}
-                      </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            removeSlot(idx);
+                          }}
+                          className="slot-remove"
+                          style={{ pointerEvents: 'auto' }}
+                        >
+                          ×
+                        </button>
+                      </motion.div>
                     ) : (
-                      <div 
-                        className="text-muted small py-2"
-                        style={{
-                          transform: shouldShiftDown ? 'translateY(120px)' : 'none',
-                          transition: 'transform 0.22s cubic-bezier(0.25, 1, 0.5, 1)'
-                        }}
-                      >
+                      <div className="text-muted small py-2" style={{ display: 'flex', alignItems: 'center' }}>
                         Drag a meme here to rank #{idx + 1}
                       </div>
                     )}
@@ -1747,6 +2084,7 @@ export default function Top20Voting() {
                 </div>
               ) : (
                 <div 
+                  ref={poolContainerCallbackRef}
                   onDragOver={handleDragOverPool}
                   onDragLeave={handleDragLeavePool}
                   onDrop={handleDropOnPool}
@@ -1854,7 +2192,7 @@ export default function Top20Voting() {
 
                   <h6 className="text-muted small uppercase tracking-wider mb-2">Submission Details</h6>
                   <div className="small text-muted mb-4">
-                    <strong>Address:</strong> <span className="text-break text-muted" style={{ color: "#888" }}>{inspectingMeme.author.primary_address}</span>
+                    <strong>Address:</strong> <span className="text-break text-muted" style={{ color: "#b0b0b5" }}>{inspectingMeme.author.primary_address}</span>
                     {inspectingMeme.rank && (
                       <>
                         <br />
@@ -1928,19 +2266,25 @@ export default function Top20Voting() {
                 }}
               >
                 <div className="card-media-wrapper">
-                  {meme.picture ? (
-                    meme.picture.toLowerCase().includes('.mp4') || 
-                    meme.picture.toLowerCase().includes('.mov') || 
-                    meme.picture.toLowerCase().includes('.webm') ? (
-                      <video src={meme.picture} muted className="floating-card-media" draggable={false} />
+                  {(() => {
+                    const voidMediaUrl = getMediaUrl(meme);
+                    const voidIsVideo = voidMediaUrl && (
+                      voidMediaUrl.toLowerCase().includes('.mp4') || 
+                      voidMediaUrl.toLowerCase().includes('.mov') || 
+                      voidMediaUrl.toLowerCase().includes('.webm')
+                    );
+                    return voidMediaUrl ? (
+                      voidIsVideo ? (
+                        <video src={voidMediaUrl} muted className="floating-card-media" draggable={false} />
+                      ) : (
+                        <img src={voidMediaUrl} alt={meme.title} className="floating-card-media" draggable={false} loading="lazy" />
+                      )
                     ) : (
-                      <img src={meme.picture} alt={meme.title} className="floating-card-media" draggable={false} />
-                    )
-                  ) : (
-                    <div className="floating-card-fallback">Art</div>
-                  )}
+                      <div className="floating-card-fallback">Art</div>
+                    );
+                  })()}
                 </div>
-                <div className="text-center small mt-1 text-truncate w-100 px-1" style={{ color: "#aaa", fontSize: "0.7rem" }}>
+                <div className="text-center small mt-1 text-truncate w-100 px-1" style={{ color: "#c0c0c5", fontSize: "0.7rem" }}>
                   {meme.title}
                 </div>
               </div>
@@ -1952,6 +2296,106 @@ export default function Top20Voting() {
             )}
           </div>
         </Modal.Body>
+      </Modal>
+
+      {/* Submit Confirmation Modal */}
+      <Modal 
+        show={showSubmitConfirm} 
+        onHide={() => setShowSubmitConfirm(false)} 
+        centered 
+        size="lg" 
+        className="top20-modal"
+      >
+        <Modal.Header closeButton closeVariant="white" className="border-secondary">
+          <Modal.Title className="text-amber" style={{ color: '#ffb000', fontWeight: 'bold' }}>Confirm Vote Submission</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <p className="text-muted mb-4" style={{ color: '#d1d1d6', fontSize: '0.95rem', lineHeight: '1.5' }}>
+            Your votes will be updated immediately on the server. To avoid transaction failures due to insufficient TDH, we will first unset any removed votes and decrease reduced allocations before submitting increases.
+          </p>
+
+          {submitPlan && (
+            <div className="submit-plan-summary mb-4">
+              {submitPlan.unsets.length > 0 && (
+                <div className="mb-3">
+                  <h6 className="text-danger-custom small uppercase tracking-wider mb-2" style={{ letterSpacing: '0.07em', fontWeight: 'bold' }}>
+                    To Be Removed / Unset ({submitPlan.unsets.length})
+                  </h6>
+                  <div className="d-flex flex-column gap-2 max-vh-25 overflow-auto pe-2">
+                    {submitPlan.unsets.map(u => (
+                      <div key={u.dropId} className="d-flex justify-content-between align-items-center bg-dark-light p-2 rounded border border-danger-subtle" style={{ borderColor: 'rgba(255, 107, 107, 0.35) !important' }}>
+                        <span className="plan-item-text text-truncate me-3" style={{ fontSize: '0.9rem' }}>#{u.serial_no} - {u.title}</span>
+                        <span className="text-danger-custom font-monospace" style={{ fontWeight: '600', fontSize: '0.9rem' }}>-{u.prevAmount.toLocaleString()} TDH</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {submitPlan.decreases.length > 0 && (
+                <div className="mb-3">
+                  <h6 className="text-warning-custom small uppercase tracking-wider mb-2" style={{ letterSpacing: '0.07em', fontWeight: 'bold' }}>
+                    Allocations to Decrease ({submitPlan.decreases.length})
+                  </h6>
+                  <div className="d-flex flex-column gap-2 max-vh-25 overflow-auto pe-2">
+                    {submitPlan.decreases.map(d => (
+                      <div key={d.dropId} className="d-flex justify-content-between align-items-center bg-dark-light p-2 rounded border border-warning-subtle" style={{ borderColor: 'rgba(255, 215, 64, 0.35) !important' }}>
+                        <span className="plan-item-text text-truncate me-3" style={{ fontSize: '0.9rem' }}>#{d.serial_no} - {d.title}</span>
+                        <span className="text-warning-custom font-monospace" style={{ fontWeight: '600', fontSize: '0.9rem' }}>
+                          {d.prevAmount.toLocaleString()} → {d.newAmount.toLocaleString()} TDH
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {submitPlan.increases.length > 0 && (
+                <div className="mb-3">
+                  <h6 className="text-success-custom small uppercase tracking-wider mb-2" style={{ letterSpacing: '0.07em', fontWeight: 'bold' }}>
+                    Allocations to Increase or Add ({submitPlan.increases.length})
+                  </h6>
+                  <div className="d-flex flex-column gap-2 max-vh-25 overflow-auto pe-2">
+                    {submitPlan.increases.map(i => (
+                      <div key={i.dropId} className="d-flex justify-content-between align-items-center bg-dark-light p-2 rounded border border-success-subtle" style={{ borderColor: 'rgba(76, 217, 100, 0.35) !important' }}>
+                        <span className="plan-item-text text-truncate me-3" style={{ fontSize: '0.9rem' }}>#{i.serial_no} - {i.title}</span>
+                        <span className="text-success-custom font-monospace" style={{ fontWeight: '600', fontSize: '0.9rem' }}>
+                          {i.isNew ? '0' : i.prevAmount.toLocaleString()} → {i.newAmount.toLocaleString()} TDH
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {submitPlan.unchangedCount > 0 && (
+                <div className="mt-3" style={{ color: '#c0c0c8', fontSize: '0.88rem' }}>
+                  ℹ️ {submitPlan.unchangedCount} vote{submitPlan.unchangedCount > 1 ? 's' : ''} will remain unchanged (no transactions needed).
+                </div>
+              )}
+
+              <div className="mt-4 pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+                <span style={{ color: '#c0c0c8', fontSize: '0.95rem' }}>Total Budget to Allocate:</span>
+                <span className="h5 text-amber mb-0 font-monospace" style={{ color: '#ffb000', fontWeight: 'bold', fontSize: '1.25rem' }}>{submitPlan.totalNewTDH.toLocaleString()} TDH</span>
+              </div>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="border-secondary">
+          <Button variant="secondary" onClick={() => setShowSubmitConfirm(false)} disabled={isVoting}>
+            Cancel
+          </Button>
+          <Button className="btn-amber" onClick={submitBatchVotes} disabled={isVoting}>
+            {isVoting ? (
+              <>
+                <Spinner animation="border" size="sm" className="me-2" />
+                Submitting...
+              </>
+            ) : (
+              "Confirm & Submit Votes"
+            )}
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

@@ -750,8 +750,8 @@ export class SixFiveTwoNineVotingSDK {
    * Submit a vote for a drop
    */
   async submitVote(dropId: string, amount: number): Promise<any> {
-    if (!dropId || !amount || amount <= 0) {
-      throw new Error('Valid dropId and positive amount are required');
+    if (!dropId || amount === undefined || amount === null || amount < 0) {
+      throw new Error('Valid dropId and non-negative amount are required');
     }
 
     try {

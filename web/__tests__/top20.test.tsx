@@ -43,11 +43,11 @@ describe('Top 20 Page', () => {
     })
   })
 
-  it('renders the Top 20 page title and info text', () => {
+  it('renders the Top 20 page connect prompt', () => {
     render(<Top20Voting />)
-    expect(screen.getByText('Top 20 Stacked Rank')).toBeInTheDocument()
+    expect(screen.getByText('Connect Wallet')).toBeInTheDocument()
     expect(
-      screen.getByText('Drag and drop memes into rank slots and split your voting power mathematically.')
+      screen.getByText('Connect your wallet to view and submit votes')
     ).toBeInTheDocument()
   })
 
@@ -79,9 +79,9 @@ describe('calculateAllocations distribution logic', () => {
     expect(res).toEqual([])
   })
 
-  it('returns empty array if total TDH is <= 0', () => {
+  it('returns zero-filled array if total TDH is <= 0', () => {
     const res = calculateAllocations(0, 5, 'even')
-    expect(res).toEqual([])
+    expect(res).toEqual([0, 0, 0, 0, 0])
   })
 
   it('calculates even distribution and handles remainders', () => {
