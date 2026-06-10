@@ -13,6 +13,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Memes", href: "/memes" },
+  { label: "RSO", href: "/rso" },
   { label: "Naka", href: "/naka" },
   { label: "Rep", href: "/rep" },
   { label: "FAQ", href: "/faq" },
