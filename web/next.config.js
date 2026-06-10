@@ -8,6 +8,20 @@ const VERSION = require("child_process")
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
+  // A stray lockfile in ~/projects makes Next infer the workspace root way up the
+  // tree, so turbopack watches every repo under it (where agents constantly write)
+  // and the dev server burns CPU on endless FSEvents invalidations. Pin the root.
+  turbopack: {
+    root: __dirname,
+  },
+  // wagmi's tempo connector probes an OPTIONAL dependency via import('accounts') and
+  // catches the failure at runtime. Turbopack defers that to runtime; webpack resolves
+  // it at build time and fails every page through _app. Stub it to an empty module so
+  // wagmi's own catch path runs.
+  webpack: (config) => {
+    config.resolve.fallback = { ...config.resolve.fallback, accounts: false };
+    return config;
+  },
   sassOptions: {
     silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'mixed-decls'],
   },
