@@ -126,7 +126,8 @@ export default function RsoDocChain() {
             <main>
               <h1>RSO Doc Chain</h1>
               <div className="text-subheading pt-3">
-                How the orbital record is witnessed on Ethereum.
+                Chain profile and live status — this page is the document the
+                chain&apos;s identity resolves to.
               </div>
 
               <p className="pt-4">
@@ -151,6 +152,54 @@ export default function RsoDocChain() {
                 recorded instead as <em>observations</em>: each day, every
                 node logs what it learned and when. One archive, two kinds of
                 truth — and both verifiable.
+              </p>
+
+              <h3 className="pt-4">Profile (normative)</h3>
+              <p>
+                <span className="fw-bold">Identity.</span> The chain&apos;s
+                permanent id is{" "}
+                <code>docChainId = keccak256(&quot;{PROFILE_URI}&quot;)</code>{" "}
+                = <code>{shortHash(DOC_CHAIN_ID)}</code>. The URI is
+                deliberately unversioned: protocol revisions live in metadata
+                (the schema registry below and each day&apos;s manifest), never
+                in the identifier. Contract and network are bindings recorded
+                in the{" "}
+                <a
+                  className="black-link"
+                  href="https://github.com/OMPub/doc-chain/tree/main/deployments"
+                  target="_blank"
+                  rel="noreferrer">
+                  deployments registry
+                </a>
+                , not identity.
+              </p>
+              <p>
+                <span className="fw-bold">Documents.</span> One per UTC day:
+                docRef <code>YYYYMMDD000000</code>, parentHash = the previous
+                day&apos;s blockHash, genesis 2026-04-20 with a zero parent.
+                The contentHash is the SHA-256 of the canonical catalog with
+                the fields named by the day&apos;s{" "}
+                <code>content_schema</code> removed from each record — under
+                the current schema <code>rso-core-v1</code>, the nine mutable
+                object-directory fields. Raw catalogs always keep every field,
+                so any past or future projection can be recomputed from the
+                original bytes.
+              </p>
+              <p>
+                <span className="fw-bold">Evolution.</span> A protocol
+                revision adds a schema row with an effective date and applies
+                to new days only: same chain id, unbroken parent chain,
+                historical attestations untouched. The full normative text —
+                capture rule, canonicalization, schema registry, locator
+                format, verification procedures — is maintained at{" "}
+                <a
+                  className="black-link"
+                  href="https://github.com/OMPub/RSO/blob/main/docs/profile.md"
+                  target="_blank"
+                  rel="noreferrer">
+                  docs/profile.md
+                </a>{" "}
+                (profile revision 1, 2026-06-10), which this page mirrors.
               </p>
 
               <h3 className="pt-4">Live status</h3>
