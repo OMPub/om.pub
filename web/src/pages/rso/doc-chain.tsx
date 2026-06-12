@@ -29,11 +29,28 @@ interface ChainIndex {
 interface DocRefEntry {
   date: string;
   candidateCount: number;
+  firstAttestedAtUtc?: string;
+  minAttestationLagDays?: number;
   leadingAgreementGroup?: {
     blockHash?: string;
     attestationCount?: number;
     backedNodeIds?: string[];
     combinedSupportTdh?: number;
+  };
+}
+
+interface DayConjunctions {
+  date: string;
+  summary?: {
+    message_count?: number;
+    emergency_reportable_count?: number;
+    max_pc?: string | null;
+    max_pc_event?: {
+      sat_1_name?: string;
+      sat_2_name?: string;
+      tca?: string;
+      min_rng?: string;
+    };
   };
 }
 
@@ -54,9 +71,20 @@ function annotationsUrl(date: string) {
   return `https://raw.githubusercontent.com/${RSO_REPO}/node/data/${year}/${month}/${day}/annotations.json`;
 }
 
+function conjunctionsUrl(date: string) {
+  const [year, month, day] = date.split("-");
+  return `https://raw.githubusercontent.com/${RSO_REPO}/node/data/${year}/${month}/${day}/conjunctions.json`;
+}
+
+function lagLabel(lagDays?: number) {
+  if (lagDays === undefined) return null;
+  return lagDays === 0 ? "witnessed same-day" : `attested ${lagDays}d after the day`;
+}
+
 export default function RsoDocChain() {
   const [index, setIndex] = useState<ChainIndex | null>(null);
   const [annotations, setAnnotations] = useState<DayAnnotations | null>(null);
+  const [conjunctions, setConjunctions] = useState<DayConjunctions | null>(null);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
@@ -74,9 +102,15 @@ export default function RsoDocChain() {
           : [];
         const latest = dates[dates.length - 1];
         if (latest) {
-          const annotationsResponse = await fetch(annotationsUrl(latest));
+          const [annotationsResponse, conjunctionsResponse] = await Promise.all([
+            fetch(annotationsUrl(latest)),
+            fetch(conjunctionsUrl(latest)),
+          ]);
           if (!cancelled && annotationsResponse.ok) {
             setAnnotations(await annotationsResponse.json());
+          }
+          if (!cancelled && conjunctionsResponse.ok) {
+            setConjunctions(await conjunctionsResponse.json());
           }
         }
       } catch {
@@ -199,7 +233,7 @@ export default function RsoDocChain() {
                   rel="noreferrer">
                   docs/profile.md
                 </a>{" "}
-                (profile revision 3, 2026-06-11), which this page mirrors.
+                (profile revision 4, 2026-06-11), which this page mirrors.
               </p>
 
               <h3 className="pt-4">Live status</h3>
@@ -236,6 +270,9 @@ export default function RsoDocChain() {
                           </>
                         ) : null}
                       </>
+                    )}
+                    {lagLabel(latest?.minAttestationLagDays) && (
+                      <> &nbsp;·&nbsp; {lagLabel(latest?.minAttestationLagDays)}</>
                     )}
                   </p>
                   <p className="small font-grey">
@@ -289,6 +326,24 @@ export default function RsoDocChain() {
                         .join(" · ")}
                     </p>
                   )}
+                  {conjunctions?.summary?.message_count ? (
+                    <p>
+                      <span className="fw-bold">Conjunction watch:</span>{" "}
+                      {conjunctions.summary.message_count} public close-approach
+                      warnings captured
+                      {conjunctions.summary.max_pc_event ? (
+                        <>
+                          {" "}
+                          — closest watched pair{" "}
+                          {conjunctions.summary.max_pc_event.sat_1_name} ·{" "}
+                          {conjunctions.summary.max_pc_event.sat_2_name} (Pc{" "}
+                          {conjunctions.summary.max_pc ?? "—"})
+                        </>
+                      ) : null}
+                      . The feed is a rolling window upstream; these captures
+                      are its only public archive.
+                    </p>
+                  ) : null}
                 </>
               )}
 
