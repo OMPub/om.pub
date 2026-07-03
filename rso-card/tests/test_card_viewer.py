@@ -688,7 +688,7 @@ class CardArtifactTest(unittest.TestCase):
         # the ~70k-row directory parses OFF the main thread (same worker road as catalogs — parsePayload
         # with sync fallback) and the Map-build ingests in chunks with frame yields
         self.assertIn("function dirPut(id, e)", self.html)
-        self.assertIn("parsed = await parsePayload({ raw: (await readCapped(p.res, MAX_JSON_BYTES)).buffer })", self.html)
+        self.assertIn("const b = (await readCapped(p.res, MAX_JSON_BYTES)).buffer; parsed = await parsePayload({ raw: b })", self.html)
         self.assertIn("const DIR_CHUNK = 12000;", self.html)
         self.assertIn('if (shape === "entries") for (let j = i; j < end; j++) dirPut(list[j][0], list[j][1]);', self.html)
         self.assertIn('directory: (n, gz) => rawUrl(n, n.node, gz ? "directory.json.gz" : "directory.json"),', self.html)
@@ -749,6 +749,43 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("const seat = (deg) => `translateZ(${-depth}px) rotateX(${deg}deg)`", self.html)
         self.assertIn("inner.style.transform = seat(-turns * angle)", self.html)
         self.assertIn("turns = 0; inner.style.transform = seat(0)", self.html)
+
+    def test_offline_permanence_seed_and_cache(self):
+        # layer 1: the sealed seed (starts at the 1957-10-04 genesis) + its decoder
+        self.assertIn('const RSO_SEED = /*__RSO_SEED__*/"1|19571004*', self.html)
+        self.assertIn("function decodeSeed(txt)", self.html)
+        # layers 2/3: IndexedDB — every op resolves null/no-op in a storage-blocked sandbox
+        self.assertIn('const IDB_NAME = "rso-card-v1", IDB_STORE = "kv";', self.html)
+        self.assertIn("async function idbGet(key)", self.html)
+        self.assertIn("async function idbSet(key, value)", self.html)
+        self.assertIn("async function bootOffline()", self.html)
+        # union, never replace: a device last online against a short-window node must not
+        # shrink the sealed archive down to that window
+        self.assertIn("[...new Set([...seedDays, ...skelDays])].sort()", self.html)
+        # scrollable to the CURRENT date, bounded against insane device clocks
+        self.assertIn("for (let k = 0; k < 4000 && t <= Date.now(); k++, t += 86400000)", self.html)
+        # honest: a seed day carries its recorded count but never an invented fingerprint
+        self.assertIn('ledgerByDate.set(days[j], { count: c, sha: "", bands: null, raw: null })', self.html)
+        # write sides: the skeleton on BOTH boot paths, the newest day's exact bytes, the directory
+        self.assertIn('idbSet("skeleton", { days: witnessDates.slice(), latestRaw: (m.latestEntry && m.latestEntry.date && m.latestEntry) || null', self.html)
+        self.assertIn('idbSet("skeleton", { days: witnessDates.slice(), latestRaw: ordered[ordered.length - 1] || null', self.html)
+        self.assertIn("if (!replayed && date === witnessDates[TOTAL])", self.html)
+        self.assertIn('idbSet("dir", { kind: keepKind, buf: keepBuf', self.html)
+        # read sides: the replay day (re-verified downstream) + stale-chunk acceptance offline
+        self.assertIn('const c = state.replay && state.replay.date === date ? state.replay : await idbGet("day");', self.html)
+        self.assertIn('(c.sha === want || (state.offline && c.days.length))', self.html)
+        # ?offline dev switch kills the single network choke point (fetchTimed)
+        self.assertIn("const FORCE_OFFLINE = /[?&]offline\\b/.test(location.search);", self.html)
+        self.assertIn('if (FORCE_OFFLINE) throw new Error("offline (dev)");', self.html)
+
+    def test_offline_status_is_clearly_labelled(self):
+        # each offline flavor is a distinct pill label WITH a plain-language tooltip
+        for label in ("Offline · cached record", "Offline · reconstruction"):
+            self.assertIn(f'"{label}"', self.html)
+            self.assertIn(f'"{label}":', self.html)
+        # a replay must never read "Live": hash-verify keeps the amber pill offline
+        self.assertIn('setStatus(state.offline ? "offline" : "ready",', self.html)
+        self.assertIn('state.offline ? "Offline · cached record" : ok ? "Live record · verified" : "Live record")', self.html)
 
     def test_giant_screen_object_sizing(self):
         # On an 8K/16K wall or the Sphere, px-sized sprites would shrink to specks — a screen-scale
@@ -1473,7 +1510,8 @@ class CardLeanIndexTest(unittest.TestCase):
     def test_boots_to_latest_day_not_a_fixed_anchor(self):
         # opens on "now": the cursor snaps to the last witnessed day unless the visitor flew — OR a ?day=
         # param names an opening day (nearest witnessed to it)
-        self.assertIn("const wantDay = bootDayParam(), li = wantDay ? nearestWitnessIndex(wantDay) : Math.max(0, witnessDates.length - 1);", self.html)
+        self.assertIn("const wantDay = bootDayParam(), li = wantDay ? nearestWitnessIndex(wantDay)", self.html)
+        self.assertIn(": offLand >= 0 ? offLand : Math.max(0, witnessDates.length - 1);", self.html)
         self.assertIn("state.cursor = li; state.target = li; state.shownDay = -1;", self.html)
 
     def test_day_url_param_opens_on_a_specific_day(self):
@@ -1506,7 +1544,8 @@ class CardLeanIndexTest(unittest.TestCase):
     def test_status_is_honest_on_bundle_failure(self):
         # never claims "Live record" when the bundle fetch failed; the aggregates stay live, shown
         # as the "Summary only" state (amber)
-        self.assertIn('setStatus("offline", state.liveNode ? "Summary only" : "No live source")', self.html)
+        self.assertIn('setStatus("offline", state.liveNode ? "Summary only"', self.html)
+        self.assertIn(': state.offline && TOTAL > 0 ? "Offline · reconstruction" : "No live source")', self.html)
         self.assertIn(".status-light.offline", self.html)
         self.assertNotIn("Aggregates live · bundle offline", self.html)   # old awkward wording is gone
 

@@ -144,6 +144,37 @@ test("detectStacks: co-incident NORAD ids group under the lowest-id core; distin
   assert.ok(!objs.find(o => o.id === "99999").dockPrimary, "a decayed object is excluded from stacking");
 });
 
+test("decodeSeed: hand vectors, malformed inputs, and the sealed production seed", () => {
+  const { decodeSeed } = load(["decodeSeed"]);
+  // hand vector: base36 absolute + delta + zero-delta ("2s" = 100)
+  const v = decodeSeed("1|19590111*3|2s,1,0");
+  assert.deepEqual(v.days, ["1959-01-11", "1959-01-12", "1959-01-13"]);
+  assert.deepEqual(v.counts, [100, 101, 101]);
+  // run break + repeat marker + negative delta
+  const w = decodeSeed("1|19590111*2,19590115*3|5,0.2,-2,1");
+  assert.deepEqual(w.days, ["1959-01-11", "1959-01-12", "1959-01-15", "1959-01-16", "1959-01-17"]);
+  assert.deepEqual(w.counts, [5, 5, 5, 3, 4]);
+  // malformed → null, never a throw (the offline boot must survive a bad splice)
+  for (const bad of ["", "2|x|y", "1|nope|1", "1|19590111*2|1", "1||1", "1|19590111*2|"]) {
+    assert.equal(decodeSeed(bad), null, `must reject: ${JSON.stringify(bad)}`);
+  }
+  // the SEALED seed itself: decodes, coherent, and matches frozen historical facts
+  const m = MOD.match(/\/\*__RSO_SEED__\*\/"([^"]*)"\/\*__RSO_SEED_END__\*\//);
+  assert.ok(m && m[1].length > 10000, "production seed must be sealed into the file");
+  const s = decodeSeed(m[1]);
+  assert.ok(s, "sealed seed must decode");
+  assert.equal(s.days.length, s.counts.length, "one count per day");
+  assert.ok(s.days.length >= 25000, `full archive expected, got ${s.days.length}`);
+  assert.equal(s.days[0], "1957-10-04", "genesis day is Sputnik 1's");
+  assert.equal(s.counts[0], 1, "one object on genesis day");
+  assert.equal(s.counts[s.days.indexOf("1969-04-20")], 3286, "frozen deep-history count");
+  assert.ok(s.days[s.days.length - 1] >= "2026-07-03", "seed reaches the seal date");
+  for (let i = 1; i < s.days.length; i++) {
+    if (!(s.days[i] > s.days[i - 1])) assert.fail(`days not strictly ascending at ${i}`);
+  }
+  assert.ok(s.counts.every((c) => Number.isInteger(c) && c > 0), "all counts positive integers");
+});
+
 test("detectStacks: token supersession bails without throwing", async () => {
   const { detectStacks } = load(["detectStacks"],
     "const nextTask = () => Promise.resolve(); const state = { loadToken: 7 };");

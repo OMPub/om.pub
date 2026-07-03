@@ -6,7 +6,7 @@ export default [{
   languageOptions: { ecmaVersion: 2023, sourceType: "module", globals: {
     // browser runtime the card actually uses
     window:"readonly", document:"readonly", location:"readonly", navigator:"readonly",
-    console:"readonly", performance:"readonly", localStorage:"readonly",
+    console:"readonly", performance:"readonly", localStorage:"readonly", indexedDB:"readonly",
     requestAnimationFrame:"readonly", cancelAnimationFrame:"readonly", setTimeout:"readonly",
     clearTimeout:"readonly", setInterval:"readonly", clearInterval:"readonly",
     fetch:"readonly", Worker:"readonly", Blob:"readonly", URL:"readonly", URLSearchParams:"readonly",

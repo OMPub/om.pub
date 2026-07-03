@@ -11,6 +11,7 @@ It is developed **here, in the om.pub repo**.
 | `../web/public/rso/live/index.html` | **The card — source of truth AND the live-served file.** Edit this directly; serving it *is* deploying the om.pub `/rso/live` view. |
 | `../web/public/rso/live/three.core.js`, `three.module.js` | Vendored three.js. In the DEV file the card imports `./three.module.js`; the MINT build inlines both (see below). |
 | `../web/public/rso/live/build-standalone.py` | **Mint build.** Transforms the two three.js ES modules into one inline classic-script IIFE and writes `index.standalone.html` — a single self-contained file, zero external code fetches, no `blob:`/`import()` dependency. `--check` verifies self-containment (a test runs it). |
+| `../web/public/rso/live/build-seed.py` | **Offline-permanence seed.** Encodes the full witnessed-day timeline (every date + its record count, ~39 KB) and seals it between the `__RSO_SEED__` markers in index.html. Run against a source serving the full `ledger.json` before mint and whenever the archive advances: `python3 build-seed.py --source http://localhost:8766 --check`. |
 | `../web/public/rso/live/index.standalone.html` | The generated mint artifact (**git-ignored** — regenerate with `build-standalone.py`). This is what gets minted/uploaded to Arweave. |
 | `../web/public/rso/live/build-embed-matrix.py` → `embed-matrix/` | **Marketplace-embed test harness.** Builds the real standalone under 10 iframe `sandbox`/CSP combos (seize.io, Zora, OpenSea-class no-`blob:` re-host, worker-blocked, no-network, cross-origin, `data:`/`srcdoc`, inline-blocked) + a probe dashboard grading each cell. Both `embed-matrix/` and the older `nft-preview.html` are dev-only (git-ignored). |
 | `../web/public/rso/live/serve.py` | Local CORS preview server, matching production iframe hosting. |
@@ -31,6 +32,8 @@ produce the self-contained `index.standalone.html`, and mint/upload THAT file.
 - `?source=<private-host-url>` — session-only top-priority local data node (see below).
 - `?noworker` — forces the synchronous (worker-less) parse path, so you can exercise
   exactly what a worker-blocking embed (e.g. an OpenSea re-host CSP) does, on any device.
+- `?offline` — forces every network fetch to fail instantly (the single `fetchTimed` choke
+  point throws), so the offline-permanence path is testable anywhere without unplugging.
 - `window.__RSO_CARD__` — a debug handle exposing `{ state, setTarget, recordMeta, isoFor,
   TOTAL, witnessDates, camera, O, pointMat, scene, pool }`. It lives on the NFT's own
   iframe window only (no cross-origin reach) and is kept intentionally — a transparency
@@ -80,6 +83,24 @@ URL is restricted to **private/loopback hosts only** (192.168/10/172.16-31/127/1
 accepted from a roster or paste** — only your own URL can add it — so a deployed/shared
 card can never be tricked into probing arbitrary hosts. Drop the param to go back to
 the published sources.
+
+### Offline permanence (no reachable source)
+
+With no source reachable the piece still boots the full timeline, in three honest layers:
+
+1. **Sealed seed** — the witnessed-day timeline (dates + per-day record counts) lives inside
+   the file (`build-seed.py`, ~39 KB). Full 1957→now scrub, era-correct reconstruction,
+   status pill `Offline · reconstruction`. Days carry their recorded counts but never an
+   invented hash; the timeline extends day-by-day up to the device's current date.
+2. **IndexedDB skeleton** — the freshest timeline this device has seen online, refreshed on
+   every successful boot and **unioned** with the seed (a short-window node can't shrink the
+   archive).
+3. **IndexedDB day replay** — the most recent witnessed day this device downloaded: exact
+   catalog bytes + the identity directory, replayed offline and **re-hashed against the
+   published sha** (`SHA-256 · verified on this device` stays true), status pill
+   `Offline · cached record`. The rest of the timeline stays scrubbable as reconstruction.
+
+A storage-blocked sandbox (marketplace iframe) falls 3 → 2 → 1; layer 1 always works.
 
 ### Index manifest contract (REQUIRED for full-history scrub)
 
