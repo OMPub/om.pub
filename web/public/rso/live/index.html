@@ -1899,25 +1899,32 @@
       directory: (n, gz) => rawUrl(n, n.node, gz ? "directory.json.gz" : "directory.json"),
     };
     const safeParse = (t) => { try { return JSON.parse(t); } catch (e) { return null; } };
-    // Size caps + a host allowlist for the ONE class of URL not built by rawUrl: bundle locators
-    // copied out of node-served JSON (the index/ledger catalog_url, and signed Arweave mirrors from
-    // the attestation index). A hostile node can put any string there, so before fetching we require
-    // https on a known host, and EVERY download is byte-capped — a gzip bomb or a giant payload from
-    // a hostile node can't beacon to an arbitrary host or exhaust memory. Caps mirror the pipeline.
+    // Size caps for every download — a gzip bomb or a giant payload from a hostile node can't
+    // exhaust memory. Caps mirror the pipeline.
     const MAX_JSON_BYTES = 32 * 1024 * 1024;       // any node-served JSON (index, chunk, docchain, roster, anno, delta)
     const MAX_GZ_BYTES = 64 * 1024 * 1024;         // the compressed catalog on the wire
     const MAX_CATALOG_BYTES = 200 * 1024 * 1024;   // the decompressed catalog (matches snapshot.py MAX_CATALOG_BYTES)
     const MAX_CHUNK_DAYS = 400;                    // a year-chunk holds <= 366 day entries
     const MAX_CATALOG_ROWS = 200000;               // real full days are ~68k; caps a hostile node's row COUNT
     //   (byte caps alone don't bound row count — millions of tiny rows would still allocate + O(n)-process)
-    const LOCATOR_HOSTS = new Set(["raw.githubusercontent.com", "arweave.net", "arweave.dev"]);
-    const safeLocator = (u) => {                   // honour a locator only if https on a known host (or the active local dev source)
+    // Locator policy, for the ONE class of URL not built by rawUrl: bundle locators copied out of
+    // node-served JSON (the index/ledger catalog_url, and signed Arweave mirrors from the
+    // attestation index). Trust is NODE-level and rank-gated — if the card trusts a ranked node, it
+    // can trust that node's statement of where its catalogs live — so there is NO domain allowlist
+    // (arbitrary-host freedom: R2 today, whatever exists in 2036). What remains are STRUCTURAL
+    // guards, about mechanics rather than trust: https only, no credentials in the URL, never a
+    // private/LAN host (JSON served to a viewer must not aim their browser at 192.168.* — the SSRF
+    // class), redirect:"error" + byte caps at every fetch site, and the MANDATORY hash pin in
+    // loadCatalog — the bytes prove themselves against the ledger, so integrity is fully
+    // independent of the host.
+    function safeLocator(u) {
       try {
         const x = new URL(String(u));
         if (DEV_ORIGIN && x.origin === DEV_ORIGIN) return x.href;   // local dev source — http allowed on the private host
-        return x.protocol === "https:" && LOCATOR_HOSTS.has(x.hostname) ? x.href : null;
+        if (x.protocol !== "https:" || x.username || x.password) return null;
+        return isPrivateHost(x.hostname) ? null : x.href;
       } catch (e) { return null; }
-    };
+    }
     // Read a response body with a hard byte cap, so a hostile node can't stream gigabytes into memory.
     async function readCapped(res, max) {
       const reader = res.body && res.body.getReader();
@@ -2516,28 +2523,9 @@
       // scrub, and nothing reloads them. It's bounded by the attested-day count, which is the point.
       for (const m of [bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate]) lruCap(m, METADATA_MAX);
     }
-    // Don't trust the mirror — check it. The ledger's sha256 is the hash of the canonical
-    // catalog bytes, which is exactly what we hold after gunzip: one digest proves the
-    // download IS the attested record. (WebCrypto needs a secure context; absent that, or a
-    // ledgerless day, we simply make no claim.)
-    async function verifyCatalogBytes(date, bytes) {
-      const led = ledgerByDate.get(date);
-      if (!led || !led.sha || !crypto.subtle) return;
-      try {
-        const digest = await crypto.subtle.digest("SHA-256", bytes);
-        const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
-        const want = String(led.sha).trim().toLowerCase().replace(/^0x/, "");   // normalize: an UPPER-case or 0x-prefixed published hash must not read as a mismatch
-        const ok = hex === want;
-        integrityByDate.set(date, ok);
-        if (!ok) console.info("catalog hash mismatch", date, hex, "≠", led.sha);
-        if (state.shownDay >= 0 && isoFor(state.shownDay) === date) {
-          applyHud(recordMeta(date));
-          // A replay must never read "Live": offline keeps the amber pill (the panel carries the verify detail).
-          if (state.catalogDate === date) setStatus(state.offline ? "offline" : "ready",
-            state.offline ? "Offline · cached record" : ok ? "Live record · verified" : "Live record");
-        }
-      } catch (e) { /* digest unavailable — no claim */ }
-    }
+    // (The post-hoc verify-after-render pass is gone: hash verification is now the MANDATORY pin
+    // inside loadCatalog's mirror loop — mismatched bytes are rejected before they can render, and
+    // integrityByDate is set synchronously, so the HUD/status read the verdict on the same frame.)
     // Distil annotations into HUD counts + per-object notes. Catalog changes retain their
     // changed field family so the Updated-today lens is about real data, not generic activity.
     function digestAnnotations(anno) {
@@ -2653,40 +2641,69 @@
       let delta = deltaRes && deltaRes.data;
       let annoSum = digestAnnotations(annoRes && annoRes.data);
       if (annoSum) annoByDate.set(date, annoSum);
-      // Bundle mirrors, in trust / permanence order. The index entry already names a CORS-fetchable
-      // locator (Arweave bundle tar when the day is permanent, else the node-branch catalog.json.gz).
-      // Any witness's signed Arweave locations are fair mirrors — the bytes prove themselves against
-      // the ledger hash, not the address. Last resort: the ranked nodes' raw catalog.json.gz. The
-      // GitHub RELEASE asset is never tried: its redirect target sends no CORS headers.
-      let ab = null, isTar = false;
-      const led = ledgerByDate.get(date) || {}, locator = led.raw && safeLocator(led.raw.catalog_url);
-      if (locator) {
-        try { const r = await fetchTimed(locator, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = (led.raw.catalog_url_kind !== "catalog_gz"); } } catch (e) { /* fall through */ }
+      // Bundle mirrors, in trust / permanence order — each candidate MANDATORILY hash-pinned.
+      // The index entry names a CORS-fetchable locator (Arweave bundle tar when the day is
+      // permanent, else a catalog.json.gz wherever the ranked node chose to host it); any witness's
+      // signed Arweave locations are fair mirrors; then the ranked nodes' own raw path; last, this
+      // device's replay cache. With no domain allowlist the PIN is the contract: when the ledger
+      // names a sha256, bytes that don't hash to it are REJECTED and the next mirror tried — a
+      // mirror can fail us, but it can never feed us a different record. A day with no published
+      // sha is served only by the ranked nodes / the replay cache (never an arbitrary locator) and
+      // renders with no integrity claim — exactly what the HUD then says. (The GitHub RELEASE
+      // asset is never tried: its redirect target sends no CORS headers.)
+      const led = ledgerByDate.get(date) || {};
+      const wantSha = led.sha ? String(led.sha).trim().toLowerCase().replace(/^0x/, "") : "";
+      const mirrors = [];
+      const locator = led.raw && safeLocator(led.raw.catalog_url);
+      if (locator && wantSha) mirrors.push(async () => {
+        const r = await fetchTimed(locator, { cache: "force-cache", redirect: "error" });
+        return r.ok ? { ab: (await readCapped(r, MAX_GZ_BYTES)).buffer, isTar: led.raw.catalog_url_kind !== "catalog_gz" } : null;
+      });
+      if (wantSha) for (const u of (attestByDate.get(date) || {}).ar || []) {
+        const url = safeLocator(u); if (!url) continue;     // structural guards (https, no private hosts) — the pin below is the integrity
+        mirrors.push(async () => {
+          const r = await fetchTimed(url, { cache: "force-cache", redirect: "error" });
+          return r.ok ? { ab: (await readCapped(r, MAX_GZ_BYTES)).buffer, isTar: true } : null;
+        });
       }
-      for (const u of (attestByDate.get(date) || {}).ar || []) {
-        if (ab) break;
-        const url = safeLocator(u); if (!url) continue;     // attestation locators are host-allowlisted too
-        try { const r = await fetchTimed(url, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = true; } } catch (e) { /* try next */ }
-      }
-      if (!ab) {
+      mirrors.push(async () => {
         const g = await fromNodes((n) => `${nodeUrl.catalog(n, date)}/catalog.json.gz`, "force-cache");
-        if (g) { try { ab = (await readCapped(g.res, MAX_GZ_BYTES)).buffer; } catch (e) { /* oversized — no bundle */ } }
-      }
+        return g ? { ab: (await readCapped(g.res, MAX_GZ_BYTES)).buffer, isTar: false } : null;
+      });
       // Offline permanence layer 3 (read side): the most recent day THIS DEVICE witnessed, replayed
-      // from IndexedDB. The bytes still flow through verifyCatalogBytes below, so a replay makes the
-      // same on-device integrity claim a live download does — or none.
-      let replayed = null;
-      if (!ab) {
+      // from IndexedDB — pinned by the same loop, so a replay makes the same on-device integrity
+      // claim a live download does, or none.
+      mirrors.push(async () => {
         const c = state.replay && state.replay.date === date ? state.replay : await idbGet("day");
-        if (c && c.date === date && c.buf) {
-          ab = c.buf; isTar = false; replayed = c;
-          if (!delta) delta = c.delta || null;
-          if (!annoSum && c.anno) { annoSum = digestAnnotations(c.anno); if (annoSum) annoByDate.set(date, annoSum); }
-        }
+        return c && c.date === date && c.buf ? { ab: c.buf, isTar: false, cache: c } : null;
+      });
+      let cgz = null, parsed = null, replayed = null, sawMismatch = false;
+      for (const mirror of mirrors) {
+        let got = null;
+        try { got = await mirror(); } catch (e) { /* unreachable / oversized — next mirror */ }
+        if (!got) continue;
+        try {
+          const z = got.isTar ? untar(await gunzip(got.ab), "catalog.json.gz") : got.ab;
+          if (!z) continue;
+          const p = await parseCatalog(z);                  // gunzip + JSON.parse OFF the main thread (worker); sync fallback inside
+          if (wantSha && crypto.subtle) {                   // THE PIN (no secure context → no digest → no claim, as before)
+            const digest = await crypto.subtle.digest("SHA-256", p.bytes);
+            const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
+            if (hex !== wantSha) { sawMismatch = true; console.info("catalog hash mismatch — mirror rejected", date); continue; }
+            integrityByDate.set(date, true);
+          }
+          cgz = z; parsed = p; replayed = got.cache || null;
+          break;
+        } catch (e) { /* bad tar / hostile parse — next mirror */ }
       }
-      if (!ab) throw new Error("no bundle mirror reachable");
-      const cgz = isTar ? untar(await gunzip(ab), "catalog.json.gz") : ab;
-      if (!cgz) throw new Error("catalog missing");
+      if (!cgz || !parsed) {
+        if (sawMismatch) integrityByDate.set(date, false);   // we fetched bytes and they are NOT the record — say so
+        throw new Error("no bundle mirror reachable");
+      }
+      if (replayed) {   // the replay carries the day's annotations/delta from when it was witnessed
+        if (!delta) delta = replayed.delta || null;
+        if (!annoSum && replayed.anno) { annoSum = digestAnnotations(replayed.anno); if (annoSum) annoByDate.set(date, annoSum); }
+      }
       catalogGzByDate.set(date, cgz.slice(0)); lruCap(catalogGzByDate, CATALOG_GZ_MAX);
       // Offline permanence layer 3 (write side): keep the NEWEST witnessed day's exact bytes + its
       // ledger entry (the published hash a replay re-verifies against) + annotations/delta.
@@ -2695,9 +2712,8 @@
         idbSet("day", { date, buf: cgz instanceof Uint8Array ? cgz.slice().buffer : cgz.slice(0),
           raw: (kept && kept.raw) || null, anno: (annoRes && annoRes.data) || null, delta: delta || null, savedAt: Date.now() });
       }
-      const { list, bytes: catBytes } = await parseCatalog(cgz);   // gunzip + JSON.parse OFF the main thread (worker); sync fallback inside
+      const { list } = parsed;                          // parsed (and pinned) inside the mirror loop above
       if (list.length > MAX_CATALOG_ROWS) list.length = MAX_CATALOG_ROWS;   // hostile row-count cap (bounds the map, sort + detectStacks below)
-      verifyCatalogBytes(date, catBytes);              // fire-and-forget: HUD updates when it lands
       // Join identity onto each PURE-ORBIT row before the map below reads name/type/country/decay/launch.
       // Fill-if-absent: a full-row catalog (today's production) keeps its own chain-verifiable values and the
       // directory only fills what a pure-orbit catalog omits — and DECAY_DATE here drives the reentered
@@ -3501,7 +3517,7 @@
             // permanence: each node signs its publication locations into its attestation —
             // distinct Arweave locators = independent pay-once-store-forever copies
             const locations = [...new Set((strongest.locations || []).map(String).filter(Boolean))];
-            const ar = locations.map(safeLocator).filter(Boolean);   // https on a known host only (no substring bypass)
+            const ar = locations.map(safeLocator).filter(Boolean);   // structural guards only (https, no creds, no private hosts) — the catalog pin carries the integrity
             const nodeIds = new Set((rec.events || []).map((e) => e.publication?.nodeId || e.claimedNodeId || e.nodeId).filter(Boolean));
             const attesters = (strongest.attesters || []).length;
             attestByDate.set(rec.date, {

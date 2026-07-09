@@ -333,15 +333,17 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn('value="0"', slider.group(0))
 
     def test_downloads_are_verified_on_device(self):
-        # the ledger sha256 hashes the canonical catalog bytes — exactly what
-        # the viewer holds after gunzip, so one digest proves the download is
-        # the attested record
-        self.assertIn('crypto.subtle.digest("SHA-256", bytes)', self.html)
-        self.assertIn("verifyCatalogBytes(date, catBytes)", self.html)
+        # the ledger sha256 hashes the canonical catalog bytes — exactly what the viewer holds after
+        # gunzip. Verification is the MANDATORY pin inside the mirror loop: mismatched bytes are
+        # rejected before render, never adopted-then-flagged.
+        self.assertIn('crypto.subtle.digest("SHA-256", p.bytes)', self.html)
+        self.assertNotIn("verifyCatalogBytes", self.html)   # the post-hoc pass is gone — the pin replaced it
         # the published hash is normalized (lower-case, strip 0x) before comparison so an upper-case or
         # 0x-prefixed ledger sha is not a false "DOES NOT MATCH"
-        self.assertIn('const want = String(led.sha).trim().toLowerCase().replace(/^0x/, "");', self.html)
-        self.assertIn("const ok = hex === want;", self.html)
+        self.assertIn('const wantSha = led.sha ? String(led.sha).trim().toLowerCase().replace(/^0x/, "") : "";', self.html)
+        self.assertIn('if (hex !== wantSha) { sawMismatch = true;', self.html)
+        self.assertIn("integrityByDate.set(date, true);", self.html)
+        self.assertIn("if (sawMismatch) integrityByDate.set(date, false);", self.html)
         self.assertIn("verified on this device", self.html)
         self.assertIn("DOES NOT MATCH DOWNLOAD", self.html)
         # a witness card must never invent a fingerprint: an un-indexed day shows "—", not fabricated hex
@@ -534,8 +536,7 @@ class CardArtifactTest(unittest.TestCase):
         # card counts distinct Arweave locators as independent permanent copies
         self.assertIn('id="witness-perm"', self.html)
         self.assertIn("independent permanent copies", self.html)
-        self.assertIn('"arweave.net", "arweave.dev"', self.html)   # gateways in the locator host allowlist
-        # declared locations also serve as verified download mirrors (host-allowlisted before fetch)
+        # declared locations also serve as download mirrors (structurally gated, hash-pinned on fetch)
         self.assertIn("(attestByDate.get(date) || {}).ar", self.html)
         # Public witness is itself a four-face prism, including the four requested
         # views of the day's witness state.
@@ -783,9 +784,10 @@ class CardArtifactTest(unittest.TestCase):
         for label in ("Offline · cached record", "Offline · reconstruction"):
             self.assertIn(f'"{label}"', self.html)
             self.assertIn(f'"{label}":', self.html)
-        # a replay must never read "Live": hash-verify keeps the amber pill offline
-        self.assertIn('setStatus(state.offline ? "offline" : "ready",', self.html)
-        self.assertIn('state.offline ? "Offline · cached record" : ok ? "Live record · verified" : "Live record")', self.html)
+        # a replay must never read "Live": the amber pill persists offline (the pin already ran,
+        # so integrityByDate is set synchronously and this one status line reads the verdict)
+        self.assertIn('setStatus(state.offline ? "offline" : "ready", state.offline ? "Offline · cached record"', self.html)
+        self.assertIn(': integrityByDate.get(date) ? "Live record · verified" : "Live record");', self.html)
 
     def test_giant_screen_object_sizing(self):
         # On an 8K/16K wall or the Sphere, px-sized sprites would shrink to specks — a screen-scale
@@ -1641,14 +1643,20 @@ class CardNodeRankTest(unittest.TestCase):
         # the only fetch host is GitHub raw — no node field interpolates a scheme/host
         self.assertIn("`https://raw.githubusercontent.com/${n.repo}/${branch}/${path}`", self.html)
 
-    def test_locators_from_node_json_are_host_allowlisted(self):
-        # catalog_url + signed Arweave mirrors come from node-served JSON (not built by rawUrl), so
-        # they pass a host allowlist (https + raw.githubusercontent.com / arweave gateways) before fetch
-        self.assertIn("const safeLocator = ", self.html)
-        self.assertIn('LOCATOR_HOSTS = new Set(["raw.githubusercontent.com", "arweave.net", "arweave.dev"])', self.html)
-        self.assertIn("safeLocator(led.raw.catalog_url)", self.html)         # index/ledger locator gated
-        self.assertIn("locations.map(safeLocator).filter(Boolean)", self.html)  # attestation mirrors gated
-        self.assertNotIn('/^ar:\\/\\/|arweave', self.html)                   # the old unanchored-substring regex is gone
+    def test_locators_are_structurally_guarded_not_allowlisted(self):
+        # REVISED (2026-07-04): trust is node-level, rank-gated — a trusted node's statement of
+        # where its catalogs live is honoured on ANY host (R2 today, whatever exists in 2036).
+        # No domain allowlist; the STRUCTURAL guards + the mandatory hash pin carry the integrity.
+        self.assertIn("function safeLocator(u)", self.html)
+        self.assertNotIn("LOCATOR_HOSTS", self.html)                          # the allowlist is gone
+        self.assertIn('if (x.protocol !== "https:" || x.username || x.password) return null;', self.html)
+        self.assertIn("return isPrivateHost(x.hostname) ? null : x.href;", self.html)   # never aim a browser at the LAN
+        self.assertIn("safeLocator(led.raw.catalog_url)", self.html)          # index/ledger locator gated
+        self.assertIn("locations.map(safeLocator).filter(Boolean)", self.html)   # attestation mirrors gated
+        self.assertNotIn('/^ar:\\/\\/|arweave', self.html)                    # the old unanchored-substring regex is gone
+        # a day with NO published sha never fetches from an arbitrary locator — ranked nodes / replay only
+        self.assertIn("if (locator && wantSha) mirrors.push(", self.html)
+        self.assertIn("if (wantSha) for (const u of (attestByDate.get(date) || {}).ar || [])", self.html)
 
     def test_local_dev_source_is_private_host_only_and_never_persisted(self):
         # ?source=http://192.168.x.x:port adds a top-priority LOCAL source for the session, to test a

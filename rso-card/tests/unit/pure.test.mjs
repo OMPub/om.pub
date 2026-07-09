@@ -144,6 +144,24 @@ test("detectStacks: co-incident NORAD ids group under the lowest-id core; distin
   assert.ok(!objs.find(o => o.id === "99999").dockPrimary, "a decayed object is excluded from stacking");
 });
 
+test("safeLocator: structural guards, no domain allowlist — any public https host; never LAN/creds/http", () => {
+  const { safeLocator } = load(["safeLocator", "isPrivateHost"], "const DEV_ORIGIN = null;");
+  // arbitrary PUBLIC https hosts are honoured (no allowlist — R2 today, whatever exists in 2036)
+  for (const u of ["https://arweave.net/abc", "https://pub-xyz.r2.dev/day.tar",
+                   "https://raw.githubusercontent.com/o/r/x.gz", "https://cdn.example2036.zz/catalog.json.gz",
+                   "https://8.8.8.8/x"]) {
+    assert.equal(safeLocator(u), u, `${u} should be honoured`);
+  }
+  // structural rejections: scheme, credentials, private/LAN targets (SSRF class), garbage
+  for (const u of ["http://arweave.net/abc", "ftp://x.com/a", "https://user:pw@host.com/x",
+                   "https://user@host.com/x", "https://192.168.1.50/x", "https://10.0.0.1/x",
+                   "https://172.16.0.1/x", "https://localhost/x", "https://box.local/x",
+                   "https://[fd00::1]/x", "https://[fe80::1]/x", "https://127.0.0.1/x",
+                   "https://169.254.1.1/x", "not a url", "", null]) {
+    assert.equal(safeLocator(u), null, `${u} must be rejected`);
+  }
+});
+
 test("decodeSeed: hand vectors, malformed inputs, and the sealed production seed", () => {
   const { decodeSeed } = load(["decodeSeed"]);
   // hand vector: base36 absolute + delta + zero-delta ("2s" = 100)
