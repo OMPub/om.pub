@@ -10,7 +10,7 @@
       color-scheme: dark;
       --ink: #f4f7f3; --muted: #8a9b98; --dim: #53635f;
       --line: rgba(208, 233, 226, 0.19);
-      --accent: #9aa9ff; --rose: #ff75d1; --amber: #ffad55; --magenta: #ff557d; --seal: #9affd6;
+      --accent: #9aa9ff; --amber: #ffad55; --magenta: #ff557d; --seal: #9affd6;
       --panel: rgba(2, 7, 8, 0.78);
       --safe-top: max(18px, env(safe-area-inset-top));
       --safe-right: max(18px, env(safe-area-inset-right));
@@ -561,6 +561,7 @@
           <dt>Z</dt><dd>Toggle Zen mode</dd>
           <dt>`</dt><dd>Toggle frame-rate and performance data</dd>
           <dt>I</dt><dd>Find and follow the ISS</dd>
+          <dt>G</dt><dd>Find an object by name or NORAD id</dd>
           <dt>P</dt><dd>Capture a PNG screenshot</dd>
           <dt>F</dt><dd>Toggle fullscreen</dd>
           <dt>,</dt><dd>Open witness settings</dd>
@@ -711,7 +712,6 @@
     const canvas = document.getElementById("scene");
     const $ = (id) => document.getElementById(id);
 
-    const DAYMS = 86400000;
     const pd = (s) => new Date(`${s}T00:00:00Z`);
     const fmtDate = (s) => new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(pd(s));
     const fmtNum = (n) => Number(n || 0).toLocaleString("en-US");
@@ -750,7 +750,7 @@
       liveNode: null, manifest: null,         // which ranked node is serving live, + its index manifest
       chainMeta: null,                        // {contractAddress, chainId} from the attestation index
       objects: [], catalogDate: null, suspended: false, zen: false, perfVisible: false, haloFade: 0, engaged: false,
-      workStride: mobile ? 2 : 2, workPhase: 0, jumpDay: -1, timebarPct: -1
+      workStride: 2, workPhase: 0, timebarPct: -1
     };
     const MAX_WORK_STRIDE = mobile ? 12 : 24;
     const PERF = {
@@ -761,8 +761,19 @@
     const LOOK_YAW = 0.5, LOOK_PITCH = 0.28;   // a few degrees of freedom — the gentle range we like
 
     // ── three setup ──
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    // three r180 is WebGL2-only; the renderer constructor THROWS when no context can be created (GPU
+    // blocklisted, --disable-gpu, a headless prerenderer, a WebGL1-only webview). Catch it so the HUD chrome
+    // (pure DOM/CSS) tells the truth instead of the card hanging forever on "Entering orbit" over black.
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: "high-performance" });
+    } catch (e) {
+      const lbl = document.getElementById("status-label"), lt = document.getElementById("status-light");
+      if (lbl) lbl.textContent = "WebGL unavailable";
+      if (lt) lt.className = "status-light error";
+      throw e;   // the module still stops here — but now the pill says why, instead of a silent forever-load
+    }
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
     renderer.setSize(innerWidth, innerHeight, false);
     renderer.setClearColor(0x020506, 1);
     const scene = new THREE.Scene();
@@ -812,7 +823,7 @@
     // ── field: CPU positions → points (dots) + line segments (real motion-blur) ──
     const O = [];                                  // object render records
     const pPos = new Float32Array(MAXF * 3), pCol = new Float32Array(MAXF * 3), pAlpha = new Float32Array(MAXF), pSize = new Float32Array(MAXF), pFocus = new Float32Array(MAXF);
-    const pSeed = new Float32Array(MAXF * 3), pPrev = new Float32Array(MAXF * 3);
+    const pSeed = new Float32Array(MAXF), pPrev = new Float32Array(MAXF * 3);   // aSeed is a single twinkle-phase float (the old y/z — s2 + tumble — were never read)
     const pSpin = new Float32Array(MAXF * 3);   // per-axis tumble rates for the 3D solids, seeded per RSO
     const pUpdated = new Float32Array(MAXF), pStep = new Float32Array(MAXF);
     const lPos = new Float32Array(MAXF * 2 * 3), lCol = new Float32Array(MAXF * 2 * 3);
@@ -823,7 +834,7 @@
     pointGeo.setAttribute("aAlpha", new THREE.BufferAttribute(pAlpha, 1));
     pointGeo.setAttribute("aSize", new THREE.BufferAttribute(pSize, 1));
     pointGeo.setAttribute("aFocus", new THREE.BufferAttribute(pFocus, 1));
-    pointGeo.setAttribute("aSeed", new THREE.BufferAttribute(pSeed, 3));   // s1, s2, tumble rate
+    pointGeo.setAttribute("aSeed", new THREE.BufferAttribute(pSeed, 1));   // per-object twinkle phase
     pointGeo.setAttribute("aPrev", new THREE.BufferAttribute(pPrev, 3));   // last frame's position → motion direction
     pointGeo.setAttribute("aUpdated", new THREE.BufferAttribute(pUpdated, 1));
     pointGeo.setAttribute("aStep", new THREE.BufferAttribute(pStep, 1));
@@ -832,7 +843,7 @@
       transparent: true, depthTest: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: true,
       uniforms: { uPixel: { value: renderer.getPixelRatio() }, uTime: { value: 0 }, uAspect: { value: innerWidth / innerHeight } },
       vertexShader: `
-        attribute float aAlpha, aSize, aFocus, aUpdated, aStep; attribute vec3 aSeed, aPrev;
+        attribute float aAlpha, aSize, aFocus, aUpdated, aStep, aSeed; attribute vec3 aPrev;
         uniform float uPixel, uTime, uAspect;
         varying vec3 vColor; varying float vAlpha; varying float vFocus; varying float vPx;
         void main(){
@@ -855,7 +866,7 @@
           float sb = 1.30;
           gl_PointSize = clamp(base * (1.0 + swell) * sb, 1.0, 24.0);   // ceiling high enough that LARGE still out-looms
           vPx = gl_PointSize / uPixel;
-          vColor = color; vAlpha = aAlpha * (0.72 + 0.28 * sin(uTime * 1.4 + aSeed.x * 80.0));   // aSeed.x → a per-object twinkle phase
+          vColor = color; vAlpha = aAlpha * (0.72 + 0.28 * sin(uTime * 1.4 + aSeed * 80.0));   // aSeed → a per-object twinkle phase
           vFocus = aFocus;
         }`,
       // near objects render crisp, bright and DEFINED (looming); far ones stay soft pinpoints.
@@ -1243,7 +1254,7 @@
       // same silhouette on every device, every day, forever
       const nid = src ? (parseInt(src.id, 10) || i) : i;
       const orbit = orbitParams(src, band, nid);
-      const s1 = rand2(nid, 71), s2 = rand2(nid, 83);
+      const s1 = rand2(nid, 71);
       const o = O[i] || (O[i] = {});
       o.band = band; o.dataBand = band; o.orbitTarget = null;
       o.R = orbit.R; o.cg = orbit.cg; o.sg = orbit.sg;
@@ -1262,12 +1273,7 @@
       pUpdated[i] = state.time; pStep[i] = 1 / 60;
       // silhouette seeds + tumble: debris spins hard, unknowns drift, hardware holds
       // attitude — except Starlinks, whose identical airframes read distinct by spin
-      const tum = (klass === 2 ? 0.5 + 1.6 * rand2(nid, 97)
-        : klass >= 3 ? 0.25 + 0.7 * rand2(nid, 97)
-        : (o.shape === 4 || o.shape === 10) ? 0.12 + 0.3 * rand2(nid, 97)
-        : 0.05 + 0.08 * rand2(nid, 97))
-        * (rand2(nid, 109) < 0.5 ? -1 : 1);
-      pSeed[i * 3] = s1; pSeed[i * 3 + 1] = s2; pSeed[i * 3 + 2] = tum;
+      pSeed[i] = s1;
       o.iss = !!(src && src.id === "25544");     // the ISS: always solidify + a closer, central pass
       seedSpin(i, klass, nid, o.iss);           // payload flat-spin / R-B & debris tumble, seeded per RSO
       o.country = src ? (src.country || "—") : "—";
@@ -1302,13 +1308,13 @@
         if (token !== assignToken) return;           // superseded by a newer assign or a catalog adopt
         const t0 = performance.now();
         const end = Math.min(i + slice, newN);
-        for (; i < end; i++) initSlot(i, src ? src[i] : null);
+        for (; i < end; i++) { initSlot(i, src ? src[i] : null); colorSlot(O[i]); }   // colour IN PLACE: a slot must never be drawn (FIELD_N grown below) before o.col is set, or updateField reads o.col[0] of undefined
         if (newN > oldN) { FIELD_N = Math.min(Math.max(oldN, i), newN); pointGeo.setDrawRange(0, FIELD_N); lineGeo.setDrawRange(0, FIELD_N * 2); }
         pointGeo.attributes.aSeed.needsUpdate = true;
         const dt = performance.now() - t0;
         slice = Math.max(1500, Math.min(24000, Math.round(slice * 18 / Math.max(4, dt))));
         if (i < newN) { if (document.hidden) setTimeout(step, 0); else requestAnimationFrame(step); }   // hidden tab: rAF never fires
-        else { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); recolor(); }
+        else { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); }
       };
       step();
     }
@@ -1423,7 +1429,7 @@
         if (newN > oldN) { FIELD_N = Math.min(lim, newN); pointGeo.setDrawRange(0, FIELD_N); lineGeo.setDrawRange(0, FIELD_N * 2); }
         const dt = performance.now() - t0;
         stride = Math.max(1500, Math.min(DAYLOAD_CHUNK, Math.round(stride * 18 / Math.max(4, dt))));
-        if (lim < newN) await raf();                                    // yield a frame between strides
+        if (lim < newN) await (document.hidden ? nextTask() : raf());   // yield a frame between strides (but a hidden tab has no frames → don't stall the adopt)
       }
       FIELD_N = newN;
       pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2);
@@ -1435,7 +1441,7 @@
       for (let i = 0; i < newN; i++) {
         const o = O[i]; if (!o || !o.docked || !o.meta) continue;
         const pi = slotByNid.get(o.meta.dockPrimary), P = pi != null ? O[pi] : null;
-        if (!P || !P.meta || pi === i) continue;
+        if (!P || !P.meta || pi === i) { o.docked = false; colorSlot(o); continue; }   // core got sampled out (mobile 9k) → reveal the member as itself, not a hidden orphan slot
         const orb = orbitParams(P.meta, P.meta.band, parseInt(o.meta.dockPrimary, 10) || 0);
         o.band = orb.band; o.R = orb.R; o.cg = orb.cg; o.sg = orb.sg; o.eccV = orb.eccV; o.ep = orb.ep; o.wj = orb.wj; o.lapRate = orb.lapRate;
         o.phase = P.phase; o.pt = o.phase - Math.floor(o.phase); o.ta = P.ta; o.cta = Math.cos(o.ta); o.sta = Math.sin(o.ta);
@@ -1620,7 +1626,8 @@
         pAlpha[i] = Math.max(0, fadeBehind * fadeFar * o.aMul * (1 - 0.5 * warpC) * (1 - deepC * 0.96) * (o.settleK == null ? 1 : o.settleK));
         pSize[i] = o.size * (1 + warpC * 0.4);
         pFocus[i] = state.lens === 4 && o.change && o.change !== "orbit" ? Math.max(0.82, focus) : focus;
-        pCol[i3] = o.col[0]; pCol[i3 + 1] = o.col[1]; pCol[i3 + 2] = o.col[2];
+        if (o.col) { pCol[i3] = o.col[0]; pCol[i3 + 1] = o.col[1]; pCol[i3 + 2] = o.col[2]; }   // guard: a slot must be coloured before it's drawn, but never crash the loop if some path missed it
+
         if (state.pulseStr > 0.01) {                 // attestation wavefront washes objects cyan as it passes
           const dy = Math.abs(_v.y - state.pulseY);
           if (dy < 7) { const bb = (1 - dy / 7) * state.pulseStr * 0.9;
@@ -1808,7 +1815,11 @@
     function isPrivateHost(h) {
       h = (h || "").toLowerCase().replace(/^\[|\]$/g, "");
       if (h === "localhost" || h.endsWith(".local") || h.endsWith(".localhost") || h === "::1") return true;
-      if (h.startsWith("fe80:") || h.startsWith("fc") || h.startsWith("fd")) return true;   // IPv6 link-local / ULA
+      // IPv6 link-local / ULA — but ONLY for actual IPv6 literals (they contain a colon). Without the colon
+      // guard, a PUBLIC DNS name like fcdn.attacker.com / fd-x.example.net starts with "fc"/"fd" and would be
+      // accepted as a private ?source, letting a crafted share-link make an attacker the sole (spoofed
+      // "verified/attested") data node.
+      if (h.includes(":") && (h.startsWith("fe80:") || h.startsWith("fc") || h.startsWith("fd"))) return true;
       const m = h.match(/^(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}$/);
       if (!m) return false;
       const a = +m[1], b = +m[2];
@@ -1851,6 +1862,8 @@
     const MAX_GZ_BYTES = 64 * 1024 * 1024;         // the compressed catalog on the wire
     const MAX_CATALOG_BYTES = 200 * 1024 * 1024;   // the decompressed catalog (matches snapshot.py MAX_CATALOG_BYTES)
     const MAX_CHUNK_DAYS = 400;                    // a year-chunk holds <= 366 day entries
+    const MAX_CATALOG_ROWS = 200000;               // real full days are ~68k; caps a hostile node's row COUNT
+    //   (byte caps alone don't bound row count — millions of tiny rows would still allocate + O(n)-process)
     const LOCATOR_HOSTS = new Set(["raw.githubusercontent.com", "arweave.net", "arweave.dev"]);
     const safeLocator = (u) => {                   // honour a locator only if https on a known host (or the active local dev source)
       try {
@@ -2078,13 +2091,16 @@
       // be propagated in more than one batch (a station's modules updated at different epochs → their
       // mean-anomaly differs and they split across pass-1 groups); they're still one physical thing. Only
       // clusters (size ≥ 2) are merged, so a constellation's individually-orbiting sats are never swept in.
+      // merged holds only a few dozen real physical stacks; MERGE_CAP keeps a hostile catalog (crafted so
+      // every exact-group is a distinct plane) from turning this find() into an O(clusters × merged) hang.
       const merged = [];
+      const MERGE_CAP = 4096;
       for (const c of exact) {
         if (c.length < 2) continue;
         const r = c[0];
         const host = merged.find((m) => Math.abs(m[0].inc - r.inc) < 0.1 && Math.abs(m[0].mm - r.mm) < 0.002
           && Math.abs(((m[0].raan - r.raan + 540) % 360) - 180) < 0.6);
-        if (host) host.push(...c); else merged.push(c.slice());
+        if (host) host.push(...c); else if (merged.length < MERGE_CAP) merged.push(c.slice());   // past the cap: stop growing (never a real archive)
       }
       for (const g of merged) {
         g.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));   // primary = lowest NORAD (the core)
@@ -2220,7 +2236,12 @@
             if (!c.done && filled < meta.total) await nextTask();                       // paint a frame between deserializes
           }
           return { list, shape: meta.shape, bytes: meta.bytes };
-        } catch (e) { _catPending.clear(); /* fall through to the synchronous path with the intact bytes */ }
+        } catch (e) {
+          // This request's own pending entry was already settled (worker "error" reply, or _killWorker
+          // rejecting on timeout/onerror) — do NOT clear the whole _catPending map, which would orphan a
+          // CONCURRENT parse (directory + catalog + ledger can be in flight together at boot) and hang it
+          // forever. Just fall through to the synchronous path with the intact bytes.
+        }
       }
       const bytes = kind === "gz" ? new Uint8Array(await gunzip(src)) : new Uint8Array(src);
       return { ...(await parseJsonNonBlocking(bytes)), bytes };
@@ -2256,6 +2277,7 @@
           batchN = 0;
         };
         for (let i = m[0].length; i < text.length; i++) {
+          if (i >= sliceEnd) { sliceEnd = i + SSTEP; if (i > m[0].length) await nextTask(); }   // bounded scan slices — checked FIRST so a single multi-MB string value can't block
           const c = text.charCodeAt(i);
           if (inStr) { if (esc) esc = false; else if (c === 92) esc = true; else if (c === 34) inStr = false; continue; }
           if (c === 34) inStr = true;
@@ -2264,7 +2286,6 @@
           else if (c === 44 && depth === 1) {                                       // top-level comma = row boundary
             if (++batchN >= BATCH) { flush(i); batchStart = i + 1; await nextTask(); }
           }
-          if (i >= sliceEnd) { sliceEnd = i + SSTEP; if (i > m[0].length) await nextTask(); }   // bounded scan slices
         }
         throw new Error("unterminated array");
       } catch (e) { return rowsOf(JSON.parse(text)); }   // malformed / surprising layout → one atomic parse decides
@@ -2298,7 +2319,11 @@
     // evicts a working year — and an evicted day just re-estimates from the index until its catalog reloads.
     const METADATA_MAX = 1200;
     function pruneMetadata() {
-      for (const m of [bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate, attestByDate]) lruCap(m, METADATA_MAX);
+      // These maps ACCUMULATE per scrubbed/downloaded day, so they're LRU-capped. attestByDate is NOT here:
+      // it's loaded ONCE at boot from the docchain index (its own fetch is byte-capped) and is the session's
+      // authoritative attestation set — capping it would silently drop "publicly attested" days after a long
+      // scrub, and nothing reloads them. It's bounded by the attested-day count, which is the point.
+      for (const m of [bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate]) lruCap(m, METADATA_MAX);
     }
     // Don't trust the mirror — check it. The ledger's sha256 is the hash of the canonical
     // catalog bytes, which is exactly what we hold after gunzip: one digest proves the
@@ -2310,7 +2335,8 @@
       try {
         const digest = await crypto.subtle.digest("SHA-256", bytes);
         const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
-        const ok = hex === led.sha;
+        const want = String(led.sha).trim().toLowerCase().replace(/^0x/, "");   // normalize: an UPPER-case or 0x-prefixed published hash must not read as a mismatch
+        const ok = hex === want;
         integrityByDate.set(date, ok);
         if (!ok) console.info("catalog hash mismatch", date, hex, "≠", led.sha);
         if (state.shownDay >= 0 && isoFor(state.shownDay) === date) {
@@ -2450,6 +2476,7 @@
       if (!cgz) throw new Error("catalog missing");
       catalogGzByDate.set(date, cgz.slice(0)); lruCap(catalogGzByDate, CATALOG_GZ_MAX);
       const { list, bytes: catBytes } = await parseCatalog(cgz);   // gunzip + JSON.parse OFF the main thread (worker); sync fallback inside
+      if (list.length > MAX_CATALOG_ROWS) list.length = MAX_CATALOG_ROWS;   // hostile row-count cap (bounds the map, sort + detectStacks below)
       verifyCatalogBytes(date, catBytes);              // fire-and-forget: HUD updates when it lands
       // Join identity onto each PURE-ORBIT row before the map below reads name/type/country/decay/launch.
       // Fill-if-absent: a full-row catalog (today's production) keeps its own chain-verifiable values and the
@@ -2563,7 +2590,7 @@
     // Each status label carries a plain-language tooltip (hover / focus / tap) so the small HUD
     // word is always self-explaining. "Live · <node>" varies by node, so it's matched by prefix.
     const STATUS_TIP = {
-      "Live record · verified": "The full record for this day is loaded, and its content hash matches the on-chain attestation — you're seeing the exact witnessed catalogue.",
+      "Live record · verified": "The full record for this day is loaded, and its bytes hash (SHA-256) to the published snapshot hash for this day — recomputed here on your device. On-chain attestation is the separate 'attested' tier shown in the witness panel.",
       "Live record": "The full record for this day is loaded from a live source.",
       "Summary only": "The counts for this day are live and exact from the index — but its full per-object catalogue isn't published for download, so individual objects can't be inspected for this day.",
       "No live source": "No backing source is reachable right now, so the witnessed archive can't load — the field shown is a generic placeholder. It restores the moment a source comes back.",
@@ -2590,7 +2617,7 @@
       const led = ledgerByDate.get(date), raw = led ? led.raw : null;
       // exact count when the day's loaded; otherwise an era-correct estimate from the year (NOT a flat ~68k)
       const count = led ? led.count : (estRecordForYear(parseInt(date.slice(0, 4), 10) || 2026) + Math.round(hashUnit(date) * 60));
-      const sha = led ? led.sha : (Math.floor(hashUnit(date) * 0xffffffff).toString(16).padStart(8, "0"));
+      const sha = led ? led.sha : null;   // no fabricated fingerprint: a witness card must never label invented hex "SHA-256"
       // Prefer aggregates carried in the INDEX (instant, no catalog needed). Fall back to the
       // values computed from the full catalog on stop, then to a proportional estimate.
       const bands = bandCountsByDate.get(date) || (led && led.bands) || (raw && raw.band_counts) || null;
@@ -2632,9 +2659,10 @@
       const an = annoByDate.get(rec.date);
       $("d-obs").textContent = an && an.decayNotices ? ` · ${fmtNum(an.decayNotices)} decay notices` : "";
       // ── fingerprint prism ──
-      $("fingerprint").textContent = shortHex(rec.sha);
-      $("fp-sha-note").textContent = rec.integrity === true ? "SHA-256 · verified on this device"
-        : rec.integrity === false ? "SHA-256 · DOES NOT MATCH DOWNLOAD" : "SHA-256";
+      $("fingerprint").textContent = rec.sha ? shortHex(rec.sha) : "—";
+      $("fp-sha-note").textContent = !rec.sha ? "SHA-256 · awaiting index"
+        : rec.integrity === true ? "SHA-256 · verified on this device"
+        : rec.integrity === false ? "SHA-256 · DOES NOT MATCH DOWNLOAD" : "SHA-256 · published hash";
       const r = rec.raw;
       // Reconstructed days (before the live-witness epoch) are labelled as such — honest about how the
       // VALUES were sourced, while the witness/attestation framing is unchanged (viewers still attest them).
@@ -2668,7 +2696,12 @@
         $("witness-sources").textContent = fmtNum(attest.sources);
       } else {
         es.textContent = "Archive record"; es.classList.remove("attested");
-        $("witness-state").textContent = rec.verified ? "Snapshot verified · not yet attested" : "Not yet attested";
+        // "verified" here must mean the SAME thing the pill + fingerprint mean: this device downloaded the
+        // bytes and they hash-match the published snapshot. A hash MISMATCH must never read "verified"; a day
+        // whose bytes haven't been fetched/checked yet is "recorded" (a published snapshot exists), not verified.
+        $("witness-state").textContent = rec.integrity === false ? "Snapshot hash mismatch"
+          : rec.integrity === true ? "Snapshot verified · not yet attested"
+          : rec.verified ? "Snapshot recorded · not yet attested" : "Not yet attested";
         $("witness-state").classList.remove("attested"); $("witness-hash").innerHTML = "&nbsp;";
         $("witness-nodes").textContent = "—"; $("witness-node-note").textContent = "independent publishers";
         $("witness-attestations").textContent = "—"; $("witness-attestation-note").textContent = "on-chain claims";
@@ -3124,7 +3157,11 @@
         const blob = await new Promise((resolve) => out.toBlob(resolve, "image/png"));
         if (!blob) throw new Error("PNG encoding unavailable");
         downloadUrl(URL.createObjectURL(blob), name, true);
-        flashMode("Frame saved");
+        // A sandboxed marketplace iframe without allow-downloads swallows the <a download> click SILENTLY
+        // (no exception), so we can't confirm the save. Only claim "saved" top-level; in an embed be honest
+        // that the download may be blocked and the reliable path is opening the piece in its own tab.
+        let framed; try { framed = window.top !== window.self; } catch (e) { framed = true; }
+        flashMode(framed ? "Frame captured — if no download, open in its own tab" : "Frame saved");
       } catch (e) {
         console.info("Frame capture unavailable", e);
         flashMode("Capture failed");
@@ -3228,7 +3265,7 @@
       const idx = got && got.data;
       if (idx) {
         if (idx.contractAddress) state.chainMeta = { contractAddress: idx.contractAddress, chainId: idx.chainId || 11155111 };
-        for (const [ref, rec] of Object.entries(idx.docRefs || {})) {
+        for (const rec of Object.values(idx.docRefs || {})) {
           const groups = rec.agreementGroups || [];
           const strongest = groups.slice().sort((a, b) => (b.combinedSupportTdh || 0) - (a.combinedSupportTdh || 0))[0];
           if (strongest) {
@@ -3756,7 +3793,7 @@
       nameEl.style.color = lensCol;
       $("insp-stage").style.borderColor = lensCol || "";
       // bare values, each explained by its hover/tap tooltip — no inline labels
-      const esc = (s) => String(s).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+      const esc = escHtml;   // the single module-scope HTML escaper
       // data-tip drives the instant in-app tooltip; aria-label (NOT title) keeps it for
       // screen readers without the browser's slow, redundant native title box.
       const tip = (txt, why) => `<span tabindex="0" aria-label="${esc(txt)} — ${esc(why)}" data-tip="${esc(why)}">${esc(txt)}</span>`;
@@ -3900,7 +3937,7 @@
       const all = gotoSearch(q);
       gotoRows = all.slice(0, GOTO_MAX);
       if (!gotoRows.length) { list.innerHTML = `<div class="gp-empty">No object matches on this day</div>`; gotoSel = -1; if (countEl) countEl.textContent = ""; return; }
-      const esc = (s) => String(s).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+      const esc = escHtml;   // the single module-scope HTML escaper
       list.innerHTML = gotoRows.map((o, i) =>
         `<button class="gp-row${i === 0 ? " sel" : ""}" role="option" data-i="${i}" tabindex="-1" title="${esc(o.name || ("NORAD " + o.id))}">`
         + `<span class="gp-name">${esc(o.name || "Archive object")}</span>`
@@ -4038,6 +4075,22 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       PERF.frames = PERF.cpuSum = PERF.fieldSum = PERF.meshSum = PERF.drawSum = PERF.intervalSum = PERF.worstInterval = 0;
       PERF.lastReport = now;
     }
+    // Float32 precision guard for the dead-reckoning clock. state.time accumulates seconds of VISIBLE runtime;
+    // it is stored per-object in the pUpdated Float32 buffer and fed to the vertex shader as uTime, where the
+    // interpolation blend is (uTime - aUpdated) / aStep. Float32 has ~24 mantissa bits, so past ~1e5 s (a
+    // day-plus of continuous foreground play — a gallery piece) its granularity exceeds a frame step and the
+    // interpolation quantizes then freezes. rebaseTime() periodically subtracts a big offset K from state.time
+    // and every stored fix-time, preserving all the small DIFFERENCES exactly. K is a whole multiple of the
+    // twinkle period (2π/1.4) so the global point twinkle phase stays continuous across the rebase; the ~dozens
+    // of tumbling solids step by an imperceptible amount, and the warp wash is invisible at idle (when this fires).
+    const TWINKLE_PERIOD = 2 * Math.PI / 1.4, TIME_REBASE_AT = 3600;
+    function rebaseTime() {
+      const K = Math.floor((state.time - 300) / TWINKLE_PERIOD) * TWINKLE_PERIOD;
+      if (K <= 0) return;
+      state.time -= K;
+      for (let i = 0; i < FIELD_N; i++) { pUpdated[i] -= K; const o = O[i]; if (o && o.updateAt != null) o.updateAt -= K; }
+      pointGeo.attributes.aUpdated.needsUpdate = true;
+    }
     function animate(now) {
       // "Idle" is decided by TAB VISIBILITY, never by user input: a FOREGROUND tab always renders at the
       // display's full rate — the field is constantly in motion (orbits, approaching solids), so just WATCHING
@@ -4048,6 +4101,7 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       if (document.hidden) return;
       const frameStart = performance.now(), interval = now - (animate.last || now);
       const dt = Math.min(0.05, interval / 1000); animate.last = now; state.time += dt;
+      if (state.time > TIME_REBASE_AT) rebaseTime();   // Float32 precision guard for multi-day gallery runtime (see below)
 
       // ── Navigation. One cursor, two modes set by the last input:
       //   • SCRUB (wheel / timebar / touch) — the cursor moves DIRECTLY: the wheel drives a capped day-rate
@@ -4092,17 +4146,16 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       const speed = Math.abs(state.vel), traveling = speed > 0.05 || adist > 0.03;
 
       // travel direction → the "4D" feel (smoothed; holds last direction at rest)
-      const dirTarget = window.__HOLD_DIR__ != null ? window.__HOLD_DIR__ : (state.vel > 0.06 ? 1 : state.vel < -0.06 ? -1 : state.timeDir);
+      const dirTarget = state.vel > 0.06 ? 1 : state.vel < -0.06 ? -1 : state.timeDir;
       state.timeDir += (dirTarget - state.timeDir) * Math.min(1, dt * 3);
 
       // Hyperspace on MOTION RATE: warp ramps in past a few days/sec, overdrive (the deep tunnel) past ~22.
       // Covers scroll, timebar drag and the key-jump slew alike — a single-day nudge stays calm.
       const warpSpeed = smooth(WARP_LO_DPS, WARP_HI_DPS, speed);
-      const warpT = window.__HOLD_WARP__ != null ? window.__HOLD_WARP__ : Math.min(reduced ? 0.2 : 1.4, warpSpeed);
+      const warpT = Math.min(reduced ? 0.2 : 1.4, warpSpeed);
       state.warp += (warpT - state.warp) * Math.min(1, dt * (warpT > state.warp ? 7 : 2.6)); // rise quickly, ease OUT softly
       state.warpBlend = smooth(0.28, 0.92, Math.min(1, state.warp));
-      const overT = window.__HOLD_OVER__ != null ? window.__HOLD_OVER__
-        : (reduced ? 0 : smooth(OVERDRIVE_LO_DPS, OVERDRIVE_HI_DPS, speed));
+      const overT = reduced ? 0 : smooth(OVERDRIVE_LO_DPS, OVERDRIVE_HI_DPS, speed);
       state.over += (overT - state.over) * Math.min(1, dt * 3.2);
       document.body.classList.toggle("overdrive", state.over > 0.45);
       const deepReveal = smooth(0.48, 0.94, state.over) * smooth(0.62, 0.96, state.warpBlend);

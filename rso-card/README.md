@@ -8,18 +8,30 @@ It is developed **here, in the om.pub repo**.
 
 | Path | What it is |
 |------|------------|
-| `../web/public/rso/live/index.html` | **The card — source of truth AND the served file.** Edit this directly; there is no separate build/copy step. |
-| `../web/public/rso/live/three.core.js`, `three.module.js` | Vendored three.js (the card imports `./three.module.js`). |
-| `../web/public/rso/live/nft-preview.html` | Embed test kit (sandboxed-iframe previews), co-located so it ships beside the card. |
+| `../web/public/rso/live/index.html` | **The card — source of truth AND the live-served file.** Edit this directly; serving it *is* deploying the om.pub `/rso/live` view. |
+| `../web/public/rso/live/three.core.js`, `three.module.js` | Vendored three.js. In the DEV file the card imports `./three.module.js`; the MINT build inlines both (see below). |
+| `../web/public/rso/live/build-standalone.py` | **Mint build.** Transforms the two three.js ES modules into one inline classic-script IIFE and writes `index.standalone.html` — a single self-contained file, zero external code fetches, no `blob:`/`import()` dependency. `--check` verifies self-containment (a test runs it). |
+| `../web/public/rso/live/index.standalone.html` | The generated mint artifact (**git-ignored** — regenerate with `build-standalone.py`). This is what gets minted/uploaded to Arweave. |
+| `../web/public/rso/live/build-embed-matrix.py` → `embed-matrix/` | **Marketplace-embed test harness.** Builds the real standalone under 10 iframe `sandbox`/CSP combos (seize.io, Zora, OpenSea-class no-`blob:` re-host, worker-blocked, no-network, cross-origin, `data:`/`srcdoc`, inline-blocked) + a probe dashboard grading each cell. Both `embed-matrix/` and the older `nft-preview.html` are dev-only (git-ignored). |
 | `../web/public/rso/live/serve.py` | Local CORS preview server, matching production iframe hosting. |
-| `rso-card/tests/test_card_viewer.py` | Contract tests pinning the viewer ↔ pipeline/index contracts. |
+| `rso-card/tests/test_card_viewer.py` | Contract tests pinning the viewer ↔ pipeline/index contracts (and the mint-build/self-containment invariants). |
 | `rso-card/tests/fixtures/rso-docchain-index.json` | Frozen snapshot of the RSO indexer output, for the index-contract tests. |
 | `rso-card/DATA-ARCHITECTURE.md` | The card's data-layer design notes. |
 | `rso-card/index.original.html` | The original pre-generative card, kept for reference. |
 
-The card is served live from `web/public/rso/live/index.html` (a Next.js static
-asset), so editing that file *is* deploying it — no source/deploy copy to keep
-in sync.
+Editing `web/public/rso/live/index.html` *is* deploying the live om.pub view (it's a
+Next.js static asset). **Minting is separate**: run `python3 build-standalone.py` to
+produce the self-contained `index.standalone.html`, and mint/upload THAT file.
+
+### Dev-only affordances (never harmful in the mint, but good to know)
+
+- `?source=<private-host-url>` — session-only top-priority local data node (see below).
+- `?noworker` — forces the synchronous (worker-less) parse path, so you can exercise
+  exactly what a worker-blocking embed (e.g. an OpenSea re-host CSP) does, on any device.
+- `window.__RSO_CARD__` — a debug handle exposing `{ state, setTarget, recordMeta, isoFor,
+  TOTAL, witnessDates, camera, O, pointMat, scene, pool }`. It lives on the NFT's own
+  iframe window only (no cross-origin reach) and is kept intentionally — a transparency
+  affordance for a data-art piece and the hook the browser tests drive.
 
 ## Develop
 
@@ -29,6 +41,22 @@ cd web/public/rso/live && python3 serve.py        # → http://localhost:8755/
 #   the card:    http://localhost:8755/index.html
 #   embed kit:   http://localhost:8755/nft-preview.html
 ```
+
+### Tests (three layers)
+
+```bash
+python3 -m pytest rso-card/tests/          # runs ALL of the below
+```
+
+- **Contract tests** (`test_card_viewer.py`) — string pins on the source: assert specific code/markup
+  is present. Fast, but they check that text *exists*, not that it *works*.
+- **Static-analysis gate** (`test_static_analysis.py`) — extracts the card's `<script type="module">`
+  and runs ESLint (`tests/tooling/eslint.config.mjs`): undefined refs, dead vars, unreachable code, bad
+  assignments. Catches the audit-class defects mechanically. Needs `eslint` on PATH (else it skips).
+- **Executing unit tests** (`tests/unit/*.test.mjs`, run via `test_pure_units.py`) — extract the PURE
+  functions (`isPrivateHost`, `rowsOf`, `parseJsonNonBlocking`, `detectStacks`) by brace-matching and
+  actually RUN them with real inputs. A behavioural regression fails here even if the source text is
+  unchanged. Run directly: `node --test rso-card/tests/unit/*.test.mjs`. Needs `node` (else it skips).
 
 ### Point the card at a local index/archive (before deploying)
 

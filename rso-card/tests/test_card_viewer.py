@@ -190,7 +190,9 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("lruCap(catalogGzByDate, CATALOG_GZ_MAX)", self.html)
         self.assertIn("if (catalogCache.has(date)) return lruTouch(catalogCache, date);", self.html)
         self.assertIn("function pruneMetadata()", self.html)
-        self.assertIn("bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate, attestByDate", self.html)
+        self.assertIn("bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate]) lruCap(m, METADATA_MAX);", self.html)
+        # attestByDate is NOT pruned: loaded once at boot, capping it would drop "attested" days after a long scrub
+        self.assertNotIn("integrityByDate, attestByDate]", self.html)
         # the suspend path prunes them too
         self.assertIn("for (const date of catalogGzByDate.keys()) if (date !== current) catalogGzByDate.delete(date);\n      pruneMetadata();", self.html)
 
@@ -331,9 +333,17 @@ class CardArtifactTest(unittest.TestCase):
         # the attested record
         self.assertIn('crypto.subtle.digest("SHA-256", bytes)', self.html)
         self.assertIn("verifyCatalogBytes(date, catBytes)", self.html)
-        self.assertIn("hex === led.sha", self.html)
+        # the published hash is normalized (lower-case, strip 0x) before comparison so an upper-case or
+        # 0x-prefixed ledger sha is not a false "DOES NOT MATCH"
+        self.assertIn('const want = String(led.sha).trim().toLowerCase().replace(/^0x/, "");', self.html)
+        self.assertIn("const ok = hex === want;", self.html)
         self.assertIn("verified on this device", self.html)
         self.assertIn("DOES NOT MATCH DOWNLOAD", self.html)
+        # a witness card must never invent a fingerprint: an un-indexed day shows "—", not fabricated hex
+        self.assertIn('const sha = led ? led.sha : null;', self.html)
+        self.assertIn('$("fingerprint").textContent = rec.sha ? shortHex(rec.sha) : "—";', self.html)
+        # the witness panel's "verified" tracks the on-device hash check, never merely "a record exists"
+        self.assertIn('rec.integrity === false ? "Snapshot hash mismatch"', self.html)
 
     def test_attested_core_face_shows_consensus_hash(self):
         self.assertIn('id="fp-core"', self.html)
@@ -456,7 +466,7 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25", self.html)
         self.assertIn("meshCandidates.length = 0", self.html)
         self.assertIn("pAlpha[i] *= 0.62", self.html)
-        self.assertIn("workStride: mobile ? 2 : 2", self.html)
+        self.assertIn("workStride: 2, workPhase: 0", self.html)
         self.assertIn("const MAX_WORK_STRIDE = mobile ? 12 : 24", self.html)
         self.assertIn("for (let i = start; i < end; i++)", self.html)
         self.assertIn("attr.addUpdateRange(first * attr.itemSize, count * attr.itemSize)", self.html)
@@ -492,8 +502,11 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("geometry.dispose()", self.html)
 
     def test_overdrive_respects_reduced_motion(self):
-        self.assertIn("__HOLD_OVER__", self.html)
         self.assertRegex(self.html, r"reduced \? 0\s*:\s*smooth\(")
+        # the test-only __HOLD_* frame overrides are gone from the mint artifact
+        self.assertNotIn("__HOLD_OVER__", self.html)
+        self.assertNotIn("__HOLD_WARP__", self.html)
+        self.assertNotIn("__HOLD_DIR__", self.html)
 
     def test_deep_hyperspace_is_one_gated_fullscreen_shader(self):
         self.assertIn("const deepMat = new THREE.ShaderMaterial", self.html)
@@ -768,7 +781,8 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("fileSlug(LENSES[state.lens])", self.html)
         self.assertIn("norad-${fileSlug(selected.id)}", self.html)
         self.assertIn('document.body.append(a); a.click(); a.remove()', self.html)
-        self.assertIn('flashMode("Frame saved")', self.html)
+        # honest capture: only claim "saved" top-level; in a (possibly download-blocked) embed, say so
+        self.assertIn('framed ? "Frame captured — if no download, open in its own tab" : "Frame saved"', self.html)
         # Catalog download only appears once the exact loaded compressed file is retained.
         self.assertIn('id="catalog-btn"', self.html)
         self.assertIn("catalogGzByDate.set(date, cgz.slice(0))", self.html)
@@ -1182,12 +1196,16 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("const DAYLOAD_CHUNK = mobile ? 4000 : (navigator.hardwareConcurrency >= 8 ? 20000 : 10000)", self.html)
         self.assertIn("stride = Math.max(1500, Math.min(DAYLOAD_CHUNK, Math.round(stride * 18 / Math.max(4, dt))));", self.html)
         self.assertIn("if (token != null && token !== state.loadToken) return false;", self.html)
-        self.assertIn("if (lim < newN) await raf();", self.html)
+        self.assertIn("if (lim < newN) await (document.hidden ? nextTask() : raf());", self.html)   # hidden tab has no frames → don't stall the adopt
         self.assertIn("function colorSlot(o)", self.html)   # per-slot recolor, inlined into the chunked adopt
         # the full-field placeholder re-roll (boot, era drift) and the full-field retint are ALSO
         # time-sliced, with tokens so a newer assign / adopt / lens switch supersedes a stale sweep
         self.assertIn("let assignToken = 0;", self.html)
         self.assertIn("let recolorToken = 0;", self.html)
+        # a sliced fill must COLOUR each slot in place — a slot drawn (FIELD_N grown) before colorSlot ran
+        # would hit updateField's o.col[0] on undefined and crash every frame (caught by the embed matrix)
+        self.assertIn("initSlot(i, src ? src[i] : null); colorSlot(O[i]); }", self.html)
+        self.assertIn("if (o.col) { pCol[i3] = o.col[0];", self.html)
         self.assertIn("slice = Math.max(1500, Math.min(24000, Math.round(slice * 18 / Math.max(4, dt))));", self.html)
         self.assertIn("++assignToken;                                        // cancel any in-flight sliced placeholder fill", self.html)
         # comparator hygiene: sorts never run string-hash/parseInt/localeCompare per comparison
@@ -1556,6 +1574,10 @@ class CardNodeRankTest(unittest.TestCase):
         # never comes from a roster or paste — so it can't be weaponised to make a browser probe hosts.
         self.assertIn("function isPrivateHost(h)", self.html)
         self.assertIn('return a === 127 || a === 10 || (a === 192 && b === 168) || (a === 172 && b >= 16 && b <= 31) || (a === 169 && b === 254);', self.html)
+        # the IPv6 ULA/link-local prefixes only count for ACTUAL IPv6 literals (contain a colon) — else a
+        # public DNS name like fcdn.attacker.com starts with "fc" and would pass, letting a crafted
+        # ?source link install an attacker as the sole (spoofed-verified) node.
+        self.assertIn('if (h.includes(":") && (h.startsWith("fe80:") || h.startsWith("fc") || h.startsWith("fd"))) return true;', self.html)
         self.assertIn("function devSourceNode()", self.html)
         self.assertIn('new URLSearchParams(location.search).get("source")', self.html)
         self.assertIn("if ((u.protocol !== \"http:\" && u.protocol !== \"https:\") || !isPrivateHost(u.hostname)) return null;", self.html)
@@ -1576,6 +1598,32 @@ class CardNodeRankTest(unittest.TestCase):
         self.assertIn("readCapped(g.res, MAX_JSON_BYTES)", self.html)        # node JSON capped before parse
         self.assertIn("readCapped(r, MAX_GZ_BYTES)", self.html)              # catalog bytes capped
         self.assertIn("MAX_CHUNK_DAYS", self.html)                          # year-chunk entry count bounded
+        # byte caps don't bound ROW COUNT — a hostile catalog of millions of tiny rows is capped too, and
+        # detectStacks' pass-2 merge is bounded so a crafted set of distinct planes can't go quadratic
+        self.assertIn("const MAX_CATALOG_ROWS =", self.html)
+        self.assertIn("if (list.length > MAX_CATALOG_ROWS) list.length = MAX_CATALOG_ROWS;", self.html)
+        self.assertIn("const MERGE_CAP = 4096;", self.html)
+        self.assertIn("else if (merged.length < MERGE_CAP) merged.push(c.slice());", self.html)
+
+    def test_never_blanks_on_degraded_environments(self):
+        # a permanent NFT must never render a silent forever-black card. WebGL2 context-creation failure
+        # (GPU blocklist, --disable-gpu, WebGL1-only webview) is caught and the HUD pill tells the truth.
+        self.assertIn("renderer = new THREE.WebGLRenderer({ canvas, antialias: false", self.html)
+        self.assertIn('lbl.textContent = "WebGL unavailable";', self.html)
+        self.assertIn("Math.min(devicePixelRatio || 1, 1.5)", self.html)     # undefined DPR in exotic webviews
+        # a per-request worker failure (corrupt/hostile payload) must not clear the WHOLE pending map and
+        # orphan a concurrent parse (catalog + directory + ledger share one worker at boot)
+        self.assertNotIn("} catch (e) { _catPending.clear(); /* fall through", self.html)
+
+    def test_dead_frame_time_stays_float32_precise_over_days(self):
+        # state.time (seconds of visible runtime) feeds the shader as uTime and is stored in the pUpdated
+        # Float32 buffer; left to grow it loses sub-frame precision after ~a day, freezing interpolation.
+        # It is periodically rebased by a whole twinkle-period so the dead-reckoning clock stays exact and
+        # the global twinkle phase stays continuous across the rebase.
+        self.assertIn("function rebaseTime()", self.html)
+        self.assertIn("const TWINKLE_PERIOD = 2 * Math.PI / 1.4, TIME_REBASE_AT = 3600;", self.html)
+        self.assertIn("if (state.time > TIME_REBASE_AT) rebaseTime();", self.html)
+        self.assertIn("const K = Math.floor((state.time - 300) / TWINKLE_PERIOD) * TWINKLE_PERIOD;", self.html)
 
     def test_rerank_is_debounced_and_tdh_key_is_node_backing_only(self):
         self.assertIn("function scheduleRefresh()", self.html)
