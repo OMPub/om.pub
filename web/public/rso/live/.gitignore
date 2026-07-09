@@ -1,0 +1,3 @@
+# Built mint artifact — regenerate with `python3 build-standalone.py` (inlines Three.js).
+# Kept out of git: it's a 2.4 MB generated file that changes whenever index.html does.
+index.standalone.html

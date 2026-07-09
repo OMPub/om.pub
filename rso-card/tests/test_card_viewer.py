@@ -20,6 +20,8 @@ refresh it from the RSO repo when the index schema changes.
 
 import json
 import re
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -35,8 +37,8 @@ class CardArtifactTest(unittest.TestCase):
 
     def test_single_file_with_vendored_three(self):
         self.assertTrue(CARD.is_file())
-        self.assertEqual(self.html.count("<script"), 1, "one inline module only")
-        self.assertIn('import(new URL("./three.module.js", MOUNT)', self.html)
+        # DEV file: one app module; the vendored three.js files sit beside it for local iteration.
+        self.assertEqual(self.html.count('<script type="module">'), 1, "one app module only")
         for vendored in ("three.module.js", "three.core.js"):
             self.assertTrue((CARD.parent / vendored).is_file(), vendored)
         # no CDN/runtime dependencies — the piece must outlive any host
@@ -44,11 +46,126 @@ class CardArtifactTest(unittest.TestCase):
         self.assertNotIn("unpkg.com", self.html)
         self.assertNotIn("esm.sh", self.html)
 
+    def test_three_loads_dual_mode_inline_or_vendored(self):
+        # loadThree() prefers INLINED three.js (the standalone mint artifact) and falls back to the
+        # vendored files relative to the mount point (dev). Both code paths must be present.
+        self.assertIn("function loadThree()", self.html)
+        self.assertIn('document.getElementById("three-core-src")', self.html)
+        self.assertIn('document.getElementById("three-module-src")', self.html)
+        # inline path: blob-import the core, rewrite the module's ./three.core.js specifier to it
+        self.assertIn("URL.createObjectURL(new Blob([coreEl.textContent]", self.html)
+        self.assertIn(r"\.\/three\.core\.js\1/g, JSON.stringify(coreUrl)", self.html)
+        self.assertIn("const THREE = await loadThree();", self.html)
+
     def test_mount_agnostic_module_resolution(self):
         # served at a slashless path (om.pub/rso/live, Arweave gateways) a bare
-        # relative import would resolve against the parent directory
+        # relative import would resolve against the parent directory (the dev fallback)
+        self.assertIn('import(new URL("./three.module.js", MOUNT)', self.html)
         self.assertIn("const MOUNT = new URL(location.href)", self.html)
         self.assertIn('MOUNT.pathname += "/"', self.html)
+
+    def test_standalone_build_is_self_contained(self):
+        # the build step must produce ONE file with zero external CODE fetches (catalog DATA stays remote)
+        build = CARD.parent / "build-standalone.py"
+        self.assertTrue(build.is_file(), "build-standalone.py present")
+        r = subprocess.run([sys.executable, str(build), "--check"], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("zero external code dependencies", r.stdout)
+
+    def test_tap_selection_locks_the_object_at_press_not_release(self):
+        # a small fast mover drifts out from under the cursor between press and release (+ the 260ms tap
+        # timer), so the hit-test runs at pointerDOWN and locks the object by identity; the release just
+        # commits that locked object. Re-tapping it or empty space closes the card; drags never select.
+        self.assertIn("function pickAt(cx, cy)", self.html)
+        self.assertIn("function commitPick(nid, idx)", self.html)
+        self.assertNotIn("function inspectAt", self.html)                       # old up-coordinate path is gone
+        # captured at press in BOTH the touch and mouse pointerdown paths
+        self.assertIn("const pi = pickAt(e.clientX, e.clientY), pickNid = pi >= 0 ? (O[pi].meta?.id ?? null) : null;", self.html)
+        self.assertIn("t: performance.now(), pickIdx: pi, pickNid });", self.html)   # touch record
+        self.assertIn("t: performance.now(), pickIdx: pi, pickNid };", self.html)    # mouse record
+        # the tap carries the locked pick through to the commit, which re-acquires by identity
+        self.assertEqual(self.html.count("sceneTapAt(e.clientX, e.clientY, p.pickNid, p.pickIdx)"), 2)
+        self.assertIn("commitPick(nid, idx)", self.html)
+        self.assertIn("slotForNorad(nid) >= 0) ? slotForNorad(nid) : idx", self.html)
+
+    def test_hyperspace_spin_is_distance_independent(self):
+        # the roll is keyed to warp ALONE (capped), NOT overdrive — so a 50-year leap rolls no harder
+        # than a 1-day nudge (it just travels faster). The old `(1 + state.over * 1.6)` amplifier is gone.
+        self.assertIn("const spinTarget = Math.min(1, state.warp) * 0.11 * (state.timeDir >= 0 ? 1 : -1);", self.html)
+        self.assertNotIn("state.warp * 0.11 * (1 + state.over * 1.6)", self.html)
+
+    def test_idle_is_tab_visibility_not_user_input(self):
+        # "Idle" is decided by TAB VISIBILITY, never by input: a FOREGROUND tab always renders at full rate
+        # (just WATCHING the moving field must stay smooth), and a BACKGROUND tab parks the loop → ~0% CPU.
+        # An input-gated frame-throttle was REMOVED — it dropped watching to 30fps and its stretched frame
+        # interval fooled the work-stride governor into stepping the non-interpolated solids to ~1fps.
+        self.assertNotIn("IDLE_FRAME_MS", self.html)
+        self.assertNotIn("renderedAt", self.html)
+        self.assertNotIn("const restless =", self.html)
+        # the ONLY gate left is tab visibility: early-return when hidden + visibilitychange parks/restarts
+        self.assertIn("if (document.hidden) return;", self.html)
+        self.assertIn('document.addEventListener("visibilitychange",', self.html)
+        self.assertIn("if (document.hidden) renderer.setAnimationLoop(null);", self.html)
+        self.assertIn("else if (!state.suspended) { animate.last = performance.now(); renderer.setAnimationLoop(animate); }", self.html)
+
+    def test_heavy_caches_and_metadata_maps_are_bounded(self):
+        # left open for hours, scrubbing thousands of days must NOT grow the heap without limit. The heavy
+        # per-day payloads (parsed catalog + gzip) are LRU-capped; the light aggregate maps get a hard horizon.
+        self.assertIn("const CATALOG_CACHE_MAX = 6, CATALOG_GZ_MAX = 3;", self.html)
+        self.assertIn("catalogCache.set(date, sampled); lruCap(catalogCache, CATALOG_CACHE_MAX); pruneMetadata();", self.html)
+        self.assertIn("lruCap(catalogGzByDate, CATALOG_GZ_MAX)", self.html)
+        self.assertIn("if (catalogCache.has(date)) return lruTouch(catalogCache, date);", self.html)
+        self.assertIn("function pruneMetadata()", self.html)
+        self.assertIn("bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate, attestByDate", self.html)
+        # the suspend path prunes them too
+        self.assertIn("for (const date of catalogGzByDate.keys()) if (date !== current) catalogGzByDate.delete(date);\n      pruneMetadata();", self.html)
+
+    def test_time_rewind_scales_with_days_scrubbed(self):
+        # Scrubbing winds every orbit by a phase term proportional to the DAYS the cursor moved
+        # (not the scroll speed) — so a 1-day flick gives a subtle wind and a week a clear rewind,
+        # reversibly. Damped as warp (hyperspace) takes the big multi-year leaps.
+        self.assertIn("const DAY_REWIND =", self.html)
+        self.assertIn("const dCursor = state.cursor - (o.cursorAt == null ? state.cursor : o.cursorAt); o.cursorAt = state.cursor;", self.html)
+        self.assertIn("+ dCursor * DAY_REWIND * o.wj * (1 - 0.6 * warpC)", self.html)
+
+    def test_goto_panel_finds_objects_and_follows_them(self):
+        # 'g' opens a finder mirrored opposite the lens legend; search the day's catalog by NORAD id
+        # or name, default to the oldest survivors still on orbit, select to follow across the timeline.
+        self.assertIn('id="goto-panel"', self.html)
+        self.assertIn('id="goto-input"', self.html)
+        self.assertIn('if (k === "g") { toggleGoto();', self.html)
+        self.assertIn("function oldestStillUp(n)", self.html)
+        self.assertIn("function gotoSearch(q)", self.html)
+        # results are RANKED by relevance, not raw catalog order: exact id (0) < name-prefix (1) < word-boundary
+        # (2) < mid-word (3) < id-substring (4) < country/type (5) — so "iss" floats ISS (ZARYA) above swISScube
+        self.assertIn("if (qn && id === qn) score = 0;", self.html)
+        self.assertIn("else if (ni === 0) score = 1;", self.html)
+        self.assertIn("else if (ni > 0 && !ALNUM.test(name[ni - 1])) score = 2;", self.html)
+        self.assertIn("scored.sort((a, b) => a[0] - b[0]", self.html)
+        self.assertIn("o.launch && !o.reentered", self.html)            # oldest *still on orbit*
+        self.assertIn("showInspector(idx);", self.html)                 # selecting follows it (sets followNorad)
+        self.assertIn("refreshGotoIfOpen();", self.html)                # list refreshes when a new day loads
+        # at most ten rows, with a subtle TOTAL-match count below the list
+        self.assertIn("const GOTO_MAX = 10;", self.html)
+        self.assertIn("gotoRows = all.slice(0, GOTO_MAX);", self.html)
+        self.assertIn('id="goto-count"', self.html)
+        self.assertIn("`showing ${GOTO_MAX} of ${all.length} matches`", self.html)
+        # the finder REMEMBERS the last search and restores it (selected) on reopen
+        self.assertIn("const q = (gotoLastQuery = $(\"goto-input\").value).trim();", self.html)
+        self.assertIn("inp.value = gotoLastQuery;", self.html)
+        self.assertIn("inp.focus(); inp.select();", self.html)
+        # mirrored layout, but the input is anchored at a FIXED top (not centred) so it never moves as the list grows
+        self.assertIn(".goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: max(96px, 16vh);", self.html)
+
+    def test_every_fetch_is_timeout_bounded(self):
+        # a node that connects but never responds must not stall the fallback chain — every fetch is
+        # wrapped with an AbortController timeout; no bare fetch( remains in the data path.
+        self.assertIn("async function fetchTimed(url, opts)", self.html)
+        self.assertIn("setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS)", self.html)
+        self.assertEqual(self.html.count("await fetch("), 1, "the only raw fetch is inside fetchTimed")
+        self.assertEqual(self.html.count("await fetchTimed("), 3, "all 3 data-path fetches are timeout-bounded")
+        # scrub physics are clamped so a hostile manifest with millions of fake dates can't explode navK
+        self.assertIn("state.navK = Math.max(1, Math.min(800, TOTAL / 144));", self.html)
 
     def test_bundle_mirrors_are_browser_readable(self):
         # The index entry's catalog_url locator first (Arweave bundle tar when permanent, else the
@@ -203,7 +320,7 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("if (band === 1) g *= 0.16", self.html)
         # the inspector has no auto-hide timer; tapping the same object toggles it closed
         self.assertNotIn("5200", self.html)
-        self.assertIn("best === state.selIdx", self.html)
+        self.assertIn("cur === state.selIdx", self.html)
         self.assertIn("hideInspector()", self.html)
         # selection: halo rides the chosen object; travel releases the halo but a followed
         # object keeps its card and re-acquires by NORAD on the next day (see ISS test)
@@ -259,7 +376,7 @@ class CardArtifactTest(unittest.TestCase):
         # Starlink generations split by NORAD id; arrays articulate per-sat
         self.assertIn(">= 55000 ? 10 : 4", self.html)
         self.assertIn("STARLINK v2 mini — bus amidships, TWO arrays", self.html)
-        self.assertIn("updateMeshPool(meshCandidates, refreshMeshes, start, end)", self.html)
+        self.assertIn("updateMeshPool(meshCandidates, refreshMeshes)", self.html)
         self.assertIn("setSolidMatrix(free)", self.html)
         self.assertIn("_quat.identity()", self.html)
         self.assertIn("state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25", self.html)
@@ -395,7 +512,8 @@ class CardArtifactTest(unittest.TestCase):
         # cinematic flight at any length (==1 for short timelines, so no regression). The wheel uses an
         # absolute day-rate and the timebar is instant — neither scales with the archive.
         self.assertIn("function rescaleNav()", self.html)
-        self.assertIn("state.navK = Math.max(1, TOTAL / 144);", self.html)
+        # clamped at the top so a hostile manifest with millions of fake dates can't blow up the physics
+        self.assertIn("state.navK = Math.max(1, Math.min(800, TOTAL / 144));", self.html)
         self.assertIn("state.maxSpeed = (reduced ? 18 : 60) * state.navK;", self.html)
         # the brake (accel) must out-pace the decel slope (>= 8·maxSpeed) or the flight overshoots and oscillates
         self.assertIn("state.accel = 640 * state.navK;", self.html)
@@ -633,7 +751,7 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("Daily changes", names)
         self.assertNotIn("Zen", names)
         self.assertIn("function toggleZen()", self.html)
-        self.assertIn("sceneTapAt(e.clientX, e.clientY)", self.html)
+        self.assertIn("sceneTapAt(e.clientX, e.clientY, p.pickNid, p.pickIdx)", self.html)
         self.assertIn("body.zen .hud > :not(.inspector)", self.html)
         self.assertIn("body.zen .controls .icon-btn:not(#camera-btn)", self.html)
         self.assertIn("const R2 = 20 * 20", self.html)
@@ -818,8 +936,8 @@ class CardArtifactTest(unittest.TestCase):
         # rotates once per orbit for free; most payloads need no added spin and a seeded minority gets a
         # slow flat-spin about the radial. GEO comsats, navsats and the ISS hold steady.
         self.assertIn("if (o.klass === 0) {", self.html)
-        # LVLH basis built from radial-out (away from the ORBITAL centre EC) and the along-track tangent
-        self.assertIn("_radial.set(pPos[i3] - EC.x, pPos[i3 + 1] - EC.y, pPos[i3 + 2] - EC.z);", self.html)
+        # LVLH basis built from radial-out (away from the ORBITAL centre EC, at the dead-reckoned draw point)
+        self.assertIn("_radial.set(_bp.x - EC.x, _bp.y - EC.y, _bp.z - EC.z);", self.html)
         self.assertIn("_tan.copy(_vel).addScaledVector(_radial, -_vel.dot(_radial));", self.html)   # vel projected off radial
         self.assertIn("_norm.crossVectors(_tan, _radial).normalize();", self.html)                  # orbit-normal (cross-track)
         # generic payload: wing span (+X) -> orbit-normal (cross-track), panel face-normal (+Y) -> radial (parallel to surface)
@@ -940,20 +1058,30 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("halo.visible = state.haloFade > 0.01", self.html)
 
     def test_selection_rides_the_drawn_position_and_persists(self):
-        # The halo and the tap hit-test read the point the object is DRAWN at — sprites
-        # dead-reckon between strided fixes (the vertex shader's mix), solids sit at pPos —
-        # so the ring rides the speck and a tap lands on what you see, even under striding.
+        # The halo, the tap hit-test, AND the solid body all read ONE drawn position — every object (sprites
+        # AND solids) dead-reckons between strided fixes (the vertex shader's mix), so they stay locked together
+        # and the body/ring/tap glide smoothly at any work-stride. The old solid-snaps-to-pPos branch is gone.
         self.assertIn("function drawnPos(i, out)", self.html)
-        self.assertIn("if (O[i] && O[i].solid) return out.set(pPos[b], pPos[b + 1], pPos[b + 2])", self.html)
+        self.assertNotIn("if (O[i] && O[i].solid) return out.set(pPos[b]", self.html)
         self.assertIn("(state.time - pUpdated[i]) / Math.max(0.008, pStep[i])", self.html)
         self.assertIn("drawnPos(state.selIdx, halo.position)", self.html)
-        self.assertIn("drawnPos(state.selIdx, _proj).project(camera)", self.html)
+        # the tap hit-test (pickAt, run at pointerdown) reads the DRAWN position too, so a tap lands on the speck
         self.assertIn("drawnPos(i, _proj).project(camera)", self.html)
         # A selection PERSISTS through the whole orbit — including off-screen and back around —
         # so it is NOT retired when the object merely leaves the frame. (No edge/behind-camera
         # auto-dismiss of the halo or inspector.)
         self.assertNotIn("_proj.copy(halo.position).project(camera)", self.html)
         self.assertNotIn("Math.abs(_proj.y) > 1.18) { hideInspector()", self.html)
+
+    def test_solids_dead_reckon_every_frame_not_at_the_stride_rate(self):
+        # the BatchedMesh solids used to read the raw strided fix (pPos) and only refresh for the cohort in
+        # [start,end], so they stepped at the work-stride rate. Now setSolidMatrix reads the dead-reckoned
+        # drawnPos and EVERY active solid updates each frame → smooth body + spin at any stride.
+        self.assertIn("drawnPos(s.idx, _bp);", self.html)               # body position is the interpolated draw point
+        self.assertNotIn("_bp.set(pPos[i3], pPos[i3 + 1], pPos[i3 + 2]);", self.html)  # not the raw fix
+        self.assertIn("setSolidMatrix(s);", self.html)
+        self.assertNotIn("if (s.idx < start || s.idx >= end) continue;", self.html)    # no per-cohort gate
+        self.assertIn("function updateMeshPool(cands, refresh)", self.html)             # start/end params dropped
 
     def test_live_catalog_adopts_without_restarting_the_field(self):
         self.assertIn("async function adoptField(objects, token)", self.html)

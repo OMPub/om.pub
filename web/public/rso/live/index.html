@@ -196,6 +196,27 @@
     .lg-grad { width: 116px; height: 7px; border-radius: 3px; background: linear-gradient(90deg, rgb(107,77,217), rgb(64,204,235), rgb(255,209,102)); }
     .lg-years { display: flex; justify-content: space-between; width: 116px; font-family: ui-monospace, monospace; font-size: 8px; color: var(--dim); margin-top: 2px; }
     .lg-note { font-family: ui-monospace, monospace; font-size: 8px; color: var(--dim); margin-top: 3px; text-align: right; }
+    /* GOTO panel — mirror of the lens legend on the opposite (left) edge: find any object on
+       orbit this day by NORAD id or name; an empty query lists the oldest survivors still up. */
+    /* Anchored at a FIXED top (not vertically centred) so the title + input never move — the results list
+       grows and shrinks BELOW them as you type, rather than the whole panel re-centring under the cursor. */
+    .goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: max(96px, 16vh);
+      display: grid; gap: 6px; justify-items: start; width: min(232px, 42vw); pointer-events: auto; z-index: 6; }
+    .goto-panel[hidden] { display: none; }
+    .gp-title { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.12em; font-size: 8px; color: var(--accent); }
+    .gp-input { width: 100%; box-sizing: border-box; background: rgba(2,7,8,0.62); border: 1px solid rgba(154,169,255,0.35); border-radius: 6px;
+      color: var(--ink); font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; padding: 6px 9px; outline: none; }
+    .gp-input::placeholder { color: var(--dim); }
+    .gp-input:focus { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(154,169,255,0.25); }
+    .gp-results { display: grid; gap: 1px; width: 100%; max-height: min(46vh, 360px); overflow-y: auto; scrollbar-width: thin; }
+    .gp-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: baseline; text-align: left;
+      background: none; border: 0; border-radius: 5px; padding: 5px 8px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10px; cursor: pointer; }
+    .gp-row:hover, .gp-row.sel { background: rgba(154,169,255,0.12); color: var(--ink); }
+    .gp-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .gp-sub { color: var(--dim); font-size: 8px; white-space: nowrap; }
+    .gp-empty { font-family: ui-monospace, monospace; font-size: 9px; color: var(--dim); padding: 4px 8px; }
+    .gp-count { font-family: ui-monospace, monospace; font-size: 8px; letter-spacing: 0.06em; color: var(--dim); padding: 1px 8px; min-height: 10px; }
+    .gp-count:empty { display: none; }
     /* mode toast (centre, brief) */
     .mode-toast { position: fixed; left: 50%; top: 22%; transform: translate(-50%, 6px); z-index: 6; pointer-events: none;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.28em; font-size: 12px; color: var(--ink);
@@ -308,7 +329,7 @@
     /* tiny — NFT grid tiles: the piece reads as pure visual; chrome to a whisper.
        The fullscreen button stays — it's the escape hatch to the full experience. */
     @media (max-width: 420px), (max-height: 380px) {
-      .lens-legend, .status-label, .date-index, #catalog-btn { display: none; }
+      .lens-legend, .goto-panel, .status-label, .date-index, #catalog-btn { display: none; }
       .corner { width: 14px; height: 14px; }
       .date { font-size: clamp(14px, 7.5vw, 22px); margin-top: 4px; }
       .brand-name { font-size: 9px; }
@@ -346,6 +367,14 @@
     <div class="perf" id="perf" hidden>measuring frame time…</div>
 
     <aside class="lens-legend" id="lens-legend"></aside>
+
+    <aside class="goto-panel" id="goto-panel" hidden aria-label="Find an object on orbit this day">
+      <div class="gp-title">Find object</div>
+      <input class="gp-input" id="goto-input" type="text" inputmode="search" autocomplete="off" spellcheck="false"
+        placeholder="NORAD id or name" aria-label="Search objects on orbit this day by NORAD id or name" aria-controls="goto-results" />
+      <div class="gp-results" id="goto-results" role="listbox" aria-label="Matching objects"></div>
+      <div class="gp-count" id="goto-count" aria-live="polite"></div>
+    </aside>
 
 
     <section class="readout">
@@ -546,12 +575,26 @@
   </div>
 
   <script type="module">
-    // Resolve the vendored module against the directory we're mounted at, even when the
-    // page is served at a slashless path (om.pub/rso/live, Arweave gateway paths, …) where
-    // a bare relative import would resolve against the parent directory.
-    const MOUNT = new URL(location.href);
-    if (!/\/$|\.html?$/.test(MOUNT.pathname)) MOUNT.pathname += "/";
-    const THREE = await import(new URL("./three.module.js", MOUNT).href);
+    // Three.js loads one of two ways — and there is NO other runtime code dependency anywhere:
+    //  • STANDALONE (the minted artifact): the build step (build-standalone.py) inlines
+    //    three.core.js + three.module.js into <script type="text/plain"> blocks; we blob-import
+    //    them (rewriting the module's internal ./three.core.js specifier to the core blob URL), so
+    //    the file is FULLY self-contained — it renders from any Arweave/IPFS gateway, an ipfs://
+    //    subdomain, or a sandboxed marketplace iframe, with zero external code fetches.
+    //  • DEV: no inline blocks → import the vendored ./three.module.js relative to our mount point
+    //    (handles slashless paths like om.pub/rso/live where a bare relative import would miss).
+    async function loadThree() {
+      const coreEl = document.getElementById("three-core-src"), modEl = document.getElementById("three-module-src");
+      if (coreEl && modEl) {
+        const coreUrl = URL.createObjectURL(new Blob([coreEl.textContent], { type: "text/javascript" }));
+        const modSrc = modEl.textContent.replace(/(["'])\.\/three\.core\.js\1/g, JSON.stringify(coreUrl));
+        return import(URL.createObjectURL(new Blob([modSrc], { type: "text/javascript" })));
+      }
+      const MOUNT = new URL(location.href);
+      if (!/\/$|\.html?$/.test(MOUNT.pathname)) MOUNT.pathname += "/";
+      return import(new URL("./three.module.js", MOUNT).href);
+    }
+    const THREE = await loadThree();
 
     // ════════════════════════════════════════════════════════════════════
     // CONFIG — live sources + tunable feel
@@ -949,7 +992,10 @@
     function setSolidMatrix(s) {
       const i3 = s.idx * 3, o = O[s.idx];
       if (!o || s.iid < 0) return;
-      _bp.set(pPos[i3], pPos[i3 + 1], pPos[i3 + 2]);
+      // Dead-reckon the body between strided position fixes — the same pPrev→pPos mix the point shader runs —
+      // so a near-camera solid GLIDES (and its spin advances) smoothly EVERY frame, instead of stepping at the
+      // work-stride rate. (setSolidMatrix is now called for every active solid each frame; see updateMeshPool.)
+      drawnPos(s.idx, _bp);
       _bs.setScalar(0.42 * o.baseSize);
       if (o.klass === 0) {
         // PAYLOADS fly like real operational craft: a Local-Vertical/Local-Horizontal (LVLH) attitude
@@ -961,7 +1007,7 @@
         // the radial — the panel stays lying flat and just rotates in place (a small minority hold steady;
         // the ISS is rock-steady). The ISS panels face local +Z, so it locks +Z to the radial instead
         // (truss along-track, arrays spanning the orbit-normal).
-        _radial.set(pPos[i3] - EC.x, pPos[i3 + 1] - EC.y, pPos[i3 + 2] - EC.z);   // zenith: away from Earth centre
+        _radial.set(_bp.x - EC.x, _bp.y - EC.y, _bp.z - EC.z);   // zenith: away from Earth centre (from the drawn position)
         const r2 = _radial.lengthSq();
         if (r2 < 1e-9) _radial.set(0, 1, 0); else _radial.multiplyScalar(1 / Math.sqrt(r2));
         _vel.set(pPos[i3] - pPrev[i3], pPos[i3 + 1] - pPrev[i3 + 1], pPos[i3 + 2] - pPrev[i3 + 2]);
@@ -1002,7 +1048,7 @@
       _bm.compose(_bp, _quat, _bs);
       batch.setMatrixAt(s.iid, _bm);
     }
-    function updateMeshPool(cands, refresh, start, end) {
+    function updateMeshPool(cands, refresh) {
       const meshStart = performance.now();
       PERF.candidates = cands.length; PERF.builds = 0;
       batch.visible = state.warpBlend <= 0.25;
@@ -1042,9 +1088,8 @@
       for (const s of pool) {
         if (s.idx < 0 || s.iid < 0) continue;
         active++;
-        if (s.idx < start || s.idx >= end) continue;             // update the same contiguous cohort as the point field
-        setSolidMatrix(s);
-      }
+        setSolidMatrix(s);                                       // every active solid, every frame — they dead-reckon
+      }                                                          // (only the near-camera handful; the batch is hidden in warp)
       PERF.builds = builds; PERF.solids = active; PERF.mesh = performance.now() - meshStart;
     }
 
@@ -1466,7 +1511,11 @@
         const objectDt = Math.max(0, state.time - o.updateAt); o.updateAt = state.time;
         settleOrbit(o, objectDt);
         pUpdated[i] = state.time; pStep[i] = Math.max(1 / 120, objectDt);
-        o.phase += (o.lapRate + warpFlow * o.wj) * objectDt;
+        // ambient lap + warp torrent (time-based) PLUS a rewind proportional to the DAYS the cursor moved
+        // since this slot last updated (cursorAt mirrors updateAt for the strided loop). Scrub back → orbits
+        // wind backward; the per-object wj fans LEO faster than GEO; damped as warp takes the big leaps.
+        const dCursor = state.cursor - (o.cursorAt == null ? state.cursor : o.cursorAt); o.cursorAt = state.cursor;
+        o.phase += (o.lapRate + warpFlow * o.wj) * objectDt + dCursor * DAY_REWIND * o.wj * (1 - 0.6 * warpC) * (reduced ? 0.4 : 1);
         const t = o.phase - Math.floor(o.phase);
         worldPos(o, t, _v, spinC, spinS);
         const i3 = i * 3;
@@ -1563,7 +1612,7 @@
         meshCandidates.length = n;
       }
       PERF.field = performance.now() - fieldStart;
-      updateMeshPool(meshCandidates, refreshMeshes, start, end);
+      updateMeshPool(meshCandidates, refreshMeshes);
       state.workPhase = (phase + 1) % stride;
       // Upload only the contiguous cohort changed above. The former full-buffer uploads
       // moved several megabytes per frame even when adaptive work touched just 1/8 of it.
@@ -1765,6 +1814,17 @@
       for (const c of chunks) { out.set(c, off); off += c.byteLength; }
       return out;
     }
+    // A node that accepts the connection but never sends a response would otherwise stall the whole
+    // fallback chain (and a mid-scrub day-load) indefinitely. Bound the time-to-response of every
+    // fetch with an AbortController, then fall through to the next node. This caps time-to-headers,
+    // not the body: a slow but progressing catalog download is still read in full by readCapped.
+    const FETCH_TIMEOUT_MS = 12000;
+    async function fetchTimed(url, opts) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
+      try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
+      finally { clearTimeout(timer); }
+    }
     // Walk the ranked nodes; resolve { node, res } from the first to answer OK, else null. The
     // caller reads res via readCapped (the heavy catalog is gzip, the index is JSON) — never uncapped.
     async function fromNodes(urlOf, cache = "no-store") {
@@ -1772,8 +1832,8 @@
         // redirect:"error" — a GitHub-raw path serves file bytes, never an off-host 3xx; refusing to
         // FOLLOW one means a node can't smuggle content from another host via a redirect (a github.io
         // page redirect, etc.). A redirect just errors and we fall through to the next node.
-        try { const res = await fetch(urlOf(n), { cache, redirect: "error" }); if (res.ok) return { node: n, res }; }
-        catch (e) { /* unreachable node / redirect — fall through to the next */ }
+        try { const res = await fetchTimed(urlOf(n), { cache, redirect: "error" }); if (res.ok) return { node: n, res }; }
+        catch (e) { /* unreachable / timed-out / redirect — fall through to the next */ }
       }
       return null;
     }
@@ -1936,8 +1996,23 @@
       }
       return null;
     }
+    // These two hold the HEAVY per-day payloads — a ~34k-object parsed catalog and its ~11 MB gzip. Left
+    // unbounded they'd grow without limit as you scrub across days (the dominant long-session memory cost),
+    // so they're LRU-capped: only the most-recent few days stay hot for instant re-scrub; older days are
+    // dropped and simply re-fetched if revisited. (The light per-date aggregate Maps below stay small —
+    // a few dozen bytes each, bounded by the timeline length.)
     const catalogCache = new Map();
     const catalogGzByDate = new Map();
+    const CATALOG_CACHE_MAX = 6, CATALOG_GZ_MAX = 3;
+    const lruCap = (map, max) => { while (map.size > max) map.delete(map.keys().next().value); };
+    const lruTouch = (map, key) => { if (!map.has(key)) return undefined; const v = map.get(key); map.delete(key); map.set(key, v); return v; };
+    // The light per-day aggregate Maps (a few hundred bytes each) also get a hard cap so a marathon scrub
+    // across the whole 25k-day archive can't grow the heap without limit. The horizon is generous — it never
+    // evicts a working year — and an evicted day just re-estimates from the index until its catalog reloads.
+    const METADATA_MAX = 1200;
+    function pruneMetadata() {
+      for (const m of [bandCountsByDate, typeCountsByDate, orbitByDate, deltaByDate, annoByDate, integrityByDate, attestByDate]) lruCap(m, METADATA_MAX);
+    }
     // Don't trust the mirror — check it. The ledger's sha256 is the hash of the canonical
     // catalog bytes, which is exactly what we hold after gunzip: one digest proves the
     // download IS the attested record. (WebCrypto needs a secure context; absent that, or a
@@ -2041,7 +2116,7 @@
       } catch (e) { /* no directory published → catalogs carry their own identity; the join is a no-op */ }
     }
     async function loadCatalog(date) {
-      if (catalogCache.has(date)) return catalogCache.get(date);
+      if (catalogCache.has(date)) return lruTouch(catalogCache, date);   // a re-scrub bumps it to most-recent
       // Per-object detail for click-to-inspect and the daily-changes coloring: annotations
       // (directory edits, decay reports, TIP forecasts) and the delta's new/updated NORAD id lists.
       // The numeric aggregates already arrived via the lean index, so these matter only once you stop
@@ -2063,12 +2138,12 @@
       let ab = null, isTar = false;
       const led = ledgerByDate.get(date) || {}, locator = led.raw && safeLocator(led.raw.catalog_url);
       if (locator) {
-        try { const r = await fetch(locator, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = (led.raw.catalog_url_kind !== "catalog_gz"); } } catch (e) { /* fall through */ }
+        try { const r = await fetchTimed(locator, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = (led.raw.catalog_url_kind !== "catalog_gz"); } } catch (e) { /* fall through */ }
       }
       for (const u of (attestByDate.get(date) || {}).ar || []) {
         if (ab) break;
         const url = safeLocator(u); if (!url) continue;     // attestation locators are host-allowlisted too
-        try { const r = await fetch(url, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = true; } } catch (e) { /* try next */ }
+        try { const r = await fetchTimed(url, { cache: "force-cache", redirect: "error" }); if (r.ok) { ab = (await readCapped(r, MAX_GZ_BYTES)).buffer; isTar = true; } } catch (e) { /* try next */ }
       }
       if (!ab) {
         const g = await fromNodes((n) => `${nodeUrl.catalog(n, date)}/catalog.json.gz`, "force-cache");
@@ -2077,7 +2152,7 @@
       if (!ab) throw new Error("no bundle mirror reachable");
       const cgz = isTar ? untar(await gunzip(ab), "catalog.json.gz") : ab;
       if (!cgz) throw new Error("catalog missing");
-      catalogGzByDate.set(date, cgz.slice(0));
+      catalogGzByDate.set(date, cgz.slice(0)); lruCap(catalogGzByDate, CATALOG_GZ_MAX);
       const catBytes = await gunzip(cgz);
       verifyCatalogBytes(date, catBytes);              // fire-and-forget: HUD updates when it lands
       const cat = JSON.parse(new TextDecoder().decode(catBytes));
@@ -2149,7 +2224,7 @@
         new: delta?.new_object_count ?? launched, decayed: decToday, carried: delta?.carried_forward_count ?? 0
       });
       const sampled = sampleByBand(objs, MAXF);
-      catalogCache.set(date, sampled);
+      catalogCache.set(date, sampled); lruCap(catalogCache, CATALOG_CACHE_MAX); pruneMetadata();
       return sampled;
     }
     function sampleByBand(objs, limit) {
@@ -2308,7 +2383,7 @@
         state.catalogDate = date;
         if (!(await adoptField(objs, token))) return;   // superseded mid-adopt
         setStatus("ready", integrityByDate.get(date) ? "Live record · verified" : "Live record");
-        applyHud(recordMeta(date)); populateLegend(); reacquireFollow();
+        applyHud(recordMeta(date)); populateLegend(); reacquireFollow(); refreshGotoIfOpen();
       } catch (e) {
         if (token !== state.loadToken) return;
         console.info("archive bundle not reachable; field stays representative", date);
@@ -2356,7 +2431,10 @@
     function rescaleNav() {
       // Only the KEY-JUMP slew scales with the archive: a cross-archive leap lands in ~2.5s of cinematic
       // flight at any length (the wheel uses an absolute day-rate, the timebar is instant — neither scales).
-      state.navK = Math.max(1, TOTAL / 144);
+      // Clamp the upper end: a hostile/misconfigured manifest with millions of fake date entries would
+      // otherwise blow navK (and maxSpeed/accel) up to absurd values. 800 covers ~115k days (>300 yr) —
+      // far beyond the real ~67-year archive — so the real feel is untouched.
+      state.navK = Math.max(1, Math.min(800, TOTAL / 144));
       state.maxSpeed = (reduced ? 18 : 60) * state.navK;
       state.accel = 640 * state.navK;   // brake must out-pace the decel slope (>= 8·maxSpeed) or the flight overshoots and oscillates
     }
@@ -2429,6 +2507,12 @@
     // key-jumps: running faster than a few days/sec lights the warp; near the scroll ceiling (or any
     // key-jump) the tunnel opens into overdrive. A single-day nudge stays calm.
     const WARP_LO_DPS = 6, WARP_HI_DPS = 26, OVERDRIVE_LO_DPS = 22, OVERDRIVE_HI_DPS = 40;
+    // Time-rewind: every DAY the cursor moves winds each orbit by this many laps (× the object's orbital
+    // speed), so the field visibly runs BACKWARD as you scrub into the past and forward as you return —
+    // proportional to DAYS travelled, not scroll speed. A 1-day flick gives a subtle wind; a week, a clear
+    // rewind; reversible (returning to a date restores its exact configuration). Hyperspace (warp) still
+    // owns the big multi-year leaps, so this is damped out as warp takes over.
+    const DAY_REWIND = 0.05;
     function navigationDaysForDistance(px, oneDayPx) {
       // Still used by TOUCH drag (direct manipulation: a finger travels a distance → move proportionally).
       const d = Math.abs(px);
@@ -2540,6 +2624,7 @@
       if (settings.classList.contains("open")) return;
       if (e.repeat && !LOOK_KEYS.has(k)) return;
       if (k === "i") { findISS(); e.preventDefault(); return; }
+      if (k === "g") { toggleGoto(); e.preventDefault(); return; }     // goto: find any object on orbit this day
       if (k === "r") { requestReload(); e.preventDefault(); return; }
       if (k === "z") { toggleZen(); e.preventDefault(); return; }
       if (e.code === "Backquote" || k === "`") { togglePerf(); e.preventDefault(); return; }
@@ -2581,12 +2666,15 @@
       if (settings.classList.contains("open")) return;
       // A held view still accepts taps so you can inspect a frozen object — only the
       // look/navigate drag is suppressed (in pointermove), keeping the frame motionless.
+      // Lock the object under the cursor NOW, at press — not at release. A small fast mover near the edge
+      // has drifted away by mouse-up; capturing here means a tap selects what you actually aimed at.
+      const pi = pickAt(e.clientX, e.clientY), pickNid = pi >= 0 ? (O[pi].meta?.id ?? null) : null;
       if (e.pointerType === "touch") {
-        touches.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now() });
+        touches.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now(), pickIdx: pi, pickNid });
         if (touches.size === 1) touchGesture = { mode: "look", id: e.pointerId, x: e.clientX, y: e.clientY };
         else if (touches.size === 2) { const c = touchCentre(); touchGesture = { mode: "navigate", x: c.x, startY: c.y, startTarget: Math.round(state.cursor), accX: 0, lensShifted: false }; }
       } else {
-        state.pointer = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now() };
+        state.pointer = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now(), pickIdx: pi, pickNid };
       }
       try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone — capture is best-effort */ }
     });
@@ -2628,12 +2716,12 @@
         const moved = Math.hypot(e.clientX - p.x0, e.clientY - p.y0), held = performance.now() - p.t;
         if (touches.size === 0) touchGesture = null;
         else touchGesture = { mode: "blocked" };                 // lift all fingers before beginning another gesture
-        if (wasSingle && moved < 9 && held < 500) sceneTapAt(e.clientX, e.clientY);
+        if (wasSingle && moved < 9 && held < 500) sceneTapAt(e.clientX, e.clientY, p.pickNid, p.pickIdx);
         return;
       }
       const p = state.pointer; state.pointer = null; if (!p) return;
       const moved = Math.hypot(e.clientX - p.x0, e.clientY - p.y0), held = performance.now() - p.t;
-      if (moved < 9 && held < 500) sceneTapAt(e.clientX, e.clientY);
+      if (moved < 9 && held < 500) sceneTapAt(e.clientX, e.clientY, p.pickNid, p.pickIdx);
     }
     canvas.addEventListener("pointerup", endPointer);
     canvas.addEventListener("pointercancel", (e) => { state.pointer = null; touches.delete(e.pointerId); if (!touches.size) touchGesture = null; });
@@ -2740,6 +2828,7 @@
       const current = state.catalogDate;
       for (const date of catalogCache.keys()) if (date !== current) catalogCache.delete(date);
       for (const date of catalogGzByDate.keys()) if (date !== current) catalogGzByDate.delete(date);
+      pruneMetadata();
       renderer.renderLists.dispose();
     }
     function setSuspended(on) {
@@ -3316,14 +3405,14 @@
     // ── click to inspect: nearest projected object to the tap ──
     const _proj = new THREE.Vector3();
     let lastSceneTap = null, sceneTapTimer = 0;
-    function sceneTapAt(cx, cy) {
+    function sceneTapAt(cx, cy, nid, idx) {   // nid/idx = the object locked under the cursor at pointerDOWN
       const now = performance.now();
       if (lastSceneTap && now - lastSceneTap.at < 330 && Math.hypot(cx - lastSceneTap.x, cy - lastSceneTap.y) < 24) {
         clearTimeout(sceneTapTimer); lastSceneTap = null; toggleZen(); return;
       }
       const tap = { x: cx, y: cy, at: now }; lastSceneTap = tap;
       clearTimeout(sceneTapTimer);
-      sceneTapTimer = setTimeout(() => { if (lastSceneTap === tap) { lastSceneTap = null; inspectAt(cx, cy); } }, 260);
+      sceneTapTimer = setTimeout(() => { if (lastSceneTap === tap) { lastSceneTap = null; commitPick(nid, idx); } }, 260);
     }
     function hideInspector() {
       state.selIdx = -1;
@@ -3443,6 +3532,102 @@
       if (idx >= 0) showInspector(idx);
       else { state.selIdx = -1; $("inspector").classList.remove("visible"); vigHide(); }
     }
+    // ── 'g' GOTO: find any object on orbit THIS day by NORAD id or name (a mirror of the lens
+    //    legend on the opposite edge). Selecting one follows it — it re-acquires across day-changes
+    //    just like the ISS, so you can scrub the decades watching the same body. An empty query
+    //    lists the oldest survivors still up: the historic objects to seek out in the sparse early
+    //    years. Searches the day's loaded catalog (state.objects), capped, so it stays smooth at 34k.
+    let gotoRows = [], gotoSel = -1, gotoOldest = null, gotoOldestKey = null, gotoLastQuery = "";
+    const GOTO_MAX = 10;   // show at most ten rows; the rest are summarised by the match count below the list
+    function oldestStillUp(n) {
+      if (gotoOldestKey !== state.catalogDate) {   // cache per day — only re-sort when the catalog changes
+        gotoOldest = state.objects
+          .filter((o) => o.launch && !o.reentered)
+          .sort((a, b) => (a.launch < b.launch ? -1 : a.launch > b.launch ? 1 : (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0)))
+          .slice(0, 12);
+        gotoOldestKey = state.catalogDate;
+      }
+      return gotoOldest.slice(0, n);
+    }
+    const ALNUM = /[a-z0-9]/;
+    function gotoSearch(q) {   // returns the FULL ranked match list (caller shows the top GOTO_MAX + a total count)
+      q = q.trim().toLowerCase();
+      if (!q) return oldestStillUp(GOTO_MAX);
+      const qn = /^\d+$/.test(q) ? String(parseInt(q, 10)) : null;   // a padded NORAD ("00005") still finds id "5"
+      // Rank by RELEVANCE so a real match floats above a mid-word coincidence: "iss" surfaces ISS (ZARYA)
+      // before UME 1 (ISS 1) before swISScube. All keystroke-only work — never touches the render loop.
+      const scored = [];
+      for (const o of state.objects) {
+        const id = String(o.id), name = (o.name || "").toLowerCase(), ni = name.indexOf(q);
+        let score;
+        if (qn && id === qn) score = 0;                                  // exact catalog number
+        else if (ni === 0) score = 1;                                    // name starts with the query
+        else if (ni > 0 && !ALNUM.test(name[ni - 1])) score = 2;         // query at a word boundary (after a space/paren/-)
+        else if (ni > 0) score = 3;                                      // query mid-word in the name
+        else if (id.includes(q)) score = 4;                              // appears in the catalog number
+        else if ((o.country || "").toLowerCase().includes(q) || (o.type || "").toLowerCase().includes(q)) score = 5;
+        else continue;
+        scored.push([score, o]);
+      }
+      scored.sort((a, b) => a[0] - b[0] || (a[1].launch < b[1].launch ? -1 : a[1].launch > b[1].launch ? 1 : 0));
+      return scored.map((s) => s[1]);
+    }
+    function renderGoto() {
+      const list = $("goto-results"), countEl = $("goto-count"); if (!list) return;
+      const q = (gotoLastQuery = $("goto-input").value).trim();   // remember what was typed, for the next open
+      const all = gotoSearch(q);
+      gotoRows = all.slice(0, GOTO_MAX);
+      if (!gotoRows.length) { list.innerHTML = `<div class="gp-empty">No object matches on this day</div>`; gotoSel = -1; if (countEl) countEl.textContent = ""; return; }
+      const esc = (s) => String(s).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+      list.innerHTML = gotoRows.map((o, i) =>
+        `<button class="gp-row${i === 0 ? " sel" : ""}" role="option" data-i="${i}" tabindex="-1" title="${esc(o.name || ("NORAD " + o.id))}">`
+        + `<span class="gp-name">${esc(o.name || "Archive object")}</span>`
+        + `<span class="gp-sub">${esc(o.id)} · ${o.launch ? esc(o.launch.slice(0, 4)) : "—"}</span></button>`).join("");
+      gotoSel = 0;
+      // subtle total-match count under the list — only for an actual search, and only when there's an overflow worth noting
+      if (countEl) countEl.textContent = !q ? "" : all.length > GOTO_MAX ? `showing ${GOTO_MAX} of ${all.length} matches` : all.length === 1 ? "1 match" : `${all.length} matches`;
+    }
+    function gotoMove(d) {
+      if (!gotoRows.length) return;
+      gotoSel = (gotoSel + d + gotoRows.length) % gotoRows.length;
+      const rows = $("goto-results").children;
+      for (let i = 0; i < rows.length; i++) rows[i].classList.toggle("sel", i === gotoSel);
+      rows[gotoSel] && rows[gotoSel].scrollIntoView({ block: "nearest" });
+    }
+    function gotoPick(i) {
+      const o = gotoRows[i]; if (!o) return;
+      closeGoto();
+      const idx = slotForNorad(String(o.id));
+      if (idx < 0) { flashMode("Not on orbit this day"); return; }
+      showInspector(idx);   // sets followNorad → tracks across the timeline like the ISS
+      drawnPos(idx, _proj).project(camera);
+      const onScreen = _proj.z <= 1 && Math.abs(_proj.x) <= 1 && Math.abs(_proj.y) <= 1;
+      flashMode(`${o.name || ("NORAD " + o.id)}${onScreen ? "" : " · coming around"}`);
+    }
+    function openGoto() {
+      if (!state.objects.length) { flashMode("No catalog loaded yet"); return; }
+      const p = $("goto-panel"); if (!p) return;
+      p.hidden = false; const inp = $("goto-input");
+      inp.value = gotoLastQuery;   // reopen with the last search restored…
+      renderGoto();
+      inp.focus(); inp.select();   // …and the text selected, so a keystroke replaces it or you keep refining
+    }
+    function closeGoto() { const p = $("goto-panel"); if (p && !p.hidden) { p.hidden = true; $("goto-input").blur(); } }
+    function toggleGoto() { $("goto-panel").hidden ? openGoto() : closeGoto(); }
+    function refreshGotoIfOpen() { const p = $("goto-panel"); if (p && !p.hidden) renderGoto(); }
+    {
+      const inp = $("goto-input"), list = $("goto-results");
+      if (inp) {
+        inp.addEventListener("input", renderGoto);
+        inp.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") { e.stopPropagation(); e.preventDefault(); closeGoto(); }
+          else if (e.key === "ArrowDown") { e.preventDefault(); gotoMove(1); }
+          else if (e.key === "ArrowUp") { e.preventDefault(); gotoMove(-1); }
+          else if (e.key === "Enter") { e.preventDefault(); gotoPick(gotoSel); }
+        });
+      }
+      if (list) list.addEventListener("click", (e) => { const b = e.target.closest(".gp-row"); if (b) gotoPick(+b.dataset.i); });
+    }
     // The point an object is actually DRAWN at this instant. Sprites dead-reckon between
     // their last two exact orbit fixes — the same mix the vertex shader runs — so a fast,
     // strided object glides smoothly between updates; near-field solids sit at the newest
@@ -3450,22 +3635,23 @@
     // so the ring rides the object and a tap lands on the speck you can actually see.
     function drawnPos(i, out) {
       const b = i * 3;
-      if (O[i] && O[i].solid) return out.set(pPos[b], pPos[b + 1], pPos[b + 2]);
+      // Dead-reckon EVERY object (sprites AND solids) between strided fixes — the same pPrev→pPos mix the
+      // point vertex shader runs — so the body the solid's matrix is placed at, the halo that rides it, and the
+      // tap hit-test all read ONE smoothly-interpolated position and stay locked together at any work-stride.
       const blend = Math.min(1, Math.max(0, (state.time - pUpdated[i]) / Math.max(0.008, pStep[i])));
       return out.set(
         pPrev[b] + (pPos[b] - pPrev[b]) * blend,
         pPrev[b + 1] + (pPos[b + 1] - pPrev[b + 1]) * blend,
         pPrev[b + 2] + (pPos[b + 2] - pPrev[b + 2]) * blend);
     }
-    function inspectAt(cx, cy) {
-      // a tap means "that one, the one I can SEE": within the radius, the nearer and
-      // visually bigger object beats a distant speck that happens to sit pixel-perfect
+    // Hit-test the nearest tappable object to (cx,cy) — the one you can SEE: within the radius, the nearer
+    // and visually bigger object beats a distant speck that happens to sit pixel-perfect. Returns its slot, or
+    // -1 for empty space. Run at pointerDOWN so a small fast mover near the edge is locked the instant you
+    // aim — by release it has drifted out from under the cursor, and selecting at up-time would miss or grab
+    // whatever slid into that pixel.
+    function pickAt(cx, cy) {
+      camera.updateMatrixWorld();
       const R2 = 20 * 20;
-      if (state.selIdx >= 0 && $("inspector").classList.contains("visible")) {
-        drawnPos(state.selIdx, _proj).project(camera);
-        const sx = (_proj.x * 0.5 + 0.5) * innerWidth, sy = (-_proj.y * 0.5 + 0.5) * innerHeight;
-        if (_proj.z <= 1 && (sx - cx) * (sx - cx) + (sy - cy) * (sy - cy) <= R2) { hideInspector(); return; }
-      }
       let best = -1, bestScore = Infinity;
       const solid = new Set(pool.map((s) => s.idx));   // solids stay tappable though their sprite is dimmed
       for (let i = 0; i < FIELD_N; i++) {
@@ -3476,16 +3662,22 @@
         const d2 = (sx - cx) * (sx - cx) + (sy - cy) * (sy - cy);
         if (d2 > R2) continue;
         const dx = pPos[i * 3] - camera.position.x, dy = pPos[i * 3 + 1] - camera.position.y, dz = pPos[i * 3 + 2] - camera.position.z;
-        // camera distance is the primary key — a dense field always has SOME far speck
-        // a pixel from the tap, and that is never the one you meant. But the rare event
-        // objects (a predicted reentry most of all, then decays and launches) are the ones
-        // worth tapping, so they win over an ordinary neighbour inside the same tap radius.
+        // camera distance is the primary key — a dense field always has SOME far speck a pixel from the tap,
+        // and that is never the one you meant. But the rare event objects (a predicted reentry most of all,
+        // then decays and launches) are the ones worth tapping, so they win inside the same tap radius.
         const w = o.change === "reentry" ? 0.05 : (o.change === "decay" || o.change === "new") ? 0.5 : 1;
         const score = Math.sqrt(dx * dx + dy * dy + dz * dz) * (0.6 + 0.4 * d2 / R2) * w;
         if (score < bestScore) { bestScore = score; best = i; }
       }
-      if (best < 0 || (best === state.selIdx && $("inspector").classList.contains("visible"))) { hideInspector(); return; }
-      showInspector(best);
+      return best;
+    }
+    // Commit the object captured under the cursor at press time. Re-acquire by identity (nid) in case a day
+    // adopted between press and release; tapping the already-selected object (or empty space) closes the card.
+    function commitPick(nid, idx) {
+      if (idx < 0) { hideInspector(); return; }                                  // pressed empty space → close
+      const cur = (nid != null && slotForNorad(nid) >= 0) ? slotForNorad(nid) : idx;
+      if (cur === state.selIdx && $("inspector").classList.contains("visible")) { hideInspector(); return; }   // re-tap → close
+      showInspector(cur);
     }
     $("insp-body").addEventListener("click", (e) => {
       const hit = e.target.closest("[data-tip]");
@@ -3523,6 +3715,13 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       PERF.lastReport = now;
     }
     function animate(now) {
+      // "Idle" is decided by TAB VISIBILITY, never by user input: a FOREGROUND tab always renders at the
+      // display's full rate — the field is constantly in motion (orbits, approaching solids), so just WATCHING
+      // it must stay smooth, not only while you're dragging. A BACKGROUND tab parks entirely (visibilitychange
+      // stops the loop; this early-return is the belt-and-suspenders guard) → ~0% CPU, the leave-open-for-hours
+      // win. (An input-gated throttle was wrong: it dropped watching to 30fps AND its stretched frame interval
+      // fooled the work-stride governor into ramping the stride, stepping the non-interpolated solids to ~1fps.)
+      if (document.hidden) return;
       const frameStart = performance.now(), interval = now - (animate.last || now);
       const dt = Math.min(0.05, interval / 1000); animate.last = now; state.time += dt;
 
@@ -3588,8 +3787,10 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       deepMat.uniforms.uDir.value = state.timeDir;
       deepSpace.visible = deepReveal > 0.006;
       // a subtle directional roll tied DIRECTLY to warp → it returns to zero AS the warp
-      // decelerates, so there's no accumulated twist to unwind at the end of a jump
-      const spinTarget = state.warp * 0.11 * (1 + state.over * 1.6) * (state.timeDir >= 0 ? 1 : -1);
+      // decelerates, so there's no accumulated twist to unwind at the end of a jump. Keyed to
+      // warp ALONE (capped) — NOT overdrive — so the roll stays equally gentle whether you nudge
+      // one day or leap fifty years; a far jump just travels faster, it doesn't spin harder.
+      const spinTarget = Math.min(1, state.warp) * 0.11 * (state.timeDir >= 0 ? 1 : -1);
       state.spin += (spinTarget - state.spin) * Math.min(1, dt * 3);
       // witness pulse: a cyan wavefront rises through the field on attested days
       if (state.attested && state.warp < 0.2) { const pp = (state.time % 6.5) / 6.5; state.pulseY = -95 + pp * 200; state.pulseStr = Math.pow(1 - pp, 1.4); }
@@ -3672,6 +3873,13 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
     }
     function resize() { renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.fov = innerWidth <= 760 ? 80 : 72; camera.updateProjectionMatrix(); pointMat.uniforms.uPixel.value = renderer.getPixelRatio(); pointMat.uniforms.uAspect.value = innerWidth / innerHeight; deepMat.uniforms.uAspect.value = innerWidth / innerHeight; }
     addEventListener("resize", resize);
+    // Leave-open-for-hours: a backgrounded tab parks the render loop ENTIRELY (browsers only throttle rAF,
+    // they don't stop it) → ~0% CPU while hidden. Resuming reseeds the clock so the first visible frame
+    // doesn't take one giant dt step. A manually-held view ('h') stays parked regardless.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) renderer.setAnimationLoop(null);
+      else if (!state.suspended) { animate.last = performance.now(); renderer.setAnimationLoop(animate); }
+    });
 
     // ── tap-to-rotate data prisms: the turn angle follows each prism's face count.
     //    The border + pager dots live on each face, so they turn as part of the prism. ──
