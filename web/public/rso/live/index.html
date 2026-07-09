@@ -162,6 +162,10 @@
     .insp-obs:empty { display: none; }
     .insp-obs.tip { color: #fff0d6; text-shadow: 0 0 11px rgba(255,238,206,0.55); }   /* predicted reentry — incandescent, the headline */
     .insp-drag { margin-top: 5px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 9px; letter-spacing: 0.05em; }
+    .insp-dock { margin-top: 5px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 9px; letter-spacing: 0.04em; line-height: 1.6; }
+    .insp-dock:empty { display: none; }
+    .dock-link { color: var(--accent); cursor: pointer; border-bottom: 1px dotted rgba(154,169,255,0.4); white-space: nowrap; }
+    .dock-link:hover, .dock-link:focus-visible { color: var(--ink); outline: none; }
     .insp-drag:empty { display: none; }
     /* clickable line inside a rotating prism (e.g. the contract address) */
     .prism-link { pointer-events: auto; color: var(--muted); text-decoration: none; border-bottom: 1px dotted rgba(154,169,255,0.45); transition: color 150ms, border-color 150ms; }
@@ -476,6 +480,7 @@
         <div class="insp-name" id="insp-name">—</div>
         <div class="insp-meta" id="insp-meta">—</div>
         <div class="insp-drag" id="insp-drag"></div>
+        <div class="insp-dock" id="insp-dock"></div>
         <div class="insp-obs" id="insp-obs"></div>
       </div>
     </section>
@@ -1148,12 +1153,11 @@
         // instead of letting a real but unlucky orbital plane hide it off-screen forever.
         g = (rand2(nid, 23) - 0.5) * 0.5;
       } else if (src && (src.raan || src.inc)) {
-        // Plane longitude is IDENTITY-seeded (was the real RAAN, which regresses ~degrees/day — that slid
-        // every object sideways on each 1-day step). Inclination is effectively constant day-to-day, so we
-        // keep a touch of it for real orbital variety. Net: an object holds the SAME track every day, and
-        // the catalog only updates its identity/colour — like the placeholders, just named.
+        // Plane longitude is 100% IDENTITY-seeded — NOTHING that changes day to day feeds it. It used to key
+        // off the real RAAN (which regresses degrees/day → slid every object sideways on each step); then a
+        // touch of inclination (which still drifts a hair). Now the track is a pure function of the NORAD id,
+        // so an object holds the EXACT same lane every day and the catalog only updates its identity/colour.
         g = (rand2(nid, 23) - 0.5) * (band === 0 ? 2.3 : 2.7)
-          + (((src.inc || 65) - 65) / 65) * 0.35
           + (rand2(nid, 41) - 0.5) * 0.18;
         g = Math.max(-2.1, Math.min(2.1, g));
       } else {
@@ -1398,6 +1402,18 @@
       pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2);
       pointGeo.attributes.aSeed.needsUpdate = true;
       state.workPhase = 0;
+      // Co-locate each stacked member ONTO its structure's core, so a station orbits as ONE point. Each
+      // member copies the core's identity-track (plane/shell) and its live phase, so it rides hidden exactly
+      // beneath the core and stays synced (same lapRate/wj). Only the ~dozens of docked members — never per frame.
+      for (let i = 0; i < newN; i++) {
+        const o = O[i]; if (!o || !o.docked || !o.meta) continue;
+        const pi = slotByNid.get(o.meta.dockPrimary), P = pi != null ? O[pi] : null;
+        if (!P || !P.meta || pi === i) continue;
+        const orb = orbitParams(P.meta, P.meta.band, parseInt(o.meta.dockPrimary, 10) || 0);
+        o.band = orb.band; o.R = orb.R; o.cg = orb.cg; o.sg = orb.sg; o.eccV = orb.eccV; o.ep = orb.ep; o.wj = orb.wj; o.lapRate = orb.lapRate;
+        o.phase = P.phase; o.pt = o.phase - Math.floor(o.phase); o.ta = P.ta; o.cta = Math.cos(o.ta); o.sta = Math.sin(o.ta);
+        o.orbitTarget = null;   // snap (hidden) — no settle
+      }
       for (const s of pool) if (s.idx >= 0 && s.iid >= 0) setSolidColor(s);
       return true;
       } finally { if (token == null || token === state.loadToken) state.adopting = false; }   // clear only if we're still the active load
@@ -1482,6 +1498,10 @@
       // (and tappable) without forcing the Daily-changes lens. The lens itself paints them gold.
       if (o.change === "reentry" && !re && state.lens !== 4) { size = Math.max(size, 5.0); aMul = Math.max(aMul, 2.2); }
       if ((o.dataBand ?? o.band) === 1 && !re) aMul *= 1.15;   // MEO pops at eye level
+      // A stacked structure (ISS, Tiangong, a probe + its stage) is ONE physical thing: only the core NORAD
+      // is drawn; the docked members ride hidden beneath it, so the sky shows one station, not a scatter.
+      o.docked = !!(o.meta && o.meta.dockPrimary && o.meta.dockPrimary !== o.meta.id);
+      if (o.docked) aMul = 0;
       o.col = col; o.size = size; o.aMul = aMul;
     }
     function recolor() {
@@ -1530,7 +1550,7 @@
         const fadeFar = 1 - smooth(560, 780, dist);          // fade into the deep distance
         const focus = 1 - smooth(48, 260, dist);             // crisp much deeper — mid-field shapes read as shapes, not soft cubes
         o.meshWanted = false;
-        if (state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25 && o.meta && fadeBehind > 0.25 && fadeFar > 0.05 && !o.orbitTarget) {  // don't promote a solid mid-settle — it would show the zip
+        if (state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25 && o.meta && fadeBehind > 0.25 && fadeFar > 0.05 && !o.orbitTarget && !o.docked) {  // not mid-settle, not a hidden stacked member
           // Project the body's approximate REAL span, independent of the point shader's
           // readability swell. The camera matrices are from the previous rendered frame,
           // which is visually indistinguishable and avoids a second scene-matrix update.
@@ -1971,6 +1991,38 @@
 
     function bandFromMM(mm) { const v = Number(mm); if (Number.isFinite(v) && v > 0) { if (v >= 0.9 && v <= 1.1) return 2; if (v >= 11.0) return 0; return 1; } return 1; }
     function klassFromType(t) { t = String(t || "").toUpperCase(); return t.includes("DEBRIS") ? 2 : t.includes("ROCKET") ? 1 : t.includes("PAYLOAD") ? 0 : 3; }
+    // Some NORAD catalog entries are ONE physical thing sharing a single propagated state vector: the station
+    // modules + their docked visiting vehicles (ISS, Tiangong), or a deep-space probe + its spent upper stage.
+    // Group any that match to full precision, so the field co-locates them under the lowest NORAD (the core /
+    // oldest module) and they orbit as a unit. Runs once per catalog load — O(n) over a Map, never per frame.
+    function detectStacks(objs) {
+      // Pass 1 — exact-state groups: same plane + shape + altitude + POSITION (mean-anomaly) = one point.
+      const exact = new Map();
+      for (const o of objs) {
+        o.dockGroup = null; o.dockPrimary = null;                       // reset — objs are rebuilt each day
+        if (o.reentered || !(o.mm > 0)) continue;                       // decayed / element-less → not stackable
+        const key = `${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.mm.toFixed(4)}|${o.ma.toFixed(2)}`;
+        let g = exact.get(key); if (!g) exact.set(key, g = []);
+        g.push(o);
+      }
+      // Pass 2 — merge multi-member clusters that share the same ORBIT (plane + altitude). A big structure can
+      // be propagated in more than one batch (a station's modules updated at different epochs → their
+      // mean-anomaly differs and they split across pass-1 groups); they're still one physical thing. Only
+      // clusters (size ≥ 2) are merged, so a constellation's individually-orbiting sats are never swept in.
+      const merged = [];
+      for (const c of exact.values()) {
+        if (c.length < 2) continue;
+        const r = c[0];
+        const host = merged.find((m) => Math.abs(m[0].inc - r.inc) < 0.1 && Math.abs(m[0].mm - r.mm) < 0.002
+          && Math.abs(((m[0].raan - r.raan + 540) % 360) - 180) < 0.6);
+        if (host) host.push(...c); else merged.push(c.slice());
+      }
+      for (const g of merged) {
+        g.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));   // primary = lowest NORAD (the core)
+        const primary = g[0].id;
+        for (const o of g) { o.dockGroup = g; o.dockPrimary = primary; }
+      }
+    }
 
     async function gunzip(buf) {   // capped at MAX_CATALOG_BYTES so a gzip bomb from a hostile node can't OOM the tab
       const reader = new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip")).getReader();
@@ -2196,9 +2248,13 @@
           // orbital elements that shape each object's identity in the field
           inc: Number(row.INCLINATION) || 0, ecc: Number(row.ECCENTRICITY) || 0,
           raan: Number(row.RA_OF_ASC_NODE) || 0,
+          // mean-motion + mean-anomaly: NOT used for the (identity-seeded) track — kept only to detect objects
+          // sharing one state vector (docked station modules, a probe + its spent stage) so they stack as one.
+          mm: Number(row.MEAN_MOTION) || 0, ma: Number(row.MEAN_ANOMALY) || 0,
           rcs: row.RCS_SIZE || "", bstar, mmDot,
           anno: annoSum ? annoSum.byId.get(id) || null : null };
       });
+      detectStacks(objs);   // group co-incident NORAD ids into one physical structure (see below)
       // breakdowns of WHAT'S STILL UP THERE (on-orbit); decayed objects are recorded but counted apart
       const bc = { leo: 0, meo: 0, geo: 0 };
       const tc = { payload: 0, rocket: 0, debris: 0, unknown: 0, tba: 0 };
@@ -3474,6 +3530,16 @@
             m.mmDot ? tip(`Δn ${m.mmDot.toExponential(1)}`, "how fast its orbit is shrinking") : null,
           ].filter(Boolean).join(" · ")
         : "";
+      // Stacked structure: this object is one of several NORAD ids sharing the same orbit (a station's modules
+      // + docked craft, a probe + its stage). Show the family and let you WALK it — click the core, or any of
+      // its docked members, to inspect that one (each rides the same point, so the halo stays on the structure).
+      const dockEl = $("insp-dock"), grp = m && m.dockGroup && m.dockGroup.length > 1 ? m.dockGroup : null;
+      if (grp) {
+        const link = (x) => `<span class="dock-link" data-nid="${esc(x.id)}" role="button" tabindex="0">${esc(x.name)}</span>`;
+        dockEl.innerHTML = m.id === m.dockPrimary
+          ? `◈ ${grp.length - 1} docked · ` + grp.filter((x) => x.id !== m.id).map(link).join(" · ")
+          : `◈ part of ` + link(grp[0]);
+      } else dockEl.innerHTML = "";
       $("inspector").classList.add("visible");
       vigShow(o);   // stays up until another object — or blank space — is tapped
       if (state.suspended) drawHeldFrame();   // parked loop: repaint once so the halo + model show
@@ -3680,13 +3746,15 @@
       showInspector(cur);
     }
     $("insp-body").addEventListener("click", (e) => {
+      const dock = e.target.closest(".dock-link");   // walk the stacked structure — inspect the core or a docked member
+      if (dock) { e.stopPropagation(); const idx = slotForNorad(dock.dataset.nid); if (idx >= 0) showInspector(idx); return; }
       const hit = e.target.closest("[data-tip]");
       const wasOpen = !!hit?.classList.contains("tip-open");
       $("insp-body").querySelectorAll(".tip-open").forEach((x) => x.classList.remove("tip-open"));
       if (hit && !wasOpen) hit.classList.add("tip-open");
     });
     $("inspector").addEventListener("click", (e) => {
-      if (e.target.closest("[data-tip],a,button")) return;
+      if (e.target.closest("[data-tip],a,button,.dock-link")) return;
       hideInspector();
     });
 

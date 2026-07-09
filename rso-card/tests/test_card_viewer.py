@@ -88,6 +88,32 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("commitPick(nid, idx)", self.html)
         self.assertIn("slotForNorad(nid) >= 0) ? slotForNorad(nid) : idx", self.html)
 
+    def test_coincident_structures_stack_as_one(self):
+        # Multiple NORAD ids sharing one propagated state vector (station modules + docked vehicles; a probe +
+        # its spent stage) are ONE physical thing. detectStacks groups them at load, a 2nd pass merges a
+        # structure propagated in >1 batch (Tiangong), and the field co-locates the members under the lowest
+        # NORAD (the core) — hidden — so a station orbits as ONE point. Verified live: ISS = 11, Tiangong = 5,
+        # members co-located (plane/radius/phase delta 0) and hidden (aMul 0), core visible.
+        self.assertIn("function detectStacks(objs)", self.html)
+        self.assertIn("mm: Number(row.MEAN_MOTION) || 0, ma: Number(row.MEAN_ANOMALY) || 0,", self.html)   # elements kept for detection
+        self.assertIn("detectStacks(objs);", self.html)                                                     # run at load
+        self.assertIn("`${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.mm.toFixed(4)}|${o.ma.toFixed(2)}`", self.html)
+        self.assertIn("for (const o of g) { o.dockGroup = g; o.dockPrimary = primary; }", self.html)
+        # hidden members: zero alpha + never solidify; the core alone is drawn
+        self.assertIn("o.docked = !!(o.meta && o.meta.dockPrimary && o.meta.dockPrimary !== o.meta.id);", self.html)
+        self.assertIn("if (o.docked) aMul = 0;", self.html)
+        self.assertIn("!o.orbitTarget && !o.docked) {", self.html)
+        # co-location post-pass: a member copies its core's track + live phase and rides hidden beneath it
+        self.assertIn("const pi = slotByNid.get(o.meta.dockPrimary), P = pi != null ? O[pi] : null;", self.html)
+        self.assertIn("o.phase = P.phase;", self.html)
+        # the inspector is the tree: a member shows "part of {core}"; the core lists its docked members —
+        # every one a clickable link that inspects that object (each rides the structure, so the halo stays put)
+        self.assertIn('id="insp-dock"', self.html)
+        self.assertIn("`◈ ${grp.length - 1} docked · `", self.html)
+        self.assertIn("`◈ part of ` + link(grp[0])", self.html)
+        self.assertIn('const dock = e.target.closest(".dock-link");', self.html)
+        self.assertIn("const idx = slotForNorad(dock.dataset.nid); if (idx >= 0) showInspector(idx);", self.html)
+
     def test_hyperspace_spin_is_distance_independent(self):
         # the roll is keyed to warp ALONE (capped), NOT overdrive — so a 50-year leap rolls no harder
         # than a 1-day nudge (it just travels faster). The old `(1 + state.over * 1.6)` amplifier is gone.
@@ -670,7 +696,7 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("tip-open::after", self.html)
         # A non-target click inside the panel dismisses it on touch and desktop.
         self.assertIn('$("inspector").addEventListener("click"', self.html)
-        self.assertIn('closest("[data-tip],a,button")', self.html)
+        self.assertIn('closest("[data-tip],a,button,.dock-link")', self.html)
 
     def test_controls_capture_and_catalog_download(self):
         # The control rack sits outside the HUD but joins the rest of the chrome in Zen.
@@ -1176,11 +1202,11 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("resizeField(newN);                                 // cheap: density only — keeps every object on its track", self.html)
 
     def test_orbital_track_is_identity_stable_day_to_day(self):
-        # An object must hold the SAME orbital track across day-changes. The plane longitude is now seeded by
-        # IDENTITY (nid) — the real RA_OF_ASC_NODE regresses ~degrees/day, and using it slid every object
-        # sideways on each 1-day step. Inclination is ~constant day-to-day, so a touch of it is kept for variety.
-        self.assertIn("g = (rand2(nid, 23) - 0.5) * (band === 0 ? 2.3 : 2.7)", self.html)
-        self.assertIn("+ (((src.inc || 65) - 65) / 65) * 0.35", self.html)
+        # An object holds the SAME orbital track across day-changes. The plane longitude is 100% IDENTITY (nid)
+        # seeded — NOTHING that varies day to day feeds it: not RA_OF_ASC_NODE (regresses ~deg/day) and not even
+        # inclination (drifts a hair). Verified against the real archive: 0 of 34,501 objects change plane/radius.
+        self.assertIn("g = (rand2(nid, 23) - 0.5) * (band === 0 ? 2.3 : 2.7)\n          + (rand2(nid, 41) - 0.5) * 0.18;", self.html)
+        self.assertNotIn("(((src.inc || 65) - 65) / 65) * 0.35", self.html)   # the drifting inclination term is gone
         self.assertNotIn("(src.raan || 0) / 360", self.html)          # the precessing element no longer drives the plane
         # phase / anomaly seeded by identity (nid), not the raw slot index
         self.assertIn("o.phase = rand2(nid, 47);", self.html)
@@ -1202,7 +1228,7 @@ class CardArtifactTest(unittest.TestCase):
         # settled (no visible zip), and isn't promoted to a solid mid-settle.
         self.assertIn("o.settleK = smooth(0.9, 0.9997, o.cg * t.cg + o.sg * t.sg) * (1 - smooth(2, 36, Math.abs(t.R - o.R)));", self.html)
         self.assertIn("* (o.settleK == null ? 1 : o.settleK)", self.html)
-        self.assertIn("fadeFar > 0.05 && !o.orbitTarget) {", self.html)
+        self.assertIn("fadeFar > 0.05 && !o.orbitTarget && !o.docked) {", self.html)
 
     def test_adaptive_work_stride_escalates_and_relaxes(self):
         # the frame-budget governor raises the stride when frames run hot and lowers it
