@@ -581,20 +581,16 @@
 
   <script type="module">
     // Three.js loads one of two ways — and there is NO other runtime code dependency anywhere:
-    //  • STANDALONE (the minted artifact): the build step (build-standalone.py) inlines
-    //    three.core.js + three.module.js into <script type="text/plain"> blocks; we blob-import
-    //    them (rewriting the module's internal ./three.core.js specifier to the core blob URL), so
-    //    the file is FULLY self-contained — it renders from any Arweave/IPFS gateway, an ipfs://
-    //    subdomain, or a sandboxed marketplace iframe, with zero external code fetches.
-    //  • DEV: no inline blocks → import the vendored ./three.module.js relative to our mount point
+    //  • STANDALONE (the minted artifact): the build step (build-standalone.py) inlines both vendored
+    //    ES modules as ONE plain classic <script> IIFE that assigns window.__THREE_INLINE__. Crucially
+    //    that is NOT a blob import — an inline classic script runs under any CSP that lets this file's
+    //    own inline module script run at all, so three.js (the render-or-blank dependency) adds no
+    //    blob:/import() policy lever a marketplace CSP could omit. Renders from any Arweave/IPFS
+    //    gateway or sandboxed marketplace iframe with zero external code fetches.
+    //  • DEV: no inline namespace → import the vendored ./three.module.js relative to our mount point
     //    (handles slashless paths like om.pub/rso/live where a bare relative import would miss).
     async function loadThree() {
-      const coreEl = document.getElementById("three-core-src"), modEl = document.getElementById("three-module-src");
-      if (coreEl && modEl) {
-        const coreUrl = URL.createObjectURL(new Blob([coreEl.textContent], { type: "text/javascript" }));
-        const modSrc = modEl.textContent.replace(/(["'])\.\/three\.core\.js\1/g, JSON.stringify(coreUrl));
-        return import(URL.createObjectURL(new Blob([modSrc], { type: "text/javascript" })));
-      }
+      if (window.__THREE_INLINE__) return window.__THREE_INLINE__;
       const MOUNT = new URL(location.href);
       if (!/\/$|\.html?$/.test(MOUNT.pathname)) MOUNT.pathname += "/";
       return import(new URL("./three.module.js", MOUNT).href);
@@ -1283,18 +1279,38 @@
       o.hasPrev = false; o.solid = false;
       pinReentryPhase(o, nid);
     }
+    // A full-field re-roll (boot's first fill, an era drift mid-scrub) is ~34k initSlots — one synchronous
+    // hit cost ~1.4s cold. It's time-sliced instead: an adaptive slice targets ~18ms of work per frame, so
+    // the river (re)builds across a handful of frames with zero jank, growing the draw range as slots come
+    // online. Callable from the animate path (densifyForDay) since it never awaits. A newer assign — or a
+    // real catalog adopt — bumps the token and the stale fill just stops.
+    let assignToken = 0;
     function assignField(objects, placeholderCount = FIELD) {
+      const token = ++assignToken;
       state.objects = objects;
       state.workPhase = 0;
-      FIELD_N = objects.length ? Math.min(objects.length, MAXF) : Math.min(placeholderCount, MAXF);
-      pointGeo.setDrawRange(0, FIELD_N);
-      lineGeo.setDrawRange(0, FIELD_N * 2);
+      const newN = objects.length ? Math.min(objects.length, MAXF) : Math.min(placeholderCount, MAXF);
+      const oldN = FIELD_N;
       // a new day means new bodies in the slots — flush the solid batch so no stale
       // shape flies another object's track while the pool rebuilds
       flushSolids();
-      for (let i = 0; i < FIELD_N; i++) initSlot(i, objects.length ? objects[i] : null);
-      pointGeo.attributes.aSeed.needsUpdate = true;
-      recolor();
+      // shrink up front; grow as slices land (mirrors adoptField)
+      if (newN <= oldN) { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); }
+      const src = objects.length ? objects : null;
+      let i = 0, slice = 1500;                       // first slice small — it carries the cold-JIT cost
+      const step = () => {
+        if (token !== assignToken) return;           // superseded by a newer assign or a catalog adopt
+        const t0 = performance.now();
+        const end = Math.min(i + slice, newN);
+        for (; i < end; i++) initSlot(i, src ? src[i] : null);
+        if (newN > oldN) { FIELD_N = Math.min(Math.max(oldN, i), newN); pointGeo.setDrawRange(0, FIELD_N); lineGeo.setDrawRange(0, FIELD_N * 2); }
+        pointGeo.attributes.aSeed.needsUpdate = true;
+        const dt = performance.now() - t0;
+        slice = Math.max(1500, Math.min(24000, Math.round(slice * 18 / Math.max(4, dt))));
+        if (i < newN) { if (document.hidden) setTimeout(step, 0); else requestAnimationFrame(step); }   // hidden tab: rAF never fires
+        else { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); recolor(); }
+      };
+      step();
     }
     // Cheap density change for the placeholder river: grow inits only the new slots (at the current
     // composition), shrink just drops the draw range. No full rebuild — so the field can thin and swell
@@ -1366,9 +1382,12 @@
     // object count, so no satellite is ever drawn twice and none is silently truncated.
     // Chunked + token-guarded: a superseding day-jump abandons a half-finished adopt.
     async function adoptField(objects, token) {
+      ++assignToken;                                        // cancel any in-flight sliced placeholder fill
       state.adopting = true; try {                          // block placeholder density/era re-rolls mid-adopt
       // Deterministic NORAD order so the FIRST adopt and any new-object placement are reproducible.
-      objects.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));
+      // (nidNum is precomputed in loadCatalog's map — a parseInt inside the comparator ran ~500k times.)
+      for (const o of objects) if (o.nidNum === undefined) o.nidNum = parseInt(o.id, 10) || 0;
+      objects.sort((a, b) => a.nidNum - b.nidNum);
       state.objects = objects;
       flushSolids();
       const newN = Math.min(objects.length, MAXF), oldN = FIELD_N;
@@ -1382,6 +1401,7 @@
         const src = objects[k], id = String(src.id), prev = slotByNid.get(id);
         if (prev != null && prev < newN && assign[prev] == null) { assign[prev] = src; nextMap.set(id, prev); }
         else leftover.push(src);
+        if ((k & 16383) === 16383) { await nextTask(); if (token != null && token !== state.loadToken) return false; }   // ~80ms cold un-yielded
       }
       for (let f = 0, li = 0; li < leftover.length; li++) {            // fill the lowest free slots, keeping it compact
         while (f < newN && assign[f] != null) f++;
@@ -1389,13 +1409,20 @@
         assign[f] = leftover[li]; nextMap.set(String(leftover[li].id), f); f++;
       }
       slotByNid = nextMap;
-      // Shrink the draw count up front; grow it chunk-by-chunk as new slots come online.
+      // Shrink the draw count up front; grow it chunk-by-chunk as new slots come online. The stride is
+      // ADAPTIVE (like assignField's): it converges on ~18ms of adoptSlot work per frame, so the handoff
+      // never blocks a frame — a fixed 20k stride cost several hundred ms cold and read as a hitch.
       if (newN < oldN) { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); }
-      for (let base = 0; base < newN; base += DAYLOAD_CHUNK) {
+      let stride = 2500;
+      for (let base = 0; base < newN; ) {
         if (token != null && token !== state.loadToken) return false;   // a newer load won
-        const lim = Math.min(base + DAYLOAD_CHUNK, newN);
+        const t0 = performance.now();
+        const lim = Math.min(base + stride, newN);
         for (let i = base; i < lim; i++) adoptSlot(i, assign[i], oldN);
+        base = lim;
         if (newN > oldN) { FIELD_N = Math.min(lim, newN); pointGeo.setDrawRange(0, FIELD_N); lineGeo.setDrawRange(0, FIELD_N * 2); }
+        const dt = performance.now() - t0;
+        stride = Math.max(1500, Math.min(DAYLOAD_CHUNK, Math.round(stride * 18 / Math.max(4, dt))));
         if (lim < newN) await raf();                                    // yield a frame between strides
       }
       FIELD_N = newN;
@@ -1504,10 +1531,24 @@
       if (o.docked) aMul = 0;
       o.col = col; o.size = size; o.aMul = aMul;
     }
+    // Retinting the full field is ~34k colorSlots — one synchronous sweep read as a hitch on every lens
+    // switch and era re-roll, so it's time-sliced like assignField (a token supersedes stale sweeps; the
+    // tint washes across the field over a few frames, which reads as intentional).
+    let recolorToken = 0;
     function recolor() {
-      for (let i = 0; i < FIELD_N; i++) { const o = O[i]; if (o) colorSlot(o); }
-      // Batched instance colors are cheap lens-state updates, not per-frame geometry work.
-      for (const s of pool) if (s.idx >= 0 && s.iid >= 0) setSolidColor(s);
+      const token = ++recolorToken;
+      let i = 0, slice = 6000;
+      const step = () => {
+        if (token !== recolorToken) return;
+        const t0 = performance.now();
+        const end = Math.min(i + slice, FIELD_N);
+        for (; i < end; i++) { const o = O[i]; if (o) colorSlot(o); }
+        const dt = performance.now() - t0;
+        slice = Math.max(3000, Math.min(24000, Math.round(slice * 14 / Math.max(3, dt))));
+        if (i < FIELD_N) { if (document.hidden) setTimeout(step, 0); else requestAnimationFrame(step); }
+        else for (const s of pool) if (s.idx >= 0 && s.iid >= 0) setSolidColor(s);   // batched instance colors — cheap lens-state updates
+      };
+      step();
     }
 
     function updateField(dt) {
@@ -1952,13 +1993,22 @@
     // Legacy fallback: the pre-index ledger.json (whole-timeline, bloated entries, no catalog_url).
     // Used only when the chosen node hasn't published the lean index yet.
     async function loadLedger() {
-      const got = await jsonFromNodes(nodeUrl.ledger);
-      const arr = got && got.data;
-      if (!Array.isArray(arr)) return false;
-      const ordered = arr.filter((e) => e && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).sort((a, b) => a.date.localeCompare(b.date));
+      // The whole-timeline ledger can be ~25k day-entries — parse it off-thread like the catalogs, sort on
+      // plain string compare (ISO dates order correctly; a locale-aware comparator cost ~0.5s), and
+      // chunk the Map build.
+      const got = await fromNodes(nodeUrl.ledger);
+      if (!got) return false;
+      let arr = null;
+      try { arr = (await parsePayload({ raw: (await readCapped(got.res, MAX_JSON_BYTES)).buffer })).list; } catch (e) { return false; }
+      if (!Array.isArray(arr) || !arr.length) return false;
+      const ordered = arr.filter((e) => e && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
       if (!ordered.length) return false;
       state.liveNode = got.node;
-      ordered.forEach((e) => ledgerByDate.set(e.date, { count: e.object_count, sha: String(e.sha256 || ""), bands: e.band_counts || e.bands || null, raw: e }));
+      for (let i = 0; i < ordered.length; i += 8000) {
+        const end = Math.min(i + 8000, ordered.length);
+        for (let j = i; j < end; j++) { const e = ordered[j]; ledgerByDate.set(e.date, { count: e.object_count, sha: String(e.sha256 || ""), bands: e.band_counts || e.bands || null, raw: e }); }
+        if (end < ordered.length) await nextTask();
+      }
       witnessDates = ordered.map((e) => e.date); TOTAL = witnessDates.length - 1; rescaleNav();
       return true;
     }
@@ -1995,22 +2045,41 @@
     // modules + their docked visiting vehicles (ISS, Tiangong), or a deep-space probe + its spent upper stage.
     // Group any that match to full precision, so the field co-locates them under the lowest NORAD (the core /
     // oldest module) and they orbit as a unit. Runs once per catalog load — O(n) over a Map, never per frame.
-    function detectStacks(objs) {
-      // Pass 1 — exact-state groups: same plane + shape + altitude + POSITION (mean-anomaly) = one point.
-      const exact = new Map();
-      for (const o of objs) {
-        o.dockGroup = null; o.dockPrimary = null;                       // reset — objs are rebuilt each day
-        if (o.reentered || !(o.mm > 0)) continue;                       // decayed / element-less → not stackable
-        const key = `${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.mm.toFixed(4)}|${o.ma.toFixed(2)}`;
-        let g = exact.get(key); if (!g) exact.set(key, g = []);
-        g.push(o);
+    async function detectStacks(objs, token) {
+      // Bucket by an INTEGER mean-motion key first. round(mm*1e4) IS the mm.toFixed(4) group, but an
+      // integer Map key allocates no string, so the full ~34k on-orbit pass is cheap — the expensive
+      // exact-state string key is only built inside a bucket that actually has ≥2 members (rare). objs are
+      // rebuilt fresh every load, so dockGroup/dockPrimary start undefined (no reset sweep of all 68k needed).
+      // The bucketing pass is chunked with event-loop yields so it can't stall a frame on a big day.
+      const byMM = new Map();
+      const STACK_CHUNK = 9000;
+      for (let i = 0; i < objs.length; i += STACK_CHUNK) {
+        const end = Math.min(i + STACK_CHUNK, objs.length);
+        for (let j = i; j < end; j++) {
+          const o = objs[j];
+          if (o.reentered || !(o.mm > 0)) continue;                     // decayed / element-less → not stackable
+          const mk = Math.round(o.mm * 1e4);
+          let b = byMM.get(mk); if (b) b.push(o); else byMM.set(mk, [o]);
+        }
+        if (end < objs.length) { await nextTask(); if (token != null && token !== state.loadToken) return; }
+      }
+      // Pass 1 — exact-state groups within each mm bucket: same plane + shape + altitude + POSITION
+      // (mean-anomaly) = one point. Almost every bucket is a single object and is skipped.
+      const exact = [];
+      for (const b of byMM.values()) {
+        if (b.length < 2) continue;
+        const sub = new Map();
+        for (const o of b) {
+          const key = `${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.ma.toFixed(2)}`;
+          let g = sub.get(key); if (g) g.push(o); else { sub.set(key, g = [o]); exact.push(g); }
+        }
       }
       // Pass 2 — merge multi-member clusters that share the same ORBIT (plane + altitude). A big structure can
       // be propagated in more than one batch (a station's modules updated at different epochs → their
       // mean-anomaly differs and they split across pass-1 groups); they're still one physical thing. Only
       // clusters (size ≥ 2) are merged, so a constellation's individually-orbiting sats are never swept in.
       const merged = [];
-      for (const c of exact.values()) {
+      for (const c of exact) {
         if (c.length < 2) continue;
         const r = c[0];
         const host = merged.find((m) => Math.abs(m[0].inc - r.inc) < 0.1 && Math.abs(m[0].mm - r.mm) < 0.002
@@ -2048,6 +2117,172 @@
       }
       return null;
     }
+    // Decompressing + JSON.parsing a full day's catalog (~68k rows, ~700 ms cold) is the single heaviest
+    // main-thread block in the card — left inline it freezes the animation loop right after each download.
+    // Do it in a Worker instead: the gzip bytes go in (transferred, zero-copy). BUT the parsed 68k-object
+    // array is expensive to hand back — the structured-clone DESERIALIZE lands on the main thread as one
+    // ~200 ms task under load. So the worker doesn't return the array in one message: the main thread PULLS
+    // it back in ~5k-row slices, yielding a frame between each, so no single deserialize stalls a frame.
+    // Self-contained (DecompressionStream + JSON only) and byte-capped exactly like gunzip() so a hostile
+    // node's gzip bomb can't OOM the worker.
+    const CATALOG_WORKER_SRC = `
+      const CAP = ${MAX_CATALOG_BYTES}, PULL = 5000, jobs = new Map();
+      async function gunzip(buf) {
+        const reader = new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip")).getReader();
+        const chunks = []; let total = 0;
+        for (;;) {
+          const r = await reader.read();
+          if (r.done) break;
+          total += r.value.byteLength;
+          if (total > CAP) { try { await reader.cancel(); } catch (e) {} throw new Error("catalog exceeds size cap"); }
+          chunks.push(r.value);
+        }
+        const out = new Uint8Array(total); let off = 0;
+        for (const c of chunks) { out.set(c, off); off += c.byteLength; }
+        return out;
+      }
+      self.onmessage = async (e) => {
+        const d = e.data, id = d.id;
+        if (d.kind === "pull") {
+          const j = jobs.get(id); if (!j) return;
+          const end = Math.min(j.pos + PULL, j.list.length), rows = j.list.slice(j.pos, end);
+          j.pos = end; const done = end >= j.list.length;
+          self.postMessage({ id, kind: "chunk", rows, done });
+          if (done) jobs.delete(id);
+          return;
+        }
+        try {
+          const bytes = d.raw ? new Uint8Array(d.raw) : await gunzip(d.gz);
+          const cat = JSON.parse(new TextDecoder().decode(bytes));
+          // shape mirrors rowsOf() on the main side: bare array, {data:[...]} wrapper, or an
+          // object keyed by id (the directory's legacy form) served as [key, value] entries.
+          let list, shape = "rows";
+          if (Array.isArray(cat)) list = cat;
+          else if (cat && typeof cat === "object" && "data" in cat) list = Array.isArray(cat.data) ? cat.data : [];
+          else if (cat && typeof cat === "object") { list = Object.entries(cat); shape = "entries"; }
+          else list = [];
+          jobs.set(id, { list, pos: 0 });
+          self.postMessage({ id, kind: "meta", total: list.length, shape, bytes }, [bytes.buffer]);
+        } catch (err) { self.postMessage({ id, kind: "error", error: String((err && err.message) || err) }); }
+      };`;
+    // ?noworker forces the synchronous fallback — for verifying the exact path a worker-blocking embed
+    // (e.g. OpenSea's re-hosted CSP) takes, on any device, without needing such an embed in hand.
+    let _catWorker = null, _catWorkerOk = !/[?&]noworker\b/.test(location.search), _catReqId = 0;
+    const _catPending = new Map();
+    const WORKER_REPLY_MS = 15000;   // a worker that constructs but never replies (CSP-killed silently, OOM'd, hung) must not wedge the day-load
+    // Tear the worker down and reject everything in flight so parseCatalog drops to the synchronous path. Also
+    // disables it for the rest of the session (a dead worker won't recover — no point re-waiting the timeout each day).
+    const _killWorker = (reason) => { _catWorkerOk = false; try { if (_catWorker) _catWorker.terminate(); } catch (e) {} _catWorker = null; for (const p of _catPending.values()) p.reject(new Error(reason)); _catPending.clear(); };
+    function catWorker() {
+      if (_catWorker || !_catWorkerOk) return _catWorker;
+      try {
+        const url = URL.createObjectURL(new Blob([CATALOG_WORKER_SRC], { type: "application/javascript" }));
+        _catWorker = new Worker(url);
+        URL.revokeObjectURL(url);
+        _catWorker.onmessage = (e) => {   // route each meta/chunk to the pending promise for that request id
+          const p = _catPending.get(e.data.id); if (!p) return; _catPending.delete(e.data.id);
+          if (e.data.kind === "error") p.reject(new Error(e.data.error)); else p.resolve(e.data);
+        };
+        _catWorker.onerror = () => _killWorker("worker error");   // CSP-blocked blob load, OOM, or script error → fall back to sync
+      } catch (e) { _catWorkerOk = false; _catWorker = null; }
+      return _catWorker;
+    }
+    // Each request carries a reply timeout: if the worker is silently wedged (no message AND no onerror — e.g.
+    // killed mid-parse), the day still falls back to the synchronous path instead of hanging forever.
+    const _fromWorker = (id, msg, transfer) => new Promise((resolve, reject) => {
+      const to = setTimeout(() => { if (_catPending.has(id)) _killWorker("worker timeout"); }, WORKER_REPLY_MS);
+      _catPending.set(id, { resolve: (v) => { clearTimeout(to); resolve(v); }, reject: (e) => { clearTimeout(to); reject(e); } });
+      _catWorker.postMessage(msg, transfer || []);
+    });
+    // Shape of a parsed payload root — mirrored inside the worker source above.
+    function rowsOf(cat) {
+      if (Array.isArray(cat)) return { list: cat, shape: "rows" };
+      if (cat && typeof cat === "object" && "data" in cat) return { list: Array.isArray(cat.data) ? cat.data : [], shape: "rows" };
+      if (cat && typeof cat === "object") return { list: Object.entries(cat), shape: "entries" };
+      return { list: [], shape: "rows" };
+    }
+    // Off-thread decode + parse of a heavy JSON payload ({gz} compressed or {raw} plain bytes), PULLED back
+    // in slices (a frame yields between each deserialize). Copies the bytes so the ORIGINAL buffer survives
+    // for the synchronous fallback (a marketplace iframe whose CSP forbids blob: workers, or a worker crash)
+    // — the card renders everywhere, just without the smoothness win where a worker can't run.
+    async function parsePayload(payload) {
+      const src = payload.gz || payload.raw, kind = payload.gz ? "gz" : "raw";
+      const w = catWorker();
+      if (w) {
+        try {
+          const id = ++_catReqId, buf = src.slice(0);
+          const meta = await _fromWorker(id, { kind: "parse", id, [kind]: buf }, [buf]);   // decode+parse off-thread
+          const list = new Array(meta.total); let filled = 0;
+          while (filled < meta.total) {
+            const c = await _fromWorker(id, { kind: "pull", id });                     // one ~5k-row slice
+            for (let k = 0; k < c.rows.length; k++) list[filled + k] = c.rows[k];
+            filled += c.rows.length;
+            if (!c.done && filled < meta.total) await nextTask();                       // paint a frame between deserializes
+          }
+          return { list, shape: meta.shape, bytes: meta.bytes };
+        } catch (e) { _catPending.clear(); /* fall through to the synchronous path with the intact bytes */ }
+      }
+      const bytes = kind === "gz" ? new Uint8Array(await gunzip(src)) : new Uint8Array(src);
+      return { ...(await parseJsonNonBlocking(bytes)), bytes };
+    }
+    const parseCatalog = (cgz) => parsePayload({ gz: cgz });
+    // The NON-FREEZING synchronous fallback (used where a blob: worker can't run — e.g. OpenSea's
+    // re-hosted embed). An atomic decode+JSON.parse of a full day was a ~700ms block; instead the bytes
+    // are decoded in slices, the text is scanned for TOP-LEVEL element boundaries by a tiny string-aware
+    // state machine (chunked), and rows are JSON.parsed in batches — a frame paints between every step.
+    // Any anomaly (unexpected root shape, split/parse mismatch) falls back to one atomic parse, so this
+    // can degrade in smoothness but never in correctness.
+    async function parseJsonNonBlocking(bytes) {
+      // 1) decode in slices (streaming decoder keeps multi-byte sequences intact across cuts)
+      const dec = new TextDecoder(); let text = "";
+      const DSTEP = 4 << 20;
+      for (let off = 0; off < bytes.length; off += DSTEP) {
+        text += dec.decode(bytes.subarray(off, Math.min(off + DSTEP, bytes.length)), { stream: true });
+        if (off + DSTEP < bytes.length) await nextTask();
+      }
+      text += dec.decode();
+      if (text.length < (2 << 20)) return rowsOf(JSON.parse(text));   // small payload — atomic is already sub-frame
+      // 2) find the row array: a bare [...] root or the {"data":[...]} wrapper. Any other root (e.g. the
+      //    legacy object-keyed directory) parses atomically — rare, and only reached when the worker is out.
+      const m = /^\s*(?:\[|\{\s*"data"\s*:\s*\[)/.exec(text);
+      if (!m) return rowsOf(JSON.parse(text));
+      try {
+        const list = [];
+        const BATCH = 2500, SSTEP = 3 << 20;
+        let depth = 1, inStr = false, esc = false;
+        let batchStart = m[0].length, batchN = 0, sliceEnd = 0;
+        const flush = (end) => {
+          if (end > batchStart) { const rows = JSON.parse("[" + text.slice(batchStart, end) + "]"); for (const r of rows) list.push(r); }
+          batchN = 0;
+        };
+        for (let i = m[0].length; i < text.length; i++) {
+          const c = text.charCodeAt(i);
+          if (inStr) { if (esc) esc = false; else if (c === 92) esc = true; else if (c === 34) inStr = false; continue; }
+          if (c === 34) inStr = true;
+          else if (c === 123 || c === 91) depth++;                                  // { [
+          else if (c === 125 || c === 93) { depth--; if (depth === 0) { flush(i); return { list, shape: "rows" }; } }   // } ] — array closed
+          else if (c === 44 && depth === 1) {                                       // top-level comma = row boundary
+            if (++batchN >= BATCH) { flush(i); batchStart = i + 1; await nextTask(); }
+          }
+          if (i >= sliceEnd) { sliceEnd = i + SSTEP; if (i > m[0].length) await nextTask(); }   // bounded scan slices
+        }
+        throw new Error("unterminated array");
+      } catch (e) { return rowsOf(JSON.parse(text)); }   // malformed / surprising layout → one atomic parse decides
+    }
+    // Yield to the event loop so the render loop can paint a frame between heavy chunks. When the tab is
+    // hidden there's no frame to protect, so run straight through. Foreground: prefer scheduler.yield()
+    // (purpose-built), else a MessageChannel round-trip — BOTH are real task boundaries that let paint
+    // through, and neither is subject to the nested-setTimeout clamp or background timer throttling that
+    // would stretch a chunked load from milliseconds to seconds.
+    const _yieldCh = typeof MessageChannel !== "undefined" ? new MessageChannel() : null;
+    let _yieldQ = [];
+    if (_yieldCh) _yieldCh.port1.onmessage = () => { const q = _yieldQ; _yieldQ = []; for (const r of q) r(); };
+    const nextTask = () => {
+      if (document.hidden) return Promise.resolve();
+      if (typeof scheduler !== "undefined" && scheduler.yield) return scheduler.yield();
+      if (_yieldCh) return new Promise((r) => { _yieldQ.push(r); _yieldCh.port2.postMessage(0); });
+      return new Promise((r) => setTimeout(r, 0));
+    };
     // These two hold the HEAVY per-day payloads — a ~34k-object parsed catalog and its ~11 MB gzip. Left
     // unbounded they'd grow without limit as you scrub across days (the dominant long-session memory cost),
     // so they're LRU-capped: only the most-recent few days stay hot for instant re-scrub; older days are
@@ -2137,38 +2372,47 @@
     // leaves DIRECTORY empty and the join is a no-op — so this never breaks the live card.
     const DIRECTORY = new Map();           // noradStr -> { OBJECT_NAME, OBJECT_TYPE, COUNTRY_CODE, DECAY_DATE, LAUNCH_DATE }
     let directoryReady = null;
-    function ingestDirectory(d) {
-      // Tolerate object-keyed ({ "25544": {…} }) or array ([{ NORAD_CAT_ID, … }]) form, and either the
-      // card's field names or raw Space-Track satcat names.
-      const put = (id, e) => {
-        if (!e || typeof e !== "object") return;
-        id = String(id ?? e.NORAD_CAT_ID ?? e.norad_cat_id ?? e.NORAD ?? e.norad ?? "").trim();
-        if (!id) return;
-        DIRECTORY.set(id, {
-          OBJECT_NAME: e.OBJECT_NAME ?? e.SATNAME ?? e.name ?? null,
-          OBJECT_TYPE: e.OBJECT_TYPE ?? e.type ?? null,
-          COUNTRY_CODE: e.COUNTRY_CODE ?? e.COUNTRY ?? e.country ?? null,
-          DECAY_DATE: e.DECAY_DATE ?? e.DECAY ?? e.decay ?? e.decay_date ?? null,
-          LAUNCH_DATE: e.LAUNCH_DATE ?? e.LAUNCH ?? e.launch ?? e.launch_date ?? null,
-          RCS_SIZE: e.RCS_SIZE ?? e.RCS ?? e.rcs ?? null,   // size family — the Radar-size lens, object sizing + cubesat shapes need it
-        });
-      };
-      if (Array.isArray(d)) for (const e of d) put(null, e);
-      else if (d && typeof d === "object") for (const k in d) put(k, d[k]);
+    // Tolerates either the card's field names or raw Space-Track satcat names.
+    function dirPut(id, e) {
+      if (!e || typeof e !== "object") return;
+      id = String(id ?? e.NORAD_CAT_ID ?? e.norad_cat_id ?? e.NORAD ?? e.norad ?? "").trim();
+      if (!id) return;
+      DIRECTORY.set(id, {
+        OBJECT_NAME: e.OBJECT_NAME ?? e.SATNAME ?? e.name ?? null,
+        OBJECT_TYPE: e.OBJECT_TYPE ?? e.type ?? null,
+        COUNTRY_CODE: e.COUNTRY_CODE ?? e.COUNTRY ?? e.country ?? null,
+        DECAY_DATE: e.DECAY_DATE ?? e.DECAY ?? e.decay ?? e.decay_date ?? null,
+        LAUNCH_DATE: e.LAUNCH_DATE ?? e.LAUNCH ?? e.launch ?? e.launch_date ?? null,
+        RCS_SIZE: e.RCS_SIZE ?? e.RCS ?? e.rcs ?? null,   // size family — the Radar-size lens, object sizing + cubesat shapes need it
+      });
     }
     async function loadDirectory() {
       try {
-        const plain = await jsonFromNodes((n) => nodeUrl.directory(n), "force-cache");
-        if (plain && plain.data) ingestDirectory(plain.data);
-        else {
+        // The directory is another ~70k-row JSON — parsed atomically it was a ~700ms boot freeze, so it
+        // takes the same off-thread road as the catalogs (worker + pulled slices; sync fallback inside).
+        // Shape tolerance ({data:[...]}, bare array, or object-keyed by NORAD id) lives in parsePayload.
+        let parsed = null;
+        const p = await fromNodes((n) => nodeUrl.directory(n), "force-cache");
+        if (p) { try { parsed = await parsePayload({ raw: (await readCapped(p.res, MAX_JSON_BYTES)).buffer }); } catch (e) { /* bad/absent plain form */ } }
+        if (!parsed || !parsed.list.length) {
           const g = await fromNodes((n) => nodeUrl.directory(n, true), "force-cache");   // gzipped fallback
-          if (g) ingestDirectory(JSON.parse(new TextDecoder().decode(await gunzip((await readCapped(g.res, MAX_GZ_BYTES)).buffer))));
+          if (g) { try { parsed = await parsePayload({ gz: (await readCapped(g.res, MAX_GZ_BYTES)).buffer }); } catch (e) {} }
+        }
+        if (!parsed) return;
+        const { list, shape } = parsed;
+        const DIR_CHUNK = 12000;                       // Map-build is cheap per row; chunk it anyway (~70k rows)
+        for (let i = 0; i < list.length; i += DIR_CHUNK) {
+          const end = Math.min(i + DIR_CHUNK, list.length);
+          if (shape === "entries") for (let j = i; j < end; j++) dirPut(list[j][0], list[j][1]);
+          else for (let j = i; j < end; j++) dirPut(null, list[j]);
+          if (end < list.length) await nextTask();
         }
         if (DIRECTORY.size) console.info(`RSO card · identity directory joined: ${fmtNum(DIRECTORY.size)} objects`);
       } catch (e) { /* no directory published → catalogs carry their own identity; the join is a no-op */ }
     }
     async function loadCatalog(date) {
       if (catalogCache.has(date)) return lruTouch(catalogCache, date);   // a re-scrub bumps it to most-recent
+      const token = state.loadToken;   // if a newer day-load supersedes us mid-chunk, bail (the caller re-checks too)
       // Per-object detail for click-to-inspect and the daily-changes coloring: annotations
       // (directory edits, decay reports, TIP forecasts) and the delta's new/updated NORAD id lists.
       // The numeric aggregates already arrived via the lean index, so these matter only once you stop
@@ -2205,10 +2449,8 @@
       const cgz = isTar ? untar(await gunzip(ab), "catalog.json.gz") : ab;
       if (!cgz) throw new Error("catalog missing");
       catalogGzByDate.set(date, cgz.slice(0)); lruCap(catalogGzByDate, CATALOG_GZ_MAX);
-      const catBytes = await gunzip(cgz);
+      const { list, bytes: catBytes } = await parseCatalog(cgz);   // gunzip + JSON.parse OFF the main thread (worker); sync fallback inside
       verifyCatalogBytes(date, catBytes);              // fire-and-forget: HUD updates when it lands
-      const cat = JSON.parse(new TextDecoder().decode(catBytes));
-      const list = Array.isArray(cat) ? cat : cat?.data || [];
       // Join identity onto each PURE-ORBIT row before the map below reads name/type/country/decay/launch.
       // Fill-if-absent: a full-row catalog (today's production) keeps its own chain-verifiable values and the
       // directory only fills what a pure-orbit catalog omits — and DECAY_DATE here drives the reentered
@@ -2228,46 +2470,55 @@
       }
       const newIds = new Set((delta?.new_norad_cat_ids || []).map(String));
       const updatedIds = new Set((delta?.updated_norad_cat_ids || []).map(String));
-      const objs = list.map((row) => {
-        const id = String(row.NORAD_CAT_ID ?? row.norad_cat_id ?? "");
-        const decay = String(row.DECAY_DATE || row.decay_date || "").slice(0, 10);
-        const reentered = !!decay && decay <= date;                 // already came down (no longer up there)
-        const status = newIds.has(id) ? "new" : decay === date ? "decayed" : "carried";
-        const bstar = Math.abs(Number(row.BSTAR)) || 0, mmDot = Math.abs(Number(row.MEAN_MOTION_DOT)) || 0;
-        const change = annoSum?.tipIds.has(id) ? "reentry"      // predicted to come down — the headline
-          : annoSum?.decayIds.has(id) || status === "decayed" ? "decay"
-          : newIds.has(id) ? "new"
-          // Reserve "dynamic" for the extreme tail of today's refreshed solutions:
-          // roughly the top few percent by drag or mean-motion derivative.
-          : updatedIds.has(id) && (bstar >= 0.005 || mmDot >= 0.0025) ? "dynamic"
-          : annoSum?.changedIds.has(id) ? "meta"
-          : updatedIds.has(id) ? "orbit" : null;
-        return { id, name: row.OBJECT_NAME || `NORAD ${id}`, type: row.OBJECT_TYPE || "UNKNOWN",
-          band: bandFromMM(row.MEAN_MOTION), klass: klassFromType(row.OBJECT_TYPE), status, reentered, change,
-          country: row.COUNTRY_CODE || "—", launch: String(row.LAUNCH_DATE || "").slice(0, 10), decay,
-          // orbital elements that shape each object's identity in the field
-          inc: Number(row.INCLINATION) || 0, ecc: Number(row.ECCENTRICITY) || 0,
-          raan: Number(row.RA_OF_ASC_NODE) || 0,
-          // mean-motion + mean-anomaly: NOT used for the (identity-seeded) track — kept only to detect objects
-          // sharing one state vector (docked station modules, a probe + its spent stage) so they stack as one.
-          mm: Number(row.MEAN_MOTION) || 0, ma: Number(row.MEAN_ANOMALY) || 0,
-          rcs: row.RCS_SIZE || "", bstar, mmDot,
-          anno: annoSum ? annoSum.byId.get(id) || null : null };
-      });
-      detectStacks(objs);   // group co-incident NORAD ids into one physical structure (see below)
-      // breakdowns of WHAT'S STILL UP THERE (on-orbit); decayed objects are recorded but counted apart
+      // Build the field AND tally the day's breakdowns in one pass, chunked with event-loop yields so the
+      // render loop keeps painting — a full day is ~68k rows (~60 ms un-yielded), enough to drop frames.
+      // (decayed objects are recorded but counted apart from "what's still up there".)
+      const objs = new Array(list.length);
       const bc = { leo: 0, meo: 0, geo: 0 };
       const tc = { payload: 0, rocket: 0, debris: 0, unknown: 0, tba: 0 };
       const TN = ["payload", "rocket", "debris", "unknown", "tba"];
       let onOrbit = 0, reenteredTot = 0, launched = 0, decToday = 0;
-      for (const o of objs) {
-        if (o.status === "decayed") decToday++;
-        if (o.reentered) { reenteredTot++; continue; }              // not part of "what's up there"
-        onOrbit++;
-        bc[o.band === 0 ? "leo" : o.band === 1 ? "meo" : "geo"]++;
-        tc[TN[o.klass]]++;
-        if (o.status === "new") launched++;
+      const MAP_CHUNK = 5000;   // ~40ms cold, well under a frame warm
+      for (let i = 0; i < list.length; i += MAP_CHUNK) {
+        const end = Math.min(i + MAP_CHUNK, list.length);
+        for (let j = i; j < end; j++) {
+          const row = list[j];
+          const id = String(row.NORAD_CAT_ID ?? row.norad_cat_id ?? "");
+          const decay = String(row.DECAY_DATE || row.decay_date || "").slice(0, 10);
+          const reentered = !!decay && decay <= date;                 // already came down (no longer up there)
+          const status = newIds.has(id) ? "new" : decay === date ? "decayed" : "carried";
+          const bstar = Math.abs(Number(row.BSTAR)) || 0, mmDot = Math.abs(Number(row.MEAN_MOTION_DOT)) || 0;
+          const change = annoSum?.tipIds.has(id) ? "reentry"      // predicted to come down — the headline
+            : annoSum?.decayIds.has(id) || status === "decayed" ? "decay"
+            : newIds.has(id) ? "new"
+            // Reserve "dynamic" for the extreme tail of today's refreshed solutions:
+            // roughly the top few percent by drag or mean-motion derivative.
+            : updatedIds.has(id) && (bstar >= 0.005 || mmDot >= 0.0025) ? "dynamic"
+            : annoSum?.changedIds.has(id) ? "meta"
+            : updatedIds.has(id) ? "orbit" : null;
+          const o = { id, nidNum: parseInt(id, 10) || 0, name: row.OBJECT_NAME || `NORAD ${id}`, type: row.OBJECT_TYPE || "UNKNOWN",
+            band: bandFromMM(row.MEAN_MOTION), klass: klassFromType(row.OBJECT_TYPE), status, reentered, change,
+            country: row.COUNTRY_CODE || "—", launch: String(row.LAUNCH_DATE || "").slice(0, 10), decay,
+            // orbital elements that shape each object's identity in the field
+            inc: Number(row.INCLINATION) || 0, ecc: Number(row.ECCENTRICITY) || 0,
+            raan: Number(row.RA_OF_ASC_NODE) || 0,
+            // mean-motion + mean-anomaly: NOT used for the (identity-seeded) track — kept only to detect objects
+            // sharing one state vector (docked station modules, a probe + its spent stage) so they stack as one.
+            mm: Number(row.MEAN_MOTION) || 0, ma: Number(row.MEAN_ANOMALY) || 0,
+            rcs: row.RCS_SIZE || "", bstar, mmDot,
+            anno: annoSum ? annoSum.byId.get(id) || null : null };
+          objs[j] = o;
+          if (o.status === "decayed") decToday++;
+          if (o.reentered) { reenteredTot++; continue; }              // not part of "what's up there"
+          onOrbit++;
+          bc[o.band === 0 ? "leo" : o.band === 1 ? "meo" : "geo"]++;
+          tc[TN[o.klass]]++;
+          if (o.status === "new") launched++;
+        }
+        if (end < list.length) { await nextTask(); if (token !== state.loadToken) return null; }   // superseded → drop this stale load
       }
+      await detectStacks(objs, token);   // group co-incident NORAD ids into one physical structure (chunked; see below)
+      if (token !== state.loadToken) return null;
       bandCountsByDate.set(date, bc);
       typeCountsByDate.set(date, tc);
       orbitByDate.set(date, { onOrbit, reentered: reenteredTot, total: objs.length });
@@ -2297,8 +2548,13 @@
         // object visitors go looking for, via 'i') are guaranteed a slot in the sampled field
         const keep = (o) => o.status === "new" || o.status === "decayed" || o.anno || o.id === "25544";
         const rare = g.filter(keep);
+        // identity-stable sample: the SAME objects fill the field each day (no daily reshuffle).
+        // hashUnit is a string hash — computed ONCE per object, not inside the comparator (which ran
+        // it >1M times across the sort and showed up as a ~500ms task on a full modern day).
         const rest = g.filter((o) => !keep(o))
-          .sort((a, x) => hashUnit(a.id) - hashUnit(x.id));   // identity-stable sample: the SAME objects fill the field each day (no daily reshuffle)
+          .map((o) => [hashUnit(o.id), o])
+          .sort((a, x) => a[0] - x[0])
+          .map((p) => p[1]);
         return rare.concat(rest).slice(0, quotas[b]);
       });
     }

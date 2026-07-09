@@ -47,14 +47,15 @@ class CardArtifactTest(unittest.TestCase):
         self.assertNotIn("esm.sh", self.html)
 
     def test_three_loads_dual_mode_inline_or_vendored(self):
-        # loadThree() prefers INLINED three.js (the standalone mint artifact) and falls back to the
-        # vendored files relative to the mount point (dev). Both code paths must be present.
+        # loadThree() prefers INLINED three.js (the standalone mint artifact: a plain CLASSIC script that
+        # assigns window.__THREE_INLINE__ — deliberately NOT a blob import, so three.js needs no blob: in
+        # script-src beyond the inline-script allowance the card's own module script already requires) and
+        # falls back to the vendored module relative to the mount point (dev). Both code paths must be present.
         self.assertIn("function loadThree()", self.html)
-        self.assertIn('document.getElementById("three-core-src")', self.html)
-        self.assertIn('document.getElementById("three-module-src")', self.html)
-        # inline path: blob-import the core, rewrite the module's ./three.core.js specifier to it
-        self.assertIn("URL.createObjectURL(new Blob([coreEl.textContent]", self.html)
-        self.assertIn(r"\.\/three\.core\.js\1/g, JSON.stringify(coreUrl)", self.html)
+        self.assertIn("if (window.__THREE_INLINE__) return window.__THREE_INLINE__;", self.html)
+        # the render-or-blank dependency must NOT ride on blob:; the old blob-import machinery is gone
+        self.assertNotIn("three-core-src", self.html)
+        self.assertNotIn("three-module-src", self.html)
         self.assertIn("const THREE = await loadThree();", self.html)
 
     def test_mount_agnostic_module_resolution(self):
@@ -94,10 +95,13 @@ class CardArtifactTest(unittest.TestCase):
         # structure propagated in >1 batch (Tiangong), and the field co-locates the members under the lowest
         # NORAD (the core) — hidden — so a station orbits as ONE point. Verified live: ISS = 11, Tiangong = 5,
         # members co-located (plane/radius/phase delta 0) and hidden (aMul 0), core visible.
-        self.assertIn("function detectStacks(objs)", self.html)
+        self.assertIn("async function detectStacks(objs, token)", self.html)                                # chunked + bails on supersession
         self.assertIn("mm: Number(row.MEAN_MOTION) || 0, ma: Number(row.MEAN_ANOMALY) || 0,", self.html)   # elements kept for detection
-        self.assertIn("detectStacks(objs);", self.html)                                                     # run at load
-        self.assertIn("`${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.mm.toFixed(4)}|${o.ma.toFixed(2)}`", self.html)
+        self.assertIn("await detectStacks(objs, token);", self.html)                                         # run at load (chunked)
+        # bucket on an INTEGER mm key (round(mm*1e4) == mm.toFixed(4)) — no per-object string alloc — then the
+        # exact-state string key is only built inside a bucket that actually has ≥2 members
+        self.assertIn("const mk = Math.round(o.mm * 1e4);", self.html)
+        self.assertIn("`${o.inc.toFixed(2)}|${o.raan.toFixed(2)}|${o.ecc.toFixed(5)}|${o.ma.toFixed(2)}`", self.html)
         self.assertIn("for (const o of g) { o.dockGroup = g; o.dockPrimary = primary; }", self.html)
         # hidden members: zero alpha + never solidify; the core alone is drawn
         self.assertIn("o.docked = !!(o.meta && o.meta.dockPrimary && o.meta.dockPrimary !== o.meta.id);", self.html)
@@ -113,6 +117,50 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("`◈ part of ` + link(grp[0])", self.html)
         self.assertIn('const dock = e.target.closest(".dock-link");', self.html)
         self.assertIn("const idx = slotForNorad(dock.dataset.nid); if (idx >= 0) showInspector(idx);", self.html)
+
+    def test_catalog_parse_is_off_main_thread_and_chunked(self):
+        # Decompress + JSON.parse of a full ~68k-row day is the heaviest main-thread block (~700 ms cold);
+        # inline it froze the render loop right after each download. It now runs in a Worker, the parsed
+        # array is PULLED back in slices (each structured-clone deserialize is small, a frame paints between),
+        # and the on-main continuation (map + counts + detectStacks) is chunked with event-loop yields and a
+        # load-token bail. A CSP-blocked worker (or crash) falls back to the synchronous path so the card still
+        # renders everywhere. Verified live: fresh day-load max frame gap ~30 ms (was ~860 ms).
+        self.assertIn("const CATALOG_WORKER_SRC = `", self.html)          # inline, self-contained worker
+        self.assertIn("new Worker(url)", self.html)
+        self.assertIn('kind: "pull"', self.html)                          # slice-by-slice pull protocol
+        self.assertIn('kind: "meta"', self.html)
+        # parsePayload is the general off-thread parse ({gz} or {raw} bytes); catalogs, the identity
+        # directory and the legacy ledger all ride it
+        self.assertIn("async function parsePayload(payload)", self.html)
+        self.assertIn("const parseCatalog = (cgz) => parsePayload({ gz: cgz });", self.html)
+        self.assertIn("await nextTask();", self.html)                     # frame yield between deserialized slices
+        # synchronous fallback keeps working where a worker can't be created — and it is NON-FREEZING:
+        # sliced decode + a string-aware top-level splitter + batched JSON.parse, atomic parse as safety net
+        self.assertIn("async function parseJsonNonBlocking(bytes)", self.html)
+        self.assertIn('const m = /^\\s*(?:\\[|\\{\\s*"data"\\s*:\\s*\\[)/.exec(text);', self.html)
+        self.assertIn('JSON.parse("[" + text.slice(batchStart, end) + "]")', self.html)
+        self.assertIn("} catch (e) { return rowsOf(JSON.parse(text)); }", self.html)
+        # ?noworker forces the fallback path, so a worker-blocking embed can be simulated on any device
+        self.assertIn('_catWorkerOk = !/[?&]noworker\\b/.test(location.search)', self.html)
+        # a worker that constructs but never replies (CSP-killed silently, OOM'd, hung) must not wedge the load:
+        # every request carries a reply timeout that tears the worker down and drops to the synchronous path
+        self.assertIn("const WORKER_REPLY_MS =", self.html)
+        self.assertIn("const _killWorker = (reason) =>", self.html)
+        self.assertIn("if (_catPending.has(id)) _killWorker(\"worker timeout\");", self.html)
+        self.assertIn("_catWorker.onerror = () => _killWorker(\"worker error\");", self.html)
+        # worker gets the SAME zip-bomb byte cap as the main-thread gunzip
+        self.assertIn("const CAP = ", self.html)
+        # the on-main map + counts pass is chunked and bails if a newer load supersedes it
+        self.assertIn("const MAP_CHUNK = 5000;", self.html)
+        self.assertIn("if (end < list.length) { await nextTask(); if (token !== state.loadToken) return null; }", self.html)
+        self.assertIn("const token = state.loadToken;", self.html)
+        # the yield primitive: hidden tab runs straight through (no frame to protect); foreground uses
+        # scheduler.yield() or a MessageChannel round-trip — real task boundaries that let paint through
+        # WITHOUT the nested-setTimeout clamp or background timer throttling (which stretched a chunked
+        # load from milliseconds to minutes)
+        self.assertIn("if (document.hidden) return Promise.resolve();", self.html)
+        self.assertIn('if (typeof scheduler !== "undefined" && scheduler.yield) return scheduler.yield();', self.html)
+        self.assertIn("_yieldCh.port2.postMessage(0)", self.html)
 
     def test_hyperspace_spin_is_distance_independent(self):
         # the roll is keyed to warp ALONE (capped), NOT overdrive — so a 50-year leap rolls no harder
@@ -616,7 +664,12 @@ class CardArtifactTest(unittest.TestCase):
         # client-side at render (§8.1). Loaded through the same ranked-node path, byte-capped, JSON.parse only.
         self.assertIn("const DIRECTORY = new Map();", self.html)
         self.assertIn("async function loadDirectory()", self.html)
-        self.assertIn("function ingestDirectory(d)", self.html)
+        # the ~70k-row directory parses OFF the main thread (same worker road as catalogs — parsePayload
+        # with sync fallback) and the Map-build ingests in chunks with frame yields
+        self.assertIn("function dirPut(id, e)", self.html)
+        self.assertIn("parsed = await parsePayload({ raw: (await readCapped(p.res, MAX_JSON_BYTES)).buffer })", self.html)
+        self.assertIn("const DIR_CHUNK = 12000;", self.html)
+        self.assertIn('if (shape === "entries") for (let j = i; j < end; j++) dirPut(list[j][0], list[j][1]);', self.html)
         self.assertIn('directory: (n, gz) => rawUrl(n, n.node, gz ? "directory.json.gz" : "directory.json"),', self.html)
         # loaded in parallel at boot; loadCatalog awaits it before joining, but the OPTIONAL directory must
         # never block the ESSENTIAL catalog render — a stalled node fails OPEN via a timeout race.
@@ -635,8 +688,10 @@ class CardArtifactTest(unittest.TestCase):
         # DECAY_DATE from the directory drives the EXISTING time-aware reentered (decay <= shown date) logic,
         # so scrubbing back shows only what was actually on orbit then — decay came for free with the join.
         self.assertIn("const reentered = !!decay && decay <= date;", self.html)
-        # tolerant of object-keyed OR array directory form + Space-Track satcat field-name variants
-        self.assertIn("if (Array.isArray(d)) for (const e of d) put(null, e);", self.html)
+        # tolerant of object-keyed OR array directory form (shape detection lives in rowsOf, mirrored in
+        # the worker) + Space-Track satcat field-name variants
+        self.assertIn("function rowsOf(cat)", self.html)
+        self.assertIn('return { list: Object.entries(cat), shape: "entries" };', self.html)
         self.assertIn("e.OBJECT_NAME ?? e.SATNAME ?? e.name", self.html)
         # PRODUCTION-SAFE: the live CONFIG still ships its real backing nodes — NOT cleared to [] for a
         # local-only test (the local source comes via the ?source= dev node, which serves local-first).
@@ -1121,13 +1176,23 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("settleOrbit(o, objectDt)", self.html)
 
     def test_day_load_is_strided_and_capability_scaled(self):
-        # the heavy ~34k-slot rebuild spreads across frames so a catalog handoff never
-        # drops a frame; a capable machine takes bigger strides than a phone.
+        # the heavy ~34k-slot rebuild spreads across frames so a catalog handoff never drops a frame.
+        # The stride is ADAPTIVE — it converges on ~18ms of adoptSlot work per frame (a fixed 20k stride
+        # cost several hundred ms cold); DAYLOAD_CHUNK survives as the capability-scaled CAP.
         self.assertIn("const DAYLOAD_CHUNK = mobile ? 4000 : (navigator.hardwareConcurrency >= 8 ? 20000 : 10000)", self.html)
-        self.assertIn("for (let base = 0; base < newN; base += DAYLOAD_CHUNK)", self.html)
+        self.assertIn("stride = Math.max(1500, Math.min(DAYLOAD_CHUNK, Math.round(stride * 18 / Math.max(4, dt))));", self.html)
         self.assertIn("if (token != null && token !== state.loadToken) return false;", self.html)
         self.assertIn("if (lim < newN) await raf();", self.html)
         self.assertIn("function colorSlot(o)", self.html)   # per-slot recolor, inlined into the chunked adopt
+        # the full-field placeholder re-roll (boot, era drift) and the full-field retint are ALSO
+        # time-sliced, with tokens so a newer assign / adopt / lens switch supersedes a stale sweep
+        self.assertIn("let assignToken = 0;", self.html)
+        self.assertIn("let recolorToken = 0;", self.html)
+        self.assertIn("slice = Math.max(1500, Math.min(24000, Math.round(slice * 18 / Math.max(4, dt))));", self.html)
+        self.assertIn("++assignToken;                                        // cancel any in-flight sliced placeholder fill", self.html)
+        # comparator hygiene: sorts never run string-hash/parseInt/localeCompare per comparison
+        self.assertIn("objects.sort((a, b) => a.nidNum - b.nidNum);", self.html)
+        self.assertNotIn("localeCompare", self.html)
 
     def test_boots_from_live_index_no_embedded_baseline(self):
         # The as-of-mint embedded baseline was removed — the offline-permanence snapshot is being
@@ -1211,8 +1276,10 @@ class CardArtifactTest(unittest.TestCase):
         # phase / anomaly seeded by identity (nid), not the raw slot index
         self.assertIn("o.phase = rand2(nid, 47);", self.html)
         self.assertIn("o.ta = rand2(nid, 53) * 6.2832;", self.html)
-        # the mobile sample is identity-stable (same objects each day), not a daily reshuffle keyed on the date
-        self.assertIn("sort((a, x) => hashUnit(a.id) - hashUnit(x.id))", self.html)
+        # the mobile sample is identity-stable (same objects each day), not a daily reshuffle keyed on the
+        # date — and the hash key is computed ONCE per object (decorated sort), never inside the comparator
+        self.assertIn(".map((o) => [hashUnit(o.id), o])", self.html)
+        self.assertIn(".sort((a, x) => a[0] - x[0])", self.html)
         self.assertNotIn("hashUnit(`${a.id}:${date}`)", self.html)
         # A persistent identity→slot map keeps each object in the SAME field slot across day-loads. Without it,
         # objects[i]→slot i means one launch/decay shifts every slot after it (measured on the real archive:
@@ -1223,7 +1290,7 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("if (prev != null && prev < newN && assign[prev] == null) { assign[prev] = src; nextMap.set(id, prev); }", self.html)
         self.assertIn("slotByNid = nextMap;", self.html)
         self.assertIn("for (let i = base; i < lim; i++) adoptSlot(i, assign[i], oldN);", self.html)
-        self.assertIn("objects.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));", self.html)
+        self.assertIn("objects.sort((a, b) => a.nidNum - b.nidNum);", self.html)   # NORAD sort on a precomputed numeric key
         # and any object that DOES still have to travel to its track fades out while it moves and back in once
         # settled (no visible zip), and isn't promoted to a solid mid-settle.
         self.assertIn("o.settleK = smooth(0.9, 0.9997, o.cg * t.cg + o.sg * t.sg) * (1 - smooth(2, 36, Math.abs(t.R - o.R)));", self.html)
