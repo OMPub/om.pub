@@ -221,17 +221,22 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("o.launch && !o.reentered", self.html)            # oldest *still on orbit*
         self.assertIn("showInspector(idx);", self.html)                 # selecting follows it (sets followNorad)
         self.assertIn("refreshGotoIfOpen();", self.html)                # list refreshes when a new day loads
-        # at most ten rows, with a subtle TOTAL-match count below the list
-        self.assertIn("const GOTO_MAX = 10;", self.html)
+        # a capped, SCROLLABLE list with just the TOTAL-match count below it (no "showing X of Y")
+        self.assertIn("const GOTO_MAX = mobile ? 30 : 100;", self.html)   # phones keep the list short
         self.assertIn("gotoRows = all.slice(0, GOTO_MAX);", self.html)
         self.assertIn('id="goto-count"', self.html)
-        self.assertIn("`showing ${GOTO_MAX} of ${all.length} matches`", self.html)
+        self.assertIn('!q ? "" : all.length === 1 ? "1 match" : `${all.length} matches`', self.html)
+        self.assertNotIn("showing ${GOTO_MAX} of", self.html)
+        # arrowing keeps the selection visible (the list scrolls to it)
+        self.assertIn('rows[gotoSel].scrollIntoView({ block: "nearest" })', self.html)
+        # the finder panel is vertically CENTERED on the viewport (was docked too high)
+        self.assertIn("top: 50%; transform: translateY(-50%)", self.html)
         # the finder REMEMBERS the last search and restores it (selected) on reopen
         self.assertIn("const q = (gotoLastQuery = $(\"goto-input\").value).trim();", self.html)
         self.assertIn("inp.value = gotoLastQuery;", self.html)
         self.assertIn("inp.focus(); inp.select();", self.html)
         # mirrored layout, but the input is anchored at a FIXED top (not centred) so it never moves as the list grows
-        self.assertIn(".goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: max(96px, 16vh);", self.html)
+        self.assertIn(".goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: 50%; transform: translateY(-50%);", self.html)
 
     def test_every_fetch_is_timeout_bounded(self):
         # a node that connects but never responds must not stall the fallback chain — every fetch is
@@ -563,10 +568,13 @@ class CardArtifactTest(unittest.TestCase):
         ):
             self.assertIn(binding, self.html)
         self.assertIn("function resetDefaultView()", self.html)
-        self.assertIn("function inspectClosestVisible()", self.html)
+        self.assertIn("function inspectClosestVisible(dir = 1)", self.html)
         self.assertIn("if (viewZ >= -camera.near) continue", self.html)
         self.assertIn("nearestCycle = closest.slice(0, 6)", self.html)
-        self.assertIn("(nearestCyclePos + 1) % nearestCycle.length", self.html)
+        self.assertIn("(nearestCyclePos + dir + nearestCycle.length) % nearestCycle.length", self.html)
+        # Shift reverses the through-cycle bindings (Enter closest set, Space lens)
+        self.assertIn("inspectClosestVisible(e.shiftKey ? -1 : 1)", self.html)
+        self.assertIn("cycleMode(e.shiftKey ? -1 : 1)", self.html)
         # Escape returns the complete visual state, including lens and prism faces.
         self.assertIn("state.lens = 0", self.html)
         self.assertIn("resetPrisms()", self.html)
@@ -719,9 +727,15 @@ class CardArtifactTest(unittest.TestCase):
 
     def test_prisms_allow_complete_rotated_faces(self):
         self.assertIn("width: min(330px", self.html)
-        self.assertIn(".prism-inner { position: relative; height: 94px", self.html)
-        self.assertIn("translateZ(47px)", self.html)
-        self.assertIn("translateZ(114px)", self.html)
+        # geometry is var-ified (defaults = the original 94/47/114 px) so large screens can scale it in unison
+        self.assertIn("--ph: 94px; --pz4: 47px; --pz8: 114px;", self.html)
+        self.assertIn(".prism-inner { position: relative; height: var(--ph)", self.html)
+        self.assertIn("translateZ(var(--pz4))", self.html)
+        self.assertIn("translateZ(var(--pz8))", self.html)
+        # a large-screen tier scales the whole HUD (incl. prism geometry) up, additive below 1600px;
+        # vmin-based with high caps so it keeps growing through 8K/16K walls and the Sphere
+        self.assertIn("@media (min-width: 1600px) {", self.html)
+        self.assertIn(":root { --ph: clamp(94px, 10.4vmin, 660px); --pz4: clamp(47px, 5.2vmin, 330px); --pz8: clamp(114px, 12.58vmin, 799px); }", self.html)
         # The densest face (on-orbit by type: header + four rows) must clear the fixed 94px
         # box. Tight row spacing + a slim header gutter keep every row inside the face, so
         # nothing clips on a display whose font metrics round the layout a pixel or two taller.
@@ -735,6 +749,23 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("const seat = (deg) => `translateZ(${-depth}px) rotateX(${deg}deg)`", self.html)
         self.assertIn("inner.style.transform = seat(-turns * angle)", self.html)
         self.assertIn("turns = 0; inner.style.transform = seat(0)", self.html)
+
+    def test_giant_screen_object_sizing(self):
+        # On an 8K/16K wall or the Sphere, px-sized sprites would shrink to specks — a screen-scale
+        # uniform grows them (and the point-size ceiling) once BOTH dimensions are large. 1x below 1440p
+        # so the tuned look on ordinary displays is untouched.
+        self.assertIn("function screenScale() { return Math.max(1, Math.min(2.5, Math.min(innerWidth, innerHeight) / 1440)); }", self.html)
+        self.assertIn("uScreen: { value: screenScale() }", self.html)
+        self.assertIn("uniform float uPixel, uTime, uAspect, uScreen;", self.html)
+        self.assertIn("* uPixel * uScreen;", self.html)
+        self.assertIn("clamp(base * (1.0 + swell) * sb, 1.0, 24.0 * uScreen)", self.html)
+        self.assertIn("pointMat.uniforms.uScreen.value = screenScale();", self.html)
+
+    def test_finder_wheel_scrolls_list_not_day(self):
+        # Wheeling over the (scrollable) finder results scrolls the list natively instead of scrubbing
+        # the day — bail BEFORE preventDefault, and only when it can actually overflow-scroll.
+        self.assertIn('e.target.closest("#goto-results")', self.html)
+        self.assertIn("scr.scrollHeight > scr.clientHeight + 1", self.html)
 
     def test_mobile_layout_gestures_and_tooltip_taps(self):
         # The former two lower-left prisms are one eight-face archive prism,
@@ -1330,8 +1361,10 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("angle = 360 / faces.length", self.html)
         self.assertIn("seat(-turns * angle)", self.html)   # a true fraction-of-a-turn, re-seated each time
         self.assertIn('setupPrism("prism-obj", "Archive record")', self.html)
-        self.assertIn('prismRotators["prism-obj"]?.()', self.html)
-        self.assertIn('prismRotators["prism-witness"]?.()', self.html)
+        # X / C rotate the two records; Shift spins them the OTHER way (dir -1)
+        self.assertIn('prismRotators["prism-obj"]?.(e.shiftKey ? -1 : 1)', self.html)
+        self.assertIn('prismRotators["prism-witness"]?.(e.shiftKey ? -1 : 1)', self.html)
+        self.assertIn("const rotate = (dir = 1) => { turns += dir;", self.html)
         self.assertIn('e.key === "Enter" || e.key === " " || e.key === "Spacebar"', self.html)
 
     def test_settings_is_a_real_modal(self):
@@ -1438,8 +1471,18 @@ class CardLeanIndexTest(unittest.TestCase):
         cls.html = CARD.read_text(encoding="utf-8")
 
     def test_boots_to_latest_day_not_a_fixed_anchor(self):
-        # opens on "now": the cursor snaps to the last witnessed day unless the visitor flew
-        self.assertIn("const li = Math.max(0, witnessDates.length - 1); state.cursor = li;", self.html)
+        # opens on "now": the cursor snaps to the last witnessed day unless the visitor flew — OR a ?day=
+        # param names an opening day (nearest witnessed to it)
+        self.assertIn("const wantDay = bootDayParam(), li = wantDay ? nearestWitnessIndex(wantDay) : Math.max(0, witnessDates.length - 1);", self.html)
+        self.assertIn("state.cursor = li; state.target = li; state.shownDay = -1;", self.html)
+
+    def test_day_url_param_opens_on_a_specific_day(self):
+        # ?day=YYYY | YYYYMM | YYYYMMDD (dashes tolerated) → a UTC date → nearest witnessed day
+        self.assertIn("function bootDayParam()", self.html)
+        self.assertIn('new URLSearchParams(location.search).get("day")', self.html)
+        self.assertIn("raw.replace(/\\D/g, \"\")", self.html)
+        self.assertIn("/^(\\d{4})(\\d{2})?(\\d{2})?$/.exec(digits)", self.html)
+        self.assertIn("new Date(Date.UTC(parseInt(m[1], 10), mo - 1, d))", self.html)
 
     def test_fetches_lean_index_manifest_and_year_chunk(self):
         self.assertIn("async function loadIndex()", self.html)

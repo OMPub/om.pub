@@ -25,6 +25,9 @@ produce the self-contained `index.standalone.html`, and mint/upload THAT file.
 
 ### Dev-only affordances (never harmful in the mint, but good to know)
 
+- `?day=<YYYY | YYYYMM | YYYYMMDD>` — open on a specific day instead of the latest (dashes/slashes
+  tolerated; snaps to the nearest witnessed day). A deep-history day opens on a light era, e.g.
+  `?day=19690420` → Apr 20 1969 (~1.6k objects vs ~34k today) — handy for a fast, low-object load.
 - `?source=<private-host-url>` — session-only top-priority local data node (see below).
 - `?noworker` — forces the synchronous (worker-less) parse path, so you can exercise
   exactly what a worker-blocking embed (e.g. an OpenSea re-host CSP) does, on any device.

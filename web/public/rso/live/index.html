@@ -16,6 +16,8 @@
       --safe-right: max(18px, env(safe-area-inset-right));
       --safe-bottom: max(18px, env(safe-area-inset-bottom));
       --safe-left: max(18px, env(safe-area-inset-left));
+      /* 3D data-prism geometry (var-ified so large screens can scale it in unison; defaults = current) */
+      --ph: 94px; --pz4: 47px; --pz8: 114px;
     }
     * { box-sizing: border-box; }
     html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #020506; color: var(--ink);
@@ -81,26 +83,26 @@
     .readout-note { margin-top: 4px; color: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 8px; text-transform: uppercase; }
     /* tap-to-rotate 4-sided data prism (a real quarter-turn each tap) */
     .prism { position: relative; overflow: hidden; cursor: pointer; perspective: 4000px; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
-    .prism-inner { position: relative; height: 94px; transform-style: preserve-3d; transition: transform 0.62s cubic-bezier(0.45,0.05,0.2,1); }
+    .prism-inner { position: relative; height: var(--ph); transform-style: preserve-3d; transition: transform 0.62s cubic-bezier(0.45,0.05,0.2,1); }
     /* the border + dots live ON each face, so they rotate as part of the prism */
     .face { position: absolute; inset: 0; backface-visibility: hidden; padding: 6px 10px 0; border-top: 1px solid var(--line); }
-    .face:nth-child(1) { transform: rotateX(0deg)   translateZ(47px); }
-    .face:nth-child(2) { transform: rotateX(90deg)  translateZ(47px); }
-    .face:nth-child(3) { transform: rotateX(180deg) translateZ(47px); }
-    .face:nth-child(4) { transform: rotateX(270deg) translateZ(47px); }
+    .face:nth-child(1) { transform: rotateX(0deg)   translateZ(var(--pz4)); }
+    .face:nth-child(2) { transform: rotateX(90deg)  translateZ(var(--pz4)); }
+    .face:nth-child(3) { transform: rotateX(180deg) translateZ(var(--pz4)); }
+    .face:nth-child(4) { transform: rotateX(270deg) translateZ(var(--pz4)); }
     /* The archive prism combines the two former lower-left records. Eight faces means
        one compact object, with a 45-degree eighth-turn per tap. Its faces sit far out
        (a deep octagon), so it needs a much nearer vanishing point than the shallow
        four-face witness prism — otherwise the deep rotation flattens into a vertical slide. */
     .prism.eight { perspective: 900px; }
-    .prism.eight .face:nth-child(1) { transform: rotateX(0deg)   translateZ(114px); }
-    .prism.eight .face:nth-child(2) { transform: rotateX(45deg)  translateZ(114px); }
-    .prism.eight .face:nth-child(3) { transform: rotateX(90deg)  translateZ(114px); }
-    .prism.eight .face:nth-child(4) { transform: rotateX(135deg) translateZ(114px); }
-    .prism.eight .face:nth-child(5) { transform: rotateX(180deg) translateZ(114px); }
-    .prism.eight .face:nth-child(6) { transform: rotateX(225deg) translateZ(114px); }
-    .prism.eight .face:nth-child(7) { transform: rotateX(270deg) translateZ(114px); }
-    .prism.eight .face:nth-child(8) { transform: rotateX(315deg) translateZ(114px); }
+    .prism.eight .face:nth-child(1) { transform: rotateX(0deg)   translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(2) { transform: rotateX(45deg)  translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(3) { transform: rotateX(90deg)  translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(4) { transform: rotateX(135deg) translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(5) { transform: rotateX(180deg) translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(6) { transform: rotateX(225deg) translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(7) { transform: rotateX(270deg) translateZ(var(--pz8)); }
+    .prism.eight .face:nth-child(8) { transform: rotateX(315deg) translateZ(var(--pz8)); }
     /* axial / centre-gutter alignment: counts right-align to a shared centreline (tabular figures),
        labels left-align off it — each column grows outward as needed */
     .readout-rows { margin-top: 6px; display: grid; grid-template-columns: 1fr 3fr; column-gap: 14px; row-gap: 2px; align-items: baseline;
@@ -204,7 +206,7 @@
        orbit this day by NORAD id or name; an empty query lists the oldest survivors still up. */
     /* Anchored at a FIXED top (not vertically centred) so the title + input never move — the results list
        grows and shrinks BELOW them as you type, rather than the whole panel re-centring under the cursor. */
-    .goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: max(96px, 16vh);
+    .goto-panel { position: absolute; left: calc(var(--safe-left) + 18px); top: 50%; transform: translateY(-50%);
       display: grid; gap: 6px; justify-items: start; width: min(232px, 42vw); pointer-events: auto; z-index: 6; }
     .goto-panel[hidden] { display: none; }
     .gp-title { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.12em; font-size: 8px; color: var(--accent); }
@@ -212,7 +214,7 @@
       color: var(--ink); font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.02em; padding: 6px 9px; outline: none; }
     .gp-input::placeholder { color: var(--dim); }
     .gp-input:focus { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(154,169,255,0.25); }
-    .gp-results { display: grid; gap: 1px; width: 100%; max-height: min(46vh, 360px); overflow-y: auto; scrollbar-width: thin; }
+    .gp-results { display: grid; gap: 1px; width: 100%; max-height: min(40vh, 300px); overflow-y: auto; scrollbar-width: thin; }
     .gp-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: baseline; text-align: left;
       background: none; border: 0; border-radius: 5px; padding: 5px 8px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10px; cursor: pointer; }
     .gp-row:hover, .gp-row.sel { background: rgba(154,169,255,0.12); color: var(--ink); }
@@ -292,6 +294,38 @@
     body.zen .controls .icon-btn:not(#camera-btn) { opacity: 0; pointer-events: none; transition: opacity 400ms ease; }
 
     @keyframes blink { 50% { opacity: 0.35; } }
+    /* ── large screens: make the most of a big monitor. The FIELD already fills any canvas; here the
+       chrome scales UP fluidly (clamp on vw/vh) so it stays proportional on 1440p / 4K / ultrawide instead
+       of a tiny fixed HUD. Additive — never touches sizes below 1600px, so normal screens are unchanged. ── */
+    /* Large-and-giant displays: 30" desks up through 8K/16K museum walls and the Las Vegas Sphere.
+       Type + prism geometry scale on vmin (the SHORTER side) so they never overflow a wide-short wall
+       and read right on the square Sphere; caps sit high enough to keep growing to 16K. Panel/banner
+       WIDTHS stay on vw (they're horizontal, and min()-guarded) with lifted caps. Coefficients are the
+       old vw × 1.78 so 16:9 monitors look identical to before — this only ADDS headroom past ~2560px. */
+    @media (min-width: 1600px) {
+      :root { --ph: clamp(94px, 10.4vmin, 660px); --pz4: clamp(47px, 5.2vmin, 330px); --pz8: clamp(114px, 12.58vmin, 799px); }
+      .brand-name { font-size: clamp(12px, 1.46vmin, 52px); }
+      .brand-sub, .eyebrow, .date-index, .status-label { font-size: clamp(9px, 1.07vmin, 36px); }
+      .readout-value { font-size: clamp(20px, 2.67vmin, 88px); }
+      .readout-value.sm { font-size: clamp(14px, 1.87vmin, 56px); }
+      .readout-label, .readout-note, .readout-rows .hd, .lg-title, .lg-years, .lg-note, .gp-sub, .gp-count, .gp-title {
+        font-size: clamp(8px, 0.93vmin, 30px); }
+      .readout-rows { font-size: clamp(10px, 1.1vmin, 38px); }
+      .lg-row { font-size: clamp(9px, 1.07vmin, 36px); }
+      .lens-legend { gap: clamp(7px, 0.98vmin, 34px); }
+      .lg-years { width: clamp(116px, 8vw, 480px); }
+      .insp-name { font-size: clamp(14px, 1.78vmin, 56px); }
+      .insp-meta, .insp-obs, .insp-drag, .insp-dock { font-size: clamp(9px, 1.07vmin, 36px); }
+      .insp-body { font-size: clamp(8px, 0.98vmin, 34px); }
+      .inspector { width: min(clamp(430px, 32vw, 1400px), 92vw); }
+      .goto-panel { width: min(clamp(232px, 17vw, 760px), 42vw); }
+      .gp-input { font-size: clamp(11px, 1.28vmin, 40px); }
+      .gp-row { font-size: clamp(11px, 1.21vmin, 38px); }
+      .gp-results { max-height: min(46vh, 1100px); }
+      .readout .prism { width: min(clamp(330px, 23vw, 1200px), calc(50vw - var(--safe-left) - 36px)); }
+      .icon-btn { width: clamp(22px, 2.67vmin, 72px); height: clamp(22px, 2.67vmin, 72px); }
+      .record-date { width: min(60vw, clamp(620px, 46vw, 2400px)); }
+    }
     @media (max-width: 760px) {
       .brand-sub { display: none; } .record-date { top: calc(var(--safe-top) + 60px); width: 82vw; }
       .inspector { top: calc(var(--safe-top) + 182px); }
@@ -328,19 +362,25 @@
       .readout-value { font-size: clamp(13px, 2vh, 17px); }
       .lens-legend { gap: 5px; }
       .lg-row { font-size: 8px; }
+      .gp-results { max-height: min(34vh, 210px); }   /* shorter finder list on small / short screens */
       .witness { max-width: none; }
     }
     /* tiny — NFT grid tiles: the piece reads as pure visual; chrome to a whisper.
        The fullscreen button stays — it's the escape hatch to the full experience. */
     @media (max-width: 420px), (max-height: 380px) {
-      .lens-legend, .goto-panel, .status-label, .date-index, #catalog-btn { display: none; }
+      .lens-legend, .status-label, .date-index, #catalog-btn { display: none; }
       .corner { width: 14px; height: 14px; }
       .date { font-size: clamp(14px, 7.5vw, 22px); margin-top: 4px; }
       .brand-name { font-size: 9px; }
       .inspector { width: 94vw; }
       .insp-stage { flex-basis: 76px; min-height: 76px; }
       .mode-toast { font-size: 9px; }
+      /* the finder is an on-demand overlay — keep it usable on a phone (near-full-width, short list),
+         only truly gone on a tiny/short tile where the piece is pure visual */
+      .goto-panel { width: min(300px, calc(100vw - 2 * var(--safe-left) - 12px)); }
+      .gp-results { max-height: min(38vh, 240px); }
     }
+    @media (max-height: 380px) { .goto-panel { display: none; } }   /* a short tile has no room for the finder */
   </style>
 </head>
 <body>
@@ -554,9 +594,9 @@
       <div class="settings-page" id="settings-page-shortcuts" role="tabpanel" aria-labelledby="tab-shortcuts" tabindex="0" hidden>
         <dl class="shortcut-list">
           <dt>Arrows / WASD</dt><dd>Steer the view</dd>
-          <dt>Space</dt><dd>Rotate the color lens</dd>
-          <dt>X / C</dt><dd>Rotate the left / right record panel</dd>
-          <dt>Enter</dt><dd>Cycle through the six closest visible objects</dd>
+          <dt>Space</dt><dd>Rotate the color lens (Shift: the other way)</dd>
+          <dt>X / C</dt><dd>Rotate the left / right record panel (Shift: the other way)</dd>
+          <dt>Enter</dt><dd>Cycle through the six closest visible objects (Shift: reverse)</dd>
           <dt>H</dt><dd>Hold or resume motion and rendering</dd>
           <dt>Z</dt><dd>Toggle Zen mode</dd>
           <dt>`</dt><dd>Toggle frame-rate and performance data</dd>
@@ -839,12 +879,17 @@
     pointGeo.setAttribute("aUpdated", new THREE.BufferAttribute(pUpdated, 1));
     pointGeo.setAttribute("aStep", new THREE.BufferAttribute(pStep, 1));
     pointGeo.setDrawRange(0, 0);
+    // Object sprites are sized in device pixels, so on a giant low-density canvas (an 8K/16K museum wall
+    // or the Las Vegas Sphere) they'd shrink to invisible specks. Grow them once BOTH dimensions are large —
+    // a true wall/Sphere, not a wide-but-short ultrawide desk monitor (whose short side keeps it at 1×).
+    // 1× at or below 1440p so the tuned look is untouched on every ordinary display; up to 2.5× at 8K+.
+    function screenScale() { return Math.max(1, Math.min(2.5, Math.min(innerWidth, innerHeight) / 1440)); }
     const pointMat = new THREE.ShaderMaterial({
       transparent: true, depthTest: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: true,
-      uniforms: { uPixel: { value: renderer.getPixelRatio() }, uTime: { value: 0 }, uAspect: { value: innerWidth / innerHeight } },
+      uniforms: { uPixel: { value: renderer.getPixelRatio() }, uTime: { value: 0 }, uAspect: { value: innerWidth / innerHeight }, uScreen: { value: screenScale() } },
       vertexShader: `
         attribute float aAlpha, aSize, aFocus, aUpdated, aStep, aSeed; attribute vec3 aPrev;
-        uniform float uPixel, uTime, uAspect;
+        uniform float uPixel, uTime, uAspect, uScreen;
         varying vec3 vColor; varying float vAlpha; varying float vFocus; varying float vPx;
         void main(){
           // Slow tabs update interleaved object cohorts. Render between the previous
@@ -861,10 +906,10 @@
           float central  = 1.0 - smoothstep(0.05, 0.95, length(ndc));   // 1 at screen centre, 0 at the edge
           float nearness = 1.0 - smoothstep(26.0, 250.0, dist);          // 0 far (pinpoint) … 1 right on top of you
           float swell    = nearness * central * 4.2;
-          float base     = aSize * (40.0/dist + 0.55) * uPixel;
+          float base     = aSize * (40.0/dist + 0.55) * uPixel * uScreen;   // uScreen=1 on normal displays; grows on museum-wall / Sphere-scale canvases so objects stay visible from afar
           // every silhouette carves pixels away from the quad — give them all more canvas
           float sb = 1.30;
-          gl_PointSize = clamp(base * (1.0 + swell) * sb, 1.0, 24.0);   // ceiling high enough that LARGE still out-looms
+          gl_PointSize = clamp(base * (1.0 + swell) * sb, 1.0, 24.0 * uScreen);   // ceiling high enough that LARGE still out-looms
           vPx = gl_PointSize / uPixel;
           vColor = color; vAlpha = aAlpha * (0.72 + 0.28 * sin(uTime * 1.4 + aSeed * 80.0));   // aSeed → a per-object twinkle phase
           vFocus = aFocus;
@@ -2025,6 +2070,19 @@
       witnessDates = ordered.map((e) => e.date); TOTAL = witnessDates.length - 1; rescaleNav();
       return true;
     }
+    // ?day= opening date: YYYY | YYYYMM | YYYYMMDD (dashes/slashes tolerated). Year → Jan 1, month → the 1st;
+    // nearestWitnessIndex then snaps to the closest actually-witnessed day. Returns a UTC Date or null.
+    function bootDayParam() {
+      const raw = new URLSearchParams(location.search).get("day");
+      if (!raw) return null;
+      const digits = raw.replace(/\D/g, "");
+      const m = /^(\d{4})(\d{2})?(\d{2})?$/.exec(digits);
+      if (!m) return null;
+      const mo = Math.min(12, Math.max(1, parseInt(m[2] || "1", 10)));
+      const d = Math.min(31, Math.max(1, parseInt(m[3] || "1", 10)));
+      const dt = new Date(Date.UTC(parseInt(m[1], 10), mo - 1, d));
+      return isNaN(dt.getTime()) ? null : dt;
+    }
     async function boot() {
       const anchorDate = isoFor(state.cursor), startRec = recordMeta(anchorDate);
       // Until the live index arrives we only know "today"; show a light placeholder river so the
@@ -2039,10 +2097,14 @@
       // fallback for a node that hasn't published the lean index yet.
       const idx = await loadIndex();
       if (!idx) await loadLedger();
-      // Boot to the LATEST witnessed day — the piece opens on "now", not an arbitrary past day —
-      // unless the visitor already started flying. The manifest inlined that day's aggregate, so
-      // its numbers are exact on the very first frame.
-      if (!state.engaged) { const li = Math.max(0, witnessDates.length - 1); state.cursor = li; state.target = li; state.shownDay = -1; }
+      // Boot to the LATEST witnessed day — the piece opens on "now", not an arbitrary past day — unless the
+      // visitor already started flying, OR a ?day= URL param names an opening day (YYYY / YYYYMM / YYYYMMDD;
+      // dashes tolerated). A deep-history day (e.g. ?day=19690420) opens fast on a light era. The manifest
+      // inlined the latest day's aggregate, so its numbers are exact on the very first frame.
+      if (!state.engaged) {
+        const wantDay = bootDayParam(), li = wantDay ? nearestWitnessIndex(wantDay) : Math.max(0, witnessDates.length - 1);
+        state.cursor = li; state.target = li; state.shownDay = -1;
+      }
       const date = isoFor(state.cursor);
       showDay(date);
       setStatus(state.liveNode ? "ready" : "offline", state.liveNode ? `Live · ${state.liveNode.label}` : "No live source");
@@ -2871,6 +2933,11 @@
       wheelGesture = { axis, at: now, x: 0, lensShifted: false };
     }
     addEventListener("wheel", (e) => {
+      // A scrollable overlay under the pointer (the finder results) owns the wheel — let it scroll natively
+      // instead of hijacking it to scrub the day. Only when it can actually scroll, so an un-overflowed list
+      // still lets the wheel fall through to time travel.
+      const scr = e.target && e.target.closest && e.target.closest("#goto-results");
+      if (scr && scr.scrollHeight > scr.clientHeight + 1) return;   // native list scroll; day unchanged
       e.preventDefault();
       if (settings.classList.contains("open")) return;
       if (state.suspended) return;
@@ -2978,8 +3045,8 @@
       if (k === "f") { toggleFullscreen(); e.preventDefault(); return; }
       if (k === ",") { showSettings(true, "witness"); e.preventDefault(); return; }
       if (k === "/" || k === "?") { showSettings(true, "shortcuts"); e.preventDefault(); return; }
-      if (k === "enter") { inspectClosestVisible(); e.preventDefault(); return; }
-      if (k === " " || k === "spacebar") { cycleMode(1); e.preventDefault(); return; }
+      if (k === "enter") { inspectClosestVisible(e.shiftKey ? -1 : 1); e.preventDefault(); return; }   // Shift = cycle the closest set the other way
+      if (k === " " || k === "spacebar") { cycleMode(e.shiftKey ? -1 : 1); e.preventDefault(); return; }   // Shift = rotate the lens the other way
       if (/^[0-9]$/.test(k)) { jumpTimelineDigit(k); e.preventDefault(); return; }
       if (k === "-" || k === "_") { moveTimelineCalendar({ days: -1 }); e.preventDefault(); return; }
       if (k === "=" || k === "+") { moveTimelineCalendar({ days: 1 }); e.preventDefault(); return; }
@@ -2991,8 +3058,8 @@
       if (k === ">") { moveTimelineCalendar({ years: 1 }); e.preventDefault(); return; }
       if (k === "pageup") { moveTimelineCalendar({ years: -10 }); e.preventDefault(); return; }    // jump a decade back
       if (k === "pagedown") { moveTimelineCalendar({ years: 10 }); e.preventDefault(); return; }    // jump a decade forward
-      if (k === "x") { prismRotators["prism-obj"]?.(); e.preventDefault(); return; }     // rotate the left (archive) record
-      if (k === "c") { prismRotators["prism-witness"]?.(); e.preventDefault(); return; } // rotate the right (witness) record
+      if (k === "x") { prismRotators["prism-obj"]?.(e.shiftKey ? -1 : 1); e.preventDefault(); return; }     // rotate the left (archive) record — Shift = other way
+      if (k === "c") { prismRotators["prism-witness"]?.(e.shiftKey ? -1 : 1); e.preventDefault(); return; } // rotate the right (witness) record — Shift = other way
       if (state.suspended) return;
       if (LOOK_KEYS.has(k)) { state.keys.add(k); e.preventDefault(); }
       else if (k === "home") setTarget(0); else if (k === "end") setTarget(TOTAL);
@@ -3838,10 +3905,10 @@
       if (state.suspended) drawHeldFrame();   // parked loop: repaint once so the halo + model show
     }
     let nearestCycle = [], nearestCyclePos = -1, nearestCycleAt = 0;
-    function inspectClosestVisible() {
+    function inspectClosestVisible(dir = 1) {
       const now = performance.now();
       if (nearestCycle.length && now - nearestCycleAt < 8000 && state.selIdx === nearestCycle[nearestCyclePos]) {
-        nearestCyclePos = (nearestCyclePos + 1) % nearestCycle.length;
+        nearestCyclePos = (nearestCyclePos + dir + nearestCycle.length) % nearestCycle.length;   // Shift-Enter walks the closest set backward
         showInspector(nearestCycle[nearestCyclePos]);
         return;
       }
@@ -3897,7 +3964,7 @@
     //    lists the oldest survivors still up: the historic objects to seek out in the sparse early
     //    years. Searches the day's loaded catalog (state.objects), capped, so it stays smooth at 34k.
     let gotoRows = [], gotoSel = -1, gotoOldest = null, gotoOldestKey = null, gotoLastQuery = "";
-    const GOTO_MAX = 10;   // show at most ten rows; the rest are summarised by the match count below the list
+    const GOTO_MAX = mobile ? 30 : 100;   // render up to this many rows (the list scrolls); phones keep it short. total match count shown below
     function oldestStillUp(n) {
       if (gotoOldestKey !== state.catalogDate) {   // cache per day — only re-sort when the catalog changes
         gotoOldest = state.objects
@@ -3943,8 +4010,8 @@
         + `<span class="gp-name">${esc(o.name || "Archive object")}</span>`
         + `<span class="gp-sub">${esc(o.id)} · ${o.launch ? esc(o.launch.slice(0, 4)) : "—"}</span></button>`).join("");
       gotoSel = 0;
-      // subtle total-match count under the list — only for an actual search, and only when there's an overflow worth noting
-      if (countEl) countEl.textContent = !q ? "" : all.length > GOTO_MAX ? `showing ${GOTO_MAX} of ${all.length} matches` : all.length === 1 ? "1 match" : `${all.length} matches`;
+      // subtle TOTAL-match count under the list (the rows themselves show how many are listed)
+      if (countEl) countEl.textContent = !q ? "" : all.length === 1 ? "1 match" : `${all.length} matches`;
     }
     function gotoMove(d) {
       if (!gotoRows.length) return;
@@ -4248,7 +4315,7 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       renderInspectorVignette(dt);
       reportPerf(performance.now(), performance.now() - frameStart, interval);
     }
-    function resize() { renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.fov = innerWidth <= 760 ? 80 : 72; camera.updateProjectionMatrix(); pointMat.uniforms.uPixel.value = renderer.getPixelRatio(); pointMat.uniforms.uAspect.value = innerWidth / innerHeight; deepMat.uniforms.uAspect.value = innerWidth / innerHeight; }
+    function resize() { renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.fov = innerWidth <= 760 ? 80 : 72; camera.updateProjectionMatrix(); pointMat.uniforms.uPixel.value = renderer.getPixelRatio(); pointMat.uniforms.uAspect.value = innerWidth / innerHeight; pointMat.uniforms.uScreen.value = screenScale(); deepMat.uniforms.uAspect.value = innerWidth / innerHeight; }
     addEventListener("resize", resize);
     // Leave-open-for-hours: a backgrounded tab parks the render loop ENTIRELY (browsers only throttle rAF,
     // they don't stop it) → ~0% CPU while hidden. Resuming reseeds the clock so the first visible frame
@@ -4285,11 +4352,11 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       prism.setAttribute("role", "button");
       prism.setAttribute("aria-label", `${label} — show the next face`);
       let turns = 0;
-      const rotate = () => { turns += 1; inner.style.transform = seat(-turns * angle); };
-      prism.addEventListener("click", (e) => { if (e.target.closest("a")) return; rotate(); });  // links inside a face open; they don't rotate it
+      const rotate = (dir = 1) => { turns += dir; inner.style.transform = seat(-turns * angle); };   // dir -1 (Shift) spins the other way
+      prism.addEventListener("click", (e) => { if (e.target.closest("a")) return; rotate(e.shiftKey ? -1 : 1); });  // links inside a face open; they don't rotate it
       prism.addEventListener("keydown", (e) => {
         if (e.target.closest("a")) return;
-        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); e.stopPropagation(); rotate(); }
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); e.stopPropagation(); rotate(e.shiftKey ? -1 : 1); }
       });
       prismRotators[prismId] = rotate;
       prismResets.push(() => { turns = 0; inner.style.transform = seat(0); });
