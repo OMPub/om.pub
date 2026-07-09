@@ -34,8 +34,6 @@
     body.overdrive .warpwash { opacity: 1;
       background: radial-gradient(circle at 50% 50%, rgba(154,169,255,0) 16%, rgba(154,169,255,0.11) 46%, rgba(120,150,255,0.36) 100%); }
     body.overdrive .vignette { box-shadow: inset 0 0 42vmin rgba(0,0,0,0.93), inset 0 0 12vmin rgba(154,169,255,0.22); }
-    .jump-date { transition: letter-spacing 320ms ease, text-shadow 320ms ease; }
-    body.overdrive .jump-date { letter-spacing: 0.15em; text-shadow: 0 0 28px rgba(154,169,255,0.9), 0 2px 30px #020506; }
 
     .hud { z-index: 3; }
     .corner { position: absolute; width: 40px; height: 40px; border-color: rgba(164,174,255,0.4); border-style: solid; }
@@ -53,7 +51,6 @@
     .brand-sub { margin-top: 5px; color: var(--muted); font-size: 9px; line-height: 1; text-transform: uppercase; letter-spacing: 0.18em; }
 
     .record-date { position: absolute; top: calc(var(--safe-top) + 14px); left: 50%; width: min(60vw, 620px); transform: translateX(-50%); text-align: center; transition: opacity 260ms ease; }
-    body.jumping .record-date { opacity: 0; }   /* the centre jump-to date carries the day mid-flight */
     .eyebrow { color: var(--accent); font-size: 9px; line-height: 1; transition: color 220ms ease; }
     .eyebrow.attested { color: var(--seal); }
     .date { margin-top: 7px; font-size: clamp(28px, 4.6vh, 56px); font-weight: 300; line-height: 0.92; text-transform: uppercase; }
@@ -131,8 +128,17 @@
     .witness-perm.one { color: var(--muted); }
     .witness-perm.strong { color: var(--seal); text-shadow: 0 0 10px rgba(154,255,214,0.35); }
 
-    .timebar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(164,174,255,0.10); }
-    .timebar-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(154,169,255,0.5), var(--seal)); box-shadow: 0 0 10px rgba(154,255,214,0.6); }
+    /* Scrubber at the VERY TOP — a hair below the edge (so the OS resize cursor doesn't fight it), tucked
+       ~10px in from each side and kept DIM so it doesn't pull the eye; it + the knob playhead brighten on
+       hover/drag. The knob is the grab affordance. */
+    .timebar { position: absolute; left: 10px; right: 10px; top: 6px; height: 12px; pointer-events: auto; cursor: grab; touch-action: none; z-index: 6; }
+    .timebar.scrubbing { cursor: grabbing; }
+    .timebar::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(164,174,255,0.09); transition: height 120ms ease, background 120ms ease; }
+    .timebar:hover::after, .timebar.scrubbing::after { height: 4px; background: rgba(164,174,255,0.18); }
+    .timebar-fill { position: absolute; left: 0; top: 0; height: 2px; width: 0; background: linear-gradient(90deg, rgba(154,169,255,0.3), rgba(154,255,214,0.42)); box-shadow: 0 0 6px rgba(154,255,214,0.28); transition: height 120ms ease; }
+    .timebar:hover .timebar-fill, .timebar.scrubbing .timebar-fill { height: 4px; }
+    .timebar-fill::after { content: ""; position: absolute; right: -5px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: rgba(154,255,214,0.5); box-shadow: 0 0 6px rgba(154,255,214,0.4), 0 0 0 1px rgba(2,7,8,0.5); transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease; }
+    .timebar:hover .timebar-fill::after, .timebar.scrubbing .timebar-fill::after { transform: scale(1.4); background: var(--seal); box-shadow: 0 0 12px rgba(154,255,214,0.9), 0 0 0 1px rgba(2,7,8,0.5); }
 
 
     /* object inspector — sits under the date; the model stage is a transparent window
@@ -161,13 +167,6 @@
     .prism-link { pointer-events: auto; color: var(--muted); text-decoration: none; border-bottom: 1px dotted rgba(154,169,255,0.45); transition: color 150ms, border-color 150ms; }
     .prism-link:hover { color: var(--ink); border-color: var(--accent); }
 
-    .jump { position: fixed; inset: 0; z-index: 4; display: grid; place-items: center; pointer-events: none; opacity: 0; transition: opacity 160ms ease; }
-    .jump.active { opacity: 1; }
-    .jump::before, .jump::after { position: absolute; top: 50%; width: 36vw; height: 1px; content: ""; background: rgba(154,169,255,0.4); box-shadow: 0 0 18px rgba(154,169,255,0.5); }
-    .jump::before { left: 0; } .jump::after { right: 0; }
-    .jump-inner { text-align: center; text-shadow: 0 2px 30px #020506, 0 0 16px #020506; }
-    .jump-date { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(26px, 5vw, 76px); font-weight: 300; letter-spacing: 0.08em; }
-    .jump-label { margin-top: 9px; color: var(--accent); font-size: 8px; text-transform: uppercase; letter-spacing: 0.16em; }
 
     .brand { text-decoration: none; color: inherit; pointer-events: auto; transition: opacity 160ms ease; }
     .brand:hover { opacity: 0.7; }
@@ -452,10 +451,9 @@
       </div>
     </section>
 
-    <div class="timebar"><div class="timebar-fill" id="timebar-fill"></div></div>
+    <div class="timebar" id="timebar"><div class="timebar-fill" id="timebar-fill"></div></div>
   </main>
 
-  <div class="jump" id="jump"><div class="jump-inner"><div class="jump-date" id="jump-date">—</div><div class="jump-label">Traversing the archive</div></div></div>
 
   <!-- kept outside .hud so camera survives Zen mode -->
   <div class="controls" aria-label="Viewer controls">
@@ -582,6 +580,11 @@
     const MAXF = mobile ? 9000 : 36000;
     const FIELD = mobile ? 5000 : 11000;   // minimum placeholder-field size (pre-catalog)
     let FIELD_N = 0;
+    // Persistent identity→slot map: an object (by id) keeps the SAME field slot across day-loads.
+    // Without it, a launch or decay shifts every slot after it (objects[i]→slot i), so the whole
+    // field reshuffles and zips to re-settle on each catalog adopt. With it, only the handful of
+    // genuinely new/departed objects churn; everyone else stays exactly on their track.
+    let slotByNid = new Map();
 
     // Objects ride circular orbital arcs around the Earth centre, keyed by altitude shell
     // (radius from EC). The camera orbits just above LEO, so LEO flows UNDER you, MEO rides
@@ -690,11 +693,12 @@
     const titleize = (s) => s ? String(s).replace(/_/g, " ") : "—";
 
     const state = {
-      cursor: TOTAL, target: TOTAL, shownDay: -1,
+      cursor: TOTAL, target: TOTAL, lastCursor: TOTAL, shownDay: -1,
       time: 0, warp: 0, warpBlend: 0, vel: 0, spin: 0, over: 0,
-      flickVel: 0, timeDir: 1, lastWheel: 0,
+      timeDir: 1, lastWheel: 0,
       attested: false, pulseY: 0, pulseStr: 0,
-      maxSpeed: reduced ? 6 : 24, accel: 30, navK: 1,   // navK scales scrub speed/warp with the archive length
+      maxSpeed: reduced ? 6 : 24, accel: 30, navK: 1,   // navK scales the KEY-JUMP slew with the archive length
+      scrollVel: 0, navMode: "scrub", scrubDir: 0, scrubAnchor: 0,   // wheel day-velocity, mode, + 1-day-floor anchor
       yaw: 0, pitch: 0, yawT: 0, pitchT: 0, wasTraveling: false,
       pointer: null, loadToken: 0, selIdx: -1, followNorad: null,   // a selection follows its NORAD across day changes
       lens: 0, keys: new Set(), tilt: null,   // tilt = {base:{b,g}} once enabled
@@ -1099,9 +1103,13 @@
         // instead of letting a real but unlucky orbital plane hide it off-screen forever.
         g = (rand2(nid, 23) - 0.5) * 0.5;
       } else if (src && (src.raan || src.inc)) {
-        g = ((src.raan || 0) / 360 - 0.5) * (band === 0 ? 2.3 : 2.7)
-          + ((src.inc - 65) / 65) * 0.35
-          + (rand2(nid, 23) - 0.5) * 0.18;
+        // Plane longitude is IDENTITY-seeded (was the real RAAN, which regresses ~degrees/day — that slid
+        // every object sideways on each 1-day step). Inclination is effectively constant day-to-day, so we
+        // keep a touch of it for real orbital variety. Net: an object holds the SAME track every day, and
+        // the catalog only updates its identity/colour — like the placeholders, just named.
+        g = (rand2(nid, 23) - 0.5) * (band === 0 ? 2.3 : 2.7)
+          + (((src.inc || 65) - 65) / 65) * 0.35
+          + (rand2(nid, 41) - 0.5) * 0.18;
         g = Math.max(-2.1, Math.min(2.1, g));
       } else {
         g = (rand2(nid, 23) - 0.5) * (band === 0 ? 1.5 : 2.1);
@@ -1128,8 +1136,8 @@
       if (o.meta && o.meta.change === "reentry") { o.phase = 0.44 + rand2(nid, 47) * 0.16; o.pt = o.phase; }
     }
     function settleOrbit(o, objectDt) {
-      const t = o.orbitTarget; if (!t) return;
-      const k = 1 - Math.exp(-objectDt * 0.55);
+      const t = o.orbitTarget; if (!t) { o.settleK = 1; return; }   // settled / never moving → fully visible
+      const k = 1 - Math.exp(-objectDt * 2.4);                       // settle FAST so the hidden transition is brief
       o.R += (t.R - o.R) * k;
       o.eccV += (t.eccV - o.eccV) * k;
       o.wj += (t.wj - o.wj) * k;
@@ -1137,9 +1145,12 @@
       o.ep += Math.atan2(Math.sin(t.ep - o.ep), Math.cos(t.ep - o.ep)) * k;
       const cg = o.cg + (t.cg - o.cg) * k, sg = o.sg + (t.sg - o.sg) * k, n = Math.hypot(cg, sg) || 1;
       o.cg = cg / n; o.sg = sg / n;
+      // While still travelling to its real track, fade DOWN (hide the move); fade back up as the plane aligns
+      // and the altitude closes — so it appears already settled on its orbit rather than zipping across screen.
+      o.settleK = smooth(0.9, 0.9997, o.cg * t.cg + o.sg * t.sg) * (1 - smooth(2, 36, Math.abs(t.R - o.R)));
       if (Math.abs(t.R - o.R) < 0.03 && Math.abs(t.lapRate - o.lapRate) < 1e-8 && o.cg * t.cg + o.sg * t.sg > 0.999999) {
         o.band = t.band; o.R = t.R; o.cg = t.cg; o.sg = t.sg; o.eccV = t.eccV; o.ep = t.ep; o.wj = t.wj; o.lapRate = t.lapRate;
-        o.orbitTarget = null;
+        o.orbitTarget = null; o.settleK = 1;
       }
     }
     // Shared identity math so assignField (representative) and adoptField (real-catalog)
@@ -1192,9 +1203,12 @@
       o.band = band; o.dataBand = band; o.orbitTarget = null;
       o.R = orbit.R; o.cg = orbit.cg; o.sg = orbit.sg;
       o.eccV = orbit.eccV; o.ep = orbit.ep; o.wj = orbit.wj; o.lapRate = orbit.lapRate;
-      o.phase = rand2(i, 47); o.pt = o.phase % 1;
-      o.ta = rand2(i, 53) * 6.2832; o.cta = Math.cos(o.ta); o.sta = Math.sin(o.ta);
-      o.tr = 7 + Math.pow(rand2(i, 59), 0.7) * 44; // wormhole angle/radius
+      // phase / anomaly / wormhole-angle seeded by identity (nid) rather than the raw slot; nid === i for
+      // placeholders. The lap then advances with time and is kept across day-changes (no re-roll), so nothing
+      // is yanked to a new spot when the data loads.
+      o.phase = rand2(nid, 47); o.pt = o.phase % 1;
+      o.ta = rand2(nid, 53) * 6.2832; o.cta = Math.cos(o.ta); o.sta = Math.sin(o.ta);
+      o.tr = 7 + Math.pow(rand2(nid, 59), 0.7) * 44; // wormhole angle/radius
       o.klass = klass; o.status = src ? src.status : "carried"; o.meta = src; o.baseSize = slotBaseSize(klass, band, src ? src.rcs : "", nid);
       o.reentered = !!(src && src.reentered);
       o.anno = src ? src.anno || null : null; o.change = src ? src.change || null : null;
@@ -1262,11 +1276,15 @@
       const newN = Math.max(0, Math.min(MAXF, onOrbit || 0));
       const comp = compFromRecord(rec);
       const realShown = state.objects.length > 0;          // a real catalog from a DIFFERENT day still on screen
-      if (realShown || !phComp || compDrift(comp, phComp) > 0.08) {
+      // When a real catalog is on screen, NEVER re-roll the field on a day-cross — that snapped every object
+      // back onto a placeholder track before the next catalog re-settled it (the "everything slides sideways
+      // on each 1-day step"). Just resize the count IN PLACE; the next day's catalog adopts identities without
+      // moving anything. Re-roll only in placeholder mode (no catalog yet), and only when the era has drifted.
+      if (!realShown && (!phComp || compDrift(comp, phComp) > 0.08)) {
         phBandCdf = comp.bandCdf; phClassCdf = comp.classCdf; phComp = comp;
         assignField([], newN);                             // era-correct river: composition + density in one rebuild
       } else {
-        resizeField(newN);                                 // cheap: density only (same era)
+        resizeField(newN);                                 // cheap: density only — keeps every object on its track
       }
     }
     // Capability-scaled day-load: a fast machine rebuilds the whole field in one or two
@@ -1300,15 +1318,34 @@
     // Chunked + token-guarded: a superseding day-jump abandons a half-finished adopt.
     async function adoptField(objects, token) {
       state.adopting = true; try {                          // block placeholder density/era re-rolls mid-adopt
+      // Deterministic NORAD order so the FIRST adopt and any new-object placement are reproducible.
+      objects.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));
       state.objects = objects;
       flushSolids();
       const newN = Math.min(objects.length, MAXF), oldN = FIELD_N;
+      // Stable identity→slot assignment: every object that already owned a slot (and it's still in range)
+      // keeps it, so its phase/plane/interpolation carry straight over and nothing moves. Only genuinely
+      // new objects (or ones whose old slot fell past the new count) get placed into freed slots — so a
+      // launch/decay no longer cascades a one-index shift through the entire field.
+      const assign = new Array(newN).fill(null);
+      const nextMap = new Map(), leftover = [];
+      for (let k = 0; k < newN; k++) {
+        const src = objects[k], id = String(src.id), prev = slotByNid.get(id);
+        if (prev != null && prev < newN && assign[prev] == null) { assign[prev] = src; nextMap.set(id, prev); }
+        else leftover.push(src);
+      }
+      for (let f = 0, li = 0; li < leftover.length; li++) {            // fill the lowest free slots, keeping it compact
+        while (f < newN && assign[f] != null) f++;
+        if (f >= newN) break;
+        assign[f] = leftover[li]; nextMap.set(String(leftover[li].id), f); f++;
+      }
+      slotByNid = nextMap;
       // Shrink the draw count up front; grow it chunk-by-chunk as new slots come online.
       if (newN < oldN) { FIELD_N = newN; pointGeo.setDrawRange(0, newN); lineGeo.setDrawRange(0, newN * 2); }
       for (let base = 0; base < newN; base += DAYLOAD_CHUNK) {
         if (token != null && token !== state.loadToken) return false;   // a newer load won
         const lim = Math.min(base + DAYLOAD_CHUNK, newN);
-        for (let i = base; i < lim; i++) adoptSlot(i, objects[i], oldN);
+        for (let i = base; i < lim; i++) adoptSlot(i, assign[i], oldN);
         if (newN > oldN) { FIELD_N = Math.min(lim, newN); pointGeo.setDrawRange(0, FIELD_N); lineGeo.setDrawRange(0, FIELD_N * 2); }
         if (lim < newN) await raf();                                    // yield a frame between strides
       }
@@ -1444,7 +1481,7 @@
         const fadeFar = 1 - smooth(560, 780, dist);          // fade into the deep distance
         const focus = 1 - smooth(48, 260, dist);             // crisp much deeper — mid-field shapes read as shapes, not soft cubes
         o.meshWanted = false;
-        if (state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25 && o.meta && fadeBehind > 0.25 && fadeFar > 0.05) {
+        if (state.objects.length && t >= HUMP_T && state.warpBlend <= 0.25 && o.meta && fadeBehind > 0.25 && fadeFar > 0.05 && !o.orbitTarget) {  // don't promote a solid mid-settle — it would show the zip
           // Project the body's approximate REAL span, independent of the point shader's
           // readability swell. The camera matrices are from the previous rendered frame,
           // which is visually indistinguishable and avoids a second scene-matrix update.
@@ -1470,7 +1507,7 @@
             }
           }
         }
-        pAlpha[i] = Math.max(0, fadeBehind * fadeFar * o.aMul * (1 - 0.5 * warpC) * (1 - deepC * 0.96));
+        pAlpha[i] = Math.max(0, fadeBehind * fadeFar * o.aMul * (1 - 0.5 * warpC) * (1 - deepC * 0.96) * (o.settleK == null ? 1 : o.settleK));
         pSize[i] = o.size * (1 + warpC * 0.4);
         pFocus[i] = state.lens === 4 && o.change && o.change !== "orbit" ? Math.max(0.82, focus) : focus;
         pCol[i3] = o.col[0]; pCol[i3 + 1] = o.col[1]; pCol[i3 + 2] = o.col[2];
@@ -1678,7 +1715,10 @@
     }
     const devNode = devSourceNode();
     let DEV_ORIGIN = devNode ? devNode.origin : null;
-    if (devNode) { state.nodes.unshift(devNode); console.info("RSO card · local dev source active:", devNode.base); }
+    // A local ?source is authoritative for the session: use it as the SOLE node so a full-span
+    // local archive (which serves ledger.json but no lean index/manifest) drives the timeline,
+    // instead of loadIndex falling through to a published node's live-only index.
+    if (devNode) { state.nodes = [devNode]; console.info("RSO card · local dev source (exclusive):", devNode.base); }
     const nodeTdhLive = new Map();    // canonical nodeId -> TDH backing, from the live attestation index
     const tdhOf = (n) => (nodeTdhLive.has(n.id) ? nodeTdhLive.get(n.id) : (n.tdh || 0));
     const rawUrl = (n, branch, path) => n.base ? `${n.base}/${path}` : `https://raw.githubusercontent.com/${n.repo}/${branch}/${path}`;
@@ -1689,6 +1729,7 @@
       docchain: (n) => rawUrl(n, n.idx, "indexer/generated/sepolia/rso-docchain-index.json"),
       roster: (n) => rawUrl(n, n.idx, "indexer/generated/nodes.json"),
       catalog: (n, date) => rawUrl(n, n.node, `data/${date.replaceAll("-", "/")}`),
+      directory: (n, gz) => rawUrl(n, n.node, gz ? "directory.json.gz" : "directory.json"),
     };
     const safeParse = (t) => { try { return JSON.parse(t); } catch (e) { return null; } };
     // Size caps + a host allowlist for the ONE class of URL not built by rawUrl: bundle locators
@@ -1848,6 +1889,9 @@
       // latest day, where assignField/adoptField redraw the sky at the true per-day density.
       assignField([], Math.max(FIELD, Math.round(startRec.orbit ? startRec.orbit.onOrbit : startRec.count * onOrbitRatio)));
       showDay(anchorDate);
+      // Identity directory loads in parallel (optional; loadCatalog awaits it before joining identity onto
+      // the pure-orbit rows). A source without one just leaves it empty — the join no-ops.
+      directoryReady = loadDirectory();
       // Lean index first (timeline + exact aggregates + catalog locator); the legacy ledger is the
       // fallback for a node that hasn't published the lean index yet.
       const idx = await loadIndex();
@@ -1957,6 +2001,45 @@
         tipCount: (anno.tip_messages || []).length, changedObjects: changedIds.size,
         changedIds, decayIds, tipIds, byId };
     }
+    // ── Identity directory (§8.1): names, object types, country, decay + launch dates, keyed by NORAD id.
+    // The per-day catalogs are kept PURE-ORBIT so their bytes stay chain-verifiable (hash == attestation);
+    // identity lives in this ONE separate file and is joined onto each row at render (loadCatalog). It is
+    // "best known now" — today's satcat names on historically-witnessed positions. Loaded once through the
+    // same ranked-node path as everything else (host-locked rawUrl, byte-capped, JSON.parse only) and it is
+    // OPTIONAL: a source that doesn't publish it (today's full-row catalogs already carry identity) just
+    // leaves DIRECTORY empty and the join is a no-op — so this never breaks the live card.
+    const DIRECTORY = new Map();           // noradStr -> { OBJECT_NAME, OBJECT_TYPE, COUNTRY_CODE, DECAY_DATE, LAUNCH_DATE }
+    let directoryReady = null;
+    function ingestDirectory(d) {
+      // Tolerate object-keyed ({ "25544": {…} }) or array ([{ NORAD_CAT_ID, … }]) form, and either the
+      // card's field names or raw Space-Track satcat names.
+      const put = (id, e) => {
+        if (!e || typeof e !== "object") return;
+        id = String(id ?? e.NORAD_CAT_ID ?? e.norad_cat_id ?? e.NORAD ?? e.norad ?? "").trim();
+        if (!id) return;
+        DIRECTORY.set(id, {
+          OBJECT_NAME: e.OBJECT_NAME ?? e.SATNAME ?? e.name ?? null,
+          OBJECT_TYPE: e.OBJECT_TYPE ?? e.type ?? null,
+          COUNTRY_CODE: e.COUNTRY_CODE ?? e.COUNTRY ?? e.country ?? null,
+          DECAY_DATE: e.DECAY_DATE ?? e.DECAY ?? e.decay ?? e.decay_date ?? null,
+          LAUNCH_DATE: e.LAUNCH_DATE ?? e.LAUNCH ?? e.launch ?? e.launch_date ?? null,
+          RCS_SIZE: e.RCS_SIZE ?? e.RCS ?? e.rcs ?? null,   // size family — the Radar-size lens, object sizing + cubesat shapes need it
+        });
+      };
+      if (Array.isArray(d)) for (const e of d) put(null, e);
+      else if (d && typeof d === "object") for (const k in d) put(k, d[k]);
+    }
+    async function loadDirectory() {
+      try {
+        const plain = await jsonFromNodes((n) => nodeUrl.directory(n), "force-cache");
+        if (plain && plain.data) ingestDirectory(plain.data);
+        else {
+          const g = await fromNodes((n) => nodeUrl.directory(n, true), "force-cache");   // gzipped fallback
+          if (g) ingestDirectory(JSON.parse(new TextDecoder().decode(await gunzip((await readCapped(g.res, MAX_GZ_BYTES)).buffer))));
+        }
+        if (DIRECTORY.size) console.info(`RSO card · identity directory joined: ${fmtNum(DIRECTORY.size)} objects`);
+      } catch (e) { /* no directory published → catalogs carry their own identity; the join is a no-op */ }
+    }
     async function loadCatalog(date) {
       if (catalogCache.has(date)) return catalogCache.get(date);
       // Per-object detail for click-to-inspect and the daily-changes coloring: annotations
@@ -1999,6 +2082,23 @@
       verifyCatalogBytes(date, catBytes);              // fire-and-forget: HUD updates when it lands
       const cat = JSON.parse(new TextDecoder().decode(catBytes));
       const list = Array.isArray(cat) ? cat : cat?.data || [];
+      // Join identity onto each PURE-ORBIT row before the map below reads name/type/country/decay/launch.
+      // Fill-if-absent: a full-row catalog (today's production) keeps its own chain-verifiable values and the
+      // directory only fills what a pure-orbit catalog omits — and DECAY_DATE here drives the reentered
+      // (decay <= date) logic below, so time-aware decay comes for free once identity is joined.
+      // The OPTIONAL directory must never block the ESSENTIAL catalog render: cap the wait so a slow/stalled
+      // node fails OPEN (catalog renders without identity this day; the directory still populates for later).
+      if (directoryReady) await Promise.race([directoryReady, new Promise((r) => setTimeout(r, 8000))]);
+      if (DIRECTORY.size) for (const row of list) {
+        const d = DIRECTORY.get(String(row.NORAD_CAT_ID ?? row.norad_cat_id ?? ""));
+        if (!d) continue;
+        if (!row.OBJECT_NAME) row.OBJECT_NAME = d.OBJECT_NAME;
+        if (!row.OBJECT_TYPE) row.OBJECT_TYPE = d.OBJECT_TYPE;
+        if (!row.COUNTRY_CODE) row.COUNTRY_CODE = d.COUNTRY_CODE;
+        if (!row.DECAY_DATE) row.DECAY_DATE = d.DECAY_DATE;
+        if (!row.LAUNCH_DATE) row.LAUNCH_DATE = d.LAUNCH_DATE;
+        if (!row.RCS_SIZE) row.RCS_SIZE = d.RCS_SIZE;
+      }
       const newIds = new Set((delta?.new_norad_cat_ids || []).map(String));
       const updatedIds = new Set((delta?.updated_norad_cat_ids || []).map(String));
       const objs = list.map((row) => {
@@ -2048,11 +2148,11 @@
         updated: delta?.updated_object_count ?? delta?.deduped_update_count ?? 0,
         new: delta?.new_object_count ?? launched, decayed: decToday, carried: delta?.carried_forward_count ?? 0
       });
-      const sampled = sampleByBand(objs, MAXF, date);
+      const sampled = sampleByBand(objs, MAXF);
       catalogCache.set(date, sampled);
       return sampled;
     }
-    function sampleByBand(objs, limit, date) {
+    function sampleByBand(objs, limit) {
       // The field shows what's UP THERE. Long-gone re-entered objects don't fly past the
       // camera — they exist in the record (counts, inspector via observations) but not in
       // the sky. Keep only today's decay events and freshly-observed objects from that set.
@@ -2067,7 +2167,7 @@
         const keep = (o) => o.status === "new" || o.status === "decayed" || o.anno || o.id === "25544";
         const rare = g.filter(keep);
         const rest = g.filter((o) => !keep(o))
-          .sort((a, x) => hashUnit(`${a.id}:${date}`) - hashUnit(`${x.id}:${date}`));
+          .sort((a, x) => hashUnit(a.id) - hashUnit(x.id));   // identity-stable sample: the SAME objects fill the field each day (no daily reshuffle)
         return rare.concat(rest).slice(0, quotas[b]);
       });
     }
@@ -2237,7 +2337,9 @@
     }
 
     // ── travel ──
-    function setTarget(i) { state.engaged = true; state.target = Math.max(0, Math.min(TOTAL, i)); state.flickVel = 0; $("jump-date").textContent = isoFor(Math.round(state.target)).replaceAll("-", "."); }
+    // A KEY jump (number keys / arrows / timebar-less leaps) slews the cursor to a far target with the
+    // cinematic flight; hyperspace then comes for free from the slew SPEED (warp keys off |dCursor/dt|).
+    function setTarget(i) { state.engaged = true; state.target = Math.max(0, Math.min(TOTAL, i)); state.navMode = "jump"; }
     function nearestWitnessIndex(date) {
       const wanted = date.toISOString().slice(0, 10);
       let lo = 0, hi = witnessDates.length;
@@ -2252,9 +2354,11 @@
     // short timeline (unchanged feel); a full-archive jump stays a ~6 s hyperspace flight at any length
     // while a deliberate slow scrub stays precise. Recomputed whenever the timeline (re)loads.
     function rescaleNav() {
+      // Only the KEY-JUMP slew scales with the archive: a cross-archive leap lands in ~2.5s of cinematic
+      // flight at any length (the wheel uses an absolute day-rate, the timebar is instant — neither scales).
       state.navK = Math.max(1, TOTAL / 144);
-      state.maxSpeed = (reduced ? 6 : 24) * state.navK;
-      state.accel = 30 * state.navK;   // scale acceleration too, else the cursor can't reach the scaled top speed (it crawls, never warps)
+      state.maxSpeed = (reduced ? 18 : 60) * state.navK;
+      state.accel = 640 * state.navK;   // brake must out-pace the decel slope (>= 8·maxSpeed) or the flight overshoots and oscillates
     }
     function moveTimelineCalendar({ days = 0, months = 0, years = 0 }) {
       const d = pd(isoFor(Math.round(state.target)));
@@ -2314,19 +2418,28 @@
     let wheelGesture = null, wheelEndTimer = 0;
     const WHEEL_GESTURE_GAP = 220;
     const WHEEL_GESTURE_IDLE = 140;   // a lull this long ends the gesture, so the NEXT burst re-arms a lens shift
+    // ── scroll feel (day-rate momentum) ───────────────────────────────────────────────────────────────
+    // The wheel runs through time DAY by day at a capped rate — it never accelerates into year jumps (leap
+    // with the timebar drag or the 1–9/0 keys). Each event adds a bounded impulse to a day-velocity up to
+    // SCROLL_MAX_DPS; friction lands it within ~0.3s of your last scroll; reversing direction is instant.
+    const SCROLL_MAX_DPS = 40;       // hard ceiling on scroll speed (days/sec) — scrolling can't run away to years
+    const SCROLL_STEP = 12;          // days/sec added per 100px of wheel travel (sensitivity: ~1 day per notch)
+    const SCROLL_FRICTION = 8;       // momentum bleed-off (higher = lands sooner)
+    // Hyperspace keys off the view's MOTION RATE in days/sec — ONE signal covering scroll, timebar drag and
+    // key-jumps: running faster than a few days/sec lights the warp; near the scroll ceiling (or any
+    // key-jump) the tunnel opens into overdrive. A single-day nudge stays calm.
+    const WARP_LO_DPS = 6, WARP_HI_DPS = 26, OVERDRIVE_LO_DPS = 22, OVERDRIVE_HI_DPS = 40;
     function navigationDaysForDistance(px, oneDayPx) {
+      // Still used by TOUCH drag (direct manipulation: a finger travels a distance → move proportionally).
       const d = Math.abs(px);
       if (d < 8) return 0;
       if (d <= oneDayPx) return 1;
-      // EXPONENTIAL reach: 1 day at the start of the drag → the whole archive at a full-screen drag.
-      // A linear 1→0.8·TOTAL map made a tiny scroll jump decades on a 24k-day timeline; this keeps fine
-      // day/week control near the start and broad year-scale reach at the end, at ANY archive length.
-      const span = Math.max(1, TOTAL);
+      const reach = Math.min(Math.max(1, TOTAL), Math.max(120, Math.round(TOTAL * 0.03)));
       const t = Math.max(0, Math.min(1, (d - oneDayPx) / Math.max(1, innerHeight - oneDayPx)));
-      return Math.max(1, Math.round(Math.pow(span, t)));
+      return Math.max(1, Math.round(Math.pow(reach, t)));
     }
     function beginWheelGesture(axis, now) {
-      wheelGesture = { axis, at: now, startTarget: state.target, x: 0, y: 0, lensShifted: false };
+      wheelGesture = { axis, at: now, x: 0, lensShifted: false };
     }
     addEventListener("wheel", (e) => {
       e.preventDefault();
@@ -2348,11 +2461,44 @@
         }
         return;
       }
-      wheelGesture.y += e.deltaY;
-      const days = navigationDaysForDistance(wheelGesture.y, Math.min(180, innerHeight * 0.22));
-      state.target = Math.max(0, Math.min(TOTAL, wheelGesture.startTarget - Math.sign(wheelGesture.y) * days));
-      state.flickVel = 0; if (days) state.engaged = true;
+      // Day-rate scroll (scroll DOWN = back in time, matching a timeline feed). Each event nudges a capped
+      // day-VELOCITY; animate moves the cursor at that rate, so scrolling steps through DAYS and never
+      // accelerates into year jumps. Reversing direction drops the old velocity so the turn is INSTANT — no
+      // momentum to fight, no queued motion to finish first.
+      const px = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+      const dir = px > 0 ? -1 : 1;                                            // down → earlier, up → later
+      const reversing = state.scrollVel !== 0 && Math.sign(state.scrollVel) !== dir;
+      // Anchor at the day this gesture STARTS from (fresh start, or the instant you reverse) so the snap can
+      // guarantee the smallest flick lands exactly 1 day away — never short, snapping back to where it began.
+      if (state.scrollVel === 0 || reversing) state.scrubAnchor = Math.round(state.cursor);
+      if (reversing) state.scrollVel = 0;
+      state.scrubDir = dir;
+      const bump = dir * Math.min(Math.abs(px), 120) * (SCROLL_STEP / 100);   // bounded per-event impulse (days/sec)
+      state.scrollVel = Math.max(-SCROLL_MAX_DPS, Math.min(SCROLL_MAX_DPS, state.scrollVel + bump));
+      state.navMode = "scrub"; state.engaged = true;
     }, { passive: false });
+    // ── Timebar scrubber: click/drag the bottom line to scrub to any date like a video — instant, and it
+    // lands + loads the day on release. This is the coarse "jump anywhere" so the wheel can stay days-only.
+    {
+      const timebar = $("timebar");
+      let scrubbing = false;
+      const timebarTo = (clientX) => {
+        const r = timebar.getBoundingClientRect();
+        const f = Math.max(0, Math.min(1, (clientX - r.left) / Math.max(1, r.width)));
+        state.cursor = state.target = f * TOTAL; state.scrollVel = 0; state.scrubDir = 0;
+        state.navMode = "scrub"; state.lastWheel = performance.now(); state.engaged = true;
+      };
+      timebar.addEventListener("pointerdown", (e) => {
+        if (state.suspended || settings.classList.contains("open")) return;
+        scrubbing = true; timebar.classList.add("scrubbing");
+        try { timebar.setPointerCapture(e.pointerId); } catch (err) { /* capture is best-effort */ }
+        timebarTo(e.clientX); e.preventDefault();
+      });
+      timebar.addEventListener("pointermove", (e) => { if (scrubbing) timebarTo(e.clientX); });
+      const endScrub = () => { if (!scrubbing) return; scrubbing = false; timebar.classList.remove("scrubbing"); state.lastWheel = 0; }; // → idle → snap to the day + load it
+      timebar.addEventListener("pointerup", endScrub);
+      timebar.addEventListener("pointercancel", endScrub);
+    }
     function touchDaysForDistance(px) {
       return navigationDaysForDistance(px, Math.min(64, innerHeight * 0.1));
     }
@@ -2438,7 +2584,7 @@
       if (e.pointerType === "touch") {
         touches.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now() });
         if (touches.size === 1) touchGesture = { mode: "look", id: e.pointerId, x: e.clientX, y: e.clientY };
-        else if (touches.size === 2) { const c = touchCentre(); touchGesture = { mode: "navigate", x: c.x, startY: c.y, startTarget: state.target, accX: 0, lensShifted: false }; }
+        else if (touches.size === 2) { const c = touchCentre(); touchGesture = { mode: "navigate", x: c.x, startY: c.y, startTarget: Math.round(state.cursor), accX: 0, lensShifted: false }; }
       } else {
         state.pointer = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now() };
       }
@@ -2452,11 +2598,13 @@
         if (touches.size >= 2 && touchGesture?.mode === "navigate") {
           const c = touchCentre(), dx = c.x - touchGesture.x, dy = c.y - touchGesture.startY;
           touchGesture.x = c.x; touchGesture.accX += dx; state.lastWheel = performance.now();
-          // Content follows the fingers. A short move is exactly one day; a full-height
-          // swipe spans about 80% of the archive, with proportional travel between.
+          // Content follows the fingers directly (like the timebar): the cursor IS the dragged day, instant,
+          // and warp comes from how fast it moves (|dCursor/dt|). A short move is a day; a full-height swipe
+          // spans ~two years, proportional between — repeat to go further; release snaps to the day.
           const days = touchDaysForDistance(dy);
-          state.target = Math.max(0, Math.min(TOTAL, touchGesture.startTarget + Math.sign(dy) * days));
-          state.flickVel = 0; if (days) state.engaged = true;
+          const cDay = Math.max(0, Math.min(TOTAL, touchGesture.startTarget + Math.sign(dy) * days));
+          state.cursor = cDay; state.target = cDay; state.scrollVel = 0; state.scrubDir = 0;
+          state.navMode = "scrub"; if (days) state.engaged = true;
           if (!touchGesture.lensShifted && Math.abs(touchGesture.accX) >= 54) {
             touchGesture.lensShifted = true;
             cycleMode(Math.sign(touchGesture.accX));
@@ -2600,7 +2748,7 @@
       document.body.classList.toggle("suspended", on);
       if (on) {
         state.keys.clear(); touches.clear(); state.pointer = null; touchGesture = null;
-        state.flickVel = 0; state.vel = 0; state.target = state.cursor;
+        state.vel = 0; state.target = state.cursor;
         pruneSuspendedCaches();
         renderer.setAnimationLoop(null);
       } else {
@@ -2644,7 +2792,7 @@
       if (page) showSettingsPage(page);
       if (on) {
         state.keys.clear(); touches.clear(); state.pointer = null; touchGesture = null;
-        state.flickVel = 0; state.vel = 0; state.target = state.cursor;
+        state.vel = 0; state.target = state.cursor;
         settingsLastFocus = document.activeElement;
       }
       settings.classList.toggle("open", on);
@@ -3378,35 +3526,60 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       const frameStart = performance.now(), interval = now - (animate.last || now);
       const dt = Math.min(0.05, interval / 1000); animate.last = now; state.time += dt;
 
-      // momentum scrubbing: flick velocity integrates into the (float) day target, then snaps to a page
-      state.target += state.flickVel * dt;
-      state.flickVel *= Math.exp(-dt * 3.4);
-      const idle = performance.now() - state.lastWheel > 150;
-      if (idle && Math.abs(state.flickVel) < 0.4) { state.target += (Math.round(state.target) - state.target) * Math.min(1, dt * 3); state.flickVel = 0; }
-      state.target = Math.max(0, Math.min(TOTAL, state.target));
-      const targetDay = Math.round(state.target);
-      if (targetDay !== state.jumpDay) { state.jumpDay = targetDay; $("jump-date").textContent = isoFor(targetDay).replaceAll("-", "."); }
-
-      // velocity-slew the cursor toward the target day
-      const dist = state.target - state.cursor, adist = Math.abs(dist), dir = Math.sign(dist);
-      const eIn = Math.min(1, adist / 2.6), cruise = Math.min(state.maxSpeed, adist * 2.6 + 0.5) * eIn, acc = state.accel * dt;
-      state.vel += Math.max(-acc, Math.min(acc, dir * cruise - state.vel));
-      state.cursor += state.vel * dt;
-      if (adist < 0.02 && Math.abs(state.vel) < 0.04) { state.cursor = state.target; state.vel = 0; }
-      const speed = Math.abs(state.vel), traveling = adist > 0.03 || speed > 0.05;
+      // ── Navigation. One cursor, two modes set by the last input:
+      //   • SCRUB (wheel / timebar / touch) — the cursor moves DIRECTLY: the wheel drives a capped day-rate
+      //     velocity (scrollVel) and the timebar/touch set the cursor outright. No target chase → nothing
+      //     queues; friction lands the wheel ~0.3s after you stop, then it snaps to a whole day.
+      //   • JUMP (number keys / arrows) — slew across to a far target with the cinematic accel/maxSpeed flight.
+      const idle = performance.now() - state.lastWheel > 110;
+      if (state.navMode === "scrub") {
+        state.scrollVel *= Math.exp(-dt * SCROLL_FRICTION);
+        if (idle && Math.abs(state.scrollVel) < 2) state.scrollVel = 0;
+        state.cursor += state.scrollVel * dt;                                  // wheel momentum (timebar/touch set cursor directly)
+        if (state.scrollVel === 0 && idle) {                                   // settle HARD onto a whole day (so it actually lands)
+          let r = Math.round(state.cursor);
+          // smallest wheel flick commits exactly 1 day: if it stalled short, snap to the adjacent day in the
+          // scroll direction instead of falling back to where the gesture began. (Timebar/touch clear scrubDir.)
+          if (state.scrubDir && r === state.scrubAnchor) r = Math.max(0, Math.min(TOTAL, state.scrubAnchor + state.scrubDir));
+          state.cursor += (r - state.cursor) * Math.min(1, dt * 20);
+          if (Math.abs(r - state.cursor) < 0.01) { state.cursor = r; state.scrubDir = 0; }
+        }
+        state.cursor = Math.max(0, Math.min(TOTAL, state.cursor));
+        state.target = state.cursor;
+      } else {
+        if (idle) state.target += (Math.round(state.target) - state.target) * Math.min(1, dt * 10);
+        state.target = Math.max(0, Math.min(TOTAL, state.target));
+        const dist = state.target - state.cursor, ad = Math.abs(dist), dir = Math.sign(dist);
+        // Cruise at maxSpeed, then a SHORT decel zone (ad*8) so the flight lands in ~2.5s instead of crawling
+        // a long exponential tail; hard-land once within half a day.
+        const eIn = Math.min(1, ad / 2.6), cruise = Math.min(state.maxSpeed, ad * 8 + 0.5) * eIn, acc = state.accel * dt;
+        state.vel += Math.max(-acc, Math.min(acc, dir * cruise - state.vel));
+        const move = state.vel * dt;
+        // Never step PAST the target in one frame — a hard guard against overshooting and then oscillating
+        // back and forth (which re-crossed days and re-fired per-day densify/year-loads near the destination).
+        state.cursor += Math.abs(move) >= ad ? dist : move;
+        if (ad < 0.5 && Math.abs(state.vel) < 25) { state.cursor = state.target; state.vel = 0; }
+        state.cursor = Math.max(0, Math.min(TOTAL, state.cursor));
+      }
+      // ONE motion-rate signal (days/sec) covering wheel, timebar drag, touch AND the key-jump slew — measured
+      // across frames so cursor moves made by the input handlers (timebar/touch) count too.
+      state.vel = (state.cursor - state.lastCursor) / Math.max(dt, 1e-3);
+      state.lastCursor = state.cursor;
+      const adist = Math.abs(state.target - state.cursor);
+      const speed = Math.abs(state.vel), traveling = speed > 0.05 || adist > 0.03;
 
       // travel direction → the "4D" feel (smoothed; holds last direction at rest)
       const dirTarget = window.__HOLD_DIR__ != null ? window.__HOLD_DIR__ : (state.vel > 0.06 ? 1 : state.vel < -0.06 ? -1 : state.timeDir);
       state.timeDir += (dirTarget - state.timeDir) * Math.min(1, dt * 3);
 
-      const warpT = window.__HOLD_WARP__ != null ? window.__HOLD_WARP__ : Math.min(reduced ? 0.2 : 1.4, speed / (11 * state.navK));
-      state.warp += (warpT - state.warp) * Math.min(1, dt * (warpT > state.warp ? 5 : 2.4)); // ease OUT slowly → soft, un-abrupt stop
+      // Hyperspace on MOTION RATE: warp ramps in past a few days/sec, overdrive (the deep tunnel) past ~22.
+      // Covers scroll, timebar drag and the key-jump slew alike — a single-day nudge stays calm.
+      const warpSpeed = smooth(WARP_LO_DPS, WARP_HI_DPS, speed);
+      const warpT = window.__HOLD_WARP__ != null ? window.__HOLD_WARP__ : Math.min(reduced ? 0.2 : 1.4, warpSpeed);
+      state.warp += (warpT - state.warp) * Math.min(1, dt * (warpT > state.warp ? 7 : 2.6)); // rise quickly, ease OUT softly
       state.warpBlend = smooth(0.28, 0.92, Math.min(1, state.warp));
-      // OVERDRIVE — only a genuinely long jump earns it: sustained top speed with distance
-      // still to cover. The tunnel pinches, streaks stretch, the stars fall away. It eases
-      // off as the destination approaches, so arrival stays soft.
       const overT = window.__HOLD_OVER__ != null ? window.__HOLD_OVER__
-        : (reduced ? 0 : smooth(13 * state.navK, 23 * state.navK, speed) * smooth(2.5 * state.navK, 14 * state.navK, adist + speed * 0.4));
+        : (reduced ? 0 : smooth(OVERDRIVE_LO_DPS, OVERDRIVE_HI_DPS, speed));
       state.over += (overT - state.over) * Math.min(1, dt * 3.2);
       document.body.classList.toggle("overdrive", state.over > 0.45);
       const deepReveal = smooth(0.48, 0.94, state.over) * smooth(0.62, 0.96, state.warpBlend);
@@ -3468,11 +3641,7 @@ ${fmtNum(FIELD_N)} objects · ${PERF.solids} solids / ${PERF.candidates} approac
       deepMat.uniforms.uCenter.value.set(deepAxis.x * 0.5 + 0.5, deepAxis.y * 0.5 + 0.5);
 
       document.body.classList.toggle("warping", state.warp > 0.1);
-      const jumping = traveling && adist > 0.5;
-      $("jump").classList.toggle("active", jumping);
-      // while the big centre jump-to date is showing, fade the top date out; it returns
-      // as the centre date fades on arrival — only one date reads at a time
-      document.body.classList.toggle("jumping", jumping);
+      // ONE date display: the top date (#date) ticks through days live as you travel — no centre overlay.
       const timebarPct = (TOTAL ? state.cursor / TOTAL : 1) * 100;
       if (Math.abs(timebarPct - state.timebarPct) > 0.002) { state.timebarPct = timebarPct; $("timebar-fill").style.width = `${timebarPct}%`; }
 

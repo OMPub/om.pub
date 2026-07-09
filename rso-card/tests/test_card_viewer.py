@@ -215,7 +215,7 @@ class CardArtifactTest(unittest.TestCase):
         # desktop flies EVERY on-orbit object — buffers at the ceiling, draw range live
         self.assertIn("const MAXF = mobile ? 9000 : 36000", self.html)
         self.assertIn("pointGeo.setDrawRange(0, FIELD_N)", self.html)
-        self.assertIn("sampleByBand(objs, MAXF, date)", self.html)
+        self.assertIn("sampleByBand(objs, MAXF)", self.html)
 
     def test_tier2_solids_and_tooltips(self):
         # physically readable objects fly as real lit solids; everything smaller is a
@@ -390,21 +390,67 @@ class CardArtifactTest(unittest.TestCase):
         ):
             self.assertIn(marker, self.html)
 
-    def test_scrub_speed_scales_with_archive_length(self):
-        # The cruise/warp/overdrive constants were tuned for a ~few-month timeline; for the full
-        # 1959->now archive (~24k days) the cursor must traverse far faster and warp/overdrive must
-        # trigger on archive-RELATIVE distance. navK scales them with TOTAL (==1 for short timelines,
-        # so no regression). A full-archive jump stays a ~6s hyperspace flight at any length.
+    def test_keyjump_slew_scales_with_archive_length(self):
+        # navK scales ONLY the key-jump slew (number keys / arrows): a cross-archive leap lands in ~2.5s of
+        # cinematic flight at any length (==1 for short timelines, so no regression). The wheel uses an
+        # absolute day-rate and the timebar is instant — neither scales with the archive.
         self.assertIn("function rescaleNav()", self.html)
         self.assertIn("state.navK = Math.max(1, TOTAL / 144);", self.html)
-        self.assertIn("state.maxSpeed = (reduced ? 6 : 24) * state.navK;", self.html)
-        # ACCELERATION must scale too — else the cursor can't reach the scaled top speed; it crawls and
-        # never builds enough speed to warp (the "no hyperspace / 30s lag" regression on a 24k timeline).
-        self.assertIn("state.accel = 30 * state.navK;", self.html)
-        self.assertIn("rescaleNav();", self.html)                                  # called when the timeline loads
-        # warp + overdrive thresholds are scaled by navK
-        self.assertIn("speed / (11 * state.navK)", self.html)
-        self.assertIn("smooth(13 * state.navK, 23 * state.navK, speed) * smooth(2.5 * state.navK, 14 * state.navK, adist + speed * 0.4)", self.html)
+        self.assertIn("state.maxSpeed = (reduced ? 18 : 60) * state.navK;", self.html)
+        # the brake (accel) must out-pace the decel slope (>= 8·maxSpeed) or the flight overshoots and oscillates
+        self.assertIn("state.accel = 640 * state.navK;", self.html)
+        self.assertIn("rescaleNav();", self.html)
+        # hard guard: the slew never steps PAST the target in one frame (no overshoot → no oscillation, and no
+        # re-crossing days near the destination that re-fired per-day densify / year-chunk loads).
+        self.assertIn("state.cursor += Math.abs(move) >= ad ? dist : move;", self.html)
+
+    def test_wheel_is_capped_day_rate_no_year_accel(self):
+        # The wheel runs through time DAY by day at a capped rate — it can NEVER accelerate into year jumps
+        # (leap with the timebar drag or the number keys). Each event adds a bounded impulse to a day-velocity
+        # capped at SCROLL_MAX_DPS; friction lands it ~0.3s after the last scroll; reversing is INSTANT.
+        self.assertIn("const SCROLL_MAX_DPS = 40;", self.html)
+        self.assertIn("const SCROLL_STEP = 12;", self.html)
+        self.assertIn("const SCROLL_FRICTION = 8;", self.html)
+        # reversing direction drops the old velocity → no queued motion to finish first
+        self.assertIn("const reversing = state.scrollVel !== 0 && Math.sign(state.scrollVel) !== dir;", self.html)
+        self.assertIn("if (reversing) state.scrollVel = 0;", self.html)
+        self.assertIn("state.scrollVel = Math.max(-SCROLL_MAX_DPS, Math.min(SCROLL_MAX_DPS, state.scrollVel + bump));", self.html)
+        # the cursor moves DIRECTLY at the day-rate (no target chase = no queue), then snaps HARD to a day
+        self.assertIn("state.cursor += state.scrollVel * dt;", self.html)
+        self.assertIn("if (Math.abs(r - state.cursor) < 0.01) { state.cursor = r; state.scrubDir = 0; }", self.html)
+        # smallest flick commits EXACTLY 1 day: anchor at the gesture's start day, and if it stalls short of a
+        # full day, snap to the adjacent day in the scroll direction rather than back to where it began.
+        self.assertIn("if (state.scrollVel === 0 || reversing) state.scrubAnchor = Math.round(state.cursor);", self.html)
+        self.assertIn("if (state.scrubDir && r === state.scrubAnchor) r = Math.max(0, Math.min(TOTAL, state.scrubAnchor + state.scrubDir));", self.html)
+        self.assertIn("state.cursor = state.target = f * TOTAL; state.scrollVel = 0; state.scrubDir = 0;", self.html)  # timebar clears the floor
+        # the old per-gesture-cap / velocity-coast / flick machinery is gone
+        for gone in ("WHEEL_CAP_PX", "SCRUB_EASE", "scrollNotch", "wheelGain", "state.flickVel", "kickWarp", "warpPulse"):
+            self.assertNotIn(gone, self.html)
+
+    def test_timebar_scrubber_and_one_date(self):
+        # The bottom timebar is a video-style scrubber: pointer drag maps x→date and sets the cursor directly.
+        self.assertIn('<div class="timebar" id="timebar">', self.html)
+        self.assertIn('timebar.addEventListener("pointerdown"', self.html)
+        self.assertIn('timebar.addEventListener("pointermove"', self.html)
+        self.assertIn("state.cursor = state.target = f * TOTAL; state.scrollVel = 0;", self.html)
+        self.assertIn("state.lastWheel = 0; }; // → idle → snap to the day + load it", self.html)
+        # LIFTED ~9px off the bottom edge (so the OS resize cursor doesn't fight it) with a grab cursor + a
+        # knob playhead affordance (the ::after on the fill) so it's easy to grab.
+        self.assertIn("left: 10px; right: 10px; top: 6px; height: 12px; pointer-events: auto; cursor: grab;", self.html)
+        self.assertIn(".timebar-fill::after { content: \"\"; position: absolute; right: -5px;", self.html)
+        # ONE date display: the centre jump-to overlay is gone; only the top #date ticks live as you travel
+        self.assertNotIn('id="jump"', self.html)
+        self.assertNotIn('classList.toggle("jumping"', self.html)
+        self.assertNotIn('$("jump").classList', self.html)
+
+    def test_hyperspace_on_motion_rate(self):
+        # Hyperspace keys off the view's MOTION RATE in days/sec (|dCursor/dt|) — ONE signal covering wheel,
+        # timebar drag, touch AND the key-jump slew. Measured across frames so input-handler moves count too.
+        self.assertIn("const WARP_LO_DPS = 6, WARP_HI_DPS = 26, OVERDRIVE_LO_DPS = 22, OVERDRIVE_HI_DPS = 40;", self.html)
+        self.assertIn("state.vel = (state.cursor - state.lastCursor) / Math.max(dt, 1e-3);", self.html)
+        self.assertIn("const warpSpeed = smooth(WARP_LO_DPS, WARP_HI_DPS, speed);", self.html)
+        self.assertIn("smooth(OVERDRIVE_LO_DPS, OVERDRIVE_HI_DPS, speed)", self.html)
+        self.assertNotIn("speed / (11 * state.navK)", self.html)
 
     def test_full_history_timeline_loads_lazily_per_year(self):
         # The lean index must make the WHOLE archive scrubbable at boot (from the manifest's date list),
@@ -420,11 +466,44 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("stale && expect && stale <= expect * 1.8 && stale >= expect * 0.55", self.html)
         self.assertIn("state.catalogDate = null; state.objects = [];", self.html)
 
+    def test_identity_directory_joins_onto_pure_orbit_catalogs(self):
+        # The per-day catalogs stay PURE-ORBIT (so their bytes remain chain-verifiable, hash == attestation);
+        # identity — name / type / country / decay / launch — lives in a separate directory.json joined
+        # client-side at render (§8.1). Loaded through the same ranked-node path, byte-capped, JSON.parse only.
+        self.assertIn("const DIRECTORY = new Map();", self.html)
+        self.assertIn("async function loadDirectory()", self.html)
+        self.assertIn("function ingestDirectory(d)", self.html)
+        self.assertIn('directory: (n, gz) => rawUrl(n, n.node, gz ? "directory.json.gz" : "directory.json"),', self.html)
+        # loaded in parallel at boot; loadCatalog awaits it before joining, but the OPTIONAL directory must
+        # never block the ESSENTIAL catalog render — a stalled node fails OPEN via a timeout race.
+        self.assertIn("directoryReady = loadDirectory();", self.html)
+        self.assertIn("if (directoryReady) await Promise.race([directoryReady, new Promise((r) => setTimeout(r, 8000))]);", self.html)
+        # FILL-IF-ABSENT merge keyed by NORAD — a full-row catalog (today's production) keeps its own
+        # chain-verifiable values, so the join is backward-compatible AND a no-op when no directory is
+        # published (DIRECTORY stays empty). The join is gated on DIRECTORY.size.
+        self.assertIn("if (DIRECTORY.size) for (const row of list) {", self.html)
+        self.assertIn('const d = DIRECTORY.get(String(row.NORAD_CAT_ID ?? row.norad_cat_id ?? ""));', self.html)
+        self.assertIn("if (!row.OBJECT_NAME) row.OBJECT_NAME = d.OBJECT_NAME;", self.html)
+        self.assertIn("if (!row.DECAY_DATE) row.DECAY_DATE = d.DECAY_DATE;", self.html)
+        # RCS_SIZE is part of the join — the Radar-size lens, object sizing and cubesat shapes read o.meta.rcs
+        self.assertIn("RCS_SIZE: e.RCS_SIZE ?? e.RCS ?? e.rcs ?? null,", self.html)
+        self.assertIn("if (!row.RCS_SIZE) row.RCS_SIZE = d.RCS_SIZE;", self.html)
+        # DECAY_DATE from the directory drives the EXISTING time-aware reentered (decay <= shown date) logic,
+        # so scrubbing back shows only what was actually on orbit then — decay came for free with the join.
+        self.assertIn("const reentered = !!decay && decay <= date;", self.html)
+        # tolerant of object-keyed OR array directory form + Space-Track satcat field-name variants
+        self.assertIn("if (Array.isArray(d)) for (const e of d) put(null, e);", self.html)
+        self.assertIn("e.OBJECT_NAME ?? e.SATNAME ?? e.name", self.html)
+        # PRODUCTION-SAFE: the live CONFIG still ships its real backing nodes — NOT cleared to [] for a
+        # local-only test (the local source comes via the ?source= dev node, which serves local-first).
+        self.assertIn('{ id: "ompub",', self.html)
+        self.assertNotIn("nodes: []", self.html)
+
     def test_settings_capture_timeline_navigation(self):
         self.assertIn('if (settings.classList.contains("open")) return;', self.html)
         # the modal owns its keys natively (Tab / Enter / arrows); background goes inert
         self.assertIn("for (const el of document.body.children) if (el !== settings) el.inert = on;", self.html)
-        self.assertIn("state.flickVel = 0; state.vel = 0; state.target = state.cursor", self.html)
+        self.assertIn("state.vel = 0; state.target = state.cursor", self.html)
 
     def test_prisms_allow_complete_rotated_faces(self):
         self.assertIn("width: min(330px", self.html)
@@ -459,8 +538,11 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn('touchGesture = { mode: "navigate"', self.html)
         self.assertIn("touches.size >= 2", self.html)
         self.assertIn("function touchDaysForDistance(px)", self.html)
-        self.assertIn("return Math.max(1, Math.round(Math.pow(span, t)));", self.html)   # exponential reach (not the old linear TOTAL*0.8)
+        # reach is CAPPED (~2yr per full drag), not the whole archive — fine day/week/month control restored
+        self.assertIn("const reach = Math.min(Math.max(1, TOTAL), Math.max(120, Math.round(TOTAL * 0.03)));", self.html)
+        self.assertIn("return Math.max(1, Math.round(Math.pow(reach, t)));", self.html)
         self.assertNotIn("Math.round(TOTAL * 0.8)", self.html)
+        self.assertNotIn("Math.pow(span, t)", self.html)
         self.assertIn("if (d <= oneDayPx) return 1", self.html)
         self.assertIn("touchGesture.startTarget + Math.sign(dy) * days", self.html)
         self.assertIn("touchGesture.lensShifted = true", self.html)
@@ -557,11 +639,10 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn("const R2 = 20 * 20", self.html)
 
     def test_desktop_scroll_scales_time_and_steps_lenses_once(self):
-        # A wheel/trackpad gesture uses the same distance-to-days model as touch:
-        # small is one day; viewport-scale is most of the available archive.
+        # The wheel is per-gesture-capped momentum (see test_wheel_is_per_gesture_capped_momentum); TOUCH
+        # drag still uses the distance-to-days model (a finger travels a distance → move proportionally).
         self.assertIn("function navigationDaysForDistance(px, oneDayPx)", self.html)
-        self.assertIn("wheelGesture.startTarget - Math.sign(wheelGesture.y) * days", self.html)
-        self.assertIn("Math.min(180, innerHeight * 0.22)", self.html)
+        self.assertIn("touchGesture.startTarget + Math.sign(dy) * days", self.html)   # touch drag (direct manipulation)
         # Horizontal accumulation may cross the threshold many times, but a gesture
         # is allowed to shift the lens once.
         self.assertIn("wheelGesture.lensShifted = true", self.html)
@@ -958,10 +1039,42 @@ class CardArtifactTest(unittest.TestCase):
         # placeholder slots sample band + class from the era CDFs (not the fixed modern constants)
         self.assertIn("hashUnit(`b${i}`) < phBandCdf[0] ? 0 : hashUnit(`b${i}`) < phBandCdf[1] ? 1 : 2", self.html)
         self.assertIn("r < phClassCdf[0] ? 0 : r < phClassCdf[1] ? 1 : r < phClassCdf[2] ? 2 : r < phClassCdf[3] ? 3 : 4", self.html)
-        # mid-hyperspace the field is washed out → skip the per-frame churn entirely (this was the lag);
-        # when calm/settled, re-roll only on real era drift, else cheap density resize
+        # mid-hyperspace the field is washed out → skip the per-frame churn entirely (this was the lag).
         self.assertIn("if (!settled && state.warpBlend >= 0.45) return;", self.html)
-        self.assertIn("if (realShown || !phComp || compDrift(comp, phComp) > 0.08) {", self.html)
+        # When a real catalog is on screen, NEVER re-roll on a day-cross (that snapped every object back onto a
+        # placeholder track before the next catalog re-settled it — the "everything slides on each 1-day step").
+        # Resize in place; re-roll only in placeholder mode, and only on real era drift.
+        self.assertIn("if (!realShown && (!phComp || compDrift(comp, phComp) > 0.08)) {", self.html)
+        self.assertIn("resizeField(newN);                                 // cheap: density only — keeps every object on its track", self.html)
+
+    def test_orbital_track_is_identity_stable_day_to_day(self):
+        # An object must hold the SAME orbital track across day-changes. The plane longitude is now seeded by
+        # IDENTITY (nid) — the real RA_OF_ASC_NODE regresses ~degrees/day, and using it slid every object
+        # sideways on each 1-day step. Inclination is ~constant day-to-day, so a touch of it is kept for variety.
+        self.assertIn("g = (rand2(nid, 23) - 0.5) * (band === 0 ? 2.3 : 2.7)", self.html)
+        self.assertIn("+ (((src.inc || 65) - 65) / 65) * 0.35", self.html)
+        self.assertNotIn("(src.raan || 0) / 360", self.html)          # the precessing element no longer drives the plane
+        # phase / anomaly seeded by identity (nid), not the raw slot index
+        self.assertIn("o.phase = rand2(nid, 47);", self.html)
+        self.assertIn("o.ta = rand2(nid, 53) * 6.2832;", self.html)
+        # the mobile sample is identity-stable (same objects each day), not a daily reshuffle keyed on the date
+        self.assertIn("sort((a, x) => hashUnit(a.id) - hashUnit(x.id))", self.html)
+        self.assertNotIn("hashUnit(`${a.id}:${date}`)", self.html)
+        # A persistent identity→slot map keeps each object in the SAME field slot across day-loads. Without it,
+        # objects[i]→slot i means one launch/decay shifts every slot after it (measured on the real archive:
+        # a 7-day step with 11 launches + 68 decays reshuffled 21,419 of 34,444 slots — 62% — and only 11 move
+        # with the map). The NORAD sort now only makes the first adopt / new-object placement deterministic.
+        self.assertIn("let slotByNid = new Map();", self.html)
+        self.assertIn("const src = objects[k], id = String(src.id), prev = slotByNid.get(id);", self.html)
+        self.assertIn("if (prev != null && prev < newN && assign[prev] == null) { assign[prev] = src; nextMap.set(id, prev); }", self.html)
+        self.assertIn("slotByNid = nextMap;", self.html)
+        self.assertIn("for (let i = base; i < lim; i++) adoptSlot(i, assign[i], oldN);", self.html)
+        self.assertIn("objects.sort((a, b) => (parseInt(a.id, 10) || 0) - (parseInt(b.id, 10) || 0));", self.html)
+        # and any object that DOES still have to travel to its track fades out while it moves and back in once
+        # settled (no visible zip), and isn't promoted to a solid mid-settle.
+        self.assertIn("o.settleK = smooth(0.9, 0.9997, o.cg * t.cg + o.sg * t.sg) * (1 - smooth(2, 36, Math.abs(t.R - o.R)));", self.html)
+        self.assertIn("* (o.settleK == null ? 1 : o.settleK)", self.html)
+        self.assertIn("fadeFar > 0.05 && !o.orbitTarget) {", self.html)
 
     def test_adaptive_work_stride_escalates_and_relaxes(self):
         # the frame-budget governor raises the stride when frames run hot and lowers it
@@ -1020,13 +1133,10 @@ class CardArtifactTest(unittest.TestCase):
         self.assertIn('if (o.change === "reentry" && !re && state.lens !== 4) { size = Math.max(size, 5.0); aMul = Math.max(aMul, 2.2); }', self.html)
         self.assertIn("pinReentryPhase(o, nid);", self.html)
 
-    def test_perf_hud_defaults_off_and_top_date_fades_during_jump(self):
+    def test_perf_hud_defaults_off(self):
         self.assertIn("perfVisible: false", self.html)
         self.assertIn('<div class="perf" id="perf" hidden>', self.html)
         self.assertIn("if (state.perfVisible) $(\"perf\").textContent", self.html)
-        # one date reads at a time: the top date fades while the centre jump date shows
-        self.assertIn('classList.toggle("jumping", jumping)', self.html)
-        self.assertIn("body.jumping .record-date { opacity: 0; }", self.html)
 
     def test_witness_prism_counts_match_the_index_shape(self):
         # the four witness faces are computed from the live index: distinct nodes,
@@ -1228,7 +1338,7 @@ class CardNodeRankTest(unittest.TestCase):
         self.assertIn("function devSourceNode()", self.html)
         self.assertIn('new URLSearchParams(location.search).get("source")', self.html)
         self.assertIn("if ((u.protocol !== \"http:\" && u.protocol !== \"https:\") || !isPrivateHost(u.hostname)) return null;", self.html)
-        self.assertIn("if (devNode) { state.nodes.unshift(devNode);", self.html)     # top priority
+        self.assertIn("if (devNode) { state.nodes = [devNode];", self.html)          # SOLE node: a local ?source is authoritative (full-span ledger drives the timeline, not a node's live-only index)
         # rawUrl + safeLocator honour the local base/origin (http allowed for the private host)
         self.assertIn("n.base ? `${n.base}/${path}` : `https://raw.githubusercontent.com/", self.html)
         self.assertIn("if (DEV_ORIGIN && x.origin === DEV_ORIGIN) return x.href;", self.html)
