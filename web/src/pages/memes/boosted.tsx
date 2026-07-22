@@ -605,10 +605,10 @@ export default function BoostedReactions() {
       } else if ((event.code === "ArrowLeft" || key === "a") && !usingControl) {
         event.preventDefault();
         previousPairing();
-      } else if ((event.code === "Enter" || key === "s") && !usingControl) {
+      } else if ((event.code === "Enter" || event.code === "ArrowDown" || key === "s") && !usingControl) {
         event.preventDefault();
         newTextSameImage();
-      } else if (key === "w" && !usingControl) {
+      } else if ((event.code === "ArrowUp" || key === "w") && !usingControl) {
         event.preventDefault();
         newImageSameText();
       } else if (key === "c" && !usingControl) {
@@ -780,8 +780,8 @@ export default function BoostedReactions() {
             <dl className={styles.keyboardGrid}>
               <div><dt><kbd>A</kbd><kbd>←</kbd></dt><dd>Previous</dd></div>
               <div><dt><kbd>D</kbd><kbd>→</kbd></dt><dd>Next</dd></div>
-              <div><dt><kbd>S</kbd><kbd>↵</kbd></dt><dd>New words</dd></div>
-              <div><dt><kbd>W</kbd></dt><dd>New picture</dd></div>
+              <div><dt><kbd>S</kbd><kbd>↓</kbd><kbd>↵</kbd></dt><dd>New words</dd></div>
+              <div><dt><kbd>W</kbd><kbd>↑</kbd></dt><dd>New picture</dd></div>
               <div><dt><kbd>Space</kbd></dt><dd>New words + picture</dd></div>
               <div><dt><kbd>C</kbd><kbd>⌘/Ctrl C</kbd></dt><dd>Copy image</dd></div>
               <div><dt><kbd>V</kbd></dt><dd>Download PNG</dd></div>
