@@ -1,0 +1,811 @@
+import Head from "next/head";
+import {
+  FormEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import styles from "@/styles/BoostedReactions.module.scss";
+
+type Reaction = {
+  file: string;
+  sourceFile: string;
+  title: string;
+  creator: string;
+  sourceWork: string;
+  year: string;
+  institution: string;
+  sourceUrl: string;
+  rights: string;
+};
+
+type BoostedDrop = {
+  id: string;
+  content: string;
+  boosts: number;
+  author?: { handle?: string };
+  wave?: { id?: string; name?: string };
+};
+
+type Pairing = {
+  reaction: Reaction;
+  drop: BoostedDrop;
+  topText: string;
+  bottomText: string;
+  attributionVisible: boolean;
+};
+
+type EditSnapshot = Pick<
+  Pairing,
+  "topText" | "bottomText" | "attributionVisible"
+>;
+
+const ASSET_ROOT = "/boosted-reactions";
+const BOOSTED_API_URL =
+  "https://api.6529.io/api/v2/boosted-drops?page_size=300&sort=last_boosted_at&sort_direction=DESC";
+const READABLE_CHARACTER = new RegExp("[\\p{L}\\p{N}]", "gu");
+
+function randomItem<T>(items: T[]): T {
+  const value = new Uint32Array(1);
+  crypto.getRandomValues(value);
+  return items[value[0] % items.length];
+}
+
+function differentItem<T>(
+  items: T[],
+  current: T,
+  key: (item: T) => string,
+): T {
+  if (items.length < 2) return items[0];
+  let candidate = randomItem(items);
+  for (
+    let index = 0;
+    index < 12 && key(candidate) === key(current);
+    index += 1
+  ) {
+    candidate = randomItem(items);
+  }
+  return candidate;
+}
+
+function cleanText(input = "") {
+  const text = input
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/@\[([^\]]+)\]/g, "@$1")
+    .replace(/:[a-zA-Z0-9_+-]+:/g, " ")
+    .replace(/[*_~`>#]/g, " ")
+    .replace(/\\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (text.length <= 260) return text;
+  const excerpt = text.slice(0, 257);
+  const breakAt = excerpt.lastIndexOf(" ");
+  return `${excerpt.slice(0, breakAt > 0 ? breakAt : 257)}…`;
+}
+
+function usableDrops(items: BoostedDrop[]) {
+  return items
+    .map((drop) => ({ ...drop, content: cleanText(drop.content) }))
+    .filter((drop) => {
+      const readable = drop.content.match(READABLE_CHARACTER)?.length ?? 0;
+      return drop.content.length >= 8 && readable >= 5;
+    });
+}
+
+function wrapLines(
+  context: CanvasRenderingContext2D,
+  text: string,
+  maxWidth: number,
+) {
+  const lines: string[] = [];
+  let line = "";
+  for (const word of text.trim().split(/\s+/)) {
+    const attempt = line ? `${line} ${word}` : word;
+    if (context.measureText(attempt).width <= maxWidth || !line) line = attempt;
+    else {
+      lines.push(line);
+      line = word;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function splitCaption(text: string) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return { top: "", bottom: text };
+  context.font = "900 92px Arial, Helvetica, sans-serif";
+  if (wrapLines(context, text, 1136).length <= 2) {
+    return { top: "", bottom: text };
+  }
+  const words = text.split(/\s+/);
+  const target = text.length / 2;
+  let length = 0;
+  let splitAt = 1;
+  for (let index = 0; index < words.length - 1; index += 1) {
+    length += words[index].length + 1;
+    splitAt = index + 1;
+    if (length >= target) break;
+  }
+  return {
+    top: words.slice(0, splitAt).join(" "),
+    bottom: words.slice(splitAt).join(" "),
+  };
+}
+
+function stateFor(reaction: Reaction, drop: BoostedDrop): Pairing {
+  const parts = splitCaption(drop.content);
+  return {
+    reaction,
+    drop,
+    topText: parts.top,
+    bottomText: parts.bottom,
+    attributionVisible: true,
+  };
+}
+
+function dropUrl(drop: BoostedDrop) {
+  return drop.wave?.id
+    ? `https://6529.io/waves/${drop.wave.id}?drop=${drop.id}`
+    : `https://6529.io/?drop=${drop.id}`;
+}
+
+function friendlyRights(rights: string) {
+  if (rights.includes("NOT_IN_COPYRIGHT")) {
+    return "Public domain · Internet Archive: Not in Copyright";
+  }
+  if (rights.includes("Public Domain Mark 1.0")) {
+    return "Creative Commons Public Domain Mark 1.0 · commercial reuse permitted";
+  }
+  return rights || "Public domain";
+}
+
+function artworkCreditSlug(reaction: Reaction) {
+  const creator = `${reaction.creator} ${reaction.sourceFile}`.toLowerCase();
+  const institution = reaction.institution.toLowerCase();
+  let artist = "public-domain";
+  if (creator.includes("le brun") || creator.includes("lebrun")) artist = "lebrun";
+  else if (creator.includes("lavater")) artist = "lavater";
+  else if (creator.includes("bell")) artist = "bell";
+  else if (creator.includes("hollar")) artist = "hollar";
+  else if (creator.includes("hogarth")) artist = "hogarth";
+  else if (creator.includes("daumier")) artist = "daumier";
+  else if (creator.includes("ribera")) artist = "ribera";
+  else if (creator.includes("leonardo")) artist = "leonardo-school";
+
+  let source = "archive";
+  if (institution.includes("getty")) source = "getty";
+  else if (institution.includes("countway")) source = "countway";
+  else if (institution.includes("wellcome")) source = "wellcome";
+  else if (institution.includes("metropolitan") || institution.includes("the met")) source = "met";
+  return `${artist}-${source}`;
+}
+
+export default function BoostedReactions() {
+  const posterRef = useRef<HTMLElement>(null);
+  const topCaptionRef = useRef<HTMLDivElement>(null);
+  const bottomCaptionRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const currentImageRef = useRef<HTMLImageElement | null>(null);
+  const reactionsRef = useRef<Reaction[]>([]);
+  const dropsRef = useRef<BoostedDrop[]>([]);
+  const pairingRef = useRef<Pairing | null>(null);
+  const historyRef = useRef<Pairing[]>([]);
+  const historyIndexRef = useRef(-1);
+  const editSnapshotRef = useRef<EditSnapshot | null>(null);
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [pairing, setPairing] = useState<Pairing | null>(null);
+  const [attributionVisible, setAttributionVisible] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [feedStatus, setFeedStatus] = useState("Loading artwork and boosted drops");
+  const [feedback, setFeedback] = useState<{ message: string; error: boolean } | null>(null);
+
+  const showFeedback = useCallback((message: string, error = false) => {
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    setFeedback({ message, error });
+    feedbackTimerRef.current = setTimeout(
+      () => setFeedback(null),
+      error ? 2600 : 1500,
+    );
+  }, []);
+
+  const captionParts = useCallback(() => ({
+    top: topCaptionRef.current?.innerText.trim() ?? "",
+    bottom: bottomCaptionRef.current?.innerText.trim() ?? "",
+  }), []);
+
+  const fitOverlay = useCallback((element: HTMLDivElement | null) => {
+    if (!element || element.hidden || !element.textContent?.trim() || !posterRef.current) return;
+    const posterWidth = posterRef.current.clientWidth;
+    const posterHeight = posterRef.current.clientHeight;
+    const maximumHeight = posterHeight * 0.25;
+    const wordCount = element.textContent.trim().split(/\s+/).length;
+    const densityLimit = posterWidth * Math.min(0.13, 0.54 / Math.sqrt(Math.max(1, wordCount)));
+    let low = 16;
+    let high = Math.min(82, posterWidth * 0.13, densityLimit);
+    let best = low;
+    for (let index = 0; index < 9; index += 1) {
+      const size = (low + high) / 2;
+      element.style.fontSize = `${size}px`;
+      if (
+        element.scrollHeight <= maximumHeight &&
+        element.scrollWidth <= element.clientWidth + 1
+      ) {
+        best = size;
+        low = size;
+      } else {
+        high = size;
+      }
+    }
+    element.style.fontSize = `${best}px`;
+  }, []);
+
+  const drawTextBlock = useCallback((
+    context: CanvasRenderingContext2D,
+    text: string,
+    placement: "top" | "bottom",
+  ) => {
+    if (!text) return;
+    const wordCount = text.trim().split(/\s+/).length;
+    let fontSize = Math.min(92, 1200 * Math.min(0.078, 0.54 / Math.sqrt(Math.max(1, wordCount))));
+    let lines: string[] = [];
+    do {
+      context.font = `900 ${fontSize}px Arial, Helvetica, sans-serif`;
+      lines = wrapLines(context, text.toUpperCase(), 1144);
+      if (lines.length * fontSize * 0.97 <= 375) break;
+      fontSize -= 4;
+    } while (fontSize > 30);
+    const lineHeight = fontSize * 0.97;
+    const blockHeight = lines.length * lineHeight;
+    const startY = placement === "top" ? 150 : 1500 - 105 - blockHeight;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.lineJoin = "round";
+    context.strokeStyle = "rgba(15,12,9,.96)";
+    context.lineWidth = Math.max(8, fontSize * 0.105);
+    context.fillStyle = "#fffaf0";
+    lines.forEach((line, index) => {
+      const y = startY + index * lineHeight + lineHeight / 2;
+      context.strokeText(line, 600, y);
+      context.fillText(line, 600, y);
+    });
+  }, []);
+
+  const drawDownloadCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    const image = currentImageRef.current;
+    const current = pairingRef.current;
+    if (!canvas || !image || !current) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    canvas.width = 1200;
+    canvas.height = 1500;
+    context.drawImage(image, 0, 0, 1200, 1500);
+
+    const topGradient = context.createLinearGradient(0, 0, 0, 470);
+    topGradient.addColorStop(0, "rgba(12,10,8,.67)");
+    topGradient.addColorStop(1, "rgba(12,10,8,0)");
+    context.fillStyle = topGradient;
+    context.fillRect(0, 0, 1200, 470);
+    const bottomGradient = context.createLinearGradient(0, 970, 0, 1500);
+    bottomGradient.addColorStop(0, "rgba(12,10,8,0)");
+    bottomGradient.addColorStop(1, "rgba(12,10,8,.82)");
+    context.fillStyle = bottomGradient;
+    context.fillRect(0, 970, 1200, 530);
+
+    if (current.attributionVisible) {
+      const author = current.drop.author?.handle || "6529";
+      const wave = current.drop.wave?.name || "6529";
+      context.font = "520 22px -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif";
+      context.textAlign = "left";
+      context.textBaseline = "middle";
+      context.fillStyle = "rgba(255,250,240,.68)";
+      context.shadowColor = "rgba(0,0,0,.7)";
+      context.shadowBlur = 8;
+      context.fillText(
+        `@${author}  ·  ${wave}  ·  ${current.drop.boosts} boost${current.drop.boosts === 1 ? "" : "s"}`,
+        46,
+        1468,
+      );
+      context.shadowBlur = 0;
+    }
+    const parts = captionParts();
+    drawTextBlock(context, parts.top, "top");
+    drawTextBlock(context, parts.bottom, "bottom");
+  }, [captionParts, drawTextBlock]);
+
+  const showPairing = useCallback((next: Pairing) => {
+    pairingRef.current = next;
+    setPairing(next);
+    setAttributionVisible(next.attributionVisible);
+    setInfoOpen(false);
+  }, []);
+
+  const pushPairing = useCallback((next: Pairing) => {
+    historyRef.current.push(next);
+    historyIndexRef.current = historyRef.current.length - 1;
+    showPairing(next);
+  }, [showPairing]);
+
+  const newPairing = useCallback(() => {
+    const reactions = reactionsRef.current;
+    const drops = dropsRef.current;
+    if (!reactions.length || !drops.length) return;
+    const current = pairingRef.current;
+    const reaction = current
+      ? differentItem(reactions, current.reaction, (item) => item.file)
+      : randomItem(reactions);
+    const drop = current
+      ? differentItem(drops, current.drop, (item) => String(item.id))
+      : randomItem(drops);
+    pushPairing(stateFor(reaction, drop));
+  }, [pushPairing]);
+
+  const newImageSameText = useCallback(() => {
+    const current = pairingRef.current;
+    if (!current || !reactionsRef.current.length) return;
+    const reaction = differentItem(
+      reactionsRef.current,
+      current.reaction,
+      (item) => item.file,
+    );
+    const parts = captionParts();
+    pushPairing({ ...current, reaction, topText: parts.top, bottomText: parts.bottom });
+  }, [captionParts, pushPairing]);
+
+  const newTextSameImage = useCallback(() => {
+    const current = pairingRef.current;
+    if (!current || !dropsRef.current.length) return;
+    const drop = differentItem(
+      dropsRef.current,
+      current.drop,
+      (item) => String(item.id),
+    );
+    pushPairing(stateFor(current.reaction, drop));
+  }, [pushPairing]);
+
+  const previousPairing = useCallback(() => {
+    if (historyIndexRef.current <= 0) return;
+    historyIndexRef.current -= 1;
+    showPairing(historyRef.current[historyIndexRef.current]);
+  }, [showPairing]);
+
+  const nextPairing = useCallback(() => {
+    if (historyIndexRef.current < historyRef.current.length - 1) {
+      historyIndexRef.current += 1;
+      showPairing(historyRef.current[historyIndexRef.current]);
+      return;
+    }
+    newPairing();
+  }, [newPairing, showPairing]);
+
+  const updateCurrentPairing = useCallback((patch: Partial<Pairing>) => {
+    const current = pairingRef.current;
+    if (!current) return;
+    const next = { ...current, ...patch };
+    pairingRef.current = next;
+    historyRef.current[historyIndexRef.current] = next;
+  }, []);
+
+  const saveMeme = useCallback(() => {
+    const canvas = canvasRef.current;
+    const current = pairingRef.current;
+    if (!canvas || !current || !currentImageRef.current) return;
+    drawDownloadCanvas();
+    const link = document.createElement("a");
+    const id = String(current.drop.id).slice(0, 8);
+    link.download = `${artworkCreditSlug(current.reaction)}-meme-${id}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+    showFeedback("Downloaded PNG");
+  }, [drawDownloadCanvas, showFeedback]);
+
+  const copyMeme = useCallback(async () => {
+    const canvas = canvasRef.current;
+    if (!canvas || !pairingRef.current || !currentImageRef.current) return;
+    drawDownloadCanvas();
+    try {
+      if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
+        throw new Error("Image clipboard unavailable");
+      }
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+          (value) => value ? resolve(value) : reject(new Error("PNG creation failed")),
+          "image/png",
+        );
+      });
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      showFeedback("Copied image");
+    } catch {
+      showFeedback("Clipboard blocked · press V", true);
+    }
+  }, [drawDownloadCanvas, showFeedback]);
+
+  const abandonTextEdit = useCallback(() => {
+    const snapshot = editSnapshotRef.current;
+    if (!snapshot) return;
+    if (topCaptionRef.current) topCaptionRef.current.innerText = snapshot.topText;
+    if (bottomCaptionRef.current) bottomCaptionRef.current.innerText = snapshot.bottomText;
+    updateCurrentPairing(snapshot);
+    setAttributionVisible(snapshot.attributionVisible);
+    editSnapshotRef.current = null;
+    (document.activeElement as HTMLElement | null)?.blur();
+    requestAnimationFrame(() => {
+      fitOverlay(topCaptionRef.current);
+      fitOverlay(bottomCaptionRef.current);
+      drawDownloadCanvas();
+    });
+    showFeedback("Text edits discarded");
+  }, [drawDownloadCanvas, fitOverlay, showFeedback, updateCurrentPairing]);
+
+  const onCaptionFocus = useCallback(() => {
+    const current = pairingRef.current;
+    if (!current) return;
+    editSnapshotRef.current = {
+      topText: current.topText,
+      bottomText: current.bottomText,
+      attributionVisible: current.attributionVisible,
+    };
+  }, []);
+
+  const onCaptionInput = useCallback((event: FormEvent<HTMLDivElement>) => {
+    const parts = captionParts();
+    updateCurrentPairing({
+      topText: parts.top,
+      bottomText: parts.bottom,
+      attributionVisible: false,
+    });
+    setAttributionVisible(false);
+    fitOverlay(event.currentTarget);
+    drawDownloadCanvas();
+  }, [captionParts, drawDownloadCanvas, fitOverlay, updateCurrentPairing]);
+
+  const onCaptionKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      abandonTextEdit();
+    }
+  }, [abandonTextEdit]);
+
+  useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const [reactionResponse, cacheResponse] = await Promise.all([
+          fetch(`${ASSET_ROOT}/reactions/index.json`),
+          fetch(`${ASSET_ROOT}/drops-cache.json`),
+        ]);
+        if (!reactionResponse.ok || !cacheResponse.ok) {
+          throw new Error("Local assets unavailable");
+        }
+        const reactions = await reactionResponse.json() as Reaction[];
+        const cache = await cacheResponse.json() as { data?: BoostedDrop[] };
+        const cachedDrops = usableDrops(cache.data || []);
+        if (!reactions.length || !cachedDrops.length || cancelled) return;
+        reactionsRef.current = reactions;
+        dropsRef.current = cachedDrops;
+        setFeedStatus(`Cached 6529 feed · ${cachedDrops.length} caption-ready drops`);
+        newPairing();
+
+        try {
+          const controller = new AbortController();
+          const timeout = window.setTimeout(() => controller.abort(), 10000);
+          const liveResponse = await fetch(BOOSTED_API_URL, { signal: controller.signal });
+          window.clearTimeout(timeout);
+          if (!liveResponse.ok) throw new Error("Live feed unavailable");
+          const live = await liveResponse.json() as { data?: BoostedDrop[] };
+          const liveDrops = usableDrops(live.data || []);
+          if (liveDrops.length && !cancelled) {
+            dropsRef.current = liveDrops;
+            setFeedStatus(`Live 6529 feed · ${liveDrops.length} caption-ready drops`);
+          }
+        } catch {
+          if (!cancelled) {
+            setFeedStatus(`Cached 6529 feed · live API temporarily unavailable`);
+          }
+        }
+      } catch {
+        if (!cancelled) {
+          setLoading(false);
+          setFeedStatus("Artwork could not be loaded");
+          setInfoOpen(true);
+        }
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, [newPairing]);
+
+  useEffect(() => {
+    if (!pairing) return;
+    if (topCaptionRef.current) topCaptionRef.current.innerText = pairing.topText;
+    if (bottomCaptionRef.current) bottomCaptionRef.current.innerText = pairing.bottomText;
+    requestAnimationFrame(() => {
+      fitOverlay(topCaptionRef.current);
+      fitOverlay(bottomCaptionRef.current);
+    });
+
+    let cancelled = false;
+    setLoading(true);
+    const image = new Image();
+    image.onload = () => {
+      if (cancelled) return;
+      currentImageRef.current = image;
+      setImageUrl(image.src);
+      setLoading(false);
+      requestAnimationFrame(drawDownloadCanvas);
+    };
+    image.src = `${ASSET_ROOT}/reactions/${pairing.reaction.file}`;
+    return () => { cancelled = true; };
+  }, [drawDownloadCanvas, fitOverlay, pairing]);
+
+  useEffect(() => {
+    const onResize = () => {
+      fitOverlay(topCaptionRef.current);
+      fitOverlay(bottomCaptionRef.current);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [fitOverlay]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const active = document.activeElement as HTMLElement | null;
+      const editing = active?.isContentEditable ?? false;
+      const usingControl = active?.matches("button, a") ?? false;
+      const key = event.key.toLowerCase();
+
+      if (event.key === "Escape") {
+        if (editing) return;
+        setHelpOpen(false);
+        setInfoOpen(false);
+        active?.blur();
+        return;
+      }
+      if (editing) return;
+      if ((event.code === "Slash" || key === "?") && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        setInfoOpen(false);
+        setHelpOpen((open) => !open);
+        return;
+      }
+      if (key === "c" && (event.metaKey || event.ctrlKey) && !event.altKey) {
+        event.preventDefault();
+        copyMeme();
+        return;
+      }
+      if (event.code === "Space" && !usingControl) {
+        event.preventDefault();
+        newPairing();
+      } else if ((event.code === "ArrowRight" || key === "d") && !usingControl) {
+        event.preventDefault();
+        nextPairing();
+      } else if ((event.code === "ArrowLeft" || key === "a") && !usingControl) {
+        event.preventDefault();
+        previousPairing();
+      } else if ((event.code === "Enter" || key === "s") && !usingControl) {
+        event.preventDefault();
+        newTextSameImage();
+      } else if (key === "w" && !usingControl) {
+        event.preventDefault();
+        newImageSameText();
+      } else if (key === "c" && !usingControl) {
+        event.preventDefault();
+        copyMeme();
+      } else if (key === "v" && !usingControl) {
+        event.preventDefault();
+        saveMeme();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [copyMeme, newImageSameText, newPairing, newTextSameImage, nextPairing, previousPairing, saveMeme]);
+
+  useEffect(() => () => {
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+  }, []);
+
+  const currentDropUrl = pairing ? dropUrl(pairing.drop) : "https://6529.io";
+  const creatorLine = pairing
+    ? `${pairing.reaction.creator || "Unknown creator"}${pairing.reaction.year ? ` · ${pairing.reaction.year}` : ""}`
+    : "";
+
+  return (
+    <>
+      <Head>
+        <title>Boosted Reactions — OM Pub</title>
+        <meta name="description" content="Pair live boosted 6529 drops with 167 public-domain reaction engravings." />
+        <meta property="og:url" content="https://om.pub/memes/boosted" />
+        <meta property="og:title" content="Boosted Reactions — OM Pub" />
+        <meta property="og:description" content="Fresh words. Very old faces. A public-domain 6529 meme machine." />
+        <meta property="og:image" content="https://om.pub/om-pub-logo.png" />
+      </Head>
+
+      <main
+        ref={posterRef}
+        className={styles.poster}
+        aria-label="Interactive public-domain reaction artwork"
+        onClick={() => setInfoOpen(false)}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className={styles.artwork} src={imageUrl} alt="Public-domain historical reaction engraving" />
+        {loading && <span className={styles.loading} aria-label="Loading artwork" />}
+
+        <nav className={styles.artworkNavigation} aria-label="Artwork navigation">
+          <button
+            className={`${styles.navigationZone} ${styles.previousZone}`}
+            type="button"
+            aria-label="Go back to the previous pairing"
+            onClick={(event) => { event.currentTarget.blur(); previousPairing(); }}
+          />
+          <button
+            className={`${styles.navigationZone} ${styles.imageZone}`}
+            type="button"
+            aria-label="Show a new image with the same text"
+            onClick={(event) => { event.currentTarget.blur(); newImageSameText(); }}
+          />
+          <button
+            className={`${styles.navigationZone} ${styles.nextZone}`}
+            type="button"
+            aria-label="Show the next pairing"
+            onClick={(event) => { event.currentTarget.blur(); nextPairing(); }}
+          />
+        </nav>
+
+        {pairing && attributionVisible && (
+          <a
+            className={styles.dropMeta}
+            href={currentDropUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <span>@{pairing.drop.author?.handle || "6529"}</span>
+            <span className={styles.metaDivider}>·</span>
+            <span>{pairing.drop.wave?.name || "6529"}</span>
+            <span className={styles.metaDivider}>·</span>
+            <span>{pairing.drop.boosts} boost{pairing.drop.boosts === 1 ? "" : "s"}</span>
+          </a>
+        )}
+
+        <div
+          ref={topCaptionRef}
+          className={`${styles.memeCaption} ${styles.topCaption}`}
+          contentEditable
+          suppressContentEditableWarning
+          role="textbox"
+          aria-label="Edit top caption"
+          spellCheck
+          hidden={!pairing?.topText}
+          onClick={(event) => event.stopPropagation()}
+          onFocus={onCaptionFocus}
+          onBlur={() => { editSnapshotRef.current = null; }}
+          onInput={onCaptionInput}
+          onKeyDown={onCaptionKeyDown}
+        />
+        <div
+          ref={bottomCaptionRef}
+          className={`${styles.memeCaption} ${styles.bottomCaption}`}
+          contentEditable
+          suppressContentEditableWarning
+          role="textbox"
+          aria-label="Edit bottom caption"
+          spellCheck
+          hidden={!pairing}
+          onClick={(event) => event.stopPropagation()}
+          onFocus={onCaptionFocus}
+          onBlur={() => { editSnapshotRef.current = null; }}
+          onInput={onCaptionInput}
+          onKeyDown={onCaptionKeyDown}
+        />
+
+        <button
+          className={styles.downloadButton}
+          type="button"
+          aria-label="Download image with text overlay"
+          title="Download PNG (V)"
+          disabled={!pairing || loading}
+          onClick={(event) => { event.stopPropagation(); event.currentTarget.blur(); saveMeme(); }}
+        />
+
+        <div
+          className={`${styles.sourceHelp} ${infoOpen ? styles.sourceOpen : ""}`}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button
+            className={styles.infoButton}
+            type="button"
+            aria-label="Show artwork information"
+            aria-expanded={infoOpen}
+            onClick={() => { setHelpOpen(false); setInfoOpen((open) => !open); }}
+          >
+            i
+          </button>
+          {pairing && (
+            <aside className={styles.sourceTooltip} role="tooltip">
+              <span className={styles.tooltipEyebrow}>Artwork record</span>
+              <strong>{pairing.reaction.title || "Historical reaction image"}</strong>
+              <p className={styles.creatorLine}>{creatorLine}</p>
+              <div className={styles.tooltipSection}>
+                <span className={styles.tooltipLabel}>Collection</span>
+                <p>{[pairing.reaction.sourceWork, pairing.reaction.institution].filter(Boolean).join(" · ")}</p>
+              </div>
+              <div className={styles.tooltipSection}>
+                <span className={styles.tooltipLabel}>Rights</span>
+                <p>{friendlyRights(pairing.reaction.rights)}</p>
+              </div>
+              <nav className={styles.tooltipLinks} aria-label="Artwork links">
+                <a href={pairing.reaction.sourceUrl} target="_blank" rel="noreferrer">Image source <span>↗</span></a>
+                <a href={currentDropUrl} target="_blank" rel="noreferrer">Original drop <span>↗</span></a>
+              </nav>
+              <p className={styles.feedStatus}>{feedStatus}</p>
+              <p className={styles.tooltipHint}>Press ? or / for every keyboard shortcut.</p>
+            </aside>
+          )}
+        </div>
+
+        {helpOpen && (
+          <aside
+            className={styles.keyboardHelp}
+            role="dialog"
+            aria-label="Keyboard shortcuts"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <header className={styles.keyboardHelpHeader}>
+              <span>Keyboard</span>
+              <button type="button" aria-label="Close keyboard shortcuts" onClick={() => setHelpOpen(false)}>×</button>
+            </header>
+            <dl className={styles.keyboardGrid}>
+              <div><dt><kbd>A</kbd><kbd>←</kbd></dt><dd>Previous</dd></div>
+              <div><dt><kbd>D</kbd><kbd>→</kbd></dt><dd>Next</dd></div>
+              <div><dt><kbd>S</kbd><kbd>↵</kbd></dt><dd>New words</dd></div>
+              <div><dt><kbd>W</kbd></dt><dd>New picture</dd></div>
+              <div><dt><kbd>Space</kbd></dt><dd>New words + picture</dd></div>
+              <div><dt><kbd>C</kbd><kbd>⌘/Ctrl C</kbd></dt><dd>Copy image</dd></div>
+              <div><dt><kbd>V</kbd></dt><dd>Download PNG</dd></div>
+              <div><dt><kbd>Esc</kbd></dt><dd>Cancel edit</dd></div>
+              <div><dt><kbd>?</kbd><kbd>/</kbd></dt><dd>Toggle this guide</dd></div>
+            </dl>
+          </aside>
+        )}
+
+        {feedback && (
+          <span
+            className={`${styles.actionFeedback} ${feedback.error ? styles.feedbackError : ""}`}
+            role="status"
+            aria-live="polite"
+          >
+            {feedback.message}
+          </span>
+        )}
+
+        <p className={styles.srOnly} aria-live="polite">{feedStatus}</p>
+        <canvas ref={canvasRef} width="1200" height="1500" hidden />
+      </main>
+    </>
+  );
+}
+
+BoostedReactions.hideFooter = true;

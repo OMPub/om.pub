@@ -151,6 +151,9 @@ export default function Memes() {
                 <Link href="#museum" className="btn btn-ghost">
                   Visit the prememe museum
                 </Link>
+                <Link href="/memes/boosted" className="btn btn-ghost">
+                  Make a boosted reaction
+                </Link>
               </div>
             </div>
 
