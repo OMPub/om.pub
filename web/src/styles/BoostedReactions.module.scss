@@ -1,0 +1,469 @@
+.poster {
+  --paper: #d7c9ad;
+  position: relative;
+  z-index: 3;
+  width: min(100vw, 80vh);
+  height: min(100vh, 125vw);
+  aspect-ratio: 4 / 5;
+  margin: auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--paper);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.poster::before,
+.poster::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.poster::before {
+  top: 0;
+  height: 31%;
+  background: linear-gradient(rgba(12, 10, 8, 0.62), transparent);
+}
+
+.poster::after {
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(transparent, rgba(12, 10, 8, 0.8));
+}
+
+.artwork {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.artworkNavigation {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  pointer-events: none;
+}
+
+.navigationZone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 250, 240, 0.72);
+  cursor: pointer;
+  pointer-events: auto;
+  outline: none;
+  transition: background 140ms ease;
+}
+
+.navigationZone::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: rgba(255, 250, 240, 0.62);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 4vh, 42px);
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.56);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.previousZone::after { content: "‹"; left: 16px; }
+.imageZone::after { content: "↻"; left: 50%; transform: translate(-50%, -50%); font-size: clamp(17px, 2.5vh, 26px); }
+.nextZone::after { content: "›"; right: 16px; }
+.previousZone:hover,
+.previousZone:focus-visible { background: linear-gradient(90deg, rgba(10, 8, 6, 0.18), transparent); }
+.imageZone:hover,
+.imageZone:focus-visible { background: rgba(255, 250, 240, 0.045); }
+.nextZone:hover,
+.nextZone:focus-visible { background: linear-gradient(270deg, rgba(10, 8, 6, 0.18), transparent); }
+.navigationZone:hover::after,
+.navigationZone:focus-visible::after { opacity: 1; }
+.previousZone:hover::after,
+.previousZone:focus-visible::after { transform: translate(2px, -50%); }
+.nextZone:hover::after,
+.nextZone:focus-visible::after { transform: translate(-2px, -50%); }
+.imageZone:hover::after,
+.imageZone:focus-visible::after { transform: translate(-50%, -50%) rotate(16deg); }
+
+.loading {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  animation: loadingSweep 1.15s linear infinite;
+}
+
+.dropMeta {
+  position: absolute;
+  z-index: 4;
+  bottom: clamp(12px, 2.2vh, 24px);
+  left: clamp(46px, 6vh, 54px);
+  right: 54px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: rgba(255, 250, 240, 0.68);
+  text-decoration: none;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.72);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: clamp(9px, 1.4vh, 12px);
+  font-weight: 520;
+  letter-spacing: 0.025em;
+}
+
+.dropMeta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dropMeta .metaDivider { flex: 0 0 auto; opacity: 0.36; }
+
+.memeCaption {
+  position: absolute;
+  z-index: 3;
+  left: 2%;
+  width: 96%;
+  max-height: 25%;
+  color: #fffaf0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", Arial, sans-serif;
+  font-size: clamp(28px, 6vh, 72px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  -webkit-text-stroke: clamp(1px, 0.27vh, 3px) rgba(14, 11, 8, 0.96);
+  paint-order: stroke fill;
+  text-shadow: 0 3px 2px rgba(0, 0, 0, 0.62), 0 6px 18px rgba(0, 0, 0, 0.34);
+  cursor: text;
+}
+
+.memeCaption:focus {
+  outline: 1px dashed rgba(255, 250, 240, 0.8);
+  outline-offset: 8px;
+  background: rgba(10, 8, 6, 0.16);
+}
+
+.memeCaption:empty::before { content: "Click to add text"; opacity: 0.42; }
+.topCaption { top: 5%; }
+.bottomCaption { bottom: 10%; }
+
+.downloadButton {
+  position: absolute;
+  z-index: 7;
+  bottom: clamp(9px, 1.7vh, 18px);
+  left: clamp(10px, 1.8vh, 18px);
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 50%;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 16, 12, 0.22);
+  color: rgba(255, 250, 240, 0.58);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.downloadButton::before {
+  content: "↓";
+  transform: translateY(-1px);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.downloadButton:hover,
+.downloadButton:focus-visible {
+  border-color: rgba(255, 250, 240, 0.54);
+  background: rgba(20, 16, 12, 0.38);
+  color: rgba(255, 250, 240, 0.88);
+}
+.downloadButton:focus-visible { outline: 1px solid rgba(255, 250, 240, 0.48); outline-offset: 3px; }
+.downloadButton:disabled { opacity: 0.32; cursor: wait; }
+
+.sourceHelp {
+  position: absolute;
+  z-index: 7;
+  bottom: clamp(9px, 1.7vh, 18px);
+  right: clamp(10px, 1.8vh, 18px);
+}
+
+.infoButton {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255, 250, 240, 0.38);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: rgba(20, 16, 12, 0.28);
+  color: rgba(255, 250, 240, 0.72);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: help;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.sourceTooltip {
+  position: absolute;
+  bottom: 34px;
+  right: 0;
+  width: min(350px, calc(100vw - 28px));
+  max-height: calc(100vh - 54px);
+  overflow: auto;
+  padding: 20px;
+  display: grid;
+  background: rgba(20, 18, 15, 0.965);
+  color: #fffaf0;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
+  word-break: normal;
+  overflow-wrap: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 120ms ease, transform 120ms ease, visibility 120ms;
+}
+
+.sourceTooltip .tooltipEyebrow {
+  margin-bottom: 8px;
+  color: rgba(255, 250, 240, 0.42);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sourceTooltip strong {
+  color: rgba(255, 250, 240, 0.96);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.sourceTooltip p { margin: 0; }
+.sourceTooltip .creatorLine {
+  margin-top: 7px;
+  color: rgba(255, 250, 240, 0.58);
+  font-size: 12px;
+  line-height: 1.42;
+}
+.tooltipSection {
+  margin-top: 16px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+.tooltipLabel {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 250, 240, 0.38);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.tooltipSection p {
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 12px;
+  line-height: 1.48;
+}
+.tooltipLinks { display: flex; gap: 18px; margin-top: 17px; }
+.tooltipLinks a {
+  color: rgba(255, 250, 240, 0.86);
+  font-size: 11px;
+  font-weight: 620;
+  text-decoration-color: rgba(255, 250, 240, 0.28);
+  text-underline-offset: 4px;
+}
+.tooltipLinks a:hover { color: #fffaf0; text-decoration-color: rgba(255, 250, 240, 0.72); }
+.tooltipLinks a span { color: rgba(255, 250, 240, 0.42); }
+.sourceTooltip .feedStatus {
+  margin-top: 18px;
+  color: rgba(255, 250, 240, 0.38);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+.sourceTooltip .tooltipHint {
+  margin-top: 9px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  color: rgba(255, 250, 240, 0.45);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.sourceHelp:hover .sourceTooltip,
+.sourceHelp:focus-within .sourceTooltip,
+.sourceOpen .sourceTooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.keyboardHelp {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  top: 50%;
+  width: min(390px, calc(100% - 34px));
+  padding: 18px 18px 16px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 250, 240, 0.14);
+  background: rgba(18, 16, 13, 0.94);
+  color: rgba(255, 250, 240, 0.9);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(12px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.keyboardHelpHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  color: rgba(255, 250, 240, 0.48);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.keyboardHelpHeader button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 250, 240, 0.52);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1;
+}
+.keyboardHelpHeader button:hover,
+.keyboardHelpHeader button:focus-visible { color: #fffaf0; outline: none; }
+
+.keyboardGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+}
+.keyboardGrid > div {
+  min-height: 40px;
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: minmax(64px, auto) 1fr;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.keyboardGrid dt { display: flex; gap: 4px; }
+.keyboardGrid dd {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.66);
+  font-size: 11px;
+  line-height: 1.25;
+}
+.keyboardGrid kbd {
+  min-width: 23px;
+  height: 23px;
+  padding: 0 6px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 240, 0.24);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 250, 240, 0.88);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.07);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.actionFeedback {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: clamp(44px, 6vh, 62px);
+  max-width: calc(100% - 36px);
+  padding: 7px 11px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 250, 240, 0.18);
+  border-radius: 999px;
+  background: rgba(18, 16, 13, 0.84);
+  color: rgba(255, 250, 240, 0.84);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 620;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.feedbackError { color: rgba(255, 221, 205, 0.9); }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes loadingSweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@supports (height: 100dvh) {
+  .poster {
+    width: min(100vw, 80dvh);
+    height: min(100dvh, 125vw);
+  }
+  .sourceTooltip { max-height: calc(100dvh - 54px); }
+}
+
+@media (max-width: 520px) {
+  .keyboardGrid { grid-template-columns: 1fr; }
+  .keyboardHelp { max-height: calc(100% - 34px); overflow: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sourceTooltip { transition: none; }
+  .loading::after { animation: none; }
+}

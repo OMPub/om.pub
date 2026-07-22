@@ -7,6 +7,7 @@ const FOOTER_NAV: { heading: string; links: { label: string; href: string; exter
     heading: "Projects",
     links: [
       { label: "The Memes", href: "/memes" },
+      { label: "Boosted Reactions", href: "/memes/boosted" },
       { label: "Naka", href: "/naka" },
       { label: "Rep Filter", href: "/rep" },
       { label: "Meme Power Rankings", href: "/mpr" },
