@@ -32,9 +32,28 @@ type BoostedDrop = {
   wave?: { id?: string; name?: string };
 };
 
+type CuratedTweet = {
+  id: string;
+  text: string;
+  likes: number;
+};
+
+type CaptionSource = {
+  kind: "drop" | "tweet";
+  id: string;
+  content: string;
+  authorHandle: string;
+  url: string;
+  label: string;
+  engagement?: {
+    count: number;
+    type: "boosts" | "likes";
+  };
+};
+
 type Pairing = {
   reaction: Reaction;
-  drop: BoostedDrop;
+  source: CaptionSource;
   topText: string;
   bottomText: string;
   attributionVisible: boolean;
@@ -73,8 +92,8 @@ function differentItem<T>(
   return candidate;
 }
 
-function cleanText(input = "") {
-  const text = input
+function cleanText(input = "", stripThreadNumber = false) {
+  let text = input
     .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
     .replace(/https?:\/\/\S+/g, " ")
@@ -84,19 +103,64 @@ function cleanText(input = "") {
     .replace(/\\n/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  if (stripThreadNumber) text = text.replace(/^\d+\/\s*/, "");
   if (text.length <= 260) return text;
   const excerpt = text.slice(0, 257);
   const breakAt = excerpt.lastIndexOf(" ");
   return `${excerpt.slice(0, breakAt > 0 ? breakAt : 257)}…`;
 }
 
-function usableDrops(items: BoostedDrop[]) {
+function dropUrl(drop: BoostedDrop) {
+  return drop.wave?.id
+    ? `https://6529.io/waves/${drop.wave.id}?drop=${drop.id}`
+    : `https://6529.io/?drop=${drop.id}`;
+}
+
+function dropSources(items: BoostedDrop[]) {
   return items
-    .map((drop) => ({ ...drop, content: cleanText(drop.content) }))
-    .filter((drop) => {
-      const readable = drop.content.match(READABLE_CHARACTER)?.length ?? 0;
-      return drop.content.length >= 8 && readable >= 5;
+    .map((drop): CaptionSource => ({
+      kind: "drop",
+      id: drop.id,
+      content: cleanText(drop.content),
+      authorHandle: drop.author?.handle || "6529",
+      url: dropUrl(drop),
+      label: drop.wave?.name || "6529",
+      engagement: {
+        count: drop.boosts,
+        type: "boosts",
+      },
+    }))
+    .filter((source) => {
+      const readable = source.content.match(READABLE_CHARACTER)?.length ?? 0;
+      return source.content.length >= 8 && readable >= 5;
     });
+}
+
+function tweetSources(items: CuratedTweet[]) {
+  return items
+    .map((tweet): CaptionSource => ({
+      kind: "tweet",
+      id: tweet.id,
+      content: cleanText(tweet.text, true),
+      authorHandle: "punk6529",
+      url: `https://x.com/punk6529/status/${tweet.id}`,
+      label: "tweet",
+      engagement: {
+        count: tweet.likes,
+        type: "likes",
+      },
+    }))
+    .filter((source) => {
+      const readable = source.content.match(READABLE_CHARACTER)?.length ?? 0;
+      return source.content.length >= 8 && readable >= 5;
+    });
+}
+
+function normalizeSource(source: CaptionSource) {
+  return {
+    ...source,
+    content: cleanText(source.content, source.kind === "tweet"),
+  };
 }
 
 function wrapLines(
@@ -141,21 +205,30 @@ function splitCaption(text: string) {
   };
 }
 
-function stateFor(reaction: Reaction, drop: BoostedDrop): Pairing {
-  const parts = splitCaption(drop.content);
+function stateFor(reaction: Reaction, source: CaptionSource): Pairing {
+  const parts = splitCaption(source.content);
   return {
     reaction,
-    drop,
+    source,
     topText: parts.top,
     bottomText: parts.bottom,
     attributionVisible: true,
   };
 }
 
-function dropUrl(drop: BoostedDrop) {
-  return drop.wave?.id
-    ? `https://6529.io/waves/${drop.wave.id}?drop=${drop.id}`
-    : `https://6529.io/?drop=${drop.id}`;
+function sourceAttribution(source: CaptionSource) {
+  const engagement = source.engagement;
+  const metric = engagement
+    ? `${engagement.count.toLocaleString("en-US")} ${
+      engagement.count === 1
+        ? engagement.type.slice(0, -1)
+        : engagement.type
+    }`
+    : source.kind === "tweet" ? "tweet" : "drop";
+  return {
+    parts: [`@${source.authorHandle}`, source.label, metric],
+    text: `@${source.authorHandle}  ·  ${source.label}  ·  ${metric}`,
+  };
 }
 
 function friendlyRights(rights: string) {
@@ -209,7 +282,10 @@ export default function BoostedReactions() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentImageRef = useRef<HTMLImageElement | null>(null);
   const reactionsRef = useRef<Reaction[]>([]);
-  const dropsRef = useRef<BoostedDrop[]>([]);
+  const sourcePoolsRef = useRef<{
+    drops: CaptionSource[];
+    tweets: CaptionSource[];
+  }>({ drops: [], tweets: [] });
   const pairingRef = useRef<Pairing | null>(null);
   const historyRef = useRef<Pairing[]>([]);
   const historyIndexRef = useRef(-1);
@@ -228,7 +304,9 @@ export default function BoostedReactions() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
-  const [feedStatus, setFeedStatus] = useState("Loading artwork and boosted drops");
+  const [sourceInput, setSourceInput] = useState("");
+  const [sourceLoading, setSourceLoading] = useState(false);
+  const [feedStatus, setFeedStatus] = useState("Loading artwork, drops and tweets");
   const [feedback, setFeedback] = useState<{ message: string; error: boolean } | null>(null);
 
   const showFeedback = useCallback((message: string, error = false) => {
@@ -325,19 +403,14 @@ export default function BoostedReactions() {
     context.fillRect(0, 970, 1200, 530);
 
     if (current.attributionVisible) {
-      const author = current.drop.author?.handle || "6529";
-      const wave = current.drop.wave?.name || "6529";
+      const attribution = sourceAttribution(current.source);
       context.font = "520 22px -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif";
       context.textAlign = "left";
       context.textBaseline = "middle";
       context.fillStyle = "rgba(255,250,240,.68)";
       context.shadowColor = "rgba(0,0,0,.7)";
       context.shadowBlur = 8;
-      context.fillText(
-        `@${author}  ·  ${wave}  ·  ${current.drop.boosts} boost${current.drop.boosts === 1 ? "" : "s"}`,
-        46,
-        1468,
-      );
+      context.fillText(attribution.text, 46, 1468);
       context.shadowBlur = 0;
     }
     const parts = captionParts();
@@ -347,15 +420,17 @@ export default function BoostedReactions() {
 
   const randomPairingFor = useCallback((current: Pairing | null) => {
     const reactions = reactionsRef.current;
-    const drops = dropsRef.current;
-    if (!reactions.length || !drops.length) return null;
+    const pools = sourcePoolsRef.current;
+    const availablePools = [pools.drops, pools.tweets].filter((pool) => pool.length);
+    if (!reactions.length || !availablePools.length) return null;
     const reaction = current
       ? differentItem(reactions, current.reaction, (item) => item.file)
       : randomItem(reactions);
-    const drop = current
-      ? differentItem(drops, current.drop, (item) => String(item.id))
-      : randomItem(drops);
-    return stateFor(reaction, drop);
+    const pool = randomItem(availablePools);
+    const source = current
+      ? differentItem(pool, current.source, (item) => `${item.kind}:${item.id}`)
+      : randomItem(pool);
+    return stateFor(reaction, source);
   }, []);
 
   const preloadNextRandomPairing = useCallback((current: Pairing | null = pairingRef.current) => {
@@ -408,16 +483,19 @@ export default function BoostedReactions() {
 
   const newTextSameImage = useCallback(() => {
     const current = pairingRef.current;
-    if (!current || !dropsRef.current.length) return;
+    const pools = sourcePoolsRef.current;
+    const availablePools = [pools.drops, pools.tweets].filter((pool) => pool.length);
+    if (!current || !availablePools.length) return;
     const cached = preloadedPairingRef.current;
-    const drop = cached?.drop || differentItem(
-      dropsRef.current,
-      current.drop,
-      (item) => String(item.id),
+    const pool = randomItem(availablePools);
+    const source = cached?.source || differentItem(
+      pool,
+      current.source,
+      (item) => `${item.kind}:${item.id}`,
     );
     preloadedPairingRef.current = null;
     preloadedImageRef.current = null;
-    pushPairing(stateFor(current.reaction, drop));
+    pushPairing(stateFor(current.reaction, source));
   }, [pushPairing]);
 
   const previousPairing = useCallback(() => {
@@ -451,7 +529,7 @@ export default function BoostedReactions() {
     const blob = await canvasToPngBlob(canvas);
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    const id = String(current.drop.id).slice(0, 8);
+    const id = String(current.source.id).slice(0, 8);
     link.download = `${artworkCreditSlug(current.reaction)}-meme-${id}.png`;
     link.href = url;
     document.body.appendChild(link);
@@ -481,6 +559,44 @@ export default function BoostedReactions() {
       showFeedback("Clipboard blocked", true);
     }
   }, [drawDownloadCanvas, showFeedback]);
+
+  const buildFromSource = useCallback(async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const input = sourceInput.trim();
+    if (!input || sourceLoading) return;
+    setSourceLoading(true);
+    try {
+      const response = await fetch(`/api/memes/source?url=${encodeURIComponent(input)}`);
+      const result = await response.json() as CaptionSource | { error?: string };
+      if (!response.ok || !("kind" in result)) {
+        throw new Error("error" in result ? result.error : "Source could not be read");
+      }
+      const source = normalizeSource(result);
+      const readable = source.content.match(READABLE_CHARACTER)?.length ?? 0;
+      if (source.content.length < 8 || readable < 5) {
+        throw new Error("That source does not contain enough caption text");
+      }
+      const current = pairingRef.current;
+      const reactions = reactionsRef.current;
+      if (!reactions.length) throw new Error("Artwork is still loading");
+      const reaction = current
+        ? differentItem(reactions, current.reaction, (item) => item.file)
+        : randomItem(reactions);
+      preloadedPairingRef.current = null;
+      preloadedImageRef.current = null;
+      pushPairing(stateFor(reaction, source));
+      setSourceInput("");
+      setActionsOpen(false);
+      showFeedback(source.kind === "tweet" ? "Built from tweet" : "Built from drop");
+    } catch (error) {
+      showFeedback(
+        error instanceof Error ? error.message : "Source could not be read",
+        true,
+      );
+    } finally {
+      setSourceLoading(false);
+    }
+  }, [pushPairing, showFeedback, sourceInput, sourceLoading]);
 
   const canStartSwipe = useCallback((target: EventTarget | null) => {
     if (!(target instanceof HTMLElement)) return true;
@@ -623,20 +739,31 @@ export default function BoostedReactions() {
     let cancelled = false;
     async function load() {
       try {
-        const [reactionResponse, cacheResponse] = await Promise.all([
+        const [reactionResponse, cacheResponse, tweetResponse] = await Promise.all([
           fetch(`${ASSET_ROOT}/reactions/index.json`),
           fetch(`${ASSET_ROOT}/drops-cache.json`),
+          fetch(`${ASSET_ROOT}/punk6529-tweets.json`),
         ]);
-        if (!reactionResponse.ok || !cacheResponse.ok) {
+        if (!reactionResponse.ok || !cacheResponse.ok || !tweetResponse.ok) {
           throw new Error("Local assets unavailable");
         }
         const reactions = await reactionResponse.json() as Reaction[];
         const cache = await cacheResponse.json() as { data?: BoostedDrop[] };
-        const cachedDrops = usableDrops(cache.data || []);
-        if (!reactions.length || !cachedDrops.length || cancelled) return;
+        const tweetCache = await tweetResponse.json() as { tweets?: CuratedTweet[] };
+        const cachedDrops = dropSources(cache.data || []);
+        const curatedTweets = tweetSources(tweetCache.tweets || []);
+        if (cancelled) return;
+        if (!reactions.length || (!cachedDrops.length && !curatedTweets.length)) {
+          throw new Error("Local assets are empty");
+        }
         reactionsRef.current = reactions;
-        dropsRef.current = cachedDrops;
-        setFeedStatus(`Cached 6529 feed · ${cachedDrops.length} caption-ready drops`);
+        sourcePoolsRef.current = {
+          drops: cachedDrops,
+          tweets: curatedTweets,
+        };
+        setFeedStatus(
+          `${cachedDrops.length} boosted drops · ${curatedTweets.length} curated @punk6529 tweets`,
+        );
         newPairing();
 
         try {
@@ -646,14 +773,21 @@ export default function BoostedReactions() {
           window.clearTimeout(timeout);
           if (!liveResponse.ok) throw new Error("Live feed unavailable");
           const live = await liveResponse.json() as { data?: BoostedDrop[] };
-          const liveDrops = usableDrops(live.data || []);
+          const liveDrops = dropSources(live.data || []);
           if (liveDrops.length && !cancelled) {
-            dropsRef.current = liveDrops;
-            setFeedStatus(`Live 6529 feed · ${liveDrops.length} caption-ready drops`);
+            sourcePoolsRef.current = {
+              drops: liveDrops,
+              tweets: curatedTweets,
+            };
+            setFeedStatus(
+              `${liveDrops.length} live boosted drops · ${curatedTweets.length} curated @punk6529 tweets`,
+            );
           }
         } catch {
           if (!cancelled) {
-            setFeedStatus(`Cached 6529 feed · live API temporarily unavailable`);
+            setFeedStatus(
+              `${cachedDrops.length} cached drops · ${curatedTweets.length} curated @punk6529 tweets`,
+            );
           }
         }
       } catch {
@@ -704,6 +838,7 @@ export default function BoostedReactions() {
       const active = document.activeElement as HTMLElement | null;
       const editing = active?.isContentEditable ?? false;
       const usingControl = active?.matches("button, a") ?? false;
+      const typing = active?.matches("input, textarea, select") ?? false;
       const key = event.key.toLowerCase();
 
       if (event.key === "Escape") {
@@ -714,7 +849,7 @@ export default function BoostedReactions() {
         active?.blur();
         return;
       }
-      if (editing) return;
+      if (editing || typing) return;
       if ((event.code === "Slash" || key === "?") && !event.metaKey && !event.ctrlKey && !event.altKey) {
         event.preventDefault();
         setInfoOpen(false);
@@ -758,7 +893,13 @@ export default function BoostedReactions() {
     if (swipeClickTimerRef.current) clearTimeout(swipeClickTimerRef.current);
   }, []);
 
-  const currentDropUrl = pairing ? dropUrl(pairing.drop) : "https://6529.io";
+  const currentSourceUrl = pairing?.source.url || "https://6529.io";
+  const currentAttribution = pairing
+    ? sourceAttribution(pairing.source)
+    : null;
+  const sourceLinkLabel = pairing?.source.kind === "tweet"
+    ? "Original tweet"
+    : "Original drop";
   const creatorLine = pairing
     ? `${pairing.reaction.creator || "Unknown creator"}${pairing.reaction.year ? ` · ${pairing.reaction.year}` : ""}`
     : "";
@@ -767,10 +908,10 @@ export default function BoostedReactions() {
     <>
       <Head>
         <title>Boosted Reactions — OM Pub</title>
-        <meta name="description" content="Pair live boosted 6529 drops with 167 public-domain reaction engravings." />
+        <meta name="description" content="Pair boosted 6529 drops and curated @punk6529 tweets with 167 public-domain reaction engravings." />
         <meta property="og:url" content="https://om.pub/memes/boosted" />
         <meta property="og:title" content="Boosted Reactions — OM Pub" />
-        <meta property="og:description" content="Fresh words. Very old faces. A public-domain 6529 meme machine." />
+        <meta property="og:description" content="Fresh words. Very old faces. A public-domain 6529 meme machine for drops and tweets." />
         <meta property="og:image" content="https://om.pub/om-pub-logo.png" />
       </Head>
 
@@ -854,7 +995,7 @@ export default function BoostedReactions() {
               className={styles.actionMenuButton}
               type="button"
               aria-label="Open image actions"
-              aria-haspopup="menu"
+              aria-haspopup="dialog"
               aria-expanded={actionsOpen}
               disabled={!pairing || loading}
               onClick={(event) => {
@@ -865,10 +1006,13 @@ export default function BoostedReactions() {
             >
               <span aria-hidden="true">⋮</span>
             </button>
-            <div className={styles.actionMenu} role="menu">
+            <div
+              className={styles.actionMenu}
+              role="dialog"
+              aria-label="Image and source actions"
+            >
               <button
                 type="button"
-                role="menuitem"
                 disabled={!pairing || loading}
                 onClick={() => { setActionsOpen(false); void saveMeme(); }}
               >
@@ -876,28 +1020,49 @@ export default function BoostedReactions() {
               </button>
               <button
                 type="button"
-                role="menuitem"
                 disabled={!pairing || loading}
                 onClick={() => { setActionsOpen(false); void copyMeme(); }}
               >
                 Copy image
               </button>
+              <form
+                className={styles.sourceForm}
+                aria-label="Build from a tweet or drop"
+                onSubmit={buildFromSource}
+              >
+                <input
+                  type="text"
+                  inputMode="url"
+                  aria-label="Tweet or 6529 drop URL"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  placeholder={sourceLoading ? "Reading source…" : "Paste tweet or drop URL"}
+                  value={sourceInput}
+                  disabled={sourceLoading}
+                  onChange={(event) => setSourceInput(event.target.value)}
+                />
+                <button className={styles.srOnly} type="submit">
+                  Build meme from URL
+                </button>
+              </form>
             </div>
           </div>
 
-          {pairing && attributionVisible && (
+          {pairing && currentAttribution && attributionVisible && (
             <a
-              className={styles.dropMeta}
-              href={currentDropUrl}
+              className={`${styles.dropMeta} ${pairing.source.kind === "tweet" ? styles.tweetMeta : ""}`}
+              href={currentSourceUrl}
               target="_blank"
               rel="noreferrer"
               onClick={(event) => event.stopPropagation()}
             >
-              <span>@{pairing.drop.author?.handle || "6529"}</span>
+              <span>{currentAttribution.parts[0]}</span>
               <span className={styles.metaDivider}>·</span>
-              <span>{pairing.drop.wave?.name || "6529"}</span>
+              <span>{currentAttribution.parts[1]}</span>
               <span className={styles.metaDivider}>·</span>
-              <span>{pairing.drop.boosts} boost{pairing.drop.boosts === 1 ? "" : "s"}</span>
+              <span>{currentAttribution.parts[2]}</span>
             </a>
           )}
 
@@ -929,7 +1094,7 @@ export default function BoostedReactions() {
                 </div>
                 <nav className={styles.tooltipLinks} aria-label="Artwork links">
                   <a href={pairing.reaction.sourceUrl} target="_blank" rel="noreferrer">Image source <span>↗</span></a>
-                  <a href={currentDropUrl} target="_blank" rel="noreferrer">Original drop <span>↗</span></a>
+                  <a href={currentSourceUrl} target="_blank" rel="noreferrer">{sourceLinkLabel} <span>↗</span></a>
                 </nav>
                 <p className={styles.feedStatus}>{feedStatus}</p>
                 <p className={styles.tooltipHint}>Press ? or / for every keyboard shortcut.</p>

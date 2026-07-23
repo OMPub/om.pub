@@ -146,6 +146,7 @@
 
 .dropMeta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dropMeta .metaDivider { flex: 0 0 auto; opacity: 0.36; }
+.tweetMeta { color: rgba(220, 241, 247, 0.82); }
 
 .memeCaption {
   position: absolute;
@@ -219,7 +220,7 @@
   position: absolute;
   bottom: 34px;
   left: 0;
-  min-width: 142px;
+  width: min(244px, calc(100vw - 34px));
   padding: 5px;
   display: grid;
   gap: 2px;
@@ -264,6 +265,34 @@
   opacity: 0.38;
   cursor: wait;
 }
+
+.sourceForm {
+  margin-top: 4px;
+  padding: 7px 5px 4px;
+  border-top: 1px solid rgba(255, 250, 240, 0.1);
+}
+
+.sourceForm input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  border: 1px solid rgba(255, 250, 240, 0.18);
+  border-radius: 3px;
+  padding: 0 8px;
+  background: rgba(255, 250, 240, 0.055);
+  color: rgba(255, 250, 240, 0.9);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0;
+  outline: none;
+}
+
+.sourceForm input::placeholder { color: rgba(255, 250, 240, 0.36); }
+.sourceForm input:focus {
+  border-color: rgba(220, 241, 247, 0.58);
+  background: rgba(255, 250, 240, 0.085);
+}
+.sourceForm input:disabled { opacity: 0.56; cursor: wait; }
 
 .sourceHelp {
   position: relative;
@@ -490,7 +519,7 @@
   font-size: 10px;
   font-weight: 620;
   letter-spacing: 0.025em;
-  white-space: nowrap;
+  text-align: center;
   pointer-events: none;
 }
 .feedbackError { color: rgba(255, 221, 205, 0.9); }
