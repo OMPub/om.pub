@@ -2,6 +2,8 @@ import Head from "next/head";
 import {
   FormEvent,
   KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useRef,
@@ -187,6 +189,19 @@ function artworkCreditSlug(reaction: Reaction) {
   return `${artist}-${source}`;
 }
 
+function canvasToPngBlob(canvas: HTMLCanvasElement) {
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(
+      (value) => value ? resolve(value) : reject(new Error("PNG creation failed")),
+      "image/png",
+    );
+  });
+}
+
+function reactionImagePath(reaction: Reaction) {
+  return `${ASSET_ROOT}/reactions/${reaction.file}`;
+}
+
 export default function BoostedReactions() {
   const posterRef = useRef<HTMLElement>(null);
   const topCaptionRef = useRef<HTMLDivElement>(null);
@@ -200,6 +215,11 @@ export default function BoostedReactions() {
   const historyIndexRef = useRef(-1);
   const editSnapshotRef = useRef<EditSnapshot | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
+  const swipeClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const swipeBlockedClickRef = useRef(false);
+  const preloadedPairingRef = useRef<Pairing | null>(null);
+  const preloadedImageRef = useRef<HTMLImageElement | null>(null);
 
   const [pairing, setPairing] = useState<Pairing | null>(null);
   const [attributionVisible, setAttributionVisible] = useState(true);
@@ -207,6 +227,7 @@ export default function BoostedReactions() {
   const [loading, setLoading] = useState(true);
   const [infoOpen, setInfoOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(false);
   const [feedStatus, setFeedStatus] = useState("Loading artwork and boosted drops");
   const [feedback, setFeedback] = useState<{ message: string; error: boolean } | null>(null);
 
@@ -324,12 +345,37 @@ export default function BoostedReactions() {
     drawTextBlock(context, parts.bottom, "bottom");
   }, [captionParts, drawTextBlock]);
 
+  const randomPairingFor = useCallback((current: Pairing | null) => {
+    const reactions = reactionsRef.current;
+    const drops = dropsRef.current;
+    if (!reactions.length || !drops.length) return null;
+    const reaction = current
+      ? differentItem(reactions, current.reaction, (item) => item.file)
+      : randomItem(reactions);
+    const drop = current
+      ? differentItem(drops, current.drop, (item) => String(item.id))
+      : randomItem(drops);
+    return stateFor(reaction, drop);
+  }, []);
+
+  const preloadNextRandomPairing = useCallback((current: Pairing | null = pairingRef.current) => {
+    const next = randomPairingFor(current);
+    if (!next) return;
+    preloadedPairingRef.current = next;
+    const image = new Image();
+    image.src = reactionImagePath(next.reaction);
+    preloadedImageRef.current = image;
+  }, [randomPairingFor]);
+
   const showPairing = useCallback((next: Pairing) => {
     pairingRef.current = next;
+    setLoading(true);
     setPairing(next);
     setAttributionVisible(next.attributionVisible);
     setInfoOpen(false);
-  }, []);
+    setActionsOpen(false);
+    requestAnimationFrame(() => preloadNextRandomPairing(next));
+  }, [preloadNextRandomPairing]);
 
   const pushPairing = useCallback((next: Pairing) => {
     historyRef.current.push(next);
@@ -338,27 +384,24 @@ export default function BoostedReactions() {
   }, [showPairing]);
 
   const newPairing = useCallback(() => {
-    const reactions = reactionsRef.current;
-    const drops = dropsRef.current;
-    if (!reactions.length || !drops.length) return;
-    const current = pairingRef.current;
-    const reaction = current
-      ? differentItem(reactions, current.reaction, (item) => item.file)
-      : randomItem(reactions);
-    const drop = current
-      ? differentItem(drops, current.drop, (item) => String(item.id))
-      : randomItem(drops);
-    pushPairing(stateFor(reaction, drop));
-  }, [pushPairing]);
+    const next = preloadedPairingRef.current || randomPairingFor(pairingRef.current);
+    if (!next) return;
+    preloadedPairingRef.current = null;
+    preloadedImageRef.current = null;
+    pushPairing(next);
+  }, [pushPairing, randomPairingFor]);
 
   const newImageSameText = useCallback(() => {
     const current = pairingRef.current;
     if (!current || !reactionsRef.current.length) return;
-    const reaction = differentItem(
+    const cached = preloadedPairingRef.current;
+    const reaction = cached?.reaction || differentItem(
       reactionsRef.current,
       current.reaction,
       (item) => item.file,
     );
+    preloadedPairingRef.current = null;
+    preloadedImageRef.current = null;
     const parts = captionParts();
     pushPairing({ ...current, reaction, topText: parts.top, bottomText: parts.bottom });
   }, [captionParts, pushPairing]);
@@ -366,11 +409,14 @@ export default function BoostedReactions() {
   const newTextSameImage = useCallback(() => {
     const current = pairingRef.current;
     if (!current || !dropsRef.current.length) return;
-    const drop = differentItem(
+    const cached = preloadedPairingRef.current;
+    const drop = cached?.drop || differentItem(
       dropsRef.current,
       current.drop,
       (item) => String(item.id),
     );
+    preloadedPairingRef.current = null;
+    preloadedImageRef.current = null;
     pushPairing(stateFor(current.reaction, drop));
   }, [pushPairing]);
 
@@ -397,16 +443,21 @@ export default function BoostedReactions() {
     historyRef.current[historyIndexRef.current] = next;
   }, []);
 
-  const saveMeme = useCallback(() => {
+  const saveMeme = useCallback(async () => {
     const canvas = canvasRef.current;
     const current = pairingRef.current;
     if (!canvas || !current || !currentImageRef.current) return;
     drawDownloadCanvas();
+    const blob = await canvasToPngBlob(canvas);
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     const id = String(current.drop.id).slice(0, 8);
     link.download = `${artworkCreditSlug(current.reaction)}-meme-${id}.png`;
-    link.href = canvas.toDataURL("image/png");
+    link.href = url;
+    document.body.appendChild(link);
     link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 2000);
     showFeedback("Downloaded PNG");
   }, [drawDownloadCanvas, showFeedback]);
 
@@ -415,21 +466,100 @@ export default function BoostedReactions() {
     if (!canvas || !pairingRef.current || !currentImageRef.current) return;
     drawDownloadCanvas();
     try {
+      const blob = await canvasToPngBlob(canvas);
       if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
-        throw new Error("Image clipboard unavailable");
+        if (!navigator.clipboard?.writeText) {
+          throw new Error("Clipboard unavailable");
+        }
+        await navigator.clipboard.writeText(canvas.toDataURL("image/png"));
+        showFeedback("Copied PNG data");
+        return;
       }
-      const blob = await new Promise<Blob>((resolve, reject) => {
-        canvas.toBlob(
-          (value) => value ? resolve(value) : reject(new Error("PNG creation failed")),
-          "image/png",
-        );
-      });
       await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
       showFeedback("Copied image");
     } catch {
-      showFeedback("Clipboard blocked · press V", true);
+      showFeedback("Clipboard blocked", true);
     }
   }, [drawDownloadCanvas, showFeedback]);
+
+  const canStartSwipe = useCallback((target: EventTarget | null) => {
+    if (!(target instanceof HTMLElement)) return true;
+    if (
+      target.closest(`.${styles.actionMenuWrapper}`) ||
+      target.closest(`.${styles.sourceHelp}`) ||
+      target.closest(`.${styles.keyboardHelp}`)
+    ) {
+      return false;
+    }
+    if (target.isContentEditable || target.closest('[contenteditable="true"], a')) {
+      return false;
+    }
+    const button = target.closest("button");
+    return !button || button.classList.contains(styles.navigationZone);
+  }, []);
+
+  const blockSwipeClick = useCallback(() => {
+    swipeBlockedClickRef.current = true;
+    if (swipeClickTimerRef.current) clearTimeout(swipeClickTimerRef.current);
+    swipeClickTimerRef.current = setTimeout(() => {
+      swipeBlockedClickRef.current = false;
+    }, 250);
+  }, []);
+
+  const onPosterPointerDown = useCallback((event: ReactPointerEvent<HTMLElement>) => {
+    if (event.pointerType !== "touch" || !canStartSwipe(event.target)) return;
+    swipeStartRef.current = { x: event.clientX, y: event.clientY };
+  }, [canStartSwipe]);
+
+  const onPosterPointerUp = useCallback((event: ReactPointerEvent<HTMLElement>) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (event.pointerType !== "touch" || !start) return;
+
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+    const minimumSwipe = 46;
+    const dominantAxis = 1.25;
+
+    if (Math.max(absX, absY) < minimumSwipe) return;
+    if (absX > absY * dominantAxis) {
+      event.preventDefault();
+      event.stopPropagation();
+      blockSwipeClick();
+      setActionsOpen(false);
+      setHelpOpen(false);
+      setInfoOpen(false);
+      if (dx < 0) nextPairing();
+      else previousPairing();
+      return;
+    }
+    if (absY > absX * dominantAxis) {
+      event.preventDefault();
+      event.stopPropagation();
+      blockSwipeClick();
+      setActionsOpen(false);
+      setHelpOpen(false);
+      setInfoOpen(false);
+      if (dy < 0) newImageSameText();
+      else newTextSameImage();
+    }
+  }, [blockSwipeClick, newImageSameText, newTextSameImage, nextPairing, previousPairing]);
+
+  const onPosterPointerCancel = useCallback(() => {
+    swipeStartRef.current = null;
+  }, []);
+
+  const runNavigationAction = useCallback((
+    event: ReactMouseEvent<HTMLButtonElement>,
+    action: () => void,
+  ) => {
+    event.stopPropagation();
+    event.currentTarget.blur();
+    if (swipeBlockedClickRef.current) return;
+    action();
+  }, []);
 
   const abandonTextEdit = useCallback(() => {
     const snapshot = editSnapshotRef.current;
@@ -548,7 +678,6 @@ export default function BoostedReactions() {
     });
 
     let cancelled = false;
-    setLoading(true);
     const image = new Image();
     image.onload = () => {
       if (cancelled) return;
@@ -557,7 +686,7 @@ export default function BoostedReactions() {
       setLoading(false);
       requestAnimationFrame(drawDownloadCanvas);
     };
-    image.src = `${ASSET_ROOT}/reactions/${pairing.reaction.file}`;
+    image.src = reactionImagePath(pairing.reaction);
     return () => { cancelled = true; };
   }, [drawDownloadCanvas, fitOverlay, pairing]);
 
@@ -581,6 +710,7 @@ export default function BoostedReactions() {
         if (editing) return;
         setHelpOpen(false);
         setInfoOpen(false);
+        setActionsOpen(false);
         active?.blur();
         return;
       }
@@ -593,7 +723,7 @@ export default function BoostedReactions() {
       }
       if (key === "c" && (event.metaKey || event.ctrlKey) && !event.altKey) {
         event.preventDefault();
-        copyMeme();
+        void copyMeme();
         return;
       }
       if (event.code === "Space" && !usingControl) {
@@ -613,10 +743,10 @@ export default function BoostedReactions() {
         newImageSameText();
       } else if (key === "c" && !usingControl) {
         event.preventDefault();
-        copyMeme();
+        void copyMeme();
       } else if (key === "v" && !usingControl) {
         event.preventDefault();
-        saveMeme();
+        void saveMeme();
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -625,6 +755,7 @@ export default function BoostedReactions() {
 
   useEffect(() => () => {
     if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    if (swipeClickTimerRef.current) clearTimeout(swipeClickTimerRef.current);
   }, []);
 
   const currentDropUrl = pairing ? dropUrl(pairing.drop) : "https://6529.io";
@@ -647,10 +778,19 @@ export default function BoostedReactions() {
         ref={posterRef}
         className={styles.poster}
         aria-label="Interactive public-domain reaction artwork"
-        onClick={() => setInfoOpen(false)}
+        onClick={() => {
+          if (swipeBlockedClickRef.current) return;
+          setInfoOpen(false);
+          setActionsOpen(false);
+        }}
+        onPointerDown={onPosterPointerDown}
+        onPointerUp={onPosterPointerUp}
+        onPointerCancel={onPosterPointerCancel}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.artwork} src={imageUrl} alt="Public-domain historical reaction engraving" />
+        {imageUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className={styles.artwork} src={imageUrl} alt="Public-domain historical reaction engraving" />
+        )}
         {loading && <span className={styles.loading} aria-label="Loading artwork" />}
 
         <nav className={styles.artworkNavigation} aria-label="Artwork navigation">
@@ -658,37 +798,21 @@ export default function BoostedReactions() {
             className={`${styles.navigationZone} ${styles.previousZone}`}
             type="button"
             aria-label="Go back to the previous pairing"
-            onClick={(event) => { event.currentTarget.blur(); previousPairing(); }}
+            onClick={(event) => runNavigationAction(event, previousPairing)}
           />
           <button
             className={`${styles.navigationZone} ${styles.imageZone}`}
             type="button"
             aria-label="Show a new image with the same text"
-            onClick={(event) => { event.currentTarget.blur(); newImageSameText(); }}
+            onClick={(event) => runNavigationAction(event, newImageSameText)}
           />
           <button
             className={`${styles.navigationZone} ${styles.nextZone}`}
             type="button"
             aria-label="Show the next pairing"
-            onClick={(event) => { event.currentTarget.blur(); nextPairing(); }}
+            onClick={(event) => runNavigationAction(event, nextPairing)}
           />
         </nav>
-
-        {pairing && attributionVisible && (
-          <a
-            className={styles.dropMeta}
-            href={currentDropUrl}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <span>@{pairing.drop.author?.handle || "6529"}</span>
-            <span className={styles.metaDivider}>·</span>
-            <span>{pairing.drop.wave?.name || "6529"}</span>
-            <span className={styles.metaDivider}>·</span>
-            <span>{pairing.drop.boosts} boost{pairing.drop.boosts === 1 ? "" : "s"}</span>
-          </a>
-        )}
 
         <div
           ref={topCaptionRef}
@@ -721,49 +845,97 @@ export default function BoostedReactions() {
           onKeyDown={onCaptionKeyDown}
         />
 
-        <button
-          className={styles.downloadButton}
-          type="button"
-          aria-label="Download image with text overlay"
-          title="Download PNG (V)"
-          disabled={!pairing || loading}
-          onClick={(event) => { event.stopPropagation(); event.currentTarget.blur(); saveMeme(); }}
-        />
-
-        <div
-          className={`${styles.sourceHelp} ${infoOpen ? styles.sourceOpen : ""}`}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <button
-            className={styles.infoButton}
-            type="button"
-            aria-label="Show artwork information"
-            aria-expanded={infoOpen}
-            onClick={() => { setHelpOpen(false); setInfoOpen((open) => !open); }}
+        <div className={styles.bottomControls}>
+          <div
+            className={`${styles.actionMenuWrapper} ${actionsOpen ? styles.actionMenuOpen : ""}`}
+            onClick={(event) => event.stopPropagation()}
           >
-            i
-          </button>
-          {pairing && (
-            <aside className={styles.sourceTooltip} role="tooltip">
-              <span className={styles.tooltipEyebrow}>Artwork record</span>
-              <strong>{pairing.reaction.title || "Historical reaction image"}</strong>
-              <p className={styles.creatorLine}>{creatorLine}</p>
-              <div className={styles.tooltipSection}>
-                <span className={styles.tooltipLabel}>Collection</span>
-                <p>{[pairing.reaction.sourceWork, pairing.reaction.institution].filter(Boolean).join(" · ")}</p>
-              </div>
-              <div className={styles.tooltipSection}>
-                <span className={styles.tooltipLabel}>Rights</span>
-                <p>{friendlyRights(pairing.reaction.rights)}</p>
-              </div>
-              <nav className={styles.tooltipLinks} aria-label="Artwork links">
-                <a href={pairing.reaction.sourceUrl} target="_blank" rel="noreferrer">Image source <span>↗</span></a>
-                <a href={currentDropUrl} target="_blank" rel="noreferrer">Original drop <span>↗</span></a>
-              </nav>
-              <p className={styles.feedStatus}>{feedStatus}</p>
-              <p className={styles.tooltipHint}>Press ? or / for every keyboard shortcut.</p>
-            </aside>
+            <button
+              className={styles.actionMenuButton}
+              type="button"
+              aria-label="Open image actions"
+              aria-haspopup="menu"
+              aria-expanded={actionsOpen}
+              disabled={!pairing || loading}
+              onClick={(event) => {
+                event.currentTarget.blur();
+                setInfoOpen(false);
+                setActionsOpen((open) => !open);
+              }}
+            >
+              <span aria-hidden="true">⋮</span>
+            </button>
+            <div className={styles.actionMenu} role="menu">
+              <button
+                type="button"
+                role="menuitem"
+                disabled={!pairing || loading}
+                onClick={() => { setActionsOpen(false); void saveMeme(); }}
+              >
+                Download PNG
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                disabled={!pairing || loading}
+                onClick={() => { setActionsOpen(false); void copyMeme(); }}
+              >
+                Copy image
+              </button>
+            </div>
+          </div>
+
+          {pairing && attributionVisible && (
+            <a
+              className={styles.dropMeta}
+              href={currentDropUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <span>@{pairing.drop.author?.handle || "6529"}</span>
+              <span className={styles.metaDivider}>·</span>
+              <span>{pairing.drop.wave?.name || "6529"}</span>
+              <span className={styles.metaDivider}>·</span>
+              <span>{pairing.drop.boosts} boost{pairing.drop.boosts === 1 ? "" : "s"}</span>
+            </a>
           )}
+
+          <div
+            className={`${styles.sourceHelp} ${infoOpen ? styles.sourceOpen : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className={styles.infoButton}
+              type="button"
+              aria-label="Show artwork information"
+              aria-expanded={infoOpen}
+              onClick={() => { setHelpOpen(false); setInfoOpen((open) => !open); }}
+            >
+              i
+            </button>
+            {pairing && (
+              <aside className={styles.sourceTooltip} role="tooltip">
+                <span className={styles.tooltipEyebrow}>Artwork record</span>
+                <strong>{pairing.reaction.title || "Historical reaction image"}</strong>
+                <p className={styles.creatorLine}>{creatorLine}</p>
+                <div className={styles.tooltipSection}>
+                  <span className={styles.tooltipLabel}>Collection</span>
+                  <p>{[pairing.reaction.sourceWork, pairing.reaction.institution].filter(Boolean).join(" · ")}</p>
+                </div>
+                <div className={styles.tooltipSection}>
+                  <span className={styles.tooltipLabel}>Rights</span>
+                  <p>{friendlyRights(pairing.reaction.rights)}</p>
+                </div>
+                <nav className={styles.tooltipLinks} aria-label="Artwork links">
+                  <a href={pairing.reaction.sourceUrl} target="_blank" rel="noreferrer">Image source <span>↗</span></a>
+                  <a href={currentDropUrl} target="_blank" rel="noreferrer">Original drop <span>↗</span></a>
+                </nav>
+                <p className={styles.feedStatus}>{feedStatus}</p>
+                <p className={styles.tooltipHint}>Press ? or / for every keyboard shortcut.</p>
+              </aside>
+            )}
+          </div>
         </div>
 
         {helpOpen && (
