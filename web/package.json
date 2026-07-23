@@ -7,7 +7,7 @@
     "dev:turbo": "next dev --turbo -p 3333",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",

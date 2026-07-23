@@ -1,9 +1,11 @@
-import { FlatCompat } from '@eslint/eslintrc'
+const nextVitals = require('eslint-config-next/core-web-vitals')
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-})
-
-export default [
-  ...compat.extends('next/core-web-vitals'),
+module.exports = [
+  ...nextVitals,
+  {
+    ignores: [
+      'eslint.config.backup.js',
+      'public/**',
+    ],
+  },
 ]
