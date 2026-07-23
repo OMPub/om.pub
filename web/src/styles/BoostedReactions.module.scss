@@ -80,7 +80,6 @@
 }
 
 .previousZone::after { content: "‹"; left: 16px; }
-.imageZone::after { content: "↻"; left: 50%; transform: translate(-50%, -50%); font-size: clamp(17px, 2.5vh, 26px); }
 .nextZone::after { content: "›"; right: 16px; }
 .previousZone:hover,
 .previousZone:focus-visible { background: linear-gradient(90deg, rgba(10, 8, 6, 0.18), transparent); }
@@ -94,8 +93,6 @@
 .previousZone:focus-visible::after { transform: translate(2px, -50%); }
 .nextZone:hover::after,
 .nextZone:focus-visible::after { transform: translate(-2px, -50%); }
-.imageZone:hover::after,
-.imageZone:focus-visible::after { transform: translate(-50%, -50%) rotate(16deg); }
 
 .loading {
   position: absolute;
