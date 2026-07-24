@@ -73,6 +73,10 @@ type EditSnapshot = Pick<
 >;
 
 const ASSET_ROOT = "/boosted-reactions";
+const SOCIAL_PREVIEW_URL =
+  "https://om.pub/boosted-reactions/social-preview.jpg";
+const SOCIAL_PREVIEW_ALT =
+  "Brooding caricature head of Victor Hugo by Honoré Daumier";
 const BOOSTED_API_URL =
   "https://api.6529.io/api/v2/boosted-drops?page_size=300&sort=last_boosted_at&sort_direction=DESC";
 const READABLE_CHARACTER = new RegExp("[\\p{L}\\p{N}]", "gu");
@@ -911,11 +915,33 @@ export default function BoostedReactions() {
     <>
       <Head>
         <title>Boosted Reactions — OM Pub</title>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/boosted-reactions/favicon-32.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/boosted-reactions/apple-touch-icon.png"
+        />
         <meta name="description" content="Pair boosted 6529 drops and curated @punk6529 tweets with 167 public-domain reaction engravings." />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content="https://om.pub/memes/boosted" />
         <meta property="og:title" content="Boosted Reactions — OM Pub" />
         <meta property="og:description" content="Fresh words. Very old faces. A public-domain 6529 meme machine for drops and tweets." />
-        <meta property="og:image" content="https://om.pub/om-pub-logo.png" />
+        <meta property="og:image" content={SOCIAL_PREVIEW_URL} />
+        <meta property="og:image:secure_url" content={SOCIAL_PREVIEW_URL} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+        <meta property="og:image:alt" content={SOCIAL_PREVIEW_ALT} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Boosted Reactions — OM Pub" />
+        <meta name="twitter:description" content="Fresh words. Very old faces. A public-domain 6529 meme machine for drops and tweets." />
+        <meta name="twitter:image" content={SOCIAL_PREVIEW_URL} />
+        <meta name="twitter:image:alt" content={SOCIAL_PREVIEW_ALT} />
       </Head>
 
       <main
