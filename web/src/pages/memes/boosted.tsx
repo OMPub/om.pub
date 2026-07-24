@@ -10,6 +10,8 @@ import {
   useState,
 } from "react";
 
+import { sourceAttribution } from "@/lib/memeAttribution";
+import { compactTweetUrl } from "@/lib/memeSourceUrl";
 import styles from "@/styles/BoostedReactions.module.scss";
 
 type Reaction = {
@@ -152,7 +154,7 @@ function tweetSources(items: CuratedTweet[]) {
         id: tweet.id,
         content: cleanText(tweet.text, true),
         authorHandle: "punk6529",
-        url: `https://x.com/punk6529/status/${tweet.id}`,
+        url: `https://${compactTweetUrl(tweet.id)}`,
         label: "tweet",
         preferredCaption: { top, bottom },
         engagement: {
@@ -224,21 +226,6 @@ function stateFor(reaction: Reaction, source: CaptionSource): Pairing {
     topText: parts.top,
     bottomText: parts.bottom,
     attributionVisible: true,
-  };
-}
-
-function sourceAttribution(source: CaptionSource) {
-  const engagement = source.engagement;
-  const metric = engagement
-    ? `${engagement.count.toLocaleString("en-US")} ${
-      engagement.count === 1
-        ? engagement.type.slice(0, -1)
-        : engagement.type
-    }`
-    : source.kind === "tweet" ? "tweet" : "drop";
-  return {
-    parts: [`@${source.authorHandle}`, source.label, metric],
-    text: `@${source.authorHandle}  ·  ${source.label}  ·  ${metric}`,
   };
 }
 
@@ -415,13 +402,18 @@ export default function BoostedReactions() {
 
     if (current.attributionVisible) {
       const attribution = sourceAttribution(current.source);
-      context.font = "520 22px -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif";
-      context.textAlign = "left";
+      let fontSize = 22;
+      context.font = `520 ${fontSize}px -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif`;
+      while (context.measureText(attribution.text).width > 1104 && fontSize > 14) {
+        fontSize -= 1;
+        context.font = `520 ${fontSize}px -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif`;
+      }
+      context.textAlign = "center";
       context.textBaseline = "middle";
       context.fillStyle = "rgba(255,250,240,.68)";
       context.shadowColor = "rgba(0,0,0,.7)";
       context.shadowBlur = 8;
-      context.fillText(attribution.text, 46, 1468);
+      context.fillText(attribution.text, 600, 1468);
       context.shadowBlur = 0;
     }
     const parts = captionParts();

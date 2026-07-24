@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import {
+  compactTweetUrl,
   parseMemeSourceReference,
   tweetSyndicationToken,
 } from "@/lib/memeSourceUrl";
@@ -72,7 +73,7 @@ async function resolveTweet(id: string): Promise<CaptionSource> {
     id: tweet.id_str,
     content: tweet.text,
     authorHandle: handle,
-    url: `https://x.com/${handle}/status/${tweet.id_str}`,
+    url: `https://${compactTweetUrl(tweet.id_str)}`,
     label: "tweet",
     engagement: typeof tweet.favorite_count === "number"
       ? { count: tweet.favorite_count, type: "likes" }

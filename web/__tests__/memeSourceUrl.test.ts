@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  compactTweetUrl,
   parseMemeSourceReference,
   tweetSyndicationToken,
 } from "../src/lib/memeSourceUrl";
@@ -25,6 +26,15 @@ describe("parseMemeSourceReference", () => {
         "x.com/punk6529/status/1469625474678767616",
       ),
     ).toEqual({ kind: "tweet", id: "1469625474678767616" });
+  });
+
+  it("round-trips the compact attribution URL", () => {
+    const id = "1477259809493819393";
+    expect(compactTweetUrl(id)).toBe(`x.com/i/status/${id}`);
+    expect(parseMemeSourceReference(compactTweetUrl(id))).toEqual({
+      kind: "tweet",
+      id,
+    });
   });
 
   it("recognizes 6529 wave and API drop URLs", () => {

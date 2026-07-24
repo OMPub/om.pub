@@ -23,6 +23,10 @@ export function tweetSyndicationToken(id: string) {
     .replace(/(0+|\.)/g, "");
 }
 
+export function compactTweetUrl(id: string) {
+  return `x.com/i/status/${id}`;
+}
+
 export function parseMemeSourceReference(input: string): MemeSourceReference | null {
   try {
     const normalized = /^[a-z][a-z0-9+.-]*:\/\//i.test(input)
