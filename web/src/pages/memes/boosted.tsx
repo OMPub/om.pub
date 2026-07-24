@@ -35,6 +35,8 @@ type BoostedDrop = {
 type CuratedTweet = {
   id: string;
   text: string;
+  topText: string;
+  bottomText: string;
   likes: number;
 };
 
@@ -45,6 +47,10 @@ type CaptionSource = {
   authorHandle: string;
   url: string;
   label: string;
+  preferredCaption?: {
+    top: string;
+    bottom: string;
+  };
   engagement?: {
     count: number;
     type: "boosts" | "likes";
@@ -138,18 +144,23 @@ function dropSources(items: BoostedDrop[]) {
 
 function tweetSources(items: CuratedTweet[]) {
   return items
-    .map((tweet): CaptionSource => ({
-      kind: "tweet",
-      id: tweet.id,
-      content: cleanText(tweet.text, true),
-      authorHandle: "punk6529",
-      url: `https://x.com/punk6529/status/${tweet.id}`,
-      label: "tweet",
-      engagement: {
-        count: tweet.likes,
-        type: "likes",
-      },
-    }))
+    .map((tweet): CaptionSource => {
+      const top = cleanText(tweet.topText, true);
+      const bottom = cleanText(tweet.bottomText);
+      return {
+        kind: "tweet",
+        id: tweet.id,
+        content: cleanText(tweet.text, true),
+        authorHandle: "punk6529",
+        url: `https://x.com/punk6529/status/${tweet.id}`,
+        label: "tweet",
+        preferredCaption: { top, bottom },
+        engagement: {
+          count: tweet.likes,
+          type: "likes",
+        },
+      };
+    })
     .filter((source) => {
       const readable = source.content.match(READABLE_CHARACTER)?.length ?? 0;
       return source.content.length >= 8 && readable >= 5;
@@ -206,7 +217,7 @@ function splitCaption(text: string) {
 }
 
 function stateFor(reaction: Reaction, source: CaptionSource): Pairing {
-  const parts = splitCaption(source.content);
+  const parts = source.preferredCaption ?? splitCaption(source.content);
   return {
     reaction,
     source,
