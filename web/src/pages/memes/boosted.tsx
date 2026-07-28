@@ -353,6 +353,22 @@ export default function BoostedReactions() {
     bottom: bottomCaptionRef.current?.innerText.trim() ?? "",
   }), []);
 
+  const replacePageUrl = useCallback((current: Pairing) => {
+    const payload: MemeSharePayload = {
+      version: 1,
+      reactionFile: current.reaction.file,
+      source: current.source,
+      topText: current.topText,
+      bottomText: current.bottomText,
+      attributionVisible: current.attributionVisible,
+    };
+    const shareUrl = createMemeShareUrl(window.location.href, payload);
+    if (shareUrl !== window.location.href) {
+      window.history.replaceState(window.history.state, "", shareUrl);
+    }
+    return shareUrl;
+  }, []);
+
   const fitOverlay = useCallback((element: HTMLDivElement | null) => {
     if (!element || element.hidden || !element.textContent?.trim() || !posterRef.current) return;
     const posterWidth = posterRef.current.clientWidth;
@@ -479,13 +495,14 @@ export default function BoostedReactions() {
 
   const showPairing = useCallback((next: Pairing) => {
     pairingRef.current = next;
+    replacePageUrl(next);
     setLoading(true);
     setPairing(next);
     setAttributionVisible(next.attributionVisible);
     setInfoOpen(false);
     setActionsOpen(false);
     requestAnimationFrame(() => preloadNextRandomPairing(next));
-  }, [preloadNextRandomPairing]);
+  }, [preloadNextRandomPairing, replacePageUrl]);
 
   const pushPairing = useCallback((next: Pairing) => {
     historyRef.current.push(next);
@@ -554,7 +571,8 @@ export default function BoostedReactions() {
     const next = { ...current, ...patch };
     pairingRef.current = next;
     historyRef.current[historyIndexRef.current] = next;
-  }, []);
+    replacePageUrl(next);
+  }, [replacePageUrl]);
 
   const saveMeme = useCallback(async () => {
     const canvas = canvasRef.current;
@@ -599,22 +617,19 @@ export default function BoostedReactions() {
     const current = pairingRef.current;
     if (!current) return;
     const parts = captionParts();
-    const payload: MemeSharePayload = {
-      version: 1,
-      reactionFile: current.reaction.file,
-      source: current.source,
+    const next = {
+      ...current,
       topText: parts.top,
       bottomText: parts.bottom,
-      attributionVisible: current.attributionVisible,
     };
     try {
-      const shareUrl = createMemeShareUrl(window.location.href, payload);
+      const shareUrl = replacePageUrl(next);
       await writeClipboardText(shareUrl);
       showFeedback("Copied link");
     } catch {
       showFeedback("Clipboard blocked", true);
     }
-  }, [captionParts, showFeedback]);
+  }, [captionParts, replacePageUrl, showFeedback]);
 
   const buildFromSource = useCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

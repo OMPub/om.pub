@@ -125,6 +125,7 @@
 }
 
 .dropMeta {
+  grid-column: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,6 +186,7 @@
 
 .actionMenuWrapper {
   position: relative;
+  grid-column: 1;
   justify-self: start;
 }
 
@@ -300,6 +302,7 @@
 
 .sourceHelp {
   position: relative;
+  grid-column: 3;
   justify-self: end;
 }
 
