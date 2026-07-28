@@ -141,7 +141,14 @@
   letter-spacing: 0.025em;
 }
 
-.dropMeta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dropMeta span { white-space: nowrap; }
+.dropMeta .metaFixed { flex: 0 0 auto; }
+.dropMeta .metaSource {
+  min-width: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  text-overflow: ellipsis;
+}
 .dropMeta .metaDivider { flex: 0 0 auto; opacity: 0.36; }
 .tweetMeta { color: rgba(220, 241, 247, 0.82); }
 

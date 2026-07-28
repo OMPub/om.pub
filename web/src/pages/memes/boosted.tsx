@@ -11,6 +11,13 @@ import {
 } from "react";
 
 import { sourceAttribution } from "@/lib/memeAttribution";
+import {
+  createMemeShareUrl,
+  decodeMemeShare,
+  MEME_SHARE_QUERY_KEY,
+  type MemeSharePayload,
+  type MemeShareSource,
+} from "@/lib/memeShare";
 import { compactTweetUrl } from "@/lib/memeSourceUrl";
 import styles from "@/styles/BoostedReactions.module.scss";
 
@@ -42,22 +49,7 @@ type CuratedTweet = {
   likes: number;
 };
 
-type CaptionSource = {
-  kind: "drop" | "tweet";
-  id: string;
-  content: string;
-  authorHandle: string;
-  url: string;
-  label: string;
-  preferredCaption?: {
-    top: string;
-    bottom: string;
-  };
-  engagement?: {
-    count: number;
-    type: "boosts" | "likes";
-  };
-};
+type CaptionSource = MemeShareSource;
 
 type Pairing = {
   reaction: Reaction;
@@ -233,6 +225,23 @@ function stateFor(reaction: Reaction, source: CaptionSource): Pairing {
   };
 }
 
+function stateFromShare(
+  payload: MemeSharePayload,
+  reactions: Reaction[],
+): Pairing | null {
+  const reaction = reactions.find(
+    (candidate) => candidate.file === payload.reactionFile,
+  );
+  if (!reaction) return null;
+  return {
+    reaction,
+    source: payload.source,
+    topText: payload.topText,
+    bottomText: payload.bottomText,
+    attributionVisible: payload.attributionVisible,
+  };
+}
+
 function friendlyRights(rights: string) {
   if (rights.includes("NOT_IN_COPYRIGHT")) {
     return "Public domain · Internet Archive: Not in Copyright";
@@ -271,6 +280,25 @@ function canvasToPngBlob(canvas: HTMLCanvasElement) {
       "image/png",
     );
   });
+}
+
+async function writeClipboardText(value: string) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, value.length);
+  const copied = document.execCommand("copy");
+  textarea.remove();
+  if (!copied) throw new Error("Clipboard unavailable");
 }
 
 function reactionImagePath(reaction: Reaction) {
@@ -567,6 +595,27 @@ export default function BoostedReactions() {
     }
   }, [drawDownloadCanvas, showFeedback]);
 
+  const copyPairingLink = useCallback(async () => {
+    const current = pairingRef.current;
+    if (!current) return;
+    const parts = captionParts();
+    const payload: MemeSharePayload = {
+      version: 1,
+      reactionFile: current.reaction.file,
+      source: current.source,
+      topText: parts.top,
+      bottomText: parts.bottom,
+      attributionVisible: current.attributionVisible,
+    };
+    try {
+      const shareUrl = createMemeShareUrl(window.location.href, payload);
+      await writeClipboardText(shareUrl);
+      showFeedback("Copied link");
+    } catch {
+      showFeedback("Clipboard blocked", true);
+    }
+  }, [captionParts, showFeedback]);
+
   const buildFromSource = useCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const input = sourceInput.trim();
@@ -771,7 +820,14 @@ export default function BoostedReactions() {
         setFeedStatus(
           `${cachedDrops.length} boosted drops · ${curatedTweets.length} curated @punk6529 tweets`,
         );
-        newPairing();
+        const sharedPayload = decodeMemeShare(
+          new URLSearchParams(window.location.search).get(MEME_SHARE_QUERY_KEY),
+        );
+        const sharedPairing = sharedPayload
+          ? stateFromShare(sharedPayload, reactions)
+          : null;
+        if (sharedPairing) pushPairing(sharedPairing);
+        else newPairing();
 
         try {
           const controller = new AbortController();
@@ -807,7 +863,7 @@ export default function BoostedReactions() {
     }
     load();
     return () => { cancelled = true; };
-  }, [newPairing]);
+  }, [newPairing, pushPairing]);
 
   useEffect(() => {
     if (!pairing) return;
@@ -1054,6 +1110,16 @@ export default function BoostedReactions() {
               >
                 Copy image
               </button>
+              <button
+                type="button"
+                disabled={!pairing || loading}
+                onClick={() => {
+                  setActionsOpen(false);
+                  void copyPairingLink();
+                }}
+              >
+                Copy link
+              </button>
               <form
                 className={styles.sourceForm}
                 aria-label="Build from a tweet or drop"
@@ -1087,11 +1153,11 @@ export default function BoostedReactions() {
               rel="noreferrer"
               onClick={(event) => event.stopPropagation()}
             >
-              <span>{currentAttribution.parts[0]}</span>
+              <span className={styles.metaFixed}>{currentAttribution.parts[0]}</span>
               <span className={styles.metaDivider}>·</span>
-              <span>{currentAttribution.parts[1]}</span>
+              <span className={styles.metaSource}>{currentAttribution.parts[1]}</span>
               <span className={styles.metaDivider}>·</span>
-              <span>{currentAttribution.parts[2]}</span>
+              <span className={styles.metaFixed}>{currentAttribution.parts[2]}</span>
             </a>
           )}
 
