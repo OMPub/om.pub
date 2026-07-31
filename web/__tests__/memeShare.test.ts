@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  createStandaloneMemeShareUrl,
   createMemeShareUrl,
+  DEFAULT_STANDALONE_MEME_URL,
   decodeMemeShare,
   MEME_SHARE_QUERY_KEY,
   type MemeSharePayload,
@@ -72,6 +74,31 @@ describe("meme share URLs", () => {
     expect(decodeMemeShare(url.searchParams.get(MEME_SHARE_QUERY_KEY))).toEqual(
       payload,
     );
+  });
+
+  it("targets the single-file page for portable copy links", () => {
+    const shareUrl = createStandaloneMemeShareUrl(payload);
+    const url = new URL(shareUrl);
+
+    expect(url.origin + url.pathname).toBe(DEFAULT_STANDALONE_MEME_URL);
+    expect(decodeMemeShare(url.searchParams.get(MEME_SHARE_QUERY_KEY))).toEqual(
+      payload,
+    );
+  });
+
+  it("can switch copied links to an Arweave transaction URL", () => {
+    const shareUrl = createStandaloneMemeShareUrl(
+      payload,
+      "https://arweave.net/example-transaction?ignored=yes",
+    );
+    const url = new URL(shareUrl);
+
+    expect(url.origin + url.pathname).toBe(
+      "https://arweave.net/example-transaction",
+    );
+    expect(Array.from(url.searchParams.keys())).toEqual([
+      MEME_SHARE_QUERY_KEY,
+    ]);
   });
 
   it("rejects unsafe source links and unknown image files", () => {

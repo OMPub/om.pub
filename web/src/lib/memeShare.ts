@@ -1,6 +1,8 @@
 import { parseMemeSourceReference } from "@/lib/memeSourceUrl";
 
 export const MEME_SHARE_QUERY_KEY = "m";
+export const DEFAULT_STANDALONE_MEME_URL =
+  "https://om.pub/boosted-reactions/standalone.html";
 
 export type MemeShareSource = {
   kind: "drop" | "tweet";
@@ -152,4 +154,12 @@ export function createMemeShareUrl(
   url.hash = "";
   url.searchParams.set(MEME_SHARE_QUERY_KEY, JSON.stringify(payload));
   return url.toString();
+}
+
+export function createStandaloneMemeShareUrl(
+  payload: MemeSharePayload,
+  baseUrl = process.env.NEXT_PUBLIC_BOOSTED_REACTIONS_STANDALONE_URL ||
+    DEFAULT_STANDALONE_MEME_URL,
+) {
+  return createMemeShareUrl(baseUrl, payload);
 }

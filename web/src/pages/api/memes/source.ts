@@ -119,8 +119,15 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse<CaptionSource | ErrorResponse>,
 ) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (request.method === "OPTIONS") {
+    response.status(204).end();
+    return;
+  }
   if (request.method !== "GET") {
-    response.setHeader("Allow", "GET");
+    response.setHeader("Allow", "GET, OPTIONS");
     response.status(405).json({ error: "Use GET for this endpoint" });
     return;
   }

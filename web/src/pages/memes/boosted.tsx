@@ -23,6 +23,7 @@ import {
 import { sourceAttribution } from "@/lib/memeAttribution";
 import {
   createMemeShareUrl,
+  createStandaloneMemeShareUrl,
   decodeMemeShare,
   MEME_SHARE_QUERY_KEY,
   type MemeSharePayload,
@@ -895,9 +896,17 @@ export default function BoostedReactions() {
       bottomText: parts.bottom,
     };
     try {
-      const shareUrl = replacePageUrl(next);
+      replacePageUrl(next);
+      const shareUrl = createStandaloneMemeShareUrl({
+        version: 1,
+        reactionFile: next.reaction.file,
+        source: next.source,
+        topText: next.topText,
+        bottomText: next.bottomText,
+        attributionVisible: next.attributionVisible,
+      });
       await writeClipboardText(shareUrl);
-      showFeedback("Copied link");
+      showFeedback("Copied standalone link");
     } catch {
       showFeedback("Clipboard blocked", true);
     }

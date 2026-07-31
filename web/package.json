@@ -6,6 +6,8 @@
     "dev": "next dev --webpack -p 3333",
     "dev:turbo": "next dev --turbo -p 3333",
     "build": "next build",
+    "build:standalone-meme": "node scripts/buildStandaloneBoostedReactions.mjs",
+    "test:standalone-meme": "node scripts/validateStandaloneBoostedReactions.mjs",
     "start": "next start -p 3001",
     "lint": "eslint .",
     "test": "vitest run",
