@@ -10,6 +10,16 @@ import {
   useState,
 } from "react";
 
+import {
+  boostCountsById,
+  mergeBoostedDropQueue,
+  newlyBoostedDrops,
+  pickBoostWeightedSource,
+} from "@/lib/boostedDropSelection";
+import {
+  fetchMemeAuthorProfile,
+  type MemeAuthorProfile,
+} from "@/lib/memeAuthorProfile";
 import { sourceAttribution } from "@/lib/memeAttribution";
 import {
   createMemeShareUrl,
@@ -71,6 +81,7 @@ const SOCIAL_PREVIEW_ALT =
   "Brooding caricature head of Victor Hugo by Honoré Daumier";
 const BOOSTED_API_URL =
   "https://api.6529.io/api/v2/boosted-drops?page_size=300&sort=last_boosted_at&sort_direction=DESC";
+const BOOSTED_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 const READABLE_CHARACTER = new RegExp("[\\p{L}\\p{N}]", "gu");
 
 function randomItem<T>(items: T[]): T {
@@ -92,6 +103,23 @@ function differentItem<T>(
     index += 1
   ) {
     candidate = randomItem(items);
+  }
+  return candidate;
+}
+
+function differentSourceItem(
+  items: CaptionSource[],
+  current: CaptionSource,
+) {
+  if (items.length < 2) return items[0];
+  let candidate = pickBoostWeightedSource(items);
+  for (
+    let index = 0;
+    index < 12 &&
+    `${candidate.kind}:${candidate.id}` === `${current.kind}:${current.id}`;
+    index += 1
+  ) {
+    candidate = pickBoostWeightedSource(items);
   }
   return candidate;
 }
@@ -305,6 +333,225 @@ function reactionImagePath(reaction: Reaction) {
   return `${ASSET_ROOT}/reactions/${reaction.file}`;
 }
 
+const compactMetric = new Intl.NumberFormat("en-US", {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+
+function formatMetric(value: number) {
+  return compactMetric.format(value);
+}
+
+type MemeInfoBackProps = {
+  open: boolean;
+  pairing: Pairing | null;
+  attributionVisible: boolean;
+  profile: MemeAuthorProfile | null;
+  profileLoading: boolean;
+  profileLoaded: boolean;
+  feedStatus: string;
+  onClose: () => void;
+};
+
+function MemeInfoBack({
+  open,
+  pairing,
+  attributionVisible,
+  profile,
+  profileLoading,
+  profileLoaded,
+  feedStatus,
+  onClose,
+}: MemeInfoBackProps) {
+  const sourceUrl = pairing?.source.url || "https://6529.io";
+  const sourceLinkLabel = pairing?.source.kind === "tweet"
+    ? "Original tweet"
+    : "Original drop";
+  const profileHandle = pairing?.source.authorHandle.replace(/^@/, "") || "";
+  const profileUrl = `https://6529.io/${encodeURIComponent(profileHandle)}`;
+  const creatorLine = pairing
+    ? `${pairing.reaction.creator || "Unknown creator"}${pairing.reaction.year ? ` · ${pairing.reaction.year}` : ""}`
+    : "";
+  const repMaximum = profile?.topRep[0]?.totalRep || 1;
+
+  return (
+    <section
+      className={`${styles.cardFace} ${styles.cardBack}`}
+      aria-label="Meme source and artwork information"
+      aria-hidden={!open}
+      inert={!open}
+      onClick={(event) => event.stopPropagation()}
+    >
+      <header className={styles.backHeader}>
+        <div>
+          <span className={styles.backEyebrow}>Boosted reactions</span>
+          <strong>Source record</strong>
+        </div>
+        <button
+          className={styles.flipBackButton}
+          type="button"
+          aria-label="Return to meme"
+          onClick={onClose}
+        >
+          <span aria-hidden="true">↩</span>
+        </button>
+      </header>
+
+      <div className={styles.backContent}>
+        {!attributionVisible ? (
+          <section className={styles.editedSourceNotice}>
+            <span className={styles.sectionEyebrow}>Custom edit</span>
+            <strong>Author profile hidden</strong>
+            <p>
+              These words were edited, so the source profile is intentionally
+              suppressed. The original source remains available below.
+            </p>
+          </section>
+        ) : (
+          <section
+            className={styles.profileBand}
+            style={profile ? {
+              backgroundImage: `linear-gradient(125deg, ${profile.banner1}, #191a18 58%, ${profile.banner2})`,
+            } : undefined}
+          >
+            {profileLoading && (
+              <div className={styles.profileLoading} aria-label="Loading author profile">
+                <span className={styles.profileLoadingAvatar} />
+                <span />
+                <span />
+              </div>
+            )}
+
+            {!profileLoading && profile && (
+              <>
+                <div className={styles.profileIdentity}>
+                  <div className={styles.profileAvatar}>
+                    <span aria-hidden="true">
+                      {profile.handle.slice(0, 1).toUpperCase()}
+                    </span>
+                    {profile.pfp && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={profile.pfp} alt="" />
+                    )}
+                  </div>
+                  <div className={styles.profileName}>
+                    <span className={styles.sectionEyebrow}>
+                      {pairing?.source.kind === "tweet" ? "Tweet author" : "Drop author"}
+                    </span>
+                    <strong>@{profile.handle}</strong>
+                    <a href={profileUrl} target="_blank" rel="noreferrer">
+                      View 6529 profile <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                <dl className={styles.profileMetrics}>
+                  <div>
+                    <dt>Level</dt>
+                    <dd>{formatMetric(profile.level)}</dd>
+                  </div>
+                  <div>
+                    <dt>TDH</dt>
+                    <dd title={profile.tdh.toLocaleString("en-US")}>
+                      {formatMetric(profile.tdh)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>REP</dt>
+                    <dd title={profile.rep.toLocaleString("en-US")}>
+                      {formatMetric(profile.rep)}
+                    </dd>
+                  </div>
+                </dl>
+
+                {profile.topRep.length > 0 && (
+                  <div className={styles.repSection}>
+                    <span className={styles.sectionEyebrow}>Top incoming REP</span>
+                    <ol className={styles.repList}>
+                      {profile.topRep.map((item) => (
+                        <li key={item.category}>
+                          <span>{item.category}</span>
+                          <span className={styles.repTrack} aria-hidden="true">
+                            <span
+                              style={{
+                                width: `${Math.max(5, (item.totalRep / repMaximum) * 100)}%`,
+                              }}
+                            />
+                          </span>
+                          <strong>{formatMetric(item.totalRep)}</strong>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </>
+            )}
+
+            {!profileLoading && profileLoaded && !profile && (
+              <div className={styles.profileUnavailable}>
+                <span className={styles.sectionEyebrow}>
+                  {pairing?.source.kind === "tweet" ? "Tweet author" : "Drop author"}
+                </span>
+                <strong>@{profileHandle}</strong>
+                <p>No public 6529 profile data was found for this handle.</p>
+              </div>
+            )}
+          </section>
+        )}
+
+        {pairing && (
+          <>
+            <section className={styles.originalSource}>
+              <div className={styles.sectionHeading}>
+                <span className={styles.sectionEyebrow}>{sourceLinkLabel}</span>
+                <a href={sourceUrl} target="_blank" rel="noreferrer">
+                  Open <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+              <blockquote>{pairing.source.content}</blockquote>
+            </section>
+
+            <section className={styles.artworkRecord}>
+              <span className={styles.sectionEyebrow}>Artwork record</span>
+              <strong>
+                {pairing.reaction.title || "Historical reaction image"}
+              </strong>
+              <p className={styles.artworkCreator}>{creatorLine}</p>
+              <dl className={styles.artworkDetails}>
+                <div>
+                  <dt>Collection</dt>
+                  <dd>
+                    {[pairing.reaction.sourceWork, pairing.reaction.institution]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Rights</dt>
+                  <dd>{friendlyRights(pairing.reaction.rights)}</dd>
+                </div>
+              </dl>
+              <a
+                className={styles.artworkLink}
+                href={pairing.reaction.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View image source <span aria-hidden="true">↗</span>
+              </a>
+            </section>
+          </>
+        )}
+      </div>
+
+      <footer className={styles.backFooter}>
+        <span>{feedStatus}</span>
+        <span>Public 6529 data</span>
+      </footer>
+    </section>
+  );
+}
+
 export default function BoostedReactions() {
   const posterRef = useRef<HTMLElement>(null);
   const topCaptionRef = useRef<HTMLDivElement>(null);
@@ -316,6 +563,8 @@ export default function BoostedReactions() {
     drops: CaptionSource[];
     tweets: CaptionSource[];
   }>({ drops: [], tweets: [] });
+  const boostedQueueRef = useRef<CaptionSource[]>([]);
+  const liveBoostCountsRef = useRef<ReadonlyMap<string, number>>(new Map());
   const pairingRef = useRef<Pairing | null>(null);
   const historyRef = useRef<Pairing[]>([]);
   const historyIndexRef = useRef(-1);
@@ -338,6 +587,17 @@ export default function BoostedReactions() {
   const [sourceLoading, setSourceLoading] = useState(false);
   const [feedStatus, setFeedStatus] = useState("Loading artwork, drops and tweets");
   const [feedback, setFeedback] = useState<{ message: string; error: boolean } | null>(null);
+  const [profileCache, setProfileCache] = useState<
+    Record<string, MemeAuthorProfile | null>
+  >({});
+  const profileHandle = pairing?.source.authorHandle.replace(/^@/, "") || "";
+  const profileKey = attributionVisible ? profileHandle.toLowerCase() : "";
+  const profileLoaded = Boolean(
+    profileKey &&
+    Object.prototype.hasOwnProperty.call(profileCache, profileKey),
+  );
+  const authorProfile = profileLoaded ? profileCache[profileKey] : null;
+  const profileLoading = Boolean(infoOpen && profileKey && !profileLoaded);
 
   const showFeedback = useCallback((message: string, error = false) => {
     if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
@@ -479,8 +739,8 @@ export default function BoostedReactions() {
       : randomItem(reactions);
     const pool = randomItem(availablePools);
     const source = current
-      ? differentItem(pool, current.source, (item) => `${item.kind}:${item.id}`)
-      : randomItem(pool);
+      ? differentSourceItem(pool, current.source)
+      : pickBoostWeightedSource(pool);
     return stateFor(reaction, source);
   }, []);
 
@@ -511,7 +771,20 @@ export default function BoostedReactions() {
   }, [showPairing]);
 
   const newPairing = useCallback(() => {
-    const next = preloadedPairingRef.current || randomPairingFor(pairingRef.current);
+    const current = pairingRef.current;
+    const queuedSource = boostedQueueRef.current.shift();
+    const cached = preloadedPairingRef.current;
+    const reactions = reactionsRef.current;
+    const queuedReaction = queuedSource && reactions.length
+      ? cached?.reaction || (
+        current
+          ? differentItem(reactions, current.reaction, (item) => item.file)
+          : randomItem(reactions)
+      )
+      : null;
+    const next = queuedSource && queuedReaction
+      ? stateFor(queuedReaction, queuedSource)
+      : cached || randomPairingFor(current);
     if (!next) return;
     preloadedPairingRef.current = null;
     preloadedImageRef.current = null;
@@ -539,12 +812,11 @@ export default function BoostedReactions() {
     const availablePools = [pools.drops, pools.tweets].filter((pool) => pool.length);
     if (!current || !availablePools.length) return;
     const cached = preloadedPairingRef.current;
+    const queuedSource = boostedQueueRef.current.shift();
     const pool = randomItem(availablePools);
-    const source = cached?.source || differentItem(
-      pool,
-      current.source,
-      (item) => `${item.kind}:${item.id}`,
-    );
+    const source = queuedSource ||
+      cached?.source ||
+      differentSourceItem(pool, current.source);
     preloadedPairingRef.current = null;
     preloadedImageRef.current = null;
     pushPairing(stateFor(current.reaction, source));
@@ -674,6 +946,7 @@ export default function BoostedReactions() {
     if (
       target.closest(`.${styles.actionMenuWrapper}`) ||
       target.closest(`.${styles.sourceHelp}`) ||
+      target.closest(`.${styles.cardBack}`) ||
       target.closest(`.${styles.keyboardHelp}`)
     ) {
       return false;
@@ -808,6 +1081,8 @@ export default function BoostedReactions() {
 
   useEffect(() => {
     let cancelled = false;
+    let refreshInterval: number | null = null;
+    const refreshControllers = new Set<AbortController>();
     async function load() {
       try {
         const [reactionResponse, cacheResponse, tweetResponse] = await Promise.all([
@@ -832,6 +1107,7 @@ export default function BoostedReactions() {
           drops: cachedDrops,
           tweets: curatedTweets,
         };
+        liveBoostCountsRef.current = boostCountsById(cachedDrops);
         setFeedStatus(
           `${cachedDrops.length} boosted drops · ${curatedTweets.length} curated @punk6529 tweets`,
         );
@@ -844,15 +1120,29 @@ export default function BoostedReactions() {
         if (sharedPairing) pushPairing(sharedPairing);
         else newPairing();
 
-        try {
+        const refreshLiveDrops = async (queueNewBoosts: boolean) => {
           const controller = new AbortController();
+          refreshControllers.add(controller);
           const timeout = window.setTimeout(() => controller.abort(), 10000);
-          const liveResponse = await fetch(BOOSTED_API_URL, { signal: controller.signal });
-          window.clearTimeout(timeout);
-          if (!liveResponse.ok) throw new Error("Live feed unavailable");
-          const live = await liveResponse.json() as { data?: BoostedDrop[] };
-          const liveDrops = dropSources(live.data || []);
-          if (liveDrops.length && !cancelled) {
+          try {
+            const liveResponse = await fetch(BOOSTED_API_URL, {
+              signal: controller.signal,
+            });
+            if (!liveResponse.ok) throw new Error("Live feed unavailable");
+            const live = await liveResponse.json() as { data?: BoostedDrop[] };
+            const liveDrops = dropSources(live.data || []);
+            if (!liveDrops.length || cancelled) return;
+            if (queueNewBoosts) {
+              const changedDrops = newlyBoostedDrops(
+                liveBoostCountsRef.current,
+                liveDrops,
+              );
+              boostedQueueRef.current = mergeBoostedDropQueue(
+                boostedQueueRef.current,
+                changedDrops,
+              );
+            }
+            liveBoostCountsRef.current = boostCountsById(liveDrops);
             sourcePoolsRef.current = {
               drops: liveDrops,
               tweets: curatedTweets,
@@ -860,13 +1150,24 @@ export default function BoostedReactions() {
             setFeedStatus(
               `${liveDrops.length} live boosted drops · ${curatedTweets.length} curated @punk6529 tweets`,
             );
+          } catch {
+            if (!cancelled && !queueNewBoosts) {
+              setFeedStatus(
+                `${cachedDrops.length} cached drops · ${curatedTweets.length} curated @punk6529 tweets`,
+              );
+            }
+          } finally {
+            window.clearTimeout(timeout);
+            refreshControllers.delete(controller);
           }
-        } catch {
-          if (!cancelled) {
-            setFeedStatus(
-              `${cachedDrops.length} cached drops · ${curatedTweets.length} curated @punk6529 tweets`,
-            );
-          }
+        };
+
+        await refreshLiveDrops(false);
+        if (!cancelled) {
+          refreshInterval = window.setInterval(
+            () => void refreshLiveDrops(true),
+            BOOSTED_REFRESH_INTERVAL_MS,
+          );
         }
       } catch {
         if (!cancelled) {
@@ -877,7 +1178,11 @@ export default function BoostedReactions() {
       }
     }
     load();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+      if (refreshInterval !== null) window.clearInterval(refreshInterval);
+      refreshControllers.forEach((controller) => controller.abort());
+    };
   }, [newPairing, pushPairing]);
 
   useEffect(() => {
@@ -910,6 +1215,27 @@ export default function BoostedReactions() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [fitOverlay]);
+
+  useEffect(() => {
+    if (!infoOpen || !profileKey || profileLoaded) return;
+    const controller = new AbortController();
+    void fetchMemeAuthorProfile(profileHandle, controller.signal)
+      .then((profile) => {
+        if (controller.signal.aborted) return;
+        setProfileCache((current) => ({
+          ...current,
+          [profileKey]: profile,
+        }));
+      })
+      .catch(() => {
+        if (controller.signal.aborted) return;
+        setProfileCache((current) => ({
+          ...current,
+          [profileKey]: null,
+        }));
+      });
+    return () => controller.abort();
+  }, [infoOpen, profileHandle, profileKey, profileLoaded]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -975,12 +1301,6 @@ export default function BoostedReactions() {
   const currentAttribution = pairing
     ? sourceAttribution(pairing.source)
     : null;
-  const sourceLinkLabel = pairing?.source.kind === "tweet"
-    ? "Original tweet"
-    : "Original drop";
-  const creatorLine = pairing
-    ? `${pairing.reaction.creator || "Unknown creator"}${pairing.reaction.year ? ` · ${pairing.reaction.year}` : ""}`
-    : "";
 
   return (
     <>
@@ -1017,17 +1337,25 @@ export default function BoostedReactions() {
 
       <main
         ref={posterRef}
-        className={styles.poster}
+        className={`${styles.poster} ${infoOpen ? styles.posterFlipped : ""}`}
         aria-label="Interactive public-domain reaction artwork"
         onClick={() => {
           if (swipeBlockedClickRef.current) return;
-          setInfoOpen(false);
           setActionsOpen(false);
         }}
         onPointerDown={onPosterPointerDown}
         onPointerUp={onPosterPointerUp}
         onPointerCancel={onPosterPointerCancel}
       >
+        <div
+          className={`${styles.card} ${infoOpen ? styles.cardFlipped : ""}`}
+        >
+          <section
+            className={`${styles.cardFace} ${styles.cardFront}`}
+            aria-label="Meme"
+            aria-hidden={infoOpen}
+            inert={infoOpen}
+          >
         {imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img className={styles.artwork} src={imageUrl} alt="Public-domain historical reaction engraving" />
@@ -1177,39 +1505,23 @@ export default function BoostedReactions() {
           )}
 
           <div
-            className={`${styles.sourceHelp} ${infoOpen ? styles.sourceOpen : ""}`}
+            className={styles.sourceHelp}
             onClick={(event) => event.stopPropagation()}
           >
             <button
               className={styles.infoButton}
               type="button"
-              aria-label="Show artwork information"
+              aria-label="Flip card to source information"
               aria-expanded={infoOpen}
-              onClick={() => { setHelpOpen(false); setInfoOpen((open) => !open); }}
+              onClick={(event) => {
+                event.currentTarget.blur();
+                setHelpOpen(false);
+                setActionsOpen(false);
+                setInfoOpen(true);
+              }}
             >
               i
             </button>
-            {pairing && (
-              <aside className={styles.sourceTooltip} role="tooltip">
-                <span className={styles.tooltipEyebrow}>Artwork record</span>
-                <strong>{pairing.reaction.title || "Historical reaction image"}</strong>
-                <p className={styles.creatorLine}>{creatorLine}</p>
-                <div className={styles.tooltipSection}>
-                  <span className={styles.tooltipLabel}>Collection</span>
-                  <p>{[pairing.reaction.sourceWork, pairing.reaction.institution].filter(Boolean).join(" · ")}</p>
-                </div>
-                <div className={styles.tooltipSection}>
-                  <span className={styles.tooltipLabel}>Rights</span>
-                  <p>{friendlyRights(pairing.reaction.rights)}</p>
-                </div>
-                <nav className={styles.tooltipLinks} aria-label="Artwork links">
-                  <a href={pairing.reaction.sourceUrl} target="_blank" rel="noreferrer">Image source <span>↗</span></a>
-                  <a href={currentSourceUrl} target="_blank" rel="noreferrer">{sourceLinkLabel} <span>↗</span></a>
-                </nav>
-                <p className={styles.feedStatus}>{feedStatus}</p>
-                <p className={styles.tooltipHint}>Press ? or / for every keyboard shortcut.</p>
-              </aside>
-            )}
           </div>
         </div>
 
@@ -1237,6 +1549,19 @@ export default function BoostedReactions() {
             </dl>
           </aside>
         )}
+          </section>
+
+          <MemeInfoBack
+            open={infoOpen}
+            pairing={pairing}
+            attributionVisible={attributionVisible}
+            profile={authorProfile}
+            profileLoading={profileLoading}
+            profileLoaded={profileLoaded}
+            feedStatus={feedStatus}
+            onClose={() => setInfoOpen(false)}
+          />
+        </div>
 
         {feedback && (
           <span
