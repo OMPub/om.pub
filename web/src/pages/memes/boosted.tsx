@@ -21,6 +21,7 @@ import {
   type MemeAuthorProfile,
 } from "@/lib/memeAuthorProfile";
 import { sourceAttribution } from "@/lib/memeAttribution";
+import { memeKeyboardAction } from "@/lib/memeKeyboard.mjs";
 import {
   createMemeImageUrl,
   createMemeShareUrl,
@@ -1279,48 +1280,37 @@ export default function BoostedReactions() {
       const editing = active?.isContentEditable ?? false;
       const usingControl = active?.matches("button, a") ?? false;
       const typing = active?.matches("input, textarea, select") ?? false;
-      const key = event.key.toLowerCase();
+      const action = memeKeyboardAction(event, { editing, typing, usingControl });
+      if (!action) return;
+      event.preventDefault();
 
-      if (event.key === "Escape") {
-        if (editing) return;
+      if (action === "dismiss") {
         setHelpOpen(false);
         setInfoOpen(false);
         setActionsOpen(false);
         active?.blur();
         return;
       }
-      if (editing || typing) return;
-      if ((event.code === "Slash" || key === "?") && !event.metaKey && !event.ctrlKey && !event.altKey) {
-        event.preventDefault();
+      if (action === "toggle-help") {
         setInfoOpen(false);
         setHelpOpen((open) => !open);
         return;
       }
-      if (key === "c" && (event.metaKey || event.ctrlKey) && !event.altKey) {
-        event.preventDefault();
+      if (action === "copy-image") {
         void copyMeme();
         return;
       }
-      if (event.code === "Space" && !usingControl) {
-        event.preventDefault();
+      if (action === "new-pairing") {
         newPairing();
-      } else if (event.code === "ArrowRight" || key === "d") {
-        event.preventDefault();
+      } else if (action === "next") {
         nextPairing();
-      } else if (event.code === "ArrowLeft" || key === "a") {
-        event.preventDefault();
+      } else if (action === "previous") {
         previousPairing();
-      } else if (event.code === "ArrowDown" || key === "s" || (event.code === "Enter" && !usingControl)) {
-        event.preventDefault();
+      } else if (action === "new-text") {
         newTextSameImage();
-      } else if (event.code === "ArrowUp" || key === "w") {
-        event.preventDefault();
+      } else if (action === "new-image") {
         newImageSameText();
-      } else if (key === "c" && !usingControl) {
-        event.preventDefault();
-        void copyMeme();
-      } else if (key === "v" && !usingControl) {
-        event.preventDefault();
+      } else if (action === "download") {
         void saveMeme();
       }
     };

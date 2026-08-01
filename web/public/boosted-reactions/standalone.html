@@ -574,12 +574,13 @@
           <dl>
             <div><dt>A / Left</dt><dd>Previous</dd></div>
             <div><dt>D / Right</dt><dd>Next</dd></div>
-            <div><dt>S / Down</dt><dd>New words</dd></div>
+            <div><dt>S / Down / Enter</dt><dd>New words</dd></div>
             <div><dt>W / Up</dt><dd>New picture</dd></div>
             <div><dt>Space</dt><dd>New pairing</dd></div>
-            <div><dt>C</dt><dd>Copy image</dd></div>
+            <div><dt>C / Cmd-C / Ctrl-C</dt><dd>Copy image</dd></div>
             <div><dt>V</dt><dd>Download</dd></div>
-            <div><dt>?</dt><dd>This guide</dd></div>
+            <div><dt>Esc</dt><dd>Cancel edit</dd></div>
+            <div><dt>? / Slash</dt><dd>This guide</dd></div>
           </dl>
         </aside>
       </section>
@@ -1519,38 +1520,58 @@
     });
     $("poster").addEventListener("pointercancel",() => { swipeStart = null; });
 
+    const memeKeyboardAction = function memeKeyboardAction(event, context) {
+  const key = event.key.toLowerCase();
+  const usingModifier = Boolean(event.metaKey || event.ctrlKey || event.altKey);
+
+  if (event.key === "Escape") return context.editing ? null : "dismiss";
+  if (context.editing || context.typing) return null;
+  if (!usingModifier && (event.code === "Slash" || key === "?")) {
+    return "toggle-help";
+  }
+  if (
+    key === "c" &&
+    (event.metaKey || event.ctrlKey) &&
+    !event.altKey
+  ) {
+    return "copy-image";
+  }
+  if (usingModifier) return null;
+  if (event.code === "Space") {
+    return context.usingControl ? null : "new-pairing";
+  }
+  if (event.code === "ArrowRight" || key === "d") return "next";
+  if (event.code === "ArrowLeft" || key === "a") return "previous";
+  if (event.code === "ArrowDown" || key === "s") return "new-text";
+  if (event.code === "Enter") {
+    return context.usingControl ? null : "new-text";
+  }
+  if (event.code === "ArrowUp" || key === "w") return "new-image";
+  if (key === "c") return "copy-image";
+  if (key === "v") return "download";
+  return null;
+};
+
     window.addEventListener("keydown",(event) => {
       const active = document.activeElement;
       const editing = active && active.isContentEditable;
       const typing = active && active.matches("input,textarea,select");
       const usingControl = active && active.matches("button,a");
-      const key = event.key.toLowerCase();
-      if (event.key === "Escape" && !editing) {
+      const action = memeKeyboardAction(event,{editing:Boolean(editing),typing:Boolean(typing),usingControl:Boolean(usingControl)});
+      if (!action) return;
+      event.preventDefault();
+      if (action === "dismiss") {
         closeMenu(); flip(false); $("help").hidden = true; active && active.blur();
-        return;
-      }
-      if (editing || typing) return;
-      if ((event.code === "Slash" || key === "?") && !event.metaKey && !event.ctrlKey && !event.altKey) {
-        event.preventDefault();
+      } else if (action === "toggle-help") {
         flip(false);
         $("help").hidden = !$("help").hidden;
-      } else if (key === "c" && (event.metaKey || event.ctrlKey) && !event.altKey) {
-        event.preventDefault(); copyImage();
-      } else if (event.code === "Space" && !usingControl) {
-        event.preventDefault(); newPairing();
-      } else if (event.code === "ArrowRight" || key === "d") {
-        event.preventDefault(); nextPairing();
-      } else if (event.code === "ArrowLeft" || key === "a") {
-        event.preventDefault(); previousPairing();
-      } else if (event.code === "ArrowDown" || key === "s" || (event.code === "Enter" && !usingControl)) {
-        event.preventDefault(); newText();
-      } else if (event.code === "ArrowUp" || key === "w") {
-        event.preventDefault(); newImage();
-      } else if (key === "c" && !usingControl) {
-        event.preventDefault(); copyImage();
-      } else if (key === "v" && !usingControl) {
-        event.preventDefault(); downloadPng();
-      }
+      } else if (action === "new-pairing") newPairing();
+      else if (action === "next") nextPairing();
+      else if (action === "previous") previousPairing();
+      else if (action === "new-text") newText();
+      else if (action === "new-image") newImage();
+      else if (action === "copy-image") copyImage();
+      else if (action === "download") downloadPng();
     });
 
     window.addEventListener("resize",fitCaptions);

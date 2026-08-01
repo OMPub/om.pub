@@ -12,6 +12,8 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
+import { memeKeyboardAction } from "../src/lib/memeKeyboard.mjs";
+
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const webRoot = resolve(scriptDirectory, "..");
 const assetRoot = join(webRoot, "public", "boosted-reactions");
@@ -97,6 +99,7 @@ try {
     ["__REACTIONS_JSON__", scriptSafeJson(reactions)],
     ["__TWEETS_JSON__", scriptSafeJson(tweets)],
     ["__DROPS_JSON__", scriptSafeJson(drops)],
+    ["__KEYBOARD_ACTION_SOURCE__", memeKeyboardAction.toString()],
   ]);
   let output = readFileSync(templatePath, "utf8");
   for (const [placeholder, value] of replacements) {
