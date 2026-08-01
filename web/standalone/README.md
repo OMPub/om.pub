@@ -35,9 +35,12 @@ needed. The page derives its canonical share base from its own document URL,
 so a page opened at `https://arweave.net/<transaction-id>` copies links back to
 that transaction with the complete meme state in the `m` query parameter.
 
-After uploading, set
+The om.pub verification route transparently serves the generated artifact at:
+
+`https://om.pub/booster`
+
+After uploading to Arweave, set
 `NEXT_PUBLIC_BOOSTED_REACTIONS_STANDALONE_URL` to the permanent Arweave URL
 when building om.pub. This makes Copy link in the React version target the
-same standalone transaction. Until then it targets the verification artifact:
-
-`https://om.pub/boosted-reactions/standalone.html`
+same standalone transaction. Until then Copy link targets the `/booster`
+verification route.

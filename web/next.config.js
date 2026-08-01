@@ -34,6 +34,15 @@ const nextConfig = {
   async generateBuildId() {
     return VERSION;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/booster",
+        destination: "/boosted-reactions/standalone.html",
+        locale: false,
+      },
+    ];
+  },
   i18n: {
     "locales": [
       "en",

@@ -2,7 +2,7 @@ import { parseMemeSourceReference } from "@/lib/memeSourceUrl";
 
 export const MEME_SHARE_QUERY_KEY = "m";
 export const DEFAULT_STANDALONE_MEME_URL =
-  "https://om.pub/boosted-reactions/standalone.html";
+  "https://om.pub/booster";
 
 export type MemeShareSource = {
   kind: "drop" | "tweet";
