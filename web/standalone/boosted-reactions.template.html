@@ -1538,13 +1538,13 @@
         event.preventDefault(); copyImage();
       } else if (event.code === "Space" && !usingControl) {
         event.preventDefault(); newPairing();
-      } else if (event.code === "ArrowRight" || (key === "d" && !usingControl)) {
+      } else if (event.code === "ArrowRight" || key === "d") {
         event.preventDefault(); nextPairing();
-      } else if (event.code === "ArrowLeft" || (key === "a" && !usingControl)) {
+      } else if (event.code === "ArrowLeft" || key === "a") {
         event.preventDefault(); previousPairing();
-      } else if (event.code === "ArrowDown" || ((event.code === "Enter" || key === "s") && !usingControl)) {
+      } else if (event.code === "ArrowDown" || key === "s" || (event.code === "Enter" && !usingControl)) {
         event.preventDefault(); newText();
-      } else if (event.code === "ArrowUp" || (key === "w" && !usingControl)) {
+      } else if (event.code === "ArrowUp" || key === "w") {
         event.preventDefault(); newImage();
       } else if (key === "c" && !usingControl) {
         event.preventDefault(); copyImage();
