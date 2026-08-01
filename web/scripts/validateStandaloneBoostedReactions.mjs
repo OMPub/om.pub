@@ -1,7 +1,8 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const htmlPath = resolve("public", "boosted-reactions", "standalone.html");
+const rendererPath = resolve("public", "boosted-reactions", "renderer");
 const html = readFileSync(htmlPath, "utf8");
 const scripts = Array.from(
   html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/g),
@@ -42,7 +43,16 @@ if (reactions.length !== 167 || tweets.length !== 50 || drops.length < 1) {
   );
 }
 
+const rendererImages = readdirSync(rendererPath).filter((file) =>
+  /^reaction-\d{3}\.jpg$/.test(file),
+);
+if (rendererImages.length !== reactions.length) {
+  throw new Error(
+    `Expected ${reactions.length} renderer JPEGs, found ${rendererImages.length}`,
+  );
+}
+
 process.stdout.write(
   `Validated ${htmlPath}: ${(Buffer.byteLength(html) / 1024 / 1024).toFixed(2)} MiB, ` +
-  `${reactions.length} images, ${tweets.length} tweets, ${drops.length} drops, no local subresources\n`,
+  `${reactions.length} images and renderer JPEGs, ${tweets.length} tweets, ${drops.length} drops, no local subresources\n`,
 );

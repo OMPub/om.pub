@@ -550,6 +550,7 @@
               <button id="download" type="button">Download PNG</button>
               <button id="copy-image" type="button">Copy image</button>
               <button id="copy-link" type="button">Copy link</button>
+              <button id="copy-image-link" type="button">Copy image link</button>
               <form id="source-form" class="source-form" aria-label="Build from a tweet or drop">
                 <input id="source-input" type="text" inputmode="url" aria-label="Tweet or 6529 drop URL" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Paste tweet or drop URL">
                 <button class="sr-only" type="submit">Build meme from URL</button>
@@ -1184,6 +1185,27 @@
       } catch { feedback("Clipboard blocked",true); }
     }
 
+    function pairingImageUrl(pairing) {
+      const app = new URL(pairingUrl(pairing));
+      const appBase = new URL(app);
+      appBase.search = "";
+      appBase.hash = "";
+      const image = new URL("https://om.pub/booster/image.png");
+      image.searchParams.set(SHARE_KEY,JSON.stringify(sharePayload(pairing)));
+      if (appBase.toString() !== "https://om.pub/booster") {
+        image.searchParams.set("b",appBase.toString());
+      }
+      return image.toString();
+    }
+
+    async function copyImageLink() {
+      try {
+        setCurrent({topText:captionText("top"),bottomText:captionText("bottom")});
+        await writeText(pairingImageUrl(current));
+        feedback("Copied image link");
+      } catch { feedback("Clipboard blocked",true); }
+    }
+
     function feedback(message,error = false) {
       clearTimeout(feedbackTimer);
       const element = $("feedback");
@@ -1457,6 +1479,7 @@
     $("download").addEventListener("click",() => { closeMenu(); downloadPng(); });
     $("copy-image").addEventListener("click",() => { closeMenu(); copyImage(); });
     $("copy-link").addEventListener("click",() => { closeMenu(); copyLink(); });
+    $("copy-image-link").addEventListener("click",() => { closeMenu(); copyImageLink(); });
     $("source-form").addEventListener("submit",buildFromSource);
     $("close-help").addEventListener("click",() => { $("help").hidden = true; });
     $("poster").addEventListener("click",() => closeMenu());

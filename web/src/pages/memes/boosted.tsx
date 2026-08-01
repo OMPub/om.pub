@@ -22,6 +22,7 @@ import {
 } from "@/lib/memeAuthorProfile";
 import { sourceAttribution } from "@/lib/memeAttribution";
 import {
+  createMemeImageUrl,
   createMemeShareUrl,
   createStandaloneMemeShareUrl,
   decodeMemeShare,
@@ -912,6 +913,32 @@ export default function BoostedReactions() {
     }
   }, [captionParts, replacePageUrl, showFeedback]);
 
+  const copyPairingImageLink = useCallback(async () => {
+    const current = pairingRef.current;
+    if (!current) return;
+    const parts = captionParts();
+    const next = {
+      ...current,
+      topText: parts.top,
+      bottomText: parts.bottom,
+    };
+    const payload: MemeSharePayload = {
+      version: 1,
+      reactionFile: next.reaction.file,
+      source: next.source,
+      topText: next.topText,
+      bottomText: next.bottomText,
+      attributionVisible: next.attributionVisible,
+    };
+    try {
+      replacePageUrl(next);
+      await writeClipboardText(createMemeImageUrl(payload));
+      showFeedback("Copied image link");
+    } catch {
+      showFeedback("Clipboard blocked", true);
+    }
+  }, [captionParts, replacePageUrl, showFeedback]);
+
   const buildFromSource = useCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const input = sourceInput.trim();
@@ -1471,6 +1498,16 @@ export default function BoostedReactions() {
                 }}
               >
                 Copy link
+              </button>
+              <button
+                type="button"
+                disabled={!pairing || loading}
+                onClick={() => {
+                  setActionsOpen(false);
+                  void copyPairingImageLink();
+                }}
+              >
+                Copy image link
               </button>
               <form
                 className={styles.sourceForm}

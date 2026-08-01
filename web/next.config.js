@@ -14,6 +14,9 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  outputFileTracingIncludes: {
+    "/api/booster/image.png": ["./src/styles/fonts/Inter-Bold.ttf"],
+  },
   // wagmi's tempo connector probes an OPTIONAL dependency via import('accounts') and
   // catches the failure at runtime. Turbopack defers that to runtime; webpack resolves
   // it at build time and fails every page through _app. Stub it to an empty module so
@@ -39,6 +42,11 @@ const nextConfig = {
       {
         source: "/booster",
         destination: "/boosted-reactions/standalone.html",
+        locale: false,
+      },
+      {
+        source: "/booster/image.png",
+        destination: "/api/booster/image.png",
         locale: false,
       },
     ];

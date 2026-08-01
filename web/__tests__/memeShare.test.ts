@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  createMemeImageUrl,
   createStandaloneMemeShareUrl,
   createMemeShareUrl,
+  DEFAULT_MEME_IMAGE_URL,
   DEFAULT_STANDALONE_MEME_URL,
   decodeMemeShare,
   MEME_SHARE_QUERY_KEY,
@@ -99,6 +101,29 @@ describe("meme share URLs", () => {
     expect(Array.from(url.searchParams.keys())).toEqual([
       MEME_SHARE_QUERY_KEY,
     ]);
+  });
+
+  it("creates a PNG-looking URL carrying the same meme state", () => {
+    const imageUrl = createMemeImageUrl(payload);
+    const url = new URL(imageUrl);
+
+    expect(url.origin + url.pathname).toBe(DEFAULT_MEME_IMAGE_URL);
+    expect(url.searchParams.has("b")).toBe(false);
+    expect(decodeMemeShare(url.searchParams.get(MEME_SHARE_QUERY_KEY))).toEqual(
+      payload,
+    );
+  });
+
+  it("carries an Arweave app base for click-through redirects", () => {
+    const appUrl = createMemeShareUrl(
+      "https://arweave.net/example-transaction",
+      payload,
+    );
+    const imageUrl = new URL(createMemeImageUrl(payload, appUrl));
+
+    expect(imageUrl.searchParams.get("b")).toBe(
+      "https://arweave.net/example-transaction",
+    );
   });
 
   it("rejects unsafe source links and unknown image files", () => {

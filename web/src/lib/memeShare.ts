@@ -3,6 +3,8 @@ import { parseMemeSourceReference } from "@/lib/memeSourceUrl";
 export const MEME_SHARE_QUERY_KEY = "m";
 export const DEFAULT_STANDALONE_MEME_URL =
   "https://om.pub/booster";
+export const DEFAULT_MEME_IMAGE_URL =
+  "https://om.pub/booster/image.png";
 
 export type MemeShareSource = {
   kind: "drop" | "tweet";
@@ -162,4 +164,23 @@ export function createStandaloneMemeShareUrl(
     DEFAULT_STANDALONE_MEME_URL,
 ) {
   return createMemeShareUrl(baseUrl, payload);
+}
+
+export function createMemeImageUrl(
+  payload: MemeSharePayload,
+  appUrl = createStandaloneMemeShareUrl(payload),
+  imageBaseUrl = DEFAULT_MEME_IMAGE_URL,
+) {
+  const app = new URL(appUrl);
+  const appBase = new URL(app);
+  appBase.search = "";
+  appBase.hash = "";
+  const image = new URL(imageBaseUrl);
+  image.search = "";
+  image.hash = "";
+  image.searchParams.set(MEME_SHARE_QUERY_KEY, JSON.stringify(payload));
+  if (appBase.toString() !== `${DEFAULT_STANDALONE_MEME_URL}`) {
+    image.searchParams.set("b", appBase.toString());
+  }
+  return image.toString();
 }

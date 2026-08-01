@@ -21,6 +21,7 @@ const templatePath = join(
   "boosted-reactions.template.html",
 );
 const outputPath = join(assetRoot, "standalone.html");
+const rendererRoot = join(assetRoot, "renderer");
 const temporaryDirectory = mkdtempSync(
   join(tmpdir(), "ompub-boosted-standalone-"),
 );
@@ -35,9 +36,10 @@ function scriptSafeJson(value) {
 
 function resizeReaction(reaction) {
   const input = join(assetRoot, "reactions", reaction.file);
+  const rendererFile = reaction.file.replace(/\.webp$/i, ".jpg");
   const output = join(
     temporaryDirectory,
-    reaction.file.replace(/\.webp$/i, ".jpg"),
+    rendererFile,
   );
   const result = spawnSync(
     "sips",
@@ -62,13 +64,17 @@ function resizeReaction(reaction) {
       `Could not optimize ${reaction.file} with sips: ${result.stderr.trim()}`,
     );
   }
+  const image = readFileSync(output);
+  writeFileSync(join(rendererRoot, rendererFile), image);
   return {
     ...reaction,
-    image: `data:image/jpeg;base64,${readFileSync(output).toString("base64")}`,
+    image: `data:image/jpeg;base64,${image.toString("base64")}`,
   };
 }
 
 try {
+  rmSync(rendererRoot, { recursive: true, force: true });
+  mkdirSync(rendererRoot, { recursive: true });
   const reactionIndex = readJson(
     join(assetRoot, "reactions", "index.json"),
   );
@@ -104,7 +110,7 @@ try {
   writeFileSync(outputPath, output);
   const megabytes = (statSync(outputPath).size / 1024 / 1024).toFixed(2);
   process.stdout.write(
-    `Built ${outputPath} (${megabytes} MiB, ${reactions.length} embedded images, build ${buildHash})\n`,
+    `Built ${outputPath} (${megabytes} MiB, ${reactions.length} embedded images and renderer JPEGs, build ${buildHash})\n`,
   );
 } finally {
   rmSync(temporaryDirectory, { recursive: true, force: true });

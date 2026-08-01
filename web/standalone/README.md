@@ -24,8 +24,10 @@ pnpm test:standalone-meme
 ```
 
 The build uses `sips` to create 600 x 750 JPEGs from the source WebP files,
-then writes the single HTML file. Commit the generated artifact whenever the
-template or embedded source data changes.
+then writes the single HTML file. It also writes the same optimized images to
+`public/boosted-reactions/renderer/` for om.pub's dynamic PNG share endpoint.
+Those files are not dependencies of the standalone artifact. Commit all
+generated outputs whenever the template or embedded source data changes.
 
 ## Arweave
 
