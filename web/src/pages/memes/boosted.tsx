@@ -1304,16 +1304,16 @@ export default function BoostedReactions() {
       if (event.code === "Space" && !usingControl) {
         event.preventDefault();
         newPairing();
-      } else if ((event.code === "ArrowRight" || key === "d") && !usingControl) {
+      } else if (event.code === "ArrowRight" || (key === "d" && !usingControl)) {
         event.preventDefault();
         nextPairing();
-      } else if ((event.code === "ArrowLeft" || key === "a") && !usingControl) {
+      } else if (event.code === "ArrowLeft" || (key === "a" && !usingControl)) {
         event.preventDefault();
         previousPairing();
-      } else if ((event.code === "Enter" || event.code === "ArrowDown" || key === "s") && !usingControl) {
+      } else if (event.code === "ArrowDown" || ((event.code === "Enter" || key === "s") && !usingControl)) {
         event.preventDefault();
         newTextSameImage();
-      } else if ((event.code === "ArrowUp" || key === "w") && !usingControl) {
+      } else if (event.code === "ArrowUp" || (key === "w" && !usingControl)) {
         event.preventDefault();
         newImageSameText();
       } else if (key === "c" && !usingControl) {
