@@ -42,12 +42,10 @@ const nextConfig = {
       {
         source: "/booster",
         destination: "/boosted-reactions/standalone.html",
-        locale: false,
       },
       {
         source: "/booster/image.png",
         destination: "/api/booster/image.png",
-        locale: false,
       },
     ];
   },
