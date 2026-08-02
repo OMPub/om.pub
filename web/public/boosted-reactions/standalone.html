@@ -72,6 +72,10 @@
       box-shadow: 0 18px 52px rgba(0,0,0,.28);
     }
     .front { background: var(--paper); cursor: pointer; }
+    .front.slideshow-advance {
+      z-index: 2;
+      animation: slideshow-slide-over 620ms cubic-bezier(.2,.78,.2,1) both;
+    }
     .back {
       display: grid;
       grid-template-rows: auto minmax(0,1fr) auto;
@@ -197,6 +201,10 @@
       outline: none;
     }
     #menu-button { font-size: 18px; font-weight: 700; line-height: 1; }
+    .poster.slideshow-playing #menu-button {
+      border-color: rgba(104,201,198,.78);
+      box-shadow: 0 0 0 2px rgba(104,201,198,.12), 0 2px 10px rgba(0,0,0,.2);
+    }
     #info-button { grid-column: 3; justify-self: end; font: italic 700 12px Georgia,serif; }
     .menu {
       position: absolute;
@@ -247,6 +255,33 @@
     }
     .source-form input::placeholder { color: rgba(255,250,240,.36); }
     .source-form input:focus { border-color: rgba(104,201,198,.65); }
+    .slide-timing {
+      min-height: 38px;
+      margin-top: 3px;
+      padding: 5px 10px;
+      display: grid;
+      grid-template-columns: 1fr 58px;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid rgba(255,250,240,.1);
+      color: rgba(255,250,240,.62);
+      font-size: 10px;
+      font-weight: 650;
+    }
+    .slide-timing input {
+      width: 58px;
+      height: 28px;
+      min-width: 0;
+      border: 1px solid rgba(255,250,240,.18);
+      border-radius: 3px;
+      padding: 0 7px;
+      background: rgba(255,250,240,.055);
+      color: rgba(255,250,240,.9);
+      font: inherit;
+      text-align: right;
+      outline: none;
+    }
+    .slide-timing input:focus { border-color: rgba(104,201,198,.65); }
 
     .attribution {
       grid-column: 2;
@@ -514,6 +549,11 @@
     }
     @keyframes pulse { from { opacity: .45; } to { opacity: 1; } }
     @keyframes loading { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+    @keyframes slideshow-slide-over {
+      0% { opacity: .28; transform: translateX(18%); box-shadow: -24px 0 46px rgba(0,0,0,.42); }
+      72% { opacity: 1; transform: translateX(-1.25%); box-shadow: -8px 0 24px rgba(0,0,0,.22); }
+      100% { opacity: 1; transform: translateX(0); box-shadow: 0 18px 52px rgba(0,0,0,.28); }
+    }
     @supports (height: 100dvh) {
       .poster { width: min(100vw,80dvh); height: min(100dvh,125vw); }
     }
@@ -521,9 +561,10 @@
       .back-section { padding-left: 16px; padding-right: 16px; }
       .rep-list li { grid-template-columns: minmax(82px,.8fr) minmax(48px,1fr) 44px; gap: 6px; }
       .help dl { grid-template-columns: 1fr; }
+      .help { max-height: calc(100% - 34px); overflow: auto; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .card, .poster.flipped .card { animation: none; transition: none; }
+      .card, .poster.flipped .card, .front.slideshow-advance { animation: none; transition: none; }
       .profile-loading span, .loading::after { animation: none; }
     }
   </style>
@@ -551,6 +592,12 @@
               <button id="copy-image" type="button">Copy image</button>
               <button id="copy-link" type="button">Copy link</button>
               <button id="copy-image-link" type="button">Copy image link</button>
+              <button id="slideshow-toggle" type="button" data-slideshow-control aria-pressed="false">Start slideshow</button>
+              <button id="remove-history" type="button">Remove from history</button>
+              <label class="slide-timing">
+                <span>Slide seconds</span>
+                <input id="slide-seconds" type="number" inputmode="numeric" min="1" max="3600" step="1" value="5" aria-label="Seconds per slideshow slide">
+              </label>
               <form id="source-form" class="source-form" aria-label="Build from a tweet or drop">
                 <input id="source-input" type="text" inputmode="url" aria-label="Tweet or 6529 drop URL" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Paste tweet or drop URL">
                 <button class="sr-only" type="submit">Build meme from URL</button>
@@ -574,11 +621,19 @@
           <dl>
             <div><dt>A / Left</dt><dd>Previous</dd></div>
             <div><dt>D / Right</dt><dd>Next</dd></div>
-            <div><dt>S / Down / Enter</dt><dd>New words</dd></div>
+            <div><dt>S / Down</dt><dd>New words</dd></div>
             <div><dt>W / Up</dt><dd>New picture</dd></div>
-            <div><dt>Space</dt><dd>New pairing</dd></div>
+            <div><dt>Enter</dt><dd>New pairing</dd></div>
+            <div><dt>Space</dt><dd>Start / stop slideshow</dd></div>
+            <div><dt>0-9</dt><dd>Set slide seconds</dd></div>
+            <div><dt>Delete / Backspace</dt><dd>Remove from history</dd></div>
             <div><dt>C / Cmd-C / Ctrl-C</dt><dd>Copy image</dd></div>
             <div><dt>V</dt><dd>Download</dd></div>
+            <div><dt>L</dt><dd>Copy link</dd></div>
+            <div><dt>K</dt><dd>Copy image link</dd></div>
+            <div><dt>I</dt><dd>Source info</dd></div>
+            <div><dt>M</dt><dd>Options menu</dd></div>
+            <div><dt>P</dt><dd>Paste source URL</dd></div>
             <div><dt>Esc</dt><dd>Cancel edit</dd></div>
             <div><dt>? / Slash</dt><dd>This guide</dd></div>
           </dl>
@@ -678,6 +733,12 @@
     let feedbackTimer = null;
     let swipeStart = null;
     let blockClickUntil = 0;
+    let slideshowPlaying = false;
+    let slideshowTimer = null;
+    let slideSeconds = 5;
+    let slideDigitBuffer = "";
+    let slideDigitTimer = null;
+    let slideAnimationTimer = null;
     let liveCounts = boostCounts(pools.drops);
     let feedStatus = `${pools.drops.length} cached drops \u00b7 ${pools.tweets.length} curated @punk6529 tweets`;
 
@@ -979,6 +1040,104 @@
         replaceDocumentUrl(current);
         preloadNext();
       } else newPairing();
+    }
+
+    function deleteCurrentHistoryEntry() {
+      const result = removeHistoryEntry(pairingHistory,historyIndex);
+      if (!result) {
+        feedback("Keep at least one pairing",true);
+        return;
+      }
+      pairingHistory.splice(0,pairingHistory.length,...result.history);
+      historyIndex = result.index;
+      current = result.current;
+      render();
+      replaceDocumentUrl(current);
+      preloadNext();
+      feedback("Removed from history");
+    }
+
+    function syncSlideshowControls() {
+      $("poster").classList.toggle("slideshow-playing",slideshowPlaying);
+      $("slideshow-toggle").textContent = slideshowPlaying ? "Stop slideshow" : "Start slideshow";
+      $("slideshow-toggle").setAttribute("aria-pressed",String(slideshowPlaying));
+      $("slide-seconds").value = String(slideSeconds);
+    }
+
+    function stopSlideshow(announce = false) {
+      slideshowPlaying = false;
+      clearTimeout(slideshowTimer);
+      slideshowTimer = null;
+      syncSlideshowControls();
+      if (announce) feedback("Slideshow stopped");
+    }
+
+    function scheduleSlideshow() {
+      clearTimeout(slideshowTimer);
+      if (!slideshowPlaying) return;
+      slideshowTimer = setTimeout(advanceSlideshow,slideSeconds * 1000);
+    }
+
+    function animateSlideOver() {
+      const front = $("front");
+      front.classList.remove("slideshow-advance");
+      requestAnimationFrame(() => {
+        front.classList.add("slideshow-advance");
+        clearTimeout(slideAnimationTimer);
+        slideAnimationTimer = setTimeout(() => front.classList.remove("slideshow-advance"),700);
+      });
+    }
+
+    function advanceSlideshow() {
+      if (!slideshowPlaying || pairingHistory.length < 2) {
+        stopSlideshow();
+        return;
+      }
+      historyIndex = nextLoopingHistoryIndex(pairingHistory.length,historyIndex);
+      current = pairingHistory[historyIndex];
+      render();
+      replaceDocumentUrl(current);
+      animateSlideOver();
+      scheduleSlideshow();
+    }
+
+    function toggleSlideshow() {
+      if (slideshowPlaying) {
+        stopSlideshow(true);
+        return;
+      }
+      if (pairingHistory.length < 2) {
+        feedback("Add another pairing first",true);
+        return;
+      }
+      slideshowPlaying = true;
+      closeMenu();
+      flip(false);
+      $("help").hidden = true;
+      syncSlideshowControls();
+      scheduleSlideshow();
+      feedback(`Slideshow \u00b7 ${slideSeconds}s per slide`);
+    }
+
+    function setSlideTiming(value) {
+      slideSeconds = normalizeSlideSeconds(value,slideSeconds);
+      syncSlideshowControls();
+      if (slideshowPlaying) scheduleSlideshow();
+      return slideSeconds;
+    }
+
+    function enterSlideTimingDigit(digit) {
+      slideDigitBuffer = appendSlideTimingDigit(slideDigitBuffer,digit);
+      const seconds = setSlideTiming(slideDigitBuffer);
+      clearTimeout(slideDigitTimer);
+      slideDigitTimer = setTimeout(() => { slideDigitBuffer = ""; },2000);
+      feedback(`${seconds}s per slide`);
+    }
+
+    function clearSlideTimingDigits() {
+      slideDigitBuffer = "";
+      clearTimeout(slideDigitTimer);
+      slideDigitTimer = null;
     }
 
     function captionText(which) {
@@ -1481,6 +1640,15 @@
     $("copy-image").addEventListener("click",() => { closeMenu(); copyImage(); });
     $("copy-link").addEventListener("click",() => { closeMenu(); copyLink(); });
     $("copy-image-link").addEventListener("click",() => { closeMenu(); copyImageLink(); });
+    $("slideshow-toggle").addEventListener("click",toggleSlideshow);
+    $("remove-history").addEventListener("click",() => { closeMenu(); deleteCurrentHistoryEntry(); });
+    $("slide-seconds").addEventListener("input",(event) => {
+      clearSlideTimingDigits();
+      const value = event.currentTarget.value.replace(/\D/g,"").slice(0,4);
+      event.currentTarget.value = value;
+      if (value) setSlideTiming(value);
+    });
+    $("slide-seconds").addEventListener("blur",() => setSlideTiming($("slide-seconds").value));
     $("source-form").addEventListener("submit",buildFromSource);
     $("close-help").addEventListener("click",() => { $("help").hidden = true; });
     $("poster").addEventListener("click",() => closeMenu());
@@ -1520,12 +1688,17 @@
     });
     $("poster").addEventListener("pointercancel",() => { swipeStart = null; });
 
+    const appendSlideTimingDigit = function appendSlideTimingDigit(buffer, digit) {
+  if (!/^\d$/.test(digit)) return buffer;
+  return `${buffer}${digit}`.slice(0, 4);
+};
     const memeKeyboardAction = function memeKeyboardAction(event, context) {
   const key = event.key.toLowerCase();
   const usingModifier = Boolean(event.metaKey || event.ctrlKey || event.altKey);
 
   if (event.key === "Escape") return context.editing ? null : "dismiss";
   if (context.editing || context.typing) return null;
+  if (!usingModifier && /^\d$/.test(key)) return `slide-digit:${key}`;
   if (!usingModifier && (event.code === "Slash" || key === "?")) {
     return "toggle-help";
   }
@@ -1537,20 +1710,55 @@
     return "copy-image";
   }
   if (usingModifier) return null;
-  if (event.code === "Space") {
-    return context.usingControl ? null : "new-pairing";
-  }
+  if (event.code === "Space") return "toggle-slideshow";
   if (event.code === "ArrowRight" || key === "d") return "next";
   if (event.code === "ArrowLeft" || key === "a") return "previous";
   if (event.code === "ArrowDown" || key === "s") return "new-text";
   if (event.code === "Enter") {
-    return context.usingControl ? null : "new-text";
+    return context.usingControl ? null : "new-pairing";
   }
   if (event.code === "ArrowUp" || key === "w") return "new-image";
+  if (event.code === "Delete" || event.code === "Backspace") {
+    return "delete-history";
+  }
   if (key === "c") return "copy-image";
   if (key === "v") return "download";
+  if (key === "l") return "copy-link";
+  if (key === "k") return "copy-image-link";
+  if (key === "i") return "toggle-info";
+  if (key === "m") return "toggle-menu";
+  if (key === "p") return "focus-source";
   return null;
 };
+    const nextLoopingHistoryIndex = function nextLoopingHistoryIndex(length, index) {
+  if (length < 1) return -1;
+  return (Math.max(-1, index) + 1) % length;
+};
+    const normalizeSlideSeconds = function normalizeSlideSeconds(
+  value,
+  fallback = 5,
+) {
+  const parsed = Number.parseInt(String(value), 10);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(3600, Math.max(1, parsed));
+};
+    const removeHistoryEntry = function removeHistoryEntry(history, index) {
+  if (history.length <= 1 || index < 0 || index >= history.length) return null;
+  const nextHistory = history.slice();
+  nextHistory.splice(index, 1);
+  const nextIndex = index > 0 ? index - 1 : 0;
+  return {
+    history: nextHistory,
+    index: nextIndex,
+    current: nextHistory[nextIndex],
+  };
+};
+
+    window.addEventListener("pointerdown",(event) => {
+      if (!slideshowPlaying) return;
+      if (event.target instanceof Element && event.target.closest("[data-slideshow-control]")) return;
+      stopSlideshow();
+    },true);
 
     window.addEventListener("keydown",(event) => {
       const active = document.activeElement;
@@ -1558,6 +1766,12 @@
       const typing = active && active.matches("input,textarea,select");
       const usingControl = active && active.matches("button,a");
       const action = memeKeyboardAction(event,{editing:Boolean(editing),typing:Boolean(typing),usingControl:Boolean(usingControl)});
+      if (action && action.startsWith("slide-digit:")) {
+        event.preventDefault();
+        enterSlideTimingDigit(action.slice(-1));
+        return;
+      }
+      if (slideshowPlaying && action !== "toggle-slideshow") stopSlideshow();
       if (!action) return;
       event.preventDefault();
       if (action === "dismiss") {
@@ -1565,19 +1779,36 @@
       } else if (action === "toggle-help") {
         flip(false);
         $("help").hidden = !$("help").hidden;
-      } else if (action === "new-pairing") newPairing();
+      } else if (action === "toggle-slideshow") toggleSlideshow();
+      else if (action === "new-pairing") newPairing();
       else if (action === "next") nextPairing();
       else if (action === "previous") previousPairing();
       else if (action === "new-text") newText();
       else if (action === "new-image") newImage();
       else if (action === "copy-image") copyImage();
+      else if (action === "copy-link") copyLink();
+      else if (action === "copy-image-link") copyImageLink();
       else if (action === "download") downloadPng();
+      else if (action === "delete-history") deleteCurrentHistoryEntry();
+      else if (action === "toggle-info") flip(!$("poster").classList.contains("flipped"));
+      else if (action === "toggle-menu") {
+        flip(false);
+        $("help").hidden = true;
+        toggleMenu();
+      } else if (action === "focus-source") {
+        flip(false);
+        $("help").hidden = true;
+        $("menu").classList.add("open");
+        $("menu-button").setAttribute("aria-expanded","true");
+        requestAnimationFrame(() => $("source-input").focus());
+      }
     });
 
     window.addEventListener("resize",fitCaptions);
     $("feed-status").textContent = feedStatus;
     $("live-status").textContent = feedStatus;
     showPairing(sharedPairing() || randomPairing());
+    syncSlideshowControls();
     refreshLive(false);
     setInterval(() => refreshLive(true),REFRESH_MS);
   })();

@@ -21,6 +21,14 @@ import {
   type MemeAuthorProfile,
 } from "@/lib/memeAuthorProfile";
 import { sourceAttribution } from "@/lib/memeAttribution";
+import {
+  appendSlideTimingDigit,
+  DEFAULT_SLIDE_SECONDS,
+  MAX_SLIDE_SECONDS,
+  nextLoopingHistoryIndex,
+  normalizeSlideSeconds,
+  removeHistoryEntry,
+} from "@/lib/memeHistory.mjs";
 import { memeKeyboardAction } from "@/lib/memeKeyboard.mjs";
 import {
   createMemeImageUrl,
@@ -559,6 +567,7 @@ export default function BoostedReactions() {
   const posterRef = useRef<HTMLElement>(null);
   const topCaptionRef = useRef<HTMLDivElement>(null);
   const bottomCaptionRef = useRef<HTMLDivElement>(null);
+  const sourceInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentImageRef = useRef<HTMLImageElement | null>(null);
   const reactionsRef = useRef<Reaction[]>([]);
@@ -573,6 +582,11 @@ export default function BoostedReactions() {
   const historyIndexRef = useRef(-1);
   const editSnapshotRef = useRef<EditSnapshot | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slideshowTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slideAnimationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slideDigitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slideDigitBufferRef = useRef("");
+  const slideshowPlayingRef = useRef(false);
   const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const swipeClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const swipeBlockedClickRef = useRef(false);
@@ -588,6 +602,12 @@ export default function BoostedReactions() {
   const [actionsOpen, setActionsOpen] = useState(false);
   const [sourceInput, setSourceInput] = useState("");
   const [sourceLoading, setSourceLoading] = useState(false);
+  const [slideSeconds, setSlideSeconds] = useState(DEFAULT_SLIDE_SECONDS);
+  const [slideSecondsInput, setSlideSecondsInput] = useState(
+    String(DEFAULT_SLIDE_SECONDS),
+  );
+  const [slideshowPlaying, setSlideshowPlaying] = useState(false);
+  const [slideshowSliding, setSlideshowSliding] = useState(false);
   const [feedStatus, setFeedStatus] = useState("Loading artwork, drops and tweets");
   const [feedback, setFeedback] = useState<{ message: string; error: boolean } | null>(null);
   const [profileCache, setProfileCache] = useState<
@@ -609,6 +629,74 @@ export default function BoostedReactions() {
       () => setFeedback(null),
       error ? 2600 : 1500,
     );
+  }, []);
+
+  const stopSlideshow = useCallback(() => {
+    slideshowPlayingRef.current = false;
+    if (slideshowTimerRef.current) {
+      clearTimeout(slideshowTimerRef.current);
+      slideshowTimerRef.current = null;
+    }
+    setSlideshowPlaying(false);
+  }, []);
+
+  const toggleSlideshow = useCallback(() => {
+    if (slideshowPlayingRef.current) {
+      stopSlideshow();
+      showFeedback("Slideshow stopped");
+      return;
+    }
+    if (historyRef.current.length < 2) {
+      showFeedback("Add another pairing first", true);
+      return;
+    }
+    slideshowPlayingRef.current = true;
+    setSlideshowPlaying(true);
+    setActionsOpen(false);
+    setHelpOpen(false);
+    setInfoOpen(false);
+    showFeedback(`Slideshow · ${slideSeconds}s per slide`);
+  }, [showFeedback, slideSeconds, stopSlideshow]);
+
+  const setSlideTiming = useCallback((value: string | number) => {
+    const seconds = normalizeSlideSeconds(value, slideSeconds);
+    setSlideSeconds(seconds);
+    setSlideSecondsInput(String(seconds));
+    return seconds;
+  }, [slideSeconds]);
+
+  const clearSlideTimingDigits = useCallback(() => {
+    slideDigitBufferRef.current = "";
+    if (slideDigitTimerRef.current) {
+      clearTimeout(slideDigitTimerRef.current);
+      slideDigitTimerRef.current = null;
+    }
+  }, []);
+
+  const enterSlideTimingDigit = useCallback((digit: string) => {
+    const buffer = appendSlideTimingDigit(slideDigitBufferRef.current, digit);
+    slideDigitBufferRef.current = buffer;
+    const seconds = setSlideTiming(buffer);
+    if (slideDigitTimerRef.current) clearTimeout(slideDigitTimerRef.current);
+    slideDigitTimerRef.current = setTimeout(() => {
+      slideDigitBufferRef.current = "";
+      slideDigitTimerRef.current = null;
+    }, 2000);
+    showFeedback(`${seconds}s per slide`);
+  }, [setSlideTiming, showFeedback]);
+
+  const triggerSlideAnimation = useCallback(() => {
+    setSlideshowSliding(false);
+    requestAnimationFrame(() => {
+      setSlideshowSliding(true);
+      if (slideAnimationTimerRef.current) {
+        clearTimeout(slideAnimationTimerRef.current);
+      }
+      slideAnimationTimerRef.current = setTimeout(() => {
+        setSlideshowSliding(false);
+        slideAnimationTimerRef.current = null;
+      }, 700);
+    });
   }, []);
 
   const captionParts = useCallback(() => ({
@@ -839,6 +927,21 @@ export default function BoostedReactions() {
     }
     newPairing();
   }, [newPairing, showPairing]);
+
+  const deleteCurrentHistoryEntry = useCallback(() => {
+    const result = removeHistoryEntry(
+      historyRef.current,
+      historyIndexRef.current,
+    );
+    if (!result) {
+      showFeedback("Keep at least one pairing", true);
+      return;
+    }
+    historyRef.current = result.history;
+    historyIndexRef.current = result.index;
+    showPairing(result.current);
+    showFeedback("Removed from history");
+  }, [showFeedback, showPairing]);
 
   const updateCurrentPairing = useCallback((patch: Partial<Pairing>) => {
     const current = pairingRef.current;
@@ -1245,6 +1348,46 @@ export default function BoostedReactions() {
   }, [drawDownloadCanvas, fitOverlay, pairing]);
 
   useEffect(() => {
+    if (!slideshowPlaying) return;
+    if (historyRef.current.length < 2) {
+      stopSlideshow();
+      return;
+    }
+    slideshowTimerRef.current = setTimeout(() => {
+      const index = nextLoopingHistoryIndex(
+        historyRef.current.length,
+        historyIndexRef.current,
+      );
+      if (index < 0) return;
+      historyIndexRef.current = index;
+      triggerSlideAnimation();
+      showPairing(historyRef.current[index]);
+    }, slideSeconds * 1000);
+    return () => {
+      if (slideshowTimerRef.current) {
+        clearTimeout(slideshowTimerRef.current);
+        slideshowTimerRef.current = null;
+      }
+    };
+  }, [pairing, showPairing, slideSeconds, slideshowPlaying, stopSlideshow, triggerSlideAnimation]);
+
+  useEffect(() => {
+    if (!slideshowPlaying) return;
+    const stopOnPointer = (event: PointerEvent) => {
+      const target = event.target;
+      if (
+        target instanceof Element &&
+        target.closest("[data-slideshow-control]")
+      ) {
+        return;
+      }
+      stopSlideshow();
+    };
+    window.addEventListener("pointerdown", stopOnPointer, true);
+    return () => window.removeEventListener("pointerdown", stopOnPointer, true);
+  }, [slideshowPlaying, stopSlideshow]);
+
+  useEffect(() => {
     const onResize = () => {
       fitOverlay(topCaptionRef.current);
       fitOverlay(bottomCaptionRef.current);
@@ -1281,6 +1424,14 @@ export default function BoostedReactions() {
       const usingControl = active?.matches("button, a") ?? false;
       const typing = active?.matches("input, textarea, select") ?? false;
       const action = memeKeyboardAction(event, { editing, typing, usingControl });
+      if (action?.startsWith("slide-digit:")) {
+        event.preventDefault();
+        enterSlideTimingDigit(action.slice(-1));
+        return;
+      }
+      if (slideshowPlayingRef.current && action !== "toggle-slideshow") {
+        stopSlideshow();
+      }
       if (!action) return;
       event.preventDefault();
 
@@ -1300,6 +1451,37 @@ export default function BoostedReactions() {
         void copyMeme();
         return;
       }
+      if (action === "copy-link") {
+        void copyPairingLink();
+        return;
+      }
+      if (action === "copy-image-link") {
+        void copyPairingImageLink();
+        return;
+      }
+      if (action === "toggle-info") {
+        setHelpOpen(false);
+        setActionsOpen(false);
+        setInfoOpen((open) => !open);
+        return;
+      }
+      if (action === "toggle-menu") {
+        setHelpOpen(false);
+        setInfoOpen(false);
+        setActionsOpen((open) => !open);
+        return;
+      }
+      if (action === "focus-source") {
+        setHelpOpen(false);
+        setInfoOpen(false);
+        setActionsOpen(true);
+        requestAnimationFrame(() => sourceInputRef.current?.focus());
+        return;
+      }
+      if (action === "toggle-slideshow") {
+        toggleSlideshow();
+        return;
+      }
       if (action === "new-pairing") {
         newPairing();
       } else if (action === "next") {
@@ -1312,15 +1494,34 @@ export default function BoostedReactions() {
         newImageSameText();
       } else if (action === "download") {
         void saveMeme();
+      } else if (action === "delete-history") {
+        deleteCurrentHistoryEntry();
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [copyMeme, newImageSameText, newPairing, newTextSameImage, nextPairing, previousPairing, saveMeme]);
+  }, [
+    copyMeme,
+    copyPairingImageLink,
+    copyPairingLink,
+    deleteCurrentHistoryEntry,
+    enterSlideTimingDigit,
+    newImageSameText,
+    newPairing,
+    newTextSameImage,
+    nextPairing,
+    previousPairing,
+    saveMeme,
+    stopSlideshow,
+    toggleSlideshow,
+  ]);
 
   useEffect(() => () => {
     if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
     if (swipeClickTimerRef.current) clearTimeout(swipeClickTimerRef.current);
+    if (slideshowTimerRef.current) clearTimeout(slideshowTimerRef.current);
+    if (slideAnimationTimerRef.current) clearTimeout(slideAnimationTimerRef.current);
+    if (slideDigitTimerRef.current) clearTimeout(slideDigitTimerRef.current);
   }, []);
 
   const currentSourceUrl = pairing?.source.url || "https://6529.io";
@@ -1363,7 +1564,7 @@ export default function BoostedReactions() {
 
       <main
         ref={posterRef}
-        className={`${styles.poster} ${infoOpen ? styles.posterFlipped : ""}`}
+        className={`${styles.poster} ${infoOpen ? styles.posterFlipped : ""} ${slideshowPlaying ? styles.slideshowPlaying : ""}`}
         aria-label="Interactive public-domain reaction artwork"
         onClick={() => {
           if (swipeBlockedClickRef.current) return;
@@ -1377,7 +1578,7 @@ export default function BoostedReactions() {
           className={`${styles.card} ${infoOpen ? styles.cardFlipped : ""}`}
         >
           <section
-            className={`${styles.cardFace} ${styles.cardFront}`}
+            className={`${styles.cardFace} ${styles.cardFront} ${slideshowSliding ? styles.slideshowAdvance : ""}`}
             aria-label="Meme"
             aria-hidden={infoOpen}
             inert={infoOpen}
@@ -1499,12 +1700,51 @@ export default function BoostedReactions() {
               >
                 Copy image link
               </button>
+              <button
+                type="button"
+                data-slideshow-control
+                aria-pressed={slideshowPlaying}
+                disabled={!pairing || loading}
+                onClick={() => { void toggleSlideshow(); }}
+              >
+                {slideshowPlaying ? "Stop slideshow" : "Start slideshow"}
+              </button>
+              <button
+                type="button"
+                disabled={!pairing || loading}
+                onClick={() => {
+                  setActionsOpen(false);
+                  deleteCurrentHistoryEntry();
+                }}
+              >
+                Remove from history
+              </button>
+              <label className={styles.slideTiming}>
+                <span>Slide seconds</span>
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min="1"
+                  max={MAX_SLIDE_SECONDS}
+                  step="1"
+                  aria-label="Seconds per slideshow slide"
+                  value={slideSecondsInput}
+                  onChange={(event) => {
+                    clearSlideTimingDigits();
+                    const value = event.target.value.replace(/\D/g, "").slice(0, 4);
+                    setSlideSecondsInput(value);
+                    if (value) setSlideSeconds(normalizeSlideSeconds(value, slideSeconds));
+                  }}
+                  onBlur={() => { setSlideTiming(slideSecondsInput); }}
+                />
+              </label>
               <form
                 className={styles.sourceForm}
                 aria-label="Build from a tweet or drop"
                 onSubmit={buildFromSource}
               >
                 <input
+                  ref={sourceInputRef}
                   type="text"
                   inputMode="url"
                   aria-label="Tweet or 6529 drop URL"
@@ -1575,11 +1815,19 @@ export default function BoostedReactions() {
             <dl className={styles.keyboardGrid}>
               <div><dt><kbd>A</kbd><kbd>←</kbd></dt><dd>Previous</dd></div>
               <div><dt><kbd>D</kbd><kbd>→</kbd></dt><dd>Next</dd></div>
-              <div><dt><kbd>S</kbd><kbd>↓</kbd><kbd>↵</kbd></dt><dd>New words</dd></div>
+              <div><dt><kbd>S</kbd><kbd>↓</kbd></dt><dd>New words</dd></div>
               <div><dt><kbd>W</kbd><kbd>↑</kbd></dt><dd>New picture</dd></div>
-              <div><dt><kbd>Space</kbd></dt><dd>New words + picture</dd></div>
+              <div><dt><kbd>Enter</kbd></dt><dd>New words + picture</dd></div>
+              <div><dt><kbd>Space</kbd></dt><dd>Start / stop slideshow</dd></div>
+              <div><dt><kbd>0–9</kbd></dt><dd>Set slide seconds</dd></div>
+              <div><dt><kbd>Del</kbd><kbd>⌫</kbd></dt><dd>Remove from history</dd></div>
               <div><dt><kbd>C</kbd><kbd>⌘/Ctrl C</kbd></dt><dd>Copy image</dd></div>
               <div><dt><kbd>V</kbd></dt><dd>Download PNG</dd></div>
+              <div><dt><kbd>L</kbd></dt><dd>Copy link</dd></div>
+              <div><dt><kbd>K</kbd></dt><dd>Copy image link</dd></div>
+              <div><dt><kbd>I</kbd></dt><dd>Source info</dd></div>
+              <div><dt><kbd>M</kbd></dt><dd>Options menu</dd></div>
+              <div><dt><kbd>P</kbd></dt><dd>Paste source URL</dd></div>
               <div><dt><kbd>Esc</kbd></dt><dd>Cancel edit</dd></div>
               <div><dt><kbd>?</kbd><kbd>/</kbd></dt><dd>Toggle this guide</dd></div>
             </dl>

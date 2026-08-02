@@ -24,14 +24,23 @@ describe("meme keyboard shortcuts", () => {
     [key("ArrowRight", "ArrowRight"), "next"],
     [key("s"), "new-text"],
     [key("ArrowDown", "ArrowDown"), "new-text"],
-    [key("Enter", "Enter"), "new-text"],
+    [key("Enter", "Enter"), "new-pairing"],
     [key("w"), "new-image"],
     [key("ArrowUp", "ArrowUp"), "new-image"],
-    [key(" ", "Space"), "new-pairing"],
+    [key(" ", "Space"), "toggle-slideshow"],
     [key("c"), "copy-image"],
     [key("c", "KeyC", { metaKey: true }), "copy-image"],
     [key("c", "KeyC", { ctrlKey: true }), "copy-image"],
     [key("v"), "download"],
+    [key("l"), "copy-link"],
+    [key("k"), "copy-image-link"],
+    [key("i"), "toggle-info"],
+    [key("m"), "toggle-menu"],
+    [key("p"), "focus-source"],
+    [key("Delete", "Delete"), "delete-history"],
+    [key("Backspace", "Backspace"), "delete-history"],
+    [key("1", "Digit1"), "slide-digit:1"],
+    [key("7", "Numpad7"), "slide-digit:7"],
     [key("/", "Slash"), "toggle-help"],
     [key("?", "Slash"), "toggle-help"],
     [key("Escape", "Escape"), "dismiss"],
@@ -46,6 +55,7 @@ describe("meme keyboard shortcuts", () => {
     [key("w"), "new-image"],
     [key("c"), "copy-image"],
     [key("v"), "download"],
+    [key(" ", "Space"), "toggle-slideshow"],
     [key("ArrowLeft", "ArrowLeft"), "previous"],
     [key("ArrowRight", "ArrowRight"), "next"],
   ])("keeps %o global when a control has focus", (event, action) => {
@@ -54,10 +64,9 @@ describe("meme keyboard shortcuts", () => {
     );
   });
 
-  it("preserves native Space and Enter behavior on controls", () => {
+  it("preserves native Enter behavior on controls", () => {
     const control = { ...idle, usingControl: true };
 
-    expect(memeKeyboardAction(key(" ", "Space"), control)).toBeNull();
     expect(memeKeyboardAction(key("Enter", "Enter"), control)).toBeNull();
   });
 
@@ -85,6 +94,9 @@ describe("meme keyboard shortcuts", () => {
     key("ArrowLeft", "ArrowLeft", { metaKey: true }),
     key("v", "KeyV", { metaKey: true }),
     key(" ", "Space", { ctrlKey: true }),
+    key("1", "Digit1", { metaKey: true }),
+    key("Backspace", "Backspace", { ctrlKey: true }),
+    key("l", "KeyL", { metaKey: true }),
   ])("does not intercept modified browser shortcuts: %o", (event) => {
     expect(memeKeyboardAction(event, idle)).toBeNull();
   });

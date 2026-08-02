@@ -13,6 +13,12 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 import { memeKeyboardAction } from "../src/lib/memeKeyboard.mjs";
+import {
+  appendSlideTimingDigit,
+  nextLoopingHistoryIndex,
+  normalizeSlideSeconds,
+  removeHistoryEntry,
+} from "../src/lib/memeHistory.mjs";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const webRoot = resolve(scriptDirectory, "..");
@@ -100,6 +106,10 @@ try {
     ["__TWEETS_JSON__", scriptSafeJson(tweets)],
     ["__DROPS_JSON__", scriptSafeJson(drops)],
     ["__KEYBOARD_ACTION_SOURCE__", memeKeyboardAction.toString()],
+    ["__APPEND_SLIDE_DIGIT_SOURCE__", appendSlideTimingDigit.toString()],
+    ["__NEXT_HISTORY_INDEX_SOURCE__", nextLoopingHistoryIndex.toString()],
+    ["__NORMALIZE_SLIDE_SECONDS_SOURCE__", normalizeSlideSeconds.toString()],
+    ["__REMOVE_HISTORY_ENTRY_SOURCE__", removeHistoryEntry.toString()],
   ]);
   let output = readFileSync(templatePath, "utf8");
   for (const [placeholder, value] of replacements) {
